@@ -8,15 +8,13 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     if (user) return;
-
     axios.get("http://localhost:8080/auth");
+    // 401 si no hay usuario, sino info del user.
+    // si es 401, redirigir al login/register,
+    // sino setear el user.
   }, []);
 
-  let signin = (newUser, callback) => {};
-
-  let signout = (callback) => {};
-
-  let value = { user, signin, signout };
+  let value = { user };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
