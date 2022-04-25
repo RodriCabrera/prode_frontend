@@ -5,7 +5,9 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "plugin:prettier/recommended",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -22,6 +24,14 @@
     ],
     "rules": {
         "no-unused-vars": 1,
-        "react/react-in-jsx-scope": 0
+        "react/react-in-jsx-scope": 0,
+        "max-len": [
+            "error",
+            {
+                "code": 80
+            }
+        ],
+        "prettier/prettier": ["error", { "singleQuote": true }]
+
     }
 }

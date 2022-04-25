@@ -9,5 +9,5 @@ root.render(
     <AuthProvider>
       <Router />
     </AuthProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
