@@ -1,0 +1,16 @@
+{
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "es5",
+    "prettier.semi": true,
+    "prettier.singleQuote": true,
+    "prettier.jsxBracketSameLine": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+} 
