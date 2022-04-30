@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider';
+import Loader from '../Loader';
 
 function Register() {
   const [user, setUser] = useState({});
+  const userContext = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userContext.user) {
+      navigate('/');
+    }
+  }, [userContext]);
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  if (userContext.isLoading) return <Loader />;
+
   return (
     <>
       <h1>Register</h1>

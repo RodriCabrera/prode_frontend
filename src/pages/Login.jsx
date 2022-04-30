@@ -1,16 +1,30 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider';
+import GoogleAuth from '../GoogleAuth';
+import Loader from '../Loader';
 
 function Login() {
-  const [user, setUser] = useState({});
+  // TODO: si esta logueado mandar al home
+  const userContext = useContext(AuthContext);
+  const [loginData, setLoginData] = useState({});
   const navigate = useNavigate();
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
+    console.log(loginData);
   };
+
+  useEffect(() => {
+    if (userContext.user) {
+      navigate('/');
+    }
+  }, [userContext]);
+
+  if (userContext.isLoading) return <Loader />;
+
   return (
     <div>
       <h1>LOGIN</h1>
@@ -21,7 +35,7 @@ function Login() {
             type="text"
             placeholder="User Name"
             name="name"
-            value={user?.name}
+            value={loginData?.name}
             onChange={handleChange}
           />
         </label>
@@ -31,7 +45,7 @@ function Login() {
             type="password"
             name="password"
             placeholder="Password"
-            value={user?.password}
+            value={loginData?.password}
             onChange={handleChange}
           />
         </label>
@@ -42,6 +56,8 @@ function Login() {
       <button type="button" onClick={() => navigate('/register')}>
         Register
       </button>
+      <br />
+      <GoogleAuth />
     </div>
   );
 }
