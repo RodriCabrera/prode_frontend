@@ -5,7 +5,6 @@ import GoogleAuth from '../GoogleAuth';
 import Loader from '../Loader';
 
 function Login() {
-  // TODO: si esta logueado mandar al home
   const userContext = useContext(AuthContext);
   const [loginData, setLoginData] = useState({});
   const navigate = useNavigate();
