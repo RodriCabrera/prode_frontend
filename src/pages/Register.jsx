@@ -1,19 +1,17 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Register() {
   const [user, setUser] = useState({});
-  const navigate = useNavigate();
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
   };
   return (
-    <div>
-      <h1>LOGIN</h1>
+    <>
+      <h1>Register</h1>
       <form>
         <label htmlFor="name">
           Name:
@@ -39,11 +37,8 @@ function Login() {
           Btn
         </button>
       </form>
-      <button type="button" onClick={() => navigate('/register')}>
-        Register
-      </button>
-    </div>
+    </>
   );
 }
 
-export default Login;
+export default Register;
