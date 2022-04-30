@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthProvider from './AuthProvider';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import Register from './pages/Register';
 
-function Router() {
+function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -21,4 +21,4 @@ function Router() {
   );
 }
 
-export default Router;
+export default App;

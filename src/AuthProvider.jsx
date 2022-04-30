@@ -33,8 +33,8 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={useMemo(() => {
         return { user, isLoading };
-        // eslint-disable-next-line prettier/prettier
-      }, [user, isLoading])}>
+      }, [user, isLoading])}
+    >
       {children}
     </AuthContext.Provider>
   );
