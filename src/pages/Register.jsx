@@ -1,12 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { AuthContext } from '../common/AuthProvider';
 
 function Register() {
   const [user, setUser] = useState({});
-  const userContext = useContext(AuthContext);
-  const navigate = useNavigate();
 
   // Permitimos que acceda al Register por mas que ya esté logueado:
   // useEffect(() => {
