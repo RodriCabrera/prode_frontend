@@ -7,7 +7,6 @@ import { NavbarWrapper, ButtonGroup } from './Navbar.styles';
 function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
-  // TODO: No se ve el usuario logueado.
 
   const handleClick = () => {
     axios.post('http://localhost:8080/auth/logout').then(() => {
