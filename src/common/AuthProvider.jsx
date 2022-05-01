@@ -10,7 +10,7 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  console.log(user);
+
   useEffect(() => {
     if (user) return;
     // va a devolver 401 si no hay usuario, sino info del user.
@@ -21,11 +21,10 @@ function AuthProvider({ children }) {
       .then(({ data }) => {
         setUser(data);
       })
-      .catch((error) => {
-        if (error.response.status === 401) {
-          navigate('/login');
-          // TODO Esto no permite ir a '/register', porque no está logueado.
-        }
+      .catch(() => {
+        navigate('/login');
+        // TODO Esto no permite ir a '/register', porque no está logueado.
+        // Pero se deberia poder ir al register
       })
       .finally(() => {
         setIsLoading(false);

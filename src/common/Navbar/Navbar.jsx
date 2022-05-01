@@ -11,7 +11,7 @@ function Navbar() {
 
   const handleClick = () => {
     axios.post(`${config.API_URL}/auth/logout`).then(() => {
-      // TODO: Revisar porque no se esta deslogueando.
+      // TODO: Revisar => no se esta deslogueando.
       navigate('/login');
     });
   };
