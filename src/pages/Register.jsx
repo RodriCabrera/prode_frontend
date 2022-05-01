@@ -1,26 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthProvider';
-import Loader from '../Loader';
+import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../common/AuthProvider';
 
 function Register() {
   const [user, setUser] = useState({});
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userContext.user) {
-      navigate('/');
-    }
-  }, [userContext]);
+  // Permitimos que acceda al Register por mas que ya esté logueado:
+  // useEffect(() => {
+  //   if (userContext.user) {
+  //     navigate('/');
+  //   }
+  // }, [userContext]);
+
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
-  if (userContext.isLoading) return <Loader />;
 
   return (
     <>
@@ -50,6 +51,7 @@ function Register() {
           Btn
         </button>
       </form>
+      <FcGoogle />
     </>
   );
 }
