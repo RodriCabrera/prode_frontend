@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { NavbarWrapper, ButtonGroup } from './Navbar.styles';
 import config from '../../Constants';
@@ -28,7 +28,10 @@ function Navbar() {
             </button>
           </>
         ) : (
-          <p>no user</p>
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
         )}
       </ButtonGroup>
     </NavbarWrapper>

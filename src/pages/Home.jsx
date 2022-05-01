@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../common/AuthProvider';
 import { PageWrapper } from '../common/common.styles';
 
 function Home() {
-  return <PageWrapper>Home</PageWrapper>;
+  const userContext = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userContext.user) {
+      navigate('/login');
+    }
+  }, [userContext]);
+
+  return (
+    <PageWrapper>
+      <h1>Home</h1>
+    </PageWrapper>
+  );
 }
 
 export default Home;

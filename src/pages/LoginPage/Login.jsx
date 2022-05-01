@@ -16,16 +16,17 @@ function Login() {
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(loginData);
-  };
 
   useEffect(() => {
     if (userContext.user) {
       navigate('/');
     }
   }, [userContext]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(loginData);
+  };
 
   return (
     <PageWrapper id="login-page">
