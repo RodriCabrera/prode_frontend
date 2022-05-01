@@ -6,11 +6,15 @@ export const AuthContainer = styled.div`
   justify-content: center;
 `;
 
-export const AuthLink = styled.a`
+export const AuthLink = styled.button`
+  background: none;
+  color: white;
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   :hover {
     text-decoration: underline;
   }
