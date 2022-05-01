@@ -1,5 +1,5 @@
 const prod = {
-  API_URL: '/api',
+  API_URL: 'https://prode-mundial-backend.herokuapp.com',
 };
 
 const dev = {
