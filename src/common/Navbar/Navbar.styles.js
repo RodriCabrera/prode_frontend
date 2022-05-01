@@ -23,4 +23,6 @@ export const NavbarWrapper = styled.div`
 export const ButtonGroup = styled.div`
   padding: 2rem;
   background-color: inherit;
+  display: flex;
+  gap: 0 1rem;
 `;

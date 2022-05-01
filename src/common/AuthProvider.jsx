@@ -23,7 +23,7 @@ function AuthProvider({ children }) {
       .catch((error) => {
         if (error.response.status === 401) {
           navigate('/login');
-          // Esto no permite ir a '/register', porque no está logueado.
+          // TODO Esto no permite ir a '/register', porque no está logueado.
         }
       })
       .finally(() => {
