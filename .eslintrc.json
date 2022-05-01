@@ -26,6 +26,7 @@
         "no-unused-vars": 1,
         "no-console": 0,
         "react/react-in-jsx-scope": 0,
+        "prefer-default-export": 0,
         "max-len": [
             "error",
             {

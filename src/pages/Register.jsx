@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthProvider';
-import Loader from '../Loader';
+import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../common/AuthProvider';
 
 function Register() {
   const [user, setUser] = useState({});
@@ -19,8 +19,6 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
-  if (userContext.isLoading) return <Loader />;
 
   return (
     <>
@@ -50,6 +48,7 @@ function Register() {
           Btn
         </button>
       </form>
+      <FcGoogle />
     </>
   );
 }

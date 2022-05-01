@@ -1,7 +1,8 @@
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import propTypes from 'prop-types';
-import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner/Spinner';
 
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
@@ -35,7 +36,7 @@ function AuthProvider({ children }) {
         return { user, isLoading };
       }, [user, isLoading])}
     >
-      {children}
+      {isLoading ? <Spinner /> : children}
     </AuthContext.Provider>
   );
 }
