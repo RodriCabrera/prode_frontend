@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthProvider from './common/AuthProvider';
 import Navbar from './common/Navbar/Navbar';

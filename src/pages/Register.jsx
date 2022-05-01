@@ -8,14 +8,17 @@ function Register() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (userContext.user) {
-      navigate('/');
-    }
-  }, [userContext]);
+  // Permitimos que acceda al Register por mas que ya esté logueado:
+  // useEffect(() => {
+  //   if (userContext.user) {
+  //     navigate('/');
+  //   }
+  // }, [userContext]);
+
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
