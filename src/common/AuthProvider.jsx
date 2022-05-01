@@ -3,6 +3,7 @@ import axios from 'axios';
 import propTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner/Spinner';
+import config from '../Constants';
 
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
@@ -16,7 +17,7 @@ function AuthProvider({ children }) {
     // si es 401, redirigir al login/register,
     // sino setear el user.
     axios
-      .get('http://localhost:8080/auth', { withCredentials: true })
+      .get(`${config.API_URL}/auth`, { withCredentials: true })
       .then(({ data }) => {
         setUser(data);
       })

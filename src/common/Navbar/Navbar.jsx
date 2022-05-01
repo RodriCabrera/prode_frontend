@@ -3,13 +3,14 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { NavbarWrapper, ButtonGroup } from './Navbar.styles';
+import config from '../../Constants';
 
 function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    axios.post('http://localhost:8080/auth/logout').then(() => {
+    axios.post(`${config.API_URL}/auth/logout`).then(() => {
       // TODO: Revisar porque no se esta deslogueando.
       navigate('/login');
     });
