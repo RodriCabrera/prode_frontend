@@ -18,7 +18,9 @@ function Navbar() {
 
   return (
     <NavbarWrapper id="navbar-wrapper">
-      <ButtonGroup id="button-group-left">prode الحمار</ButtonGroup>
+      <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
+        prode الحمار
+      </ButtonGroup>
       <ButtonGroup id="button-group-right">
         {userContext.user ? (
           <>
