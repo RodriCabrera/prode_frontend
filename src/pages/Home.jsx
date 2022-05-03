@@ -6,7 +6,7 @@ import { PageWrapper } from '../common/common.styles';
 function Home() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(userContext);
   useEffect(() => {
     if (!userContext.user) {
       navigate('/login');

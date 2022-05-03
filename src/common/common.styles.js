@@ -40,7 +40,7 @@ export const Button = styled.button`
     #ff512f 100%
   );
   margin: 10px;
-  padding: 15px 30px;
+  padding: ${(props) => (props.padding ? props.padding : '15px 30px')};
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
