@@ -6,22 +6,16 @@ import config from '../../Constants';
 import Container, { AuthLink } from './GoogleAuth.styles';
 
 function GoogleAuth() {
-  function setCookie(name, value, days) {
-    let expires = '';
-    if (days) {
-      const date = new Date();
-      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-      expires = `; expires=${date.toUTCString()}`;
-    }
-    document.cookie = `${name}=${value || ''}${expires}; path=/`;
-  }
-
   const responseGoogle = (response) => {
-    // response.tokenId is a JWT
-    // See: https://github.com/anthonyjgrove/react-google-login#onsuccess-callback
-
-    setCookie('jwt', response.tokenId, 1);
-    axios.post(`${config.API_URL}/auth`, response.tokenId);
+    axios.post(
+      `${config.API_URL}/auth/google`,
+      {
+        token: response.tokenId,
+      },
+      {
+        withCredentials: true,
+      }
+    );
   };
 
   return (
