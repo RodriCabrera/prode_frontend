@@ -12,10 +12,14 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    axios.post(`${config.API_URL}/auth/logout`).then(() => {
-      // TODO: Revisar => no se esta deslogueando.
-      navigate('/login');
-    });
+    axios
+      .post(`${config.API_URL}/auth/logout`, {}, { withCredentials: true })
+      .then(() => {
+        navigate('/login');
+      })
+      .finally(() => {
+        userContext.user = null;
+      });
   };
 
   return (
@@ -26,7 +30,10 @@ function Navbar() {
       <ButtonGroup id="button-group-right">
         {userContext.user ? (
           <>
-            <span>{userContext.user?.user.name.split('@')[0]}</span>
+            <span>
+              {userContext.user?.user.name ||
+                userContext.user?.user.name.split('@')[0]}
+            </span>
             <Button padding="3px" onClick={handleClick}>
               <IoMdLogOut size="1.5rem" />
             </Button>

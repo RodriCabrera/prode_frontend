@@ -2,12 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import config from '../../Constants';
 import Container, { AuthLink } from './GoogleAuth.styles';
 
 function GoogleAuth() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
 
   const responseGoogle = async (response) => {
@@ -21,7 +21,7 @@ function GoogleAuth() {
       }
     );
     if (res.status === 200) {
-      navigate('/');
+      window.location.reload();
     } else {
       setShowError(true);
     }
@@ -45,7 +45,6 @@ function GoogleAuth() {
           )}
           onSuccess={responseGoogle}
           onFailure={responseGoogle}
-          isSignedIn
           cookiePolicy="single_host_origin"
         />
       </Container>
