@@ -2,9 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
 import {
+  Button,
   CardContainer,
   CardTitle,
   CardWrapper,
+  Form,
+  Input,
+  Label,
   PageWrapper,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
@@ -33,36 +37,33 @@ function Login() {
       <CardContainer id="login-card-container">
         <CardWrapper id="login-card-wrapper">
           <CardTitle>LOGIN</CardTitle>
-          <form>
-            <label htmlFor="name">
+          <Form>
+            <Label htmlFor="name">
               Name:
-              <input
+              <Input
                 type="text"
                 placeholder="User Name"
                 name="name"
                 value={loginData?.name}
                 onChange={handleChange}
               />
-            </label>
-            <label htmlFor="password">
+            </Label>
+            <Label htmlFor="password">
               Password
-              <input
+              <Input
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={loginData?.password}
                 onChange={handleChange}
               />
-            </label>
-            <button type="submit" onClick={handleSubmit}>
-              Btn
-            </button>
-          </form>
-          <button type="button" onClick={() => navigate('/register')}>
-            Register
-          </button>
-          <br />
-          <GoogleAuth text="Login" />
+            </Label>
+            <Button type="submit" onClick={handleSubmit}>
+              Login
+            </Button>
+            <GoogleAuth text="Login" />
+          </Form>
+          <Button onClick={() => navigate('/register')}>New? Register</Button>
         </CardWrapper>
       </CardContainer>
     </PageWrapper>

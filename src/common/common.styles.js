@@ -27,3 +27,53 @@ export const CardWrapper = styled.div`
   gap: 1rem;
   flex-direction: column;
 `;
+
+export const Button = styled.button`
+  background-color: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background-image: linear-gradient(
+    45deg,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  :hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+  :active {
+    transform: scale(0.95);
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const Input = styled.input`
+  padding: 10px;
+`;
