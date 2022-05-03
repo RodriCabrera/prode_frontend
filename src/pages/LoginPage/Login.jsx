@@ -15,8 +15,9 @@ import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
 
 function Login() {
   const userContext = useContext(AuthContext);
-  const [loginData, setLoginData] = useState({});
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
@@ -38,13 +39,13 @@ function Login() {
         <CardWrapper id="login-card-wrapper">
           <CardTitle>LOGIN</CardTitle>
           <Form>
-            <Label htmlFor="name">
-              Name:
+            <Label htmlFor="email">
+              Email:
               <Input
                 type="text"
-                placeholder="User Name"
-                name="name"
-                value={loginData?.name}
+                placeholder="User Email"
+                name="email"
+                value={loginData?.email}
                 onChange={handleChange}
               />
             </Label>

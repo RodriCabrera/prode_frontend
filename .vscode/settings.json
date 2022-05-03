@@ -4,6 +4,7 @@
     },
     // "prettier.tabWidth": 4,
     // "prettier.trailingComma": "es5",
+    "editor.formatOnSave": false,
     "prettier.semi": true,
     "prettier.singleQuote": true,
     "prettier.jsxBracketSameLine": true,
