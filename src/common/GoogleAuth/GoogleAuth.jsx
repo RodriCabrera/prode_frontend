@@ -27,7 +27,6 @@ function GoogleAuth() {
     );
     if (res.status === 200) {
       setCookie('jwt', response.tokenId, 30);
-      window.location.reload();
     }
   };
 
