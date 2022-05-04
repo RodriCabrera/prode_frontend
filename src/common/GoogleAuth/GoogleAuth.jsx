@@ -7,7 +7,6 @@ import config from '../../Constants';
 import Container, { AuthLink } from './GoogleAuth.styles';
 
 function GoogleAuth() {
-  // const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
 
   const responseGoogle = async (response) => {

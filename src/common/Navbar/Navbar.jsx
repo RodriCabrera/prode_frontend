@@ -11,7 +11,7 @@ function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleLogout = () => {
     axios
       .post(`${config.API_URL}/auth/logout`, {}, { withCredentials: true })
       .then(() => {
@@ -34,7 +34,7 @@ function Navbar() {
               {userContext.user?.user.name ||
                 userContext.user?.user.name.split('@')[0]}
             </span>
-            <Button padding="3px" onClick={handleClick}>
+            <Button padding="3px" onClick={handleLogout}>
               <IoMdLogOut size="1.5rem" />
             </Button>
           </>
