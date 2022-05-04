@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 // import { useNavigate } from 'react-router-dom';
+import propTypes from 'prop-types';
 import config from '../../Constants';
 import Container, { AuthLink } from './GoogleAuth.styles';
 
-function GoogleAuth() {
+function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);
 
   const responseGoogle = async (response) => {
@@ -39,7 +40,7 @@ function GoogleAuth() {
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
             >
-              Login with Google <FcGoogle size="2rem" />
+              {text} with Google <FcGoogle size="2rem" />
             </AuthLink>
           )}
           onSuccess={responseGoogle}
@@ -50,5 +51,9 @@ function GoogleAuth() {
     </>
   );
 }
+
+GoogleAuth.propTypes = {
+  text: propTypes.string.isRequired,
+};
 
 export default GoogleAuth;

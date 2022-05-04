@@ -20,6 +20,7 @@ export const CardContainer = styled.div`
 export const CardWrapper = styled.div`
   border: 1px solid #bdbdbd;
   border-radius: 8px;
+  min-width: 300px;
   max-width: 500px;
   display: flex;
   padding: 1rem;
@@ -33,10 +34,10 @@ export const Button = styled.button`
   cursor: pointer;
   border: none;
   background-image: linear-gradient(
-    45deg,
-    #ff512f 0%,
-    #f09819 51%,
-    #ff512f 100%
+    ${(props) =>
+      props.grayscale
+        ? '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
+        : '45deg, #ff512f 0%, #f09819 51%, #ff512f 100%'}
   );
   margin: 10px;
   padding: ${(props) => (props.padding ? props.padding : '15px 30px')};

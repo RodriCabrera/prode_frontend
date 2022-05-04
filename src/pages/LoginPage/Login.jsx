@@ -64,7 +64,9 @@ function Login() {
             </Button>
             <GoogleAuth text="Login" />
           </Form>
-          <Button onClick={() => navigate('/register')}>New? Register</Button>
+          <Button grayscale padding="5px" onClick={() => navigate('/register')}>
+            New? Register
+          </Button>
         </CardWrapper>
       </CardContainer>
     </PageWrapper>

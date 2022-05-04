@@ -14,6 +14,7 @@ export const AuthLink = styled.button`
   gap: 8px;
   text-decoration: none;
   border: none;
+  font-size: 1rem;
   cursor: pointer;
   :hover {
     text-decoration: underline;

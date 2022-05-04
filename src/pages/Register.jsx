@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import {
+  Button,
   CardContainer,
   CardTitle,
   CardWrapper,
+  Form,
+  Input,
+  Label,
   PageWrapper,
 } from '../common/common.styles';
 import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
@@ -23,31 +27,29 @@ function Register() {
       <CardContainer id="register-card-container">
         <CardWrapper id="register-card-wrapper">
           <CardTitle>Register</CardTitle>
-          <form>
-            <label htmlFor="name">
+          <Form>
+            <Label htmlFor="name">
               Email:
-              <input
+              <Input
                 type="text"
                 placeholder="Email"
                 name="name"
                 value={registerData?.name}
                 onChange={handleChange}
               />
-            </label>
-            <label htmlFor="password">
+            </Label>
+            <Label htmlFor="password">
               Password
-              <input
+              <Input
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={registerData?.password}
                 onChange={handleChange}
               />
-            </label>
-            <button type="submit" onClick={handleSubmit}>
-              Btn
-            </button>
-          </form>
+            </Label>
+            <Button onClick={handleSubmit}>Register</Button>
+          </Form>
           <GoogleAuth text="Register" />
         </CardWrapper>
       </CardContainer>
