@@ -15,7 +15,7 @@ function AuthProvider({ children }) {
     axios
       .get(`${config.API_URL}/auth`, { withCredentials: true })
       .then(({ data }) => {
-        setUser(data);
+        setUser(data.user);
       })
       .catch((error) => {
         console.error(error);

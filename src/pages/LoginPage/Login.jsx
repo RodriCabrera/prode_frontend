@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../api/auth';
 import { AuthContext } from '../../common/AuthProvider';
 import {
   Button,
@@ -10,12 +11,15 @@ import {
   Input,
   Label,
   PageWrapper,
+  Text,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
 
 function Login() {
   const userContext = useContext(AuthContext);
   const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,21 +34,39 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(loginData);
+    setIsLoading(true);
+    setError(undefined);
+    // TODO: Que forma tiene que tener el payload? de loginUser?
+    loginUser(loginData)
+      .then((res) => {
+        console.log('Login con exito:', res);
+      })
+      .catch((err) => {
+        // TODO: Revisar manejo de errores
+        if (err.response.status === 401) {
+          setError('Usuario o contraseña incorrectos');
+        } else {
+          setError('Error. Intenta de nuevo.');
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <PageWrapper id="login-page">
       <CardContainer id="login-card-container">
         <CardWrapper id="login-card-wrapper">
-          <CardTitle>LOGIN</CardTitle>
-          <Form>
+          <CardTitle>Login</CardTitle>
+          <Form onSubmit={handleSubmit}>
             <Label htmlFor="email">
               Email:
               <Input
-                type="text"
+                type="email"
                 placeholder="User Email"
                 name="email"
+                required
                 value={loginData?.email}
                 onChange={handleChange}
               />
@@ -54,11 +76,15 @@ function Login() {
               <Input
                 type="password"
                 name="password"
+                required
                 placeholder="Password"
                 value={loginData?.password}
                 onChange={handleChange}
               />
             </Label>
+            <Text color={error && 'red'} text-align="center">
+              {isLoading ? 'Cargando...' : error}
+            </Text>
             <Button type="submit" onClick={handleSubmit}>
               Login
             </Button>

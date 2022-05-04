@@ -1,11 +1,20 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IoMdLogOut } from 'react-icons/io';
+import styled from '@emotion/styled';
 import { AuthContext } from '../AuthProvider';
 import { NavbarWrapper, ButtonGroup } from './Navbar.styles';
 import config from '../../Constants';
-import { Button } from '../common.styles';
+
+const NavLink = styled.button`
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
+`;
 
 function Navbar() {
   const userContext = useContext(AuthContext);
@@ -30,13 +39,8 @@ function Navbar() {
       <ButtonGroup id="button-group-right">
         {userContext.user ? (
           <>
-            <span>
-              {userContext.user?.user.name ||
-                userContext.user?.user.name.split('@')[0]}
-            </span>
-            <Button padding="3px" onClick={handleLogout}>
-              <IoMdLogOut size="1.5rem" />
-            </Button>
+            <span>{userContext.user.email?.split('@')[0]}</span>
+            <NavLink onClick={handleLogout}>Salir</NavLink>
           </>
         ) : (
           <>

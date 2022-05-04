@@ -77,3 +77,8 @@ export const Label = styled.label`
 export const Input = styled.input`
   padding: 10px;
 `;
+
+export const Text = styled.p`
+  text-align: ${(props) => (props.align ? props.align : 'center')};
+  color: ${(props) => (props.color ? props.color : 'inherit')};
+`;

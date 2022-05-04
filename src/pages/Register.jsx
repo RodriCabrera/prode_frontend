@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createUser } from '../api/auth';
 import {
   Button,
   CardContainer,
@@ -8,11 +9,14 @@ import {
   Input,
   Label,
   PageWrapper,
+  Text,
 } from '../common/common.styles';
 import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
 
 function Register() {
   const [registerData, setRegisterData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
@@ -20,6 +24,20 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError(undefined);
+    // TODO: Que forma tiene que tener la data para registrarse?
+    createUser(registerData)
+      .then((res) => {
+        // TODO: Que hacemo con esto...?
+        console.log('Registro con exito', res);
+      })
+      .catch((err) => {
+        setError(`Error : ${err.response.statusText} (${err.response.status})`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -27,11 +45,11 @@ function Register() {
       <CardContainer id="register-card-container">
         <CardWrapper id="register-card-wrapper">
           <CardTitle>Register</CardTitle>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Label htmlFor="name">
               Email:
               <Input
-                type="text"
+                type="email"
                 placeholder="Email"
                 name="name"
                 value={registerData?.name}
@@ -48,6 +66,9 @@ function Register() {
                 onChange={handleChange}
               />
             </Label>
+            <Text color={error && 'red'} text-align="center">
+              {isLoading ? 'Cargando...' : error}
+            </Text>
             <Button onClick={handleSubmit}>Register</Button>
           </Form>
           <GoogleAuth text="Register" />

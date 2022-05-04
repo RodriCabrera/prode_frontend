@@ -40,7 +40,7 @@ function GoogleAuth({ text }) {
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
             >
-              {text} with Google <FcGoogle size="2rem" />
+              {text} with Google <FcGoogle size="1.2rem" />
             </AuthLink>
           )}
           onSuccess={responseGoogle}

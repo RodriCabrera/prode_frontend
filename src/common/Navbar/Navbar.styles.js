@@ -24,5 +24,6 @@ export const ButtonGroup = styled.div`
   padding: 2rem;
   background-color: inherit;
   display: flex;
+  align-items: center;
   gap: 0 1rem;
 `;
