@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { AuthContext } from '../AuthProvider';
 import { NavbarWrapper, ButtonGroup } from './Navbar.styles';
-import config from '../../Constants';
+import { logoutUser } from '../../api/auth';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -21,8 +20,7 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    axios
-      .post(`${config.API_URL}/auth/logout`, {}, { withCredentials: true })
+    logoutUser()
       .then(() => {
         navigate('/login');
       })
@@ -30,7 +28,18 @@ function Navbar() {
         userContext.user = null;
       });
   };
-
+  // TODO: Pensar que botones va a ver el usuario una vez que este logueado.
+  /*
+    Ideas de botones:
+    - Predicciones ya cargadas o por cargar.
+      - Como se van a ver? Tenemos filtros por fecha? por grupo? por pais?...
+    - Integrantes del grupo.
+    - Predicciones de los integrantes del grupo? Suma ver eso o da para copiarse?
+    - Perfil del usuario?
+    
+    Los resultados de los partidos se deberian ver en la misma tabla que se ven
+    las predicciones del usuario.
+  */
   return (
     <NavbarWrapper id="navbar-wrapper">
       <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
