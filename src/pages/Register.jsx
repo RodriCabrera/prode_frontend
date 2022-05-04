@@ -27,9 +27,14 @@ function Register() {
     setIsLoading(true);
     setError(undefined);
     // TODO: Que forma tiene que tener la data para registrarse?
+    // POST a /auth/email/register con
+    // obligatorio: email y password
+    // optativo: nombre
     createUser(registerData)
       .then((res) => {
         // TODO: Que hacemo con esto...?
+        // Si el servidor devuelve un 200 es que se envió un mail
+        // de confirmación al usuario.
         console.log('Registro con exito', res);
       })
       .catch((err) => {
@@ -73,6 +78,7 @@ function Register() {
           </Form>
           <GoogleAuth text="Register" />
         </CardWrapper>
+        {/* Agregar un '<Button>Already registered? Login</Button>' ? */}
       </CardContainer>
     </PageWrapper>
   );

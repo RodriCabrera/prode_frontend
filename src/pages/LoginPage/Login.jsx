@@ -37,12 +37,15 @@ function Login() {
     setIsLoading(true);
     setError(undefined);
     // TODO: Que forma tiene que tener el payload? de loginUser?
+    // email & password en el req.body POST a /auth/email
     loginUser(loginData)
       .then((res) => {
         console.log('Login con exito:', res);
       })
       .catch((err) => {
         // TODO: Revisar manejo de errores
+        //  En caso de error en el servidor la respuesta
+        //  contendra una propiedad 'error' con el mensaje de error
         if (err.response.status === 401) {
           setError('Usuario o contraseña incorrectos');
         } else {
