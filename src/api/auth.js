@@ -6,7 +6,9 @@ export const createUser = (userData) => {
 };
 
 export const loginUser = (userData) => {
-  return axios.post(`${config.API_URL}/auth/email`, { userData });
+  return axios.post(`${config.API_URL}/auth/email`, userData, {
+    withCredentials: true,
+  });
 };
 
 export const logoutUser = () => {
