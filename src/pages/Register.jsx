@@ -16,6 +16,7 @@ import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
 
 function Register() {
   const [registerData, setRegisterData] = useState({
+    name: null,
     email: '',
     password: '',
   });
@@ -26,6 +27,7 @@ function Register() {
     // TODO: Revisar que al llenar el campo nombre salta un warning que dice
     // que no hay que llenarlo de la nada (que ya tiene que existir). El problema
     // es que si el usuario no da nombre no hay que pasarlo o pasarlo como null
+    // R: inicializar 'name' como null sirve? Si no se modifica quedaria como null.
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
   };
 
@@ -51,10 +53,10 @@ function Register() {
     <PageWrapper id="register-page">
       <CardContainer id="register-card-container">
         <CardWrapper id="register-card-wrapper">
-          <CardTitle>Register</CardTitle>
+          <CardTitle>Registrarse</CardTitle>
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="name">
-              Name:
+              Nombre:
               <Input
                 type="text"
                 placeholder="Username"
@@ -88,7 +90,7 @@ function Register() {
             <Text color={error && 'red'} text-align="center">
               {isLoading ? 'Cargando...' : error}
             </Text>
-            <Button onClick={handleSubmit}>Register</Button>
+            <Button onClick={handleSubmit}>Registrarse</Button>
           </Form>
           <GoogleAuth text="Register" />
         </CardWrapper>

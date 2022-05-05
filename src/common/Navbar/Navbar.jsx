@@ -31,11 +31,11 @@ function Navbar() {
   // TODO: Pensar que botones va a ver el usuario una vez que este logueado.
   /*
     Ideas de botones:
-    - Predicciones ya cargadas o por cargar.
-      - Como se van a ver? Tenemos filtros por fecha? por grupo? por pais?...
-    - Integrantes del grupo.
-    - Predicciones de los integrantes del grupo? Suma ver eso o da para copiarse?
-    - Perfil del usuario?
+    * Predicciones ya cargadas o por cargar.
+      * Como se van a ver? Tenemos filtros por fecha? por grupo? por pais?...
+    * Integrantes del grupo.
+    * Predicciones de los integrantes del grupo? Suma ver eso o da para copiarse?
+    * Perfil del usuario?
     
     Los resultados de los partidos se deberian ver en la misma tabla que se ven
     las predicciones del usuario.
@@ -54,7 +54,7 @@ function Navbar() {
         ) : (
           <>
             <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/register">Registrarse</Link>
           </>
         )}
       </ButtonGroup>

@@ -23,7 +23,7 @@ function Home() {
 
     -->(después) Un panel para crear un grupo o sumarse a uno con un código?
     --> Tarjetas para cada grupo con su puntaje 
-    //    con un botón Predicciones (para editar) y otro Tabla de puntajes?
+        con un botón Predicciones (para editar) y otro Tabla de puntajes?
     --> Próximos partidos: partidos de la próxima fecha?
     --> Fixture completo abajo? O un link al mismo?
   */
