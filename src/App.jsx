@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Login from './pages/LoginPage/Login';
 import NotFound from './pages/NotFound';
 import Register from './pages/Register';
+import ConfirmationEmail from './pages/ConfirmationEmail';
+import VerifiedEmail from './pages/VerifiedEmail';
 
 // const RouterContainer = styled.div`
 //   width: 100%;
@@ -18,6 +20,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/account-created" element={<ConfirmationEmail />} />
+        <Route path="/verified" element={<VerifiedEmail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>

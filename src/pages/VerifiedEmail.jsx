@@ -1,0 +1,18 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function VerifiedEmail() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
+  });
+  return (
+    <div>
+      Your email was verified correctly! Redirecting you to the login page...
+    </div>
+  );
+}
+
+export default VerifiedEmail;

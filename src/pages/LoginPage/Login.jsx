@@ -36,18 +36,16 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
     setError(undefined);
-    // TODO: Que forma tiene que tener el payload? de loginUser?
     loginUser(loginData)
       .then((res) => {
-        console.log('Login con exito:', res);
+        // TODO: Revisar si hay alguna solución más elegante que el reload
+        if (res.status === 200) return window.location.reload();
+        return navigate('/');
       })
       .catch((err) => {
-        // TODO: Revisar manejo de errores
-        if (err.response.status === 401) {
-          setError('Usuario o contraseña incorrectos');
-        } else {
-          setError('Error. Intenta de nuevo.');
-        }
+        if (err.response.status === 401)
+          return setError(err.response.data.error);
+        return setError('Error. Intenta de nuevo.');
       })
       .finally(() => {
         setIsLoading(false);

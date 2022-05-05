@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createUser } from '../api/auth';
 import {
   Button,
@@ -14,11 +15,17 @@ import {
 import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
 
 function Register() {
-  const [registerData, setRegisterData] = useState({});
+  const [registerData, setRegisterData] = useState({
+    email: '',
+    password: '',
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
+    // TODO: Revisar que al llenar el campo nombre salta un warning que dice
+    // que no hay que llenarlo de la nada (que ya tiene que existir). El problema
+    // es que si el usuario no da nombre no hay que pasarlo o pasarlo como null
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
   };
 
@@ -26,14 +33,14 @@ function Register() {
     e.preventDefault();
     setIsLoading(true);
     setError(undefined);
-    // TODO: Que forma tiene que tener la data para registrarse?
     createUser(registerData)
       .then((res) => {
-        // TODO: Que hacemo con esto...?
+        if (res.status === 200) return navigate('/account-created');
         console.log('Registro con exito', res);
+        return navigate('/');
       })
       .catch((err) => {
-        setError(`Error : ${err.response.statusText} (${err.response.status})`);
+        setError(`Error : ${err.response.data.error}`);
       })
       .finally(() => {
         setIsLoading(false);
@@ -47,12 +54,23 @@ function Register() {
           <CardTitle>Register</CardTitle>
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="name">
+              Name:
+              <Input
+                type="text"
+                placeholder="Username"
+                name="name"
+                value={registerData?.name}
+                onChange={handleChange}
+              />
+            </Label>
+            <Label htmlFor="email">
               Email:
               <Input
                 type="email"
                 placeholder="Email"
-                name="name"
-                value={registerData?.name}
+                name="email"
+                required
+                value={registerData?.email}
                 onChange={handleChange}
               />
             </Label>
@@ -62,6 +80,7 @@ function Register() {
                 type="password"
                 name="password"
                 placeholder="Password"
+                required
                 value={registerData?.password}
                 onChange={handleChange}
               />
@@ -73,6 +92,7 @@ function Register() {
           </Form>
           <GoogleAuth text="Register" />
         </CardWrapper>
+        {/* Agregar un '<Button>Already registered? Login</Button>' ? */}
       </CardContainer>
     </PageWrapper>
   );
