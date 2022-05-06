@@ -19,6 +19,9 @@ import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
 import Spinner from '../../common/Spinner/Spinner';
 import { loginSchema } from '../../validationSchemas/loginSchema';
 
+// TODO - Sumar la opción 'Olvide mi contraseña',
+// TODO   debería pedir nuevamente el mail y hacer un post a la API en /auth/new-password
+
 function Login() {
   const userContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);

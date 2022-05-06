@@ -11,7 +11,7 @@ import VerifiedEmail from './pages/VerifiedEmail';
 // const RouterContainer = styled.div`
 //   width: 100%;
 // `;
-
+// TODO Sumar una ruta 'change-password' desde la cual se puede postear un cambio de pass
 function App() {
   return (
     <AuthProvider>
