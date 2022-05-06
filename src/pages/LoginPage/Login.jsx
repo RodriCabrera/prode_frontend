@@ -1,3 +1,5 @@
+import { useFormik } from 'formik';
+import { isEmpty } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../api/auth';
@@ -14,17 +16,19 @@ import {
   Text,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
+import Spinner from '../../common/Spinner/Spinner';
+import { loginSchema } from '../../validationSchemas/loginSchema';
 
 function Login() {
   const userContext = useContext(AuthContext);
-  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
+  const { values, errors, handleChange } = useFormik({
+    initialValues: {},
+    validationSchema: loginSchema,
+    validateOnMount: true,
+  });
 
   useEffect(() => {
     if (userContext.user) {
@@ -36,7 +40,7 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
     setError(undefined);
-    loginUser(loginData)
+    loginUser(values)
       .then((res) => {
         // TODO: Revisar si hay alguna solución más elegante que el reload
         if (res.status === 200) return window.location.reload();
@@ -65,10 +69,11 @@ function Login() {
                 placeholder="User Email"
                 name="email"
                 required
-                value={loginData?.email}
+                value={values.email}
                 onChange={handleChange}
               />
             </Label>
+            <Text color="red">{errors.email}</Text>
             <Label htmlFor="password">
               Password
               <Input
@@ -76,20 +81,21 @@ function Login() {
                 name="password"
                 required
                 placeholder="Password"
-                value={loginData?.password}
+                value={values.password}
                 onChange={handleChange}
               />
             </Label>
+            <Text color="red">{errors.password}</Text>
             <Text color={error && 'red'} text-align="center">
-              {isLoading ? 'Cargando...' : error}
+              {isLoading ? <Spinner /> : error}
             </Text>
-            <Button type="submit" onClick={handleSubmit}>
-              Login
+            <Button type="submit" disabled={!isEmpty(errors)}>
+              LOGIN
             </Button>
             <GoogleAuth text="Login" />
           </Form>
           <Button grayscale padding="5px" onClick={() => navigate('/register')}>
-            New? Register
+            Primera vez? Registrate
           </Button>
         </CardWrapper>
       </CardContainer>

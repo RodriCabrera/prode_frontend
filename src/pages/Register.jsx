@@ -1,3 +1,5 @@
+import { useFormik } from 'formik';
+import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../api/auth';
@@ -13,29 +15,24 @@ import {
   Text,
 } from '../common/common.styles';
 import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
+import Spinner from '../common/Spinner/Spinner';
+import { registerSchema } from '../validationSchemas/registerSchema';
 
 function Register() {
-  const [registerData, setRegisterData] = useState({
-    name: null,
-    email: '',
-    password: '',
-  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const handleChange = (e) => {
-    // TODO: Revisar que al llenar el campo nombre salta un warning que dice
-    // que no hay que llenarlo de la nada (que ya tiene que existir). El problema
-    // es que si el usuario no da nombre no hay que pasarlo o pasarlo como null
-    // R: inicializar 'name' como null sirve? Si no se modifica quedaria como null.
-    setRegisterData({ ...registerData, [e.target.name]: e.target.value });
-  };
+  const { values, errors, handleChange } = useFormik({
+    initialValues: { name: null },
+    validationSchema: registerSchema,
+    validateOnMount: true,
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(undefined);
-    createUser(registerData)
+    createUser(values)
       .then((res) => {
         if (res.status === 200) return navigate('/account-created');
         console.log('Registro con exito', res);
@@ -48,7 +45,6 @@ function Register() {
         setIsLoading(false);
       });
   };
-
   return (
     <PageWrapper id="register-page">
       <CardContainer id="register-card-container">
@@ -61,9 +57,10 @@ function Register() {
                 type="text"
                 placeholder="Username"
                 name="name"
-                value={registerData?.name}
+                value={values.name}
                 onChange={handleChange}
               />
+              <Text color="red">{errors.name}</Text>
             </Label>
             <Label htmlFor="email">
               Email:
@@ -72,10 +69,12 @@ function Register() {
                 placeholder="Email"
                 name="email"
                 required
-                value={registerData?.email}
+                value={values.email}
                 onChange={handleChange}
               />
             </Label>
+            <Text color="red">{errors.email}</Text>
+
             <Label htmlFor="password">
               Password
               <Input
@@ -83,18 +82,24 @@ function Register() {
                 name="password"
                 placeholder="Password"
                 required
-                value={registerData?.password}
+                value={values.password}
                 onChange={handleChange}
               />
             </Label>
+            <Text color="red">{errors.password}</Text>
+
             <Text color={error && 'red'} text-align="center">
-              {isLoading ? 'Cargando...' : error}
+              {isLoading ? <Spinner /> : error}
             </Text>
-            <Button onClick={handleSubmit}>Registrarse</Button>
+            <Button onClick={handleSubmit} disabled={!isEmpty(errors)}>
+              REGISTRARSE
+            </Button>
           </Form>
           <GoogleAuth text="Register" />
+          <Button grayscale padding="5px" onClick={() => navigate('/login')}>
+            Ya tenés cuenta?
+          </Button>
         </CardWrapper>
-        {/* Agregar un '<Button>Already registered? Login</Button>' ? */}
       </CardContainer>
     </PageWrapper>
   );

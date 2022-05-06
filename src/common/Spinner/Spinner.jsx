@@ -6,7 +6,7 @@ const SpinnerWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -15,7 +15,6 @@ const SpinnerWrapper = styled.div`
 function Spinner() {
   return (
     <SpinnerWrapper>
-      <p>Loading</p>
       <div className="lds-default">
         <div />
         <div />

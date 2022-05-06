@@ -20,8 +20,9 @@ export const CardContainer = styled.div`
 export const CardWrapper = styled.div`
   border: 1px solid #bdbdbd;
   border-radius: 8px;
-  min-width: 300px;
-  max-width: 500px;
+  min-width: 200px;
+  width: 80%;
+  max-width: 350px;
   display: flex;
   padding: 1rem;
   gap: 1rem;
@@ -42,7 +43,6 @@ export const Button = styled.button`
   margin: 10px;
   padding: ${(props) => (props.padding ? props.padding : '15px 30px')};
   text-align: center;
-  text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -59,6 +59,10 @@ export const Button = styled.button`
   }
   :active {
     transform: scale(0.95);
+  }
+  :disabled {
+    background-image: none;
+    color: darkgray;
   }
 `;
 
