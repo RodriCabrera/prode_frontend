@@ -10,6 +10,7 @@ export const PageWrapper = styled.div`
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
+  margin-bottom: 1.5rem;
 `;
 
 export const CardContainer = styled.div`

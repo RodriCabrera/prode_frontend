@@ -14,4 +14,5 @@ export const authSchema = {
   login: object({ email, password }),
   register: object({ name, email, password }),
   forgotPassword: object({ email }),
+  changePassword: object({ password }),
 };

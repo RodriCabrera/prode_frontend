@@ -48,7 +48,7 @@ function Navbar() {
       <ButtonGroup id="button-group-right">
         {userContext.user ? (
           <>
-            <span>{userContext.user.email?.split('@')[0]}</span>
+            <span>{userContext.user.name}</span>
             <NavLink onClick={handleLogout}>Salir</NavLink>
           </>
         ) : (

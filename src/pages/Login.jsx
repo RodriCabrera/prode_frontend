@@ -92,7 +92,7 @@ function Login() {
               LOGIN
             </Button>
             <GoogleAuth text="Login" />
-            <Link to="/change-password">Olvidé mi contraseña</Link>
+            <Link to="/forgot-password">Olvidé mi contraseña</Link>
           </Form>
           <Button grayscale padding="8px" onClick={() => navigate('/register')}>
             Primera vez? Registrate

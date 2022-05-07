@@ -24,3 +24,9 @@ export const logoutUser = () => {
 export const forgotPassword = (email) => {
   return axios.post(`${config.API_URL}/auth/new-password`, email);
 };
+
+export const changePassword = (password) => {
+  return axios.post(`${config.API_URL}/auth/change-password`, password, {
+    withCredentials: true,
+  });
+};
