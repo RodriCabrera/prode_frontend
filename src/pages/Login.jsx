@@ -30,7 +30,6 @@ function Login() {
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.login,
-    validateOnMount: true,
   });
   console.log('errors', errors);
   useEffect(() => {
@@ -60,29 +59,32 @@ function Login() {
           <CardTitle>Login</CardTitle>
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="email">
-              Email:
+              <Text color={errors.email ? 'orange' : ''}>
+                {errors.email ? errors.email : 'Email:'}
+              </Text>
               <Input
                 type="email"
-                placeholder="User Email"
+                placeholder="Email"
                 name="email"
                 required
                 value={values.email}
                 onChange={handleChange}
               />
             </Label>
-            <Text color="orange">{errors.email}</Text>
+
             <Label htmlFor="password">
-              Password
+              <Text color={errors.password ? 'orange' : ''}>
+                {errors.password ? errors.password : 'Password:'}
+              </Text>
               <Input
                 type="password"
                 name="password"
                 required
-                placeholder="Password"
+                placeholder="Al menos 6 caracteres"
                 value={values.password}
                 onChange={handleChange}
               />
             </Label>
-            <Text color="orange">{errors.password}</Text>
             <Text color={error && 'red'} text-align="center">
               {isLoading ? <Spinner /> : error}
             </Text>
