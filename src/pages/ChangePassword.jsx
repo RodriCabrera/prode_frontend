@@ -28,13 +28,11 @@ function ChangePassword() {
     validateOnMount: true,
   });
 
-  console.log(values.email);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(undefined);
-    forgotPassword('pepe@gmail.com')
+    forgotPassword(values)
       .then(() => {
         setShowSuccess(true);
         setTimeout(() => navigate('/new-password'), 3000);
@@ -64,9 +62,10 @@ function ChangePassword() {
                     onChange={handleChange}
                   />
                 </Label>
-                <Text color="orange">{errors.email}</Text>
+                {/* <Text color="orange">{errors.email}</Text> */}
                 <Text color={error && 'red'} text-align="center">
-                  {isLoading ? <Spinner /> : error}
+                  {isLoading && <Spinner />}
+                  {error}
                 </Text>
                 <Button disabled={!isEmpty(errors)}>
                   Recuperar contraseña
