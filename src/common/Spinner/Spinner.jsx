@@ -12,7 +12,7 @@ const SpinnerWrapper = styled.div`
   gap: 1rem;
 `;
 
-function Spinner() {
+export function Spinner() {
   return (
     <SpinnerWrapper>
       <div className="lds-default">
@@ -32,5 +32,3 @@ function Spinner() {
     </SpinnerWrapper>
   );
 }
-
-export default Spinner;

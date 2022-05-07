@@ -15,8 +15,7 @@ import {
   Text,
 } from '../common/common.styles';
 import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
-import Spinner from '../common/Spinner/Spinner';
-import { registerSchema } from '../validationSchemas/registerSchema';
+import { Spinner } from '../common/Spinner/Spinner';
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,20 +29,21 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setIsLoading(true);
     setError(undefined);
+
     createUser(values)
       .then((res) => {
-        if (res.status === 200) return navigate('/account-created');
         console.log('Registro con exito', res);
-        return navigate('/');
+        return navigate('/account-created');
       })
       .catch((err) => {
-        setError(`Error : ${err.response.data.error}`);
+        setError(`${err.response.statusText}${err.response.data.error}`);
+        setShowError(true);
+        console.log('Error al registrar', err.response);
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => setIsLoading(false));
   };
   return (
     <PageWrapper id="register-page">

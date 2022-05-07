@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import propTypes from 'prop-types';
-import Spinner from './Spinner/Spinner';
+import { Spinner } from './Spinner/Spinner';
 import config from '../Constants';
 
 export const AuthContext = createContext(null);

@@ -46,10 +46,11 @@ export const Button = styled.button`
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
+  letter-spacing: 1px;
   border-radius: 10px;
   display: block;
   border: 0px;
-  font-weight: 700;
+  font-weight: 600;
   box-shadow: 0px 0px 14px -7px #f09819;
   :hover {
     background-position: right center;
