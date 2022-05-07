@@ -2,7 +2,9 @@ import axios from 'axios';
 import config from '../Constants';
 
 export const createUser = (userData) => {
-  return axios.post(`${config.API_URL}/auth/email/create`, userData);
+  return axios.post(`${config.API_URL}/auth/email/create`, userData, {
+    withCredentials: true,
+  });
 };
 
 export const loginUser = (userData) => {
@@ -17,4 +19,8 @@ export const logoutUser = () => {
     {},
     { withCredentials: true }
   );
+};
+
+export const forgotPassword = (email) => {
+  return axios.post(`${config.API_URL}/auth/new-password`, email);
 };

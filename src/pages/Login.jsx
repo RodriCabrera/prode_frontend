@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../api/auth';
 import { AuthContext } from '../common/AuthProvider';
 import {
@@ -90,6 +90,7 @@ function Login() {
               LOGIN
             </Button>
             <GoogleAuth text="Login" />
+            <Link to="/change-password">Olvidé mi contraseña</Link>
           </Form>
           <Button grayscale padding="8px" onClick={() => navigate('/register')}>
             Primera vez? Registrate
