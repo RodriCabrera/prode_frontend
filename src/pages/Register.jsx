@@ -16,14 +16,16 @@ import {
 } from '../common/common.styles';
 import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
 import { Spinner } from '../common/Spinner/Spinner';
+import { authSchema } from '../validationSchemas/auth';
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
     initialValues: { name: null },
-    validationSchema: registerSchema,
+    validationSchema: authSchema.register,
     validateOnMount: true,
   });
 
@@ -45,6 +47,7 @@ function Register() {
       })
       .finally(() => setIsLoading(false));
   };
+
   return (
     <PageWrapper id="register-page">
       <CardContainer id="register-card-container">
@@ -60,7 +63,7 @@ function Register() {
                 value={values.name}
                 onChange={handleChange}
               />
-              <Text color="red">{errors.name}</Text>
+              <Text color="orange">{errors.name}</Text>
             </Label>
             <Label htmlFor="email">
               Email:
@@ -73,7 +76,7 @@ function Register() {
                 onChange={handleChange}
               />
             </Label>
-            <Text color="red">{errors.email}</Text>
+            <Text color="orange">{errors.email}</Text>
 
             <Label htmlFor="password">
               Password
@@ -86,13 +89,13 @@ function Register() {
                 onChange={handleChange}
               />
             </Label>
-            <Text color="red">{errors.password}</Text>
+            <Text color="orange">{errors.password}</Text>
 
             <Text color={error && 'red'} text-align="center">
-              {isLoading ? <Spinner /> : error}
+              {isLoading ? <Spinner /> : showError && error}
             </Text>
             <Button onClick={handleSubmit} disabled={!isEmpty(errors)}>
-              REGISTRARSE
+              CREAR CUENTA
             </Button>
           </Form>
           <GoogleAuth text="Register" />
