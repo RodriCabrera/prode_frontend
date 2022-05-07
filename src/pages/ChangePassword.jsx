@@ -20,7 +20,6 @@ import { authSchema } from '../validationSchemas/auth';
 
 function ChangePassword() {
   const userContext = useContext(AuthContext);
-  const [animation, setAnimation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -34,11 +33,6 @@ function ChangePassword() {
     if (userContext.user) {
       navigate('/');
     }
-    setAnimation('fade-in');
-    return () => {
-      console.log('Login component unmounted');
-      // setAnimation('fade-out');
-    };
   }, [userContext]);
 
   const handleSubmit = (e) => {
@@ -57,7 +51,7 @@ function ChangePassword() {
 
   return (
     <PageWrapper id="change-password-page">
-      <CardContainer id="change-password-card-container" className={animation}>
+      <CardContainer id="change-password-card-container">
         <CardWrapper id="change-password-card-wrapper">
           <CardTitle>Cambiar Contraseña</CardTitle>
           <Form onSubmit={handleSubmit}>

@@ -24,7 +24,6 @@ import { authSchema } from '../validationSchemas/auth';
 
 function Login() {
   const userContext = useContext(AuthContext);
-  const [animation, setAnimation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -38,11 +37,6 @@ function Login() {
     if (userContext.user) {
       navigate('/');
     }
-    setAnimation('fade-in');
-    return () => {
-      console.log('Login component unmounted');
-      // setAnimation('fade-out');
-    };
   }, [userContext]);
 
   const handleSubmit = (e) => {
@@ -61,7 +55,7 @@ function Login() {
 
   return (
     <PageWrapper id="login-page">
-      <CardContainer id="login-card-container" className={animation}>
+      <CardContainer id="login-card-container">
         <CardWrapper id="login-card-wrapper">
           <CardTitle>Login</CardTitle>
           <Form onSubmit={handleSubmit}>
