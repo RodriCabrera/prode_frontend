@@ -51,7 +51,6 @@ function Register() {
       .catch((err) => {
         setError(`${err.response.statusText}${err.response.data.error}`);
         setShowError(true);
-        console.log('Error al registrar', err.response);
       })
       .finally(() => setIsLoading(false));
   };

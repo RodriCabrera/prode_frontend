@@ -16,17 +16,11 @@ function Home() {
   // TODO : Ver si esta nos sirve para hacer las tablas:
   // https://react-table.tanstack.com/docs/quick-start
 
-  // TODO: Pensar el diseño de la pagina:
   /*
-    Que va a haber en el Home?
-    Empieza de una a completar predicciones?
-
-    -->(después) Un panel para crear un grupo o sumarse a uno con un código?
-    --> Tarjetas para cada grupo con su puntaje 
-        con un botón Predicciones (para editar) y otro Tabla de puntajes?
-    --> Próximos partidos: partidos de la próxima fecha?
-    --> Fixture completo abajo? O un link al mismo?
+  Jamboard con diseño:
+  https://jamboard.google.com/d/1RjaVVilMR1_6Na-FjjAT0aM5Y5_-YOayeoVAMX9BzQo/viewer
   */
+
   return (
     <PageWrapper>
       <h1>Home</h1>

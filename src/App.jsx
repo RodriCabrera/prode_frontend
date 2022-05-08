@@ -10,13 +10,14 @@ import ForgotPassword from './pages/ForgotPassword';
 import Login from './pages/Login';
 import ChangePassword from './pages/ChangePassword';
 
-// TODO Sumar una ruta 'change-password' desde la cual se puede postear un cambio de pass
 function App() {
   return (
     <AuthProvider>
       <Navbar id="navbar" />
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* TODO: Pensar organizacion de rutas dentro del HOME */}
+        {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/account-created" element={<ConfirmationEmail />} />
