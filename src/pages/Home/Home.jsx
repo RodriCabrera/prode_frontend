@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
-import { PageContainer } from '../../common/common.styles';
 import Countdown from './components/Countdown';
 import Keypad from './components/Keypad';
 import LeaderBoard from './components/LeaderBoard';
@@ -20,15 +19,17 @@ const PageWrapper = styled.div`
   flex-direction: column;
   gap: 2rem;
   flex-wrap: wrap;
-  max-width: 1000px;
+  max-width: 1100px;
   padding: 2rem;
   width: 100%;
 `;
+
 const Row = styled.div`
   gap: 2rem;
   flex-wrap: wrap;
   display: flex;
 `;
+
 function Home() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -40,18 +41,16 @@ function Home() {
   }, [userContext]);
 
   return (
-    <PageContainer>
-      <PageWrapper>
-        <Row>
-          <Keypad />
-          <LeaderBoard />
-        </Row>
-        <div>
-          <h3>Tabla proximos partidos o Coundtown para inicio mundial</h3>
-          <Countdown />
-        </div>
-      </PageWrapper>
-    </PageContainer>
+    <PageWrapper>
+      <Row>
+        <Keypad />
+        <LeaderBoard />
+      </Row>
+      <div>
+        <h3>Tabla proximos partidos o Coundtown para inicio mundial</h3>
+        <Countdown />
+      </div>
+    </PageWrapper>
   );
 }
 

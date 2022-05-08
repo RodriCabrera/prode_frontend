@@ -1,21 +1,28 @@
 import styled from '@emotion/styled';
 
+export const NavbarContainer = styled.div`
+  backdrop-filter: blur(10px);
+  background-color: #21212190;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+`;
 export const NavbarWrapper = styled.div`
-  /* background-color: #1e1e1e; */
-  background: inherit;
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: space-between;
   font-weight: 600;
+  max-width: 1100px;
   font-size: 15px;
-  position: sticky;
-  top: 0;
   width: 100%;
-  margin-bottom: 20px;
 `;
 
 export const ButtonGroup = styled.div`
-  padding: 2rem;
   background-color: inherit;
+  padding: 2rem 0;
   display: flex;
   align-items: center;
   gap: 0 1rem;

@@ -10,7 +10,6 @@ import {
   Input,
   Label,
   Form,
-  PageContainer,
 } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { changePassword } from '../../api/auth';
@@ -47,31 +46,29 @@ function ChangePassword() {
   };
 
   return (
-    <PageContainer id="change-password-page">
-      <CardContainer id="change-password-card-container">
-        <CardWrapper id="change-password-card-wrapper">
-          <>
-            <CardTitle>Cambiar Contraseña</CardTitle>
-            <Form onSubmit={handleSubmit}>
-              <Label htmlFor="password">
-                Nueva contraseña: {error}
-                <Input
-                  type="password"
-                  placeholder="Nueva contraseña"
-                  name="password"
-                  required
-                  value={values.email}
-                  onChange={handleChange}
-                />
-              </Label>
-              <Button disabled={!isEmpty(errors)}>Cambiar contraseña</Button>
-              {isLoading && <Spinner />}
-              {error}
-            </Form>
-          </>
-        </CardWrapper>
-      </CardContainer>
-    </PageContainer>
+    <CardContainer id="change-password-card-container">
+      <CardWrapper id="change-password-card-wrapper">
+        <>
+          <CardTitle>Cambiar Contraseña</CardTitle>
+          <Form onSubmit={handleSubmit}>
+            <Label htmlFor="password">
+              Nueva contraseña: {error}
+              <Input
+                type="password"
+                placeholder="Nueva contraseña"
+                name="password"
+                required
+                value={values.email}
+                onChange={handleChange}
+              />
+            </Label>
+            <Button disabled={!isEmpty(errors)}>Cambiar contraseña</Button>
+            {isLoading && <Spinner />}
+            {error}
+          </Form>
+        </>
+      </CardWrapper>
+    </CardContainer>
   );
 }
 

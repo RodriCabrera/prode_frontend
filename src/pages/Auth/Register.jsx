@@ -12,7 +12,6 @@ import {
   Form,
   Input,
   Label,
-  PageContainer,
   Text,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
@@ -56,62 +55,60 @@ function Register() {
   };
 
   return (
-    <PageContainer id="register-page">
-      <CardContainer id="register-card-container">
-        <CardWrapper id="register-card-wrapper">
-          <CardTitle>Registrarse</CardTitle>
-          <Form onSubmit={handleSubmit}>
-            <Label htmlFor="name">
-              Nombre:
-              <Input
-                type="text"
-                placeholder="Username"
-                name="name"
-                value={values.name}
-                onChange={handleChange}
-              />
-              <Text color="orange">{errors.name}</Text>
-            </Label>
-            <Label htmlFor="email">
-              Email:
-              <Input
-                type="email"
-                placeholder="Email"
-                name="email"
-                required
-                value={values.email}
-                onChange={handleChange}
-              />
-            </Label>
-            <Text color="orange">{errors.email}</Text>
+    <CardContainer id="register-card-container">
+      <CardWrapper id="register-card-wrapper">
+        <CardTitle>Registrarse</CardTitle>
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="name">
+            Nombre:
+            <Input
+              type="text"
+              placeholder="Username"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+            />
+            <Text color="orange">{errors.name}</Text>
+          </Label>
+          <Label htmlFor="email">
+            Email:
+            <Input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={values.email}
+              onChange={handleChange}
+            />
+          </Label>
+          <Text color="orange">{errors.email}</Text>
 
-            <Label htmlFor="password">
-              Password
-              <Input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-                value={values.password}
-                onChange={handleChange}
-              />
-            </Label>
-            <Text color="orange">{errors.password}</Text>
+          <Label htmlFor="password">
+            Password
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              value={values.password}
+              onChange={handleChange}
+            />
+          </Label>
+          <Text color="orange">{errors.password}</Text>
 
-            <Text color={error && 'red'} text-align="center">
-              {isLoading ? <Spinner /> : showError && error}
-            </Text>
-            <Button onClick={handleSubmit} disabled={!isEmpty(errors)}>
-              CREAR CUENTA
-            </Button>
-          </Form>
-          <GoogleAuth text="Register" />
-          <Button grayscale padding="5px" onClick={() => navigate('/login')}>
-            Ya tenés cuenta?
+          <Text color={error && 'red'} text-align="center">
+            {isLoading ? <Spinner /> : showError && error}
+          </Text>
+          <Button onClick={handleSubmit} disabled={!isEmpty(errors)}>
+            CREAR CUENTA
           </Button>
-        </CardWrapper>
-      </CardContainer>
-    </PageContainer>
+        </Form>
+        <GoogleAuth text="Register" />
+        <Button grayscale padding="5px" onClick={() => navigate('/login')}>
+          Ya tenés cuenta?
+        </Button>
+      </CardWrapper>
+    </CardContainer>
   );
 }
 

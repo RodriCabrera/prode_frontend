@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { AuthContext } from '../AuthProvider';
-import { NavbarWrapper, ButtonGroup } from './Navbar.styles';
+import { NavbarWrapper, ButtonGroup, NavbarContainer } from './Navbar.styles';
 import { logoutUser } from '../../api/auth';
+import { Linkbar } from '../Linkbar/Linkbar';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -45,24 +46,27 @@ function Navbar() {
     las predicciones del usuario.
   */
   return (
-    <NavbarWrapper id="navbar-wrapper">
-      <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
-        prode الحمار
-      </ButtonGroup>
-      <ButtonGroup id="button-group-right">
-        {userContext.user ? (
-          <>
-            <span>{userContext.user.name}</span>
-            <NavLink onClick={handleLogout}>Salir</NavLink>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Registrarse</Link>
-          </>
-        )}
-      </ButtonGroup>
-    </NavbarWrapper>
+    <NavbarContainer id="navbar-container">
+      <NavbarWrapper id="navbar-wrapper">
+        <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
+          prode الحمار
+        </ButtonGroup>
+        <ButtonGroup id="button-group-right">
+          {userContext.user ? (
+            <>
+              <span>{userContext.user.name}</span>
+              <NavLink onClick={handleLogout}>Salir</NavLink>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Registrarse</Link>
+            </>
+          )}
+        </ButtonGroup>
+      </NavbarWrapper>
+      {userContext.user && <Linkbar />}
+    </NavbarContainer>
   );
 }
 

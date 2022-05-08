@@ -13,7 +13,6 @@ import {
   Label,
   Form,
   Text,
-  PageContainer,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
 import { Spinner } from '../../common/Spinner/Spinner';
@@ -50,53 +49,51 @@ function Login() {
   };
 
   return (
-    <PageContainer id="login-page">
-      <CardContainer id="login-card-container">
-        <CardWrapper id="login-card-wrapper">
-          <CardTitle>Login</CardTitle>
-          <Form onSubmit={handleSubmit}>
-            <Label htmlFor="email">
-              <Text color={errors.email ? 'orange' : ''}>
-                {errors.email ? errors.email : 'Email:'}
-              </Text>
-              <Input
-                type="email"
-                placeholder="Email"
-                name="email"
-                required
-                value={values.email}
-                onChange={handleChange}
-              />
-            </Label>
-
-            <Label htmlFor="password">
-              <Text color={errors.password ? 'orange' : ''}>
-                {errors.password ? errors.password : 'Password:'}
-              </Text>
-              <Input
-                type="password"
-                name="password"
-                required
-                placeholder="Al menos 6 caracteres"
-                value={values.password}
-                onChange={handleChange}
-              />
-            </Label>
-            <Text color={error && 'red'} text-align="center">
-              {isLoading ? <Spinner /> : error}
+    <CardContainer id="login-card-container">
+      <CardWrapper id="login-card-wrapper">
+        <CardTitle>Login</CardTitle>
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="email">
+            <Text color={errors.email ? 'orange' : ''}>
+              {errors.email ? errors.email : 'Email:'}
             </Text>
-            <Button type="submit" disabled={!isEmpty(errors)}>
-              LOGIN
-            </Button>
-            <GoogleAuth text="Login" />
-            <Link to="/forgot-password">Olvidé mi contraseña</Link>
-          </Form>
-          <Button grayscale padding="8px" onClick={() => navigate('/register')}>
-            Primera vez? Registrate
+            <Input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              value={values.email}
+              onChange={handleChange}
+            />
+          </Label>
+
+          <Label htmlFor="password">
+            <Text color={errors.password ? 'orange' : ''}>
+              {errors.password ? errors.password : 'Password:'}
+            </Text>
+            <Input
+              type="password"
+              name="password"
+              required
+              placeholder="Al menos 6 caracteres"
+              value={values.password}
+              onChange={handleChange}
+            />
+          </Label>
+          <Text color={error && 'red'} text-align="center">
+            {isLoading ? <Spinner /> : error}
+          </Text>
+          <Button type="submit" disabled={!isEmpty(errors)}>
+            LOGIN
           </Button>
-        </CardWrapper>
-      </CardContainer>
-    </PageContainer>
+          <GoogleAuth text="Login" />
+          <Link to="/forgot-password">Olvidé mi contraseña</Link>
+        </Form>
+        <Button grayscale padding="8px" onClick={() => navigate('/register')}>
+          Primera vez? Registrate
+        </Button>
+      </CardWrapper>
+    </CardContainer>
   );
 }
 
