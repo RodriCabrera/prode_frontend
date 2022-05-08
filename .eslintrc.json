@@ -33,7 +33,8 @@
             {
                 "code": 85,
                 "ignoreUrls": true,
-                "ignoreComments": true
+                "ignoreComments": true,
+                "ignoreStrings": true
             }
         ],
         "prettier/prettier": ["error", { "singleQuote": true }]

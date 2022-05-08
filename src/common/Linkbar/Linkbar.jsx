@@ -6,7 +6,7 @@ import { ButtonGroup, NavbarWrapper } from '../Navbar/Navbar.styles';
 const LinkGroup = styled(ButtonGroup)`
   justify-content: space-around;
   align-items: center;
-  width: 50%;
+  max-width: 50%;
 `;
 
 const LinkbarWrapper = styled(NavbarWrapper)`
