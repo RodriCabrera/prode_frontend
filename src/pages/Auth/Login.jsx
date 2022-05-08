@@ -26,6 +26,7 @@ function Login() {
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.login,
+    validateOnMount: true,
   });
 
   useEffect(() => {
