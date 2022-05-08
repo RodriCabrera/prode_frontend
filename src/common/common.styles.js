@@ -2,9 +2,11 @@ import styled from '@emotion/styled';
 
 export const PageContainer = styled.div`
   display: flex;
+  justify-content: center;
   gap: 1rem;
   width: 100vw;
 `;
+
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
@@ -39,7 +41,6 @@ export const Button = styled.button`
         ? '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
         : '45deg, #ff512f 0%, #f09819 51%, #ff512f 100%'}
   );
-  margin: 10px;
   padding: ${(props) => (props.padding ? props.padding : '15px 30px')};
   text-align: center;
   transition: 0.5s;
