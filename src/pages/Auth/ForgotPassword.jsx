@@ -8,7 +8,7 @@ import {
   CardWrapper,
   Input,
   Label,
-  PageWrapper,
+  PageContainer,
   Form,
   Text,
 } from '../../common/common.styles';
@@ -39,7 +39,7 @@ function ForgotPassword() {
   };
 
   return (
-    <PageWrapper id="change-password-page">
+    <PageContainer id="change-password-page">
       <CardContainer id="change-password-card-container">
         <CardWrapper id="change-password-card-wrapper">
           {showSuccess ? (
@@ -80,7 +80,7 @@ function ForgotPassword() {
           )}
         </CardWrapper>
       </CardContainer>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 

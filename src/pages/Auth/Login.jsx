@@ -11,9 +11,9 @@ import {
   CardWrapper,
   Input,
   Label,
-  PageWrapper,
   Form,
   Text,
+  PageContainer,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
 import { Spinner } from '../../common/Spinner/Spinner';
@@ -50,7 +50,7 @@ function Login() {
   };
 
   return (
-    <PageWrapper id="login-page">
+    <PageContainer id="login-page">
       <CardContainer id="login-card-container">
         <CardWrapper id="login-card-wrapper">
           <CardTitle>Login</CardTitle>
@@ -96,7 +96,7 @@ function Login() {
           </Button>
         </CardWrapper>
       </CardContainer>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 

@@ -3,12 +3,12 @@ import {
   CardContainer,
   CardTitle,
   CardWrapper,
-  PageWrapper,
+  PageContainer,
 } from '../common/common.styles';
 
 function NotFound() {
   return (
-    <PageWrapper id="not-found-page">
+    <PageContainer id="not-found-page">
       <CardContainer id="not-found-card-container">
         <CardWrapper id="not-found-card-wrapper">
           <CardTitle>Page Not Found</CardTitle>
@@ -18,7 +18,7 @@ function NotFound() {
           />
         </CardWrapper>
       </CardContainer>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 

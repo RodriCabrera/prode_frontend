@@ -12,7 +12,7 @@ import {
   Form,
   Input,
   Label,
-  PageWrapper,
+  PageContainer,
   Text,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
@@ -56,7 +56,7 @@ function Register() {
   };
 
   return (
-    <PageWrapper id="register-page">
+    <PageContainer id="register-page">
       <CardContainer id="register-card-container">
         <CardWrapper id="register-card-wrapper">
           <CardTitle>Registrarse</CardTitle>
@@ -111,7 +111,7 @@ function Register() {
           </Button>
         </CardWrapper>
       </CardContainer>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 

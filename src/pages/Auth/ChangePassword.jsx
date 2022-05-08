@@ -9,8 +9,8 @@ import {
   CardWrapper,
   Input,
   Label,
-  PageWrapper,
   Form,
+  PageContainer,
 } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { changePassword } from '../../api/auth';
@@ -47,7 +47,7 @@ function ChangePassword() {
   };
 
   return (
-    <PageWrapper id="change-password-page">
+    <PageContainer id="change-password-page">
       <CardContainer id="change-password-card-container">
         <CardWrapper id="change-password-card-wrapper">
           <>
@@ -71,7 +71,7 @@ function ChangePassword() {
           </>
         </CardWrapper>
       </CardContainer>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 

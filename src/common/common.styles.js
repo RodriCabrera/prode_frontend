@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const PageWrapper = styled.div`
+export const PageContainer = styled.div`
   display: flex;
   gap: 1rem;
   width: 100vw;
@@ -30,7 +30,7 @@ export const CardWrapper = styled.div`
 
 export const Button = styled.button`
   background-color: inherit;
-  color: inherit;
+  color: white;
   cursor: pointer;
   border: none;
   background-image: linear-gradient(

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
-import { PageWrapper } from '../../common/common.styles';
+import { PageContainer } from '../../common/common.styles';
 import Countdown from './components/Countdown';
 import Keypad from './components/Keypad';
 import LeaderBoard from './components/LeaderBoard';
@@ -25,14 +25,14 @@ function Home() {
   */
 
   return (
-    <PageWrapper>
+    <PageContainer>
       <Keypad />
       <LeaderBoard />
       <div>
         <h3>Tabla proximos partidos o Coundtown para inicio mundial</h3>
         <Countdown />
       </div>
-    </PageWrapper>
+    </PageContainer>
   );
 }
 
