@@ -18,9 +18,9 @@ export function Linkbar() {
     <LinkbarWrapper>
       <LinkGroup id="button-group-left">
         <Link to="/proximos-partidos">Proximos Partidos</Link>
-        <Link to="/mi-prode">Mi Prode</Link>
-        <Link to="/puntajes">Tabla de Puntajes</Link>
-        <Link to="/grupos">Gestionar Grupos</Link>
+        <Link to="/mis-predicciones">Mis Predicciones</Link>
+        <Link to="/scores">Tabla de Puntajes</Link>
+        <Link to="/prodes">Gestionar Prodes</Link>
       </LinkGroup>
     </LinkbarWrapper>
   );

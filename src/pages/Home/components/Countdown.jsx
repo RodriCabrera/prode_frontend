@@ -28,6 +28,7 @@ function Countdown() {
 
   return timeLeft.days > 0 ? (
     <>
+      FALTAN:
       <p>DIAS: {timeLeft.days}</p>
       <p>HORAS: {timeLeft.hours}</p>
       <p>MINUTOS: {timeLeft.minutes}</p>

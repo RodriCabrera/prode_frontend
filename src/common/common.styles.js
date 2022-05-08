@@ -26,6 +26,7 @@ export const CardWrapper = styled.div`
 
 export const Button = styled.button`
   background-color: inherit;
+  display: flex;
   color: white;
   cursor: pointer;
   border: none;
