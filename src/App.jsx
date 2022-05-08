@@ -2,14 +2,18 @@ import styled from '@emotion/styled';
 import { Outlet } from 'react-router-dom';
 import Navbar from './common/Navbar/Navbar';
 
-const PageContainer = styled.div`
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: #212121;
+`;
+
+const PageContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
   width: 100vw;
-  min-height: calc(100vh - 100px);
-  padding-top: 120px;
 `;
 const PageWrapper = styled.div`
   display: flex;
@@ -23,14 +27,14 @@ const PageWrapper = styled.div`
 
 function App() {
   return (
-    <>
+    <Layout>
       <Navbar />
       <PageContainer id="app-page-container">
         <PageWrapper id="app-page-wrapper">
           <Outlet />
         </PageWrapper>
       </PageContainer>
-    </>
+    </Layout>
   );
 }
 

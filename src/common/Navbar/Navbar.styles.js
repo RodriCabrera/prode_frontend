@@ -7,7 +7,7 @@ export const NavbarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 export const NavbarWrapper = styled.div`
@@ -22,7 +22,7 @@ export const NavbarWrapper = styled.div`
 
 export const ButtonGroup = styled.div`
   background-color: inherit;
-  padding: 2rem 0;
+  padding: 2rem;
   display: flex;
   align-items: center;
   gap: 0 1rem;
