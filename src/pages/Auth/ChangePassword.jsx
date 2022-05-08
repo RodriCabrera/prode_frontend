@@ -11,7 +11,6 @@ import {
   Label,
   PageWrapper,
   Form,
-  Text,
 } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { changePassword } from '../../api/auth';
@@ -66,6 +65,8 @@ function ChangePassword() {
                 />
               </Label>
               <Button disabled={!isEmpty(errors)}>Cambiar contraseña</Button>
+              {isLoading && <Spinner />}
+              {error}
             </Form>
           </>
         </CardWrapper>

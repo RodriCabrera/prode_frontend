@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import AuthProvider from './common/AuthProvider';
 import Navbar from './common/Navbar/Navbar';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import NotFound from './pages/NotFound';
 import Register from './pages/Auth/Register';
 import ConfirmationEmail from './pages/Auth/ConfirmationEmail';
