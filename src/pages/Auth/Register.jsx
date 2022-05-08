@@ -2,8 +2,8 @@ import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from '../api/auth';
-import { AuthContext } from '../common/AuthProvider';
+import { createUser } from '../../api/auth';
+import { AuthContext } from '../../common/AuthProvider';
 import {
   Button,
   CardContainer,
@@ -14,10 +14,10 @@ import {
   Label,
   PageWrapper,
   Text,
-} from '../common/common.styles';
-import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
-import { Spinner } from '../common/Spinner/Spinner';
-import { authSchema } from '../validationSchemas/auth';
+} from '../../common/common.styles';
+import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
+import { Spinner } from '../../common/Spinner/Spinner';
+import { authSchema } from '../../validationSchemas/auth';
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);

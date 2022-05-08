@@ -30,6 +30,10 @@ function Navbar() {
   };
   // TODO: Pensar que botones va a ver el usuario una vez que este logueado.
   /*
+    
+  Jamboard con diseño:
+  https://jamboard.google.com/d/1RjaVVilMR1_6Na-FjjAT0aM5Y5_-YOayeoVAMX9BzQo/viewer
+  
     Ideas de botones:
     * Predicciones ya cargadas o por cargar.
       * Como se van a ver? Tenemos filtros por fecha? por grupo? por pais?...

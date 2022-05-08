@@ -12,11 +12,11 @@ import {
   PageWrapper,
   Form,
   Text,
-} from '../common/common.styles';
-import { Spinner } from '../common/Spinner/Spinner';
-import { changePassword } from '../api/auth';
-import { authSchema } from '../validationSchemas/auth';
-import { AuthContext } from '../common/AuthProvider';
+} from '../../common/common.styles';
+import { Spinner } from '../../common/Spinner/Spinner';
+import { changePassword } from '../../api/auth';
+import { AuthContext } from '../../common/AuthProvider';
+import { authSchema } from '../../validationSchemas/auth';
 
 function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);

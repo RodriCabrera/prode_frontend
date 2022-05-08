@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PageWrapper } from '../common/common.styles';
+import { PageWrapper } from '../../common/common.styles';
 
 function ConfirmationEmail() {
   return (

@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Button,
   CardContainer,
@@ -12,16 +11,15 @@ import {
   PageWrapper,
   Form,
   Text,
-} from '../common/common.styles';
-import { Spinner } from '../common/Spinner/Spinner';
-import { forgotPassword } from '../api/auth';
-import { authSchema } from '../validationSchemas/auth';
+} from '../../common/common.styles';
+import { Spinner } from '../../common/Spinner/Spinner';
+import { forgotPassword } from '../../api/auth';
+import { authSchema } from '../../validationSchemas/auth';
 
 function ForgotPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
-  const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.forgotPassword,
@@ -35,7 +33,6 @@ function ForgotPassword() {
     forgotPassword(values)
       .then(() => {
         setShowSuccess(true);
-        setTimeout(() => navigate('/new-password'), 3000);
       })
       .catch((err) => setError(err.response.data.error))
       .finally(() => setIsLoading(false));
@@ -46,7 +43,15 @@ function ForgotPassword() {
       <CardContainer id="change-password-card-container">
         <CardWrapper id="change-password-card-wrapper">
           {showSuccess ? (
-            <p>Email enviado</p>
+            <>
+              <h5>
+                Email de recuperación de contraseña enviado a {values.email}
+              </h5>
+              <p>
+                Allí encontrarás un link para que puedas crear una nueva
+                contraseña
+              </p>
+            </>
           ) : (
             <>
               <CardTitle>Recuperar Contraseña</CardTitle>

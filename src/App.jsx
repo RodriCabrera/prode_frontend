@@ -3,12 +3,12 @@ import AuthProvider from './common/AuthProvider';
 import Navbar from './common/Navbar/Navbar';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Register from './pages/Register';
-import ConfirmationEmail from './pages/ConfirmationEmail';
-import VerifiedEmail from './pages/VerifiedEmail';
-import ForgotPassword from './pages/ForgotPassword';
-import Login from './pages/Login';
-import ChangePassword from './pages/ChangePassword';
+import Register from './pages/Auth/Register';
+import ConfirmationEmail from './pages/Auth/ConfirmationEmail';
+import VerifiedEmail from './pages/Auth/VerifiedEmail';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import Login from './pages/Auth/Login';
+import ChangePassword from './pages/Auth/ChangePassword';
 
 function App() {
   return (

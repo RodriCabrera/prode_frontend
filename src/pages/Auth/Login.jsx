@@ -2,8 +2,8 @@ import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../api/auth';
-import { AuthContext } from '../common/AuthProvider';
+import { loginUser } from '../../api/auth';
+import { AuthContext } from '../../common/AuthProvider';
 import {
   Button,
   CardContainer,
@@ -14,10 +14,10 @@ import {
   PageWrapper,
   Form,
   Text,
-} from '../common/common.styles';
-import GoogleAuth from '../common/GoogleAuth/GoogleAuth';
-import { Spinner } from '../common/Spinner/Spinner';
-import { authSchema } from '../validationSchemas/auth';
+} from '../../common/common.styles';
+import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
+import { Spinner } from '../../common/Spinner/Spinner';
+import { authSchema } from '../../validationSchemas/auth';
 
 function Login() {
   const userContext = useContext(AuthContext);
@@ -28,7 +28,7 @@ function Login() {
     initialValues: {},
     validationSchema: authSchema.login,
   });
-  console.log('errors', errors);
+
   useEffect(() => {
     if (userContext.user) {
       navigate('/');

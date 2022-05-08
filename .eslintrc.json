@@ -30,7 +30,9 @@
         "max-len": [
             "error",
             {
-                "code": 95
+                "code": 85,
+                "ignoreUrls": true,
+                "ignoreComments": true
             }
         ],
         "prettier/prettier": ["error", { "singleQuote": true }]
