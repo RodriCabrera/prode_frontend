@@ -1,24 +1,5 @@
 import styled from '@emotion/styled';
 
-export const PageContainer = styled.div`
-  background-color: #212121;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  width: 100vw;
-  min-height: calc(100vh - 100px);
-  padding-top: 120px;
-`;
-export const PageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  flex-wrap: wrap;
-  max-width: 1100px;
-  padding: 2rem;
-  width: 100%;
-`;
-
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
@@ -30,6 +11,7 @@ export const CardContainer = styled.div`
   justify-content: center;
   width: 100%;
 `;
+
 export const CardWrapper = styled.div`
   border: 1px solid #bdbdbd;
   border-radius: 8px;
