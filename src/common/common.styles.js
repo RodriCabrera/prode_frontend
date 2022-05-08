@@ -78,6 +78,6 @@ export const Input = styled.input`
 `;
 
 export const Text = styled.p`
-  text-align: ${(props) => (props.align ? props.align : 'center')};
+  text-align: ${(props) => (props.align ? props.align : 'left')};
   color: ${(props) => (props.color ? props.color : 'inherit')};
 `;

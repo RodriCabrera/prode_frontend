@@ -71,7 +71,9 @@ function Register() {
             <Text color="orange">{errors.name}</Text>
           </Label>
           <Label htmlFor="email">
-            Email:
+            <Text color={errors.email ? 'orange' : 'white'}>
+              {errors.email || 'Email:'}
+            </Text>
             <Input
               type="email"
               placeholder="Email"
@@ -81,10 +83,11 @@ function Register() {
               onChange={handleChange}
             />
           </Label>
-          <Text color="orange">{errors.email}</Text>
 
           <Label htmlFor="password">
-            Password
+            <Text color={errors.password ? 'orange' : 'white'}>
+              {errors.password || 'Password:'}
+            </Text>
             <Input
               type="password"
               name="password"
@@ -94,7 +97,6 @@ function Register() {
               onChange={handleChange}
             />
           </Label>
-          <Text color="orange">{errors.password}</Text>
 
           <Text color={error && 'red'} text-align="center">
             {isLoading ? <Spinner /> : showError && error}

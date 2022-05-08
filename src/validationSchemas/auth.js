@@ -1,10 +1,10 @@
 import { object, string } from 'yup';
 
 const fields = {
-  email: string().email('Inserta un email valido').required('Inserta un email'),
+  email: string().email('Ingresa un email valido').required('Ingresa un email'),
   password: string()
     .min(6, 'La contraseña tiene que tener al menos 6 caracteres')
-    .required('Insertar contraseña'),
+    .required('Ingresar contraseña'),
   name: string().nullable(),
 };
 
