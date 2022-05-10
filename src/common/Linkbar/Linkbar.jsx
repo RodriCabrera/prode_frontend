@@ -17,10 +17,10 @@ export function Linkbar() {
   return (
     <LinkbarWrapper>
       <LinkGroup id="button-group-left">
-        <Link to="/proximos-partidos">Proximos Partidos</Link>
-        <Link to="/mis-predicciones">Mis Predicciones</Link>
+        <Link to="/fixture">Proximos Partidos</Link>
+        <Link to="/predictions">Mis Predicciones</Link>
         <Link to="/scores">Tabla de Puntajes</Link>
-        <Link to="/prodes">Gestionar Prodes</Link>
+        <Link to="/groups">Gestionar Prodes</Link>
       </LinkGroup>
     </LinkbarWrapper>
   );

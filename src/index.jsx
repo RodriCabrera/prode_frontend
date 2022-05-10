@@ -12,8 +12,8 @@ import Register from './pages/Auth/Register';
 import VerifiedEmail from './pages/Auth/VerifiedEmail';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home/Home';
-import MiProde from './pages/MiProde/MiProde';
-import Prodes from './pages/Prodes/Prodes';
+import Predictions from './pages/Predictions/Predictions';
+import Groups from './pages/Groups/Groups';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,8 +23,8 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="prodes" element={<Prodes />} />
-            <Route path="mis-predicciones" element={<MiProde />} />
+            <Route path="groups" element={<Groups />} />
+            <Route path="predictions" element={<Predictions />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="account-created" element={<ConfirmationEmail />} />

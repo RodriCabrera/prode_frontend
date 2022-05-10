@@ -1,7 +1,7 @@
 import React from 'react';
-import { Banner, BannerTitle, MiProdeContainer } from './MiProde.styles';
+import { Banner, BannerTitle, MiProdeContainer } from './Predictions.styles';
 
-function MiProde() {
+function Predictions() {
   return (
     <MiProdeContainer id="mi-prode-container">
       <BannerTitle>
@@ -46,4 +46,4 @@ function MiProde() {
   );
 }
 
-export default MiProde;
+export default Predictions;
