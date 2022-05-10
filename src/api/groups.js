@@ -6,3 +6,15 @@ export const createGroup = (groupName) => {
     withCredentials: true,
   });
 };
+
+export const joinGroup = (groupName) => {
+  return axios.post(`${config.API_URL}/group/join`, groupName, {
+    withCredentials: true,
+  });
+};
+
+export const getGroupScores = (groupName) => {
+  return axios.get(`${config.API_URL}/group/score`, groupName, {
+    withCredentials: true,
+  });
+};
