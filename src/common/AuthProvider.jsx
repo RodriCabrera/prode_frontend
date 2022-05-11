@@ -21,7 +21,9 @@ function AuthProvider({ children }) {
         setIsLoading(false);
       });
   };
+
   console.log('USER STATE IN AUTH PROVIDER', user);
+
   useEffect(() => {
     if (user) return;
     checkAuth();
@@ -31,7 +33,7 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={useMemo(() => {
         return { user, isLoading, checkAuth };
-      }, [user, isLoading])}
+      }, [user, isLoading, checkAuth])}
     >
       {isLoading ? <Spinner /> : children}
     </AuthContext.Provider>
