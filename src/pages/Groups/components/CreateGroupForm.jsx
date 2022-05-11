@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createGroup } from '../../../api/groups';
+import { AuthContext } from '../../../common/AuthProvider';
 import {
   Button,
   Input,
@@ -14,15 +15,16 @@ function CreateGroupForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const userContext = useContext(AuthContext);
   const { values, handleChange } = useFormik({ initialValues: {} });
 
   const handleSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
     createGroup(values)
-      .then((res) => {
+      .then(() => {
+        userContext.checkAuth();
         setShowSuccess(true);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

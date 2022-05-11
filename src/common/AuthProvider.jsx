@@ -1,19 +1,16 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
 import propTypes from 'prop-types';
 import { Spinner } from './Spinner/Spinner';
-import config from '../Constants';
+import { getAuth } from '../api/auth';
 
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (user) return;
-
-    axios
-      .get(`${config.API_URL}/auth`, { withCredentials: true })
+  const checkAuth = () => {
+    console.log('checkAuth');
+    getAuth()
       .then(({ data }) => {
         setUser(data.user);
       })
@@ -23,12 +20,17 @@ function AuthProvider({ children }) {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+  console.log('USER STATE IN AUTH PROVIDER', user);
+  useEffect(() => {
+    if (user) return;
+    checkAuth();
   }, [user, isLoading]);
 
   return (
     <AuthContext.Provider
       value={useMemo(() => {
-        return { user, isLoading };
+        return { user, isLoading, checkAuth };
       }, [user, isLoading])}
     >
       {isLoading ? <Spinner /> : children}
