@@ -16,15 +16,12 @@ function GroupScores() {
   const [error, setError] = useState(undefined);
   const { values, handleChange } = useFormik({ initialValues: {} });
 
-  // TODO : Ver como le pasamos los nombres de los grupos.
-
-  // ! TODO: Este getGroupScores me esta devolviendo 401 UNAUTHORIZED.
-  // No deberia ser un post? Si lleva payload groupName?
+  // TODO : Ver como le pasamos los nombres de los grupos. Mas que nada diseño.
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    getGroupScores(values)
+    getGroupScores(values.groupName)
       .then((res) => {
         console.log(res);
         setScores(res);
@@ -36,7 +33,7 @@ function GroupScores() {
         setIsLoading(false);
       });
   };
-
+  console.log(scores.data);
   return (
     <div>
       <Text size="2rem" align="center">
@@ -45,7 +42,7 @@ function GroupScores() {
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="groupName">
           Nombre del grupo:
-          <Input // TODO: Esto supongo que deberia ser con un select cuyas opciones vendrian mapeadas del usercontext.
+          <Input // TODO: Esto supongo que deberia ser con un select cuyas opciones vendrian mapeadas del usercontext. (Los grupos del usuario)
             type="text"
             placeholder="Nombre del grupo"
             name="groupName"
@@ -57,7 +54,7 @@ function GroupScores() {
         <Button type="submit">Ver scores</Button>
         {isLoading && <Spinner />}
         {error}
-        <Text>{scores}</Text>
+        {/* <Text>{scores}</Text> */}
       </Form>
     </div>
   );

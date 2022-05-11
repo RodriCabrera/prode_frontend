@@ -17,14 +17,10 @@ function JoinGroupForm() {
   //   const userContext = useContext(AuthContext);
   const { values, handleChange, errors } = useFormik({ initialValues: {} });
 
-  // TODO: Este request me esta devolviendo POST 400 BAD REQUEST. cuando le paso:
-  // {groupName: 'grupo1'}
-  // Cuando cree el grupo 1 todo OK.
-
   const handleSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
-    joinGroup(values)
+    joinGroup(values.groupName)
       .then((res) => {
         setShowSuccess(true);
         console.log(res);

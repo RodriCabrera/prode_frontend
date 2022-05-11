@@ -20,7 +20,7 @@ export function Linkbar() {
         <Link to="/fixture">Proximos Partidos</Link>
         <Link to="/predictions">Mis Predicciones</Link>
         <Link to="/scores">Tabla de Puntajes</Link>
-        <Link to="/groups">Gestionar Prodes</Link>
+        <Link to="/groups">Gestionar grupos</Link>
       </LinkGroup>
     </LinkbarWrapper>
   );
