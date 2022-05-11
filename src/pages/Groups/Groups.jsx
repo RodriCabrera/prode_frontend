@@ -4,6 +4,8 @@ import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import CreateGroupForm from './components/CreateGroupForm';
 import JoinGroupForm from './components/JoinGroupForm';
 // TODO: Darle algo de estilos a esto.
+// TODO: Revisar en los componentes que al mandar el request se borre la data y los msjs de error
+// TODO: Refrescar los datos de usuario al sumarse a un grupo
 
 function Groups() {
   const userContext = useContext(AuthContext);

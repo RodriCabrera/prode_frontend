@@ -16,9 +16,7 @@ export const joinGroup = (groupName) => {
 };
 
 export const getGroupScores = (groupName) => {
-  return axios.get(
-    `${config.API_URL}/group/score?groupName=${groupName}`,
-    {},
-    { withCredentials: true }
-  );
+  return axios.get(`${config.API_URL}/group/score?groupName=${groupName}`, {
+    withCredentials: true,
+  });
 };
