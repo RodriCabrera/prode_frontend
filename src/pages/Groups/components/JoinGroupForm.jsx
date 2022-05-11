@@ -12,6 +12,7 @@ import { Spinner } from '../../../common/Spinner/Spinner';
 
 function JoinGroupForm() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   //   const userContext = useContext(AuthContext);
@@ -19,6 +20,7 @@ function JoinGroupForm() {
 
   const handleSubmit = (e) => {
     setIsLoading(true);
+    setShowError(false);
     e.preventDefault();
     joinGroup(values.groupName)
       .then((res) => {
@@ -26,8 +28,9 @@ function JoinGroupForm() {
         console.log(res);
       })
       .catch((err) => {
-        console.log(err);
-        setError(err.response.data.error);
+        console.log(err.response.statusText);
+        setShowError(true);
+        setError(`Error: ${err.response.statusText}`);
       })
       .finally(() => {
         setIsLoading(false);
@@ -55,8 +58,8 @@ function JoinGroupForm() {
         </Label>
         <Button type="submit">Unirse</Button>
         {isLoading && <Spinner />}
-        {error}
-        {showSuccess && <Text>Creado con exito</Text>}
+        {showError && error && <Text color="red">{error}</Text>}
+        {showSuccess && <Text color="green">Creado con exito</Text>}
       </Form>
     </>
   );

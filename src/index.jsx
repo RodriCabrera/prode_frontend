@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound';
 import Home from './pages/Home/Home';
 import Predictions from './pages/Predictions/Predictions';
 import Groups from './pages/Groups/Groups';
+import Scores from './pages/Scores/Scores';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
             <Route index element={<Home />} />
             <Route path="groups" element={<Groups />} />
             <Route path="predictions" element={<Predictions />} />
+            <Route path="scores" element={<Scores />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="account-created" element={<ConfirmationEmail />} />
