@@ -11,10 +11,11 @@ function Groups() {
 
   return (
     <>
-      <Text size="1.2rem">Grupos en los que estás participando:</Text>
-      {userContext.user.groups.map((group) => (
-        <Text>🟠 {group}</Text>
-      ))}
+      <Text size="1.2rem">
+        Grupos en los que estás participando:{' '}
+        {userContext.user.groups.map((group) => `🟠 ${group}`)}
+      </Text>
+
       <CardContainer>
         <CardWrapper>
           <CreateGroupForm />

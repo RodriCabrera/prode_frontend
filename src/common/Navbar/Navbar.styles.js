@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const NavbarContainer = styled.div`
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   background-color: #21212190;
   width: 100%;
   display: flex;

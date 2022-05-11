@@ -12,8 +12,8 @@ const Layout = styled.div`
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  width: 100vw;
+  /* gap: 1rem; */
+  /* width: 100vw; */
 `;
 const PageWrapper = styled.div`
   display: flex;

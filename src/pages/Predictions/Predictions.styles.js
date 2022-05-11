@@ -3,6 +3,7 @@ import { Button } from '../../common/common.styles';
 
 export const MiProdeContainer = styled.div`
   gap: 1rem;
+  padding: 1rem;
 `;
 // export const Banner = styled.div`
 //   cursor: pointer;
@@ -21,6 +22,9 @@ export const MiProdeContainer = styled.div`
 export const Banner = styled(Button)`
   width: 100%;
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const BannerTitle = styled.h3`
