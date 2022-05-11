@@ -1,32 +1,21 @@
-import axios from 'axios';
-import config from '../Constants';
+import { withCredentials, withoutCredentials } from './instances';
 
 export const createUser = (userData) => {
-  return axios.post(`${config.API_URL}/auth/email/create`, userData, {
-    withCredentials: true,
-  });
+  return withCredentials.post(`/auth/email/create`, userData);
 };
 
 export const loginUser = (userData) => {
-  return axios.post(`${config.API_URL}/auth/email`, userData, {
-    withCredentials: true,
-  });
+  return withCredentials.post(`/auth/email`, userData);
 };
 
 export const logoutUser = () => {
-  return axios.post(
-    `${config.API_URL}/auth/logout`,
-    {},
-    { withCredentials: true }
-  );
+  return withCredentials.post(`/auth/logout`);
 };
 
 export const forgotPassword = (email) => {
-  return axios.post(`${config.API_URL}/auth/new-password`, email);
+  return withoutCredentials.post(`/auth/new-password`, email);
 };
 
 export const changePassword = (password) => {
-  return axios.post(`${config.API_URL}/auth/change-password`, password, {
-    withCredentials: true,
-  });
+  return withCredentials.post(`/auth/change-password`, password);
 };

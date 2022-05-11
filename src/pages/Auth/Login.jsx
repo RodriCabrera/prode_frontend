@@ -41,8 +41,9 @@ function Login() {
     setError(undefined);
     loginUser(values)
       .then((res) => {
+        console.log(res);
         // TODO: Revisar si hay alguna solución más elegante que el reload
-        if (res.status === 200) return window.location.reload();
+        window.location.reload();
         return navigate('/');
       })
       .catch((err) => setError(err.response.data.error))
