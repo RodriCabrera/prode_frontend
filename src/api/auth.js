@@ -1,28 +1,17 @@
 import axios from 'axios';
 import config from '../Constants';
-
-const withCredentials = axios.create({
-  withCredentials: true,
-  baseURL: config.API_URL,
-});
+import { withCredentials } from './instances';
 
 export const createUser = (userData) => {
-  return axios.post(`${config.API_URL}/auth/email/create`, userData, {
-    withCredentials: true,
-  });
+  return withCredentials.post(`/auth/email/create`, userData);
 };
 
-// * PASANDO LOS REQUESTS A LA NUEVA INSTANCE:
 export const loginUser = (userData) => {
   return withCredentials.post(`/auth/email`, userData);
 };
 
 export const logoutUser = () => {
-  return axios.post(
-    `${config.API_URL}/auth/logout`,
-    {},
-    { withCredentials: true }
-  );
+  return withCredentials.post(`/auth/logout`);
 };
 
 export const forgotPassword = (email) => {
@@ -30,7 +19,5 @@ export const forgotPassword = (email) => {
 };
 
 export const changePassword = (password) => {
-  return axios.post(`${config.API_URL}/auth/change-password`, password, {
-    withCredentials: true,
-  });
+  return withCredentials.post(`/auth/change-password`, password);
 };
