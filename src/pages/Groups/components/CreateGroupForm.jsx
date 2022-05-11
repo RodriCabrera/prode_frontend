@@ -14,13 +14,8 @@ function CreateGroupForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  //   const [name, setName] = useState(undefined);
   const { values, handleChange } = useFormik({ initialValues: {} });
-  //   const handleChange = (e) => {
-  //     setName(e.target.value);
-  //   };
 
-  console.log(values.name);
   const handleSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
