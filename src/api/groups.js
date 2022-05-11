@@ -8,13 +8,17 @@ export const createGroup = (groupName) => {
 };
 
 export const joinGroup = (groupName) => {
-  return axios.post(`${config.API_URL}/group/join?groupName=${groupName}`, {
-    withCredentials: true,
-  });
+  return axios.post(
+    `${config.API_URL}/group/join?groupName=${groupName}`,
+    {},
+    { withCredentials: true }
+  );
 };
 
 export const getGroupScores = (groupName) => {
-  return axios.get(`${config.API_URL}/group/score?groupName=${groupName}`, {
-    withCredentials: true,
-  });
+  return axios.get(
+    `${config.API_URL}/group/score?groupName=${groupName}`,
+    {},
+    { withCredentials: true }
+  );
 };
