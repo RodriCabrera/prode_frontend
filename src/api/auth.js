@@ -1,16 +1,20 @@
 import axios from 'axios';
 import config from '../Constants';
 
+const withCredentials = axios.create({
+  withCredentials: true,
+  baseURL: config.API_URL,
+});
+
 export const createUser = (userData) => {
   return axios.post(`${config.API_URL}/auth/email/create`, userData, {
     withCredentials: true,
   });
 };
 
+// * PASANDO LOS REQUESTS A LA NUEVA INSTANCE:
 export const loginUser = (userData) => {
-  return axios.post(`${config.API_URL}/auth/email`, userData, {
-    withCredentials: true,
-  });
+  return withCredentials.post(`/auth/email`, userData);
 };
 
 export const logoutUser = () => {
