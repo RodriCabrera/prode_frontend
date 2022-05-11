@@ -9,7 +9,7 @@ import JoinGroupForm from './components/JoinGroupForm';
 
 function Groups() {
   const userContext = useContext(AuthContext);
-  console.log(userContext.user);
+  console.log('userContext', userContext.user);
 
   return (
     <>

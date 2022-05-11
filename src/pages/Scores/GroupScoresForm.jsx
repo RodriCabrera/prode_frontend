@@ -29,9 +29,7 @@ function GroupScoresForm() {
         setIsLoading(false);
       });
   };
-
-  console.log('Scores Data', scores?.data);
-  console.log('values', values);
+  console.log('SCORES: ', scores);
   return (
     <Form onSubmit={handleSubmit}>
       Seleccionar grupo:
