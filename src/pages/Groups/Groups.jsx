@@ -17,8 +17,6 @@ function Groups() {
     }
   }, [userContext.user]);
 
-  console.log('userContext', userContext.user);
-
   return (
     <>
       <Text size="1.2rem">

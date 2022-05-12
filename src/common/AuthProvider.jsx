@@ -9,7 +9,6 @@ function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const checkAuth = () => {
-    console.log('checkAuth');
     getAuth()
       .then(({ data }) => {
         setUser(data.user);
@@ -21,8 +20,6 @@ function AuthProvider({ children }) {
         setIsLoading(false);
       });
   };
-
-  console.log('USER STATE IN AUTH PROVIDER', user);
 
   useEffect(() => {
     if (user) return;
