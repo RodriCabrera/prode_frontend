@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
-import React, { useContext, useState } from 'react';
-import { getGroupScores } from '../../api/groups';
-import { AuthContext } from '../../common/AuthProvider';
+import React, { useState, useEffect } from 'react';
+import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Button, Form, Label } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
@@ -9,10 +8,23 @@ function GroupScoresForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [scores, setScores] = useState(undefined);
   const [error, setError] = useState(undefined);
+  const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({ initialValues: {} });
-  const userContext = useContext(AuthContext);
 
   // TODO : Ver como le pasamos los nombres de los grupos. Mas que nada diseño.
+
+  const getGroupList = () => {
+    getUserGroups()
+      .then(({ data }) => {
+        setGroupList(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +42,11 @@ function GroupScoresForm() {
       });
   };
   console.log('SCORES: ', scores);
+
+  useEffect(() => {
+    getGroupList();
+  }, []);
+
   return (
     <Form onSubmit={handleSubmit}>
       Seleccionar grupo:
@@ -40,8 +57,8 @@ function GroupScoresForm() {
           onChange={handleChange}
         >
           <option defaultChecked>Seleccione un grupo</option>
-          {userContext.user.groups.map((group) => (
-            <option value={group}>{group}</option>
+          {groupList.map((group) => (
+            <option value={group.name}>{group.name}</option>
           ))}
         </select>
       </Label>
