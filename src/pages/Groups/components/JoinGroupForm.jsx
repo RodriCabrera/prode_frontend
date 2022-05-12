@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { joinGroup } from '../../../api/groups';
-import { AuthContext } from '../../../common/AuthProvider';
 import {
   Button,
   Input,
@@ -11,12 +10,11 @@ import {
 } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 
-function JoinGroupForm() {
+function JoinGroupForm({ updateList }) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const userContext = useContext(AuthContext);
   const { values, handleChange, errors } = useFormik({ initialValues: {} });
 
   const handleSubmit = (e) => {
@@ -25,7 +23,7 @@ function JoinGroupForm() {
     e.preventDefault();
     joinGroup(values.groupName)
       .then(() => {
-        userContext.checkAuth();
+        updateList();
         setShowSuccess(true);
       })
       .catch((err) => {

@@ -1,22 +1,21 @@
-import axios from 'axios';
-import config from '../Constants';
+import { withCredentials } from './instances';
 
 export const createGroup = (groupName) => {
-  return axios.post(`${config.API_URL}/group/create`, groupName, {
-    withCredentials: true,
-  });
+  return withCredentials.post('/group/create', groupName);
 };
 
 export const joinGroup = (groupName) => {
-  return axios.post(
-    `${config.API_URL}/group/join?groupName=${groupName}`,
-    {},
-    { withCredentials: true }
-  );
+  return withCredentials.post(`/group/join?groupName=${groupName}`);
 };
 
 export const getGroupScores = (groupName) => {
-  return axios.get(`${config.API_URL}/group/score?groupName=${groupName}`, {
-    withCredentials: true,
-  });
+  return withCredentials.get(`/group/score?groupName=${groupName}`);
+};
+
+export const getUserGroups = () => {
+  return withCredentials.get('/group');
+};
+
+export const getGroupData = (groupName) => {
+  return withCredentials.get(`/group/?groupName=${groupName}`);
 };
