@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import propTypes from 'prop-types';
-import { Spinner } from './Spinner/Spinner';
 import { getAuth } from '../api/auth';
 import Loading from './Loading/Loading';
 
