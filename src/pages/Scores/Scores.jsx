@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../common/AuthProvider';
+import React, { useState } from 'react';
 import { CardWrapper, Text } from '../../common/common.styles';
 import GroupScoresForm from './GroupScoresForm';
 
 function Scores() {
-  const userContext = useContext(AuthContext);
-  console.log(userContext);
-
+  const [scores, setScores] = useState(undefined);
+  console.log('scores', scores);
   return (
     <CardWrapper>
       <Text size="2rem" align="center">
         Ver puntajes
       </Text>
-      <GroupScoresForm />
+      <GroupScoresForm setScores={setScores} />
+      {scores?.data.scores.map((score) => (
+        <p key={score.user}>{`${score.user} : ${score.score}`}</p>
+      ))}
     </CardWrapper>
   );
 }

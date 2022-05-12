@@ -49,8 +49,8 @@ function CreateGroupForm({ updateList }) {
             onChange={handleChange}
           />
         </Label>
-        <Button type="submit">Crear</Button>
-        {isLoading && <Spinner />}
+
+        <Button type="submit">{isLoading ? <Spinner /> : 'Crear grupo'}</Button>
         {error}
         {showSuccess && <Text>Creado con exito</Text>}
       </Form>

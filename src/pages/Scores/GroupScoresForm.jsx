@@ -4,9 +4,9 @@ import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Button, Form, Label } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
-function GroupScoresForm() {
+function GroupScoresForm({ setScores }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [scores, setScores] = useState(undefined);
+  // const [scores, setScores] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({ initialValues: {} });
@@ -14,6 +14,7 @@ function GroupScoresForm() {
   // TODO : Ver como le pasamos los nombres de los grupos. Mas que nada diseño.
 
   const getGroupList = () => {
+    setIsLoading(true);
     getUserGroups()
       .then(({ data }) => {
         setGroupList(data);
@@ -41,7 +42,6 @@ function GroupScoresForm() {
         setIsLoading(false);
       });
   };
-  console.log('SCORES: ', scores);
 
   useEffect(() => {
     getGroupList();
@@ -56,9 +56,13 @@ function GroupScoresForm() {
           name="groupName"
           onChange={handleChange}
         >
-          <option defaultChecked>Seleccione un grupo</option>
+          <option defaultChecked>
+            {isLoading ? 'Cargando grupos...' : 'Selecciona un grupo'}
+          </option>
           {groupList.map((group) => (
-            <option value={group.name}>{group.name}</option>
+            <option key={group.name} value={group.name}>
+              {group.name}
+            </option>
           ))}
         </select>
       </Label>

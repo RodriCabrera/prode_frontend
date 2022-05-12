@@ -32,7 +32,7 @@ function Groups() {
 
   return (
     <>
-      <Text size="1.2rem">Grupos en los que estás participando: </Text>
+      <Text size="1.5rem">Grupos en los que estás participando: </Text>
       {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
       <CardContainer>
         <CardWrapper>

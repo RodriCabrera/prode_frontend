@@ -29,22 +29,7 @@ function Navbar() {
         userContext.user = null;
       });
   };
-  // TODO: Pensar que botones va a ver el usuario una vez que este logueado.
-  /*
-    
-  Jamboard con diseño:
-  https://jamboard.google.com/d/1RjaVVilMR1_6Na-FjjAT0aM5Y5_-YOayeoVAMX9BzQo/viewer
-  
-    Ideas de botones:
-    * Predicciones ya cargadas o por cargar.
-      * Como se van a ver? Tenemos filtros por fecha? por grupo? por pais?...
-    * Integrantes del grupo.
-    * Predicciones de los integrantes del grupo? Suma ver eso o da para copiarse?
-    * Perfil del usuario?
-    
-    Los resultados de los partidos se deberian ver en la misma tabla que se ven
-    las predicciones del usuario.
-  */
+
   return (
     <NavbarContainer id="navbar-container">
       <NavbarWrapper id="navbar-wrapper">
