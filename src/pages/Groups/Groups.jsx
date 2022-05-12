@@ -33,7 +33,7 @@ function Groups() {
   return (
     <>
       <Text size="1.2rem">Grupos en los que estás participando: </Text>
-      {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
+      {isLoading ? <Spinner size={90} /> : <GroupList groups={groupList} />}
       <CardContainer>
         <CardWrapper>
           <CreateGroupForm updateList={getGroupList} />
@@ -42,6 +42,9 @@ function Groups() {
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
       </CardContainer>
+      <div>
+        <Spinner size={50} />
+      </div>
     </>
   );
 }
