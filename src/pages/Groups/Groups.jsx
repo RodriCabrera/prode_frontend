@@ -19,10 +19,12 @@ function Groups() {
 
   return (
     <>
-      <Text size="1.2rem">
-        Grupos en los que estás participando:{' '}
-        {groupList.map((group) => `🟠 ${group}`)}
-      </Text>
+      <Text size="1.2rem">Grupos en los que estás participando: </Text>
+      <ul>
+        {groupList.map((group) => (
+          <li> {group}</li>
+        ))}
+      </ul>
 
       <CardContainer>
         <CardWrapper>

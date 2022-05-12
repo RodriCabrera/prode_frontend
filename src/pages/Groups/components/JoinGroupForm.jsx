@@ -25,7 +25,7 @@ function JoinGroupForm() {
     e.preventDefault();
     joinGroup(values.groupName)
       .then(() => {
-        userContext.update();
+        userContext.checkAuth();
         setShowSuccess(true);
       })
       .catch((err) => {
@@ -56,10 +56,11 @@ function JoinGroupForm() {
             onChange={handleChange}
           />
         </Label>
-        <Button type="submit">Unirse</Button>
-        {isLoading && <Spinner />}
+        <Button type="submit" grayscale={isLoading}>
+          {isLoading ? <Spinner /> : 'Unirse'}
+        </Button>
         {showError && error && <Text color="red">{error}</Text>}
-        {showSuccess && <Text color="green">Creado con exito</Text>}
+        {showSuccess && <Text color="green">Te uniste al grupo</Text>}
       </Form>
     </>
   );

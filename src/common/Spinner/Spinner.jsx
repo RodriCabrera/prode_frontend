@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import React from 'react';
 import './spinner.css';
 
+// TODO Reemplazar por uno que se adapte mejor.
+
 const SpinnerWrapper = styled.div`
   width: 100%;
   display: flex;
