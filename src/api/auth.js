@@ -1,7 +1,7 @@
 import { withCredentials, withoutCredentials } from './instances';
 
 export const getAuth = () => {
-  return axios.get(`${config.API_URL}/auth`, { withCredentials: true });
+  return withCredentials.get(`/auth`);
 };
 
 export const createUser = (userData) => {
