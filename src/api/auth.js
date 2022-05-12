@@ -1,5 +1,9 @@
 import { withCredentials, withoutCredentials } from './instances';
 
+export const getAuth = () => {
+  return withCredentials.get(`/auth`);
+};
+
 export const createUser = (userData) => {
   return withCredentials.post(`/auth/email/create`, userData);
 };

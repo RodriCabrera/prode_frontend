@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../common/AuthProvider';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import CreateGroupForm from './components/CreateGroupForm';
@@ -9,13 +9,19 @@ import JoinGroupForm from './components/JoinGroupForm';
 
 function Groups() {
   const userContext = useContext(AuthContext);
-  console.log('userContext', userContext.user);
+  const [groupList, setGroupList] = useState([]);
+
+  useEffect(() => {
+    if (userContext.user) {
+      setGroupList(userContext.user.groups);
+    }
+  }, [userContext.user]);
 
   return (
     <>
       <Text size="1.2rem">
         Grupos en los que estás participando:{' '}
-        {userContext.user.groups.map((group) => `🟠 ${group}`)}
+        {groupList.map((group) => `🟠 ${group}`)}
       </Text>
 
       <CardContainer>
