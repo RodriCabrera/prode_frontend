@@ -48,7 +48,11 @@ function Navbar() {
   return (
     <NavbarContainer id="navbar-container">
       <NavbarWrapper id="navbar-wrapper">
-        <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
+        <ButtonGroup
+          id="button-group-left"
+          clickable
+          onClick={() => navigate('/')}
+        >
           prode الحمار
         </ButtonGroup>
         <ButtonGroup id="button-group-right">

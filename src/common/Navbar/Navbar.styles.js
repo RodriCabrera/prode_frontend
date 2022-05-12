@@ -26,4 +26,5 @@ export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 0 1rem;
+  cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
 `;
