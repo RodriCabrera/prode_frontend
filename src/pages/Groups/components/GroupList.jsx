@@ -2,47 +2,26 @@ import { isEmpty } from 'lodash';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
-import styled from '@emotion/styled/macro';
 import { Text } from '../../../common/common.styles';
+import ListWrapper from '../../../common/Lists/ListWrapper';
 
-const AvatarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: darkorange;
-  border-radius: 100%;
-  height: 2.5rem;
-  width: 2.5rem;
-  transition: 0.2s;
-`;
-
-const GroupListElement = styled.div`
-  display: flex;
-  gap: 1rem;
-  cursor: pointer;
-  :hover ${AvatarWrapper} {
-    background-color: orange;
-    height: 3rem;
-    width: 3rem;
-  }
-`;
 function GroupList({ groups }) {
   const navigate = useNavigate();
 
   const handleClick = (group) => {
     navigate(`/groups/${group.name}`);
-    console.log('click');
   };
 
   if (isEmpty(groups)) {
     return <p>No perteneces a ningún grupo</p>;
   }
-  console.log(groups);
+
   return groups.map((group) => (
-    <GroupListElement key={group} onClick={() => handleClick(group)}>
-      <AvatarWrapper>
-        <HiOutlineUserGroup size="1.8rem" />
-      </AvatarWrapper>
+    <ListWrapper
+      key={group.name}
+      onClick={() => handleClick(group)}
+      avatar={<HiOutlineUserGroup size="1.8rem" />}
+    >
       <div>
         <Text size="1.3rem">
           <Text>{group.name}</Text>
@@ -50,7 +29,7 @@ function GroupList({ groups }) {
         <Text>Admin: {group.owner}</Text>
         <Text>Integrantes: {group.members.length}</Text>
       </div>
-    </GroupListElement>
+    </ListWrapper>
   ));
 }
 
