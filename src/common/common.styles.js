@@ -10,6 +10,7 @@ export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  gap: 2rem;
 `;
 
 export const CardWrapper = styled.div`

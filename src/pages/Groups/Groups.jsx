@@ -32,12 +32,20 @@ function Groups() {
 
   return (
     <>
-      <Text size="1.5rem">Grupos en los que estás participando: </Text>
-      {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
+      <CardContainer>
+        <CardWrapper>
+          <Text size="1.5rem">Grupos en los que estás participando: </Text>
+          {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
+        </CardWrapper>
+      </CardContainer>
+
       <CardContainer>
         <CardWrapper>
           <CreateGroupForm updateList={getGroupList} />
         </CardWrapper>
+      </CardContainer>
+
+      <CardContainer>
         <CardWrapper>
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
