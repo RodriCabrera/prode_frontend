@@ -34,7 +34,9 @@ function Groups() {
     <>
       <CardContainer>
         <CardWrapper>
-          <Text size="1.5rem">Grupos en los que estás participando: </Text>
+          <Text size="1.5rem" align="center">
+            Grupos en los que estás participando:{' '}
+          </Text>
           {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
         </CardWrapper>
       </CardContainer>

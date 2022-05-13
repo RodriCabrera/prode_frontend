@@ -98,7 +98,7 @@ function Register() {
             />
           </Label>
 
-          <Text color={error && 'red'} text-align="center">
+          <Text color={error && 'red'} align="center">
             {isLoading ? <Spinner /> : showError && error}
           </Text>
           <Button onClick={handleSubmit} disabled={!isEmpty(errors)}>

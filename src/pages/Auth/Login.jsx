@@ -82,7 +82,7 @@ function Login() {
               onChange={handleChange}
             />
           </Label>
-          <Text color={error && 'red'} text-align="center">
+          <Text color={error && 'red'} align="center">
             {isLoading ? <Spinner /> : error}
           </Text>
           <Button type="submit" disabled={!isEmpty(errors)}>
