@@ -2,7 +2,14 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { AuthContext } from '../AuthProvider';
-import { NavbarWrapper, ButtonGroup, NavbarContainer } from './Navbar.styles';
+import {
+  NavbarWrapper,
+  ButtonGroup,
+  NavbarContainer,
+  LogoContainer,
+  LogoMain,
+  LogoSub,
+} from './Navbar.styles';
 import { logoutUser } from '../../api/auth';
 import { Linkbar } from '../Linkbar/Linkbar';
 
@@ -34,7 +41,10 @@ function Navbar() {
     <NavbarContainer id="navbar-container">
       <NavbarWrapper id="navbar-wrapper">
         <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
-          prode الحمار
+          <LogoContainer>
+            <LogoMain>Prode </LogoMain>
+            <LogoSub>الحمار</LogoSub>
+          </LogoContainer>
         </ButtonGroup>
         <ButtonGroup id="button-group-right">
           {userContext.user ? (
