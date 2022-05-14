@@ -22,10 +22,10 @@ export const NavbarWrapper = styled.div`
 
 export const ButtonGroup = styled.div`
   background-color: inherit;
-  padding: 2rem 0rem;
+  padding: 2rem;
   display: flex;
   align-items: center;
-  gap: 0 1rem;
+  gap: 1rem;
 `;
 
 export const LogoContainer = styled.div`
@@ -49,3 +49,11 @@ export const LogoMain = styled.p`
 export const LogoSub = styled(LogoMain)`
   letter-spacing: 1px;
 `;
+
+/*
+Colores:
+#fff: blanco
+#ff3: amarillo
+#f90: naranja
+#c33: rojo
+*/

@@ -8,6 +8,10 @@ export const joinGroup = (groupName) => {
   return withCredentials.post(`/group/join?groupName=${groupName}`);
 };
 
+export const leaveGroup = (groupName) => {
+  return withCredentials.post(`/group/leave?groupName=${groupName}`);
+};
+
 export const getGroupScores = (groupName) => {
   return withCredentials.get(`/group/score?groupName=${groupName}`);
 };

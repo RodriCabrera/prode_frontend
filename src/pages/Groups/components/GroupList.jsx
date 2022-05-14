@@ -13,7 +13,7 @@ function GroupList({ groups }) {
   };
 
   if (isEmpty(groups)) {
-    return <p>No perteneces a ningún grupo</p>;
+    return <Text size="1.5rem">No perteneces a ningún grupo</Text>;
   }
 
   return groups.map((group) => (

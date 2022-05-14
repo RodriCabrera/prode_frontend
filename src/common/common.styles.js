@@ -35,7 +35,7 @@ export const Button = styled.button`
     ${({ grayscale }) =>
       grayscale
         ? '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
-        : '45deg, #ff512f 0%, #f09819 51%, #ff512f 100%'}
+        : '45deg, #c33 0%, #ff3 51%, #c33 100%'}
   );
   padding: ${({ padding }) => padding || '15px 30px'};
   text-align: center;
@@ -47,7 +47,7 @@ export const Button = styled.button`
   display: block;
   border: 0px;
   font-weight: 600;
-  box-shadow: 0px 0px 14px -7px #f09819;
+  box-shadow: 0px 0px 14px -7px #fff;
   :hover {
     background-position: right center;
     /* change the direction of the change here */
