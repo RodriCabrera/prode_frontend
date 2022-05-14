@@ -42,7 +42,7 @@ function Home() {
   return (
     <PageWrapper>
       <Row>
-        <Keypad />
+        {/* <Keypad /> */}
         <LeaderBoard />
       </Row>
       <div>
