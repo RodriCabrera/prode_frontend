@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { createUser } from '../../api/auth';
 import { AuthContext } from '../../common/AuthProvider';
 import {
@@ -15,14 +16,11 @@ import {
   Text,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
-import { Spinner } from '../../common/Spinner/Spinner';
 import { authSchema } from '../../validationSchemas/auth';
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const userContext = useContext(AuthContext);
-  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
     initialValues: { name: null },
@@ -38,20 +36,24 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setIsLoading(true);
-    setError(undefined);
 
-    createUser(values)
-      .then((res) => {
-        console.log('Registro con exito', res);
-        return navigate('/account-created');
-      })
-      .catch((err) => {
-        setError(`${err.response.statusText}${err.response.data.error}`);
-        setShowError(true);
-      })
-      .finally(() => setIsLoading(false));
+    toast.promise(
+      createUser(values)
+        .then(() => {
+          return navigate('/account-created');
+        })
+        .finally(() => setIsLoading(false)),
+      {
+        pending: 'Registrandote...',
+        success: 'Registrado con éxito',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
   };
 
   return (
@@ -98,10 +100,10 @@ function Register() {
             />
           </Label>
 
-          <Text color={error && 'red'} align="center">
-            {isLoading ? <Spinner /> : showError && error}
-          </Text>
-          <Button onClick={handleSubmit} disabled={!isEmpty(errors)}>
+          <Button
+            onClick={handleSubmit}
+            disabled={!isEmpty(errors) || isLoading}
+          >
             CREAR CUENTA
           </Button>
         </Form>

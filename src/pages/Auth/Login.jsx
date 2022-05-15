@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { loginUser } from '../../api/auth';
 import { AuthContext } from '../../common/AuthProvider';
 import {
@@ -15,13 +16,11 @@ import {
   Text,
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
-import { Spinner } from '../../common/Spinner/Spinner';
 import { authSchema } from '../../validationSchemas/auth';
 
 function Login() {
   const userContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
@@ -38,16 +37,26 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(undefined);
-    loginUser(values)
-      .then((res) => {
-        console.log(res);
-        // TODO: Revisar si hay alguna solución más elegante que el reload
-        window.location.reload();
-        return navigate('/');
-      })
-      .catch((err) => setError(err.response.data.error))
-      .finally(() => setIsLoading(false));
+
+    toast.promise(
+      loginUser(values)
+        .then(() => {
+          window.location.reload();
+          return navigate('/');
+        })
+        .finally(() => {
+          setIsLoading(false);
+        }),
+      {
+        pending: 'Logueandote...',
+        success: 'Logueado con éxito',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
   };
 
   return (
@@ -82,10 +91,7 @@ function Login() {
               onChange={handleChange}
             />
           </Label>
-          <Text color={error && 'red'} align="center">
-            {isLoading ? <Spinner /> : error}
-          </Text>
-          <Button type="submit" disabled={!isEmpty(errors)}>
+          <Button type="submit" disabled={!isEmpty(errors) || isLoading}>
             LOGIN
           </Button>
           <GoogleAuth text="Login" />
