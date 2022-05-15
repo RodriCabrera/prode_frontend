@@ -15,6 +15,7 @@ import Home from './pages/Home/Home';
 import Predictions from './pages/Predictions/Predictions';
 import Groups from './pages/Groups/Groups';
 import Scores from './pages/Scores/Scores';
+import GroupPage from './pages/GroupPage/GroupPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
             <Route path="groups" element={<Groups />} />
+            <Route path="groups/:name" element={<GroupPage />} />
             <Route path="predictions" element={<Predictions />} />
             <Route path="scores" element={<Scores />} />
             <Route path="login" element={<Login />} />
