@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { createGroup } from '../../../api/groups';
 import {
   Button,
@@ -8,30 +9,35 @@ import {
   Text,
   Form,
 } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
 
 function CreateGroupForm({ updateList }) {
-  const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const { values, handleChange } = useFormik({ initialValues: {} });
 
   const handleSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
-    createGroup(values)
-      .then(() => {
-        updateList();
-        setShowSuccess(true);
-      })
-      .catch((err) => {
-        console.log(err);
-        setError(err.response.data.error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+
+    toast.promise(
+      createGroup(values)
+        .then(() => {
+          updateList();
+        })
+        .finally(() => {
+          setIsLoading(false);
+        }),
+      {
+        pending: 'Creando grupo...',
+        success: 'Grupo creado con éxito',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
   };
+
   return (
     <>
       <Text size="2rem" align="center">
@@ -49,10 +55,9 @@ function CreateGroupForm({ updateList }) {
             onChange={handleChange}
           />
         </Label>
-
-        <Button type="submit">{isLoading ? <Spinner /> : 'Crear grupo'}</Button>
-        {error}
-        {showSuccess && <Text>Creado con exito</Text>}
+        <Button type="submit" disabled={isLoading}>
+          Crear grupo
+        </Button>
       </Form>
     </>
   );

@@ -3,7 +3,6 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
 import Countdown from './components/Countdown';
-import Keypad from './components/Keypad';
 import LeaderBoard from './components/LeaderBoard';
 
 // TODO : Ver si esta nos sirve para hacer las tablas:

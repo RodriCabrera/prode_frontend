@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { leaveGroup } from '../../../api/groups';
 import {
   Button,
@@ -8,28 +9,32 @@ import {
   Text,
   Form,
 } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
 
 function LeaveGroupForm({ updateList }) {
-  const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const { values, handleChange } = useFormik({ initialValues: {} });
 
   const handleSubmit = (e) => {
     setIsLoading(true);
     e.preventDefault();
-    leaveGroup(values.name)
-      .then(() => {
-        updateList();
-        setShowSuccess(true);
-      })
-      .catch((err) => {
-        setError(err.response.data.error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    toast.promise(
+      leaveGroup(values.name)
+        .then(() => {
+          updateList();
+        })
+        .finally(() => {
+          setIsLoading(false);
+        }),
+      {
+        pending: 'Saliendo del grupo...',
+        success: 'Saliste del grupo',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
   };
 
   return (
@@ -50,9 +55,9 @@ function LeaveGroupForm({ updateList }) {
           />
         </Label>
 
-        <Button type="submit">{isLoading ? <Spinner /> : 'Salir'}</Button>
-        {error}
-        {showSuccess && <Text>Saliste con exito</Text>}
+        <Button type="submit" disabled={isLoading}>
+          Salir
+        </Button>
       </Form>
     </>
   );
