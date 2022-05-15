@@ -18,6 +18,7 @@ export const NavbarWrapper = styled.div`
   max-width: 1100px;
   font-size: 15px;
   width: 100%;
+  flex-wrap: wrap;
 `;
 
 export const ButtonGroup = styled.div`

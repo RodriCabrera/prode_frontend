@@ -44,10 +44,7 @@ function Home() {
         {/* <Keypad /> */}
         <LeaderBoard />
       </Row>
-      <div>
-        <h3>Tabla proximos partidos o Coundtown para inicio mundial</h3>
-        <Countdown />
-      </div>
+      <Countdown />
     </PageWrapper>
   );
 }

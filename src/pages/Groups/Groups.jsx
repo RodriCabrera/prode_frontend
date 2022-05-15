@@ -8,8 +8,6 @@ import { getUserGroups } from '../../api/groups';
 import { Spinner } from '../../common/Spinner/Spinner';
 import LeaveGroupForm from './components/LeaveGroupForm';
 
-// TODO: Revisar en los componentes que al mandar el request se borre la data y los msjs de error
-
 function Groups() {
   const [groupList, setGroupList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
