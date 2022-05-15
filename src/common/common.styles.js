@@ -25,6 +25,7 @@ export const CardWrapper = styled.div`
   flex-direction: column;
 `;
 
+// TODO: Mejorar los colores del BUTTON:
 export const Button = styled.button`
   background-color: inherit;
   display: flex;
