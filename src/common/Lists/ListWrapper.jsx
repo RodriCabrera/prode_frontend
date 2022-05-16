@@ -34,8 +34,14 @@ function ListWrapper({ children, onClick, avatar }) {
 
 ListWrapper.propTypes = {
   children: propTypes.node.isRequired,
-  onClick: propTypes.func.isRequired,
+  onClick: propTypes.func,
   avatar: propTypes.node.isRequired,
+};
+
+ListWrapper.defaultProps = {
+  onClick: () => {
+    console.log('onClick');
+  },
 };
 
 export default ListWrapper;

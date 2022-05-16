@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getGroupData } from '../../api/groups';
+import { HiOutlineUserGroup } from 'react-icons/hi';
+import { isEmpty } from 'lodash';
+import { getGroupData, getGroupScores } from '../../api/groups';
+import ListWrapper from '../../common/Lists/ListWrapper';
 import { Spinner } from '../../common/Spinner/Spinner';
 
 function GroupPage() {
   const { name } = useParams();
   const [group, setGroup] = useState({});
+  const [scoresData, setScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getGroup = () => {
-    setIsLoading(true);
+  useEffect(() => {
+    // TODO: Implementar toast promise:
     getGroupData(name)
       .then(({ data }) => {
         setGroup(data.groupData);
       })
       .catch((error) => {
-        // TODO: handle error
+        // TODO: handle error : Mostrar el msg en el toast?
         if (error.request.status === 401) {
           alert('You are not a member of this group');
         } else if (error.request.status === 400) {
@@ -27,11 +31,19 @@ function GroupPage() {
       .finally(() => {
         setIsLoading(false);
       });
-  };
-  useEffect(() => {
-    console.log(name);
-    getGroup();
   }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getGroupScores(name)
+      .then((res) => {
+        setScoresData(res.data.scores);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <>
       {isLoading && <Spinner />}
@@ -40,12 +52,21 @@ function GroupPage() {
           <h1>{group.name}</h1>
           <h2>Admin: {group.owner.name}</h2>
           <h3>Members:</h3>
-          <ul>
+          {/* <ul>
             {group.members.map((member) => (
-              // eslint-disable-next-line no-underscore-dangle
               <li key={member._id}>{member.name}</li>
             ))}
-          </ul>
+          </ul> */}
+          {isEmpty(scoresData)
+            ? 'Loading member scores...'
+            : scoresData?.map((score) => (
+                <ListWrapper
+                  key={score.user}
+                  avatar={<HiOutlineUserGroup size="1.8rem" />}
+                >
+                  <p>{`${score.user} : ${score.score} pts`}</p>
+                </ListWrapper>
+              ))}
         </>
       )}
     </>

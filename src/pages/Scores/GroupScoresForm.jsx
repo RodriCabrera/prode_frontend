@@ -4,14 +4,14 @@ import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Button, Form, Label } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
+// TODO Implementar Toast promise
+
 function GroupScoresForm({ setScores }) {
   const [isLoading, setIsLoading] = useState(false);
   // const [scores, setScores] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({ initialValues: {} });
-
-  // TODO : Ver como le pasamos los nombres de los grupos. Mas que nada diseño.
 
   const getGroupList = () => {
     setIsLoading(true);
@@ -69,7 +69,6 @@ function GroupScoresForm({ setScores }) {
       <Button type="submit">Ver scores</Button>
       {isLoading && <Spinner />}
       {error}
-      {/* <Text>{scores}</Text> */}
     </Form>
   );
 }
