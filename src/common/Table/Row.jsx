@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Row() {
-  return <tr>Row</tr>;
+function Row({ children }) {
+  return <tr>{children}</tr>;
 }
 
 export { Row };

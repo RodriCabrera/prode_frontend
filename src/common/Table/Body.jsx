@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Body() {
-  return <tbody>Body</tbody>;
+function Body({ children }) {
+  return <tbody>{children}</tbody>;
 }
 
 export { Body };

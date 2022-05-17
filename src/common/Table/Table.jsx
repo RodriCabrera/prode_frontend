@@ -6,10 +6,10 @@ import { Header } from './Header';
 import { Row } from './Row';
 import { Container, TableWrapper } from './Table.styles';
 
-function Table() {
+function Table({ children }) {
   return (
     <Container>
-      <TableWrapper>Table</TableWrapper>;
+      <TableWrapper>{children}</TableWrapper>;
     </Container>
   );
 }
@@ -20,4 +20,4 @@ Table.Head = Head;
 Table.Header = Header;
 Table.Row = Row;
 
-export { Table };
+export default Table;
