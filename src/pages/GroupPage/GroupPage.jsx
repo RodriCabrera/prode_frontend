@@ -6,6 +6,9 @@ import { getGroupData, getGroupScores } from '../../api/groups';
 import ListWrapper from '../../common/Lists/ListWrapper';
 import { Spinner } from '../../common/Spinner/Spinner';
 
+// TODO: Boton para salir del grupo.
+// TODO: Mostrar acuerdo/reglas del grupo.
+
 function GroupPage() {
   const { name } = useParams();
   const [group, setGroup] = useState({});
