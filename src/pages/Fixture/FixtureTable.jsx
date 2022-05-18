@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from '../../common/Table/Table';
+import { getFlagUrl } from './fixturePageUtils';
 
 function FixtureTable({ data }) {
   console.log('data en fixture table', data);
@@ -7,19 +8,28 @@ function FixtureTable({ data }) {
     <Table>
       <Table.Head>
         <Table.Row>
-          <Table.Header>Fecha</Table.Header>
-          <Table.Header>ad</Table.Header>
-          <Table.Header>display</Table.Header>
-          <Table.Header>ds</Table.Header>
+          <Table.Header />
+          <Table.Header />
+          <Table.Header />
+          <Table.Header />
+          <Table.Header />
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        <Table.Row>
-          {/* <Table.Cell>Cell</Table.Cell>
-          <Table.Cell>Cell</Table.Cell>
-          <Table.Cell>Cell</Table.Cell>
-          <Table.Cell>Cell</Table.Cell> */}
-        </Table.Row>
+        {data.map((match) => {
+          return (
+            <Table.Row>
+              <Table.Cell>{match.date}</Table.Cell>
+              <Table.Cell>{getFlagUrl(match.away.flag, 1)}</Table.Cell>
+              <Table.Cell>{match.away.shortName}</Table.Cell>
+              <Table.Cell>
+                {`${match.awayScore || ''} - ${match.homeScore || ''}`}
+              </Table.Cell>
+              <Table.Cell>{match.home.shortName}</Table.Cell>
+              <Table.Cell>{getFlagUrl(match.home.flag, 1)}</Table.Cell>
+            </Table.Row>
+          );
+        })}
       </Table.Body>
     </Table>
   );
