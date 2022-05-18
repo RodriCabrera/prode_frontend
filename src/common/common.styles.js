@@ -81,7 +81,8 @@ export const Input = styled.input`
 `;
 
 export const Text = styled.p`
-  text-align: ${(props) => (props.align ? props.align : 'left')};
-  color: ${(props) => (props.color ? props.color : 'inherit')};
+  text-align: ${({ align }) => align || 'left'};
+  color: ${({ color }) => color || 'inherit'};
   font-size: ${(props) => props.size};
+  font-weight: ${({ weight }) => weight};
 `;

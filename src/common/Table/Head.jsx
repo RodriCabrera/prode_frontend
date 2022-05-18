@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Head({ children }) {
-  return <th>{children}</th>;
+  return <thead>{children}</thead>;
 }
 
 export { Head };

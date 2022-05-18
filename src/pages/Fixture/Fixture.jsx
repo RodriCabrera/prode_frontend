@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { getFixture } from '../../api/fixture';
+import styled from '@emotion/styled';
+import { getGroupStage } from '../../api/fixture';
 import FixtureTable from './FixtureTable';
+import { Spinner } from '../../common/Spinner/Spinner';
+import { Text } from '../../common/common.styles';
+
+const FixtureWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
 
 function Fixture() {
+  const [isLoading, setIsLoading] = useState(false);
   const [fixtureData, setFixtureData] = useState([]);
 
   useEffect(() => {
-    // getGroupStage()
-    getFixture().then((res) => {
-      setFixtureData(res.data);
-    });
+    setIsLoading(true);
+    getGroupStage()
+      .then((res) => {
+        setFixtureData(res.data.fixture);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   const renderGroupsTables = () => {
-    const groups = fixtureData.fixture?.filter(
-      (stage) => stage.name === 'Primera fase'
-    )[0];
-    if (groups) {
-      return (
-        <div>
-          <h2>{groups?.name}</h2>
-          <FixtureTable data={groups[0]} />
-        </div>
-      );
-    }
-    return <p>Loading</p>;
-    // return groups.filter((elem) => elem.name === 'Primera fase')[0];
+    console.log('fixtureData inside render', fixtureData);
+    return fixtureData.map((group) => (
+      <div>
+        <h2>{group.name}</h2>
+        <FixtureTable data={group.matches} />
+      </div>
+    ));
   };
 
   return (
-    <div>
-      <h1>coso</h1>
-      {renderGroupsTables()}
-    </div>
+    <FixtureWrapper>
+      <Text size="2rem" weight="700" align="center">
+        Fase de Grupos
+      </Text>
+      {isLoading ? <Spinner /> : renderGroupsTables()}
+    </FixtureWrapper>
   );
 }
 

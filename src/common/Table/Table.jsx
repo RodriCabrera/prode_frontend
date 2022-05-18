@@ -9,7 +9,7 @@ import { Container, TableWrapper } from './Table.styles';
 function Table({ children }) {
   return (
     <Container>
-      <TableWrapper>{children}</TableWrapper>;
+      <TableWrapper>{children}</TableWrapper>
     </Container>
   );
 }
