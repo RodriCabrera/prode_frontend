@@ -21,11 +21,11 @@ function FixtureTable({ data }) {
             <Table.Row>
               <Table.Cell>{match.date}</Table.Cell>
               <Table.Cell>{getFlagUrl(match.away.flag, 1)}</Table.Cell>
-              <Table.Cell>{match.away.shortName}</Table.Cell>
+              <Table.Cell>{match.away.shortName || '?'}</Table.Cell>
               <Table.Cell>
                 {`${match.awayScore || ''} - ${match.homeScore || ''}`}
               </Table.Cell>
-              <Table.Cell>{match.home.shortName}</Table.Cell>
+              <Table.Cell>{match.home.shortName || '?'}</Table.Cell>
               <Table.Cell>{getFlagUrl(match.home.flag, 1)}</Table.Cell>
             </Table.Row>
           );
