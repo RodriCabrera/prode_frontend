@@ -27,7 +27,6 @@ function Fixture() {
   }, []);
 
   const renderGroupsTables = () => {
-    console.log('fixtureData inside render', fixtureData);
     return fixtureData.map((group) => (
       <div>
         <h2>{group.name}</h2>
