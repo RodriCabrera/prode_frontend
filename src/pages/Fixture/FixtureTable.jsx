@@ -19,7 +19,9 @@ function FixtureTable({ data }) {
         {data.map((match) => {
           return (
             <Table.Row>
-              <Table.Cell>{match.date}</Table.Cell>
+              <Table.Cell borderRight="1px solid white">
+                {new Date(match.date).toUTCString()}
+              </Table.Cell>
               <Table.Cell>{getFlagUrl(match.away.flag, 1)}</Table.Cell>
               <Table.Cell>{match.away.shortName || '?'}</Table.Cell>
               <Table.Cell>

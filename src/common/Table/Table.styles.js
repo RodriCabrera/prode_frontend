@@ -11,8 +11,15 @@ export const TableWrapper = styled.table`
   border-radius: 6px;
   padding: 1rem;
   width: 100%;
+  max-width: 660px;
 `;
 
 export const TH = styled.th`
   /* padding: 1rem; */
+`;
+export const TD = styled.td`
+  padding: 7px;
+  text-align: center;
+  vertical-align: middle;
+  border-right: ${({ borderRight }) => borderRight || 'none'};
 `;

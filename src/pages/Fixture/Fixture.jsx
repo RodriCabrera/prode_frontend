@@ -8,6 +8,7 @@ import { Text } from '../../common/common.styles';
 const FixtureWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
 `;
 
@@ -29,7 +30,7 @@ function Fixture() {
   const renderGroupsTables = () => {
     return fixtureData.map((group) => (
       <div>
-        <h2>{group.name}</h2>
+        <Text size="2rem">{group.name}</Text>
         <FixtureTable data={group.matches} />
       </div>
     ));
