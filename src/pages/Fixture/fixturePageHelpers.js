@@ -11,5 +11,5 @@ export const parseMatchScore = (score) => {
 };
 
 export const parseDate = (date) => {
-  return new Date(date).toUTCString();
+  return new Date(date).toUTCString().split(' ').slice(1, 6).join(' ');
 };

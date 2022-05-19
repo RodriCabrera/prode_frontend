@@ -3,10 +3,18 @@ import { Text } from '../common.styles';
 import { TD } from './Table.styles';
 
 function Cell({ children, ...props }) {
-  const { borderRight } = props;
+  const { borderBottom, colSpan, fontSize, fontWeight, withBottomBorder } =
+    props;
   return (
-    <TD borderRight={borderRight}>
-      <Text align="center">{children}</Text>
+    <TD borderBottom={borderBottom} colSpan={colSpan}>
+      <Text
+        align="center"
+        size={fontSize}
+        weight={fontWeight}
+        withBottomBorder={withBottomBorder}
+      >
+        {children}
+      </Text>
     </TD>
   );
 }
