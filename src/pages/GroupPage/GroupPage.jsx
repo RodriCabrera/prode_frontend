@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { isEmpty } from 'lodash';
 import { toast } from 'react-toastify';
 import { getGroupData, getGroupScores, leaveGroup } from '../../api/groups';
-import ListWrapper from '../../common/Lists/ListWrapper';
+import ListElement from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text, Button } from '../../common/common.styles';
 
@@ -13,41 +13,26 @@ import { Text, Button } from '../../common/common.styles';
 
 function GroupPage() {
   const { name } = useParams();
+  const navigate = useNavigate();
   const [group, setGroup] = useState({});
   const [scoresData, setScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [groupError, setGroupError] = useState();
+  // ? Queda como toast o mejor display en el body que diga si el grupo no existe o el usuario no es parte?
 
   useEffect(() => {
-    // // TODO: Implementar toast promise:
-    // ? Queda como toast o mejor display en el body que diga si el grupo no existe o el usuario no es parte?
-    toast.promise(
-      getGroupData(name)
-        .then(({ data }) => {
-          setGroup(data.groupData);
-        })
-        //   // TODO: handle error : Mostrar el msg en el toast?
-        // .catch((error) => {
-        //   if (error.request.status === 401) {
-        //     alert('You are not a member of this group');
-        //   } else if (error.request.status === 400) {
-        //     alert('Group does not exist');
-        //   } else {
-        //     console.error(error);
-        //   }
-        // })
-        .finally(() => {
-          setIsLoading(false);
-        }),
-      {
-        pending: 'Loading group data...',
-        success: 'Group data loaded',
-        error: {
-          render({ data }) {
-            return data.response.data.error;
-          },
-        },
-      }
-    );
+    getGroupData(name)
+      .then(({ data }) => {
+        setGroup(data.groupData);
+      })
+      .catch((err) => {
+        console.log('LO AGARRA ACA?');
+        // console.log(err.response.data.error);
+        setGroupError(err.response.data.error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -62,16 +47,33 @@ function GroupPage() {
   }, []);
 
   const handleLeaveGroup = () => {
-    toast.promise(leaveGroup(name), {
-      pending: 'Leaving group...',
-      success: 'You left the group',
-      error: {
-        render({ data }) {
-          return data.response.data.error;
+    toast.promise(
+      leaveGroup(name).then(() => {
+        navigate('/groups');
+      }),
+      {
+        pending: 'Leaving group...',
+        success: 'You left the group',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
         },
-      },
-    });
+      }
+    );
   };
+  if (!isEmpty(groupError)) {
+    return (
+      <>
+        <Text size="2.5rem" align="center">
+          {name}
+        </Text>
+        <Text align="center" color="tomato" size="1.5rem">
+          {groupError}
+        </Text>
+      </>
+    );
+  }
 
   return (
     <>
@@ -91,12 +93,12 @@ function GroupPage() {
           {isEmpty(scoresData)
             ? 'Loading member scores...'
             : scoresData?.map((score) => (
-                <ListWrapper
+                <ListElement
                   key={score.user}
                   avatar={<HiOutlineUserGroup size="1.8rem" />}
                 >
                   <Text>{`${score.user} : ${score.score} pts`}</Text>
-                </ListWrapper>
+                </ListElement>
               ))}
           <Button onClick={handleLeaveGroup}>Leave group</Button>
         </>

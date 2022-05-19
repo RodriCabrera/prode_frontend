@@ -14,6 +14,7 @@ const AvatarWrapper = styled.div`
 
 const GroupListElement = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   cursor: pointer;
   :hover ${AvatarWrapper} {
@@ -23,7 +24,7 @@ const GroupListElement = styled.div`
   }
 `;
 
-function ListWrapper({ children, onClick, avatar }) {
+function ListElement({ children, onClick, avatar }) {
   return (
     <GroupListElement onClick={onClick}>
       <AvatarWrapper>{avatar}</AvatarWrapper>
@@ -32,16 +33,16 @@ function ListWrapper({ children, onClick, avatar }) {
   );
 }
 
-ListWrapper.propTypes = {
+ListElement.propTypes = {
   children: propTypes.node.isRequired,
   onClick: propTypes.func,
   avatar: propTypes.node.isRequired,
 };
 
-ListWrapper.defaultProps = {
+ListElement.defaultProps = {
   onClick: () => {
     console.log('onClick');
   },
 };
 
-export default ListWrapper;
+export default ListElement;

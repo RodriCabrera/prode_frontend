@@ -33,7 +33,7 @@ function Groups() {
   return (
     <>
       <CardContainer>
-        <CardWrapper>
+        <CardWrapper fullWidth>
           {!isEmpty(groupList) && (
             <Text size="1.5rem" align="center">
               Grupos en los que estás participando:{' '}
@@ -47,15 +47,11 @@ function Groups() {
         <CardWrapper>
           <CreateGroupForm updateList={getGroupList} />
         </CardWrapper>
-      </CardContainer>
 
-      <CardContainer>
         <CardWrapper>
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
-      </CardContainer>
 
-      <CardContainer>
         <CardWrapper>
           <LeaveGroupForm updateList={getGroupList} />
         </CardWrapper>

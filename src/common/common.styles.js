@@ -11,14 +11,15 @@ export const CardContainer = styled.div`
   justify-content: center;
   width: 100%;
   gap: 2rem;
+  flex-wrap: wrap;
 `;
 
 export const CardWrapper = styled.div`
   border: 1px solid #bdbdbd;
   border-radius: 8px;
   min-width: 200px;
-  width: 80%;
-  max-width: 350px;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : '80%')};
+  max-width: ${({ fullWidth }) => (fullWidth ? '100%' : '350px')};
   display: flex;
   padding: 1rem;
   gap: 1rem;

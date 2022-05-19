@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { CardWrapper, Text } from '../../common/common.styles';
-import ListWrapper from '../../common/Lists/ListWrapper';
+import ListElement from '../../common/Lists/ListElement';
 import GroupScoresForm from './GroupScoresForm';
 
 function Scores() {
@@ -20,13 +20,13 @@ function Scores() {
       <GroupScoresForm setScores={setScores} />
       {scores?.data.scores.map((score) => {
         return (
-          <ListWrapper
+          <ListElement
             key={score.group}
             onClick={() => onMemberClick(score.user)}
             avatar={<HiOutlineUserGroup size="1.8rem" />}
           >
             <p>{`${score.user} : ${score.score}`}</p>
-          </ListWrapper>
+          </ListElement>
         );
       })}
     </CardWrapper>
