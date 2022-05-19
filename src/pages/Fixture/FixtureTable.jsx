@@ -3,18 +3,8 @@ import Table from '../../common/Table/Table';
 import { getFlagUrl, parseDate, parseMatchScore } from './fixturePageHelpers';
 
 function FixtureTable({ data }) {
-  console.log('data en fixture table', data);
   return (
     <Table>
-      <Table.Head>
-        <Table.Row>
-          <Table.Header />
-          <Table.Header />
-          <Table.Header />
-          <Table.Header />
-          <Table.Header />
-        </Table.Row>
-      </Table.Head>
       <Table.Body>
         {data.map((match) => {
           return (
