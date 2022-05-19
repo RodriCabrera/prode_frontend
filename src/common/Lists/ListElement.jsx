@@ -1,35 +1,12 @@
-import styled from '@emotion/styled/macro';
 import propTypes from 'prop-types';
-
-const AvatarWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: darkorange;
-  border-radius: 100%;
-  height: 2.5rem;
-  width: 2.5rem;
-  transition: 0.2s;
-`;
-
-const GroupListElement = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  cursor: pointer;
-  :hover ${AvatarWrapper} {
-    background-color: orange;
-    height: 3rem;
-    width: 3rem;
-  }
-`;
+import { AvatarWrapper, Wrapper } from './Lists.styles';
 
 function ListElement({ children, onClick, avatar }) {
   return (
-    <GroupListElement onClick={onClick}>
+    <Wrapper onClick={onClick} id="ListWrapper">
       <AvatarWrapper>{avatar}</AvatarWrapper>
       {children}
-    </GroupListElement>
+    </Wrapper>
   );
 }
 

@@ -18,7 +18,7 @@ export const CardWrapper = styled.div`
   border: 1px solid #bdbdbd;
   border-radius: 8px;
   min-width: 200px;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : '80%')};
+  width: 80%;
   max-width: ${({ fullWidth }) => (fullWidth ? '100%' : '350px')};
   display: flex;
   padding: 1rem;
@@ -26,18 +26,16 @@ export const CardWrapper = styled.div`
   flex-direction: column;
 `;
 
-// TODO: Mejorar los colores del BUTTON:
 export const Button = styled.button`
   background-color: inherit;
   display: flex;
-  color: white;
   cursor: pointer;
   border: none;
   background-image: linear-gradient(
     ${({ grayscale }) =>
       grayscale
         ? '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
-        : '45deg, #c33 0%, #ff3 51%, #c33 100%'}
+        : '45deg, darkorange 0%, tomato 51%, darkorange 100%'}
   );
   padding: ${({ padding }) => padding || '15px 30px'};
   text-align: center;
@@ -48,11 +46,11 @@ export const Button = styled.button`
   border-radius: 10px;
   display: block;
   border: 0px;
+  color: white;
   font-weight: 600;
   box-shadow: 0px 0px 14px -7px #fff;
   :hover {
     background-position: right center;
-    /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
   }
@@ -61,7 +59,6 @@ export const Button = styled.button`
   }
   :disabled {
     background-image: none;
-    color: darkgray;
   }
 `;
 

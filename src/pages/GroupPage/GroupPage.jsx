@@ -84,12 +84,7 @@ function GroupPage() {
             {group.name}
           </Text>
           <Text size="1.5rem">Admin: {group.owner.name}</Text>
-          <Text size="1.5rem">Members:</Text>
-          {/* <ul>
-            {group.members.map((member) => (
-              <li key={member._id}>{member.name}</li>
-            ))}
-          </ul> */}
+          <Text size="1.5rem">Miembros del grupo:</Text>
           {isEmpty(scoresData)
             ? 'Loading member scores...'
             : scoresData?.map((score) => (
@@ -100,7 +95,7 @@ function GroupPage() {
                   <Text>{`${score.user} : ${score.score} pts`}</Text>
                 </ListElement>
               ))}
-          <Button onClick={handleLeaveGroup}>Leave group</Button>
+          <Button onClick={handleLeaveGroup}>Salir del grupo</Button>
         </>
       )}
     </>

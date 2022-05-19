@@ -1,5 +1,7 @@
 import { useFormik } from 'formik';
+import { isEmpty } from 'lodash';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createGroup } from '../../../api/groups';
 import {
@@ -9,10 +11,15 @@ import {
   Text,
   Form,
 } from '../../../common/common.styles';
+import { groupsSchema } from '../../../validationSchemas/groups';
 
 function CreateGroupForm({ updateList }) {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { values, handleChange } = useFormik({ initialValues: {} });
+  const { values, handleChange, errors } = useFormik({
+    initialValues: {},
+    validationSchema: groupsSchema.create,
+  });
 
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -22,13 +29,16 @@ function CreateGroupForm({ updateList }) {
       createGroup(values)
         .then(() => {
           updateList();
+          setTimeout(() => {
+            navigate(`/groups/${values.name}`);
+          }, 2000);
         })
         .finally(() => {
           setIsLoading(false);
         }),
       {
         pending: 'Creando grupo...',
-        success: 'Grupo creado con éxito',
+        success: 'Grupo creado con éxito. Redirigiendo...',
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -37,7 +47,7 @@ function CreateGroupForm({ updateList }) {
       }
     );
   };
-
+  console.log(errors);
   return (
     <>
       <Text size="2rem" align="center">
@@ -54,8 +64,8 @@ function CreateGroupForm({ updateList }) {
             onChange={handleChange}
           />
         </Label>
-        <Button type="submit" disabled={isLoading}>
-          Crear grupo
+        <Button type="submit" disabled={isLoading || !isEmpty(errors)}>
+          {!isEmpty(errors) ? errors.name : 'Crear grupo'}
         </Button>
       </Form>
     </>

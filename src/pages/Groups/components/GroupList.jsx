@@ -6,12 +6,11 @@ import styled from '@emotion/styled';
 import { Text } from '../../../common/common.styles';
 import ListElement from '../../../common/Lists/ListElement';
 
-const ListWrapper = styled.div`
+const GroupListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 `;
-
 function GroupList({ groups }) {
   const navigate = useNavigate();
 
@@ -24,7 +23,7 @@ function GroupList({ groups }) {
   }
 
   return (
-    <ListWrapper>
+    <GroupListWrapper>
       {groups.map((group) => (
         <ListElement
           key={group.name}
@@ -40,7 +39,7 @@ function GroupList({ groups }) {
           </div>
         </ListElement>
       ))}
-    </ListWrapper>
+    </GroupListWrapper>
   );
 }
 
