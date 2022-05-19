@@ -45,7 +45,6 @@ function CreateGroupForm({ updateList }) {
       </Text>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
-          Nombre del nuevo grupo:
           <Input
             type="text"
             placeholder="Nombre del nuevo grupo"

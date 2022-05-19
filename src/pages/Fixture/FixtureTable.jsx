@@ -20,7 +20,12 @@ function FixtureTable({ data }) {
           return (
             <>
               <Table.Row>
-                <Table.Cell colSpan="5" withBottomBorder>
+                <Table.Cell
+                  colSpan="5"
+                  withBottomBorder
+                  fontWeight="700"
+                  fontSize="1.2rem"
+                >
                   {parseDate(match.date)}
                 </Table.Cell>
               </Table.Row>
