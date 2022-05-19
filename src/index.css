@@ -11,9 +11,8 @@ fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
+menu, nav, output, ruby, section, button, a, summary,
 time, mark, audio, video {
-	background-color: #212121;
 	color: #e0e0e0;
 	margin: 0;
 	padding: 0;

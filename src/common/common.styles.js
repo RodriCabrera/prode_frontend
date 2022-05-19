@@ -1,56 +1,54 @@
 import styled from '@emotion/styled';
 
-export const PageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  width: 100vw;
-`;
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
+  margin-bottom: 1.5rem;
 `;
 
 export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  gap: 2rem;
 `;
+
 export const CardWrapper = styled.div`
   border: 1px solid #bdbdbd;
   border-radius: 8px;
-  min-width: 300px;
-  max-width: 500px;
+  min-width: 200px;
+  width: 80%;
+  max-width: 350px;
   display: flex;
   padding: 1rem;
   gap: 1rem;
   flex-direction: column;
 `;
 
+// TODO: Mejorar los colores del BUTTON:
 export const Button = styled.button`
   background-color: inherit;
-  color: inherit;
+  display: flex;
+  color: white;
   cursor: pointer;
   border: none;
   background-image: linear-gradient(
-    ${(props) =>
-      props.grayscale
+    ${({ grayscale }) =>
+      grayscale
         ? '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
-        : '45deg, #ff512f 0%, #f09819 51%, #ff512f 100%'}
+        : '45deg, #c33 0%, #ff3 51%, #c33 100%'}
   );
-  margin: 10px;
-  padding: ${(props) => (props.padding ? props.padding : '15px 30px')};
+  padding: ${({ padding }) => padding || '15px 30px'};
   text-align: center;
-  text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
+  letter-spacing: 1px;
   border-radius: 10px;
   display: block;
   border: 0px;
-  font-weight: 700;
-  box-shadow: 0px 0px 14px -7px #f09819;
+  font-weight: 600;
+  box-shadow: 0px 0px 14px -7px #fff;
   :hover {
     background-position: right center;
     /* change the direction of the change here */
@@ -59,6 +57,10 @@ export const Button = styled.button`
   }
   :active {
     transform: scale(0.95);
+  }
+  :disabled {
+    background-image: none;
+    color: darkgray;
   }
 `;
 
@@ -79,6 +81,8 @@ export const Input = styled.input`
 `;
 
 export const Text = styled.p`
-  text-align: ${(props) => (props.align ? props.align : 'center')};
-  color: ${(props) => (props.color ? props.color : 'inherit')};
+  text-align: ${({ align }) => align || 'left'};
+  color: ${({ color }) => color || 'inherit'};
+  font-size: ${(props) => props.size};
+  font-weight: ${({ weight }) => weight};
 `;

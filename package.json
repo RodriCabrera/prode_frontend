@@ -7,13 +7,17 @@
     "@emotion/styled": "^11.8.1",
     "@types/react": "^18.0.6",
     "axios": "^0.26.1",
+    "formik": "^2.2.9",
+    "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "6.3.0",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "react-toastify": "^9.0.1",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
