@@ -18,20 +18,28 @@ function FixtureTable({ data }) {
       <Table.Body>
         {data.map((match) => {
           return (
-            <Table.Row>
-              <Table.Cell borderRight="1px solid white">
-                {parseDate(match.date)}
-              </Table.Cell>
-              <Table.Cell>{getFlagUrl(match.away.flag, 1)}</Table.Cell>
-              <Table.Cell>{match.away.shortName || '?'}</Table.Cell>
-              <Table.Cell>
-                {`${parseMatchScore(match.awayScore)} - ${parseMatchScore(
-                  match.homeScore
-                )}`}
-              </Table.Cell>
-              <Table.Cell>{match.home.shortName || '?'}</Table.Cell>
-              <Table.Cell>{getFlagUrl(match.home.flag, 1)}</Table.Cell>
-            </Table.Row>
+            <>
+              <Table.Row>
+                <Table.Cell colSpan="5" withBottomBorder>
+                  {parseDate(match.date)}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row borderBottom="1px solid red">
+                <Table.Cell>{getFlagUrl(match.away.flag, 1)}</Table.Cell>
+                <Table.Cell fontWeight="800">
+                  {match.away.shortName || '?'}
+                </Table.Cell>
+                <Table.Cell>
+                  {`${parseMatchScore(match.awayScore)} - ${parseMatchScore(
+                    match.homeScore
+                  )}`}
+                </Table.Cell>
+                <Table.Cell fontWeight="800">
+                  {match.home.shortName || '?'}
+                </Table.Cell>
+                <Table.Cell>{getFlagUrl(match.home.flag, 1)}</Table.Cell>
+              </Table.Row>
+            </>
           );
         })}
       </Table.Body>

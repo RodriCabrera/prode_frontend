@@ -12,6 +12,7 @@ export const TableWrapper = styled.table`
   padding: 1rem;
   width: 100%;
   max-width: 660px;
+  /* border-collapse: collapse; PARA PODER PONERLE BORDERS A LAS ROWS*/
 `;
 
 export const TH = styled.th`
@@ -21,5 +22,8 @@ export const TD = styled.td`
   padding: 7px;
   text-align: center;
   vertical-align: middle;
-  border-right: ${({ borderRight }) => borderRight || 'none'};
+  border-bottom: ${({ borderBottom }) => borderBottom || 'none'};
+`;
+export const TR = styled.tr`
+  border-bottom: ${({ borderBottom }) => borderBottom || 'none'};
 `;

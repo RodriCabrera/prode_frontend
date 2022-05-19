@@ -85,4 +85,14 @@ export const Text = styled.p`
   color: ${({ color }) => color || 'inherit'};
   font-size: ${(props) => props.size};
   font-weight: ${({ weight }) => weight};
+  &:after {
+    ${({ withBottomBorder }) =>
+      withBottomBorder &&
+      `content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: white;
+    `}
+  }
 `;
