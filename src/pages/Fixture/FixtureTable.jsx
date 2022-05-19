@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from '../../common/Table/Table';
-import { getFlagUrl } from './fixturePageUtils';
+import { getFlagUrl, parseDate, parseMatchScore } from './fixturePageUtils';
 
 function FixtureTable({ data }) {
   console.log('data en fixture table', data);
@@ -20,12 +20,14 @@ function FixtureTable({ data }) {
           return (
             <Table.Row>
               <Table.Cell borderRight="1px solid white">
-                {new Date(match.date).toUTCString()}
+                {parseDate(match.date)}
               </Table.Cell>
               <Table.Cell>{getFlagUrl(match.away.flag, 1)}</Table.Cell>
               <Table.Cell>{match.away.shortName || '?'}</Table.Cell>
               <Table.Cell>
-                {`${match.awayScore || ''} - ${match.homeScore || ''}`}
+                {`${parseMatchScore(match.awayScore)} - ${parseMatchScore(
+                  match.homeScore
+                )}`}
               </Table.Cell>
               <Table.Cell>{match.home.shortName || '?'}</Table.Cell>
               <Table.Cell>{getFlagUrl(match.home.flag, 1)}</Table.Cell>
