@@ -41,7 +41,7 @@ function Register() {
     toast.promise(
       createUser(values)
         .then(() => {
-          return navigate('/account-created');
+          return navigate('/auth/account-created');
         })
         .finally(() => setIsLoading(false)),
       {
@@ -108,7 +108,7 @@ function Register() {
           </Button>
         </Form>
         <GoogleAuth text="Register" />
-        <Button grayscale padding="5px" onClick={() => navigate('/login')}>
+        <Button grayscale padding="5px" onClick={() => navigate('/auth')}>
           Ya tenés cuenta?
         </Button>
       </CardWrapper>

@@ -2,12 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthProvider from '../common/AuthProvider';
 import '../index.css';
-import ChangePassword from '../pages/Auth/ChangePassword';
-import ConfirmationEmail from '../pages/Auth/ConfirmationEmail';
-import ForgotPassword from '../pages/Auth/ForgotPassword';
-import Login from '../pages/Auth/Login';
-import Register from '../pages/Auth/Register';
-import VerifiedEmail from '../pages/Auth/VerifiedEmail';
 import NotFound from '../pages/NotFound';
 import Home from '../pages/Home/Home';
 import Groups from '../pages/Groups/Groups';
@@ -16,6 +10,7 @@ import GroupPage from '../pages/GroupPage/GroupPage';
 import Fixture from '../pages/Fixture/Fixture';
 import App from '../App';
 import PredictionRoutes from './PredictionRoutes';
+import AuthRoutes from './AuthRoutes';
 
 function Router() {
   return (
@@ -30,12 +25,8 @@ function Router() {
               <Route path="predictions/*" element={<PredictionRoutes />} />
               <Route path="fixture" element={<Fixture />} />
               <Route path="scores" element={<Scores />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="account-created" element={<ConfirmationEmail />} />
-              <Route path="forgot-password" element={<ForgotPassword />} />
-              <Route path="change-password" element={<ChangePassword />} />
-              <Route path="verified" element={<VerifiedEmail />} />
+              <Route path="auth/*" element={<AuthRoutes />} />
+
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
