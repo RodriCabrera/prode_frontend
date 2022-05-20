@@ -5,21 +5,18 @@ export const Container = styled.div`
 `;
 
 export const TableWrapper = styled.table`
-  border: 1px solid white;
-  border-radius: 10%;
+  border: 1px solid darkgray;
+  border-radius: 18px;
   border-collapse: separate;
-  border-radius: 6px;
-  padding: 1rem;
-  width: 100%;
+  /* width: 100%; */
   max-width: 660px;
-  /* border-collapse: collapse; PARA PODER PONERLE BORDERS A LAS ROWS*/
 `;
 
 export const TH = styled.th`
   /* padding: 1rem; */
 `;
 export const TD = styled.td`
-  padding: 7px;
+  padding: 1rem;
   text-align: center;
   vertical-align: middle;
   border-bottom: ${({ borderBottom }) => borderBottom || 'none'};

@@ -11,6 +11,19 @@ const FixtureWrapper = styled.div`
   align-items: center;
   gap: 2rem;
 `;
+const GroupTableWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const FixtureTablesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 4rem;
+  align-items: center;
+  justify-content: center;
+`;
 
 function Fixture() {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,12 +41,18 @@ function Fixture() {
   }, []);
 
   const renderGroupsTables = () => {
-    return fixtureData.map((group) => (
-      <div>
-        <Text size="2rem">{group.name}</Text>
-        <FixtureTable data={group.matches} />
-      </div>
-    ));
+    return (
+      <FixtureTablesContainer>
+        {fixtureData.map((group) => (
+          <GroupTableWrapper>
+            <Text size="2rem" align="center" color="darkorange">
+              {group.name}
+            </Text>
+            <FixtureTable data={group.matches} />
+          </GroupTableWrapper>
+        ))}
+      </FixtureTablesContainer>
+    );
   };
 
   return (

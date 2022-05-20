@@ -3,24 +3,19 @@ import Table from '../../common/Table/Table';
 import { getFlagUrl, parseDate, parseMatchScore } from './fixturePageHelpers';
 
 function FixtureTable({ data }) {
-  console.log('data en fixture table', data);
   return (
     <Table>
-      <Table.Head>
-        <Table.Row>
-          <Table.Header />
-          <Table.Header />
-          <Table.Header />
-          <Table.Header />
-          <Table.Header />
-        </Table.Row>
-      </Table.Head>
       <Table.Body>
         {data.map((match) => {
           return (
             <>
               <Table.Row>
-                <Table.Cell colSpan="5" withBottomBorder>
+                <Table.Cell
+                  colSpan="5"
+                  withBottomBorder
+                  fontWeight="700"
+                  fontSize="1.2rem"
+                >
                   {parseDate(match.date)}
                 </Table.Cell>
               </Table.Row>
