@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
 import Countdown from './components/Countdown';
-import LeaderBoard from './components/LeaderBoard';
+import NotificationBoard from './components/NotificationBoard';
 
 // TODO : Ver si esta nos sirve para hacer las tablas:
 // https://react-table.tanstack.com/docs/quick-start
@@ -41,8 +41,8 @@ function Home() {
   return (
     <PageWrapper>
       <Row>
+        <NotificationBoard />
         {/* <Keypad /> */}
-        <LeaderBoard />
       </Row>
       <Countdown />
     </PageWrapper>
