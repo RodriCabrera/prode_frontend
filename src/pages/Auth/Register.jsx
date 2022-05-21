@@ -30,7 +30,7 @@ function Register() {
 
   useEffect(() => {
     if (userContext.user) {
-      navigate('/');
+      navigate('/auth');
     }
   }, [userContext]);
 

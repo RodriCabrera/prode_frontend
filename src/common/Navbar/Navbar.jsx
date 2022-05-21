@@ -30,7 +30,7 @@ function Navbar() {
   const handleLogout = () => {
     logoutUser()
       .then(() => {
-        navigate('/login');
+        navigate('/auth');
       })
       .finally(() => {
         userContext.user = null;

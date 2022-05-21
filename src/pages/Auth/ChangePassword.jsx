@@ -29,7 +29,7 @@ function ChangePassword() {
 
   useEffect(() => {
     if (!userContext.user) {
-      navigate('/login');
+      navigate('/auth');
     }
   }, [userContext]);
 

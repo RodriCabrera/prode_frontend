@@ -34,7 +34,7 @@ function Home() {
 
   useEffect(() => {
     if (!userContext.user) {
-      navigate('/login');
+      navigate('/auth');
     }
   }, [userContext]);
 
