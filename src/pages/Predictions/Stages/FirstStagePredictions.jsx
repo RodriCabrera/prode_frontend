@@ -19,12 +19,11 @@ function GroupPredictions() {
   const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, 2 - C, 3 - D, 4 - E, 5 - F, 6 - G, 7 - H
   const [isLoading, setIsLoading] = useState(false);
-  const [groupId] = useOutletContext();
+  const [selectedGroup] = useOutletContext();
   const [groupPredictions, setFirstStagePredictions] = useState([]);
   const { values, handleChange, resetForm } = useFormik({
     initialValues: {},
   });
-  // TODO Ver como hacer para que se mantenga actualizado el groupId que viene por el router context.
   useEffect(() => {
     setIsLoading(true);
     getGroupStage() // Con la data de esta llamada armo las tablas.
@@ -42,7 +41,7 @@ function GroupPredictions() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formatPredicitonsToPost(values, groupId);
+    formatPredicitonsToPost(values, selectedGroup.id);
     resetForm({ values: null });
   };
 

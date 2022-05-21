@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { getUserGroups } from '../../api/groups';
@@ -27,21 +28,26 @@ function EditPredictions() {
       });
   }, []);
 
-  const handleGroupSelect = (groupId) => {
-    setselectedGroup(groupId);
+  const handleGroupSelect = (group) => {
+    setselectedGroup(group);
   };
 
-  console.log('groupList', groupList);
+  console.log(selectedGroup);
   return (
     <>
-      <Text>Para que grupo son estas predicciones??</Text>
+      <Text size="1.4rem">
+        {isEmpty(selectedGroup)
+          ? 'Para que grupo son estas predicciones??'
+          : 'Prediciendo para:  '}
+      </Text>
+      <Text weight="600">{selectedGroup?.name}</Text>
       <GroupsListWrapper>
         {isLoading ? (
           <Spinner />
         ) : (
           groupList?.map((group) => {
             return (
-              <ListElement onClick={() => handleGroupSelect(group.id)}>
+              <ListElement onClick={() => handleGroupSelect(group)}>
                 {group.name}
               </ListElement>
             );
