@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { getFixture } from '../../../api/fixture';
 import { Form, Input } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
@@ -16,7 +17,7 @@ function LaterPredictions() {
     setIsLoading(true);
     getFixture(null, getStageId(stage))
       .then((res) => setFixture(res.data.fixture))
-      .catch((err) => console.log(err))
+      .catch((err) => toast.error(err.response.data.error))
       .finally(() => setIsLoading(false));
   }, []);
 
