@@ -51,6 +51,7 @@ function LeaveGroupForm({ updater }) {
           required
           value={values.name}
           onChange={handleChange}
+          showUppercase
         />
       </Label>
 

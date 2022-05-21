@@ -1,7 +1,7 @@
 import React from 'react';
 
 function GroupPredictions() {
-  return <div>GroupPredictions</div>;
+  return <div>PREDICCIONES FASE DE GRUPOS</div>;
 }
 
 export default GroupPredictions;

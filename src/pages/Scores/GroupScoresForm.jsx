@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState, useEffect } from 'react';
 import { getGroupScores, getUserGroups } from '../../api/groups';
-import { Button, Form, Label } from '../../common/common.styles';
+import { Button, Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
 // TODO Implementar Toast promise
@@ -51,7 +51,7 @@ function GroupScoresForm({ setScores }) {
     <Form onSubmit={handleSubmit}>
       Seleccionar grupo:
       <Label htmlFor="groupName">
-        <select
+        <Select
           value={values.groupName}
           name="groupName"
           onChange={handleChange}
@@ -64,7 +64,7 @@ function GroupScoresForm({ setScores }) {
               {group.name}
             </option>
           ))}
-        </select>
+        </Select>
       </Label>
       <Button type="submit">Ver scores</Button>
       {isLoading && <Spinner />}

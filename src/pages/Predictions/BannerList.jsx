@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Banner, BannerTitle } from './Predictions.styles';
 
 function BannerList() {
+  const navigate = useNavigate();
   return (
     <div>
-      <Banner>
+      <Banner onClick={() => navigate('first-stage')}>
         <div>
           <BannerTitle>GRUPOS</BannerTitle>
           <p>Ver/Editar</p>

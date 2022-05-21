@@ -43,10 +43,14 @@ function NotificationBoard() {
     // IF USER IS IN GROUPS:
     if (isEmpty(predictions.data))
       return (
-        <Text>
-          Aún no hiciste ninguna predicción. Hacelo desde{' '}
-          <Link to="/predictions">acá</Link>
-        </Text>
+        <>
+          <Text>Aún no hiciste ninguna predicción.</Text>
+          <Text>
+            {' '}
+            Hacelo desde{' '}
+            <Link to="/predictions/edit?mode=edit">esta sección</Link>
+          </Text>
+        </>
       );
     return '';
   };

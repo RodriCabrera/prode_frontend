@@ -29,9 +29,7 @@ function CreateGroupForm({ updateList }) {
       createGroup(values)
         .then(() => {
           updateList();
-          setTimeout(() => {
-            navigate(`/groups/${values.name}`);
-          }, 2000);
+          navigate(`/groups/${values.name}`);
         })
         .finally(() => {
           setIsLoading(false);
@@ -62,6 +60,7 @@ function CreateGroupForm({ updateList }) {
             required
             value={values.name}
             onChange={handleChange}
+            showUppercase
           />
         </Label>
         <Button type="submit" disabled={isLoading || !isEmpty(errors)}>

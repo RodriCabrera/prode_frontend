@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash';
 import { getGroupData, getGroupScores } from '../../api/groups';
 import ListElement from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
-import { Text, CardContainer } from '../../common/common.styles';
+import { Text, CardContainer, Button } from '../../common/common.styles';
 import LeaveGroupForm from '../Groups/components/LeaveGroupForm';
 
 // TODO: Boton para salir del grupo.
@@ -18,7 +18,7 @@ function GroupPage() {
   const [scoresData, setScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [groupError, setGroupError] = useState();
-  // ? Queda como toast o mejor display en el body que diga si el grupo no existe o el usuario no es parte?
+  const [showLeave, setShowLeave] = useState(false);
 
   useEffect(() => {
     getGroupData(name)
@@ -79,9 +79,18 @@ function GroupPage() {
                   <Text>{`${score.user} : ${score.score} pts`}</Text>
                 </ListElement>
               ))}
-
           <CardContainer>
-            <LeaveGroupForm updater={onGroupExit} />
+            <Button
+              grayscale
+              onClick={() => {
+                setShowLeave(!showLeave);
+              }}
+            >
+              Salir del grupo?
+            </Button>
+          </CardContainer>
+          <CardContainer>
+            {showLeave && <LeaveGroupForm updater={onGroupExit} />}
           </CardContainer>
         </>
       )}
