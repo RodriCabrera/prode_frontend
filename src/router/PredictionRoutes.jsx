@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import FirstStagePredictions from '../pages/Predictions/Stages/FirstStagePredictions';
+import LaterPredictions from '../pages/Predictions/Stages/LaterStagesPredictions';
 import BannerList from '../pages/Predictions/BannerList';
 import Predictions from '../pages/Predictions/Predictions';
 import PredictionResults from '../pages/Predictions/PredictionResults';
@@ -14,6 +15,7 @@ function PredictionRoutes() {
         <Route path="edit" element={<EditPredictions />}>
           <Route index element={<BannerList />} />
           <Route path="first-stage" element={<FirstStagePredictions />} />
+          <Route path="later-stages/:stage" element={<LaterPredictions />} />
         </Route>
       </Route>
     </Routes>
