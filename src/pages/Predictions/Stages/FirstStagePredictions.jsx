@@ -1,31 +1,70 @@
+import styled from '@emotion/styled';
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { getGroupStage } from '../../../api/fixture';
-import { Form, Input } from '../../../common/common.styles';
+import { getPredictionsByStage } from '../../../api/predictions';
+import { Button, Form, Input } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import Table from '../../../common/Table/Table';
 import { getFlagUrl, parseDate } from '../../Fixture/fixturePageHelpers';
+import { formatPredicitonsToPost } from '../predictionsPageUtils';
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+`;
 function GroupPredictions() {
-  const [firstStage, setFirstStage] = useState([]);
-  const [groupNumber, setGroupNumber] = useState(0);
+  const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos
+  const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, 2 - C, 3 - D, 4 - E, 5 - F, 6 - G, 7 - H
   const [isLoading, setIsLoading] = useState(false);
+  const [groupPredictions, setFirstStagePredictions] = useState([]);
+  const { values, handleChange, resetForm } = useFormik({
+    initialValues: {},
+  });
 
   useEffect(() => {
     setIsLoading(true);
-    getGroupStage()
-      .then((res) => setFirstStage(res.data.fixture))
+    getGroupStage() // Con la data de esta llamada armo las tablas.
+      .then((res) => setFirstStageData(res.data.fixture))
       .finally(() => setIsLoading(false));
   }, []);
 
+  useEffect(() => {
+    // Esta llamada sirve por si ya había hecho alguna predicción.
+    getPredictionsByStage(285063).then((res) => {
+      setFirstStagePredictions(res.data);
+    });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    formatPredicitonsToPost(values);
+    resetForm({ values: null });
+  };
+
+  const handleReset = () => {
+    console.log('HANDLE RESET');
+    resetForm({ values: null });
+  };
+
+  const handleNextGroup = () => {
+    setGroupNumber((prevState) => prevState + 1);
+    handleReset();
+  };
+
+  const handlePrevGroup = () => {
+    setGroupNumber((prevState) => prevState - 1);
+    handleReset();
+  };
+
   if (isLoading) return <Spinner />;
 
-  console.log(firstStage);
-  // a la fixture table se le mandan los matches
   return (
-    <Form>
+    <Form onSubmit={handleSubmit} onReset={handleReset}>
       <Table>
         <Table.Body>
-          {firstStage[groupNumber]?.matches.map((match) => {
+          {firstStageData[groupNumber]?.matches.map((match) => {
             return (
               <>
                 <Table.Row>
@@ -47,11 +86,25 @@ function GroupPredictions() {
                     {match.away.shortName || '?'}
                   </Table.Cell>
                   <Table.Cell padding="5px">
-                    <Input type="number" width="30px" />
+                    <Input
+                      type="number"
+                      width="30px"
+                      id={`${match.id}-away`}
+                      value={values[`${match.id}-away`]}
+                      name={`${match.id}-away`}
+                      onChange={handleChange}
+                    />
                   </Table.Cell>
                   {/* <Table.Cell>-</Table.Cell> */}
                   <Table.Cell padding="5px">
-                    <Input type="number" width="30px" />
+                    <Input
+                      type="number"
+                      width="30px"
+                      name={`${match.id}-home`}
+                      id={`${match.id}-home`}
+                      value={values[`${match.id}-home`]}
+                      onChange={handleChange}
+                    />
                   </Table.Cell>
                   <Table.Cell padding="5px" fontWeight="800">
                     {match.home.shortName || '?'}
@@ -65,6 +118,20 @@ function GroupPredictions() {
           })}
         </Table.Body>
       </Table>
+      <Button type="submit">Enviar prediccion</Button>
+      <ButtonWrapper>
+        <Button
+          grayscale
+          onClick={handlePrevGroup}
+          disabled={groupNumber === 0}
+          type="reset"
+        >
+          Anterior
+        </Button>
+        <Button grayscale onClick={handleNextGroup} type="reset">
+          Siguiente
+        </Button>
+      </ButtonWrapper>
     </Form>
   );
 }
