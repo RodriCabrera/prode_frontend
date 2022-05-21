@@ -5,25 +5,13 @@ import { Form, Input } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import Table from '../../../common/Table/Table';
 import { getFlagUrl, parseDate } from '../../Fixture/fixturePageHelpers';
+import { getStageId } from '../../Fixture/fixturePageUtils';
 
 function LaterPredictions() {
   const { stage } = useParams();
   const [fixture, setFixture] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const getStageId = (stageName) => {
-    switch (stageName) {
-      case '16round':
-        return 'OCTAVOS';
-      case '8round':
-        return 'CUARTOS';
-      case 'semis':
-        return 'SEMIFINAL';
-      case 'final':
-        return 'FINAL';
-      default:
-        return null;
-    }
-  };
+
   useEffect(() => {
     setIsLoading(true);
     getFixture(null, getStageId(stage))
@@ -31,7 +19,9 @@ function LaterPredictions() {
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   }, []);
+
   if (isLoading) return <Spinner />;
+
   return (
     <Form>
       <Table>

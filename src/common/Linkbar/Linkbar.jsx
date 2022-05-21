@@ -18,7 +18,7 @@ export function Linkbar() {
     <LinkbarWrapper>
       <LinkGroup id="button-group-left">
         <Link to="/fixture">Fixture</Link>
-        <Link to="/predictions">Mis Predicciones</Link>
+        <Link to="/predictions/edit">Mis Predicciones</Link>
         <Link to="/scores">Tabla de Puntajes</Link>
         <Link to="/groups">Gestionar grupos</Link>
       </LinkGroup>

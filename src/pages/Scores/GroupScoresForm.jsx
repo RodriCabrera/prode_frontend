@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState, useEffect } from 'react';
 import { getGroupScores, getUserGroups } from '../../api/groups';
-import { Button, Form, Label, Select } from '../../common/common.styles';
+import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
 // TODO Implementar Toast promise
@@ -11,26 +11,14 @@ function GroupScoresForm({ setScores }) {
   // const [scores, setScores] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [groupList, setGroupList] = useState([]);
-  const { values, handleChange } = useFormik({ initialValues: {} });
-
-  const getGroupList = () => {
-    setIsLoading(true);
-    getUserGroups()
-      .then(({ data }) => {
-        setGroupList(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  const { values, handleChange } = useFormik({
+    initialValues: {},
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    getGroupScores(values.groupName)
+    getGroupScores(e.target.value)
       .then((res) => {
         console.log(res);
         setScores(res);
@@ -44,7 +32,17 @@ function GroupScoresForm({ setScores }) {
   };
 
   useEffect(() => {
-    getGroupList();
+    setIsLoading(true);
+    getUserGroups()
+      .then(({ data }) => {
+        setGroupList(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -54,7 +52,10 @@ function GroupScoresForm({ setScores }) {
         <Select
           value={values.groupName}
           name="groupName"
-          onChange={handleChange}
+          onChange={(e) => {
+            handleChange(e.target.value);
+            handleSubmit(e);
+          }}
         >
           <option defaultChecked>
             {isLoading ? 'Cargando grupos...' : 'Selecciona un grupo'}
@@ -66,7 +67,7 @@ function GroupScoresForm({ setScores }) {
           ))}
         </Select>
       </Label>
-      <Button type="submit">Ver scores</Button>
+      {/* <Button type="submit">Ver scores</Button> */}
       {isLoading && <Spinner />}
       {error}
     </Form>
