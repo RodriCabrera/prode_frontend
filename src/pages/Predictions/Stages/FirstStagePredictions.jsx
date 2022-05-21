@@ -40,7 +40,6 @@ function GroupPredictions() {
   const handleSubmit = (e) => {
     e.preventDefault();
     formatPredicitonsToPost(values);
-    console.log('values on creating', values);
     resetForm({ values: null });
   };
 

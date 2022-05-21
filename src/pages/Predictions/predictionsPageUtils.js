@@ -1,3 +1,5 @@
+import { isEmpty } from 'lodash';
+
 export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
   //   const predictionsRawExample = {
   //     '400128082-away': 1,
@@ -28,6 +30,8 @@ export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
   //       },
   //     ],
   //   };
+  if (isEmpty(predictionsRaw)) return null;
+
   const predictionKeys = Object.keys(predictionsRaw);
 
   const predictionsBatch = predictionKeys
@@ -56,34 +60,7 @@ export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
         index === self.findIndex((t) => t.matchId === value.matchId)
     );
 
-  //   predictionsBatch = predictionsBatch
-
   const data = { multiple: true, groupId, predictions: predictionsBatch };
-  console.log('data', data);
+  console.log('Batch de prediciones a postear:', data);
   return data;
 };
-
-/*
-jwt cookie
-Simple
-body {
- groupId: String,
- prediction: {
-   matchId: String,
-   homeScore: Number,
-  awayScore: Number
-  }
-} 
-
- O multiple:
-
-body {
-  multiple: “true”,
-  predictions: [
-     lista de objetos como el de arriba
-    ]
-}
-
-
-
-*/
