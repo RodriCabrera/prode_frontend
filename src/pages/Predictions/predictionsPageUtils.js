@@ -1,0 +1,89 @@
+export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
+  //   const predictionsRawExample = {
+  //     '400128082-away': 1,
+  //     '400128082-home': 2,
+  //     '400235448-away': 1,
+  //     '400235448-home': 0,
+  //     '400235449-away': 3,
+  //     '400235449-home': 6,
+  //     '400235450-away': 4,
+  //     '400235450-home': 3,
+  //     '400235451-away': 2,
+  //     '400235451-home': 2,
+  //     '400235452-away': 1,
+  //     '400235452-home': 0,
+  //   };
+
+  //   const predictionDataShape = {
+  //     multiple: true,
+  //     groupId,
+  //     predictions: [
+  //       {
+  //         groupId,
+  //         prediction: {
+  //           matchId: String,
+  //           homeScore: Number,
+  //           awayScore: Number,
+  //         },
+  //       },
+  //     ],
+  //   };
+  const predictionKeys = Object.keys(predictionsRaw);
+
+  const predictionsBatch = predictionKeys
+    .map((key) => {
+      let homeScore;
+      let awayScore;
+      const matchId = key.split('-')[0];
+      const homeOrAway = key.split('-')[1];
+
+      if (homeOrAway === 'home') {
+        homeScore = predictionsRaw[key];
+        awayScore = predictionsRaw[`${matchId}-away`];
+      } else if (homeOrAway === 'away') {
+        homeScore = predictionsRaw[`${matchId}-home`];
+        awayScore = predictionsRaw[key];
+      }
+      return {
+        matchId,
+        homeScore,
+        awayScore,
+        groupId,
+      };
+    })
+    .filter(
+      (value, index, self) =>
+        index === self.findIndex((t) => t.matchId === value.matchId)
+    );
+
+  //   predictionsBatch = predictionsBatch
+
+  const data = { multiple: true, groupId, predictions: predictionsBatch };
+  console.log('data', data);
+  return data;
+};
+
+/*
+jwt cookie
+Simple
+body {
+ groupId: String,
+ prediction: {
+   matchId: String,
+   homeScore: Number,
+  awayScore: Number
+  }
+} 
+
+ O multiple:
+
+body {
+  multiple: “true”,
+  predictions: [
+     lista de objetos como el de arriba
+    ]
+}
+
+
+
+*/
