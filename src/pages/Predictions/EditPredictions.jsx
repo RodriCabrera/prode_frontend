@@ -28,7 +28,7 @@ function EditPredictions() {
   }, []);
 
   const handleGroupSelect = (groupId) => {
-    console.log(groupId);
+    setselectedGroup(groupId);
   };
 
   console.log('groupList', groupList);
