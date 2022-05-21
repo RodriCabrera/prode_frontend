@@ -16,7 +16,7 @@ export const TH = styled.th`
   /* padding: 1rem; */
 `;
 export const TD = styled.td`
-  padding: 1rem;
+  padding: ${({ padding }) => padding || '1rem'};
   text-align: center;
   vertical-align: middle;
   border-bottom: ${({ borderBottom }) => borderBottom || 'none'};

@@ -76,10 +76,15 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
+  width: ${({ width }) => width};
   padding: 10px;
   border-radius: 10px;
   background-color: #e5e5e5;
 `;
+export function ScoreInput() {
+  return <Input type="number" width="30px" />;
+}
+
 export const Select = styled.select`
   padding: 10px;
   background-color: #e5e5e5;
