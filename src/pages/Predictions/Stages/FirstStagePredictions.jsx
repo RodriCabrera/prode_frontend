@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { getGroupStage } from '../../../api/fixture';
 import { getPredictionsByStage } from '../../../api/predictions';
 import { Button, Form, Input } from '../../../common/common.styles';
@@ -18,11 +19,12 @@ function GroupPredictions() {
   const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, 2 - C, 3 - D, 4 - E, 5 - F, 6 - G, 7 - H
   const [isLoading, setIsLoading] = useState(false);
+  const [groupId] = useOutletContext();
   const [groupPredictions, setFirstStagePredictions] = useState([]);
   const { values, handleChange, resetForm } = useFormik({
     initialValues: {},
   });
-
+  // TODO Ver como hacer para que se mantenga actualizado el groupId que viene por el router context.
   useEffect(() => {
     setIsLoading(true);
     getGroupStage() // Con la data de esta llamada armo las tablas.
@@ -32,6 +34,7 @@ function GroupPredictions() {
 
   useEffect(() => {
     // Esta llamada sirve por si ya había hecho alguna predicción.
+    // Stage 285063 es la fase de grupos.
     getPredictionsByStage(285063).then((res) => {
       setFirstStagePredictions(res.data);
     });
@@ -39,7 +42,7 @@ function GroupPredictions() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formatPredicitonsToPost(values);
+    formatPredicitonsToPost(values, groupId);
     resetForm({ values: null });
   };
 
