@@ -47,6 +47,16 @@ function FirstStagePredictionsForm() {
       setFirstStagePredictions(res.data);
     });
   }, []);
+  console.log('predicciones hasta el momento', groupPredictions);
+  /*
+  * Note: Si le mando una prediccion a un match que ya predije, no se actualiza, se mantiene la primera
+  * En ese caso habría que hacer un PUT, no POST.
+  ? Como hacemos para diferenciar partido a partido si ya existe?
+  ? O... se podría mandar el mismo grupo de predicciones a los 2 EPs.
+  * Total si ya había pred. no pasa nada si le mando el POST. Con el PUT lo sobreescribo.
+  ? Qué pasa si no había nada y le mando un PUT?
+  Porque en ese caso podría mandar todo con PUT y que se sobreescriba o escriba x 1ra vez.
+  */
 
   const handleSubmit = (e) => {
     e.preventDefault();

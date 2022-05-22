@@ -28,7 +28,7 @@ function NotificationBoard() {
       .then((res) => setPredictions(res))
       .finally(() => setIsLoading(false));
   }, []);
-  console.log(predictions);
+
   const renderBoards = () => {
     // CONDITIONAL BOARD RENDERING ACCORDING TO USER STATUS
     if (isLoading) return <Spinner />;
@@ -54,7 +54,7 @@ function NotificationBoard() {
       );
     return '';
   };
-
+  if (!isEmpty(predictions.data)) return undefined;
   return (
     <CardContainer>
       <CardWrapper fullWidth>{renderBoards()}</CardWrapper>

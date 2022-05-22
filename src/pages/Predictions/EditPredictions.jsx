@@ -55,6 +55,7 @@ function EditPredictions() {
                 onClick={() => handleGroupSelect(group)}
               >
                 <Text weight="600">{group.name.toUpperCase()}</Text>
+                {/* TODO : helper funcion para calcular % de predicciones completadas */}
               </ListElement>
             );
           })}
