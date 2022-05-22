@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import FirstStagePredictions from '../pages/Predictions/Stages/FirstStagePredictions';
+import FirstStagePredictions from '../pages/Predictions/Stages/FirstStagePredictionsForm';
 import LaterPredictions from '../pages/Predictions/Stages/LaterStagesPredictions';
 import BannerList from '../pages/Predictions/BannerList';
 import Predictions from '../pages/Predictions/Predictions';

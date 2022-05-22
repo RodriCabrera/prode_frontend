@@ -22,7 +22,7 @@ function Predictions() {
   console.log(mode);
   return (
     <PredictionsPageWrapper id="mi-prode-container">
-      <BannerTitle align="center">Predicciones</BannerTitle>
+      <BannerTitle align="center">PREDICCIONES</BannerTitle>
       <ToggleContainer>
         <ToggleWrapper>
           <Text weight="700">RESULTADOS</Text>

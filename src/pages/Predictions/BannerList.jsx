@@ -1,11 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Banner, BannerTitle } from './Predictions.styles';
+import { Text } from '../../common/common.styles';
+import { Banner, BannerContainer, BannerTitle } from './Predictions.styles';
 
 function BannerList() {
   const navigate = useNavigate();
   return (
-    <div>
+    <BannerContainer>
+      <Text align="center" size="2rem" weight="700">
+        FASES
+      </Text>
       <Banner onClick={() => navigate('first-stage')}>
         <div>
           <BannerTitle>GRUPOS</BannerTitle>
@@ -41,7 +45,7 @@ function BannerList() {
         </div>
         <p>pts</p>
       </Banner>
-    </div>
+    </BannerContainer>
   );
 }
 

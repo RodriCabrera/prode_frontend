@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
-import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
 import { getUserGroups } from '../../api/groups';
 import { Text } from '../../common/common.styles';
 import ListElement from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
+import { ListWrapper } from '../../common/Lists/Lists.styles';
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -35,26 +36,32 @@ function EditPredictions() {
   console.log(selectedGroup);
   return (
     <>
-      <Text size="1.4rem">
-        {isEmpty(selectedGroup)
-          ? 'Para que grupo son estas predicciones??'
-          : 'Prediciendo para:  '}
-      </Text>
-      <Text weight="600">{selectedGroup?.name}</Text>
+      <Text size="1.4rem">Para qué grupo son estas predicciones?</Text>
       <GroupsListWrapper>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          groupList?.map((group) => {
+        {isLoading && <Spinner />}
+
+        <ListWrapper>
+          {groupList?.map((group) => {
+            const isSelected = selectedGroup?.id === group.id;
             return (
-              <ListElement onClick={() => handleGroupSelect(group)}>
-                {group.name}
+              <ListElement
+                avatar={
+                  isSelected ? (
+                    <HiCheck size="1.8rem" />
+                  ) : (
+                    <HiOutlineUserGroup size="1.8rem" />
+                  )
+                }
+                bgColor={isSelected && 'green'}
+                onClick={() => handleGroupSelect(group)}
+              >
+                <Text weight="600">{group.name.toUpperCase()}</Text>
               </ListElement>
             );
-          })
-        )}
+          })}
+        </ListWrapper>
       </GroupsListWrapper>
-      <Outlet context={[selectedGroup]} />
+      {!isLoading && selectedGroup?.id && <Outlet context={[selectedGroup]} />}
     </>
   );
 }

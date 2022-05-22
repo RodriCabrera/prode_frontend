@@ -1,10 +1,10 @@
 import propTypes from 'prop-types';
 import { AvatarWrapper, Wrapper } from './Lists.styles';
 
-function ListElement({ children, onClick, avatar }) {
+function ListElement({ children, onClick, avatar, bgColor }) {
   return (
     <Wrapper onClick={onClick} id="ListWrapper">
-      <AvatarWrapper>{avatar}</AvatarWrapper>
+      <AvatarWrapper bgColor={bgColor}>{avatar}</AvatarWrapper>
       {children}
     </Wrapper>
   );
