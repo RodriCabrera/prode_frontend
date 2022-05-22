@@ -26,10 +26,10 @@ function CreateGroupForm({ updateList }) {
     e.preventDefault();
 
     toast.promise(
-      createGroup(values)
+      createGroup({ name: values.name.toUpperCase() })
         .then(() => {
           updateList();
-          navigate(`/groups/${values.name}`);
+          navigate(`/groups/${values.name.toUpperCase()}`);
         })
         .finally(() => {
           setIsLoading(false);
