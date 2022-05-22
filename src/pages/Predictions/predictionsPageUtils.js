@@ -60,7 +60,7 @@ export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
         index === self.findIndex((t) => t.matchId === value.matchId)
     );
 
-  const data = { multiple: true, groupId, predictions: predictionsBatch };
+  const data = { multiple: true, groupId, prediction: predictionsBatch };
   console.log('Batch de prediciones a postear:', data);
   return data;
 };

@@ -3,7 +3,10 @@ import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { getGroupStage } from '../../../api/fixture';
-import { getPredictionsByStage } from '../../../api/predictions';
+import {
+  createPredictions,
+  getPredictionsByStage,
+} from '../../../api/predictions';
 import { Button, Form, Input } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import Table from '../../../common/Table/Table';
@@ -47,7 +50,14 @@ function FirstStagePredictionsForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formatPredicitonsToPost(values, selectedGroup.id);
+    createPredictions(formatPredicitonsToPost(values, selectedGroup.id))
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     resetForm({ values: null });
   };
 

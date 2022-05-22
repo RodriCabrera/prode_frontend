@@ -5,7 +5,7 @@ export const getAllPredictions = () => {
 };
 
 export const createPredictions = (predictions) => {
-  return withCredentials.get('/predictions', predictions);
+  return withCredentials.post('/predictions', predictions);
 };
 /*
 * createPredictions recibe:
