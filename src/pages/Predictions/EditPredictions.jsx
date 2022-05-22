@@ -33,7 +33,6 @@ function EditPredictions() {
     setselectedGroup(group);
   };
 
-  console.log(selectedGroup);
   return (
     <>
       <Text size="1.4rem">Para qué grupo son estas predicciones?</Text>

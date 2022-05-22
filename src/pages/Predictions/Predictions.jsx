@@ -19,7 +19,6 @@ function Predictions() {
       : navigate('/predictions/edit');
   }, [mode]);
 
-  console.log(mode);
   return (
     <PredictionsPageWrapper id="mi-prode-container">
       <BannerTitle align="center">PREDICCIONES</BannerTitle>
