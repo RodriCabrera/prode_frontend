@@ -7,7 +7,7 @@ import Predictions from '../pages/Predictions/Predictions';
 import PredictionResults from '../pages/Predictions/PredictionResults';
 import EditPredictions from '../pages/Predictions/EditPredictions';
 
-function PredictionRoutes() {
+function PredictionsRoutes() {
   return (
     <Routes>
       <Route path="" element={<Predictions />}>
@@ -22,4 +22,4 @@ function PredictionRoutes() {
   );
 }
 
-export default PredictionRoutes;
+export default PredictionsRoutes;

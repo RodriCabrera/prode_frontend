@@ -43,7 +43,7 @@ function FirstStagePredictionsForm() {
   useEffect(() => {
     // Esta llamada sirve por si ya había hecho alguna predicción.
     // Stage 285063 es la fase de grupos.
-    getPredictionsByStage(285063).then((res) => {
+    getPredictionsByStage('GROUPS').then((res) => {
       setFirstStagePredictions(res.data);
     });
   }, []);
