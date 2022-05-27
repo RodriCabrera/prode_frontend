@@ -10,7 +10,7 @@ import GroupPage from '../pages/GroupPage/GroupPage';
 import Fixture from '../pages/Fixture/Fixture';
 import App from '../App';
 import AuthRoutes from './AuthRoutes';
-import PredictionsRoutes from './PredictionRoutes';
+import PredictionsRoutes from './PredictionsRoutes';
 
 function Router() {
   return (

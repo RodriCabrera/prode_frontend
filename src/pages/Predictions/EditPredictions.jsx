@@ -14,7 +14,7 @@ const GroupsListWrapper = styled.div`
 `;
 
 function EditPredictions() {
-  const [groupList, setGroupList] = useState([]);
+  const [userGroupList, setUserGroupList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedGroup, setselectedGroup] = useState(null);
 
@@ -22,7 +22,7 @@ function EditPredictions() {
     setIsLoading(true);
     getUserGroups()
       .then(({ data }) => {
-        setGroupList(data);
+        setUserGroupList(data);
       })
       .finally(() => {
         setIsLoading(false);
@@ -40,10 +40,11 @@ function EditPredictions() {
         {isLoading && <Spinner />}
 
         <ListWrapper>
-          {groupList?.map((group) => {
-            const isSelected = selectedGroup?.id === group.id;
+          {userGroupList?.map((userGroup) => {
+            const isSelected = selectedGroup?.id === userGroup.id;
             return (
               <ListElement
+                key={userGroup.id}
                 avatar={
                   isSelected ? (
                     <HiCheck size="1.8rem" />
@@ -52,9 +53,9 @@ function EditPredictions() {
                   )
                 }
                 bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(group)}
+                onClick={() => handleGroupSelect(userGroup)}
               >
-                <Text weight="600">{group.name.toUpperCase()}</Text>
+                <Text weight="600">{userGroup.name.toUpperCase()}</Text>
                 {/* TODO : helper funcion para calcular % de predicciones completadas */}
               </ListElement>
             );

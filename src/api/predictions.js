@@ -26,10 +26,13 @@ body {
     ]
 }
 */
-export const getPredictionsByGroup = (groupId) => {
-  return withCredentials.get(`/predictions?groupId=${groupId}`);
+
+export const getPredictions = (userGroupId = '', stage = '') => {
+  return withCredentials.get(
+    `/predictions?userGroupId=${userGroupId}&stage=${stage}`
+  );
 };
 
-export const getPredictionsByStage = (stageId) => {
-  return withCredentials.get(`/predictions/history?stageId=${stageId}`);
+export const getFirstStagePredictionsByGroup = (group) => {
+  return withCredentials.get(`/predictions?group=${group}`);
 };

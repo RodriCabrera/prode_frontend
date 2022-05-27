@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-export const formatPredicitonsToPost = (predictionsRaw, userGroupId) => {
+export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
   //   const predictionsRawExample = {
   //     '400128082-away': 1,
   //     '400128082-home': 2,
@@ -63,4 +63,20 @@ export const formatPredicitonsToPost = (predictionsRaw, userGroupId) => {
   const data = { multiple: true, userGroupId, prediction: predictionsBatch };
   console.log('Batch de prediciones a postear:', data);
   return data;
+};
+
+export const formatPredictionsToDisplay = (predictionsRaw) => {
+  console.log('formatPredictionsToDisplay', predictionsRaw);
+  if (isEmpty(predictionsRaw)) return null;
+
+  const data = predictionsRaw.map((prediction) => {
+    const { matchId } = prediction;
+
+    return {
+      [`${matchId}-away`]: prediction.awayScore,
+      [`${matchId}-home`]: prediction.homeScore,
+    };
+  });
+
+  return Object.assign({}, ...data);
 };

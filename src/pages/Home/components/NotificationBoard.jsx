@@ -2,7 +2,7 @@ import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getUserGroups } from '../../../api/groups';
-import { getAllPredictions } from '../../../api/predictions';
+import { getPredictions } from '../../../api/predictions';
 import {
   CardContainer,
   CardWrapper,
@@ -24,7 +24,7 @@ function NotificationBoard() {
 
   useEffect(() => {
     setIsLoading(true);
-    getAllPredictions()
+    getPredictions()
       .then((res) => setPredictions(res))
       .finally(() => setIsLoading(false));
   }, []);
