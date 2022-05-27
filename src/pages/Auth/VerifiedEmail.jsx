@@ -5,7 +5,7 @@ function VerifiedEmail() {
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      navigate('/login');
+      navigate('/auth');
     }, 2000);
   });
   return (
