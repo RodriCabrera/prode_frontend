@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Text } from '../../common/common.styles';
 import ToggleSwitch from '../../common/ToggleSwitch';
 import {
@@ -10,11 +10,12 @@ import {
 } from './Predictions.styles';
 
 function Predictions() {
-  const [mode, setMode] = useState('resultados');
+  const location = useLocation();
+  const [mode, setMode] = useState(location.pathname.split('/')[2]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    return mode === 'resultados'
+    return mode === 'results'
       ? navigate('/predictions/results')
       : navigate('/predictions/edit');
   }, [mode]);
