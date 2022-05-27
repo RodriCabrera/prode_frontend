@@ -27,7 +27,7 @@ body {
 }
 */
 export const getPredictionsByGroup = (groupId) => {
-  return withCredentials.get(`/predictions?userGroupId=${groupId}`);
+  return withCredentials.get(`/predictions?groupId=${groupId}`);
 };
 
 export const getPredictionsByStage = (stageId) => {

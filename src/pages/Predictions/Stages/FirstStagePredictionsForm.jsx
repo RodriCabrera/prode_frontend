@@ -43,8 +43,7 @@ function FirstStagePredictionsForm() {
   useEffect(() => {
     // Esta llamada sirve por si ya había hecho alguna predicción.
     // Stage 285063 es la fase de grupos.
-    // Cambio el parámetro para que sirva con el mundial anterior.
-    getPredictionsByStage('GRUPOS').then((res) => {
+    getPredictionsByStage('GROUPS').then((res) => {
       setFirstStagePredictions(res.data);
     });
   }, []);
