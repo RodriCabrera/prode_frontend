@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 
-export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
+export const formatPredicitonsToPost = (predictionsRaw, userGroupId) => {
   //   const predictionsRawExample = {
   //     '400128082-away': 1,
   //     '400128082-home': 2,
@@ -52,7 +52,7 @@ export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
         matchId,
         homeScore,
         awayScore,
-        groupId,
+        userGroupId,
       };
     })
     .filter(
@@ -60,7 +60,7 @@ export const formatPredicitonsToPost = (predictionsRaw, groupId) => {
         index === self.findIndex((t) => t.matchId === value.matchId)
     );
 
-  const data = { multiple: true, groupId, prediction: predictionsBatch };
+  const data = { multiple: true, userGroupId, prediction: predictionsBatch };
   console.log('Batch de prediciones a postear:', data);
   return data;
 };
