@@ -26,12 +26,10 @@ function CreateGroupForm({ updateList }) {
     e.preventDefault();
 
     toast.promise(
-      createGroup(values)
+      createGroup({ name: values.name.toUpperCase() })
         .then(() => {
           updateList();
-          setTimeout(() => {
-            navigate(`/groups/${values.name}`);
-          }, 2000);
+          navigate(`/groups/${values.name.toUpperCase()}`);
         })
         .finally(() => {
           setIsLoading(false);
@@ -62,6 +60,7 @@ function CreateGroupForm({ updateList }) {
             required
             value={values.name}
             onChange={handleChange}
+            showUppercase
           />
         </Label>
         <Button type="submit" disabled={isLoading || !isEmpty(errors)}>

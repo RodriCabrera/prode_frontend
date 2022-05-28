@@ -9,6 +9,7 @@ export const NavbarContainer = styled.div`
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 999;
 `;
 export const NavbarWrapper = styled.div`
   backdrop-filter: blur(4px);
@@ -23,7 +24,7 @@ export const NavbarWrapper = styled.div`
 
 export const ButtonGroup = styled.div`
   background-color: inherit;
-  padding: 2rem;
+  padding: ${({ padding }) => padding || '2rem 1rem'};
   display: flex;
   align-items: center;
   gap: 1rem;

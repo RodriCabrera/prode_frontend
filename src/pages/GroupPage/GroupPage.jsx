@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { isEmpty } from 'lodash';
-import { toast } from 'react-toastify';
-import { getGroupData, getGroupScores, leaveGroup } from '../../api/groups';
+import { getGroupData, getGroupScores } from '../../api/groups';
 import ListElement from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
-import { Text, Button } from '../../common/common.styles';
+import { Text, CardContainer, Button } from '../../common/common.styles';
+import LeaveGroupForm from '../Groups/components/LeaveGroupForm';
 
-// TODO: Boton para salir del grupo.
 // TODO: Mostrar acuerdo/reglas del grupo.
 
 function GroupPage() {
@@ -18,7 +17,7 @@ function GroupPage() {
   const [scoresData, setScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [groupError, setGroupError] = useState();
-  // ? Queda como toast o mejor display en el body que diga si el grupo no existe o el usuario no es parte?
+  const [showLeave, setShowLeave] = useState(false);
 
   useEffect(() => {
     getGroupData(name)
@@ -26,8 +25,6 @@ function GroupPage() {
         setGroup(data.groupData);
       })
       .catch((err) => {
-        console.log('LO AGARRA ACA?');
-        // console.log(err.response.data.error);
         setGroupError(err.response.data.error);
       })
       .finally(() => {
@@ -46,22 +43,6 @@ function GroupPage() {
       });
   }, []);
 
-  const handleLeaveGroup = () => {
-    toast.promise(
-      leaveGroup(name).then(() => {
-        navigate('/groups');
-      }),
-      {
-        pending: 'Leaving group...',
-        success: 'You left the group',
-        error: {
-          render({ data }) {
-            return data.response.data.error;
-          },
-        },
-      }
-    );
-  };
   if (!isEmpty(groupError)) {
     return (
       <>
@@ -74,7 +55,9 @@ function GroupPage() {
       </>
     );
   }
-
+  const onGroupExit = () => {
+    navigate('/groups');
+  };
   return (
     <>
       {isLoading && <Spinner />}
@@ -95,7 +78,19 @@ function GroupPage() {
                   <Text>{`${score.user} : ${score.score} pts`}</Text>
                 </ListElement>
               ))}
-          <Button onClick={handleLeaveGroup}>Salir del grupo</Button>
+          <CardContainer>
+            <Button
+              grayscale
+              onClick={() => {
+                setShowLeave(!showLeave);
+              }}
+            >
+              Salir del grupo?
+            </Button>
+          </CardContainer>
+          <CardContainer>
+            {showLeave && <LeaveGroupForm updater={onGroupExit} />}
+          </CardContainer>
         </>
       )}
     </>

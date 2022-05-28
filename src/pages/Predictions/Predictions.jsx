@@ -1,46 +1,39 @@
-import React from 'react';
-import { Banner, BannerTitle, MiProdeContainer } from './Predictions.styles';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Text } from '../../common/common.styles';
+import ToggleSwitch from '../../common/ToggleSwitch';
+import {
+  BannerTitle,
+  PredictionsPageWrapper,
+  ToggleContainer,
+  ToggleWrapper,
+} from './Predictions.styles';
 
 function Predictions() {
+  const location = useLocation();
+  const [mode, setMode] = useState(location.pathname.split('/')[2]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    return mode === 'results'
+      ? navigate('/predictions/results')
+      : navigate('/predictions/edit');
+  }, [mode]);
+
   return (
-    <MiProdeContainer id="mi-prode-container">
-      <BannerTitle>Mirá las predicciones que ya hiciste:</BannerTitle>
-      <Banner>
-        <div>
-          <BannerTitle>GRUPOS</BannerTitle>
-          <p>Ver/Editar</p>
-        </div>
-        <p>pts</p>
-      </Banner>
-      <Banner>
-        <div>
-          <BannerTitle>OCTAVOS</BannerTitle>
-          <p>Ver/Editar</p>
-        </div>
-        <p>pts</p>
-      </Banner>
-      <Banner>
-        <div>
-          <BannerTitle>CUARTOS</BannerTitle>
-          <p>Ver/Editar</p>
-        </div>
-        <p>pts</p>
-      </Banner>
-      <Banner>
-        <div>
-          <BannerTitle>SEMIFINALES</BannerTitle>
-          <p>Ver/Editar</p>
-        </div>
-        <p>pts</p>
-      </Banner>
-      <Banner>
-        <div>
-          <BannerTitle>FINAL</BannerTitle>
-          <p>Ver/Editar</p>
-        </div>
-        <p>pts</p>
-      </Banner>
-    </MiProdeContainer>
+    <PredictionsPageWrapper id="mi-prode-container">
+      <BannerTitle align="center">PREDICCIONES</BannerTitle>
+      <ToggleContainer>
+        <ToggleWrapper>
+          <Text weight="700">RESULTADOS</Text>
+          <ToggleSwitch mode={{ mode, setMode }} />
+          <Text weight="700" color="tomato">
+            PREDECIR
+          </Text>
+        </ToggleWrapper>
+      </ToggleContainer>
+      <Outlet />
+    </PredictionsPageWrapper>
   );
 }
 

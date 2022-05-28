@@ -52,6 +52,7 @@ function JoinGroupForm({ updateList }) {
             required
             value={values.groupName}
             onChange={handleChange}
+            showUppercase
           />
         </Label>
         <Button type="submit" disabled={isLoading}>

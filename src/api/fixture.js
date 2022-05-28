@@ -1,8 +1,8 @@
 import { withoutCredentials } from './instances';
 
-export const getFixture = (groupId, stageId) => {
+export const getFixture = (groupId = '', stageId = '') => {
   return withoutCredentials.get(
-    `/fifa/fixture?groupId=${groupId || ''}&stageId=${stageId || ''}`
+    `/fifa/fixture?groupId=${groupId}&stageId=${stageId}`
   );
 };
 

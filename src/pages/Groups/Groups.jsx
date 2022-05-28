@@ -6,7 +6,6 @@ import JoinGroupForm from './components/JoinGroupForm';
 import GroupList from './components/GroupList';
 import { getUserGroups } from '../../api/groups';
 import { Spinner } from '../../common/Spinner/Spinner';
-import LeaveGroupForm from './components/LeaveGroupForm';
 
 function Groups() {
   const [groupList, setGroupList] = useState([]);
@@ -48,10 +47,6 @@ function Groups() {
 
         <CardWrapper>
           <JoinGroupForm updateList={getGroupList} />
-        </CardWrapper>
-
-        <CardWrapper>
-          <LeaveGroupForm updateList={getGroupList} />
         </CardWrapper>
       </CardContainer>
     </>

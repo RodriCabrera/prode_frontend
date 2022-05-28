@@ -30,7 +30,7 @@ function Navbar() {
   const handleLogout = () => {
     logoutUser()
       .then(() => {
-        navigate('/login');
+        navigate('/auth');
       })
       .finally(() => {
         userContext.user = null;
@@ -54,8 +54,8 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Registrarse</Link>
+              <Link to="/auth">Login</Link>
+              <Link to="/auth/register">Registrarse</Link>
             </>
           )}
         </ButtonGroup>
