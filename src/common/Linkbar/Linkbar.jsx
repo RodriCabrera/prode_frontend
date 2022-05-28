@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ButtonGroup, NavbarWrapper } from '../Navbar/Navbar.styles';
 
 const LinkbarContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 `;
