@@ -9,6 +9,7 @@ export const NavbarContainer = styled.div`
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 999;
 `;
 export const NavbarWrapper = styled.div`
   backdrop-filter: blur(4px);
