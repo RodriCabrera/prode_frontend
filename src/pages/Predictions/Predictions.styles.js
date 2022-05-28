@@ -27,7 +27,11 @@ export const Banner = styled(Button)`
   justify-content: space-between;
   align-items: center;
 `;
-
+export const BannerLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
 export const BannerTitle = styled(Text)`
   font-weight: 500;
   font-size: 2.5rem;

@@ -1,7 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Text } from '../../common/common.styles';
-import { Banner, BannerContainer, BannerTitle } from './Predictions.styles';
+import {
+  Banner,
+  BannerContainer,
+  BannerLeft,
+  BannerTitle,
+} from './Predictions.styles';
 
 function BannerList() {
   const navigate = useNavigate();
@@ -11,34 +16,34 @@ function BannerList() {
         FASES
       </Text>
       <Banner onClick={() => navigate('first-stage')}>
-        <div>
+        <BannerLeft>
           <BannerTitle>GRUPOS</BannerTitle>
           <p>Ver/Editar</p>
-        </div>
+        </BannerLeft>
       </Banner>
-      <Banner onClick={() => navigate('later-stages/16round')}>
-        <div>
+      <Banner disabled onClick={() => navigate('later-stages/16round')}>
+        <BannerLeft>
           <BannerTitle>OCTAVOS</BannerTitle>
           <p>Ver/Editar</p>
-        </div>
+        </BannerLeft>
       </Banner>
-      <Banner onClick={() => navigate('later-stages/8round')}>
-        <div>
+      <Banner disabled onClick={() => navigate('later-stages/8round')}>
+        <BannerLeft>
           <BannerTitle>CUARTOS</BannerTitle>
           <p>Ver/Editar</p>
-        </div>
+        </BannerLeft>
       </Banner>
-      <Banner onClick={() => navigate('later-stages/semis')}>
-        <div>
+      <Banner disabled onClick={() => navigate('later-stages/semis')}>
+        <BannerLeft>
           <BannerTitle>SEMIFINALES</BannerTitle>
           <p>Ver/Editar</p>
-        </div>
+        </BannerLeft>
       </Banner>
-      <Banner onClick={() => navigate('later-stages/final')}>
-        <div>
+      <Banner disabled onClick={() => navigate('later-stages/final')}>
+        <BannerLeft>
           <BannerTitle>FINAL</BannerTitle>
           <p>Ver/Editar</p>
-        </div>
+        </BannerLeft>
       </Banner>
     </BannerContainer>
   );
