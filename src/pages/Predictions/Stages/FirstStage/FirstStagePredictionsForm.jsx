@@ -14,20 +14,10 @@ import {
   numberToGroupLetter,
 } from '../../predictionsPageUtils';
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-`;
-const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 function FirstStagePredictionsForm(props) {
   const { firstStageData, resultsMode } = props;
   const [selectedGroup] = useOutletContext();
-  const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, 2 - C, 3 - D, 4 - E, 5 - F, 6 - G, 7 - H
+  const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [isLoading, setIsLoading] = useState(false);
   const { values, handleChange, resetForm } = useFormik({
     initialValues: {},
@@ -82,6 +72,14 @@ function FirstStagePredictionsForm(props) {
     updatePredictions();
   };
 
+  const checkPredictionResult = (homeOrAway, prediction, matchId) => {
+    const matchResult = firstStageData[groupNumber].matches.find(
+      (match) => match.id === matchId
+    )[`${homeOrAway}Score`];
+    console.log('match result', matchResult);
+    return prediction === matchResult;
+  };
+
   if (isLoading) return <Spinner />;
 
   return (
@@ -114,8 +112,7 @@ function FirstStagePredictionsForm(props) {
                       {match.away.shortName || '?'}
                     </Table.Cell>
                     <Table.Cell padding="5px">
-                      <Input
-                        disabled={resultsMode}
+                      <ResultsInput
                         type="number"
                         width="30px"
                         min={0}
@@ -123,12 +120,22 @@ function FirstStagePredictionsForm(props) {
                         value={values[`${match.id}-away`]}
                         name={`${match.id}-away`}
                         onChange={handleChange}
+                        disabled={resultsMode}
+                        userCorrectPrediction={
+                          // segun esta propiedad se pinta el input en verde o rojo
+                          resultsMode
+                            ? checkPredictionResult(
+                                'away',
+                                values[`${match.id}-away`],
+                                match.id
+                              )
+                            : ''
+                        }
                       />
                     </Table.Cell>
                     {/* <Table.Cell>-</Table.Cell> */}
                     <Table.Cell padding="5px">
-                      <Input
-                        disabled={resultsMode}
+                      <ResultsInput
                         type="number"
                         width="30px"
                         min={0}
@@ -136,6 +143,17 @@ function FirstStagePredictionsForm(props) {
                         id={`${match.id}-home`}
                         value={values[`${match.id}-home`]}
                         onChange={handleChange}
+                        disabled={resultsMode}
+                        userCorrectPrediction={
+                          // segun esta propiedad se pinta el input en verde o rojo
+                          resultsMode
+                            ? checkPredictionResult(
+                                'home',
+                                values[`${match.id}-home`],
+                                match.id
+                              )
+                            : ''
+                        }
                       />
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
@@ -172,5 +190,22 @@ function FirstStagePredictionsForm(props) {
     </FormWrapper>
   );
 }
+const ResultsInput = styled(Input)`
+  :disabled {
+    background-color: ${({ userCorrectPrediction }) =>
+      userCorrectPrediction ? 'lightgreen' : '#fd5e53'};
+  }
+`;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+`;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 export default FirstStagePredictionsForm;

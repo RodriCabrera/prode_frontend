@@ -36,11 +36,14 @@ function PredictionResults() {
     getAllPredictions()
       .then((res) => setPredictions(res.data))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [selectedGroup]);
+
   const handleGroupSelect = (group) => {
     setselectedGroup(group);
   };
+
   if (isLoading) return <Spinner />;
+
   if (isEmpty(predictions)) return <Text>Aún no hiciste predicciones</Text>;
 
   return (

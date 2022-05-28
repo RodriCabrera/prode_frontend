@@ -24,7 +24,7 @@ export const NavbarWrapper = styled.div`
 
 export const ButtonGroup = styled.div`
   background-color: inherit;
-  padding: 2rem;
+  padding: ${({ padding }) => padding || '2rem 1rem'};
   display: flex;
   align-items: center;
   gap: 1rem;

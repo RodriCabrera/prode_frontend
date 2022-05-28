@@ -27,7 +27,7 @@ function EditPredictions() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [selectedGroup]);
 
   const handleGroupSelect = (group) => {
     setselectedGroup(group);
