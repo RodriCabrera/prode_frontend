@@ -80,7 +80,11 @@ export const Input = styled.input`
   padding: 10px;
   border-radius: 10px;
   background-color: #e5e5e5;
+  :disabled {
+    background-color: darkgray;
+  }
 `;
+
 export function ScoreInput() {
   return <Input type="number" width="30px" />;
 }

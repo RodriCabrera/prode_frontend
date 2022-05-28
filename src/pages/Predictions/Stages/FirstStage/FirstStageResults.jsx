@@ -4,7 +4,7 @@ import { getGroupStage } from '../../../../api/fixture';
 import { Spinner } from '../../../../common/Spinner/Spinner';
 import FirstStagePredictionsForm from './FirstStagePredictionsForm';
 
-function FirstStage() {
+function FirstStageResults() {
   const [isLoading, setIsLoading] = useState(false);
   const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos para este userGroup
 
@@ -14,13 +14,15 @@ function FirstStage() {
       .then((res) => setFirstStageData(res.data.fixture))
       .finally(() => setIsLoading(false));
   }, []);
+  console.log('first stage data', firstStageData);
   if (isLoading) return <Spinner />;
+
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      <FirstStagePredictionsForm firstStageData={firstStageData} />
+      <FirstStagePredictionsForm resultsMode firstStageData={firstStageData} />
     </>
   );
 }
 
-export default FirstStage;
+export default FirstStageResults;

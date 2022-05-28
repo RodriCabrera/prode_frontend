@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createPredictions, getPredictions } from '../../../../api/predictions';
-import { Button, Form, Input } from '../../../../common/common.styles';
+import { Button, Form, Input, Text } from '../../../../common/common.styles';
 import { Spinner } from '../../../../common/Spinner/Spinner';
 import Table from '../../../../common/Table/Table';
 import { getFlagUrl, parseDate } from '../../../Fixture/fixturePageHelpers';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
+  numberToGroupLetter,
 } from '../../predictionsPageUtils';
 
 const ButtonWrapper = styled.div`
@@ -24,7 +25,7 @@ const FormWrapper = styled.div`
   align-items: center;
 `;
 function FirstStagePredictionsForm(props) {
-  const { firstStageData } = props;
+  const { firstStageData, resultsMode } = props;
   const [selectedGroup] = useOutletContext();
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, 2 - C, 3 - D, 4 - E, 5 - F, 6 - G, 7 - H
   const [isLoading, setIsLoading] = useState(false);
@@ -36,8 +37,6 @@ function FirstStagePredictionsForm(props) {
     setIsLoading(true);
     getPredictions(selectedGroup.id, 'GRUPOS')
       .then((res) => {
-        console.log('FORMATEADO:', formatPredictionsToDisplay(res.data));
-        // setFirstStagePredictions(formatPredictionsToDisplay(res.data));
         resetForm({ values: formatPredictionsToDisplay(res.data) });
       })
       .finally(() => setIsLoading(false));
@@ -87,6 +86,9 @@ function FirstStagePredictionsForm(props) {
 
   return (
     <FormWrapper>
+      <Text align="center" size="1.7rem" weight="600">
+        {`GRUPO ${numberToGroupLetter(groupNumber)}`}
+      </Text>
       <Form onSubmit={handleSubmit}>
         <Table>
           <Table.Body>
@@ -113,6 +115,7 @@ function FirstStagePredictionsForm(props) {
                     </Table.Cell>
                     <Table.Cell padding="5px">
                       <Input
+                        disabled={resultsMode}
                         type="number"
                         width="30px"
                         min={0}
@@ -125,6 +128,7 @@ function FirstStagePredictionsForm(props) {
                     {/* <Table.Cell>-</Table.Cell> */}
                     <Table.Cell padding="5px">
                       <Input
+                        disabled={resultsMode}
                         type="number"
                         width="30px"
                         min={0}
@@ -146,9 +150,11 @@ function FirstStagePredictionsForm(props) {
             })}
           </Table.Body>
         </Table>
-        <Button type="submit" disabled={!selectedGroup?.id}>
-          {selectedGroup?.id ? 'Enviar prediccion' : 'Seleccione un grupo'}
-        </Button>
+        {!resultsMode && (
+          <Button type="submit" disabled={!selectedGroup?.id}>
+            {selectedGroup?.id ? 'Enviar prediccion' : 'Seleccione un grupo'}
+          </Button>
+        )}
         <ButtonWrapper>
           <Button
             grayscale

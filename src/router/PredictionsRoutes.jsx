@@ -5,16 +5,20 @@ import BannerList from '../pages/Predictions/BannerList';
 import Predictions from '../pages/Predictions/Predictions';
 import PredictionResults from '../pages/Predictions/PredictionResults';
 import EditPredictions from '../pages/Predictions/EditPredictions';
-import FirstStage from '../pages/Predictions/Stages/FirstStage/FirstStage';
+import { FirstStageEdit } from '../pages/Predictions/Stages/FirstStage/FirstStageEdit';
+import FirstStageResults from '../pages/Predictions/Stages/FirstStage/FirstStageResults';
 
 function PredictionsRoutes() {
   return (
     <Routes>
       <Route path="" element={<Predictions />}>
-        <Route path="results" element={<PredictionResults />} />
+        <Route path="results" element={<PredictionResults />}>
+          <Route index element={<BannerList />} />
+          <Route path="first-stage" element={<FirstStageResults />} />
+        </Route>
         <Route path="edit" element={<EditPredictions />}>
           <Route index element={<BannerList />} />
-          <Route path="first-stage" element={<FirstStage />} />
+          <Route path="first-stage" element={<FirstStageEdit />} />
           <Route path="later-stages/:stage" element={<LaterPredictions />} />
         </Route>
       </Route>

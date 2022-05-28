@@ -8,7 +8,6 @@ import { Spinner } from '../../common/Spinner/Spinner';
 import { Text, CardContainer, Button } from '../../common/common.styles';
 import LeaveGroupForm from '../Groups/components/LeaveGroupForm';
 
-// TODO: Boton para salir del grupo.
 // TODO: Mostrar acuerdo/reglas del grupo.
 
 function GroupPage() {

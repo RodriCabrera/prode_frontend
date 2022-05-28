@@ -80,3 +80,37 @@ export const formatPredictionsToDisplay = (predictionsRaw) => {
 
   return Object.assign({}, ...data);
 };
+
+// TODO: Debe haber una mejor forma que el switch para esta funcion:
+export const numberToGroupLetter = (number) => {
+  let groupLetter;
+  switch (number) {
+    case 0:
+      groupLetter = 'A';
+      break;
+    case 1:
+      groupLetter = 'B';
+      break;
+    case 2:
+      groupLetter = 'C';
+      break;
+    case 3:
+      groupLetter = 'D';
+      break;
+    case 4:
+      groupLetter = 'E';
+      break;
+    case 5:
+      groupLetter = 'F';
+      break;
+    case 6:
+      groupLetter = 'G';
+      break;
+    case 7:
+      groupLetter = 'H';
+      break;
+    default:
+      break;
+  }
+  return groupLetter;
+};

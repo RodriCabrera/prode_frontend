@@ -3,8 +3,6 @@ import propTypes from 'prop-types';
 import { getAuth } from '../api/auth';
 import Loading from './Loading/Loading';
 
-// TODO: Ver como hacer para que este AuthProvider se use para el navbar y redirigir para afuera si no esta logueado
-
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
