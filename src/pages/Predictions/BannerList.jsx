@@ -1,15 +1,32 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import { getPredictions } from '../../api/predictions';
 import { Text } from '../../common/common.styles';
 import {
   Banner,
   BannerContainer,
-  BannerLeft,
+  BannerDataWrapper,
   BannerTitle,
 } from './Predictions.styles';
 
-function BannerList() {
+function BannerList({ editMode }) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const selectedGroup = useOutletContext();
+  const [groupsPredictedQty, setGroupsPredictedQty] = useState(undefined);
+
+  useEffect(() => {
+    if (editMode) {
+      setIsLoading(true);
+      getPredictions(selectedGroup.id, 'GRUPOS')
+        .then((res) => {
+          setGroupsPredictedQty(res.data.length);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [selectedGroup]);
 
   const setDisabledField = (disablingDate, enablingDate) => {
     const today = new Date();
@@ -17,7 +34,12 @@ function BannerList() {
     const startDate = new Date(enablingDate);
     return today > endDate || today < startDate;
   };
-  // TODO: Revisar fechas dee habilitacion de predicciones. Y formato para pasar horas.
+
+  const calculatePercentage = (predictionsQty, totalGroups) => {
+    return Math.round((predictionsQty / totalGroups) * 100);
+  };
+  // TODO: Revisar fechas de habilitacion de predicciones. Y formato para pasar horas.
+
   return (
     <BannerContainer>
       <Text align="center" size="2rem" weight="700">
@@ -27,46 +49,51 @@ function BannerList() {
         disabled={setDisabledField('2022-11-20', '2022-01-01')}
         onClick={() => navigate('first-stage')}
       >
-        <BannerLeft>
+        <BannerDataWrapper>
           <BannerTitle>GRUPOS</BannerTitle>
           <p>Ver/Editar</p>
-        </BannerLeft>
+        </BannerDataWrapper>
+        {!isLoading && editMode && (
+          <BannerDataWrapper>
+            {calculatePercentage(groupsPredictedQty, 48)}% completo
+          </BannerDataWrapper>
+        )}
       </Banner>
       <Banner
         disabled={setDisabledField('2022-13-02', '2022-12-02')}
         onClick={() => navigate('later-stages/16round')}
       >
-        <BannerLeft>
+        <BannerDataWrapper>
           <BannerTitle>OCTAVOS</BannerTitle>
           <p>Ver/Editar</p>
-        </BannerLeft>
+        </BannerDataWrapper>
       </Banner>
       <Banner
         disabled={setDisabledField('2022-12-08', '2022-12-02')}
         onClick={() => navigate('later-stages/8round')}
       >
-        <BannerLeft>
+        <BannerDataWrapper>
           <BannerTitle>CUARTOS</BannerTitle>
           <p>Ver/Editar</p>
-        </BannerLeft>
+        </BannerDataWrapper>
       </Banner>
       <Banner
         disabled={setDisabledField('2022-12-12', '2022-12-02')}
         onClick={() => navigate('later-stages/semis')}
       >
-        <BannerLeft>
+        <BannerDataWrapper>
           <BannerTitle>SEMIFINALES</BannerTitle>
           <p>Ver/Editar</p>
-        </BannerLeft>
+        </BannerDataWrapper>
       </Banner>
       <Banner
         disabled={setDisabledField('2022-12-16', '2022-12-02')}
         onClick={() => navigate('later-stages/final')}
       >
-        <BannerLeft>
+        <BannerDataWrapper>
           <BannerTitle>FINAL</BannerTitle>
           <p>Ver/Editar</p>
-        </BannerLeft>
+        </BannerDataWrapper>
       </Banner>
     </BannerContainer>
   );

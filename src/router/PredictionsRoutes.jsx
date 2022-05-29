@@ -17,7 +17,7 @@ function PredictionsRoutes() {
           <Route path="first-stage" element={<FirstStageResults />} />
         </Route>
         <Route path="edit" element={<EditPredictions />}>
-          <Route index element={<BannerList />} />
+          <Route index element={<BannerList editMode />} />
           <Route path="first-stage" element={<FirstStageEdit />} />
           <Route path="later-stages/:stage" element={<LaterPredictions />} />
         </Route>

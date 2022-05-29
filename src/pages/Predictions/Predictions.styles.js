@@ -27,7 +27,7 @@ export const Banner = styled(Button)`
   justify-content: space-between;
   align-items: center;
 `;
-export const BannerLeft = styled.div`
+export const BannerDataWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
