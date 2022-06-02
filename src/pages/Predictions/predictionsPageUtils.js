@@ -82,8 +82,11 @@ export const formatPredictionsToDisplay = (predictionsRaw) => {
 };
 
 // TODO: Debe haber una mejor forma que el switch para esta funcion:
+// TODO: Dejo una propuesta
 export const numberToGroupLetter = (number) => {
   let groupLetter;
+  // const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  // return letters[number % 8];
   switch (number) {
     case 0:
       groupLetter = 'A';
@@ -113,4 +116,9 @@ export const numberToGroupLetter = (number) => {
       break;
   }
   return groupLetter;
+};
+
+export const getErrorMessageForMatch = (errors, matchId) => {
+  const error = errors.find((err) => (err.id === matchId ? err : null));
+  return error ? error.message : null;
 };

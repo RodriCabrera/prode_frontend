@@ -7,10 +7,12 @@ import { createPredictions, getPredictions } from '../../../../api/predictions';
 import { Button, Form, Input, Text } from '../../../../common/common.styles';
 import { Spinner } from '../../../../common/Spinner/Spinner';
 import Table from '../../../../common/Table/Table';
+import ErrorInfo from '../../../../common/MoreInfo/ErrorInfo';
 import { getFlagUrl, parseDate } from '../../../Fixture/fixturePageHelpers';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
+  getErrorMessageForMatch,
   numberToGroupLetter,
 } from '../../predictionsPageUtils';
 
@@ -22,6 +24,7 @@ function FirstStagePredictionsForm(props) {
   const { values, handleChange, resetForm } = useFormik({
     initialValues: {},
   });
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const updatePredictions = () => {
     setIsLoading(true);
@@ -45,6 +48,7 @@ function FirstStagePredictionsForm(props) {
       createPredictions(formatPredictionsToPost(values, selectedGroup.id))
         .then((res) => {
           console.log(res);
+          setErrorMessages(res.data.errors);
         })
         .finally(() => {
           setIsLoading(false);
@@ -162,6 +166,9 @@ function FirstStagePredictionsForm(props) {
                     <Table.Cell padding="0">
                       {getFlagUrl(match.home.flag, 1)}
                     </Table.Cell>
+                    <ErrorInfo
+                      info={getErrorMessageForMatch(errorMessages, match.id)}
+                    />
                   </Table.Row>
                 </>
               );

@@ -2,7 +2,8 @@
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    // "prettier.tabWidth": 4,
+    "prettier.tabWidth": 2,
+    "prettier.useTabs": true,
     // "prettier.trailingComma": "es5",
     "editor.formatOnSave": false,
     "prettier.semi": true,
