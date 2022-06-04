@@ -45,7 +45,7 @@ function CreateGroupForm({ updateList }) {
       }
     );
   };
-  console.log(errors);
+
   return (
     <>
       <Text size="2rem" align="center">

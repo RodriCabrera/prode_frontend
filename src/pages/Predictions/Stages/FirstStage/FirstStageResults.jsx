@@ -14,7 +14,7 @@ function FirstStageResults() {
       .then((res) => setFirstStageData(res.data.fixture))
       .finally(() => setIsLoading(false));
   }, []);
-  console.log('first stage data', firstStageData);
+
   if (isLoading) return <Spinner />;
 
   return (

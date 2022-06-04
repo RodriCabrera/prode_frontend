@@ -47,7 +47,6 @@ function FirstStagePredictionsForm(props) {
     toast.promise(
       createPredictions(formatPredictionsToPost(values, selectedGroup.id))
         .then((res) => {
-          console.log(res);
           setErrorMessages(res.data.errors);
         })
         .finally(() => {
@@ -80,7 +79,6 @@ function FirstStagePredictionsForm(props) {
     const matchResult = firstStageData[groupNumber].matches.find(
       (match) => match.id === matchId
     )[`${homeOrAway}Score`];
-    console.log('match result', matchResult);
     return prediction === matchResult;
   };
 
@@ -150,6 +148,7 @@ function FirstStagePredictionsForm(props) {
                         disabled={resultsMode}
                         userCorrectPrediction={
                           // segun esta propiedad se pinta el input en verde o rojo
+                          // TODO: Agregar color para ganador adivinado.
                           resultsMode
                             ? checkPredictionResult(
                                 'home',

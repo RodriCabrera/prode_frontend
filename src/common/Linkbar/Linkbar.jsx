@@ -34,7 +34,7 @@ export function Linkbar() {
   const isCurrent = (link) => {
     return link === basePath;
   };
-  console.log('iscurrent fixture', isCurrent('fixture'));
+
   return (
     <LinkbarContainer>
       <LinkbarWrapper>

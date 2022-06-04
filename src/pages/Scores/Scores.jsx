@@ -6,7 +6,6 @@ import GroupScoresForm from './GroupScoresForm';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
-  console.log('scores', scores);
 
   const onMemberClick = (member) => {
     console.log(member);
