@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from '../../common/Table/Table';
-import { getFlagUrl, parseDate, parseMatchScore } from './fixturePageHelpers';
+import { getFlagUrl, parseDate } from '../pagesHelpers';
+import { parseMatchScore } from './fixturePageHelpers';
 
 function FixtureTable({ data }) {
   return (

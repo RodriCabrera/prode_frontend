@@ -5,8 +5,8 @@ import { getFixture } from '../../../api/fixture';
 import { Form, Input } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import Table from '../../../common/Table/Table';
-import { getFlagUrl, parseDate } from '../../Fixture/fixturePageHelpers';
-import { getStageId } from '../../Fixture/fixturePageUtils';
+import { getStageId } from '../../Fixture/fixturePageHelpers';
+import { getFlagUrl, parseDate } from '../../pagesHelpers';
 
 function LaterPredictions() {
   const { stage } = useParams();

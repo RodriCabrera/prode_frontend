@@ -66,7 +66,7 @@ export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
 };
 
 export const formatPredictionsToDisplay = (predictionsRaw) => {
-  console.log('formatPredictionsToDisplay', predictionsRaw);
+  console.log('formatPredictionsToDisplay, RAW:', predictionsRaw);
   if (isEmpty(predictionsRaw)) return null;
 
   const data = predictionsRaw.map((prediction) => {
@@ -77,7 +77,7 @@ export const formatPredictionsToDisplay = (predictionsRaw) => {
       [`${matchId}-home`]: prediction.homeScore,
     };
   });
-
+  console.log('Formateado:', Object.assign({}, ...data));
   return Object.assign({}, ...data);
 };
 
@@ -121,4 +121,56 @@ export const numberToGroupLetter = (number) => {
 export const getErrorMessageForMatch = (errors, matchId) => {
   const error = errors.find((err) => (err.id === matchId ? err : null));
   return error ? error.message : null;
+};
+
+export const checkPredictionResult = (
+  stageData,
+  groupNumber,
+  matchId,
+  homeOrAway,
+  predictionAway,
+  predictionHome
+) => {
+  console.log(
+    stageData,
+    groupNumber,
+    matchId,
+    homeOrAway,
+    predictionAway,
+    predictionHome
+  );
+  const matchData = stageData[groupNumber]?.matches.find(
+    (match) => match.id === matchId
+  );
+  const teamResult = matchData[`${homeOrAway}Score`];
+
+  function getScoreStatus() {
+    const resultAway = matchData.awayScore;
+    const resultHome = matchData.homeScore;
+    if (predictionAway === resultAway && predictionHome === resultHome) {
+      return 'full';
+    }
+    if (
+      (predictionAway > predictionHome && resultAway > resultHome) ||
+      (predictionAway < predictionHome && resultAway < resultHome)
+    ) {
+      return 'half';
+    }
+    return 'none';
+  }
+
+  const teamPrediction =
+    homeOrAway === 'home' ? predictionHome : predictionAway;
+
+  if (teamResult === null || teamPrediction === undefined) {
+    return 'silver';
+  }
+  if (getScoreStatus() === 'full') {
+    return 'lightgreen';
+  }
+  if (getScoreStatus() === 'half') {
+    return '#FFFF66';
+  }
+
+  return 'tomato';
 };

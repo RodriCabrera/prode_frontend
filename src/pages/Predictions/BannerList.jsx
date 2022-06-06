@@ -28,17 +28,20 @@ function BannerList({ editMode }) {
     }
   }, [selectedGroup]);
 
+  // eslint-disable-next-line no-unused-vars
   const setDisabledField = (disablingDate, enablingDate) => {
-    const today = new Date();
-    const endDate = new Date(disablingDate);
-    const startDate = new Date(enablingDate);
-    return today > endDate || today < startDate;
+    // const today = new Date();
+    // const endDate = new Date(disablingDate);
+    // const startDate = new Date(enablingDate);
+    return '';
+    // TODO: Habría que emprolijar esta funcion para que vaya liberando los stages según la fecha y hora.
+    // *: Por ahora lo dejo desactivado para poder ver los banners con la data del mundial pasado
+    // return today > endDate || today < startDate;
   };
 
   const calculatePercentage = (predictionsQty, totalGroups) => {
     return Math.round((predictionsQty / totalGroups) * 100);
   };
-  // TODO: Revisar fechas de habilitacion de predicciones. Y formato para pasar horas.
 
   return (
     <BannerContainer>

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LaterPredictions from '../pages/Predictions/Stages/LaterStagesPredictions';
+import LaterPredictions from '../pages/Predictions/Stages/LaterPredictions';
 import BannerList from '../pages/Predictions/BannerList';
 import Predictions from '../pages/Predictions/Predictions';
 import PredictionResults from '../pages/Predictions/PredictionResults';
 import EditPredictions from '../pages/Predictions/EditPredictions';
-import { FirstStageEdit } from '../pages/Predictions/Stages/FirstStage/FirstStageEdit';
-import FirstStageResults from '../pages/Predictions/Stages/FirstStage/FirstStageResults';
+import FirstStage from '../pages/Predictions/Stages/FirstStage';
 
 function PredictionsRoutes() {
   return (
@@ -14,11 +13,15 @@ function PredictionsRoutes() {
       <Route path="" element={<Predictions />}>
         <Route path="results" element={<PredictionResults />}>
           <Route index element={<BannerList />} />
-          <Route path="first-stage" element={<FirstStageResults />} />
+          <Route path="first-stage" element={<FirstStage resultsMode />} />
+          <Route
+            path="later-stages/:stage"
+            element={<LaterPredictions resultsMode />}
+          />
         </Route>
         <Route path="edit" element={<EditPredictions />}>
           <Route index element={<BannerList editMode />} />
-          <Route path="first-stage" element={<FirstStageEdit />} />
+          <Route path="first-stage" element={<FirstStage />} />
           <Route path="later-stages/:stage" element={<LaterPredictions />} />
         </Route>
       </Route>

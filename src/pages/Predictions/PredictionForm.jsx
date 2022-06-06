@@ -1,88 +1,29 @@
 import styled from '@emotion/styled';
-import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { createPredictions, getPredictions } from '../../../../api/predictions';
-import { Button, Form, Input, Text } from '../../../../common/common.styles';
-import { Spinner } from '../../../../common/Spinner/Spinner';
-import Table from '../../../../common/Table/Table';
-import ErrorInfo from '../../../../common/MoreInfo/ErrorInfo';
-import { getFlagUrl, parseDate } from '../../../Fixture/fixturePageHelpers';
+import { Button, Form, Input, Text } from '../../common/common.styles';
+import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
+import Table from '../../common/Table/Table';
+import { getFlagUrl, parseDate } from '../pagesHelpers';
 import {
-  formatPredictionsToDisplay,
-  formatPredictionsToPost,
+  checkPredictionResult,
   getErrorMessageForMatch,
   numberToGroupLetter,
-} from '../../predictionsPageUtils';
+} from './predictionsPageUtils';
 
-function FirstStagePredictionsForm(props) {
-  const { firstStageData, resultsMode } = props;
+function PredictionForm(props) {
+  const {
+    stageData,
+    groupNumber,
+    values,
+    handleChange,
+    handleSubmit,
+    handleNextGroup,
+    handlePrevGroup,
+    errorMessages,
+    resultsMode,
+  } = props;
+
   const [selectedGroup] = useOutletContext();
-  const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
-  const [isLoading, setIsLoading] = useState(false);
-  const { values, handleChange, resetForm } = useFormik({
-    initialValues: {},
-  });
-  const [errorMessages, setErrorMessages] = useState([]);
-
-  const updatePredictions = () => {
-    setIsLoading(true);
-    getPredictions(selectedGroup.id, 'GRUPOS')
-      .then((res) => {
-        resetForm({ values: formatPredictionsToDisplay(res.data) });
-      })
-      .finally(() => setIsLoading(false));
-  };
-
-  useEffect(() => {
-    if (firstStageData.length > 0) {
-      updatePredictions();
-    }
-  }, [firstStageData]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    toast.promise(
-      createPredictions(formatPredictionsToPost(values, selectedGroup.id))
-        .then((res) => {
-          setErrorMessages(res.data.errors);
-        })
-        .finally(() => {
-          setIsLoading(false);
-          updatePredictions();
-        }),
-      {
-        pending: 'Enviando predicciones...',
-        success: 'Predicciones enviadas con éxito',
-        error: {
-          render({ data }) {
-            return data.response.data.error;
-          },
-        },
-      }
-    );
-  };
-
-  const handleNextGroup = () => {
-    setGroupNumber((prevState) => prevState + 1);
-    updatePredictions();
-  };
-
-  const handlePrevGroup = () => {
-    setGroupNumber((prevState) => prevState - 1);
-    updatePredictions();
-  };
-
-  const checkPredictionResult = (homeOrAway, prediction, matchId) => {
-    const matchResult = firstStageData[groupNumber].matches.find(
-      (match) => match.id === matchId
-    )[`${homeOrAway}Score`];
-    return prediction === matchResult;
-  };
-
-  if (isLoading) return <Spinner />;
 
   return (
     <FormWrapper>
@@ -92,7 +33,7 @@ function FirstStagePredictionsForm(props) {
       <Form onSubmit={handleSubmit}>
         <Table>
           <Table.Body>
-            {firstStageData[groupNumber]?.matches.map((match) => {
+            {stageData[groupNumber]?.matches.map((match) => {
               return (
                 <>
                   <Table.Row>
@@ -123,13 +64,15 @@ function FirstStagePredictionsForm(props) {
                         name={`${match.id}-away`}
                         onChange={handleChange}
                         disabled={resultsMode}
-                        userCorrectPrediction={
-                          // segun esta propiedad se pinta el input en verde o rojo
+                        predictionStatus={
                           resultsMode
                             ? checkPredictionResult(
+                                stageData,
+                                groupNumber,
+                                match.id,
                                 'away',
                                 values[`${match.id}-away`],
-                                match.id
+                                values[`${match.id}-home`]
                               )
                             : ''
                         }
@@ -146,14 +89,15 @@ function FirstStagePredictionsForm(props) {
                         value={values[`${match.id}-home`]}
                         onChange={handleChange}
                         disabled={resultsMode}
-                        userCorrectPrediction={
-                          // segun esta propiedad se pinta el input en verde o rojo
-                          // TODO: Agregar color para ganador adivinado.
+                        predictionStatus={
                           resultsMode
                             ? checkPredictionResult(
+                                stageData,
+                                groupNumber,
+                                match.id,
                                 'home',
-                                values[`${match.id}-home`],
-                                match.id
+                                values[`${match.id}-away`],
+                                values[`${match.id}-home`]
                               )
                             : ''
                         }
@@ -165,9 +109,11 @@ function FirstStagePredictionsForm(props) {
                     <Table.Cell padding="0">
                       {getFlagUrl(match.home.flag, 1)}
                     </Table.Cell>
-                    <ErrorInfo
-                      info={getErrorMessageForMatch(errorMessages, match.id)}
-                    />
+                    {!resultsMode && (
+                      <ErrorInfo
+                        info={getErrorMessageForMatch(errorMessages, match.id)}
+                      />
+                    )}
                   </Table.Row>
                 </>
               );
@@ -198,8 +144,7 @@ function FirstStagePredictionsForm(props) {
 }
 const ResultsInput = styled(Input)`
   :disabled {
-    background-color: ${({ userCorrectPrediction }) =>
-      userCorrectPrediction ? 'lightgreen' : '#fd5e53'};
+    background-color: ${({ predictionStatus }) => predictionStatus};
   }
 `;
 
@@ -214,4 +159,4 @@ const FormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-export default FirstStagePredictionsForm;
+export default PredictionForm;
