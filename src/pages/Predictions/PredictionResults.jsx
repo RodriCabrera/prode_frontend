@@ -69,7 +69,6 @@ function PredictionResults() {
                 onClick={() => handleGroupSelect(userGroup)}
               >
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
-                {/* TODO : helper funcion para calcular % de predicciones completadas */}
               </ListElement>
             );
           })}

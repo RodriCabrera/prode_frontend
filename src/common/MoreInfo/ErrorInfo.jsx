@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 const InfoButton = styled.div`
-  cursor: pointer;
+  cursor: default;
   position: relative;
   display: inline-block;
   width: 30px;
@@ -47,7 +47,7 @@ const Tooltip = styled.div`
   transition: opacity 0.5s, visibility 0.2s;
 `;
 
-function ErrorInfo({ info }) {
+function ErrorInfo({ info, color = 'red' }) {
   if (!info) return null;
   const [show, setShow] = useState(false);
   const toggleTempShow = () => {
@@ -63,7 +63,7 @@ function ErrorInfo({ info }) {
       onMouseLeave={() => setShow(false)}
       onClick={toggleTempShow}
     >
-      <span className="material-symbols-outlined" style={{ color: 'red' }}>
+      <span className="material-symbols-outlined" style={{ color }}>
         info
       </span>
       <Tooltip show={show}>

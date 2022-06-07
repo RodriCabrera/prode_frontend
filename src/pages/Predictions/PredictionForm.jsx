@@ -34,6 +34,42 @@ function PredictionForm(props) {
         <Table>
           <Table.Body>
             {stageData[groupNumber]?.matches.map((match) => {
+              const predictionStatus = () =>
+                checkPredictionResult(
+                  stageData,
+                  groupNumber,
+                  match.id,
+                  'away',
+                  values[`${match.id}-away`],
+                  values[`${match.id}-home`]
+                );
+              const matchResult = `Resultado: ${match.away.shortName} ${match.awayScore}-${match.homeScore} ${match.home.shortName}`;
+              const renderInfoIcon = () => {
+                if (resultsMode) {
+                  if (
+                    predictionStatus() === 'silver' ||
+                    predictionStatus() === 'lightgreen'
+                  )
+                    return '-';
+
+                  if (predictionStatus() === '#FFFF66')
+                    return (
+                      <ErrorInfo
+                        color={predictionStatus()}
+                        info={matchResult}
+                      />
+                    );
+
+                  if (predictionStatus() === 'tomato')
+                    return (
+                      <ErrorInfo
+                        color={predictionStatus()}
+                        info={matchResult}
+                      />
+                    );
+                }
+                return null;
+              };
               return (
                 <>
                   <Table.Row>
@@ -65,20 +101,11 @@ function PredictionForm(props) {
                         onChange={handleChange}
                         disabled={resultsMode}
                         predictionStatus={
-                          resultsMode
-                            ? checkPredictionResult(
-                                stageData,
-                                groupNumber,
-                                match.id,
-                                'away',
-                                values[`${match.id}-away`],
-                                values[`${match.id}-home`]
-                              )
-                            : ''
+                          resultsMode ? predictionStatus('away') : ''
                         }
                       />
                     </Table.Cell>
-                    {/* <Table.Cell>-</Table.Cell> */}
+                    <Table.Cell padding="0">{renderInfoIcon()}</Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
                         type="number"
@@ -90,16 +117,7 @@ function PredictionForm(props) {
                         onChange={handleChange}
                         disabled={resultsMode}
                         predictionStatus={
-                          resultsMode
-                            ? checkPredictionResult(
-                                stageData,
-                                groupNumber,
-                                match.id,
-                                'home',
-                                values[`${match.id}-away`],
-                                values[`${match.id}-home`]
-                              )
-                            : ''
+                          resultsMode ? predictionStatus('home') : ''
                         }
                       />
                     </Table.Cell>

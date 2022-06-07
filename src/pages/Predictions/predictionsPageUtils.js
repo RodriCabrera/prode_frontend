@@ -131,14 +131,6 @@ export const checkPredictionResult = (
   predictionAway,
   predictionHome
 ) => {
-  console.log(
-    stageData,
-    groupNumber,
-    matchId,
-    homeOrAway,
-    predictionAway,
-    predictionHome
-  );
   const matchData = stageData[groupNumber]?.matches.find(
     (match) => match.id === matchId
   );
