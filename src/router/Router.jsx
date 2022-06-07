@@ -8,6 +8,8 @@ import Groups from '../pages/Groups/Groups';
 import Scores from '../pages/Scores/Scores';
 import GroupPage from '../pages/GroupPage/GroupPage';
 import Fixture from '../pages/Fixture/Fixture';
+import Profile from '../pages/Profile/Profile';
+import ProfileEdit from '../pages/Profile/ProfileEdit';
 import App from '../App';
 import AuthRoutes from './AuthRoutes';
 import PredictionsRoutes from './PredictionsRoutes';
@@ -26,7 +28,8 @@ function Router() {
               <Route path="fixture" element={<Fixture />} />
               <Route path="scores" element={<Scores />} />
               <Route path="auth/*" element={<AuthRoutes />} />
-
+              <Route path="profile" element={<ProfileEdit />} />
+              <Route path="profile/:name" element={<Profile />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
