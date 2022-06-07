@@ -83,33 +83,38 @@ function FirstStage({ resultsMode }) {
     <>
       <Link to="..">Volver a selección de fases</Link>
       {/* // TODO: Mejorar estilo y sintaxis de las referencias: */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '1rem',
-        }}
-      >
-        <div style={{ backgroundColor: 'lightgreen', color: 'black' }}>
-          Full: acertaste resultado
-        </div>
-        <div style={{ backgroundColor: '#FFFF66', color: 'black' }}>
-          Half: acertaste ganador
-        </div>
-        <div style={{ backgroundColor: 'tomato', color: 'black' }}>No suma</div>
-        <div style={{ backgroundColor: 'silver', color: 'black' }}>
-          Sin predicción
-        </div>
-      </div>
+
       {resultsMode ? (
-        <PredictionForm
-          resultsMode
-          groupNumber={groupNumber}
-          stageData={firstStageData}
-          handleNextGroup={handleNextGroup}
-          handlePrevGroup={handlePrevGroup}
-          values={values}
-        />
+        <>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '1rem',
+            }}
+          >
+            <div style={{ backgroundColor: 'lightgreen', color: 'black' }}>
+              Full: acertaste resultado
+            </div>
+            <div style={{ backgroundColor: '#FFFF66', color: 'black' }}>
+              Half: acertaste ganador
+            </div>
+            <div style={{ backgroundColor: 'tomato', color: 'black' }}>
+              No suma
+            </div>
+            <div style={{ backgroundColor: 'silver', color: 'black' }}>
+              Sin predicción
+            </div>
+          </div>
+          <PredictionForm
+            resultsMode
+            groupNumber={groupNumber}
+            stageData={firstStageData}
+            handleNextGroup={handleNextGroup}
+            handlePrevGroup={handlePrevGroup}
+            values={values}
+          />
+        </>
       ) : (
         <PredictionForm
           groupNumber={groupNumber}
