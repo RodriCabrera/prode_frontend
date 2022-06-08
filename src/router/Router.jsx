@@ -10,6 +10,7 @@ import GroupPage from '../pages/GroupPage/GroupPage';
 import Fixture from '../pages/Fixture/Fixture';
 import Profile from '../pages/Profile/Profile';
 import ProfileEdit from '../pages/Profile/ProfileEdit';
+import ProfilePredictions from '../pages/Profile/ProfilePredictions';
 import App from '../App';
 import AuthRoutes from './AuthRoutes';
 import PredictionsRoutes from './PredictionsRoutes';
@@ -30,6 +31,10 @@ function Router() {
               <Route path="auth/*" element={<AuthRoutes />} />
               <Route path="profile" element={<ProfileEdit />} />
               <Route path="profile/:name" element={<Profile />} />
+              <Route
+                path="profile/:id/:group"
+                element={<ProfilePredictions />}
+              />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
