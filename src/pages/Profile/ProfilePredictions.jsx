@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Spinner } from '../../common/Spinner/Spinner';
-import {
-  CardContainer,
-  CardWrapper,
-  CardTitle,
-} from '../../common/common.styles';
+import { CardContainer, CardTitle, Text } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 
-// TODO: Botón de vuelta al perfil del usuario
-
-function ProfilePredictions() {
-  const { id, group } = useParams();
+function ProfilePredictions({ props }) {
+  const { group, user } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [predictions, setPredictions] = useState([]);
 
   useEffect(() => {
+    if (!group || !user) return;
     setIsLoading(true);
-    getOtherUserPredictionsByGroup(id, group)
+    getOtherUserPredictionsByGroup(user._id, group._id)
       .then(({ data }) => {
         setPredictions(data);
         console.log(data);
@@ -28,18 +22,25 @@ function ProfilePredictions() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [props]);
+
   return (
     <>
       {isLoading && <Spinner />}
-      <CardContainer>
-        <CardWrapper fullWidth>
-          <CardTitle>Predicciones de ...</CardTitle>
+      {predictions.length > 0 ? (
+        <CardContainer>
+          <CardTitle>Predicciones para {group.name}</CardTitle>
           {
             // TODO: Display de las predicciones en la tabla
           }
-        </CardWrapper>
-      </CardContainer>
+        </CardContainer>
+      ) : (
+        !isLoading && (
+          <Text align="center">
+            {user.name} no ha hecho predicciones para {group.name}
+          </Text>
+        )
+      )}
     </>
   );
 }

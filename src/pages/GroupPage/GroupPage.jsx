@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { HiOutlineUserGroup } from 'react-icons/hi';
 import { isEmpty } from 'lodash';
-import { getGroupData, getGroupScores } from '../../api/groups';
+import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
+import { getGroupScores } from '../../api/groups';
 import ListElement from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text, CardContainer, Button } from '../../common/common.styles';
@@ -13,33 +13,19 @@ import LeaveGroupForm from '../Groups/components/LeaveGroupForm';
 function GroupPage() {
   const { name } = useParams();
   const navigate = useNavigate();
-  const [group, setGroup] = useState({});
   const [scoresData, setScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [groupError, setGroupError] = useState();
   const [showLeave, setShowLeave] = useState(false);
 
-  // TODO: Este llamado va a poder borrarse porque va a venir toda la info desde el otro llamado (getGroupScores)
-  useEffect(() => {
-    getGroupData(name)
-      .then(({ data }) => {
-        setGroup(data.groupData);
-      })
-      .catch((err) => {
-        setGroupError(err.response.data.error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
   useEffect(() => {
     setIsLoading(true);
     getGroupScores(name)
       .then((res) => {
-        setScoresData(res.data.scores);
-        console.log('RESPUESTA DE ESTO', res);
-        // TODO: De aca va a llegar toda la info del grupo.
+        setScoresData(res.data);
+      })
+      .catch((err) => {
+        setGroupError(err.response.data.error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -64,24 +50,24 @@ function GroupPage() {
   return (
     <>
       {isLoading && <Spinner />}
-      {group.name && (
+      {scoresData?.group?.name && (
         <>
           <Text size="2.5rem" align="center">
             {name}
           </Text>
-          <Text size="1.5rem">Admin: {group.owner.name}</Text>
+          <Text size="1.5rem">Admin: {scoresData.group.owner}</Text>
           <Text size="1.5rem">Miembros del grupo:</Text>
-          {isEmpty(scoresData)
-            ? 'Loading member scores...'
-            : scoresData?.map((score) => (
-                <ListElement
-                  onClick={() => navigate(`/profile/${score.user}`)}
-                  key={score.user}
-                  avatar={<HiOutlineUserGroup size="1.8rem" />}
-                >
-                  <Text>{`${score.user} : ${score.score} pts`}</Text>
-                </ListElement>
-              ))}
+          {scoresData.scores?.map((score) => (
+            <ListElement
+              onClick={() => navigate(`/profile/${score.user}`)}
+              key={score.user}
+              avatar={
+                <UserMiniAvatar avatar={score.avatar} name={score.user} />
+              }
+            >
+              <Text>{`${score.user} : ${score.score} pts`}</Text>
+            </ListElement>
+          ))}
           <CardContainer>
             <Button
               grayscale
