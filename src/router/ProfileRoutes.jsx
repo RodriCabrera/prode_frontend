@@ -8,8 +8,10 @@ function ProfileRoutes() {
   return (
     <Routes>
       <Route path="" element={<ProfileEdit />} />
-      <Route path="/:name" element={<Profile />} />
-      <Route path="/:id/:group" element={<ProfilePredictions />} />
+      <Route>
+        <Route path="/:name" element={<Profile />} />
+        <Route path="/:id/:group" element={<ProfilePredictions />} />
+      </Route>
     </Routes>
   );
 }

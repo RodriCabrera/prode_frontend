@@ -49,7 +49,9 @@ function Navbar() {
         <ButtonGroup id="button-group-right">
           {userContext.user ? (
             <>
-              <span>{userContext.user.name}</span>
+              <NavLink onClick={() => navigate('/profile')}>
+                {userContext.user.name}
+              </NavLink>
               <NavLink onClick={handleLogout}>Salir</NavLink>
             </>
           ) : (

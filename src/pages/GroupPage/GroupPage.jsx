@@ -19,6 +19,7 @@ function GroupPage() {
   const [groupError, setGroupError] = useState();
   const [showLeave, setShowLeave] = useState(false);
 
+  // TODO: Este llamado va a poder borrarse porque va a venir toda la info desde el otro llamado (getGroupScores)
   useEffect(() => {
     getGroupData(name)
       .then(({ data }) => {
@@ -37,6 +38,8 @@ function GroupPage() {
     getGroupScores(name)
       .then((res) => {
         setScoresData(res.data.scores);
+        console.log('RESPUESTA DE ESTO', res);
+        // TODO: De aca va a llegar toda la info del grupo.
       })
       .finally(() => {
         setIsLoading(false);
@@ -64,7 +67,7 @@ function GroupPage() {
       {group.name && (
         <>
           <Text size="2.5rem" align="center">
-            {group.name}
+            {name}
           </Text>
           <Text size="1.5rem">Admin: {group.owner.name}</Text>
           <Text size="1.5rem">Miembros del grupo:</Text>
@@ -72,6 +75,7 @@ function GroupPage() {
             ? 'Loading member scores...'
             : scoresData?.map((score) => (
                 <ListElement
+                  onClick={() => navigate(`/profile/${score.user}`)}
                   key={score.user}
                   avatar={<HiOutlineUserGroup size="1.8rem" />}
                 >

@@ -28,7 +28,7 @@ function Profile() {
     getProfile(name)
       .then(({ data }) => {
         setProfile(data.profile);
-        setSharedGroups(data.sharedGroups);
+        setSharedGroups(data.sharedGroups || []);
       })
       .catch((err) => {
         console.log(err);
