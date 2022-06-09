@@ -13,10 +13,6 @@ import {
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 import ListElement from '../../common/Lists/ListElement';
 
-// TODO: Definir: ==>
-// ? Queda este componente como padre y router de Profile Edit y Profile Predictions
-// ? Quedan así como están con simples links a c/u
-
 function Profile() {
   const { name } = useParams();
   // const navigate = useNavigate();
