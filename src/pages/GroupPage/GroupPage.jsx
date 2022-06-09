@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { HiOutlineUserGroup } from 'react-icons/hi';
 import { isEmpty } from 'lodash';
+import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { getGroupScores } from '../../api/groups';
 import ListElement from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
@@ -29,7 +29,6 @@ function GroupPage() {
       .then((res) => {
         setGroupScoresData(res.data);
         console.log('RESPUESTA DE ESTO', res);
-        // TODO: De aca va a llegar toda la info del grupo.
       })
       .finally(() => {
         setIsLoading(false);
@@ -62,7 +61,9 @@ function GroupPage() {
                   <ListElement
                     onClick={() => handleUserClick(score.user)}
                     key={score.user}
-                    avatar={<HiOutlineUserGroup size="1.8rem" />}
+                    avatar={
+                      <UserMiniAvatar avatar={score.avatar} name={score.user} />
+                    }
                   >
                     <Text>{`${score.user} : ${score.score} pts`}</Text>
                   </ListElement>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
+import ProfilePredictions from './ProfilePredictions';
 import { getProfile } from '../../api/profiles';
 import { Spinner } from '../../common/Spinner/Spinner';
 import {
@@ -18,10 +19,11 @@ import ListElement from '../../common/Lists/ListElement';
 
 function Profile() {
   const { name } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [sharedGroups, setSharedGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [groupPredictions, setGroupPredictions] = useState({});
 
   useEffect(() => {
     setIsLoading(true);
@@ -53,7 +55,10 @@ function Profile() {
                   <ListElement
                     key={group._id}
                     onClick={() =>
-                      navigate(`/profile/${profile._id}/${group._id}`)
+                      setGroupPredictions({
+                        user: profile,
+                        group,
+                      })
                     }
                     avatar={<HiOutlineUserGroup size="1.8rem" />}
                   >
@@ -61,6 +66,10 @@ function Profile() {
                   </ListElement>
                 ))}
               </ListWrapper>
+              {groupPredictions.group && (
+                // TODO: Agregar una botón para dejar de ver las predicciones
+                <ProfilePredictions props={groupPredictions} />
+              )}
             </>
           ) : (
             <Text align="center">

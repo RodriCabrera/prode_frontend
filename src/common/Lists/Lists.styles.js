@@ -9,6 +9,9 @@ export const AvatarWrapper = styled.div`
   height: 2.5rem;
   width: 2.5rem;
   transition: 0.2s;
+  & img {
+    height: 105%;
+  }
 `;
 
 export const Wrapper = styled.div`

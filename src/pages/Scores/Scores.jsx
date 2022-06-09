@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HiOutlineUserGroup } from 'react-icons/hi';
+import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import ListElement from '../../common/Lists/ListElement';
 import GroupScoresForm from './GroupScoresForm';
@@ -23,7 +23,9 @@ function Scores() {
             <ListElement
               key={score.group}
               onClick={() => onMemberClick(score.user)}
-              avatar={<HiOutlineUserGroup size="1.8rem" />}
+              avatar={
+                <UserMiniAvatar avatar={score.avatar} name={score.user} />
+              }
             >
               <p>{`${score.user} : ${score.score}`}</p>
             </ListElement>
