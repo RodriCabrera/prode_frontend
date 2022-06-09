@@ -22,13 +22,12 @@ function GroupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showLeave, setShowLeave] = useState(false);
   const userContext = useContext(AuthContext);
-  console.log('userContext', userContext.user.name);
+
   useEffect(() => {
     setIsLoading(true);
     getGroupScores(name)
       .then((res) => {
         setGroupScoresData(res.data);
-        console.log('RESPUESTA DE ESTO', res);
       })
       .finally(() => {
         setIsLoading(false);
