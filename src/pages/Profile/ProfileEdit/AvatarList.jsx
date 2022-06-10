@@ -4,6 +4,8 @@ import { getAvatars } from '../../../api/profiles';
 import { Button } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 
+// TODO: Hacer que al clickear un avatar le aparezca un borde o algo para saber que fue seleccionado
+
 function AvatarList({ handleAvatarClick }) {
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

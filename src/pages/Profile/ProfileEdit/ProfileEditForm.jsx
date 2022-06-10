@@ -26,6 +26,7 @@ function ProfileEditForm({
       .finally(() => {
         setIsLoading(false);
         setIsEditingEnabled(false);
+        // TODO: Cuando se edita el perfil, se debe actualizar el perfil del usuario. El avatar no se actualzia
       });
   };
   if (isLoading) return <Spinner />;
