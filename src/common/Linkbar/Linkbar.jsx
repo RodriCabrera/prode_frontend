@@ -23,6 +23,7 @@ const LinkGroup = styled(ButtonGroup)`
 
 const CustomLink = styled(Text)`
   text-decoration: none;
+  cursor: pointer;
   text-align: center;
   font-weight: ${({ isCurrent }) => isCurrent && '800'};
   font-size: ${({ isCurrent }) => isCurrent && '1.2rem'};

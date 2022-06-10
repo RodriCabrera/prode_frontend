@@ -24,6 +24,7 @@ const PageWrapper = styled.div`
   flex-wrap: wrap;
   max-width: 1100px;
   width: 100%;
+  padding-top: 2rem;
 `;
 
 function App() {
