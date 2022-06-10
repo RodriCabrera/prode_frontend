@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
-const InfoButton = styled.div`
+const InfoButton = styled.span`
   cursor: default;
   position: relative;
   display: inline-block;
@@ -11,7 +11,7 @@ const InfoButton = styled.div`
   text-align: center;
 `;
 
-const ToolTipBox = styled.div`
+const ToolTipBox = styled.span`
   position: relative;
   display: inline-block;
   text-align: center;
@@ -36,7 +36,7 @@ const ToolTipBox = styled.div`
   }
 `;
 
-const Tooltip = styled.div`
+const Tooltip = styled.span`
   position: absolute;
   width: 0;
   height: 0;
