@@ -9,7 +9,7 @@ function FixtureTable({ data }) {
       <Table.Body>
         {data.map((match) => {
           return (
-            <>
+            <React.Fragment key={match.id}>
               <Table.Row>
                 <Table.Cell
                   colSpan="5"
@@ -35,7 +35,7 @@ function FixtureTable({ data }) {
                 </Table.Cell>
                 <Table.Cell>{getFlagUrl(match.home.flag, 1)}</Table.Cell>
               </Table.Row>
-            </>
+            </React.Fragment>
           );
         })}
       </Table.Body>

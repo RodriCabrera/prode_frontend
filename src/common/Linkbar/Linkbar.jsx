@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Text } from '../common.styles';
 import { ButtonGroup, NavbarWrapper } from '../Navbar/Navbar.styles';
 
 const LinkbarContainer = styled.div`
@@ -20,7 +21,7 @@ const LinkGroup = styled(ButtonGroup)`
   padding: 0;
 `;
 
-const CustomLink = styled(Link)`
+const CustomLink = styled(Text)`
   text-decoration: none;
   text-align: center;
   font-weight: ${({ isCurrent }) => isCurrent && '800'};
@@ -30,28 +31,41 @@ const CustomLink = styled(Link)`
 export function Linkbar() {
   const location = useLocation();
   const basePath = location.pathname.split('/')[1];
+  const navigate = useNavigate();
 
   const isCurrent = (link) => {
     return link === basePath;
+  };
+  const handleLinkClick = (path) => {
+    return navigate(path);
   };
 
   return (
     <LinkbarContainer>
       <LinkbarWrapper>
         <LinkGroup id="button-group-left">
-          <CustomLink to="/fixture" isCurrent={isCurrent('fixture')}>
+          <CustomLink
+            onClick={() => handleLinkClick('/fixture')}
+            isCurrent={isCurrent('fixture')}
+          >
             Fixture
           </CustomLink>
           <CustomLink
-            to="/predictions/edit"
+            onClick={() => handleLinkClick('/predictions/edit')}
             isCurrent={isCurrent('predictions')}
           >
             Mis Predicciones
           </CustomLink>
-          <CustomLink to="/scores" isCurrent={isCurrent('scores')}>
+          <CustomLink
+            onClick={() => handleLinkClick('/scores')}
+            isCurrent={isCurrent('scores')}
+          >
             Tabla de Puntajes
           </CustomLink>
-          <CustomLink to="/groups" isCurrent={isCurrent('groups')}>
+          <CustomLink
+            onClick={() => handleLinkClick('/groups')}
+            isCurrent={isCurrent('groups')}
+          >
             Gestionar grupos
           </CustomLink>
         </LinkGroup>

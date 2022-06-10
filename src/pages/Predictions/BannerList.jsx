@@ -28,15 +28,15 @@ function BannerList({ editMode }) {
     }
   }, [selectedGroup]);
 
+  // TODO: Habría que emprolijar esta funcion para que vaya liberando los stages según la fecha y hora.
+  // *: Por ahora lo dejo desactivado para poder ver los banners con la data del mundial pasado
   // eslint-disable-next-line no-unused-vars
   const setDisabledField = (disablingDate, enablingDate) => {
     // const today = new Date();
     // const endDate = new Date(disablingDate);
     // const startDate = new Date(enablingDate);
-    return '';
-    // TODO: Habría que emprolijar esta funcion para que vaya liberando los stages según la fecha y hora.
-    // *: Por ahora lo dejo desactivado para poder ver los banners con la data del mundial pasado
     // return today > endDate || today < startDate;
+    return '';
   };
 
   const calculatePercentage = (predictionsQty, totalGroups) => {

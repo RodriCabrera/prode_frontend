@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
@@ -43,6 +45,7 @@ function PredictionForm(props) {
                   values[`${match.id}-away`],
                   values[`${match.id}-home`]
                 );
+
               const matchResult = `Resultado: ${match.away.shortName} ${match.awayScore}-${match.homeScore} ${match.home.shortName}`;
               const renderInfoIcon = () => {
                 if (resultsMode) {
@@ -71,7 +74,7 @@ function PredictionForm(props) {
                 return null;
               };
               return (
-                <>
+                <React.Fragment key={match.id}>
                   <Table.Row>
                     <Table.Cell
                       colSpan="6"
@@ -133,7 +136,7 @@ function PredictionForm(props) {
                       />
                     )}
                   </Table.Row>
-                </>
+                </React.Fragment>
               );
             })}
           </Table.Body>
@@ -177,4 +180,16 @@ const FormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+PredictionForm.propTypes = {
+  // stageData: PropTypes.object.isRequired,
+  groupNumber: PropTypes.number,
+  // values: PropTypes.object.isRequired,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  handleNextGroup: PropTypes.func,
+  handlePrevGroup: PropTypes.func,
+  // errorMessages: PropTypes.object,
+  resultsMode: PropTypes.bool,
+};
 export default PredictionForm;

@@ -6,18 +6,18 @@ import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 function ProfilePredictions({ props }) {
   const { group, user } = props;
   const [isLoading, setIsLoading] = useState(true);
-  const [predictions, setPredictions] = useState([]);
+  const [otherUserPredictions, setOtherUserPredictions] = useState([]);
 
   useEffect(() => {
     if (!group || !user) return;
     setIsLoading(true);
     getOtherUserPredictionsByGroup(user._id, group._id)
       .then(({ data }) => {
-        setPredictions(data);
+        setOtherUserPredictions(data);
         console.log(data);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -27,7 +27,7 @@ function ProfilePredictions({ props }) {
   return (
     <>
       {isLoading && <Spinner />}
-      {predictions.length > 0 ? (
+      {otherUserPredictions.length > 0 ? (
         <CardContainer>
           <CardTitle>Predicciones para {group.name}</CardTitle>
           {
