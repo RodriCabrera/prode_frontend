@@ -10,6 +10,7 @@ import {
   checkPredictionResult,
   getErrorMessageForMatch,
   numberToGroupLetter,
+  groupNumberMod,
 } from './predictionsPageUtils';
 
 function PredictionForm(props) {
@@ -35,11 +36,11 @@ function PredictionForm(props) {
       <Form onSubmit={handleSubmit}>
         <Table>
           <Table.Body>
-            {stageData[groupNumber]?.matches.map((match) => {
+            {stageData[groupNumberMod(groupNumber)]?.matches.map((match) => {
               const predictionStatus = () =>
                 checkPredictionResult(
                   stageData,
-                  groupNumber,
+                  groupNumberMod(groupNumber),
                   match.id,
                   'away',
                   values[`${match.id}-away`],
@@ -150,7 +151,7 @@ function PredictionForm(props) {
           <Button
             grayscale
             onClick={handlePrevGroup}
-            disabled={groupNumber === 0}
+            // disabled={groupNumber === 0}
             type="reset"
           >
             Anterior

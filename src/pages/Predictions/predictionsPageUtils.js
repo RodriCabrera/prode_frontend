@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native */
 import { isEmpty } from 'lodash';
 
 export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
@@ -81,41 +82,16 @@ export const formatPredictionsToDisplay = (predictionsRaw) => {
   return Object.assign({}, ...data);
 };
 
-// TODO: Debe haber una mejor forma que el switch para esta funcion:
-// TODO: Dejo una propuesta
+// eslint-disable-next-line func-names
+Number.prototype.mod = function (n) {
+  return ((this % n) + n) % n;
+};
 export const numberToGroupLetter = (number) => {
-  let groupLetter;
-  // const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-  // return letters[number % 8];
-  switch (number) {
-    case 0:
-      groupLetter = 'A';
-      break;
-    case 1:
-      groupLetter = 'B';
-      break;
-    case 2:
-      groupLetter = 'C';
-      break;
-    case 3:
-      groupLetter = 'D';
-      break;
-    case 4:
-      groupLetter = 'E';
-      break;
-    case 5:
-      groupLetter = 'F';
-      break;
-    case 6:
-      groupLetter = 'G';
-      break;
-    case 7:
-      groupLetter = 'H';
-      break;
-    default:
-      break;
-  }
-  return groupLetter;
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  return letters[number.mod(8)];
+};
+export const groupNumberMod = (number) => {
+  return number.mod(8);
 };
 
 export const getErrorMessageForMatch = (errors, matchId) => {

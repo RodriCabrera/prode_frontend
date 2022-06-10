@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getGroupStage } from '../../../api/fixture';
-import { createPredictions, getPredictions } from '../../../api/predictions';
+import {
+  createPredictions,
+  getFirstStagePredictionsByGroup,
+} from '../../../api/predictions';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import PredictionForm from '../PredictionForm';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
+  numberToGroupLetter,
 } from '../predictionsPageUtils';
 
 function FirstStage({ resultsMode }) {
@@ -28,9 +32,10 @@ function FirstStage({ resultsMode }) {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const updatePredictions = (stageName) => {
+  const updatePredictions = () => {
     setIsLoading(true);
-    getPredictions(selectedGroup.id, stageName)
+    const groupLeter = numberToGroupLetter(groupNumber);
+    getFirstStagePredictionsByGroup(groupLeter, selectedGroup.id)
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) });
       })
@@ -39,9 +44,9 @@ function FirstStage({ resultsMode }) {
 
   useEffect(() => {
     if (firstStageData.length > 0) {
-      updatePredictions('GRUPOS');
+      updatePredictions();
     }
-  }, [firstStageData]);
+  }, [firstStageData, groupNumber]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +58,7 @@ function FirstStage({ resultsMode }) {
         })
         .finally(() => {
           setIsLoading(false);
-          updatePredictions('GRUPOS');
+          updatePredictions();
         }),
       {
         pending: 'Enviando predicciones...',
@@ -69,12 +74,10 @@ function FirstStage({ resultsMode }) {
 
   const handleNextGroup = () => {
     setGroupNumber((prevState) => prevState + 1);
-    updatePredictions('GRUPOS');
   };
 
   const handlePrevGroup = () => {
     setGroupNumber((prevState) => prevState - 1);
-    updatePredictions('GRUPOS');
   };
 
   if (isLoading) return <Spinner />;
