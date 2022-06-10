@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { editProfile } from '../../../api/profiles';
 import { Button, Form, Input, Label } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
+import AvatarList from './AvatarList';
 
-function ProfileEditForm({
-  profile,
-  selectedAvatar,
-  isEditingEnabled,
-  setIsEditingEnabled,
-}) {
+function ProfileEditForm({ profile, updateProfile }) {
   const [userName, setuserName] = useState(profile.name);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditingEnabled, setIsEditingEnabled] = useState(false);
+  const [selectedAvatar, setSelectedAvatar] = useState('');
   const navigate = useNavigate();
   const handleNameChange = (e) => {
     setuserName(e.target.value);
@@ -26,24 +24,42 @@ function ProfileEditForm({
       .finally(() => {
         setIsLoading(false);
         setIsEditingEnabled(false);
-        // TODO: Cuando se edita el perfil, se debe actualizar el perfil del usuario. El avatar no se actualzia
+        updateProfile();
       });
   };
+
+  const handleAvatarClick = (avatar) => {
+    setSelectedAvatar(avatar);
+  };
+
   if (isLoading) return <Spinner />;
   return (
-    <Form onSubmit={handleSubmit}>
-      <Label htmlFor="name">
-        <Input
-          type="string"
-          placeholder="Nombre de usuario"
-          name="name"
-          disabled={!isEditingEnabled}
-          value={userName}
-          onChange={handleNameChange}
+    <>
+      {!isEditingEnabled && (
+        <Button onClick={() => setIsEditingEnabled(!isEditingEnabled)}>
+          Editar Perfil
+        </Button>
+      )}
+      <Form onSubmit={handleSubmit}>
+        <Label htmlFor="name">
+          <Input
+            type="string"
+            placeholder="Nombre de usuario"
+            name="name"
+            disabled={!isEditingEnabled}
+            value={userName}
+            onChange={handleNameChange}
+          />
+        </Label>
+        {isEditingEnabled && <Button type="submit">Actualizar Perfil</Button>}
+      </Form>
+      {isEditingEnabled && (
+        <AvatarList
+          handleAvatarClick={handleAvatarClick}
+          selectedAvatar={selectedAvatar}
         />
-      </Label>
-      {isEditingEnabled && <Button type="submit">Actualizar Perfil</Button>}
-    </Form>
+      )}
+    </>
   );
 }
 

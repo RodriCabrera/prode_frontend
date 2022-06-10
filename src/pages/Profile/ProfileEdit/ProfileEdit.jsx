@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
   CardContainer,
   CardWrapper,
   Text,
@@ -8,29 +7,25 @@ import {
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { getProfile } from '../../../api/profiles';
 import { UserNameContainer } from '../Profile';
-import AvatarList from './AvatarList';
 import UserMiniAvatar from '../../../common/UserMiniAvatar/UserMiniAvatar';
 import ProfileEditForm from './ProfileEditForm';
 
-// TODO: ver nombre, avatar, y poder editarlos.
 function ProfileEdit() {
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
-  const [isEditingEnabled, setIsEditingEnabled] = useState(false);
-  const [avatar, setAvatar] = useState(undefined);
 
-  useEffect(() => {
-    setIsLoading(true);
+  const updateProfile = () => {
     getProfile()
       .then((res) => setProfile(res.data.profile))
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
-
-  const handleAvatarClick = (selectedAvatar) => {
-    setAvatar(selectedAvatar);
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    updateProfile();
+  }, []);
 
   const renderCardContent = () => (
     <>
@@ -40,18 +35,7 @@ function ProfileEdit() {
         </Text>
         <UserMiniAvatar name={profile.name} avatar={profile.avatar} />
       </UserNameContainer>
-      <ProfileEditForm
-        profile={profile}
-        isEditingEnabled={isEditingEnabled}
-        selectedAvatar={avatar}
-        setIsEditingEnabled={setIsEditingEnabled}
-      />
-      {!isEditingEnabled && (
-        <Button onClick={() => setIsEditingEnabled(!isEditingEnabled)}>
-          Editar Perfil
-        </Button>
-      )}
-      {isEditingEnabled && <AvatarList handleAvatarClick={handleAvatarClick} />}
+      <ProfileEditForm profile={profile} updateProfile={updateProfile} />
     </>
   );
 

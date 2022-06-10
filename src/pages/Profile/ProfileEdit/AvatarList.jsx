@@ -4,18 +4,19 @@ import { getAvatars } from '../../../api/profiles';
 import { Button } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 
-// TODO: Hacer que al clickear un avatar le aparezca un borde o algo para saber que fue seleccionado
-
-function AvatarList({ handleAvatarClick }) {
+function AvatarList({ handleAvatarClick, selectedAvatar }) {
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showAvatarList, setShowAvatarList] = useState(false);
+
   useEffect(() => {
-    setIsLoading(true);
-    getAvatars()
-      .then((res) => setAvatars(res.data))
-      .finally(() => setIsLoading(false));
-  }, []);
+    if (showAvatarList) {
+      setIsLoading(true);
+      getAvatars()
+        .then((res) => setAvatars(res.data))
+        .finally(() => setIsLoading(false));
+    }
+  }, [showAvatarList]);
 
   return (
     <Container>
@@ -36,6 +37,7 @@ function AvatarList({ handleAvatarClick }) {
             avatars.map((avatar) => {
               return (
                 <AvatarWrapper
+                  selected={avatar === selectedAvatar}
                   key={avatar}
                   onClick={() => handleAvatarClick(avatar)}
                 >
@@ -61,6 +63,7 @@ const AvatarWrapper = styled.div`
   border-radius: 100%;
   cursor: pointer;
   overflow: hidden;
+  border: ${({ selected }) => selected && '6px inset tomato'};
 `;
 const Avatar = styled.img`
   width: 70px;
