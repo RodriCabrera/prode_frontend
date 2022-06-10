@@ -37,7 +37,7 @@ function FirstStage({ resultsMode }) {
     const groupLeter = numberToGroupLetter(groupNumber);
     getFirstStagePredictionsByGroup(groupLeter, selectedGroup.id)
       .then((res) => {
-        resetForm({ values: formatPredictionsToDisplay(res.data) });
+        resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
       .finally(() => setIsLoading(false));
   };
