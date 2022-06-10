@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { editProfile } from '../../../api/profiles';
 import { Button, Form, Input, Label } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
@@ -10,7 +9,6 @@ function ProfileEditForm({ profile, updateProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState('');
-  const navigate = useNavigate();
   const handleNameChange = (e) => {
     setuserName(e.target.value);
   };
@@ -18,13 +16,18 @@ function ProfileEditForm({ profile, updateProfile }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    editProfile({ name: userName, avatar: selectedAvatar })
-      .then(() => navigate('/profile'))
+    editProfile({
+      name: userName || profile.name,
+      avatar: selectedAvatar || profile.avatar,
+    })
+      .then((res) => {
+        console.log(res);
+        updateProfile();
+      })
       .catch((err) => alert(err))
       .finally(() => {
         setIsLoading(false);
         setIsEditingEnabled(false);
-        updateProfile();
       });
   };
 
