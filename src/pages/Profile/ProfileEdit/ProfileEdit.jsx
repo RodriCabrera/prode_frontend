@@ -24,6 +24,9 @@ function ProfileEdit() {
               <Text size="1.5rem" weight="bold">
                 {userContext.user.name}
               </Text>
+              <Text size="1rem" weight="300">
+                {userContext.user.email}
+              </Text>
               <UserMiniAvatar
                 name={userContext.user.name}
                 avatar={userContext.user.avatar}
