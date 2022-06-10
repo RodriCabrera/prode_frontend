@@ -30,9 +30,7 @@ function GroupList({ groups }) {
           avatar={<HiOutlineUserGroup size="1.8rem" />}
         >
           <div>
-            <Text size="1.3rem">
-              <Text>{group.name}</Text>
-            </Text>
+            <Text size="1.3rem">{group.name}</Text>
             <Text>Admin: {group.owner}</Text>
             <Text>Integrantes: {group.members.length}</Text>
           </div>
