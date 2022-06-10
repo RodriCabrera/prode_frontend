@@ -5,19 +5,13 @@ import styled from '@emotion/styled';
 import ProfilePredictions from './ProfilePredictions';
 import { getProfile } from '../../api/profiles';
 import { Spinner } from '../../common/Spinner/Spinner';
-import {
-  CardContainer,
-  CardTitle,
-  CardWrapper,
-  Text,
-} from '../../common/common.styles';
+import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 import ListElement from '../../common/Lists/ListElement';
 import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
 
 function Profile() {
   const { name } = useParams();
-  // const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [sharedGroups, setSharedGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +77,6 @@ function Profile() {
                 ))}
               </ListWrapper>
               {groupPredictions.group && (
-                // TODO: Agregar una botón para dejar de ver las predicciones
                 <ProfilePredictions props={groupPredictions} />
               )}
             </>
