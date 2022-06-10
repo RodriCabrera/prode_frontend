@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -190,7 +191,7 @@ const FormWrapper = styled.div`
 `;
 
 PredictionForm.propTypes = {
-  // stageData: PropTypes.object.isRequired,
+  stageData: PropTypes.array.isRequired,
   groupNumber: PropTypes.number,
   // values: PropTypes.object.isRequired,
   handleChange: PropTypes.func,
