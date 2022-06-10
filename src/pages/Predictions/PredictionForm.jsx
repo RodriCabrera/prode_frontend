@@ -27,7 +27,8 @@ function PredictionForm(props) {
   } = props;
 
   const [selectedGroup] = useOutletContext();
-
+  // TODO: Arreglar formato de la lista con el error info (queda corrida)
+  // ? Eliminar los horarios o disponerlos una sóla vez por fecha? Ordenarlos ascendentemente?
   return (
     <FormWrapper>
       <Text align="center" size="1.7rem" weight="600">
@@ -109,7 +110,18 @@ function PredictionForm(props) {
                         }
                       />
                     </Table.Cell>
-                    <Table.Cell padding="0">{renderInfoIcon()}</Table.Cell>
+                    <Table.Cell padding="0">
+                      {resultsMode ? (
+                        renderInfoIcon()
+                      ) : (
+                        <ErrorInfo
+                          info={getErrorMessageForMatch(
+                            errorMessages,
+                            match.id
+                          )}
+                        />
+                      )}
+                    </Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
                         type="number"
@@ -131,11 +143,6 @@ function PredictionForm(props) {
                     <Table.Cell padding="0">
                       {getFlagUrl(match.home.flag, 1)}
                     </Table.Cell>
-                    {!resultsMode && (
-                      <ErrorInfo
-                        info={getErrorMessageForMatch(errorMessages, match.id)}
-                      />
-                    )}
                   </Table.Row>
                 </React.Fragment>
               );

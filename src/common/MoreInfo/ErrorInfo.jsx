@@ -43,7 +43,7 @@ const Tooltip = styled.span`
   top: -7px;
   left: 50%;
   visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
-  opacity: ${({ show }) => (show ? '0.8' : '0')};
+  opacity: ${({ show }) => (show ? '1' : '0')};
   transition: opacity 0.5s, visibility 0.2s;
 `;
 
