@@ -5,8 +5,6 @@ import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
-// TODO Implementar Toast promise
-
 function GroupScoresForm({ setScores }) {
   const [isLoading, setIsLoading] = useState(false);
   const [groupList, setGroupList] = useState([]);
@@ -16,6 +14,8 @@ function GroupScoresForm({ setScores }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setScores(undefined);
+    if (!e.target.value) return;
     setIsLoading(true);
     toast.promise(
       getGroupScores(e.target.value)
@@ -76,8 +76,9 @@ function GroupScoresForm({ setScores }) {
             handleChange(e.target.value);
             handleSubmit(e);
           }}
+          disabled={groupList.length === 0}
         >
-          <option defaultChecked disabled={groupList.length === 0}>
+          <option value="" defaultChecked>
             {isLoading ? 'Cargando grupos...' : 'Selecciona un grupo'}
           </option>
           {groupList.map((group) => (
