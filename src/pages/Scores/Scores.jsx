@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import ListElement from '../../common/Lists/ListElement';
@@ -6,10 +7,7 @@ import GroupScoresForm from './GroupScoresForm';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
-
-  const onMemberClick = (member) => {
-    console.log(member);
-  };
+  const navigate = useNavigate();
 
   return (
     <CardContainer>
@@ -22,7 +20,7 @@ function Scores() {
           return (
             <ListElement
               key={score.group}
-              onClick={() => onMemberClick(score.user)}
+              onClick={() => navigate(`/profile/${score.user}`)}
               avatar={
                 <UserMiniAvatar avatar={score.avatar} name={score.user} />
               }

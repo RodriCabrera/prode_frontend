@@ -8,7 +8,6 @@ import { Spinner } from '../../common/Spinner/Spinner';
 
 function GroupScoresForm({ setScores }) {
   const [isLoading, setIsLoading] = useState(false);
-  // const [scores, setScores] = useState(undefined);
   const [error, setError] = useState(undefined);
   const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({
@@ -20,7 +19,6 @@ function GroupScoresForm({ setScores }) {
     setIsLoading(true);
     getGroupScores(e.target.value)
       .then((res) => {
-        console.log(res);
         setScores(res);
       })
       .catch((err) => {
