@@ -1,12 +1,12 @@
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { isEmpty } from 'lodash';
-import React, { useEffect, useState } from 'react';
 import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
 import { Outlet } from 'react-router-dom';
 import { getUserGroups } from '../../api/groups';
 import { getAllPredictions } from '../../api/predictions';
 import { Text } from '../../common/common.styles';
-import ListElement from '../../common/Lists/ListElement';
+import { ListElement } from '../../common/Lists/ListElement';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 

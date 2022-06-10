@@ -13,7 +13,7 @@ import {
   groupNumberMod,
 } from './predictionsPageUtils';
 
-function PredictionForm(props) {
+export function PredictionForm(props) {
   const {
     stageData,
     groupNumber,
@@ -200,4 +200,3 @@ PredictionForm.propTypes = {
   // errorMessages: PropTypes.object,
   resultsMode: PropTypes.bool,
 };
-export default PredictionForm;

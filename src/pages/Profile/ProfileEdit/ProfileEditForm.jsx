@@ -4,7 +4,7 @@ import { Button, Form, Input, Label } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import AvatarList from './AvatarList';
 
-function ProfileEditForm({ profile, updateProfile }) {
+export function ProfileEditForm({ profile, updateProfile }) {
   const [userName, setuserName] = useState(profile.name);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
@@ -65,5 +65,3 @@ function ProfileEditForm({ profile, updateProfile }) {
     </>
   );
 }
-
-export default ProfileEditForm;

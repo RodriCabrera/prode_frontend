@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
-import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
+import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { getGroupScores } from '../../api/groups';
-import ListElement from '../../common/Lists/ListElement';
+import { ListElement } from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
 import {
   Text,

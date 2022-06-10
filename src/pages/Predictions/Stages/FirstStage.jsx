@@ -8,7 +8,7 @@ import {
   getFirstStagePredictionsByGroup,
 } from '../../../api/predictions';
 import { Spinner } from '../../../common/Spinner/Spinner';
-import PredictionForm from '../PredictionForm';
+import { PredictionForm } from '../PredictionForm';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
-import styled from '@emotion/styled';
 import ProfilePredictions from './ProfilePredictions';
 import { getProfile } from '../../api/profiles';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
-import ListElement from '../../common/Lists/ListElement';
-import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
+import { ListElement } from '../../common/Lists/ListElement';
+import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 
 function Profile() {
   const { name } = useParams();

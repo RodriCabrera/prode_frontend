@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
+import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
-import ListElement from '../../common/Lists/ListElement';
-import GroupScoresForm from './GroupScoresForm';
+import { ListElement } from '../../common/Lists/ListElement';
+import { GroupScoresForm } from './GroupScoresForm';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);

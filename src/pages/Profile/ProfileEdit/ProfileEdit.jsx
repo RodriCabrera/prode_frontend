@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Spinner } from '../../../common/Spinner/Spinner';
+import { getProfile } from '../../../api/profiles';
+import { UserNameContainer } from '../Profile';
+import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
+import { ProfileEditForm } from './ProfileEditForm';
 import {
   CardContainer,
   CardWrapper,
   Text,
 } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
-import { getProfile } from '../../../api/profiles';
-import { UserNameContainer } from '../Profile';
-import UserMiniAvatar from '../../../common/UserMiniAvatar/UserMiniAvatar';
-import ProfileEditForm from './ProfileEditForm';
 
 function ProfileEdit() {
   const [isLoading, setIsLoading] = useState(false);

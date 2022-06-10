@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { CardContainer, CardTitle, Text } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
+import { PredictionForm } from '../Predictions/PredictionForm';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;

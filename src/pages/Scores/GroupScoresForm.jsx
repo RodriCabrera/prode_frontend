@@ -5,7 +5,7 @@ import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
-function GroupScoresForm({ setScores }) {
+export function GroupScoresForm({ setScores }) {
   const [isLoading, setIsLoading] = useState(false);
   const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({
@@ -93,5 +93,3 @@ function GroupScoresForm({ setScores }) {
     </Form>
   );
 }
-
-export default GroupScoresForm;

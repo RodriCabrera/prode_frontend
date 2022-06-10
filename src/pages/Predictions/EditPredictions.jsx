@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
 import { getUserGroups } from '../../api/groups';
 import { Text } from '../../common/common.styles';
-import ListElement from '../../common/Lists/ListElement';
+import { ListElement } from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 
