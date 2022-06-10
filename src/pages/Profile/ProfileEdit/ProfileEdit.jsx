@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
 import {
   Button,
   CardContainer,
@@ -8,6 +7,7 @@ import {
 } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { getProfile } from '../../../api/profiles';
+import { UserNameContainer } from '../Profile';
 import AvatarList from './AvatarList';
 import UserMiniAvatar from '../../../common/UserMiniAvatar/UserMiniAvatar';
 import ProfileEditForm from './ProfileEditForm';
@@ -61,10 +61,5 @@ function ProfileEdit() {
     </CardContainer>
   );
 }
-const UserNameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-`;
+
 export default ProfileEdit;

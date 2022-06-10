@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
+import styled from '@emotion/styled';
 import ProfilePredictions from './ProfilePredictions';
 import { getProfile } from '../../api/profiles';
 import { Spinner } from '../../common/Spinner/Spinner';
@@ -12,6 +13,7 @@ import {
 } from '../../common/common.styles';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 import ListElement from '../../common/Lists/ListElement';
+import UserMiniAvatar from '../../common/UserMiniAvatar/UserMiniAvatar';
 
 function Profile() {
   const { name } = useParams();
@@ -35,14 +37,24 @@ function Profile() {
         setIsLoading(false);
       });
   }, []);
-  // TODO: Agregar un elemento para el avatar -->
-  // ? A la derecha, izq, arriba, abajo del nombre? Grande?
+
+  const handleSwitchPredictions = (group) => {
+    if (groupPredictions.group?._id === group._id)
+      return setGroupPredictions({});
+    return setGroupPredictions({ user: profile, group });
+  };
+
   return (
     <>
       {isLoading && <Spinner />}
       <CardContainer>
         <CardWrapper fullWidth>
-          <CardTitle>{profile.name}</CardTitle>
+          <UserNameContainer>
+            <Text size="1.5rem" weight="bold">
+              {profile?.name}
+            </Text>
+            <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+          </UserNameContainer>
           {sharedGroups.length > 0 ? (
             <>
               <Text>Predicciones de {profile.name}:</Text>
@@ -50,13 +62,21 @@ function Profile() {
                 {sharedGroups.map((group) => (
                   <ListElement
                     key={group._id}
-                    onClick={() =>
-                      setGroupPredictions({
-                        user: profile,
-                        group,
-                      })
+                    onClick={() => handleSwitchPredictions(group)}
+                    bgColor={
+                      groupPredictions.group?._id === group._id
+                        ? 'salmon'
+                        : null
                     }
-                    avatar={<HiOutlineUserGroup size="1.8rem" />}
+                    avatar={
+                      groupPredictions?.group?._id === group._id ? (
+                        <span className="material-symbols-outlined">
+                          visibility_off
+                        </span>
+                      ) : (
+                        <HiOutlineUserGroup size="1.8rem" />
+                      )
+                    }
                   >
                     <Text>{group.name}</Text>
                   </ListElement>
@@ -77,5 +97,12 @@ function Profile() {
     </>
   );
 }
+
+export const UserNameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;
 
 export default Profile;
