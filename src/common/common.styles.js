@@ -48,7 +48,7 @@ export const Button = styled.button`
   display: block;
   border: 0px;
   color: white;
-  font-weight: 600;
+  font-weight: ${({ weight }) => weight || '600'};
   box-shadow: 0px 0px 14px -7px #fff;
   :hover {
     background-position: right center;
