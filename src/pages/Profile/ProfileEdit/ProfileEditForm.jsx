@@ -43,19 +43,21 @@ export function ProfileEditForm({ profile, updateProfile }) {
           Editar Perfil
         </Button>
       )}
-      <Form onSubmit={handleSubmit}>
-        <Label htmlFor="name">
-          <Input
-            type="string"
-            placeholder="Nombre de usuario"
-            name="name"
-            disabled={!isEditingEnabled}
-            value={userName}
-            onChange={handleNameChange}
-          />
-        </Label>
-        {isEditingEnabled && <Button type="submit">Actualizar Perfil</Button>}
-      </Form>
+      {isEditingEnabled && (
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="name">
+            <Input
+              type="string"
+              placeholder="Nombre de usuario"
+              name="name"
+              disabled={!isEditingEnabled}
+              value={userName}
+              onChange={handleNameChange}
+            />
+          </Label>
+          <Button type="submit">Actualizar Perfil</Button>
+        </Form>
+      )}
       {isEditingEnabled && (
         <AvatarList
           handleAvatarClick={handleAvatarClick}

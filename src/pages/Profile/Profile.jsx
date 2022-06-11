@@ -38,56 +38,48 @@ function Profile() {
     return setGroupPredictions({ user: profile, group });
   };
 
-  return (
-    <>
-      {isLoading && <Spinner />}
-      <CardContainer>
-        <CardWrapper fullWidth>
-          <UserNameContainer>
-            <Text size="1.5rem" weight="bold">
-              {profile?.name}
-            </Text>
-            <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
-          </UserNameContainer>
-          {sharedGroups.length > 0 ? (
-            <>
-              <Text>Predicciones de {profile.name}:</Text>
-              <ListWrapper>
-                {sharedGroups.map((group) => (
-                  <ListElement
-                    key={group._id}
-                    onClick={() => handleSwitchPredictions(group)}
-                    bgColor={
-                      groupPredictions.group?._id === group._id
-                        ? 'salmon'
-                        : null
-                    }
-                    avatar={
-                      groupPredictions?.group?._id === group._id ? (
-                        <span className="material-symbols-outlined">
-                          visibility_off
-                        </span>
-                      ) : (
-                        <HiOutlineUserGroup size="1.8rem" />
-                      )
-                    }
-                  >
-                    <Text>{group.name}</Text>
-                  </ListElement>
-                ))}
-              </ListWrapper>
-              {groupPredictions.group && (
-                <ProfilePredictions props={groupPredictions} />
-              )}
-            </>
-          ) : (
-            <Text align="center">
-              No compartes ningún grupo con este usuario
-            </Text>
-          )}
-        </CardWrapper>
-      </CardContainer>
-    </>
+  return isLoading ? (
+    <Spinner />
+  ) : (
+    <CardContainer>
+      <CardWrapper fullWidth>
+        <UserNameContainer>
+          <Text size="1.5rem" weight="bold">
+            {profile?.name}
+          </Text>
+          <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+        </UserNameContainer>
+        <Text>Predicciones de {profile.name}:</Text>
+        <ListWrapper>
+          {sharedGroups.map((group) => (
+            <ListElement
+              key={group._id}
+              onClick={() => handleSwitchPredictions(group)}
+              bgColor={
+                groupPredictions.group?._id === group._id ? 'salmon' : null
+              }
+              avatar={
+                groupPredictions?.group?._id === group._id ? (
+                  <span className="material-symbols-outlined">
+                    visibility_off
+                  </span>
+                ) : (
+                  <HiOutlineUserGroup size="1.8rem" />
+                )
+              }
+            >
+              <Text>{group.name}</Text>
+            </ListElement>
+          ))}
+        </ListWrapper>
+        {groupPredictions.group && (
+          <ProfilePredictions props={groupPredictions} />
+        )}
+        {sharedGroups.length === 0 && (
+          <Text align="center">No compartes ningún grupo con este usuario</Text>
+        )}
+      </CardWrapper>
+    </CardContainer>
   );
 }
 
