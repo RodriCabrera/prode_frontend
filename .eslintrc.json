@@ -32,6 +32,7 @@
         "import/prefer-default-export": 0,
         "react/require-default-props": 0,
         "react/prop-types": 0,
+        "no-debugger": 0,
         "max-len": [
             "error",
             {
