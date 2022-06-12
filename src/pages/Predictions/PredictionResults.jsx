@@ -74,6 +74,7 @@ function PredictionResults() {
           })}
         </ListWrapper>
       </GroupsListWrapper>
+      {/* TODO: El context puede englobar un nivel mas */}
       {!isLoading && selectedGroup?.id && <Outlet context={[selectedGroup]} />}
     </>
   );
