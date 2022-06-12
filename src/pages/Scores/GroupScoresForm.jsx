@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
