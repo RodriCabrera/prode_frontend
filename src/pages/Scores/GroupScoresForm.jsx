@@ -17,48 +17,25 @@ export function GroupScoresForm({ setScores }) {
     setScores(undefined);
     if (!e.target.value) return;
     setIsLoading(true);
-    toast.promise(
-      getGroupScores(e.target.value)
-        .then((res) => {
-          setScores(res);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        }),
-      {
-        pending: 'Obteniendo puntajes...',
-        success: 'Puntajes obtenidos.',
-        error: {
-          render({ data }) {
-            return data.response.data.error;
-          },
-        },
-      }
-    );
+    getGroupScores(e.target.value)
+      .then((res) => {
+        setScores(res);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const loadUserGroups = () => {
     setIsLoading(true);
-    toast.promise(
-      getUserGroups()
-        .then(({ data }) => {
-          if (data.length === 0)
-            throw new Error('No perteneces a ningún grupo.');
-          setGroupList(data);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        }),
-      {
-        pending: 'Obteniendo grupos...',
-        success: 'Grupos obtenidos.',
-        error: {
-          render({ data }) {
-            return data.message || data.response.data.error;
-          },
-        },
-      }
-    );
+    getUserGroups()
+      .then(({ data }) => {
+        if (data.length === 0) throw new Error('No perteneces a ningún grupo.');
+        setGroupList(data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
