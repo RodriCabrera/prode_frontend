@@ -62,12 +62,10 @@ export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
     );
 
   const data = { multiple: true, userGroupId, prediction: predictionsBatch };
-  console.log('Batch de prediciones a postear:', data);
   return data;
 };
 
 export const formatPredictionsToDisplay = (predictionsRaw) => {
-  console.log('formatPredictionsToDisplay, RAW:', predictionsRaw);
   if (isEmpty(predictionsRaw)) return null;
 
   const data = predictionsRaw.map((prediction) => {
@@ -78,7 +76,6 @@ export const formatPredictionsToDisplay = (predictionsRaw) => {
       [`${matchId}-home`]: prediction.homeScore,
     };
   });
-  console.log('Formateado:', Object.assign({}, ...data));
   return Object.assign({}, ...data);
 };
 
@@ -87,10 +84,16 @@ Number.prototype.mod = function (n) {
   return ((this % n) + n) % n;
 };
 export const numberToGroupLetter = (number) => {
+  if (number === undefined) {
+    return null;
+  }
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
   return letters[number.mod(8)];
 };
 export const groupNumberMod = (number) => {
+  if (number === undefined) {
+    return null;
+  }
   return number.mod(8);
 };
 
@@ -107,9 +110,14 @@ export const checkPredictionResult = (
   predictionAway,
   predictionHome
 ) => {
-  const matchData = stageData[groupNumber]?.matches.find(
-    (match) => match.id === matchId
-  );
+  const matchData = () => {
+    if (groupNumber === undefined) {
+      return stageData.find((match) => match.id === matchId);
+    }
+    return stageData[groupNumber]?.matches.find(
+      (match) => match.id === matchId
+    );
+  };
   const teamResult = matchData[`${homeOrAway}Score`];
 
   function getScoreStatus() {

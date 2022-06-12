@@ -9,6 +9,7 @@ import {
 } from '../../../api/predictions';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { PredictionForm } from '../PredictionForm';
+import { PredictionReferences } from '../PredictionReferences';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
@@ -21,14 +22,17 @@ function FirstStage({ resultsMode }) {
   const [selectedGroup] = useOutletContext();
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [errorMessages, setErrorMessages] = useState([]);
-  const { values, handleChange, resetForm } = useFormik({
+  const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
-
+  console.log('DIRTY', dirty); // TODO: Modal '¿Estás seguro de que quieres salir sin guardar?'
   useEffect(() => {
     setIsLoading(true);
-    getGroupStage() // Con la data de esta llamada armo las tablas.
-      .then((res) => setFirstStageData(res.data.fixture))
+    getGroupStage() // TODO: Se debería traer el fixture de 1 grupo. No toda la fase.
+      // getFixture(selectedGroup.id, 'GRUPOS') // ? Algo así, pero devuelve []
+      .then((res) => {
+        setFirstStageData(res.data.fixture);
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -85,51 +89,19 @@ function FirstStage({ resultsMode }) {
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      {/* // TODO: Mejorar estilo y sintaxis de las referencias: */}
-
-      {resultsMode ? (
-        <>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '1rem',
-            }}
-          >
-            <div style={{ backgroundColor: 'lightgreen', color: 'black' }}>
-              Full: acertaste resultado
-            </div>
-            <div style={{ backgroundColor: '#FFFF66', color: 'black' }}>
-              Half: acertaste ganador
-            </div>
-            <div style={{ backgroundColor: 'tomato', color: 'black' }}>
-              No suma
-            </div>
-            <div style={{ backgroundColor: 'silver', color: 'black' }}>
-              Sin predicción
-            </div>
-          </div>
-          <PredictionForm
-            resultsMode
-            groupNumber={groupNumber}
-            stageData={firstStageData}
-            handleNextGroup={handleNextGroup}
-            handlePrevGroup={handlePrevGroup}
-            values={values}
-          />
-        </>
-      ) : (
-        <PredictionForm
-          groupNumber={groupNumber}
-          handleSubmit={handleSubmit}
-          stageData={firstStageData}
-          errorMessages={errorMessages}
-          handleNextGroup={handleNextGroup}
-          handlePrevGroup={handlePrevGroup}
-          values={values}
-          handleChange={handleChange}
-        />
-      )}
+      {resultsMode && <PredictionReferences />}
+      <PredictionForm
+        resultsMode={resultsMode}
+        groupNumber={groupNumber}
+        handleSubmit={!resultsMode && handleSubmit}
+        stageData={firstStageData}
+        errorMessages={errorMessages}
+        handleNextGroup={handleNextGroup}
+        handlePrevGroup={handlePrevGroup}
+        values={values}
+        handleChange={!resultsMode && handleChange}
+        groupPhase
+      />
     </>
   );
 }

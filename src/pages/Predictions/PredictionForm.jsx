@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
@@ -25,31 +25,43 @@ export function PredictionForm(props) {
     handlePrevGroup,
     errorMessages,
     resultsMode,
+    groupPhase,
   } = props;
 
   const [selectedGroup] = useOutletContext();
+  const [data, setData] = useState(stageData);
+
+  useEffect(() => {
+    if (stageData.length > 0) {
+      if (typeof groupNumber === 'number') {
+        setData(stageData[groupNumberMod(groupNumber)]?.matches);
+      }
+    }
+  }, [stageData]);
+
   // TODO: Arreglar formato de la lista con el error info (queda corrida)
   // ? Eliminar los horarios o disponerlos una sóla vez por fecha? Ordenarlos ascendentemente?
   return (
-    <FormWrapper>
+    <FormWrapper id="prediction-form-wrapper">
       <Text align="center" size="1.7rem" weight="600">
-        {`GRUPO ${numberToGroupLetter(groupNumber)}`}
+        {typeof groupNumber === 'number' &&
+          `GRUPO ${numberToGroupLetter(groupNumber)}`}
       </Text>
-      <Form onSubmit={handleSubmit}>
-        <Table>
+      <Form id="prediction-form" onSubmit={handleSubmit}>
+        <Table id="prediction-table">
           <Table.Body>
-            {stageData[groupNumberMod(groupNumber)]?.matches.map((match) => {
+            {data?.map((match) => {
               const predictionStatus = () =>
                 checkPredictionResult(
-                  stageData,
+                  data,
                   groupNumberMod(groupNumber),
                   match.id,
                   'away',
                   values[`${match.id}-away`],
                   values[`${match.id}-home`]
                 );
+              const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
 
-              const matchResult = `Resultado: ${match.away.shortName} ${match.awayScore}-${match.homeScore} ${match.home.shortName}`;
               const renderInfoIcon = () => {
                 if (resultsMode) {
                   if (
@@ -62,7 +74,7 @@ export function PredictionForm(props) {
                     return (
                       <ErrorInfo
                         color={predictionStatus()}
-                        info={matchResult}
+                        info={matchResultString}
                       />
                     );
 
@@ -70,7 +82,7 @@ export function PredictionForm(props) {
                     return (
                       <ErrorInfo
                         color={predictionStatus()}
-                        info={matchResult}
+                        info={matchResultString}
                       />
                     );
                 }
@@ -91,10 +103,10 @@ export function PredictionForm(props) {
                   </Table.Row>
                   <Table.Row>
                     <Table.Cell padding="0">
-                      {getFlagUrl(match.away.flag, 1)}
+                      {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
-                      {match.away.shortName || '?'}
+                      {match.away?.shortName || '?'}
                     </Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
@@ -139,10 +151,10 @@ export function PredictionForm(props) {
                       />
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
-                      {match.home.shortName || '?'}
+                      {match.home?.shortName || '?'}
                     </Table.Cell>
                     <Table.Cell padding="0">
-                      {getFlagUrl(match.home.flag, 1)}
+                      {getFlagUrl(match.home?.flag, 1)}
                     </Table.Cell>
                   </Table.Row>
                 </React.Fragment>
@@ -155,19 +167,21 @@ export function PredictionForm(props) {
             {selectedGroup?.id ? 'Enviar prediccion' : 'Seleccione un grupo'}
           </Button>
         )}
-        <ButtonWrapper>
-          <Button
-            grayscale
-            onClick={handlePrevGroup}
-            // disabled={groupNumber === 0}
-            type="reset"
-          >
-            Anterior
-          </Button>
-          <Button grayscale onClick={handleNextGroup} type="reset">
-            Siguiente
-          </Button>
-        </ButtonWrapper>
+        {groupPhase && (
+          <ButtonWrapper>
+            <Button
+              grayscale
+              onClick={handlePrevGroup}
+              // disabled={groupNumber === 0}
+              type="reset"
+            >
+              Anterior
+            </Button>
+            <Button grayscale onClick={handleNextGroup} type="reset">
+              Siguiente
+            </Button>
+          </ButtonWrapper>
+        )}
       </Form>
     </FormWrapper>
   );

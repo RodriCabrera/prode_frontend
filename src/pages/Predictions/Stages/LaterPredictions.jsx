@@ -1,73 +1,90 @@
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getFixture } from '../../../api/fixture';
-import { Form, Input } from '../../../common/common.styles';
+import { getFixtureByStageId } from '../../../api/fixture';
+import { createPredictions, getPredictions } from '../../../api/predictions';
 import { Spinner } from '../../../common/Spinner/Spinner';
-import Table from '../../../common/Table/Table';
 import { getStageId } from '../../Fixture/fixturePageHelpers';
-import { getFlagUrl, parseDate } from '../../pagesHelpers';
+import { PredictionForm } from '../PredictionForm';
+import { PredictionReferences } from '../PredictionReferences';
+import {
+  formatPredictionsToDisplay,
+  formatPredictionsToPost,
+} from '../predictionsPageUtils';
 
-function LaterPredictions() {
+function LaterPredictions({ resultsMode }) {
   const { stage } = useParams();
-  const [fixture, setFixture] = useState([]);
+  const [stageData, setStageData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [selectedGroup] = useOutletContext();
+  const [errorMessages, setErrorMessages] = useState([]);
+  const { values, handleChange, resetForm } = useFormik({
+    initialValues: {},
+  });
   useEffect(() => {
     setIsLoading(true);
-    getFixture(null, getStageId(stage))
-      .then((res) => setFixture(res.data.fixture))
+    getFixtureByStageId(getStageId(stage))
+      .then((res) => {
+        setStageData(res.data.fixture);
+      })
       .catch((err) => toast.error(err.response.data.error))
       .finally(() => setIsLoading(false));
   }, []);
 
-  if (isLoading) return <Spinner />;
+  const updatePredictions = () => {
+    setIsLoading(true);
+    getPredictions(selectedGroup.id, 'OCTAVOS')
+      .then((res) => {
+        resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
+      })
+      .finally(() => setIsLoading(false));
+  };
 
+  useEffect(() => {
+    if (stageData.length > 0) {
+      updatePredictions();
+    }
+  }, [stageData]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    toast.promise(
+      createPredictions(formatPredictionsToPost(values, selectedGroup.id))
+        .then((res) => {
+          setErrorMessages(res.data.errors);
+        })
+        .finally(() => {
+          setIsLoading(false);
+          updatePredictions();
+        }),
+      {
+        pending: 'Enviando predicciones...',
+        success: 'Predicciones enviadas con éxito',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
+  };
+
+  if (isLoading) return <Spinner />;
   return (
-    <Form>
-      <Table>
-        <Table.Body>
-          {fixture.map((match) => {
-            return (
-              <>
-                <Table.Row>
-                  <Table.Cell
-                    colSpan="6"
-                    withBottomBorder
-                    fontWeight="500"
-                    fontSize="1.2rem"
-                    padding="5px"
-                  >
-                    {parseDate(match.date)}
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.Cell padding="0">
-                    {getFlagUrl(match.away.flag, 1)}
-                  </Table.Cell>
-                  <Table.Cell padding="5px" fontWeight="800">
-                    {match.away.shortName || '?'}
-                  </Table.Cell>
-                  <Table.Cell padding="5px">
-                    <Input type="number" width="30px" />
-                  </Table.Cell>
-                  {/* <Table.Cell>-</Table.Cell> */}
-                  <Table.Cell padding="5px">
-                    <Input type="number" width="30px" />
-                  </Table.Cell>
-                  <Table.Cell padding="5px" fontWeight="800">
-                    {match.home.shortName || '?'}
-                  </Table.Cell>
-                  <Table.Cell padding="0">
-                    {getFlagUrl(match.home.flag, 1)}
-                  </Table.Cell>
-                </Table.Row>
-              </>
-            );
-          })}
-        </Table.Body>
-      </Table>
-    </Form>
+    <>
+      <Link to="..">Volver a selección de fases</Link>
+      {resultsMode && <PredictionReferences />}
+      <PredictionForm
+        resultsMode={resultsMode}
+        handleSubmit={!resultsMode && handleSubmit}
+        stageData={stageData}
+        errorMessages={errorMessages}
+        values={values}
+        handleChange={handleChange}
+      />
+    </>
   );
 }
 

@@ -20,8 +20,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
       name: userName || profile.name,
       avatar: selectedAvatar || profile.avatar,
     })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         updateProfile();
       })
       .catch((err) => alert(err))

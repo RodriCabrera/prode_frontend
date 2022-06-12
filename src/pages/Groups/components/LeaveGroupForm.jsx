@@ -20,7 +20,6 @@ function LeaveGroupForm({ updater }) {
     toast.promise(
       leaveGroup(values.name)
         .then(() => {
-          console.log('OK');
           updater();
         })
         .finally(() => {
