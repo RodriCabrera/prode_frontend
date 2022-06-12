@@ -32,23 +32,25 @@ function Groups() {
   return (
     <>
       <CardContainer>
-        <CardWrapper fullWidth={!isEmpty(groupList)}>
+        <CardWrapper>
           {!isEmpty(groupList) && (
             <Text size="1.5rem">Grupos en los que estás participando: </Text>
           )}
           {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
         </CardWrapper>
       </CardContainer>
-
-      <CardContainer>
-        <CardWrapper>
-          <CreateGroupForm updateList={getGroupList} />
-        </CardWrapper>
-
-        <CardWrapper>
-          <JoinGroupForm updateList={getGroupList} />
-        </CardWrapper>
-      </CardContainer>
+      <div>
+        <CardContainer>
+          <CardWrapper border="none">
+            <CreateGroupForm updateList={getGroupList} />
+          </CardWrapper>
+        </CardContainer>
+        <CardContainer>
+          <CardWrapper border="none">
+            <JoinGroupForm updateList={getGroupList} />
+          </CardWrapper>
+        </CardContainer>
+      </div>
     </>
   );
 }

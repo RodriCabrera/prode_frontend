@@ -2,18 +2,12 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { joinGroup } from '../../../api/groups';
-import {
-  Button,
-  Input,
-  Label,
-  Text,
-  Form,
-} from '../../../common/common.styles';
+import { Button, Input, Label, Form } from '../../../common/common.styles';
 
 function JoinGroupForm({ updateList }) {
   const [isLoading, setIsLoading] = useState(false);
   const { values, handleChange } = useFormik({ initialValues: {} });
-
+  const [showForm, setShowForm] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -38,27 +32,37 @@ function JoinGroupForm({ updateList }) {
     );
   };
 
+  const handleShowFormSwitch = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <>
-      <Text size="2rem" align="center">
-        Unirse a un Grupo
-      </Text>
-      <Form onSubmit={handleSubmit}>
-        <Label htmlFor="groupName">
-          <Input
-            type="text"
-            placeholder="Nombre del grupo"
-            name="groupName"
-            required
-            value={values.groupName}
-            onChange={handleChange}
-            showUppercase
-          />
-        </Label>
-        <Button type="submit" disabled={isLoading}>
-          Unirse
-        </Button>
-      </Form>
+      <Button
+        onClick={handleShowFormSwitch}
+        grayscale={showForm}
+        padding="10px"
+      >
+        {showForm ? 'Ocultar' : 'Unirse a un Grupo'}
+      </Button>
+      {showForm && (
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="groupName">
+            <Input
+              type="text"
+              placeholder="Nombre del grupo"
+              name="groupName"
+              required
+              value={values.groupName}
+              onChange={handleChange}
+              showUppercase
+            />
+          </Label>
+          <Button type="submit" disabled={isLoading}>
+            Unirse
+          </Button>
+        </Form>
+      )}
     </>
   );
 }

@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
 `;
 
 export const CardWrapper = styled.div`
-  border: 1px solid #bdbdbd;
+  border: ${({ border }) => border || '1px solid #bdbdbd'};
   border-radius: 8px;
   min-width: 200px;
   width: 80%;
