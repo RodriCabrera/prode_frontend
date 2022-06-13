@@ -45,13 +45,6 @@ function CreateGroupForm({ updateList }) {
   };
   return (
     <>
-      <Button
-        onClick={handleShowFormSwitch}
-        grayscale={showForm}
-        padding="10px"
-      >
-        {showForm ? 'Ocultar' : 'Crear un nuevo grupo'}
-      </Button>
       {showForm && (
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="name">
@@ -70,6 +63,13 @@ function CreateGroupForm({ updateList }) {
           </Button>
         </Form>
       )}
+      <Button
+        onClick={handleShowFormSwitch}
+        grayscale={showForm}
+        padding="10px"
+      >
+        {showForm ? 'Ocultar' : 'Crear un nuevo grupo'}
+      </Button>
     </>
   );
 }

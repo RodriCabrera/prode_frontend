@@ -38,13 +38,6 @@ function JoinGroupForm({ updateList }) {
 
   return (
     <>
-      <Button
-        onClick={handleShowFormSwitch}
-        grayscale={showForm}
-        padding="10px"
-      >
-        {showForm ? 'Ocultar' : 'Unirse a un Grupo'}
-      </Button>
       {showForm && (
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="groupName">
@@ -63,6 +56,13 @@ function JoinGroupForm({ updateList }) {
           </Button>
         </Form>
       )}
+      <Button
+        onClick={handleShowFormSwitch}
+        grayscale={showForm}
+        padding="10px"
+      >
+        {showForm ? 'Ocultar' : 'Unirse a un Grupo'}
+      </Button>
     </>
   );
 }

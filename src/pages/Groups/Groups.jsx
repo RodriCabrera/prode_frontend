@@ -39,18 +39,18 @@ function Groups() {
           {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
         </CardWrapper>
       </CardContainer>
-      <div>
-        <CardContainer>
-          <CardWrapper border="none">
-            <CreateGroupForm updateList={getGroupList} />
-          </CardWrapper>
-        </CardContainer>
-        <CardContainer>
-          <CardWrapper border="none">
-            <JoinGroupForm updateList={getGroupList} />
-          </CardWrapper>
-        </CardContainer>
-      </div>
+
+      <CardContainer>
+        <CardWrapper>
+          <CreateGroupForm updateList={getGroupList} />
+        </CardWrapper>
+      </CardContainer>
+
+      <CardContainer>
+        <CardWrapper>
+          <JoinGroupForm updateList={getGroupList} />
+        </CardWrapper>
+      </CardContainer>
     </>
   );
 }
