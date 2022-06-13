@@ -9,6 +9,7 @@ import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 import { ListElement } from '../../common/Lists/ListElement';
 import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
+import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 
 function Profile() {
   const { name } = useParams();
@@ -40,6 +41,7 @@ function Profile() {
   ) : (
     <CardContainer>
       <CardWrapper fullWidth>
+        <GoBackButton />
         <UserNameContainer>
           <Text size="1.5rem" weight="bold">
             {profile?.name}

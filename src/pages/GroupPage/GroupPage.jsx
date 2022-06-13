@@ -14,6 +14,7 @@ import {
 } from '../../common/common.styles';
 import LeaveGroupForm from '../Groups/components/LeaveGroupForm';
 import { AuthContext } from '../../common/AuthProvider';
+import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 
 function GroupPage() {
   const { name } = useParams();
@@ -49,6 +50,7 @@ function GroupPage() {
       {groupScoresData.group && (
         <CardContainer>
           <CardWrapper>
+            <GoBackButton />
             <CardTitle size="2.5rem" align="center">
               {name}
             </CardTitle>

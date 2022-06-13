@@ -9,6 +9,7 @@ import {
 } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 import FixtureTable from '../Fixture/FixtureTable';
+import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
@@ -38,6 +39,7 @@ function ProfilePredictions({ props }) {
         <CardContainer>
           <CardWrapper border="none">
             <CardTitle>Predicciones para {group.name}</CardTitle>
+            <GoBackButton />
             <FixtureTable
               data={otherUserPredictions.sort(
                 (a, b) => new Date(a.date) - new Date(b.date)
