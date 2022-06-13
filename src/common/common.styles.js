@@ -4,6 +4,7 @@ export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 1.5rem;
+  max-width: 100%;
 `;
 
 export const CardContainer = styled.div`
@@ -15,7 +16,7 @@ export const CardContainer = styled.div`
 `;
 
 export const CardWrapper = styled.div`
-  border: 1px solid #bdbdbd;
+  border: ${({ border }) => border || '1px solid #bdbdbd'};
   border-radius: 8px;
   min-width: 200px;
   width: 80%;
@@ -47,7 +48,7 @@ export const Button = styled.button`
   display: block;
   border: 0px;
   color: white;
-  font-weight: 600;
+  font-weight: ${({ weight }) => weight || '600'};
   box-shadow: 0px 0px 14px -7px #fff;
   :hover {
     background-position: right center;

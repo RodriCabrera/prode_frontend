@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 import { AvatarWrapper, Wrapper } from './Lists.styles';
 
-function ListElement({ children, onClick, avatar, bgColor }) {
+export function ListElement({ children, onClick, avatar, bgColor }) {
   return (
     <Wrapper onClick={onClick} id="ListWrapper">
       <AvatarWrapper bgColor={bgColor}>{avatar}</AvatarWrapper>
@@ -21,5 +21,3 @@ ListElement.defaultProps = {
     console.log('onClick');
   },
 };
-
-export default ListElement;

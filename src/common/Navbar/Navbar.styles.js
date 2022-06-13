@@ -27,7 +27,7 @@ export const ButtonGroup = styled.div`
   padding: ${({ padding }) => padding || '2rem 1rem'};
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: ${({ gap }) => gap || '1rem'};
 `;
 
 export const LogoContainer = styled.div`

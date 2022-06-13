@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { HiOutlineUserGroup } from 'react-icons/hi';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../common/AuthProvider';
+import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
-import ListElement from '../../common/Lists/ListElement';
-import GroupScoresForm from './GroupScoresForm';
+import { ListElement } from '../../common/Lists/ListElement';
+import { GroupScoresForm } from './GroupScoresForm';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
-  console.log('scores', scores);
+  const userContext = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const onMemberClick = (member) => {
-    console.log(member);
+  const handleUserClick = (user) => {
+    if (user === userContext.user.name) return navigate('/profile/');
+    return navigate(`/profile/${user}`);
   };
 
   return (
@@ -23,8 +27,10 @@ function Scores() {
           return (
             <ListElement
               key={score.group}
-              onClick={() => onMemberClick(score.user)}
-              avatar={<HiOutlineUserGroup size="1.8rem" />}
+              onClick={() => handleUserClick(score.user)}
+              avatar={
+                <UserMiniAvatar avatar={score.avatar} name={score.user} />
+              }
             >
               <p>{`${score.user} : ${score.score}`}</p>
             </ListElement>

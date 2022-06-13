@@ -5,14 +5,6 @@ import { AuthContext } from '../../common/AuthProvider';
 import Countdown from './components/Countdown';
 import NotificationBoard from './components/NotificationBoard';
 
-// TODO : Ver si esta nos sirve para hacer las tablas:
-// https://react-table.tanstack.com/docs/quick-start
-
-/*
-  Jamboard con diseño:
-  https://jamboard.google.com/d/1RjaVVilMR1_6Na-FjjAT0aM5Y5_-YOayeoVAMX9BzQo/viewer
-  */
-
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;

@@ -11,6 +11,7 @@ import Fixture from '../pages/Fixture/Fixture';
 import App from '../App';
 import AuthRoutes from './AuthRoutes';
 import PredictionsRoutes from './PredictionsRoutes';
+import ProfileRoutes from './ProfileRoutes';
 
 function Router() {
   return (
@@ -26,7 +27,7 @@ function Router() {
               <Route path="fixture" element={<Fixture />} />
               <Route path="scores" element={<Scores />} />
               <Route path="auth/*" element={<AuthRoutes />} />
-
+              <Route path="profile/*" element={<ProfileRoutes />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

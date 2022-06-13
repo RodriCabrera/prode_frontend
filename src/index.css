@@ -45,3 +45,23 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+::-webkit-scrollbar {
+width: 5px;
+height: 10px;
+}
+::-webkit-scrollbar-track {
+border-radius: 10px;
+
+background:#212121;
+box-shadow: 0 0 1px 1px #bbb, inset 0 0 7px rgba(0,0,0,0.3)
+}
+::-webkit-scrollbar-thumb {
+background-color: rgb(203, 203, 203);
+border-radius: 10px;
+background: linear-gradient(to left, #96A6BF, #63738C);
+box-shadow: inset 0 0 1px 1px #5C6670;
+}
+::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(to left, #8391A6, #536175);
+}

@@ -23,8 +23,8 @@ const PageWrapper = styled.div`
   gap: 2rem;
   flex-wrap: wrap;
   max-width: 1100px;
-  padding: 2rem;
   width: 100%;
+  padding-top: 2rem;
 `;
 
 function App() {

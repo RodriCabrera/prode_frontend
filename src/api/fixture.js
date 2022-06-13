@@ -5,6 +5,9 @@ export const getFixture = (groupId = '', stageId = '') => {
     `/fifa/fixture?groupId=${groupId}&stageId=${stageId}`
   );
 };
+export const getFixtureByStageId = (stageId = '') => {
+  return withoutCredentials.get(`/fifa/fixture?stageId=${stageId}`);
+};
 
 export const getGroupStage = () => {
   return withoutCredentials.get('/fifa/fixture/groups');

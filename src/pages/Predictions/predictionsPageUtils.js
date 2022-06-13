@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native */
 import { isEmpty } from 'lodash';
 
 export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
@@ -61,12 +62,10 @@ export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
     );
 
   const data = { multiple: true, userGroupId, prediction: predictionsBatch };
-  console.log('Batch de prediciones a postear:', data);
   return data;
 };
 
 export const formatPredictionsToDisplay = (predictionsRaw) => {
-  console.log('formatPredictionsToDisplay', predictionsRaw);
   if (isEmpty(predictionsRaw)) return null;
 
   const data = predictionsRaw.map((prediction) => {
@@ -77,40 +76,77 @@ export const formatPredictionsToDisplay = (predictionsRaw) => {
       [`${matchId}-home`]: prediction.homeScore,
     };
   });
-
   return Object.assign({}, ...data);
 };
 
-// TODO: Debe haber una mejor forma que el switch para esta funcion:
+// eslint-disable-next-line func-names
+Number.prototype.mod = function (n) {
+  return ((this % n) + n) % n;
+};
 export const numberToGroupLetter = (number) => {
-  let groupLetter;
-  switch (number) {
-    case 0:
-      groupLetter = 'A';
-      break;
-    case 1:
-      groupLetter = 'B';
-      break;
-    case 2:
-      groupLetter = 'C';
-      break;
-    case 3:
-      groupLetter = 'D';
-      break;
-    case 4:
-      groupLetter = 'E';
-      break;
-    case 5:
-      groupLetter = 'F';
-      break;
-    case 6:
-      groupLetter = 'G';
-      break;
-    case 7:
-      groupLetter = 'H';
-      break;
-    default:
-      break;
+  if (number === undefined) {
+    return null;
   }
-  return groupLetter;
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  return letters[number.mod(8)];
+};
+export const groupNumberMod = (number) => {
+  if (number === undefined) {
+    return null;
+  }
+  return number.mod(8);
+};
+
+export const getErrorMessageForMatch = (errors, matchId) => {
+  const error = errors.find((err) => (err.id === matchId ? err : null));
+  return error ? error.message : null;
+};
+
+export const checkPredictionResult = (
+  stageData,
+  groupNumber,
+  matchId,
+  homeOrAway,
+  predictionAway,
+  predictionHome
+) => {
+  const matchData = () => {
+    if (groupNumber === undefined) {
+      return stageData.find((match) => match.id === matchId);
+    }
+    return stageData[groupNumber]?.matches.find(
+      (match) => match.id === matchId
+    );
+  };
+  const teamResult = matchData[`${homeOrAway}Score`];
+
+  function getScoreStatus() {
+    const resultAway = matchData.awayScore;
+    const resultHome = matchData.homeScore;
+    if (predictionAway === resultAway && predictionHome === resultHome) {
+      return 'full';
+    }
+    if (
+      (predictionAway > predictionHome && resultAway > resultHome) ||
+      (predictionAway < predictionHome && resultAway < resultHome)
+    ) {
+      return 'half';
+    }
+    return 'none';
+  }
+
+  const teamPrediction =
+    homeOrAway === 'home' ? predictionHome : predictionAway;
+
+  if (teamResult === null || teamPrediction === undefined) {
+    return 'silver';
+  }
+  if (getScoreStatus() === 'full') {
+    return 'lightgreen';
+  }
+  if (getScoreStatus() === 'half') {
+    return '#FFFF66';
+  }
+
+  return 'tomato';
 };

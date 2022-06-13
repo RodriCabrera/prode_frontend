@@ -1,7 +1,10 @@
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import styled from '@emotion/styled';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
+import { logoutUser } from '../../api/auth';
+import { Linkbar } from '../Linkbar/Linkbar';
+import { UserMiniAvatar } from '../UserMiniAvatar/UserMiniAvatar';
 import {
   NavbarWrapper,
   ButtonGroup,
@@ -10,8 +13,6 @@ import {
   LogoMain,
   LogoSub,
 } from './Navbar.styles';
-import { logoutUser } from '../../api/auth';
-import { Linkbar } from '../Linkbar/Linkbar';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -49,7 +50,9 @@ function Navbar() {
         <ButtonGroup id="button-group-right">
           {userContext.user ? (
             <>
-              <span>{userContext.user.name}</span>
+              <NavLink onClick={() => navigate('/profile')}>
+                {userContext.user.name}
+              </NavLink>
               <NavLink onClick={handleLogout}>Salir</NavLink>
             </>
           ) : (

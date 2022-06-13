@@ -33,6 +33,17 @@ export const getPredictions = (userGroupId = '', stage = '') => {
   );
 };
 
-export const getFirstStagePredictionsByGroup = (group) => {
-  return withCredentials.get(`/predictions?group=${group}`);
+export const getFirstStagePredictionsByGroup = (
+  userGroupId = '',
+  groupLeter = ''
+) => {
+  return withCredentials.get(
+    `/predictions?userGroupId=${userGroupId}&group=${groupLeter}`
+  );
+};
+
+export const getOtherUserPredictionsByGroup = (userId, userGroupId) => {
+  return withCredentials.get(
+    `/predictions/profile/${userId}?userGroupId=${userGroupId}`
+  );
 };

@@ -1,10 +1,9 @@
+import styled from '@emotion/styled';
 import { isEmpty } from 'lodash';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineUserGroup } from 'react-icons/hi';
-import styled from '@emotion/styled';
 import { Text } from '../../../common/common.styles';
-import ListElement from '../../../common/Lists/ListElement';
+import { ListElement } from '../../../common/Lists/ListElement';
 
 const GroupListWrapper = styled.div`
   display: flex;
@@ -31,9 +30,7 @@ function GroupList({ groups }) {
           avatar={<HiOutlineUserGroup size="1.8rem" />}
         >
           <div>
-            <Text size="1.3rem">
-              <Text>{group.name}</Text>
-            </Text>
+            <Text size="1.3rem">{group.name}</Text>
             <Text>Admin: {group.owner}</Text>
             <Text>Integrantes: {group.members.length}</Text>
           </div>

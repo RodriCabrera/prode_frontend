@@ -1,15 +1,20 @@
-export const getFlagUrl = (url, size) => {
-  if (!url) return '?';
-  const newUrl = url?.replace('{format}', 'sq').replace('{size}', size);
-  return <img src={newUrl} alt="Country flag" />;
-};
-
 export const parseMatchScore = (score) => {
   if (score === 0) return '0';
   if (!score) return '';
   return score;
 };
 
-export const parseDate = (date) => {
-  return new Date(date).toUTCString().split(' ').slice(1, 6).join(' ');
+export const getStageId = (stageName) => {
+  switch (stageName) {
+    case '16round':
+      return 'OCTAVOS';
+    case '8round':
+      return 'CUARTOS';
+    case 'semis':
+      return 'SEMIFINAL';
+    case 'final':
+      return 'FINAL';
+    default:
+      return null;
+  }
 };

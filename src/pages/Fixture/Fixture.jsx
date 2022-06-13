@@ -44,7 +44,7 @@ function Fixture() {
     return (
       <FixtureTablesContainer>
         {fixtureData.map((group) => (
-          <GroupTableWrapper>
+          <GroupTableWrapper key={group.id}>
             <Text size="2rem" align="center" color="darkorange">
               {group.name}
             </Text>

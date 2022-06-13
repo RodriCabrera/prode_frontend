@@ -4,18 +4,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createGroup } from '../../../api/groups';
-import {
-  Button,
-  Input,
-  Label,
-  Text,
-  Form,
-} from '../../../common/common.styles';
+import { Button, Input, Label, Form } from '../../../common/common.styles';
 import { groupsSchema } from '../../../validationSchemas/groups';
 
 function CreateGroupForm({ updateList }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const { values, handleChange, errors } = useFormik({
     initialValues: {},
     validationSchema: groupsSchema.create,
@@ -45,28 +40,36 @@ function CreateGroupForm({ updateList }) {
       }
     );
   };
-  console.log(errors);
+  const handleShowFormSwitch = () => {
+    setShowForm(!showForm);
+  };
   return (
     <>
-      <Text size="2rem" align="center">
-        Crear nuevo Grupo
-      </Text>
-      <Form onSubmit={handleSubmit}>
-        <Label htmlFor="name">
-          <Input
-            type="text"
-            placeholder="Nombre del nuevo grupo"
-            name="name"
-            required
-            value={values.name}
-            onChange={handleChange}
-            showUppercase
-          />
-        </Label>
-        <Button type="submit" disabled={isLoading || !isEmpty(errors)}>
-          {!isEmpty(errors) ? errors.name : 'Crear grupo'}
-        </Button>
-      </Form>
+      {showForm && (
+        <Form onSubmit={handleSubmit}>
+          <Label htmlFor="name">
+            <Input
+              type="text"
+              placeholder="Nombre del nuevo grupo"
+              name="name"
+              required
+              value={values.name}
+              onChange={handleChange}
+              showUppercase
+            />
+          </Label>
+          <Button type="submit" disabled={isLoading || !isEmpty(errors)}>
+            {!isEmpty(errors) ? errors.name : 'Crear grupo'}
+          </Button>
+        </Form>
+      )}
+      <Button
+        onClick={handleShowFormSwitch}
+        grayscale={showForm}
+        padding="10px"
+      >
+        {showForm ? 'Ocultar' : 'Crear un nuevo grupo'}
+      </Button>
     </>
   );
 }

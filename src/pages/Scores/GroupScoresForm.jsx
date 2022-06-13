@@ -4,12 +4,8 @@ import { getGroupScores, getUserGroups } from '../../api/groups';
 import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
-// TODO Implementar Toast promise
-
-function GroupScoresForm({ setScores }) {
+export function GroupScoresForm({ setScores }) {
   const [isLoading, setIsLoading] = useState(false);
-  // const [scores, setScores] = useState(undefined);
-  const [error, setError] = useState(undefined);
   const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({
     initialValues: {},
@@ -17,14 +13,24 @@ function GroupScoresForm({ setScores }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setScores(undefined);
+    if (!e.target.value) return;
     setIsLoading(true);
     getGroupScores(e.target.value)
       .then((res) => {
-        console.log(res);
         setScores(res);
       })
-      .catch((err) => {
-        setError(err.response.data.error);
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const loadUserGroups = () => {
+    setIsLoading(true);
+    getUserGroups()
+      .then(({ data }) => {
+        if (data.length === 0) throw new Error('No perteneces a ningún grupo.');
+        setGroupList(data);
       })
       .finally(() => {
         setIsLoading(false);
@@ -32,17 +38,7 @@ function GroupScoresForm({ setScores }) {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    getUserGroups()
-      .then(({ data }) => {
-        setGroupList(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    loadUserGroups();
   }, []);
 
   return (
@@ -56,8 +52,9 @@ function GroupScoresForm({ setScores }) {
             handleChange(e.target.value);
             handleSubmit(e);
           }}
+          disabled={groupList.length === 0}
         >
-          <option defaultChecked>
+          <option value="" defaultChecked>
             {isLoading ? 'Cargando grupos...' : 'Selecciona un grupo'}
           </option>
           {groupList.map((group) => (
@@ -69,9 +66,6 @@ function GroupScoresForm({ setScores }) {
       </Label>
       {/* <Button type="submit">Ver scores</Button> */}
       {isLoading && <Spinner />}
-      {error}
     </Form>
   );
 }
-
-export default GroupScoresForm;
