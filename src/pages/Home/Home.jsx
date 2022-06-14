@@ -18,6 +18,8 @@ const Row = styled.div`
   gap: 2rem;
   flex-wrap: wrap;
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function Home() {
@@ -32,11 +34,13 @@ function Home() {
 
   return (
     <PageWrapper>
-      <Row>
-        <NotificationBoard />
-        {/* <Keypad /> */}
-      </Row>
+      {/* <Row> */}
+      {/* <Keypad /> */}
+      {/* </Row> */}
       <Countdown />
+      <Row>
+        <NotificationBoard id="notification-board" />
+      </Row>
     </PageWrapper>
   );
 }

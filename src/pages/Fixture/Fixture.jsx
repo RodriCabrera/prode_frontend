@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { getGroupStage } from '../../api/fixture';
-import FixtureTable from './FixtureTable';
+import { FixtureTable } from './FixtureTable';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
 

@@ -3,7 +3,7 @@ import Table from '../../common/Table/Table';
 import { getFlagUrl, parseDate } from '../pagesHelpers';
 import { parseMatchScore } from './fixturePageHelpers';
 
-function FixtureTable({ data, isCompact }) {
+export function FixtureTable({ data, isCompact }) {
   return (
     <Table compact={isCompact}>
       <Table.Body>
@@ -47,5 +47,3 @@ function FixtureTable({ data, isCompact }) {
     </Table>
   );
 }
-
-export default FixtureTable;
