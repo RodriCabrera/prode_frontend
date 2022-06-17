@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
@@ -29,8 +29,18 @@ const NavLink = styled.button`
 function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
-
   const [showModal, setShowModal] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
 
   const toggleModal = () => {
     setShowModal((showing) => !showing);
