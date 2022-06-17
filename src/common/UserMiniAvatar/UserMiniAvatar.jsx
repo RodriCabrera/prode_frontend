@@ -5,7 +5,7 @@ export function UserMiniAvatar({ name, avatar, isSmall }) {
     <img
       src={avatar}
       alt={name || 'user avatar'}
-      style={isSmall && { width: '20%' }}
+      style={isSmall && { width: '30px' }}
     />
   ) : (
     <HiUserCircle size="2.2rem" />

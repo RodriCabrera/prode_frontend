@@ -67,7 +67,11 @@ function Navbar() {
             {userContext.user ? (
               <>
                 <NavLink onClick={() => navigate('/profile')}>
-                  {userContext.user.name}
+                  <UserMiniAvatar
+                    avatar={userContext.user.avatar}
+                    isSmall
+                    onClick={() => navigate('/profile')}
+                  />
                 </NavLink>
                 <NavLink onClick={toggleModal}>Salir</NavLink>
               </>
