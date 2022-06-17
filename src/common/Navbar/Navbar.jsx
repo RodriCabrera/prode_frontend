@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
+import { HiMenu } from 'react-icons/hi';
 import { AuthContext } from '../AuthProvider';
 import { logoutUser } from '../../api/auth';
 import { Linkbar } from '../Linkbar/Linkbar';
@@ -13,8 +14,10 @@ import {
   LogoContainer,
   LogoMain,
   LogoSub,
+  SidebarContainer,
 } from './Navbar.styles';
 import { Button, CardTitle } from '../common.styles';
+import Sidebar from './Sidebar';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -29,6 +32,19 @@ const NavLink = styled.button`
 function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const [width, setWidth] = useState(window.innerWidth);
+  const [showAside, setShowAside] = useState(false);
+
+  const handleWindowSizeChange = () => setWidth(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
 
   const [showModal, setShowModal] = useState(false);
 
@@ -46,7 +62,10 @@ function Navbar() {
         userContext.user = null;
       });
   };
-
+  console.log('SHOWMENU', showAside);
+  const switchShowAside = () => {
+    setShowAside((showing) => !showing);
+  };
   return (
     <>
       <Modal show={showModal}>
@@ -55,10 +74,12 @@ function Navbar() {
           Salir
         </Button>
       </Modal>
+      <Sidebar showAside={showAside} close={switchShowAside} />
       <NavbarContainer id="navbar-container">
         <NavbarWrapper id="navbar-wrapper">
-          <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
-            <LogoContainer>
+          <ButtonGroup id="button-group-left">
+            {isMobile && <HiMenu size="2.2rem" onClick={switchShowAside} />}
+            <LogoContainer onClick={() => navigate('/')}>
               <LogoMain>Prode </LogoMain>
               <LogoSub>الحمار</LogoSub>
             </LogoContainer>

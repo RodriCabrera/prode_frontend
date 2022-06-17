@@ -52,6 +52,17 @@ export const LogoSub = styled(LogoMain)`
   letter-spacing: 1px;
 `;
 
+export const SidebarContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: ${({ show }) => (show ? '0' : '-50%')};
+  transition: 0.5s ease-in-out all;
+  height: 100vh;
+  z-index: 99999;
+  width: 50%;
+  background-color: #21212190;
+`;
+
 /*
 Colores:
 #fff: blanco
