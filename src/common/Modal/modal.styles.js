@@ -21,10 +21,15 @@ export const ModalContainer = styled.div`
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   padding: 1rem;
   background-color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const CloseModalButton = styled.button`
   float: right;
+  align-self: flex-end;
   border: none;
   background: none;
   text-align: center;

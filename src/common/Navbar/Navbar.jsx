@@ -14,6 +14,7 @@ import {
   LogoMain,
   LogoSub,
 } from './Navbar.styles';
+import { Button, CardTitle } from '../common.styles';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -49,10 +50,10 @@ function Navbar() {
   return (
     <>
       <Modal show={showModal}>
-        <div>Are you sure you want to log out?</div>
-        <button type="button" onClick={handleLogout}>
-          Log out
-        </button>
+        <CardTitle>¿Estás seguro?</CardTitle>
+        <Button type="button" onClick={handleLogout}>
+          Salir
+        </Button>
       </Modal>
       <NavbarContainer id="navbar-container">
         <NavbarWrapper id="navbar-wrapper">
