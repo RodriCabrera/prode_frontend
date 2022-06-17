@@ -32,7 +32,7 @@ function Scores() {
                 <UserMiniAvatar avatar={score.avatar} name={score.user} />
               }
             >
-              <p>{`${score.user} : ${score.score}`}</p>
+              <p key={score.user}>{`${score.user} : ${score.score}`}</p>
             </ListElement>
           );
         })}
