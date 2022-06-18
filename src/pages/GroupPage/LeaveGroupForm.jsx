@@ -1,14 +1,8 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { leaveGroup } from '../../../api/groups';
-import {
-  Button,
-  Input,
-  Label,
-  Text,
-  Form,
-} from '../../../common/common.styles';
+import { leaveGroup } from '../../api/groups';
+import { Button, Input, Label, Text, Form } from '../../common/common.styles';
 
 function LeaveGroupForm({ updater }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +35,7 @@ function LeaveGroupForm({ updater }) {
     <Form onSubmit={handleSubmit}>
       <Label htmlFor="name">
         <Text size="1.3rem" align="center">
-          Para salir del grupo ingrese el nombre del grupo
+          Para confirmar ingrese el nombre del grupo
         </Text>
         <Input
           type="text"

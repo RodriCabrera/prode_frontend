@@ -1,15 +1,21 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { joinGroup } from '../../../api/groups';
+import JoinGroupConfirm from './JoinGroupConfirm';
+import { joinGroup, getGroupRules } from '../../../api/groups';
 import { Button, Input, Label, Form } from '../../../common/common.styles';
+import Modal from '../../../common/Modal/Modal';
 
 function JoinGroupForm({ updateList }) {
   const [isLoading, setIsLoading] = useState(false);
   const { values, handleChange } = useFormik({ initialValues: {} });
   const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [groupRules, setGroupRules] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowModal((value) => !value);
     setIsLoading(true);
 
     toast.promise(
@@ -32,8 +38,35 @@ function JoinGroupForm({ updateList }) {
     );
   };
 
+  const getGroupInformation = () => {
+    setIsLoading(true);
+    toast.promise(
+      getGroupRules(values.groupName)
+        .then(({ data }) => {
+          setGroupRules(data);
+        })
+        .then(() => setShowModal(true))
+        .finally(() => {
+          setIsLoading(false);
+        }),
+      {
+        pending: 'Buscando grupo...',
+        success: 'Grupo encontrado',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
+  };
+
   const handleShowFormSwitch = () => {
     setShowForm(!showForm);
+  };
+
+  const handleGroupSearch = () => {
+    getGroupInformation();
   };
 
   return (
@@ -51,9 +84,19 @@ function JoinGroupForm({ updateList }) {
               showUppercase
             />
           </Label>
-          <Button type="submit" disabled={isLoading}>
-            Unirse
+          <Button
+            type="button"
+            onClick={handleGroupSearch}
+            disabled={isLoading}
+          >
+            Buscar grupo
           </Button>
+          <Modal show={showModal && groupRules}>
+            <JoinGroupConfirm
+              groupName={values.groupName}
+              userGroupData={groupRules}
+            />
+          </Modal>
         </Form>
       )}
       <Button

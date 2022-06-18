@@ -113,6 +113,7 @@ export function PredictionForm(props) {
                         type="number"
                         width="30px"
                         min={0}
+                        align="center"
                         id={`${match.id}-away`}
                         value={values[`${match.id}-away`]}
                         name={`${match.id}-away`}
@@ -140,6 +141,7 @@ export function PredictionForm(props) {
                         type="number"
                         width="30px"
                         min={0}
+                        align="center"
                         name={`${match.id}-home`}
                         id={`${match.id}-home`}
                         value={values[`${match.id}-home`]}

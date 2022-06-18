@@ -5,6 +5,7 @@ import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { getGroupScores } from '../../api/groups';
 import { ListElement } from '../../common/Lists/ListElement';
 import { Spinner } from '../../common/Spinner/Spinner';
+import Modal from '../../common/Modal/Modal';
 import {
   Text,
   CardContainer,
@@ -12,7 +13,7 @@ import {
   CardWrapper,
   CardTitle,
 } from '../../common/common.styles';
-import LeaveGroupForm from '../Groups/components/LeaveGroupForm';
+import LeaveGroupForm from './LeaveGroupForm';
 import { AuthContext } from '../../common/AuthProvider';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 
@@ -79,9 +80,9 @@ function GroupPage() {
                 Salir del grupo?
               </Button>
             </CardContainer>
-            <CardContainer>
-              {showLeave && <LeaveGroupForm updater={onGroupExit} />}
-            </CardContainer>
+            <Modal show={showLeave}>
+              <LeaveGroupForm updater={onGroupExit} />
+            </Modal>
           </CardWrapper>
         </CardContainer>
       )}
