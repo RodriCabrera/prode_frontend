@@ -93,8 +93,8 @@ function Navbar() {
             )}
           </ButtonGroup>
         </NavbarWrapper>
-        {userContext.user && <Linkbar />}
       </NavbarContainer>
+      {userContext.user && <Linkbar isMobile={isMobile} />}
     </>
   );
 }
