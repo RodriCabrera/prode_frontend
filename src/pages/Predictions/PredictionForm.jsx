@@ -91,7 +91,7 @@ export function PredictionForm(props) {
               return (
                 <React.Fragment key={match.id}>
                   <Table.Row>
-                    <Table.Cell
+                    {/* <Table.Cell
                       colSpan="6"
                       withBottomBorder
                       fontWeight="500"
@@ -99,10 +99,10 @@ export function PredictionForm(props) {
                       padding="5px"
                     >
                       {parseDate(match.date)}
-                    </Table.Cell>
+                    </Table.Cell> */}
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell padding="0">
+                    <Table.Cell padding="1rem 0" margin="0 0 0 1rem">
                       {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
@@ -155,7 +155,7 @@ export function PredictionForm(props) {
                     <Table.Cell padding="5px" fontWeight="800">
                       {match.home?.shortName || '?'}
                     </Table.Cell>
-                    <Table.Cell padding="0">
+                    <Table.Cell padding="1rem 0" margin="0 1rem 0 0">
                       {getFlagUrl(match.home?.flag, 1)}
                     </Table.Cell>
                   </Table.Row>
@@ -176,11 +176,19 @@ export function PredictionForm(props) {
               onClick={handlePrevGroup}
               // disabled={groupNumber === 0}
               type="reset"
+              width="100%"
             >
-              Anterior
+              <span className="material-symbols-outlined">chevron_left</span>
+              {stageData[groupNumberMod(groupNumber - 1)]?.name}
             </Button>
-            <Button grayscale onClick={handleNextGroup} type="reset">
-              Siguiente
+            <Button
+              grayscale
+              onClick={handleNextGroup}
+              type="reset"
+              width="100%"
+            >
+              {stageData[groupNumberMod(groupNumber + 1)]?.name}
+              <span className="material-symbols-outlined">chevron_right</span>
             </Button>
           </ButtonWrapper>
         )}
@@ -196,8 +204,8 @@ const ResultsInput = styled(Input)`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  justify-content: space-evenly;
   gap: 1rem;
-  flex-wrap: wrap;
 `;
 
 const FormWrapper = styled.div`

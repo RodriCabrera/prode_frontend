@@ -30,6 +30,9 @@ export const CardWrapper = styled.div`
 export const Button = styled.button`
   background-color: inherit;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${({ width }) => width || 'auto'};
   cursor: pointer;
   border: none;
   background-image: linear-gradient(
@@ -45,7 +48,6 @@ export const Button = styled.button`
   color: white;
   letter-spacing: 1px;
   border-radius: 10px;
-  display: block;
   border: 0px;
   color: white;
   font-weight: ${({ weight }) => weight || '600'};
@@ -113,6 +115,7 @@ export const Text = styled.p`
   color: ${({ color }) => color || 'inherit'};
   font-size: ${(props) => props.size};
   font-weight: ${({ weight }) => weight};
+  margin: ${({ margin }) => margin || '0'};
   &:after {
     ${({ withBottomBorder }) =>
       withBottomBorder &&
