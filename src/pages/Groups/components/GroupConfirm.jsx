@@ -11,7 +11,7 @@ const ConfirmWrapper = styled.div`
   flex-direction: column;
 `;
 
-function JoinGroupConfirm({ groupName, userGroupData }) {
+function GroupConfirm({ groupName, userGroupData, confirmText }) {
   const translateDuration = (miliseconds) => {
     switch (miliseconds) {
       case 1000 * 60 * 60 * 1:
@@ -65,10 +65,10 @@ function JoinGroupConfirm({ groupName, userGroupData }) {
           {translateDuration(userGroupData.timeLimit)}
         </Text>
         <br />
-        <Button type="submit">Si, quiero unirme</Button>
+        <Button type="submit">{confirmText}</Button>
       </ConfirmWrapper>
     )
   );
 }
 
-export default JoinGroupConfirm;
+export default GroupConfirm;

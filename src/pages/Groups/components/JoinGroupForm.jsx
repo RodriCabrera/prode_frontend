@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import JoinGroupConfirm from './JoinGroupConfirm';
+import GroupConfirm from './GroupConfirm';
 import { joinGroup, getGroupRules } from '../../../api/groups';
 import { Button, Input, Label, Form } from '../../../common/common.styles';
 import Modal from '../../../common/Modal/Modal';
@@ -92,9 +92,10 @@ function JoinGroupForm({ updateList }) {
             Buscar grupo
           </Button>
           <Modal show={showModal && groupRules}>
-            <JoinGroupConfirm
+            <GroupConfirm
               groupName={values.groupName}
               userGroupData={groupRules}
+              confirmText="Aceptar"
             />
           </Modal>
         </Form>
