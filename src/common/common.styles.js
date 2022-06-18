@@ -84,6 +84,19 @@ export const Input = styled.input`
   :disabled {
     background-color: darkgray;
   }
+  text-align: ${({ align }) => align || 'initial'};
+`;
+
+export const TextareaInput = styled.textarea`
+  text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
+  width: ${({ width }) => width};
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  :disabled {
+    background-color: darkgray;
+  }
+  resize: none;
 `;
 
 export function ScoreInput() {
