@@ -52,14 +52,16 @@ export function PredictionForm(props) {
           <Table.Body>
             {data?.map((match) => {
               const predictionStatus = () =>
-                checkPredictionResult(
-                  data,
-                  groupNumberMod(groupNumber),
-                  match.id,
-                  'away',
-                  values[`${match.id}-away`],
-                  values[`${match.id}-home`]
-                );
+                match.status === 0
+                  ? checkPredictionResult(
+                      data,
+                      groupNumberMod(groupNumber),
+                      match.id,
+                      'away',
+                      values[`${match.id}-away`],
+                      values[`${match.id}-home`]
+                    )
+                  : 'silver';
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
 
               const renderInfoIcon = () => {

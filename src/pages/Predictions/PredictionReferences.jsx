@@ -17,7 +17,7 @@ export function PredictionReferences() {
       </div>
       <div style={{ backgroundColor: 'tomato', color: 'black' }}>No suma</div>
       <div style={{ backgroundColor: 'silver', color: 'black' }}>
-        Sin predicción
+        No evaluado
       </div>
     </div>
   );
