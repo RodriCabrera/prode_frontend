@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { logoutUser } from '../../api/auth';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { Linkbar } from '../Linkbar/Linkbar';
 import Modal from '../Modal/Modal';
 import { UserMiniAvatar } from '../UserMiniAvatar/UserMiniAvatar';
@@ -30,15 +31,8 @@ function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [width, setWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleWindowSizeChange = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleWindowSizeChange);
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    };
-  }, []);
+  const { width } = useWindowDimensions();
 
   const isMobile = width <= 768;
 

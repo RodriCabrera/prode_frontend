@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getFixtureByStageId } from '../../../api/fixture';
 import { getUserGroups } from '../../../api/groups';
 import { getPredictions } from '../../../api/predictions';
+import useWindowDimensions from '../../../hooks/useWindowDimensions';
 import {
   CardContainer,
   CardTitle,
@@ -18,6 +19,9 @@ function NotificationBoard() {
   const [isLoading, setIsLoading] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [fixtureShortData, setFixtureShortData] = useState([]);
+
+  const { width } = useWindowDimensions();
+  const isMobile = width <= 768;
 
   useEffect(() => {
     setIsLoading(true);
@@ -76,15 +80,25 @@ function NotificationBoard() {
   if (!isEmpty(predictions))
     return (
       <CardContainer id="next-5-card-container">
-        {/* <CardWrapper border={0}> */}
-        <CardTitle id="next-5-title">Próximos 5 partidos:</CardTitle>
-        {/* //TODO: Centrar la fixture table: */}
-        <FixtureTable
-          id="next-5-card-container"
-          data={fixtureShortData}
-          isCompact
-        />
-        {/* </CardWrapper> */}
+        <CardWrapper
+          border="none"
+          align="center"
+          justify="center"
+          fullWidth={isMobile}
+        >
+          <CardTitle id="next-5-title">Próximos partidos:</CardTitle>
+          <FixtureTable
+            id="next-5-card-container"
+            data={fixtureShortData}
+            isCompact
+          />
+        </CardWrapper>
+        {/* TODO: manejar estilos más elegantemente? Otro styled component distinto para esto? */}
+        <CardWrapper
+          style={{ flexGrow: 1, maxWidth: '100%', width: 'initial' }}
+        >
+          <h1>Otros contenidos para la página de inicio?</h1>
+        </CardWrapper>
       </CardContainer>
     );
   return (

@@ -9,6 +9,7 @@ export const TableWrapper = styled.table`
   border: 1px solid darkgray;
   border-radius: 18px;
   border-collapse: separate;
+  margin: auto;
   /* width: 100%; */
   max-width: 660px;
 `;

@@ -25,6 +25,8 @@ export const CardWrapper = styled.div`
   padding: 1rem;
   gap: 1rem;
   flex-direction: column;
+  justify-content: ${({ justify }) => justify || 'intial'};
+  align-items: ${({ align }) => align || 'initial'};
 `;
 
 export const Button = styled.button`
