@@ -3,9 +3,9 @@ import Table from '../../common/Table/Table';
 import { getFlagUrl, parseDate } from '../pagesHelpers';
 import { parseMatchScore } from './fixturePageHelpers';
 
-export function FixtureTable({ data, isCompact }) {
+export function FixtureTable({ data, isCompact, fullWidth }) {
   return (
-    <Table compact={isCompact}>
+    <Table compact={isCompact} fullWidth={fullWidth}>
       <Table.Body>
         {data.map((match) => {
           return (
