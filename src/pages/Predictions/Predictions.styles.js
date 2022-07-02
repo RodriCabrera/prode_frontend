@@ -20,7 +20,7 @@ export const BannerContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
-export const Banner = styled(Button)`
+export const BannerButton = styled(Button)`
   width: 100%;
   margin-bottom: 1.5rem;
   display: flex;
