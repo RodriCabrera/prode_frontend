@@ -16,7 +16,7 @@ const GroupsListWrapper = styled.div`
 function EditPredictions() {
   const [userGroupList, setUserGroupList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedGroup, setselectedGroup] = useState(null);
+  const [selectedUserGroup, setSelectedUserGroup] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,10 +27,10 @@ function EditPredictions() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [selectedGroup]);
+  }, [selectedUserGroup]);
 
   const handleGroupSelect = (group) => {
-    setselectedGroup(group);
+    setSelectedUserGroup(group);
   };
 
   return (
@@ -41,7 +41,7 @@ function EditPredictions() {
 
         <ListWrapper>
           {userGroupList?.map((userGroup) => {
-            const isSelected = selectedGroup?.id === userGroup.id;
+            const isSelected = selectedUserGroup?.id === userGroup.id;
             return (
               <ListElement
                 key={userGroup.id}
@@ -61,7 +61,9 @@ function EditPredictions() {
           })}
         </ListWrapper>
       </GroupsListWrapper>
-      {!isLoading && selectedGroup?.id && <Outlet context={[selectedGroup]} />}
+      {!isLoading && selectedUserGroup?.id && (
+        <Outlet context={[selectedUserGroup]} />
+      )}
     </>
   );
 }

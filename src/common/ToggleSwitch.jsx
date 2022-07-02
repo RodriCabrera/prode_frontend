@@ -1,22 +1,29 @@
 import styled from '@emotion/styled/macro';
-import React from 'react';
+import { ToggleWrapper } from '../pages/Predictions/Predictions.styles';
+import { Text } from './common.styles';
 
-function ToggleSwitch({ mode }) {
+function ToggleSwitch({ mode, setMode }) {
   const handleChange = () => {
-    mode.setMode(mode.mode === 'results' ? 'edit' : 'results');
+    setMode(mode === 'results' ? 'edit' : 'results');
   };
 
   return (
-    <CheckBoxWrapper>
-      <CheckBox
-        id="checkbox"
-        type="checkbox"
-        onChange={handleChange}
-        value={mode.mode}
-        checked={mode.mode === 'edit'}
-      />
-      <CheckBoxLabel htmlFor="checkbox" />
-    </CheckBoxWrapper>
+    <ToggleWrapper>
+      <Text weight="700">RESULTADOS</Text>
+      <CheckBoxWrapper>
+        <CheckBox
+          id="checkbox"
+          type="checkbox"
+          onChange={handleChange}
+          value={mode}
+          checked={mode === 'edit'}
+        />
+        <CheckBoxLabel htmlFor="checkbox" />
+      </CheckBoxWrapper>
+      <Text weight="700" color="tomato">
+        PREDECIR
+      </Text>
+    </ToggleWrapper>
   );
 }
 

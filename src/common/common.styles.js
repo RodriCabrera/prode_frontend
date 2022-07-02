@@ -115,7 +115,7 @@ export const Select = styled.select`
 export const Text = styled.p`
   text-align: ${({ align }) => align || 'left'};
   color: ${({ color }) => color || 'inherit'};
-  font-size: ${(props) => props.size};
+  font-size: ${({ size }) => size};
   font-weight: ${({ weight }) => weight};
   margin: ${({ margin }) => margin || '0'};
   &:after {

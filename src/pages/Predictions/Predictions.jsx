@@ -1,38 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Text } from '../../common/common.styles';
+import { Outlet } from 'react-router-dom';
 import ToggleSwitch from '../../common/ToggleSwitch';
 import {
   BannerTitle,
   PredictionsPageWrapper,
   ToggleContainer,
-  ToggleWrapper,
 } from './Predictions.styles';
+import { getUserGroups } from '../../api/groups';
+import { GroupSelector } from './components/GroupSelector';
 
 function Predictions() {
-  const location = useLocation();
-  const [mode, setMode] = useState(location.pathname.split('/')[2]);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState('results');
+  const [userGroupList, setUserGroupList] = useState([]);
+  const [selectedUserGroup, setSelectedUserGroup] = useState(null);
 
   useEffect(() => {
-    return mode === 'results'
-      ? navigate('/predictions/results')
-      : navigate('/predictions/edit');
-  }, [mode]);
+    setIsLoading(true);
+    getUserGroups()
+      .then(({ data }) => {
+        setUserGroupList(data);
+        if (data.length === 1) {
+          setSelectedUserGroup(data[0]);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  const handleGroupSelect = (group) => {
+    setSelectedUserGroup(group);
+  };
 
   return (
     <PredictionsPageWrapper id="mi-prode-container">
       <BannerTitle align="center">PREDICCIONES</BannerTitle>
+
+      {userGroupList.length !== 1 && (
+        <GroupSelector
+          isLoading={isLoading}
+          selectedUserGroup={selectedUserGroup}
+          userGroupList={userGroupList}
+          handleGroupSelect={handleGroupSelect}
+        />
+      )}
+
       <ToggleContainer>
-        <ToggleWrapper>
-          <Text weight="700">RESULTADOS</Text>
-          <ToggleSwitch mode={{ mode, setMode }} />
-          <Text weight="700" color="tomato">
-            PREDECIR
-          </Text>
-        </ToggleWrapper>
+        <ToggleSwitch mode={mode} setMode={setMode} />
       </ToggleContainer>
-      <Outlet />
+      <Outlet context={{ mode, selectedUserGroup }} />
     </PredictionsPageWrapper>
   );
 }

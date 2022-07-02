@@ -7,6 +7,7 @@ import {
   createPredictions,
   getFirstStagePredictionsByGroup,
 } from '../../../api/predictions';
+import { Text } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { PredictionForm } from '../PredictionForm';
 import { PredictionReferences } from '../PredictionReferences';
@@ -16,30 +17,34 @@ import {
   numberToGroupLetter,
 } from '../predictionsPageUtils';
 
-function FirstStage({ resultsMode }) {
+function FirstStage() {
   const [isLoading, setIsLoading] = useState(false);
   const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos para este userGroup
-  const [selectedGroup] = useOutletContext();
+  const { selectedUserGroup, mode } = useOutletContext();
+  const resultsMode = mode === 'edit';
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [errorMessages, setErrorMessages] = useState([]);
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
   console.log('DIRTY', dirty); // TODO: Modal '¿Estás seguro de que quieres salir sin guardar?'
+
   useEffect(() => {
-    setIsLoading(true);
-    getGroupStage() // TODO: Se debería traer el fixture de 1 grupo. No toda la fase.
-      // getFixture(selectedGroup.id, 'GRUPOS') // ? Algo así, pero devuelve []
-      .then((res) => {
-        setFirstStageData(res.data.fixture);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
+    if (selectedUserGroup) {
+      setIsLoading(true);
+      getGroupStage() // TODO: Se debería traer el fixture de 1 grupo. No toda la fase.
+        // getFixture(selectedUserGroup.id, 'GRUPOS') // ? Algo así? pero devuelve []
+        .then((res) => {
+          setFirstStageData(res.data.fixture);
+        })
+        .finally(() => setIsLoading(false));
+    }
+  }, [selectedUserGroup]);
 
   const updatePredictions = () => {
     setIsLoading(true);
     const groupLeter = numberToGroupLetter(groupNumber);
-    getFirstStagePredictionsByGroup(selectedGroup.id, groupLeter)
+    getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter)
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
@@ -50,13 +55,13 @@ function FirstStage({ resultsMode }) {
     if (firstStageData.length > 0) {
       updatePredictions();
     }
-  }, [firstStageData, groupNumber]);
+  }, [firstStageData, groupNumber, selectedUserGroup]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
     toast.promise(
-      createPredictions(formatPredictionsToPost(values, selectedGroup.id))
+      createPredictions(formatPredictionsToPost(values, selectedUserGroup?.id))
         .then((res) => {
           setErrorMessages(res.data.errors);
         })
@@ -90,18 +95,23 @@ function FirstStage({ resultsMode }) {
     <>
       <Link to="..">Volver a selección de fases</Link>
       {resultsMode && <PredictionReferences />}
-      <PredictionForm
-        resultsMode={resultsMode}
-        groupNumber={groupNumber}
-        handleSubmit={!resultsMode && handleSubmit}
-        stageData={firstStageData}
-        errorMessages={errorMessages}
-        handleNextGroup={handleNextGroup}
-        handlePrevGroup={handlePrevGroup}
-        values={values}
-        handleChange={!resultsMode && handleChange}
-        groupPhase
-      />
+      {selectedUserGroup ? (
+        <PredictionForm
+          groupNumber={groupNumber}
+          handleSubmit={!resultsMode && handleSubmit}
+          stageData={firstStageData}
+          errorMessages={errorMessages}
+          handleNextGroup={handleNextGroup}
+          handlePrevGroup={handlePrevGroup}
+          values={values}
+          handleChange={!resultsMode && handleChange}
+          groupPhase
+        />
+      ) : (
+        <Text size="1.5rem" weight="800" align="center" color="tomato">
+          NO ELEGISTE NINGUN GRUPO
+        </Text>
+      )}
     </>
   );
 }

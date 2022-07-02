@@ -1,12 +1,11 @@
 /* eslint-disable react/forbid-prop-types */
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
 import Table from '../../common/Table/Table';
-import { getFlagUrl, parseDate } from '../pagesHelpers';
+import { getFlagUrl } from '../pagesHelpers';
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
@@ -14,6 +13,8 @@ import {
   groupNumberMod,
 } from './predictionsPageUtils';
 
+// TODO: Para dehabilitar inputs si se pasó la fecha:
+// Si Date.now es mayor a la fecha del partido menos el time limit ya no podes hacer predicciones.
 export function PredictionForm(props) {
   const {
     stageData,
@@ -24,12 +25,12 @@ export function PredictionForm(props) {
     handleNextGroup,
     handlePrevGroup,
     errorMessages,
-    resultsMode,
     groupPhase,
   } = props;
 
-  const [selectedGroup] = useOutletContext();
   const [data, setData] = useState(stageData);
+  const { selectedUserGroup, mode } = useOutletContext();
+  const resultsMode = mode === 'results';
 
   useEffect(() => {
     if (stageData.length > 0) {
@@ -167,8 +168,10 @@ export function PredictionForm(props) {
           </Table.Body>
         </Table>
         {!resultsMode && (
-          <Button type="submit" disabled={!selectedGroup?.id}>
-            {selectedGroup?.id ? 'Enviar prediccion' : 'Seleccione un grupo'}
+          <Button type="submit" disabled={!selectedUserGroup?.id}>
+            {selectedUserGroup?.id
+              ? 'Enviar prediccion'
+              : 'Seleccione un grupo'}
           </Button>
         )}
         {groupPhase && (
@@ -215,15 +218,3 @@ const FormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-PredictionForm.propTypes = {
-  stageData: PropTypes.array.isRequired,
-  groupNumber: PropTypes.number,
-  // values: PropTypes.object.isRequired,
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  handleNextGroup: PropTypes.func,
-  handlePrevGroup: PropTypes.func,
-  // errorMessages: PropTypes.object,
-  resultsMode: PropTypes.bool,
-};

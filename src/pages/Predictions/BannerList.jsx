@@ -5,15 +5,17 @@ import { Text } from '../../common/common.styles';
 import { Banner } from './Banner';
 import { BannerContainer } from './Predictions.styles';
 
-function BannerList({ editMode }) {
+function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
-  const selectedGroup = useOutletContext();
+  const { selectedUserGroup } = useOutletContext();
   const [groupsPredictedQty, setGroupsPredictedQty] = useState(undefined);
+  const { mode } = useOutletContext();
+  const editMode = mode === 'edit';
 
   useEffect(() => {
     if (editMode) {
       setIsLoading(true);
-      getPredictions(selectedGroup.id, 'GRUPOS')
+      getPredictions(selectedUserGroup?.id, 'GRUPOS')
         .then((res) => {
           setGroupsPredictedQty(res.data.length);
         })
@@ -21,7 +23,7 @@ function BannerList({ editMode }) {
           setIsLoading(false);
         });
     }
-  }, [selectedGroup]);
+  }, [selectedUserGroup, editMode]);
 
   const calculatePercentage = (predictionsQty, totalGroups) => {
     return Math.round((predictionsQty / totalGroups) * 100);

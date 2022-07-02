@@ -75,7 +75,7 @@ export function Linkbar({ isMobile }) {
               <CustomLink isCurrent={isCurrent('fixture')}>Fixture</CustomLink>
             )}
           </LinkWrapper>
-          <LinkWrapper onClick={() => handleLinkClick('/predictions/edit')}>
+          <LinkWrapper onClick={() => handleLinkClick('/predictions')}>
             {isMobile ? (
               <FaListUl
                 size="2rem"

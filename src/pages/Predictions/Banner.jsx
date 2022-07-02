@@ -1,4 +1,4 @@
-import { isNull } from 'lodash';
+import { isNil } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import {
   BannerButton,
@@ -38,7 +38,7 @@ export function Banner({
       </BannerDataWrapper>
       {!isLoading && editMode && (
         <BannerDataWrapper>
-          {!isNull(percentage) ? `${percentage} % completo` : ''}
+          {!isNil(percentage) ? `${percentage} % completo` : ''}
         </BannerDataWrapper>
       )}
     </BannerButton>

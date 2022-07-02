@@ -18,7 +18,7 @@ function PredictionResults() {
   const [userGroupList, setUserGroupList] = useState([]);
   const [predictions, setPredictions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedGroup, setselectedGroup] = useState(null);
+  const [selectedUserGroup, setSelectedUserGroup] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,10 +36,10 @@ function PredictionResults() {
     getAllPredictions()
       .then((res) => setPredictions(res.data))
       .finally(() => setIsLoading(false));
-  }, [selectedGroup]);
+  }, [selectedUserGroup]);
 
   const handleGroupSelect = (group) => {
-    setselectedGroup(group);
+    setSelectedUserGroup(group);
   };
 
   if (isLoading) return <Spinner />;
@@ -54,7 +54,7 @@ function PredictionResults() {
 
         <ListWrapper>
           {userGroupList?.map((userGroup) => {
-            const isSelected = selectedGroup?.id === userGroup.id;
+            const isSelected = selectedUserGroup?.id === userGroup.id;
             return (
               <ListElement
                 key={userGroup.id}
@@ -75,7 +75,9 @@ function PredictionResults() {
         </ListWrapper>
       </GroupsListWrapper>
       {/* TODO: El context puede englobar un nivel mas */}
-      {!isLoading && selectedGroup?.id && <Outlet context={[selectedGroup]} />}
+      {!isLoading && selectedUserGroup?.id && (
+        <Outlet context={[selectedUserGroup]} />
+      )}
     </>
   );
 }
