@@ -1,6 +1,5 @@
 import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getFixtureByStageId } from '../../../api/fixture';
 import { getUserGroups } from '../../../api/groups';
 import { getPredictions } from '../../../api/predictions';
@@ -9,38 +8,44 @@ import {
   CardContainer,
   CardTitle,
   CardWrapper,
-  Text,
 } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { FixtureTable } from '../../Fixture/FixtureTable';
+import { NoGroupNotification } from './NoGroupNotification';
+import { NoPredictionNotification } from './NoPredictionNotification';
 
 function NotificationBoard() {
   const [groups, setGroups] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [fixtureShortData, setFixtureShortData] = useState([]);
+  const [loadingCheck, setloadingCheck] = useState({
+    groups: false,
+    predictions: false,
+    fixture: false,
+  });
 
   const { width } = useWindowDimensions();
   const isMobile = width <= 768;
 
   useEffect(() => {
-    setIsLoading(true);
     getUserGroups()
       .then((res) => setGroups(res.data))
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setloadingCheck({ ...loadingCheck, groups: true });
+      });
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
     if (!isEmpty(groups)) {
       getPredictions()
         .then((res) => setPredictions(res.data))
-        .finally(() => setIsLoading(false));
+        .finally(() => {
+          setloadingCheck({ ...loadingCheck, predictions: true });
+        });
     }
   }, [groups]);
 
   useEffect(() => {
-    setIsLoading(true);
     getFixtureByStageId('GRUPOS')
       .then((res) => {
         setFixtureShortData(
@@ -49,35 +54,26 @@ function NotificationBoard() {
             .splice(0, 5)
         );
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setloadingCheck({ ...loadingCheck, fixture: true });
+      });
   }, []);
 
-  const renderBoards = () => {
-    // CONDITIONAL BOARD RENDERING ACCORDING TO USER STATUS:
-    if (isLoading) return <Spinner />;
-    // IF USER IS IN NO GROUPS:
-    if (isEmpty(groups)) {
-      return (
-        <Text weight="500" align="center">
-          Empezá por crear o unirte a un grupo: <Link to="/groups">Aca</Link>
-        </Text>
-      );
+  function renderBoards() {
+    // NO GROUPS (NO PREDICTIONS):
+    if (loadingCheck.groups && isEmpty(groups)) {
+      return <NoGroupNotification />;
     }
-    // IF USER IS IN GROUPS BUT HAS NO PREDICTIONS:
-    if (!isEmpty(groups) && isEmpty(predictions))
-      return (
-        <>
-          <Text>Aún no hiciste ninguna predicción.</Text>
-          <Text>
-            {' '}
-            Hacelo desde{' '}
-            <Link to="/predictions/edit?mode=edit">esta sección</Link>
-          </Text>
-        </>
-      );
-    return '';
-  };
-  if (!isEmpty(predictions))
+
+    // YES GROUPS - NO PREDICTIONS:
+    if (loadingCheck.groups && isEmpty(predictions)) {
+      return <NoPredictionNotification />;
+    }
+
+    return <Spinner />;
+  }
+
+  if (!isEmpty(predictions) && loadingCheck.predictions)
     return (
       <CardContainer id="next-5-card-container">
         <CardWrapper
