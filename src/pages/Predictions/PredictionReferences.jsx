@@ -1,24 +1,24 @@
-import React from 'react';
+import styled from '@emotion/styled';
 
+const PillWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+`;
+const Pill = styled.div`
+  font-size: 12px;
+  background-color: ${({ bg }) => bg};
+  color: black;
+  padding: 6px;
+  border-radius: 6px;
+`;
 export function PredictionReferences() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '1rem',
-      }}
-    >
-      <div style={{ backgroundColor: 'lightgreen', color: 'black' }}>
-        Full: acertaste resultado
-      </div>
-      <div style={{ backgroundColor: '#FFFF66', color: 'black' }}>
-        Half: acertaste ganador
-      </div>
-      <div style={{ backgroundColor: 'tomato', color: 'black' }}>No suma</div>
-      <div style={{ backgroundColor: 'silver', color: 'black' }}>
-        No evaluado
-      </div>
-    </div>
+    <PillWrapper>
+      <Pill bg="lightgreen">Acertaste resultado</Pill>
+      <Pill bg="#FFFF66">Acertaste ganador</Pill>
+      <Pill bg="tomato">No suma</Pill>
+      <Pill bg="silver">No evaluado</Pill>
+    </PillWrapper>
   );
 }

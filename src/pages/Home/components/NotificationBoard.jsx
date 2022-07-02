@@ -91,6 +91,7 @@ function NotificationBoard() {
             id="next-5-card-container"
             data={fixtureShortData}
             isCompact
+            fullWidth={isMobile}
           />
         </CardWrapper>
         {/* TODO: manejar estilos más elegantemente? Otro styled component distinto para esto? */}
