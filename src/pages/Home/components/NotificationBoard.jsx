@@ -66,7 +66,11 @@ function NotificationBoard() {
     }
 
     // YES GROUPS - NO PREDICTIONS:
-    if (loadingCheck.groups && isEmpty(predictions)) {
+    if (
+      loadingCheck.groups &&
+      loadingCheck.predictions &&
+      isEmpty(predictions)
+    ) {
       return <NoPredictionNotification />;
     }
 
