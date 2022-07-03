@@ -7,9 +7,8 @@ import { BannerContainer } from './Predictions.styles';
 
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
-  const { selectedUserGroup } = useOutletContext();
+  const { selectedUserGroup, mode } = useOutletContext();
   const [groupsPredictedQty, setGroupsPredictedQty] = useState(undefined);
-  const { mode } = useOutletContext();
   const editMode = mode === 'edit';
 
   useEffect(() => {
@@ -23,7 +22,7 @@ function BannerList() {
           setIsLoading(false);
         });
     }
-  }, [selectedUserGroup, editMode]);
+  }, [selectedUserGroup]);
 
   const calculatePercentage = (predictionsQty, totalGroups) => {
     return Math.round((predictionsQty / totalGroups) * 100);
