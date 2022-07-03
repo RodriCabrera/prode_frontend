@@ -48,6 +48,7 @@ export function Banner({
     <BannerButton
       disabled={setDisabledField(disabledStart, disabledEnd)}
       onClick={() => navigate(path)}
+      tertiary={editMode}
     >
       <BannerDataWrapper>
         <BannerTitle>{title}</BannerTitle>

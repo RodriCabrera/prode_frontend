@@ -37,12 +37,19 @@ export const Button = styled.button`
   width: ${({ width }) => width || 'auto'};
   cursor: pointer;
   border: none;
+
   background-image: linear-gradient(
-    ${({ grayscale }) =>
-      grayscale
-        ? '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
-        : '45deg, darkorange 0%, tomato 51%, darkorange 100%'}
+    ${({ tertiary, grayscale }) => {
+      if (tertiary) {
+        return '45deg, #FA8072 0%, #FF7261 51%, #FA8072 100%';
+      }
+      if (grayscale) {
+        return '45deg, #818181 0%, #a4a4a4 51%, #818181 100%';
+      }
+      return '45deg, darkorange 0%, tomato 51%, darkorange 100%';
+    }}
   );
+  background-color: ${({ tertiary }) => tertiary && 'salmon'};
   padding: ${({ padding }) => padding || '15px 30px'};
   text-align: center;
   transition: 0.5s;
