@@ -1,8 +1,13 @@
 import styled from '@emotion/styled';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getFixtureByStageId } from '../../api/fixture';
 import { AuthContext } from '../../common/AuthProvider';
+import { CardTitle, CardWrapper } from '../../common/common.styles';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { FixtureTable } from '../Fixture/FixtureTable';
 import Countdown from './components/Countdown';
+import { HomeGroups } from './components/HomeGroups';
 import NotificationBoard from './components/NotificationBoard';
 
 const PageWrapper = styled.div`
@@ -24,7 +29,26 @@ const Row = styled.div`
 
 function Home() {
   const userContext = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [fixtureShortData, setFixtureShortData] = useState([]);
+  const { width } = useWindowDimensions();
+  const isMobile = width <= 768;
+
+  useEffect(() => {
+    setIsLoading(true);
+    getFixtureByStageId('GRUPOS')
+      .then((res) => {
+        setFixtureShortData(
+          res.data.fixture
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .splice(0, 5)
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     if (!userContext.user) {
@@ -34,11 +58,23 @@ function Home() {
 
   return (
     <PageWrapper>
-      {/* <Row> */}
-      {/* <Keypad /> */}
-      {/* </Row> */}
       <Countdown />
       <Row>
+        <HomeGroups />
+        <CardWrapper
+          border="none"
+          align="center"
+          justify="center"
+          fullWidth={isMobile}
+        >
+          <CardTitle id="next-5-title">Próximos partidos:</CardTitle>
+          <FixtureTable
+            id="next-5-card-container"
+            data={fixtureShortData}
+            isCompact
+            fullWidth={isMobile}
+          />
+        </CardWrapper>
         <NotificationBoard id="notification-board" />
       </Row>
     </PageWrapper>

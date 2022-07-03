@@ -21,7 +21,7 @@ function FirstStage() {
   const [isLoading, setIsLoading] = useState(false);
   const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos para este userGroup
   const { selectedUserGroup, mode } = useOutletContext();
-  const resultsMode = mode === 'edit';
+  const resultsMode = mode === 'results';
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [errorMessages, setErrorMessages] = useState([]);
   const { values, handleChange, resetForm, dirty } = useFormik({
