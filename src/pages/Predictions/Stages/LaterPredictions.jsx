@@ -13,15 +13,18 @@ import {
   formatPredictionsToPost,
 } from '../predictionsPageUtils';
 
-function LaterPredictions({ resultsMode }) {
+function LaterPredictions() {
   const { stage } = useParams();
   const [stageData, setStageData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedGroup] = useOutletContext();
+  const { selectedUserGroup } = useOutletContext();
   const [errorMessages, setErrorMessages] = useState([]);
   const { values, handleChange, resetForm } = useFormik({
     initialValues: {},
   });
+  const { mode } = useOutletContext();
+  const resultsMode = mode === 'results';
+
   useEffect(() => {
     setIsLoading(true);
     getFixtureByStageId(getStageId(stage))
@@ -34,7 +37,7 @@ function LaterPredictions({ resultsMode }) {
 
   const updatePredictions = () => {
     setIsLoading(true);
-    getPredictions(selectedGroup.id, 'OCTAVOS')
+    getPredictions(selectedUserGroup.id, 'OCTAVOS')
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
@@ -51,7 +54,7 @@ function LaterPredictions({ resultsMode }) {
     e.preventDefault();
     setIsLoading(true);
     toast.promise(
-      createPredictions(formatPredictionsToPost(values, selectedGroup.id))
+      createPredictions(formatPredictionsToPost(values, selectedUserGroup.id))
         .then((res) => {
           setErrorMessages(res.data.errors);
         })

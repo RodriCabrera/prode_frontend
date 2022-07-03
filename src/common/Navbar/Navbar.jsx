@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { logoutUser } from '../../api/auth';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { Linkbar } from '../Linkbar/Linkbar';
+import Modal from '../Modal/Modal';
 import { UserMiniAvatar } from '../UserMiniAvatar/UserMiniAvatar';
 import {
   NavbarWrapper,
@@ -13,6 +15,7 @@ import {
   LogoMain,
   LogoSub,
 } from './Navbar.styles';
+import { Button, CardTitle } from '../common.styles';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -27,8 +30,18 @@ const NavLink = styled.button`
 function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+
+  const { width } = useWindowDimensions();
+
+  const isMobile = width <= 768;
+
+  const toggleModal = () => {
+    setShowModal((showing) => !showing);
+  };
 
   const handleLogout = () => {
+    toggleModal();
     logoutUser()
       .then(() => {
         navigate('/auth');
@@ -39,32 +52,44 @@ function Navbar() {
   };
 
   return (
-    <NavbarContainer id="navbar-container">
-      <NavbarWrapper id="navbar-wrapper">
-        <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
-          <LogoContainer>
-            <LogoMain>Prode </LogoMain>
-            <LogoSub>الحمار</LogoSub>
-          </LogoContainer>
-        </ButtonGroup>
-        <ButtonGroup id="button-group-right">
-          {userContext.user ? (
-            <>
-              <NavLink onClick={() => navigate('/profile')}>
-                {userContext.user.name}
-              </NavLink>
-              <NavLink onClick={handleLogout}>Salir</NavLink>
-            </>
-          ) : (
-            <>
-              <Link to="/auth">Login</Link>
-              <Link to="/auth/register">Registrarse</Link>
-            </>
-          )}
-        </ButtonGroup>
-      </NavbarWrapper>
-      {userContext.user && <Linkbar />}
-    </NavbarContainer>
+    <>
+      <Modal show={showModal}>
+        <CardTitle>¿Estás seguro?</CardTitle>
+        <Button type="button" onClick={handleLogout}>
+          Salir
+        </Button>
+      </Modal>
+      <NavbarContainer id="navbar-container">
+        <NavbarWrapper id="navbar-wrapper">
+          <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
+            <LogoContainer>
+              <LogoMain>Prode </LogoMain>
+              <LogoSub>الحمار</LogoSub>
+            </LogoContainer>
+          </ButtonGroup>
+          <ButtonGroup id="button-group-right">
+            {userContext.user ? (
+              <>
+                <NavLink onClick={() => navigate('/profile')}>
+                  <UserMiniAvatar
+                    avatar={userContext.user.avatar}
+                    isSmall
+                    onClick={() => navigate('/profile')}
+                  />
+                </NavLink>
+                <NavLink onClick={toggleModal}>Salir</NavLink>
+              </>
+            ) : (
+              <>
+                <Link to="/auth">Login</Link>
+                <Link to="/auth/register">Registrarse</Link>
+              </>
+            )}
+          </ButtonGroup>
+        </NavbarWrapper>
+      </NavbarContainer>
+      {userContext.user && <Linkbar isMobile={isMobile} />}
+    </>
   );
 }
 

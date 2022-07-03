@@ -25,11 +25,16 @@ export const CardWrapper = styled.div`
   padding: 1rem;
   gap: 1rem;
   flex-direction: column;
+  justify-content: ${({ justify }) => justify || 'intial'};
+  align-items: ${({ align }) => align || 'initial'};
 `;
 
 export const Button = styled.button`
   background-color: inherit;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${({ width }) => width || 'auto'};
   cursor: pointer;
   border: none;
   background-image: linear-gradient(
@@ -45,7 +50,6 @@ export const Button = styled.button`
   color: white;
   letter-spacing: 1px;
   border-radius: 10px;
-  display: block;
   border: 0px;
   color: white;
   font-weight: ${({ weight }) => weight || '600'};
@@ -84,6 +88,19 @@ export const Input = styled.input`
   :disabled {
     background-color: darkgray;
   }
+  text-align: ${({ align }) => align || 'initial'};
+`;
+
+export const TextareaInput = styled.textarea`
+  text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
+  width: ${({ width }) => width};
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  :disabled {
+    background-color: darkgray;
+  }
+  resize: none;
 `;
 
 export function ScoreInput() {
@@ -98,8 +115,9 @@ export const Select = styled.select`
 export const Text = styled.p`
   text-align: ${({ align }) => align || 'left'};
   color: ${({ color }) => color || 'inherit'};
-  font-size: ${(props) => props.size};
+  font-size: ${({ size }) => size};
   font-weight: ${({ weight }) => weight};
+  margin: ${({ margin }) => margin || '0'};
   &:after {
     ${({ withBottomBorder }) =>
       withBottomBorder &&

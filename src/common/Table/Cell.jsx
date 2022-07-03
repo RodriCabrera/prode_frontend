@@ -10,6 +10,7 @@ function Cell({ children, ...props }) {
     fontWeight,
     withBottomBorder,
     padding,
+    margin,
   } = props;
   return (
     <TD borderBottom={borderBottom} colSpan={colSpan} padding={padding}>
@@ -18,6 +19,7 @@ function Cell({ children, ...props }) {
         size={fontSize}
         weight={fontWeight}
         withBottomBorder={withBottomBorder}
+        margin={margin}
       >
         {children}
       </Text>

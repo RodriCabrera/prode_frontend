@@ -6,10 +6,10 @@ import { Header } from './Header';
 import { Row } from './Row';
 import { Container, TableWrapper } from './Table.styles';
 
-function Table({ children }) {
+function Table({ fullWidth, children }) {
   return (
     <Container>
-      <TableWrapper>{children}</TableWrapper>
+      <TableWrapper fullWidth={fullWidth}>{children}</TableWrapper>
     </Container>
   );
 }

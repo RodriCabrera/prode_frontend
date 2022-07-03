@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { getGroupStage } from '../../api/fixture';
-import FixtureTable from './FixtureTable';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { FixtureTable } from './FixtureTable';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
 
@@ -15,6 +16,7 @@ const GroupTableWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex-grow: ${({ fullWidth }) => (fullWidth ? 1 : 'initial')};
 `;
 
 const FixtureTablesContainer = styled.div`
@@ -28,6 +30,10 @@ const FixtureTablesContainer = styled.div`
 function Fixture() {
   const [isLoading, setIsLoading] = useState(false);
   const [fixtureData, setFixtureData] = useState([]);
+
+  const { width } = useWindowDimensions();
+  // TODO: Ponerse de acuerdo en este número, si va a ser global o depende el caso. Porque me parece que sin hacer ajustes acá queda mejor así
+  const isMobile = width <= 600;
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,11 +50,11 @@ function Fixture() {
     return (
       <FixtureTablesContainer>
         {fixtureData.map((group) => (
-          <GroupTableWrapper key={group.id}>
+          <GroupTableWrapper key={group.id} fullWidth={isMobile}>
             <Text size="2rem" align="center" color="darkorange">
               {group.name}
             </Text>
-            <FixtureTable data={group.matches} />
+            <FixtureTable data={group.matches} fullWidth={isMobile} />
           </GroupTableWrapper>
         ))}
       </FixtureTablesContainer>

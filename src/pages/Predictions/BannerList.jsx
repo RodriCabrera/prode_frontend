@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { getPredictions } from '../../api/predictions';
 import { Text } from '../../common/common.styles';
-import {
-  Banner,
-  BannerContainer,
-  BannerDataWrapper,
-  BannerTitle,
-} from './Predictions.styles';
+import { Banner } from './Banner';
+import { BannerContainer } from './Predictions.styles';
 
-function BannerList({ editMode }) {
-  const navigate = useNavigate();
+function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
-  const selectedGroup = useOutletContext();
+  const { selectedUserGroup } = useOutletContext();
   const [groupsPredictedQty, setGroupsPredictedQty] = useState(undefined);
+  const { mode } = useOutletContext();
+  const editMode = mode === 'edit';
 
   useEffect(() => {
     if (editMode) {
       setIsLoading(true);
-      getPredictions(selectedGroup.id, 'GRUPOS')
+      getPredictions(selectedUserGroup?.id, 'GRUPOS')
         .then((res) => {
           setGroupsPredictedQty(res.data.length);
         })
@@ -26,78 +23,74 @@ function BannerList({ editMode }) {
           setIsLoading(false);
         });
     }
-  }, [selectedGroup]);
-
-  // TODO: Habría que emprolijar esta funcion para que vaya liberando los stages según la fecha y hora.
-  // *: Por ahora lo dejo desactivado para poder ver los banners con la data del mundial pasado
-  // eslint-disable-next-line no-unused-vars
-  const setDisabledField = (disablingDate, enablingDate) => {
-    // const today = new Date();
-    // const endDate = new Date(disablingDate);
-    // const startDate = new Date(enablingDate);
-    // return today > endDate || today < startDate;
-    return '';
-  };
+  }, [selectedUserGroup, editMode]);
 
   const calculatePercentage = (predictionsQty, totalGroups) => {
     return Math.round((predictionsQty / totalGroups) * 100);
   };
+
+  const bannerData = [
+    {
+      id: 1,
+      title: 'GRUPOS',
+      path: 'first-stage',
+      percentage: calculatePercentage(groupsPredictedQty, 48),
+      disabledStart: '2022-11-20',
+      disabledEnd: '2022-01-01',
+    },
+    {
+      id: 2,
+      title: 'OCTAVOS',
+      path: 'later-stages/16round',
+      percentage: null,
+      disabledStart: '2022-11-20',
+      disabledEnd: '2022-01-01',
+    },
+    {
+      id: 3,
+      title: 'CUARTOS',
+      path: 'later-stages/8round',
+      percentage: null,
+      disabledStart: '2022-11-20',
+      disabledEnd: '2022-01-01',
+    },
+    {
+      id: 4,
+      title: 'SEMIS',
+      path: 'later-stages/semis',
+      percentage: null,
+      disabledStart: '2022-11-20',
+      disabledEnd: '2022-01-01',
+    },
+    {
+      id: 5,
+      title: 'FINAL',
+      path: 'later-stages/semis',
+      percentage: null,
+      disabledStart: '2022-11-20',
+      disabledEnd: '2022-01-01',
+    },
+  ];
 
   return (
     <BannerContainer>
       <Text align="center" size="2rem" weight="700">
         FASES
       </Text>
-      <Banner
-        disabled={setDisabledField('2022-11-20', '2022-01-01')}
-        onClick={() => navigate('first-stage')}
-      >
-        <BannerDataWrapper>
-          <BannerTitle>GRUPOS</BannerTitle>
-          <p>Ver/Editar</p>
-        </BannerDataWrapper>
-        {!isLoading && editMode && (
-          <BannerDataWrapper>
-            {calculatePercentage(groupsPredictedQty, 48)}% completo
-          </BannerDataWrapper>
-        )}
-      </Banner>
-      <Banner
-        disabled={setDisabledField('2022-13-02', '2022-12-02')}
-        onClick={() => navigate('later-stages/16round')}
-      >
-        <BannerDataWrapper>
-          <BannerTitle>OCTAVOS</BannerTitle>
-          <p>Ver/Editar</p>
-        </BannerDataWrapper>
-      </Banner>
-      <Banner
-        disabled={setDisabledField('2022-12-08', '2022-12-02')}
-        onClick={() => navigate('later-stages/8round')}
-      >
-        <BannerDataWrapper>
-          <BannerTitle>CUARTOS</BannerTitle>
-          <p>Ver/Editar</p>
-        </BannerDataWrapper>
-      </Banner>
-      <Banner
-        disabled={setDisabledField('2022-12-12', '2022-12-02')}
-        onClick={() => navigate('later-stages/semis')}
-      >
-        <BannerDataWrapper>
-          <BannerTitle>SEMIFINALES</BannerTitle>
-          <p>Ver/Editar</p>
-        </BannerDataWrapper>
-      </Banner>
-      <Banner
-        disabled={setDisabledField('2022-12-16', '2022-12-02')}
-        onClick={() => navigate('later-stages/final')}
-      >
-        <BannerDataWrapper>
-          <BannerTitle>FINAL</BannerTitle>
-          <p>Ver/Editar</p>
-        </BannerDataWrapper>
-      </Banner>
+      {bannerData.map((stage) => {
+        return (
+          <Banner
+            key={stage.id}
+            title={stage.title}
+            path={stage.path}
+            percentage={stage.percentage}
+            isLoading={isLoading}
+            editMode={editMode}
+            disabledStart={stage.disabledStart}
+            disabledEnd={stage.disabledStart}
+          />
+        );
+      })}
     </BannerContainer>
   );
 }

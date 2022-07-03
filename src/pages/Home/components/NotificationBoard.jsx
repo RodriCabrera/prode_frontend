@@ -1,60 +1,45 @@
 import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getUserGroups } from '../../../api/groups';
 import { getPredictions } from '../../../api/predictions';
-import {
-  CardContainer,
-  CardWrapper,
-  Text,
-} from '../../../common/common.styles';
+import { CardContainer, CardWrapper } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
+import { NoPredictionNotification } from './NoPredictionNotification';
 
 function NotificationBoard() {
-  const [groups, setGroups] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [predictions, setPredictions] = useState([]);
+  const [loadingCheck, setloadingCheck] = useState({
+    predictions: false,
+    fixture: false,
+  });
 
   useEffect(() => {
-    setIsLoading(true);
-    getUserGroups()
-      .then((res) => setGroups(res))
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
     getPredictions()
-      .then((res) => setPredictions(res))
-      .finally(() => setIsLoading(false));
+      .then((res) => setPredictions(res.data))
+      .finally(() => {
+        setloadingCheck({ ...loadingCheck, predictions: true });
+      });
   }, []);
 
-  const renderBoards = () => {
-    // CONDITIONAL BOARD RENDERING ACCORDING TO USER STATUS
-    if (isLoading) return <Spinner />;
-    // IF USER IS IN NO GROUPS:
-    if (isEmpty(groups.data)) {
-      return (
-        <Text weight="500" align="center">
-          Empezá por crear o unirte a un grupo: <Link to="/groups">Aca</Link>
-        </Text>
-      );
+  function renderBoards() {
+    // YES GROUPS - NO PREDICTIONS:
+    if (loadingCheck.predictions && isEmpty(predictions)) {
+      return <NoPredictionNotification />;
     }
-    // IF USER IS IN GROUPS:
-    if (isEmpty(predictions.data))
-      return (
-        <>
-          <Text>Aún no hiciste ninguna predicción.</Text>
-          <Text>
-            {' '}
-            Hacelo desde{' '}
-            <Link to="/predictions/edit?mode=edit">esta sección</Link>
-          </Text>
-        </>
-      );
-    return '';
-  };
-  if (!isEmpty(predictions.data)) return undefined;
+
+    return <Spinner />;
+  }
+
+  if (!isEmpty(predictions) && loadingCheck.predictions)
+    return (
+      <CardContainer id="next-5-card-container">
+        {/* TODO: manejar estilos más elegantemente? Otro styled component distinto para esto? */}
+        <CardWrapper
+          style={{ flexGrow: 1, maxWidth: '100%', width: 'initial' }}
+        >
+          <h1>Otros contenidos para la página de inicio?</h1>
+        </CardWrapper>
+      </CardContainer>
+    );
   return (
     <CardContainer>
       <CardWrapper fullWidth>{renderBoards()}</CardWrapper>

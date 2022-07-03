@@ -23,3 +23,7 @@ export const getUserGroups = () => {
 export const getGroupData = (groupName) => {
   return withCredentials.get(`/group/?groupName=${groupName}`);
 };
+
+export const getGroupRules = (groupName) => {
+  return withCredentials.get(`/group/rules?groupName=${groupName}`);
+};

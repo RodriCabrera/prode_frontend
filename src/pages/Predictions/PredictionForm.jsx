@@ -1,12 +1,11 @@
 /* eslint-disable react/forbid-prop-types */
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
 import Table from '../../common/Table/Table';
-import { getFlagUrl, parseDate } from '../pagesHelpers';
+import { getFlagUrl } from '../pagesHelpers';
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
@@ -14,6 +13,8 @@ import {
   groupNumberMod,
 } from './predictionsPageUtils';
 
+// TODO: Para dehabilitar inputs si se pasó la fecha:
+// Si Date.now es mayor a la fecha del partido menos el time limit ya no podes hacer predicciones.
 export function PredictionForm(props) {
   const {
     stageData,
@@ -24,12 +25,12 @@ export function PredictionForm(props) {
     handleNextGroup,
     handlePrevGroup,
     errorMessages,
-    resultsMode,
     groupPhase,
   } = props;
 
-  const [selectedGroup] = useOutletContext();
   const [data, setData] = useState(stageData);
+  const { selectedUserGroup, mode } = useOutletContext();
+  const resultsMode = mode === 'results';
 
   useEffect(() => {
     if (stageData.length > 0) {
@@ -52,14 +53,16 @@ export function PredictionForm(props) {
           <Table.Body>
             {data?.map((match) => {
               const predictionStatus = () =>
-                checkPredictionResult(
-                  data,
-                  groupNumberMod(groupNumber),
-                  match.id,
-                  'away',
-                  values[`${match.id}-away`],
-                  values[`${match.id}-home`]
-                );
+                match.status === 0
+                  ? checkPredictionResult(
+                      data,
+                      groupNumberMod(groupNumber),
+                      match.id,
+                      'away',
+                      values[`${match.id}-away`],
+                      values[`${match.id}-home`]
+                    )
+                  : 'silver';
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
 
               const renderInfoIcon = () => {
@@ -91,7 +94,7 @@ export function PredictionForm(props) {
               return (
                 <React.Fragment key={match.id}>
                   <Table.Row>
-                    <Table.Cell
+                    {/* <Table.Cell
                       colSpan="6"
                       withBottomBorder
                       fontWeight="500"
@@ -99,10 +102,10 @@ export function PredictionForm(props) {
                       padding="5px"
                     >
                       {parseDate(match.date)}
-                    </Table.Cell>
+                    </Table.Cell> */}
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell padding="0">
+                    <Table.Cell padding="1rem 0" margin="0 0 0 1rem">
                       {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
@@ -113,6 +116,7 @@ export function PredictionForm(props) {
                         type="number"
                         width="30px"
                         min={0}
+                        align="center"
                         id={`${match.id}-away`}
                         value={values[`${match.id}-away`]}
                         name={`${match.id}-away`}
@@ -140,6 +144,7 @@ export function PredictionForm(props) {
                         type="number"
                         width="30px"
                         min={0}
+                        align="center"
                         name={`${match.id}-home`}
                         id={`${match.id}-home`}
                         value={values[`${match.id}-home`]}
@@ -153,7 +158,7 @@ export function PredictionForm(props) {
                     <Table.Cell padding="5px" fontWeight="800">
                       {match.home?.shortName || '?'}
                     </Table.Cell>
-                    <Table.Cell padding="0">
+                    <Table.Cell padding="1rem 0" margin="0 1rem 0 0">
                       {getFlagUrl(match.home?.flag, 1)}
                     </Table.Cell>
                   </Table.Row>
@@ -163,8 +168,10 @@ export function PredictionForm(props) {
           </Table.Body>
         </Table>
         {!resultsMode && (
-          <Button type="submit" disabled={!selectedGroup?.id}>
-            {selectedGroup?.id ? 'Enviar prediccion' : 'Seleccione un grupo'}
+          <Button type="submit" disabled={!selectedUserGroup?.id}>
+            {selectedUserGroup?.id
+              ? 'Enviar prediccion'
+              : 'Seleccione un grupo'}
           </Button>
         )}
         {groupPhase && (
@@ -174,11 +181,19 @@ export function PredictionForm(props) {
               onClick={handlePrevGroup}
               // disabled={groupNumber === 0}
               type="reset"
+              width="100%"
             >
-              Anterior
+              <span className="material-symbols-outlined">chevron_left</span>
+              {stageData[groupNumberMod(groupNumber - 1)]?.name}
             </Button>
-            <Button grayscale onClick={handleNextGroup} type="reset">
-              Siguiente
+            <Button
+              grayscale
+              onClick={handleNextGroup}
+              type="reset"
+              width="100%"
+            >
+              {stageData[groupNumberMod(groupNumber + 1)]?.name}
+              <span className="material-symbols-outlined">chevron_right</span>
             </Button>
           </ButtonWrapper>
         )}
@@ -194,8 +209,8 @@ const ResultsInput = styled(Input)`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  justify-content: space-evenly;
   gap: 1rem;
-  flex-wrap: wrap;
 `;
 
 const FormWrapper = styled.div`
@@ -203,15 +218,3 @@ const FormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-PredictionForm.propTypes = {
-  stageData: PropTypes.array.isRequired,
-  groupNumber: PropTypes.number,
-  // values: PropTypes.object.isRequired,
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  handleNextGroup: PropTypes.func,
-  handlePrevGroup: PropTypes.func,
-  // errorMessages: PropTypes.object,
-  resultsMode: PropTypes.bool,
-};

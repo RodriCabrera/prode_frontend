@@ -6,11 +6,16 @@ export const Container = styled.div`
 `;
 
 export const TableWrapper = styled.table`
-  border: 1px solid darkgray;
+  border: ${({ fullWidth }) => (fullWidth ? 'none' : '1px solid darkgray')};
   border-radius: 18px;
   border-collapse: separate;
-  /* width: 100%; */
-  max-width: 660px;
+  margin: auto;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'initial')};
+  max-width: ${({ fullWidth }) => (fullWidth ? '100%' : '660px')};
+  & td {
+    padding-left: ${({ fullWidth }) => (fullWidth ? '0' : '')};
+    padding-right: ${({ fullWidth }) => (fullWidth ? '0' : '')};
+  }
 `;
 
 export const TH = styled.th`

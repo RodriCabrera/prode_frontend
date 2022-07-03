@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Spinner } from '../../common/Spinner/Spinner';
 import {
   CardContainer,
@@ -8,15 +7,14 @@ import {
   Text,
 } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
-import FixtureTable from '../Fixture/FixtureTable';
+import { FixtureTable } from '../Fixture/FixtureTable';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [otherUserPredictions, setOtherUserPredictions] = useState([]);
-  const location = useLocation();
-  console.log(location);
+
   useEffect(() => {
     if (!group || !user) return;
     setIsLoading(true);

@@ -14,6 +14,7 @@ const Layout = styled.div`
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 3rem;
   /* gap: 1rem; */
   /* width: 100vw; */
 `;
