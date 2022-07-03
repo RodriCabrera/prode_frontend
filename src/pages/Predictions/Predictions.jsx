@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import ToggleSwitch from '../../common/ToggleSwitch';
-import {
-  BannerTitle,
-  PredictionsPageWrapper,
-  ToggleContainer,
-} from './Predictions.styles';
+import ToggleSwitch from '../../common/ToggleSwitch/ToggleSwitch';
+import { BannerTitle, PredictionsPageWrapper } from './Predictions.styles';
 import { getUserGroups } from '../../api/groups';
 import { GroupSelector } from './components/GroupSelector';
 
@@ -46,9 +42,7 @@ function Predictions() {
         />
       )}
 
-      <ToggleContainer>
-        <ToggleSwitch mode={mode} setMode={setMode} />
-      </ToggleContainer>
+      <ToggleSwitch mode={mode} setMode={setMode} />
       <Outlet context={{ mode, selectedUserGroup }} />
     </PredictionsPageWrapper>
   );
