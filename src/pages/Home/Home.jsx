@@ -29,14 +29,12 @@ const Row = styled.div`
 
 function Home() {
   const userContext = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [fixtureShortData, setFixtureShortData] = useState([]);
   const { width } = useWindowDimensions();
   const isMobile = width <= 768;
 
   useEffect(() => {
-    setIsLoading(true);
     getFixtureByStageId('GRUPOS')
       .then((res) => {
         setFixtureShortData(
@@ -45,9 +43,7 @@ function Home() {
             .splice(0, 5)
         );
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => {});
   }, []);
 
   useEffect(() => {
