@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Text, CardTitle, Button } from '../../../common/common.styles';
+import { translateDuration } from '../../pagesHelpers';
 
 const ConfirmWrapper = styled.div`
   min-width: 200px;
@@ -12,21 +13,6 @@ const ConfirmWrapper = styled.div`
 `;
 
 function GroupConfirm({ groupName, userGroupData, confirmText }) {
-  const translateDuration = (miliseconds) => {
-    switch (miliseconds) {
-      case 1000 * 60 * 60 * 1:
-        return ' una hora antes del partido';
-      case 1000 * 60 * 60 * 12:
-        return ' doce horas antes del partido';
-      case 1000 * 60 * 60 * 24:
-        return ' un día antes del partido';
-      case 1000 * 60 * 60 * 24 * 7:
-        return ' una semana antes del partido';
-      case 0:
-      default:
-        return ' el comienzo del partido';
-    }
-  };
   return (
     userGroupData && (
       <ConfirmWrapper>

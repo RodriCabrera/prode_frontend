@@ -1,92 +1,45 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { isEmpty } from 'lodash';
-import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
-import { getGroupScores } from '../../api/groups';
-import { ListElement } from '../../common/Lists/ListElement';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getGroupData } from '../../api/groups';
 import { Spinner } from '../../common/Spinner/Spinner';
-import Modal from '../../common/Modal/Modal';
-import {
-  Text,
-  CardContainer,
-  Button,
-  CardWrapper,
-  CardTitle,
-} from '../../common/common.styles';
-import LeaveGroupForm from './LeaveGroupForm';
-import { AuthContext } from '../../common/AuthProvider';
-import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
+import NotFound from '../NotFound';
+import InGroup from './components/InGroup';
+import NotInGroup from './components/NotInGroup';
 
 function GroupPage() {
   const { name } = useParams();
-  const navigate = useNavigate();
-  const [groupScoresData, setGroupScoresData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showLeave, setShowLeave] = useState(false);
-  const userContext = useContext(AuthContext);
 
-  useEffect(() => {
-    setIsLoading(true);
-    getGroupScores(name)
+  const [isUserInGroup, setIsUserInGroup] = useState(undefined);
+  const [groupData, setGroupData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [groupExists, setGroupExists] = useState(true);
+
+  const updateGroupData = () => {
+    setIsUserInGroup(undefined);
+    getGroupData(name)
       .then((res) => {
-        setGroupScoresData(res.data);
+        setIsUserInGroup(true);
+        setGroupData(res.data.groupData);
+      })
+      .catch((err) => {
+        if (err.response.status === 401) setIsUserInGroup(false);
+        if (err.response.status === 404) setGroupExists(false);
       })
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    updateGroupData();
   }, []);
 
-  const onGroupExit = () => {
-    navigate('/groups');
-  };
-
-  const handleUserClick = (user) => {
-    if (user === userContext.user.name) return navigate('/profile/');
-    return navigate(`/profile/${user}`);
-  };
-
-  return (
-    <>
-      {isLoading && <Spinner />}
-      {groupScoresData.group && (
-        <CardContainer>
-          <CardWrapper>
-            <GoBackButton />
-            <CardTitle size="2.5rem" align="center">
-              {name}
-            </CardTitle>
-            <Text size="1.5rem">Admin: {groupScoresData.group.owner}</Text>
-            <Text size="1.5rem">Miembros del grupo:</Text>
-            {isEmpty(groupScoresData)
-              ? 'Loading member scores...'
-              : groupScoresData.scores?.map((score) => (
-                  <ListElement
-                    onClick={() => handleUserClick(score.user)}
-                    key={score.user}
-                    avatar={
-                      <UserMiniAvatar avatar={score.avatar} name={score.user} />
-                    }
-                  >
-                    <Text>{`${score.user} : ${score.score} pts`}</Text>
-                  </ListElement>
-                ))}
-            <CardContainer>
-              <Button
-                grayscale
-                onClick={() => {
-                  setShowLeave(!showLeave);
-                }}
-              >
-                Salir del grupo?
-              </Button>
-            </CardContainer>
-            <Modal show={showLeave}>
-              <LeaveGroupForm updater={onGroupExit} />
-            </Modal>
-          </CardWrapper>
-        </CardContainer>
-      )}
-    </>
+  if (groupExists === false) return <NotFound />;
+  if (isLoading || isUserInGroup === undefined) return <Spinner />;
+  return isUserInGroup ? (
+    <InGroup groupData={groupData} />
+  ) : (
+    <NotInGroup name={name} updater={updateGroupData} />
   );
 }
 

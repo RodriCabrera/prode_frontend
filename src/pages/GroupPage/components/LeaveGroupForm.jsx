@@ -2,8 +2,14 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { leaveGroup } from '../../api/groups';
-import { Button, Input, Label, Text, Form } from '../../common/common.styles';
+import { leaveGroup } from '../../../api/groups';
+import {
+  Button,
+  Input,
+  Label,
+  Text,
+  Form,
+} from '../../../common/common.styles';
 
 function LeaveGroupForm({ updater }) {
   const { name } = useParams();
