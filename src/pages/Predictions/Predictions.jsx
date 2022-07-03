@@ -37,7 +37,7 @@ function Predictions() {
     <PredictionsPageWrapper id="mi-prode-container">
       <BannerTitle align="center">PREDICCIONES</BannerTitle>
 
-      {userGroupList.length !== 1 && (
+      {userGroupList.length > 1 && (
         <GroupSelector
           isLoading={isLoading}
           selectedUserGroup={selectedUserGroup}
