@@ -36,16 +36,3 @@ export const BannerTitle = styled(Text)`
   font-weight: 500;
   font-size: 2.5rem;
 `;
-
-export const ToggleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  /* background-color: dimgray; */
-  padding: 1rem 0;
-  border-radius: 1rem;
-`;
-export const ToggleWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  gap: 1rem;
-`;

@@ -6,7 +6,11 @@ function Modal({ children, show }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setOpen((value) => !value);
+    setOpen((value) => {
+      if (show && !value) return true;
+      if (!show && value) return false;
+      return value;
+    });
   }, [show]);
 
   useEffect(() => {

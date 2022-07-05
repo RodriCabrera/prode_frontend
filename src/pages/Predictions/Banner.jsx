@@ -1,5 +1,6 @@
 import { isNil } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import { Text } from '../../common/common.styles';
 import {
   BannerButton,
   BannerDataWrapper,
@@ -27,20 +28,33 @@ export function Banner({
     return '';
   };
 
+  const renderPercentageInfo = () => {
+    if (editMode) {
+      if (isLoading) {
+        return <Text weight="200">Cargando %...</Text>;
+      }
+      return (
+        editMode && (
+          <Text weight="400" size="0.8rem">
+            {!isNil(percentage) ? `${percentage} % completo` : ''}
+          </Text>
+        )
+      );
+    }
+    return null;
+  };
+
   return (
     <BannerButton
       disabled={setDisabledField(disabledStart, disabledEnd)}
       onClick={() => navigate(path)}
+      tertiary={editMode}
     >
       <BannerDataWrapper>
         <BannerTitle>{title}</BannerTitle>
         <p>Ver/Editar</p>
       </BannerDataWrapper>
-      {!isLoading && editMode && (
-        <BannerDataWrapper>
-          {!isNil(percentage) ? `${percentage} % completo` : ''}
-        </BannerDataWrapper>
-      )}
+      {renderPercentageInfo()}
     </BannerButton>
   );
 }
