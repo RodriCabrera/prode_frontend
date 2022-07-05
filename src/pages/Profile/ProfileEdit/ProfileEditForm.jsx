@@ -18,7 +18,6 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState('');
-  // const [showModal, setShowModal] = useState(false);
   const { showModal, toggleModal } = useToggleModal();
   const handleNameChange = (e) => {
     setuserName(e.target.value);
@@ -32,6 +31,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
       avatar: selectedAvatar || profile.avatar,
     })
       .then(() => {
+        toggleModal();
         updateProfile();
       })
       .catch((err) => alert(err))
