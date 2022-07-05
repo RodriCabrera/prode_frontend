@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { logoutUser } from '../../api/auth';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import useToggleModal from '../../hooks/useToggleModal';
 import { Linkbar } from '../Linkbar/Linkbar';
 import Modal from '../Modal/Modal';
 import { UserMiniAvatar } from '../UserMiniAvatar/UserMiniAvatar';
@@ -30,15 +31,12 @@ const NavLink = styled.button`
 function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
+
+  const { showModal, toggleModal } = useToggleModal();
 
   const { width } = useWindowDimensions();
 
   const isMobile = width <= 768;
-
-  const toggleModal = () => {
-    setShowModal((showing) => !showing);
-  };
 
   const handleLogout = () => {
     toggleModal();
@@ -53,7 +51,7 @@ function Navbar() {
 
   return (
     <>
-      <Modal show={showModal}>
+      <Modal show={showModal} toggle={toggleModal}>
         <CardTitle>¿Estás seguro?</CardTitle>
         <Button type="button" onClick={handleLogout}>
           Salir

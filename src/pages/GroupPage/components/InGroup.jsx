@@ -5,6 +5,7 @@ import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
 import { getGroupScores } from '../../../api/groups';
 import { ListElement } from '../../../common/Lists/ListElement';
 import { Spinner } from '../../../common/Spinner/Spinner';
+import useToggleModal from '../../../hooks/useToggleModal';
 import Modal from '../../../common/Modal/Modal';
 import {
   Text,
@@ -22,7 +23,7 @@ function InGroup({ groupData }) {
   const navigate = useNavigate();
   const [groupScoresData, setGroupScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showLeave, setShowLeave] = useState(false);
+  const { showModal, toggleModal } = useToggleModal();
   const userContext = useContext(AuthContext);
 
   useEffect(() => {
@@ -73,16 +74,11 @@ function InGroup({ groupData }) {
                   </ListElement>
                 ))}
             <CardContainer>
-              <Button
-                grayscale
-                onClick={() => {
-                  setShowLeave(!showLeave);
-                }}
-              >
+              <Button grayscale onClick={toggleModal}>
                 Salir del grupo?
               </Button>
             </CardContainer>
-            <Modal show={showLeave}>
+            <Modal show={showModal} toggle={toggleModal}>
               <LeaveGroupForm updater={onGroupExit} />
             </Modal>
           </>

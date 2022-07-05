@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { editProfile } from '../../../api/profiles';
 import Modal from '../../../common/Modal/Modal';
+import useToggleModal from '../../../hooks/useToggleModal';
 import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
 import {
   Button,
@@ -17,13 +18,10 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState('');
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+  const { showModal, toggleModal } = useToggleModal();
   const handleNameChange = (e) => {
     setuserName(e.target.value);
-  };
-
-  const toggleModal = () => {
-    setShowModal((value) => !value);
   };
 
   const handleSubmit = (e) => {
@@ -76,7 +74,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
           >
             Actualizar Perfil
           </Button>
-          <Modal show={showModal}>
+          <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>
               Tu nuevo perfil
             </Text>

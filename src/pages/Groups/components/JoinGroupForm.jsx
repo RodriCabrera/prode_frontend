@@ -4,18 +4,19 @@ import { toast } from 'react-toastify';
 import GroupConfirm from './GroupConfirm';
 import { joinGroup, getGroupRules } from '../../../api/groups';
 import { Button, Input, Label, Form } from '../../../common/common.styles';
+import useToggleModal from '../../../hooks/useToggleModal';
 import Modal from '../../../common/Modal/Modal';
 
 function JoinGroupForm({ updateList }) {
   const [isLoading, setIsLoading] = useState(false);
   const { values, handleChange } = useFormik({ initialValues: {} });
   const [showForm, setShowForm] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [groupRules, setGroupRules] = useState(null);
+  const { showModal, toggleModal } = useToggleModal();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowModal((value) => !value);
+    toggleModal();
     setIsLoading(true);
 
     toast.promise(
@@ -45,7 +46,7 @@ function JoinGroupForm({ updateList }) {
         .then(({ data }) => {
           setGroupRules(data);
         })
-        .then(() => setShowModal(true))
+        .then(() => toggleModal())
         .finally(() => {
           setIsLoading(false);
         }),
@@ -91,7 +92,7 @@ function JoinGroupForm({ updateList }) {
           >
             Buscar grupo
           </Button>
-          <Modal show={showModal && groupRules}>
+          <Modal show={showModal && groupRules} toggle={toggleModal}>
             <GroupConfirm
               groupName={values.groupName}
               userGroupData={groupRules}
