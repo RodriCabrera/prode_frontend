@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import GroupConfirm from './GroupConfirm';
 import { createGroup } from '../../../api/groups';
 import ScoringInputs from './ScoringInputs';
+import useToggleModal from '../../../hooks/useToggleModal';
 import Modal from '../../../common/Modal/Modal';
 import {
   Button,
@@ -21,7 +22,7 @@ function CreateGroupForm({ updateList }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const { showModal, toggleModal } = useToggleModal();
   const { values, handleChange, errors } = useFormik({
     initialValues: {
       name: '',
@@ -32,10 +33,6 @@ function CreateGroupForm({ updateList }) {
     },
     validationSchema: groupsSchema.create,
   });
-
-  const toggleModal = () => {
-    setShowModal((value) => !value);
-  };
 
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -134,7 +131,7 @@ function CreateGroupForm({ updateList }) {
           >
             {!isEmpty(errors) ? errors.name || errors.manifesto : 'Crear grupo'}
           </Button>
-          <Modal show={showModal}>
+          <Modal show={showModal} toggle={toggleModal}>
             <GroupConfirm
               groupName={values.name.toUpperCase()}
               userGroupData={{

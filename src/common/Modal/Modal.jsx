@@ -1,22 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Backdrop, ModalContainer, CloseModalButton } from './modal.styles';
 
-function Modal({ children, show }) {
+function Modal({ children, show, toggle }) {
   const modalRef = useRef();
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen((value) => {
-      if (show && !value) return true;
-      if (!show && value) return false;
-      return value;
-    });
-  }, [show]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setOpen(false);
+        toggle();
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -25,11 +16,11 @@ function Modal({ children, show }) {
     };
   }, [modalRef]);
 
-  return open ? (
+  return show ? (
     <>
       <Backdrop />
       <ModalContainer ref={modalRef}>
-        <CloseModalButton onClick={() => setOpen(false)} type="button">
+        <CloseModalButton onClick={toggle} type="button">
           <span className="material-symbols-outlined">close</span>
         </CloseModalButton>
         {children}
