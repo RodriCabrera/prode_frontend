@@ -7,8 +7,9 @@ function Modal({ children, show }) {
 
   useEffect(() => {
     setOpen((value) => {
-      if (show && !value) setOpen(true);
-      if (!show && value) setOpen(false);
+      if (show && !value) return true;
+      if (!show && value) return false;
+      return value;
     });
   }, [show]);
 
