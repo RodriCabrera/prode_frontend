@@ -12,6 +12,8 @@ export const getStageId = (stageName) => {
       return 'CUARTOS';
     case 'semis':
       return 'SEMIFINAL';
+    case 'tercer_puesto':
+      return 'TERCER_PUESTO';
     case 'final':
       return 'FINAL';
     default:

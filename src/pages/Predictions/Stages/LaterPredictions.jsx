@@ -37,7 +37,7 @@ function LaterPredictions() {
 
   const updatePredictions = () => {
     setIsLoading(true);
-    getPredictions(selectedUserGroup.id, 'OCTAVOS')
+    getPredictions(selectedUserGroup.id, getStageId(stage))
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { getPredictions } from '../../api/predictions';
+import { getPredictionCompletePercentage } from '../../api/predictions';
 import { Text } from '../../common/common.styles';
 import { Banner } from './Banner';
 import { BannerContainer } from './Predictions.styles';
@@ -8,24 +8,25 @@ import { BannerContainer } from './Predictions.styles';
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
   const { selectedUserGroup, mode } = useOutletContext();
-  const [groupsPredictedQty, setGroupsPredictedQty] = useState(undefined);
+  const [predictedPercentages, setPredictedPercentages] = useState([]);
   const editMode = mode === 'edit';
 
   useEffect(() => {
     if (editMode) {
       setIsLoading(true);
-      getPredictions(selectedUserGroup?.id, 'GRUPOS')
+      getPredictionCompletePercentage(selectedUserGroup?.id)
         .then((res) => {
-          setGroupsPredictedQty(res.data.length);
+          console.log(res.data);
+          setPredictedPercentages(res.data);
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
-  }, [selectedUserGroup]);
+  }, [selectedUserGroup, editMode]);
 
-  const calculatePercentage = (predictionsQty, totalGroups) => {
-    return Math.round((predictionsQty / totalGroups) * 100);
+  const calculatePercentage = (quantities) => {
+    return Math.round((quantities.predicted / quantities.total) * 100);
   };
 
   const bannerData = [
@@ -33,7 +34,9 @@ function BannerList() {
       id: 1,
       title: 'GRUPOS',
       path: 'first-stage',
-      percentage: calculatePercentage(groupsPredictedQty, 48),
+      percentage: predictedPercentages.GRUPOS
+        ? calculatePercentage(predictedPercentages.GRUPOS)
+        : null,
       disabledStart: '2022-11-20',
       disabledEnd: '2022-01-01',
     },
@@ -41,7 +44,9 @@ function BannerList() {
       id: 2,
       title: 'OCTAVOS',
       path: 'later-stages/16round',
-      percentage: null,
+      percentage: predictedPercentages.OCTAVOS
+        ? calculatePercentage(predictedPercentages.OCTAVOS)
+        : null,
       disabledStart: '2022-11-20',
       disabledEnd: '2022-01-01',
     },
@@ -49,7 +54,9 @@ function BannerList() {
       id: 3,
       title: 'CUARTOS',
       path: 'later-stages/8round',
-      percentage: null,
+      percentage: predictedPercentages.CUARTOS
+        ? calculatePercentage(predictedPercentages.CUARTOS)
+        : null,
       disabledStart: '2022-11-20',
       disabledEnd: '2022-01-01',
     },
@@ -57,15 +64,29 @@ function BannerList() {
       id: 4,
       title: 'SEMIS',
       path: 'later-stages/semis',
-      percentage: null,
+      percentage: predictedPercentages.SEMIFINAL
+        ? calculatePercentage(predictedPercentages.SEMIFINAL)
+        : null,
       disabledStart: '2022-11-20',
       disabledEnd: '2022-01-01',
     },
     {
       id: 5,
+      title: 'TERCER PUESTO',
+      path: 'later-stages/tercer_puesto',
+      percentage: predictedPercentages.TERCER_PUESTO
+        ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
+        : null,
+      disabledStart: '2022-11-20',
+      disabledEnd: '2022-01-01',
+    },
+    {
+      id: 6,
       title: 'FINAL',
-      path: 'later-stages/semis',
-      percentage: null,
+      path: 'later-stages/final',
+      percentage: predictedPercentages.FINAL
+        ? calculatePercentage(predictedPercentages.FINAL)
+        : null,
       disabledStart: '2022-11-20',
       disabledEnd: '2022-01-01',
     },
