@@ -107,13 +107,13 @@ function FirstStage() {
       {selectedUserGroup ? (
         <PredictionForm
           groupNumber={groupNumber}
-          handleSubmit={!resultsMode && handleSubmit}
+          handleSubmit={!resultsMode ? handleSubmit : undefined}
           stageData={firstStageData}
           errorMessages={errorMessages}
           handleNextGroup={handleNextGroup}
           handlePrevGroup={handlePrevGroup}
           values={values}
-          handleChange={!resultsMode && handleChange}
+          handleChange={!resultsMode ? handleChange : undefined}
           groupPhase
         />
       ) : (

@@ -92,7 +92,7 @@ function LaterPredictions() {
       {selectedUserGroup ? (
         <PredictionForm
           resultsMode={resultsMode}
-          handleSubmit={!resultsMode && handleSubmit}
+          handleSubmit={!resultsMode ? handleSubmit : undefined}
           stageData={stageData}
           errorMessages={errorMessages}
           values={values}
