@@ -35,7 +35,7 @@ export function Banner({
       }
       return (
         editMode && (
-          <Text weight="400" size="0.8rem">
+          <Text weight="200">
             {!isNil(percentage) ? `${percentage} % completo` : ''}
           </Text>
         )

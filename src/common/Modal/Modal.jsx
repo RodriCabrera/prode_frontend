@@ -1,6 +1,16 @@
+import styled from '@emotion/styled';
 import React, { useEffect, useRef } from 'react';
+import { Button } from '../common.styles';
 import { Backdrop, ModalContainer, CloseModalButton } from './modal.styles';
 
+const ModalContentWrapper = styled.div`
+  min-width: 200px;
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  flex-direction: column;
+`;
 function Modal({ children, show, toggle }) {
   const modalRef = useRef();
 
@@ -23,7 +33,12 @@ function Modal({ children, show, toggle }) {
         <CloseModalButton onClick={toggle} type="button">
           <span className="material-symbols-outlined">close</span>
         </CloseModalButton>
-        {children}
+        <ModalContentWrapper>
+          {children}
+          <Button grayscale onClick={toggle}>
+            Cancelar
+          </Button>
+        </ModalContentWrapper>
       </ModalContainer>
     </>
   ) : null;

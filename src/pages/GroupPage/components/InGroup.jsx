@@ -49,7 +49,7 @@ function InGroup({ groupData }) {
 
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper fullWidth>
         <GoBackButton />
         <CardTitle size="2.5rem" align="center">
           {groupData?.name}
