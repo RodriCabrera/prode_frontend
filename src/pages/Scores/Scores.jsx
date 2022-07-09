@@ -18,7 +18,7 @@ function Scores() {
 
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper fullWidth>
         <Text size="2rem" align="center">
           Ver puntajes
         </Text>
