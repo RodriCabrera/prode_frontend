@@ -12,18 +12,21 @@ import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
 } from '../predictionsPageUtils';
+import { Text } from '../../../common/common.styles';
+import { usePrompt } from '../../../hooks/routerPrompt';
 
 function LaterPredictions() {
   const { stage } = useParams();
   const [stageData, setStageData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { selectedUserGroup } = useOutletContext();
+  const { selectedUserGroup, mode } = useOutletContext();
   const [errorMessages, setErrorMessages] = useState([]);
-  const { values, handleChange, resetForm } = useFormik({
+  const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
-  const { mode } = useOutletContext();
   const resultsMode = mode === 'results';
+
+  usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,7 +40,7 @@ function LaterPredictions() {
 
   const updatePredictions = () => {
     setIsLoading(true);
-    getPredictions(selectedUserGroup.id, getStageId(stage))
+    getPredictions(selectedUserGroup?.id, getStageId(stage))
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
@@ -78,7 +81,7 @@ function LaterPredictions() {
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      {resultsMode && (
+      {resultsMode && selectedUserGroup && (
         <References
           green="Acertaste resultado"
           red="Acertaste ganador"
@@ -86,14 +89,20 @@ function LaterPredictions() {
           gray="No evaluado"
         />
       )}
-      <PredictionForm
-        resultsMode={resultsMode}
-        handleSubmit={!resultsMode && handleSubmit}
-        stageData={stageData}
-        errorMessages={errorMessages}
-        values={values}
-        handleChange={handleChange}
-      />
+      {selectedUserGroup ? (
+        <PredictionForm
+          resultsMode={resultsMode}
+          handleSubmit={!resultsMode && handleSubmit}
+          stageData={stageData}
+          errorMessages={errorMessages}
+          values={values}
+          handleChange={handleChange}
+        />
+      ) : (
+        <Text size="1.5rem" weight="800" align="center" color="tomato">
+          NO ELEGISTE NINGUN GRUPO
+        </Text>
+      )}
     </>
   );
 }

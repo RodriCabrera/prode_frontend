@@ -16,6 +16,7 @@ import {
   formatPredictionsToPost,
   numberToGroupLetter,
 } from '../predictionsPageUtils';
+import { usePrompt } from '../../../hooks/routerPrompt';
 
 function FirstStage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +28,8 @@ function FirstStage() {
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
-  console.log('DIRTY', dirty); // TODO: Modal '¿Estás seguro de que quieres salir sin guardar?'
+
+  usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
   useEffect(() => {
     if (selectedUserGroup) {
@@ -94,7 +96,7 @@ function FirstStage() {
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      {resultsMode && (
+      {resultsMode && selectedUserGroup && (
         <References
           green="Acertaste resultado"
           red="Acertaste ganador"
