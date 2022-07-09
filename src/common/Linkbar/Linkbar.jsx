@@ -19,7 +19,7 @@ const LinkbarContainer = styled.div`
   position: ${({ isMobile }) => (isMobile ? 'fixed' : 'sticky')};
   top: ${({ isMobile }) => (isMobile ? 'auto' : '80px')};
   bottom: ${({ isMobile }) => (isMobile ? '0' : 'auto')};
-  z-index: 999990;
+  z-index: 99998;
   background-color: #23272a;
 `;
 const LinkbarWrapper = styled(NavbarWrapper)`
