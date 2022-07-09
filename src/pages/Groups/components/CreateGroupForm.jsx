@@ -40,7 +40,7 @@ function CreateGroupForm({ updateList }) {
 
     toast.promise(
       createGroup({
-        name: values.name.toUpperCase(),
+        name: values.name.trim().toUpperCase(),
         rules: {
           manifesto: values.manifesto,
           scoring: {
@@ -53,7 +53,7 @@ function CreateGroupForm({ updateList }) {
       })
         .then(() => {
           updateList();
-          navigate(`/groups/${values.name.toUpperCase()}`);
+          navigate(`/groups/${values.name.trim().toUpperCase()}`);
         })
         .finally(() => {
           setIsLoading(false);
@@ -133,7 +133,7 @@ function CreateGroupForm({ updateList }) {
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <GroupConfirm
-              groupName={values.name.toUpperCase()}
+              groupName={values.name.trim().toUpperCase()}
               userGroupData={{
                 manifesto: values.manifesto,
                 scoring: {
