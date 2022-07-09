@@ -16,7 +16,6 @@ function BannerList() {
       setIsLoading(true);
       getPredictionCompletePercentage(selectedUserGroup?.id)
         .then((res) => {
-          console.log(res.data);
           setPredictedPercentages(res.data);
         })
         .finally(() => {
@@ -33,7 +32,7 @@ function BannerList() {
     {
       id: 1,
       title: 'GRUPOS',
-      path: 'first-stage',
+      path: 'groups',
       percentage: predictedPercentages.GRUPOS
         ? calculatePercentage(predictedPercentages.GRUPOS)
         : null,
@@ -43,7 +42,7 @@ function BannerList() {
     {
       id: 2,
       title: 'OCTAVOS',
-      path: 'later-stages/16round',
+      path: '16',
       percentage: predictedPercentages.OCTAVOS
         ? calculatePercentage(predictedPercentages.OCTAVOS)
         : null,
@@ -53,7 +52,7 @@ function BannerList() {
     {
       id: 3,
       title: 'CUARTOS',
-      path: 'later-stages/8round',
+      path: '8',
       percentage: predictedPercentages.CUARTOS
         ? calculatePercentage(predictedPercentages.CUARTOS)
         : null,
@@ -63,7 +62,7 @@ function BannerList() {
     {
       id: 4,
       title: 'SEMIS',
-      path: 'later-stages/semis',
+      path: 'semis',
       percentage: predictedPercentages.SEMIFINAL
         ? calculatePercentage(predictedPercentages.SEMIFINAL)
         : null,
@@ -73,7 +72,7 @@ function BannerList() {
     {
       id: 5,
       title: 'TERCER PUESTO',
-      path: 'later-stages/tercer_puesto',
+      path: '3',
       percentage: predictedPercentages.TERCER_PUESTO
         ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
         : null,
@@ -83,7 +82,7 @@ function BannerList() {
     {
       id: 6,
       title: 'FINAL',
-      path: 'later-stages/final',
+      path: 'final',
       percentage: predictedPercentages.FINAL
         ? calculatePercentage(predictedPercentages.FINAL)
         : null,
