@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import ToggleSwitch from '../../common/ToggleSwitch/ToggleSwitch';
 import { BannerTitle, PredictionsPageWrapper } from './Predictions.styles';
+import { Text } from '../../common/common.styles';
 import { getUserGroups } from '../../api/groups';
 import { GroupSelector } from './components/GroupSelector';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 function Predictions() {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,13 +35,18 @@ function Predictions() {
     <PredictionsPageWrapper id="mi-prode-container">
       <BannerTitle align="center">PREDICCIONES</BannerTitle>
 
-      {userGroupList.length > 1 && (
+      {userGroupList.length > 0 ? (
         <GroupSelector
           isLoading={isLoading}
           selectedUserGroup={selectedUserGroup}
           userGroupList={userGroupList}
           handleGroupSelect={handleGroupSelect}
         />
+      ) : (
+        <>
+          {isLoading && <Spinner />}
+          {!isLoading && <Text>No perteneces a ningún grupo</Text>}
+        </>
       )}
 
       <ToggleSwitch mode={mode} setMode={setMode} />
