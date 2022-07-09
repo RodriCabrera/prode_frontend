@@ -125,6 +125,7 @@ export const Text = styled.p`
   font-size: ${({ size }) => size};
   font-weight: ${({ weight }) => weight};
   margin: ${({ margin }) => margin || '0'};
+  transition: all ease 0.5s;
   &:after {
     ${({ withBottomBorder }) =>
       withBottomBorder &&
