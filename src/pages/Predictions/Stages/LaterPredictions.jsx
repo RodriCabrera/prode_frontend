@@ -7,7 +7,7 @@ import { createPredictions, getPredictions } from '../../../api/predictions';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { getStageId } from '../../Fixture/fixturePageHelpers';
 import { PredictionForm } from '../PredictionForm';
-import { PredictionReferences } from '../PredictionReferences';
+import { References } from '../../../common/References';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
@@ -78,7 +78,14 @@ function LaterPredictions() {
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      {resultsMode && <PredictionReferences />}
+      {resultsMode && (
+        <References
+          green="Acertaste resultado"
+          red="Acertaste ganador"
+          yellow="No suma"
+          gray="No evaluado"
+        />
+      )}
       <PredictionForm
         resultsMode={resultsMode}
         handleSubmit={!resultsMode && handleSubmit}

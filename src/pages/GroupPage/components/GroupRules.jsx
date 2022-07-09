@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text } from '../../../common/common.styles';
+import { References } from '../../../common/References';
 import { translateDuration } from '../../pagesHelpers';
 
 function GroupRules({ rules }) {
@@ -18,19 +19,12 @@ function GroupRules({ rules }) {
       <Text size="1.2rem" withBottomBorder>
         Sistema de puntaje
       </Text>
-      <div>
-        <Text align="center" color="lightgreen">
-          Resultado exacto: {rules.scoring.FULL}
-        </Text>
-        <br />
-        <Text align="center" color="yellow">
-          Ganador: {rules.scoring.WINNER}
-        </Text>
-        <br />
-        <Text align="center" color="red">
-          Resultado erróneo: {rules.scoring.NONE}
-        </Text>
-      </div>
+      <References
+        size="1rem"
+        green={`Resultado exacto: ${rules.scoring.FULL}`}
+        yellow={`Ganador: ${rules.scoring.WINNER}`}
+        red={`Resultado erróneo: ${rules.scoring.NONE}`}
+      />
       <br />
       <Text size="1.2rem" withBottomBorder>
         Tiempos
