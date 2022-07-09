@@ -21,12 +21,12 @@ import {
 import { usePrompt } from '../../../hooks/routerPrompt';
 
 const STAGE_NAMES = {
-  groups: 'GRUPOS',
-  16: 'OCTAVOS',
-  8: 'CUARTOS',
-  semis: 'SEMIFINALES',
-  final: 'FINAL',
-  3: 'TERCER PUESTO',
+  GRUPOS: 'GRUPOS',
+  OCTAVOS: 'OCTAVOS',
+  CUARTOS: 'CUARTOS',
+  SEMIS: 'SEMIFINALES',
+  FINAL: 'FINAL',
+  TERCER_PUESTO: 'TERCER PUESTO',
 };
 
 function FirstStage() {
@@ -43,9 +43,26 @@ function FirstStage() {
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
+  const getStageName = () => {
+    switch (phase) {
+      case '16':
+        return STAGE_NAMES.OCTAVOS;
+      case '8':
+        return STAGE_NAMES.CUARTOS;
+      case 'semis':
+        return STAGE_NAMES.SEMIS;
+      case 'final':
+        return STAGE_NAMES.FINAL;
+      case '3':
+        return STAGE_NAMES.TERCER_PUESTO;
+      case 'groups':
+      default:
+        return STAGE_NAMES.GRUPOS;
+    }
+  };
   const getPhaseFixture = () => {
-    if (STAGE_NAMES[phase] !== STAGE_NAMES.groups)
-      return getFixture('', STAGE_NAMES[phase]);
+    if (getStageName() !== STAGE_NAMES.GRUPOS)
+      return getFixture('', getStageName());
     return getGroupStage();
   };
 
@@ -61,11 +78,10 @@ function FirstStage() {
   }, [selectedUserGroup, phase]);
 
   const updatePredictionsByStage = () => {
-    if (STAGE_NAMES[phase] === STAGE_NAMES.groups) {
-      const groupLeter = numberToGroupLetter(groupNumber);
-      return getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter);
-    }
-    return getPredictions(selectedUserGroup?.id, STAGE_NAMES[phase]);
+    if (getStageName() !== STAGE_NAMES.GRUPOS)
+      return getPredictions(selectedUserGroup?.id, getStageName());
+    const groupLeter = numberToGroupLetter(groupNumber);
+    return getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter);
   };
 
   const updatePredictions = () => {
@@ -130,7 +146,16 @@ function FirstStage() {
       )}
       {selectedUserGroup ? (
         <>
-          {STAGE_NAMES[phase] === STAGE_NAMES.groups ? (
+          {getStageName() !== STAGE_NAMES.GRUPOS ? (
+            <PredictionForm
+              resultsMode={resultsMode}
+              handleSubmit={!resultsMode && handleSubmit}
+              stageData={stageData}
+              errorMessages={errorMessages}
+              values={values}
+              handleChange={handleChange}
+            />
+          ) : (
             <PredictionForm
               groupNumber={groupNumber}
               handleSubmit={!resultsMode && handleSubmit}
@@ -141,15 +166,6 @@ function FirstStage() {
               values={values}
               handleChange={!resultsMode && handleChange}
               groupPhase
-            />
-          ) : (
-            <PredictionForm
-              resultsMode={resultsMode}
-              handleSubmit={!resultsMode && handleSubmit}
-              stageData={stageData}
-              errorMessages={errorMessages}
-              values={values}
-              handleChange={handleChange}
             />
           )}
         </>
