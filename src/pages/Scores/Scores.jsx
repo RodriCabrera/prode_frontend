@@ -26,7 +26,7 @@ function Scores() {
         {scores?.data.scores.map((score) => {
           return (
             <ListElement
-              key={score.group}
+              key={score.user}
               onClick={() => handleUserClick(score.user)}
               avatar={
                 <UserMiniAvatar avatar={score.avatar} name={score.user} />

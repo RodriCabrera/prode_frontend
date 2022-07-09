@@ -68,10 +68,10 @@ function Home() {
             id="next-5-card-container"
             data={fixtureShortData}
             isCompact
-            fullWidth={isMobile}
+            fullWidth
           />
+          <NotificationBoard id="notification-board" />
         </CardWrapper>
-        <NotificationBoard id="notification-board" />
       </Row>
     </PageWrapper>
   );
