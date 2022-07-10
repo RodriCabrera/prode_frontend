@@ -119,6 +119,7 @@ export const Select = styled.select`
   background-color: #e5e5e5;
   border-radius: 10px;
 `;
+
 export const Text = styled.p`
   text-align: ${({ align }) => align || 'left'};
   color: ${({ color }) => color || 'inherit'};
