@@ -36,8 +36,9 @@ function BannerList() {
       percentage: predictedPercentages.GRUPOS
         ? calculatePercentage(predictedPercentages.GRUPOS)
         : null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      prevStage: null,
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 2,
@@ -46,8 +47,9 @@ function BannerList() {
       percentage: predictedPercentages.OCTAVOS
         ? calculatePercentage(predictedPercentages.OCTAVOS)
         : null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      prevStage: 'GRUPOS',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 3,
@@ -56,8 +58,9 @@ function BannerList() {
       percentage: predictedPercentages.CUARTOS
         ? calculatePercentage(predictedPercentages.CUARTOS)
         : null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      prevStage: 'OCTAVOS',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 4,
@@ -66,8 +69,9 @@ function BannerList() {
       percentage: predictedPercentages.SEMIFINAL
         ? calculatePercentage(predictedPercentages.SEMIFINAL)
         : null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      prevStage: 'CUARTOS',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 5,
@@ -76,8 +80,9 @@ function BannerList() {
       percentage: predictedPercentages.TERCER_PUESTO
         ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
         : null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      prevStage: 'SEMIFINAL',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 6,
@@ -86,8 +91,9 @@ function BannerList() {
       percentage: predictedPercentages.FINAL
         ? calculatePercentage(predictedPercentages.FINAL)
         : null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      prevStage: 'SEMIFINAL',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
   ];
 
@@ -105,8 +111,9 @@ function BannerList() {
             percentage={stage.percentage}
             isLoading={isLoading}
             editMode={editMode}
-            disabledStart={stage.disabledStart}
-            disabledEnd={stage.disabledStart}
+            prevStage={stage.prevStage}
+            // disabledStart={stage.disabledStart}
+            // disabledEnd={stage.disabledStart}
           />
         );
       })}
