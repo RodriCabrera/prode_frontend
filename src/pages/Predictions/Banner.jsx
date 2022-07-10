@@ -16,26 +16,13 @@ export function Banner({
   isLoading,
   editMode,
   prevStage,
-  // disabledStart,
-  // disabledEnd,
 }) {
   const navigate = useNavigate();
-  // TODO: Habría que emprolijar esta funcion para que vaya liberando los stages según la fecha y hora.
-  // *: Por ahora lo dejo desactivado para poder ver los banners con la data del mundial pasado
-  // eslint-disable-next-line no-unused-vars
-  const setDisabledField = (disablingDate, enablingDate) => {
-    // const today = new Date();
-    // const endDate = new Date(disablingDate);
-    // const startDate = new Date(enablingDate);
-    // return today > endDate || today < startDate;
-    return '';
-  };
 
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
-    if (!editMode) setIsDisabled(false);
-    else checkIfStageIsEnabled(prevStage).then((res) => setIsDisabled(!res));
+    checkIfStageIsEnabled(prevStage).then((res) => setIsDisabled(!res));
   }, [editMode, prevStage]);
 
   const renderPercentageInfo = () => {
@@ -58,7 +45,8 @@ export function Banner({
     <BannerButton
       disabled={isDisabled}
       onClick={() => navigate(path)}
-      tertiary={editMode}
+      tertiary={editMode && !isDisabled}
+      grayscale={isDisabled}
     >
       <BannerDataWrapper>
         <BannerTitle>{title}</BannerTitle>
