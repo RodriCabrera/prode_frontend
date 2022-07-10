@@ -110,7 +110,7 @@ export function PredictionForm(props) {
                       {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
-                      {match.away?.shortName || '?'}
+                      {match.away?.shortName || match.away}
                     </Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
@@ -157,7 +157,7 @@ export function PredictionForm(props) {
                       />
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
-                      {match.home?.shortName || '?'}
+                      {match.home?.shortName || match.home}
                     </Table.Cell>
                     <Table.Cell padding="1rem 0" margin="0 1rem 0 0">
                       {getFlagUrl(match.home?.flag, 1)}

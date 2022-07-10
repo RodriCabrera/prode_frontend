@@ -26,7 +26,7 @@ export function FixtureTable({ data, isCompact, fullWidth }) {
                   {getFlagUrl(match.away.flag, 1)}
                 </Table.Cell>
                 <Table.Cell fontWeight="800" padding={isCompact && '10px'}>
-                  {match.away.shortName || '?'}
+                  {match.away.shortName || match.away}
                 </Table.Cell>
                 <Table.Cell padding={isCompact && '10px'}>
                   {`${parseMatchScore(match.awayScore)}-${parseMatchScore(
@@ -34,7 +34,7 @@ export function FixtureTable({ data, isCompact, fullWidth }) {
                   )}`}
                 </Table.Cell>
                 <Table.Cell fontWeight="800" padding={isCompact && '10px'}>
-                  {match.home.shortName || '?'}
+                  {match.home.shortName || match.home}
                 </Table.Cell>
                 <Table.Cell padding={isCompact && '10px'}>
                   {getFlagUrl(match.home.flag, 1)}
