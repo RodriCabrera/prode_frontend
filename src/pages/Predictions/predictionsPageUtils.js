@@ -159,6 +159,7 @@ export const checkIfStageIsEnabled = (prevStageName) => {
       .then((res) => {
         if (!res.data.fixture) resolve(true);
         const prevStage = res.data.fixture;
+        if (!prevStage[0]) resolve(false);
         if (prevStage.some((match) => match.status === 1)) {
           resolve(false);
         }
