@@ -32,7 +32,10 @@ function Groups() {
   return (
     <>
       <CardContainer>
-        <CardWrapper fullWidth>
+        <CardWrapper fullWidth border="none">
+          <Text size="2.5rem" weight="500" align="center">
+            GRUPOS
+          </Text>
           {!isEmpty(groupList) && (
             <Text size="1.5rem">Grupos en los que estás participando: </Text>
           )}
