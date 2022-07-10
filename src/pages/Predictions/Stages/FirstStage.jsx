@@ -1,25 +1,41 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getGroupStage } from '../../../api/fixture';
+import { getFixture, getGroupStage } from '../../../api/fixture';
 import {
   createPredictions,
+  getPredictions,
   getFirstStagePredictionsByGroup,
 } from '../../../api/predictions';
-import { Text } from '../../../common/common.styles';
+import {
+  CardContainer,
+  CardWrapper,
+  Text,
+} from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { PredictionForm } from '../PredictionForm';
-import { PredictionReferences } from '../PredictionReferences';
+import { References } from '../../../common/References';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
   numberToGroupLetter,
 } from '../predictionsPageUtils';
+import { usePrompt } from '../../../hooks/routerPrompt';
+
+const STAGE_NAMES = {
+  GRUPOS: 'GRUPOS',
+  OCTAVOS: 'OCTAVOS',
+  CUARTOS: 'CUARTOS',
+  SEMIS: 'SEMIFINALES',
+  FINAL: 'FINAL',
+  TERCER_PUESTO: 'TERCER PUESTO',
+};
 
 function FirstStage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [firstStageData, setFirstStageData] = useState([]); // Toda la data de la fase de grupos para este userGroup
+  const [stageData, setStageData] = useState([]); // Toda la data de la fase seleccionada para este userGroup
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
@@ -27,24 +43,54 @@ function FirstStage() {
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
-  console.log('DIRTY', dirty); // TODO: Modal '¿Estás seguro de que quieres salir sin guardar?'
+  const { phase } = useParams();
+
+  usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
+
+  const getStageName = () => {
+    switch (phase) {
+      case '16':
+        return STAGE_NAMES.OCTAVOS;
+      case '8':
+        return STAGE_NAMES.CUARTOS;
+      case 'semis':
+        return STAGE_NAMES.SEMIS;
+      case 'final':
+        return STAGE_NAMES.FINAL;
+      case '3':
+        return STAGE_NAMES.TERCER_PUESTO;
+      case 'groups':
+      default:
+        return STAGE_NAMES.GRUPOS;
+    }
+  };
+  const getPhaseFixture = () => {
+    if (getStageName() !== STAGE_NAMES.GRUPOS)
+      return getFixture('', getStageName());
+    return getGroupStage();
+  };
 
   useEffect(() => {
     if (selectedUserGroup) {
       setIsLoading(true);
-      getGroupStage() // TODO: Se debería traer el fixture de 1 grupo. No toda la fase.
-        // getFixture(selectedUserGroup.id, 'GRUPOS') // ? Algo así? pero devuelve []
+      getPhaseFixture()
         .then((res) => {
-          setFirstStageData(res.data.fixture);
+          setStageData(res.data.fixture);
         })
         .finally(() => setIsLoading(false));
     }
-  }, [selectedUserGroup]);
+  }, [selectedUserGroup, phase]);
+
+  const updatePredictionsByStage = () => {
+    if (getStageName() !== STAGE_NAMES.GRUPOS)
+      return getPredictions(selectedUserGroup?.id, getStageName());
+    const groupLeter = numberToGroupLetter(groupNumber);
+    return getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter);
+  };
 
   const updatePredictions = () => {
     setIsLoading(true);
-    const groupLeter = numberToGroupLetter(groupNumber);
-    getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter)
+    updatePredictionsByStage()
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
@@ -52,10 +98,10 @@ function FirstStage() {
   };
 
   useEffect(() => {
-    if (firstStageData.length > 0) {
+    if (stageData.length > 0) {
       updatePredictions();
     }
-  }, [firstStageData, groupNumber, selectedUserGroup]);
+  }, [stageData, groupNumber, selectedUserGroup]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,24 +135,51 @@ function FirstStage() {
     setGroupNumber((prevState) => prevState - 1);
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <CardContainer>
+        <CardWrapper style={{ height: '400px' }}>
+          <Spinner />
+        </CardWrapper>
+      </CardContainer>
+    );
 
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      {resultsMode && <PredictionReferences />}
-      {selectedUserGroup ? (
-        <PredictionForm
-          groupNumber={groupNumber}
-          handleSubmit={!resultsMode && handleSubmit}
-          stageData={firstStageData}
-          errorMessages={errorMessages}
-          handleNextGroup={handleNextGroup}
-          handlePrevGroup={handlePrevGroup}
-          values={values}
-          handleChange={!resultsMode && handleChange}
-          groupPhase
+      {resultsMode && selectedUserGroup && (
+        <References
+          green="Acertaste resultado"
+          red="Acertaste ganador"
+          yellow="No suma"
+          gray="No evaluado"
         />
+      )}
+      {selectedUserGroup ? (
+        <>
+          {getStageName() !== STAGE_NAMES.GRUPOS ? (
+            <PredictionForm
+              resultsMode={resultsMode}
+              handleSubmit={!resultsMode && handleSubmit}
+              stageData={stageData}
+              errorMessages={errorMessages}
+              values={values}
+              handleChange={handleChange}
+            />
+          ) : (
+            <PredictionForm
+              groupNumber={groupNumber}
+              handleSubmit={!resultsMode && handleSubmit}
+              stageData={stageData}
+              errorMessages={errorMessages}
+              handleNextGroup={handleNextGroup}
+              handlePrevGroup={handlePrevGroup}
+              values={values}
+              handleChange={!resultsMode && handleChange}
+              groupPhase
+            />
+          )}
+        </>
       ) : (
         <Text size="1.5rem" weight="800" align="center" color="tomato">
           NO ELEGISTE NINGUN GRUPO

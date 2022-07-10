@@ -1,5 +1,6 @@
 /* eslint-disable no-extend-native */
 import { isEmpty } from 'lodash';
+import { getFixtureByStageId } from '../../api/fixture';
 
 export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
   //   const predictionsRawExample = {
@@ -149,4 +150,22 @@ export const checkPredictionResult = (
   }
 
   return 'tomato';
+};
+
+export const checkIfStageIsEnabled = (prevStageName) => {
+  return new Promise((resolve, reject) => {
+    if (!prevStageName) resolve(true);
+    getFixtureByStageId(prevStageName)
+      .then((res) => {
+        if (!res.data.fixture) resolve(true);
+        const prevStage = res.data.fixture;
+        if (prevStage.some((match) => match.status === 1)) {
+          resolve(false);
+        }
+        resolve(true);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };

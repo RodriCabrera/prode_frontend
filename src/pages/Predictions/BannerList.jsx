@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { getPredictions } from '../../api/predictions';
+import { getPredictionCompletePercentage } from '../../api/predictions';
 import { Text } from '../../common/common.styles';
 import { Banner } from './Banner';
 import { BannerContainer } from './Predictions.styles';
@@ -8,66 +8,92 @@ import { BannerContainer } from './Predictions.styles';
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
   const { selectedUserGroup, mode } = useOutletContext();
-  const [groupsPredictedQty, setGroupsPredictedQty] = useState(undefined);
+  const [predictedPercentages, setPredictedPercentages] = useState([]);
   const editMode = mode === 'edit';
 
   useEffect(() => {
     if (editMode) {
       setIsLoading(true);
-      getPredictions(selectedUserGroup?.id, 'GRUPOS')
+      getPredictionCompletePercentage(selectedUserGroup?.id)
         .then((res) => {
-          setGroupsPredictedQty(res.data.length);
+          setPredictedPercentages(res.data);
         })
         .finally(() => {
           setIsLoading(false);
         });
     }
-  }, [selectedUserGroup]);
+  }, [selectedUserGroup, editMode]);
 
-  const calculatePercentage = (predictionsQty, totalGroups) => {
-    return Math.round((predictionsQty / totalGroups) * 100);
+  const calculatePercentage = (quantities) => {
+    return Math.round((quantities.predicted / quantities.total) * 100);
   };
 
   const bannerData = [
     {
       id: 1,
       title: 'GRUPOS',
-      path: 'first-stage',
-      percentage: calculatePercentage(groupsPredictedQty, 48),
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      path: 'groups',
+      percentage: predictedPercentages.GRUPOS
+        ? calculatePercentage(predictedPercentages.GRUPOS)
+        : null,
+      prevStage: null,
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 2,
       title: 'OCTAVOS',
-      path: 'later-stages/16round',
-      percentage: null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      path: '16',
+      percentage: predictedPercentages.OCTAVOS
+        ? calculatePercentage(predictedPercentages.OCTAVOS)
+        : null,
+      prevStage: 'GRUPOS',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 3,
       title: 'CUARTOS',
-      path: 'later-stages/8round',
-      percentage: null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      path: '8',
+      percentage: predictedPercentages.CUARTOS
+        ? calculatePercentage(predictedPercentages.CUARTOS)
+        : null,
+      prevStage: 'OCTAVOS',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 4,
       title: 'SEMIS',
-      path: 'later-stages/semis',
-      percentage: null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      path: 'semis',
+      percentage: predictedPercentages.SEMIFINAL
+        ? calculatePercentage(predictedPercentages.SEMIFINAL)
+        : null,
+      prevStage: 'CUARTOS',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
     {
       id: 5,
+      title: 'TERCER PUESTO',
+      path: '3',
+      percentage: predictedPercentages.TERCER_PUESTO
+        ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
+        : null,
+      prevStage: 'SEMIFINAL',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
+    },
+    {
+      id: 6,
       title: 'FINAL',
-      path: 'later-stages/semis',
-      percentage: null,
-      disabledStart: '2022-11-20',
-      disabledEnd: '2022-01-01',
+      path: 'final',
+      percentage: predictedPercentages.FINAL
+        ? calculatePercentage(predictedPercentages.FINAL)
+        : null,
+      prevStage: 'SEMIFINAL',
+      // disabledStart: '2022-11-20',
+      // disabledEnd: '2022-01-01',
     },
   ];
 
@@ -85,8 +111,9 @@ function BannerList() {
             percentage={stage.percentage}
             isLoading={isLoading}
             editMode={editMode}
-            disabledStart={stage.disabledStart}
-            disabledEnd={stage.disabledStart}
+            prevStage={stage.prevStage}
+            // disabledStart={stage.disabledStart}
+            // disabledEnd={stage.disabledStart}
           />
         );
       })}

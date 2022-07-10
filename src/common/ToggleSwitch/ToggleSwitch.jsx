@@ -15,7 +15,9 @@ function ToggleSwitch({ mode, setMode }) {
   return (
     <ToggleContainer>
       <ToggleWrapper>
-        <Text weight="700">RESULTADOS</Text>
+        <Text weight="700" color={mode === 'results' ? 'orange' : undefined}>
+          RESULTADOS
+        </Text>
         <CheckBoxWrapper>
           <CheckBox
             id="checkbox"
@@ -26,7 +28,7 @@ function ToggleSwitch({ mode, setMode }) {
           />
           <CheckBoxLabel htmlFor="checkbox" />
         </CheckBoxWrapper>
-        <Text weight="700" color="tomato">
+        <Text weight="700" color={mode === 'edit' ? 'salmon' : undefined}>
           PREDECIR
         </Text>
       </ToggleWrapper>

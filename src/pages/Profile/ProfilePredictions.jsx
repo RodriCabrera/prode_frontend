@@ -47,11 +47,11 @@ function ProfilePredictions({ props }) {
           </CardWrapper>
         </CardContainer>
       ) : (
-        // !isLoading && (
-        <Text align="center">
-          {user.name} no ha hecho predicciones para {group.name}
-        </Text>
-        // )
+        !isLoading && (
+          <Text align="center">
+            {user.name} no ha hecho predicciones para {group.name}
+          </Text>
+        )
       )}
     </>
   );

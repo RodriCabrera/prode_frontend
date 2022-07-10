@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import { isNil } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { Text } from '../../common/common.styles';
+import { checkIfStageIsEnabled } from './predictionsPageUtils';
 import {
   BannerButton,
   BannerDataWrapper,
@@ -13,8 +15,9 @@ export function Banner({
   percentage,
   isLoading,
   editMode,
-  disabledStart,
-  disabledEnd,
+  prevStage,
+  // disabledStart,
+  // disabledEnd,
 }) {
   const navigate = useNavigate();
   // TODO: Habría que emprolijar esta funcion para que vaya liberando los stages según la fecha y hora.
@@ -28,6 +31,13 @@ export function Banner({
     return '';
   };
 
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    if (!editMode) setIsDisabled(false);
+    else checkIfStageIsEnabled(prevStage).then((res) => setIsDisabled(!res));
+  }, [editMode, prevStage]);
+
   const renderPercentageInfo = () => {
     if (editMode) {
       if (isLoading) {
@@ -35,7 +45,7 @@ export function Banner({
       }
       return (
         editMode && (
-          <Text weight="400" size="0.8rem">
+          <Text weight="200">
             {!isNil(percentage) ? `${percentage} % completo` : ''}
           </Text>
         )
@@ -46,7 +56,7 @@ export function Banner({
 
   return (
     <BannerButton
-      disabled={setDisabledField(disabledStart, disabledEnd)}
+      disabled={isDisabled}
       onClick={() => navigate(path)}
       tertiary={editMode}
     >

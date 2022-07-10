@@ -36,3 +36,15 @@ export const BannerTitle = styled(Text)`
   font-weight: 500;
   font-size: 2.5rem;
 `;
+
+export const FormButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+`;
+
+export const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

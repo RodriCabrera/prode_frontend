@@ -6,6 +6,7 @@ import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
 import Table from '../../common/Table/Table';
 import { getFlagUrl } from '../pagesHelpers';
+import { FormButtonWrapper, FormWrapper } from './Predictions.styles';
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
@@ -109,7 +110,7 @@ export function PredictionForm(props) {
                       {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
-                      {match.away?.shortName || '?'}
+                      {match.away?.shortName || match.away}
                     </Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
@@ -156,7 +157,7 @@ export function PredictionForm(props) {
                       />
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
-                      {match.home?.shortName || '?'}
+                      {match.home?.shortName || match.home}
                     </Table.Cell>
                     <Table.Cell padding="1rem 0" margin="0 1rem 0 0">
                       {getFlagUrl(match.home?.flag, 1)}
@@ -175,7 +176,7 @@ export function PredictionForm(props) {
           </Button>
         )}
         {groupPhase && (
-          <ButtonWrapper>
+          <FormButtonWrapper>
             <Button
               grayscale
               onClick={handlePrevGroup}
@@ -195,7 +196,7 @@ export function PredictionForm(props) {
               {stageData[groupNumberMod(groupNumber + 1)]?.name}
               <span className="material-symbols-outlined">chevron_right</span>
             </Button>
-          </ButtonWrapper>
+          </FormButtonWrapper>
         )}
       </Form>
     </FormWrapper>
@@ -205,16 +206,4 @@ const ResultsInput = styled(Input)`
   :disabled {
     background-color: ${({ predictionStatus }) => predictionStatus};
   }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  gap: 1rem;
-`;
-
-const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;

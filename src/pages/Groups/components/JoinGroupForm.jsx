@@ -96,7 +96,7 @@ function JoinGroupForm({ updateList }) {
             <GroupConfirm
               groupName={values.groupName}
               userGroupData={groupRules}
-              confirmText="Aceptar"
+              confirmText="Unirme"
             />
           </Modal>
         </Form>

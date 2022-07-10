@@ -119,12 +119,14 @@ export const Select = styled.select`
   background-color: #e5e5e5;
   border-radius: 10px;
 `;
+
 export const Text = styled.p`
   text-align: ${({ align }) => align || 'left'};
   color: ${({ color }) => color || 'inherit'};
   font-size: ${({ size }) => size};
   font-weight: ${({ weight }) => weight};
   margin: ${({ margin }) => margin || '0'};
+  transition: all ease 0.5s;
   &:after {
     ${({ withBottomBorder }) =>
       withBottomBorder &&

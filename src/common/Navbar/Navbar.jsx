@@ -17,6 +17,7 @@ import {
   LogoSub,
 } from './Navbar.styles';
 import { Button, CardTitle } from '../common.styles';
+import { Tooltip } from '../Tooltip/Tooltip';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -69,11 +70,13 @@ function Navbar() {
             {userContext.user ? (
               <>
                 <NavLink onClick={() => navigate('/profile')}>
-                  <UserMiniAvatar
-                    avatar={userContext.user.avatar}
-                    isSmall
-                    onClick={() => navigate('/profile')}
-                  />
+                  <Tooltip text={userContext.user.name} position="top">
+                    <UserMiniAvatar
+                      avatar={userContext.user.avatar}
+                      isSmall
+                      onClick={() => navigate('/profile')}
+                    />
+                  </Tooltip>
                 </NavLink>
                 <NavLink onClick={toggleModal}>Salir</NavLink>
               </>

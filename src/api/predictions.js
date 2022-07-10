@@ -33,6 +33,12 @@ export const getPredictions = (userGroupId = '', stage = '') => {
   );
 };
 
+export const getPredictionCompletePercentage = (userGroupId = '') => {
+  return withCredentials.get(
+    `/predictions/percentage?userGroupId=${userGroupId}`
+  );
+};
+
 export const getFirstStagePredictionsByGroup = (
   userGroupId = '',
   groupLeter = ''

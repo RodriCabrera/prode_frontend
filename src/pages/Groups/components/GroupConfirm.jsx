@@ -1,21 +1,11 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { Text, CardTitle, Button } from '../../../common/common.styles';
 import { translateDuration } from '../../pagesHelpers';
-
-const ConfirmWrapper = styled.div`
-  min-width: 200px;
-  width: 100%;
-  display: flex;
-  padding: 1rem;
-  gap: 1rem;
-  flex-direction: column;
-`;
 
 function GroupConfirm({ groupName, userGroupData, confirmText }) {
   return (
     userGroupData && (
-      <ConfirmWrapper>
+      <>
         <CardTitle>{groupName}</CardTitle>
         {userGroupData.manifesto && (
           <>
@@ -52,7 +42,7 @@ function GroupConfirm({ groupName, userGroupData, confirmText }) {
         </Text>
         <br />
         <Button type="submit">{confirmText}</Button>
-      </ConfirmWrapper>
+      </>
     )
   );
 }

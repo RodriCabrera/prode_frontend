@@ -18,7 +18,7 @@ function Scores() {
 
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper fullWidth>
         <Text size="2rem" align="center">
           Ver puntajes
         </Text>
@@ -26,7 +26,7 @@ function Scores() {
         {scores?.data.scores.map((score) => {
           return (
             <ListElement
-              key={score.group}
+              key={score.user}
               onClick={() => handleUserClick(score.user)}
               avatar={
                 <UserMiniAvatar avatar={score.avatar} name={score.user} />
