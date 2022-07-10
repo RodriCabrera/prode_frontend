@@ -9,7 +9,11 @@ import {
   getPredictions,
   getFirstStagePredictionsByGroup,
 } from '../../../api/predictions';
-import { Text } from '../../../common/common.styles';
+import {
+  CardContainer,
+  CardWrapper,
+  Text,
+} from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { PredictionForm } from '../PredictionForm';
 import { References } from '../../../common/References';
@@ -131,7 +135,14 @@ function FirstStage() {
     setGroupNumber((prevState) => prevState - 1);
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <CardContainer>
+        <CardWrapper style={{ height: '400px' }}>
+          <Spinner />
+        </CardWrapper>
+      </CardContainer>
+    );
 
   return (
     <>

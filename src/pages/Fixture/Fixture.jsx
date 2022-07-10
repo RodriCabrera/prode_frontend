@@ -11,6 +11,7 @@ const FixtureWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  min-height: 700px;
 `;
 const GroupTableWrapper = styled.div`
   display: flex;
