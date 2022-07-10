@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from '@emotion/styled';
 import { editProfile } from '../../../api/profiles';
 import Modal from '../../../common/Modal/Modal';
 import useToggleModal from '../../../hooks/useToggleModal';
@@ -83,10 +84,14 @@ export function ProfileEditForm({ profile, updateProfile }) {
               {userName || profile.name}
             </Text>
             <br />
-            <UserMiniAvatar
-              avatar={selectedAvatar || profile.avatar}
-              name={userName || profile.name}
-            />
+            <AvatarContainer>
+              <AvatarWrapper>
+                <UserMiniAvatar
+                  avatar={selectedAvatar || profile.avatar}
+                  name={userName || profile.name}
+                />
+              </AvatarWrapper>
+            </AvatarContainer>
             <br />
             <Button type="submit">Confirmar</Button>
           </Modal>
@@ -101,3 +106,10 @@ export function ProfileEditForm({ profile, updateProfile }) {
     </>
   );
 }
+const AvatarContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const AvatarWrapper = styled.div`
+  max-height: 500px;
+`;
