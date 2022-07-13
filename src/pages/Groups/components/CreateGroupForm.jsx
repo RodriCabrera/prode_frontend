@@ -30,6 +30,7 @@ function CreateGroupForm({ updateList }) {
       scoringFull: 3,
       scoringWinner: 1,
       scoringNone: 0,
+      timeLimit: 0,
     },
     validationSchema: groupsSchema.create,
   });

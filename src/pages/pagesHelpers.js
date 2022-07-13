@@ -1,5 +1,5 @@
 export const parseDate = (date) => {
-  return new Date(date).toLocaleString([], {
+  return new Date(date).toLocaleString(navigator.language, {
     month: 'short',
     day: 'numeric',
     hour: '2-digit',
