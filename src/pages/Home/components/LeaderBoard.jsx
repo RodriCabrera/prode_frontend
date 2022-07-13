@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Leader from './Leader';
 import { getUserGroups } from '../../../api/groups';
 
-const LeaderBoardWrapper = styled.div``;
+const LeaderBoardWrapper = styled.div`
+  width: 100%;
+`;
 
 function LeaderBoard() {
   const [userGroups, setUserGroups] = useState();
