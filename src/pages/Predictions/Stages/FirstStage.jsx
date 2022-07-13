@@ -174,8 +174,8 @@ function FirstStage() {
       {resultsMode && selectedUserGroup && (
         <References
           green="Acertaste resultado"
-          red="Acertaste ganador"
-          yellow="No suma"
+          red="No suma"
+          yellow="Acertaste ganador"
           gray="No evaluado"
         />
       )}
