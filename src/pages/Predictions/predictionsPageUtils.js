@@ -111,14 +111,7 @@ export const checkPredictionResult = (
   predictionAway,
   predictionHome
 ) => {
-  const matchData = () => {
-    if (groupNumber === undefined) {
-      return stageData.find((match) => match.id === matchId);
-    }
-    return stageData[groupNumber]?.matches.find(
-      (match) => match.id === matchId
-    );
-  };
+  const matchData = stageData.find((match) => match.id === matchId);
   const teamResult = matchData[`${homeOrAway}Score`];
 
   function getScoreStatus() {
