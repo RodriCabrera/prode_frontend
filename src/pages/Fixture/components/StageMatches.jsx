@@ -24,18 +24,25 @@ function StageMatches({ stageName, isFirst }) {
   return (
     !isLoading && (
       <StageColumn>
-        {fixtureData.map((match, index) => (
-          <Match key={match.id}>
-            {parseDate(match.date, datePreferences)}
-            <MatchData>
-              {getFlagUrl(match.home?.flag, 1)}
-              {match.homeScore}
-              <span>-</span>
-              {match.awayScore}
-              {getFlagUrl(match.away?.flag, 1)}
-            </MatchData>
-          </Match>
-        ))}
+        {fixtureData[0] &&
+          fixtureData.map((match) => (
+            <Match key={match.id}>
+              {match.home.name ? (
+                <>
+                  {parseDate(match.date, datePreferences)}
+                  <MatchData>
+                    {getFlagUrl(match.home?.flag, 1)}
+                    {match.homeScore}
+                    <span>-</span>
+                    {match.awayScore}
+                    {getFlagUrl(match.away?.flag, 1)}
+                  </MatchData>
+                </>
+              ) : (
+                <h6>{match.home}</h6>
+              )}
+            </Match>
+          ))}
       </StageColumn>
     )
   );

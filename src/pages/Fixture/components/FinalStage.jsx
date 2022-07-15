@@ -22,14 +22,26 @@ function FinalStage() {
     <StageColumn>
       <Match>
         <h6>FINAL</h6>
-        {parseDate(finalData.date, datePreferences)}
-        <MatchData>
-          {getFlagUrl(finalData.home?.flag, 1)}
-          {finalData.homeScore}
-          <span>-</span>
-          {finalData.awayScore}
-          {getFlagUrl(finalData.away?.flag, 1)}
-        </MatchData>
+        {finalData && (
+          <>
+            {parseDate(finalData.date, datePreferences)}
+            <MatchData>
+              {finalData.home?.name ? (
+                getFlagUrl(finalData.home?.flag, 1)
+              ) : (
+                <h6>{finalData.home}</h6>
+              )}
+              {finalData.homeScore}
+              <span>-</span>
+              {finalData.awayScore}
+              {finalData.away?.name ? (
+                getFlagUrl(finalData.away?.flag, 1)
+              ) : (
+                <h6>{finalData.away}</h6>
+              )}
+            </MatchData>
+          </>
+        )}
       </Match>
       <div>
         <img
@@ -41,14 +53,26 @@ function FinalStage() {
       </div>
       <Match>
         <h6>TERCER PUESTO</h6>
-        {parseDate(thirdData.date, datePreferences)}
-        <MatchData>
-          {getFlagUrl(thirdData.home?.flag, 1)}
-          {thirdData.homeScore}
-          <span>-</span>
-          {thirdData.awayScore}
-          {getFlagUrl(thirdData.away?.flag, 1)}
-        </MatchData>
+        {thirdData && (
+          <>
+            {parseDate(thirdData.date, datePreferences)}
+            <MatchData>
+              {thirdData.home?.name ? (
+                getFlagUrl(thirdData.home?.flag, 1)
+              ) : (
+                <h6>{thirdData.home}</h6>
+              )}
+              {thirdData.homeScore}
+              <span>-</span>
+              {thirdData.awayScore}
+              {thirdData.away?.name ? (
+                getFlagUrl(thirdData.away?.flag, 1)
+              ) : (
+                <h6>{thirdData.away}</h6>
+              )}
+            </MatchData>
+          </>
+        )}
       </Match>
     </StageColumn>
   );
