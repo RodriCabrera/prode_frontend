@@ -122,7 +122,8 @@ export const checkPredictionResult = (
     }
     if (
       (predictionAway > predictionHome && resultAway > resultHome) ||
-      (predictionAway < predictionHome && resultAway < resultHome)
+      (predictionAway < predictionHome && resultAway < resultHome) ||
+      (predictionAway === predictionHome && resultAway === resultHome)
     ) {
       return 'half';
     }
