@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
 import { getUserGroups } from '../../api/groups';
@@ -9,8 +9,8 @@ import { Spinner } from '../../common/Spinner/Spinner';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 
 const GroupsListWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 `;
 
 function EditPredictions() {
@@ -53,8 +53,7 @@ function EditPredictions() {
                   )
                 }
                 bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}
-              >
+                onClick={() => handleGroupSelect(userGroup)}>
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>
             );

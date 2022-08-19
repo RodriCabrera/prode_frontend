@@ -7,11 +7,14 @@ import { getUserGroups } from '../../api/groups';
 import { GroupSelector } from './components/GroupSelector';
 import { Spinner } from '../../common/Spinner/Spinner';
 
-function Predictions() {
+const useGetGroupsData = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState('results');
   const [userGroupList, setUserGroupList] = useState([]);
   const [selectedUserGroup, setSelectedUserGroup] = useState(null);
+
+  const handleGroupSelect = (group) => {
+    setSelectedUserGroup(group);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,9 +30,13 @@ function Predictions() {
       });
   }, []);
 
-  const handleGroupSelect = (group) => {
-    setSelectedUserGroup(group);
-  };
+  return { isLoading, userGroupList, selectedUserGroup, handleGroupSelect };
+};
+
+function Predictions() {
+  const [mode, setMode] = useState('results');
+  const { isLoading, userGroupList, selectedUserGroup, handleGroupSelect } =
+		useGetGroupsData();
 
   return (
     <PredictionsPageWrapper id="mi-prode-container">
@@ -47,7 +54,7 @@ function Predictions() {
           {isLoading && <Spinner />}
           {!isLoading && (
             <Text align="center" size="1.3rem">
-              No perteneces a ningún grupo para hacer predicciones...
+							No perteneces a ningún grupo para hacer predicciones...
             </Text>
           )}
         </>

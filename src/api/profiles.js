@@ -1,7 +1,7 @@
 import { withCredentials } from './instances';
 
 export const getProfile = (name = null) => {
-  if (!name) return withCredentials.get(`/user/profile`);
+  if (!name) return withCredentials.get('/user/profile');
   return withCredentials.get(`/user/profile/${name}`);
 };
 export const getAvatars = () => {

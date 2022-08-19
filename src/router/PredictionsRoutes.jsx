@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BannerList from '../pages/Predictions/BannerList';
-import Predictions from '../pages/Predictions/Predictions';
+import Predictions from '../pages/Predictions/PredictionsPage';
 import FirstStage from '../pages/Predictions/Stages/FirstStage';
 
 function PredictionsRoutes() {

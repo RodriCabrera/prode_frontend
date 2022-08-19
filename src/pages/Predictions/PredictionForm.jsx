@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
@@ -62,13 +61,13 @@ export function PredictionForm(props) {
               const predictionStatus = () =>
                 match.status === 0
                   ? checkPredictionResult(
-                      data,
-                      groupNumberMod(groupNumber),
-                      match.id,
-                      'away',
-                      values[`${match.id}-away`],
-                      values[`${match.id}-home`]
-                    )
+                    data,
+                    groupNumberMod(groupNumber),
+                    match.id,
+                    'away',
+                    values[`${match.id}-away`],
+                    values[`${match.id}-home`]
+                  )
                   : 'silver';
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
               const canPredict = calculateCanPredict(match.date);
@@ -189,8 +188,7 @@ export function PredictionForm(props) {
               onClick={handlePrevGroup}
               // disabled={groupNumber === 0}
               type="reset"
-              width="100%"
-            >
+              width="100%">
               <MdOutlineChevronLeft size={26} />
               {stageData[groupNumberMod(groupNumber - 1)]?.name}
             </Button>
@@ -198,8 +196,7 @@ export function PredictionForm(props) {
               grayscale
               onClick={handleNextGroup}
               type="reset"
-              width="100%"
-            >
+              width="100%">
               {stageData[groupNumberMod(groupNumber + 1)]?.name}
               <MdOutlineChevronRight size={26} />
             </Button>
