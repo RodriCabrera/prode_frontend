@@ -16,6 +16,7 @@ import {
 } from '../../../common/common.styles';
 import LeaveGroupForm from './LeaveGroupForm';
 import GroupRules from './GroupRules';
+import GroupInvite from './GroupInvite';
 import { AuthContext } from '../../../common/AuthProvider';
 import { GoBackButton } from '../../../common/GoBackButton/GoBackButton';
 
@@ -73,6 +74,7 @@ function InGroup({ groupData }) {
                     <Text>{`${score.user} : ${score.score} pts`}</Text>
                   </ListElement>
                 ))}
+            <GroupInvite />
             <CardContainer>
               <Button grayscale onClick={toggleModal}>
                 Salir del grupo?

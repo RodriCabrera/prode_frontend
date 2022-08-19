@@ -43,7 +43,7 @@
                 "ignoreTemplateLiterals": true
             }
         ],
-        "prettier/prettier": ["error", { "singleQuote": true }]
+        "prettier/prettier": ["error", { "singleQuote": true }, { "endOfLine": "auto" }]
 
     }
 }
