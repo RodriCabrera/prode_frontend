@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
+import { MdOutlineVisibilityOff } from 'react-icons/md';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import ProfilePredictions from './ProfilePredictions';
 import { getProfile } from '../../api/profiles';
@@ -59,9 +60,7 @@ function Profile() {
               }
               avatar={
                 groupPredictions?.group?._id === group._id ? (
-                  <span className="material-symbols-outlined">
-                    visibility_off
-                  </span>
+                  <MdOutlineVisibilityOff size={26} />
                 ) : (
                   <HiOutlineUserGroup size="1.8rem" />
                 )

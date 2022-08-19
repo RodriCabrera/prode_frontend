@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MdOutlineInfo } from 'react-icons/md';
 import styled from '@emotion/styled';
 
 const InfoButton = styled.span`
@@ -63,9 +64,7 @@ function ErrorInfo({ info, color = 'red' }) {
       onMouseLeave={() => setShow(false)}
       onClick={toggleTempShow}
     >
-      <span className="material-symbols-outlined" style={{ color }}>
-        info
-      </span>
+      <MdOutlineInfo size={20} color={color} />
       <Tooltip show={show}>
         <ToolTipBox>{info}</ToolTipBox>
       </Tooltip>

@@ -2,6 +2,7 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { MdOutlineChevronRight, MdOutlineChevronLeft } from 'react-icons/md';
 import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
 import Table from '../../common/Table/Table';
@@ -190,7 +191,7 @@ export function PredictionForm(props) {
               type="reset"
               width="100%"
             >
-              <span className="material-symbols-outlined">chevron_left</span>
+              <MdOutlineChevronLeft size={26} />
               {stageData[groupNumberMod(groupNumber - 1)]?.name}
             </Button>
             <Button
@@ -200,7 +201,7 @@ export function PredictionForm(props) {
               width="100%"
             >
               {stageData[groupNumberMod(groupNumber + 1)]?.name}
-              <span className="material-symbols-outlined">chevron_right</span>
+              <MdOutlineChevronRight size={26} />
             </Button>
           </FormButtonWrapper>
         )}
