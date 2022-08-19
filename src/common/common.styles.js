@@ -40,14 +40,14 @@ export const Button = styled.button`
 
   background-image: linear-gradient(
     ${({ tertiary, grayscale }) => {
-      if (tertiary) {
-        return '45deg, #FA8072 0%, #FF7261 51%, #FA8072 100%';
-      }
-      if (grayscale) {
-        return '45deg, #818181 0%, #a4a4a4 51%, #818181 100%';
-      }
-      return '45deg, darkorange 0%, tomato 51%, darkorange 100%';
-    }}
+    if (tertiary) {
+      return '45deg, #FA8072 0%, #FF7261 51%, #FA8072 100%';
+    }
+    if (grayscale) {
+      return '45deg, #818181 0%, #a4a4a4 51%, #818181 100%';
+    }
+    return '45deg, darkorange 0%, tomato 51%, darkorange 100%';
+  }}
   );
   background-color: ${({ tertiary }) => tertiary && 'salmon'};
   padding: ${({ padding }) => padding || '15px 30px'};
@@ -129,7 +129,7 @@ export const Text = styled.p`
   transition: all ease 0.5s;
   &:after {
     ${({ withBottomBorder }) =>
-      withBottomBorder &&
+    withBottomBorder &&
       `content: "";
         display: block;
         width: 100%;
