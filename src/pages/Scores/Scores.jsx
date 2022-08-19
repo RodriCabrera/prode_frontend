@@ -1,13 +1,18 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
 import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import { ListElement } from '../../common/Lists/ListElement';
 import { GroupScoresForm } from './GroupScoresForm';
+import { getUserGroups } from '../../api/groups';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userGroupList, setUserGroupList] = useState([]);
+
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -16,13 +21,37 @@ function Scores() {
     return navigate(`/profile/${user}`);
   };
 
+  const loadUserGroups = () => {
+    setIsLoading(true);
+    getUserGroups()
+      .then(({ data }) => {
+        setUserGroupList(data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    loadUserGroups();
+  }, []);
+
+  if (isLoading) return <Spinner />;
+
   return (
     <CardContainer>
-      <CardWrapper fullWidth>
-        <Text size="2rem" align="center">
-          Ver puntajes
+      <CardWrapper border="none" fullWidth>
+        <Text size="2.5rem" weight="500" align="center">
+          PUNTAJES
         </Text>
-        <GroupScoresForm setScores={setScores} />
+        {userGroupList.length === 0 ? (
+          <Text>No estás en ningún grupo</Text>
+        ) : (
+          <GroupScoresForm
+            setScores={setScores}
+            userGroupList={userGroupList}
+          />
+        )}
         {scores?.data.scores.map((score) => {
           return (
             <ListElement

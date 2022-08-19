@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { getGroupStage } from '../../api/fixture';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { FixtureTable } from './FixtureTable';
+import LaterStagesGraph from './components/LaterStagesGraph';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
 
@@ -64,6 +65,7 @@ function Fixture() {
 
   return (
     <FixtureWrapper>
+      <LaterStagesGraph />
       <Text size="2rem" weight="700" align="center">
         Fase de Grupos
       </Text>

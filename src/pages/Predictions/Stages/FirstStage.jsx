@@ -10,7 +10,9 @@ import {
   getFirstStagePredictionsByGroup,
 } from '../../../api/predictions';
 import {
+  Button,
   CardContainer,
+  CardTitle,
   CardWrapper,
   Text,
 } from '../../../common/common.styles';
@@ -23,6 +25,8 @@ import {
   numberToGroupLetter,
 } from '../predictionsPageUtils';
 import { usePrompt } from '../../../hooks/routerPrompt';
+import useToggleModal from '../../../hooks/useToggleModal';
+import Modal from '../../../common/Modal/Modal';
 
 const STAGE_NAMES = {
   GRUPOS: 'GRUPOS',
@@ -40,6 +44,7 @@ function FirstStage() {
   const resultsMode = mode === 'results';
   const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [errorMessages, setErrorMessages] = useState([]);
+  const { showModal, toggleModal } = useToggleModal();
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
@@ -127,12 +132,19 @@ function FirstStage() {
     );
   };
 
-  const handleNextGroup = () => {
-    setGroupNumber((prevState) => prevState + 1);
+  const switchGroupNumber = (jumpValue) => {
+    setGroupNumber((prevState) => prevState + jumpValue);
   };
 
-  const handlePrevGroup = () => {
-    setGroupNumber((prevState) => prevState - 1);
+  const [switchNumber, setSwitchNumber] = useState(null);
+
+  const handleGroupSwitch = (value) => {
+    if (dirty) {
+      setSwitchNumber(value);
+      toggleModal();
+    } else {
+      switchGroupNumber(value);
+    }
   };
 
   if (isLoading)
@@ -146,12 +158,24 @@ function FirstStage() {
 
   return (
     <>
+      <Modal show={showModal} toggle={toggleModal}>
+        <CardTitle>Continuar sin enviar predicciones?</CardTitle>
+        <Button
+          type="button"
+          onClick={() => {
+            toggleModal();
+            switchGroupNumber(switchNumber);
+          }}
+        >
+          Continuar
+        </Button>
+      </Modal>
       <Link to="..">Volver a selección de fases</Link>
       {resultsMode && selectedUserGroup && (
         <References
           green="Acertaste resultado"
-          red="Acertaste ganador"
-          yellow="No suma"
+          red="No suma"
+          yellow="Acertaste ganador"
           gray="No evaluado"
         />
       )}
@@ -172,8 +196,8 @@ function FirstStage() {
               handleSubmit={!resultsMode && handleSubmit}
               stageData={stageData}
               errorMessages={errorMessages}
-              handleNextGroup={handleNextGroup}
-              handlePrevGroup={handlePrevGroup}
+              handleNextGroup={() => handleGroupSwitch(1)}
+              handlePrevGroup={() => handleGroupSwitch(-1)}
               values={values}
               handleChange={!resultsMode && handleChange}
               groupPhase

@@ -19,10 +19,12 @@ export function Banner({
 }) {
   const navigate = useNavigate();
 
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    checkIfStageIsEnabled(prevStage).then((res) => setIsDisabled(!res));
+    checkIfStageIsEnabled(prevStage)
+      .then((res) => setIsDisabled(!res))
+      .catch(() => setIsDisabled(true));
   }, [editMode, prevStage]);
 
   const renderPercentageInfo = () => {

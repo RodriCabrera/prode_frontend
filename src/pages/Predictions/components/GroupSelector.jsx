@@ -17,7 +17,7 @@ export function GroupSelector({
 }) {
   return (
     <>
-      <Text size="1.4rem">Elegí un grupo para ver los resultados:</Text>
+      <Text size="1.4rem">Seleccioná un grupo:</Text>
       <GroupsListWrapper>
         {isLoading && <Spinner />}
 

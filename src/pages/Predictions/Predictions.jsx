@@ -45,12 +45,20 @@ function Predictions() {
       ) : (
         <>
           {isLoading && <Spinner />}
-          {!isLoading && <Text>No perteneces a ningún grupo</Text>}
+          {!isLoading && (
+            <Text align="center" size="1.3rem">
+              No perteneces a ningún grupo para hacer predicciones...
+            </Text>
+          )}
         </>
       )}
 
-      <ToggleSwitch mode={mode} setMode={setMode} />
-      <Outlet context={{ mode, selectedUserGroup }} />
+      {userGroupList.length > 0 && (
+        <>
+          <ToggleSwitch mode={mode} setMode={setMode} />
+          <Outlet context={{ mode, selectedUserGroup }} />
+        </>
+      )}
     </PredictionsPageWrapper>
   );
 }

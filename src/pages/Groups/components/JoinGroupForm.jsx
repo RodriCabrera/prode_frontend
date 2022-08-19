@@ -14,31 +14,6 @@ function JoinGroupForm({ updateList }) {
   const [groupRules, setGroupRules] = useState(null);
   const { showModal, toggleModal } = useToggleModal();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    toggleModal();
-    setIsLoading(true);
-
-    toast.promise(
-      joinGroup(values.groupName)
-        .then(() => {
-          updateList();
-        })
-        .finally(() => {
-          setIsLoading(false);
-        }),
-      {
-        pending: 'Uniendote al grupo...',
-        success: 'Te uniste al grupo',
-        error: {
-          render({ data }) {
-            return data.response.data.error;
-          },
-        },
-      }
-    );
-  };
-
   const getGroupInformation = () => {
     setIsLoading(true);
     toast.promise(
@@ -62,6 +37,33 @@ function JoinGroupForm({ updateList }) {
     );
   };
 
+  const handleJoinGroupSubmit = (e) => {
+    e.preventDefault();
+    if (!showModal) {
+      return getGroupInformation();
+    }
+    setIsLoading(true);
+    return toast.promise(
+      joinGroup(values.groupName)
+        .then(() => {
+          updateList();
+        })
+        .finally(() => {
+          setIsLoading(false);
+          toggleModal();
+        }),
+      {
+        pending: 'Uniendote al grupo...',
+        success: 'Te uniste al grupo',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
+  };
+
   const handleShowFormSwitch = () => {
     setShowForm(!showForm);
   };
@@ -73,7 +75,7 @@ function JoinGroupForm({ updateList }) {
   return (
     <>
       {showForm && (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleJoinGroupSubmit}>
           <Label htmlFor="groupName">
             <Input
               type="text"

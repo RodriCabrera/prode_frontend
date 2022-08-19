@@ -41,8 +41,13 @@ export function PredictionForm(props) {
     }
   }, [stageData]);
 
-  // TODO: Arreglar formato de la lista con el error info (queda corrida)
-  // ? Eliminar los horarios o disponerlos una sóla vez por fecha? Ordenarlos ascendentemente?
+  const calculateCanPredict = (matchDate) => {
+    const now = Date.now();
+    const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
+    const matchTime = new Date(matchDate).getTime();
+    return now + timeLimit < matchTime;
+  };
+
   return (
     <FormWrapper id="prediction-form-wrapper">
       <Text align="center" size="1.7rem" weight="600">
@@ -65,6 +70,7 @@ export function PredictionForm(props) {
                     )
                   : 'silver';
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
+              const canPredict = calculateCanPredict(match.date);
 
               const renderInfoIcon = () => {
                 if (resultsMode) {
@@ -122,7 +128,7 @@ export function PredictionForm(props) {
                         value={values[`${match.id}-away`]}
                         name={`${match.id}-away`}
                         onChange={handleChange}
-                        disabled={resultsMode}
+                        disabled={resultsMode || !canPredict}
                         predictionStatus={
                           resultsMode ? predictionStatus('away') : ''
                         }
@@ -150,7 +156,7 @@ export function PredictionForm(props) {
                         id={`${match.id}-home`}
                         value={values[`${match.id}-home`]}
                         onChange={handleChange}
-                        disabled={resultsMode}
+                        disabled={resultsMode || !canPredict}
                         predictionStatus={
                           resultsMode ? predictionStatus('home') : ''
                         }

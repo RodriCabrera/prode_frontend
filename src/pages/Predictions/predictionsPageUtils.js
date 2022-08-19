@@ -111,14 +111,7 @@ export const checkPredictionResult = (
   predictionAway,
   predictionHome
 ) => {
-  const matchData = () => {
-    if (groupNumber === undefined) {
-      return stageData.find((match) => match.id === matchId);
-    }
-    return stageData[groupNumber]?.matches.find(
-      (match) => match.id === matchId
-    );
-  };
+  const matchData = stageData.find((match) => match.id === matchId);
   const teamResult = matchData[`${homeOrAway}Score`];
 
   function getScoreStatus() {
@@ -129,7 +122,8 @@ export const checkPredictionResult = (
     }
     if (
       (predictionAway > predictionHome && resultAway > resultHome) ||
-      (predictionAway < predictionHome && resultAway < resultHome)
+      (predictionAway < predictionHome && resultAway < resultHome) ||
+      (predictionAway === predictionHome && resultAway === resultHome)
     ) {
       return 'half';
     }
@@ -159,6 +153,7 @@ export const checkIfStageIsEnabled = (prevStageName) => {
       .then((res) => {
         if (!res.data.fixture) resolve(true);
         const prevStage = res.data.fixture;
+        if (!prevStage[0]) resolve(false);
         if (prevStage.some((match) => match.status === 1)) {
           resolve(false);
         }

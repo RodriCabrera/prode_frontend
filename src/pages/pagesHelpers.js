@@ -1,11 +1,14 @@
-export const parseDate = (date) => {
-  return new Date(date).toLocaleString([], {
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    weekday: 'short',
-  });
+export const parseDate = (date, options = null) => {
+  return new Date(date).toLocaleString(
+    navigator.language,
+    options || {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      weekday: 'short',
+    }
+  );
 };
 
 export const getFlagUrl = (url, size) => {

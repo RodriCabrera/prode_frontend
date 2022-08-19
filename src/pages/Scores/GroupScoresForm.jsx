@@ -1,12 +1,11 @@
 import { useFormik } from 'formik';
-import React, { useState, useEffect } from 'react';
-import { getGroupScores, getUserGroups } from '../../api/groups';
+import { useState } from 'react';
+import { getGroupScores } from '../../api/groups';
 import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
-export function GroupScoresForm({ setScores }) {
+export function GroupScoresForm({ setScores, userGroupList }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [groupList, setGroupList] = useState([]);
   const { values, handleChange } = useFormik({
     initialValues: {},
   });
@@ -25,22 +24,6 @@ export function GroupScoresForm({ setScores }) {
       });
   };
 
-  const loadUserGroups = () => {
-    setIsLoading(true);
-    getUserGroups()
-      .then(({ data }) => {
-        if (data.length === 0) throw new Error('No perteneces a ningún grupo.');
-        setGroupList(data);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    loadUserGroups();
-  }, []);
-
   return (
     <Form onSubmit={handleSubmit}>
       Seleccionar grupo:
@@ -52,19 +35,18 @@ export function GroupScoresForm({ setScores }) {
             handleChange(e.target.value);
             handleSubmit(e);
           }}
-          disabled={groupList.length === 0}
+          disabled={userGroupList?.length === 0}
         >
           <option value="" defaultChecked>
             {isLoading ? 'Cargando grupos...' : 'Selecciona un grupo'}
           </option>
-          {groupList.map((group) => (
+          {userGroupList?.map((group) => (
             <option key={group.name} value={group.name}>
               {group.name}
             </option>
           ))}
         </Select>
       </Label>
-      {/* <Button type="submit">Ver scores</Button> */}
       {isLoading && <Spinner />}
     </Form>
   );
