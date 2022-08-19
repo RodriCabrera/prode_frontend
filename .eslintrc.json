@@ -5,7 +5,6 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb",
         "plugin:prettier/recommended",
         "prettier"
     ],
@@ -19,7 +18,8 @@
     "plugins": [
         "react",
         "react-hooks",
-        "prettier"
+        "prettier",
+        "eslint-plugin-prettier"
     ],
     "rules": {
         "no-unused-vars": 1,
