@@ -5,7 +5,7 @@ import { getFixtureByStageId } from '../../api/fixture';
 import { AuthContext } from '../../common/AuthProvider';
 import { CardTitle, CardWrapper } from '../../common/common.styles';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { FixtureTable } from '../Fixture/FixtureTable';
+import { FixtureTable } from '../FixturePage/components/FixtureTable';
 import LeaderBoard from './components/LeaderBoard';
 import Countdown from './components/Countdown';
 import { HomeGroups } from './components/HomeGroups';

@@ -7,7 +7,7 @@ import {
   Text,
 } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
-import { FixtureTable } from '../Fixture/FixtureTable';
+import { FixtureTable } from '../FixturePage/components/FixtureTable';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 
 function ProfilePredictions({ props }) {

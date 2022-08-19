@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import { getGroupStage } from '../../api/fixture';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { FixtureTable } from './FixtureTable';
+import { FixtureTable } from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
+import { useFetchFixtureData } from './hooks/useFetchFixtureData';
 
 const FixtureWrapper = styled.div`
   display: flex;
@@ -30,23 +30,10 @@ const FixtureTablesContainer = styled.div`
 `;
 
 function Fixture() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [fixtureData, setFixtureData] = useState([]);
-
   const { width } = useWindowDimensions();
+  const { isLoading, fixtureData } = useFetchFixtureData();
   // TODO: Ponerse de acuerdo en este número, si va a ser global o depende el caso. Porque me parece que sin hacer ajustes acá queda mejor así
   const isMobile = width <= 600;
-
-  useEffect(() => {
-    setIsLoading(true);
-    getGroupStage()
-      .then((res) => {
-        setFixtureData(res.data.fixture);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
 
   const renderGroupsTables = () => {
     return (

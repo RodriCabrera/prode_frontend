@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { getFixtureByStageId } from '../../../api/fixture';
 import { createPredictions, getPredictions } from '../../../api/predictions';
 import { Spinner } from '../../../common/Spinner/Spinner';
-import { getStageId } from '../../Fixture/fixturePageHelpers';
+import { getStageId } from '../../FixturePage/fixturePageHelpers';
 import { PredictionForm } from '../PredictionForm';
 import { References } from '../../../common/References';
 import {
@@ -13,7 +13,7 @@ import {
   formatPredictionsToPost,
 } from '../predictionsPageUtils';
 import { Text } from '../../../common/common.styles';
-import { usePrompt } from '../../../hooks/routerPrompt';
+import { usePrompt } from '../../../hooks/usePrompt';
 
 function LaterPredictions() {
   const { stage } = useParams();

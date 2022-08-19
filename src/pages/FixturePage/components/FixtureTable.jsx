@@ -1,7 +1,7 @@
 import React from 'react';
-import Table from '../../common/Table/Table';
-import { getFlagUrl, parseDate } from '../pagesHelpers';
-import { parseMatchScore } from './fixturePageHelpers';
+import Table from '../../../common/Table/Table';
+import { getFlagUrl, parseDate } from '../../pagesHelpers';
+import { parseMatchScore } from '../fixturePageHelpers';
 
 export function FixtureTable({ data, isCompact, fullWidth }) {
   return (
