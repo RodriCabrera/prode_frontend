@@ -4,9 +4,8 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "plugin:prettier/recommended",
-        "prettier"
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -16,33 +15,20 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "react-hooks",
-        "prettier",
-        "eslint-plugin-prettier"
+        "react"
     ],
     "rules": {
-        "no-unused-vars": 1,
-        "no-console": 0,
-        "no-underscore-dangle": 0,
-        "no-alert": 0,
-        "react/react-in-jsx-scope": 0,
-        "react/jsx-filename-extension": 0,
-        "import/prefer-default-export": 0,
-        "react/require-default-props": 0,
-        "react/prop-types": 0,
-        "no-debugger": 0,
-        "max-len": [
+        "indent": [
             "error",
-            {
-                "code": 85,
-                "ignoreUrls": true,
-                "ignoreComments": true,
-                "ignoreStrings": true,
-                "ignoreTemplateLiterals": true
-            }
+            "tab"
         ],
-        "prettier/prettier": ["error", { "singleQuote": true }, { "endOfLine": "auto" }]
-
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ]
     }
 }
