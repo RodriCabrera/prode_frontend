@@ -13,8 +13,9 @@
 	},
 	"plugins": ["react"],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": ["error", 2],
 		"quotes": ["error", "single"],
-		"react/prop-types": 0
+		"react/prop-types": 0,
+		"react/react-in-jsx-scope": 0
 	}
 }
