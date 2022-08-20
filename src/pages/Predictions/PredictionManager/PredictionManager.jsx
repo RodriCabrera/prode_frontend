@@ -44,7 +44,7 @@ function PredictionManager() {
 
   const { phase } = useParams();
   const { showModal, toggleModal } = useToggleModal();
-  const { switchGroupNumber, groupNumber } = useSwitchGroupNumber();
+  const { groupNumber, switchGroupNumber } = useSwitchGroupNumber();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 

@@ -7,5 +7,5 @@ export const useSwitchGroupNumber = () => {
     setGroupNumber((prevState) => prevState + jumpValue);
   };
 
-  return { switchGroupNumber, groupNumber };
+  return { groupNumber, switchGroupNumber };
 };
