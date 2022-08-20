@@ -15,7 +15,7 @@
 	"rules": {
 		"indent": ["error", 2,  {
 			"SwitchCase": 1,
-			"ignoredNodes": ["ConditionalExpression"]
+			"ignoredNodes": ["ConditionalExpression", "flatTernaryExpressions", "offsetTernaryExpressions"]
 		  }],
 		"quotes": ["error", "single"],
 		"react/prop-types": 0,
