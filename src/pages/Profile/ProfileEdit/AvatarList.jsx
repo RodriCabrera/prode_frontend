@@ -4,6 +4,32 @@ import { getAvatars } from '../../../api/profiles';
 import { Button } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 40px;
+`;
+
+const AvatarWrapper = styled.div`
+  border-radius: 100%;
+
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 70px;
+  min-width: 70px;
+  border: ${({ selected }) =>
+    selected ? '2px inset tomato' : '2px inset rgba(0, 0, 0, 0)'};
+  background-color: darkgray;
+`;
+
+const Avatar = styled.img`
+  width: 70px;
+  filter: grayscale(${({ selected }) => (selected ? '30%' : '100%')});
+`;
+
 function AvatarList({ handleAvatarClick, selectedAvatar }) {
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,8 +55,7 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
             padding="10px"
             weight="400"
             onClick={() => setShowAvatarList(!showAvatarList)}
-            style={{ width: '100%' }}
-          >
+            style={{ width: '100%' }}>
             {showAvatarList ? 'Ocultar' : 'Mostrar'} lista de avatares
           </Button>
           {showAvatarList &&
@@ -39,9 +64,12 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
                 <AvatarWrapper
                   selected={avatar === selectedAvatar}
                   key={avatar}
-                  onClick={() => handleAvatarClick(avatar)}
-                >
-                  <Avatar src={avatar} alt="avatar" />
+                  onClick={() => handleAvatarClick(avatar)}>
+                  <Avatar
+                    src={avatar}
+                    alt="avatar"
+                    selected={avatar === selectedAvatar}
+                  />
                 </AvatarWrapper>
               );
             })}
@@ -50,22 +78,5 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
     </Container>
   );
 }
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  min-height: 40px;
-`;
 
-const AvatarWrapper = styled.div`
-  border-radius: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  border: ${({ selected }) => selected && '6px inset tomato'};
-`;
-const Avatar = styled.img`
-  width: 70px;
-`;
 export default AvatarList;
