@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { getPredictionCompletePercentage } from '../../api/predictions';
+import { getFixtureStatus } from '../../api/fixture';
 import { Text } from '../../common/common.styles';
 import { Banner } from './Banner';
 import { BannerContainer } from './Predictions.styles';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(true);
   const { selectedUserGroup, mode } = useOutletContext();
   const [predictedPercentages, setPredictedPercentages] = useState([]);
+  const [stageStatus, setStageStatus] = useState({
+    GRUPOS: false,
+    OCTAVOS: false,
+    CUARTOS: false,
+    SEMIFINAL: false,
+    FINAL: false,
+    TERCER_PUESTO: false,
+  });
   const editMode = mode === 'edit';
 
   useEffect(() => {
@@ -28,6 +39,16 @@ function BannerList() {
     return Math.round((quantities.predicted / quantities.total) * 100);
   };
 
+  useEffect(() => {
+    getFixtureStatus()
+      .then((res) => {
+        setStageStatus(res.data);
+      })
+      .finally(() => {
+        setLoadingStatus(false);
+      });
+  }, []);
+
   const bannerData = [
     {
       id: 1,
@@ -36,9 +57,6 @@ function BannerList() {
       percentage: predictedPercentages.GRUPOS
         ? calculatePercentage(predictedPercentages.GRUPOS)
         : null,
-      prevStage: null,
-      // disabledStart: '2022-11-20',
-      // disabledEnd: '2022-01-01',
     },
     {
       id: 2,
@@ -47,9 +65,6 @@ function BannerList() {
       percentage: predictedPercentages.OCTAVOS
         ? calculatePercentage(predictedPercentages.OCTAVOS)
         : null,
-      prevStage: 'GRUPOS',
-      // disabledStart: '2022-11-20',
-      // disabledEnd: '2022-01-01',
     },
     {
       id: 3,
@@ -58,20 +73,14 @@ function BannerList() {
       percentage: predictedPercentages.CUARTOS
         ? calculatePercentage(predictedPercentages.CUARTOS)
         : null,
-      prevStage: 'OCTAVOS',
-      // disabledStart: '2022-11-20',
-      // disabledEnd: '2022-01-01',
     },
     {
       id: 4,
-      title: 'SEMIS',
+      title: 'SEMIFINAL',
       path: 'semis',
       percentage: predictedPercentages.SEMIFINAL
         ? calculatePercentage(predictedPercentages.SEMIFINAL)
         : null,
-      prevStage: 'CUARTOS',
-      // disabledStart: '2022-11-20',
-      // disabledEnd: '2022-01-01',
     },
     {
       id: 5,
@@ -80,9 +89,6 @@ function BannerList() {
       percentage: predictedPercentages.TERCER_PUESTO
         ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
         : null,
-      prevStage: 'SEMIFINAL',
-      // disabledStart: '2022-11-20',
-      // disabledEnd: '2022-01-01',
     },
     {
       id: 6,
@@ -91,9 +97,6 @@ function BannerList() {
       percentage: predictedPercentages.FINAL
         ? calculatePercentage(predictedPercentages.FINAL)
         : null,
-      prevStage: 'SEMIFINAL',
-      // disabledStart: '2022-11-20',
-      // disabledEnd: '2022-01-01',
     },
   ];
 
@@ -102,21 +105,23 @@ function BannerList() {
       <Text align="center" size="2rem" weight="700">
         FASES
       </Text>
-      {bannerData.map((stage) => {
-        return (
-          <Banner
-            key={stage.id}
-            title={stage.title}
-            path={stage.path}
-            percentage={stage.percentage}
-            isLoading={isLoading}
-            editMode={editMode}
-            prevStage={stage.prevStage}
-            // disabledStart={stage.disabledStart}
-            // disabledEnd={stage.disabledStart}
-          />
-        );
-      })}
+      {loadingStatus ? (
+        <Spinner />
+      ) : (
+        bannerData.map((stage) => {
+          return (
+            <Banner
+              key={stage.id}
+              title={stage.title}
+              path={stage.path}
+              percentage={stage.percentage}
+              isLoading={isLoading}
+              editMode={editMode}
+              disabled={stageStatus[stage.title.replace(' ', '_')]}
+            />
+          );
+        })
+      )}
     </BannerContainer>
   );
 }
