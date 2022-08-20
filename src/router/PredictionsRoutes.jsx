@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import BannerList from '../pages/Predictions/BannerList';
-import Predictions from '../pages/Predictions/PredictionsPage';
-import FirstStage from '../pages/Predictions/Stages/FirstStage';
+import PredictionsPage from '../pages/Predictions/PredictionsPage';
+import PredictionManager from '../pages/Predictions/Stages/PredictionManager';
 
 function PredictionsRoutes() {
   return (
     <Routes>
-      <Route path="" element={<Predictions />}>
+      <Route path="" element={<PredictionsPage />}>
         <Route index element={<BannerList />} />
-        <Route path="/:phase" element={<FirstStage />} />
+        <Route path="/:phase" element={<PredictionManager />} />
       </Route>
     </Routes>
   );

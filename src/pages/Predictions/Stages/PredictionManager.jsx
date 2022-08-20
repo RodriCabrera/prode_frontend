@@ -36,7 +36,7 @@ const STAGE_NAMES = {
   TERCER_PUESTO: 'TERCER PUESTO',
 };
 
-function FirstStage() {
+function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
   const [stageData, setStageData] = useState([]); // Toda la data de la fase seleccionada para este userGroup
   const { selectedUserGroup, mode } = useOutletContext();
@@ -68,6 +68,7 @@ function FirstStage() {
         return STAGE_NAMES.GRUPOS;
     }
   };
+  
   const getPhaseFixture = () => {
     if (getStageName() !== STAGE_NAMES.GRUPOS)
       return getFixture('', getStageName());
@@ -212,4 +213,4 @@ function FirstStage() {
   );
 }
 
-export default FirstStage;
+export default PredictionManager;

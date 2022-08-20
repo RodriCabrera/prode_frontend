@@ -33,7 +33,7 @@ const useGetGroupsData = () => {
   return { isLoading, userGroupList, selectedUserGroup, handleGroupSelect };
 };
 
-function Predictions() {
+function PredictionsPage() {
   const [mode, setMode] = useState('results');
   const { isLoading, userGroupList, selectedUserGroup, handleGroupSelect } =
 		useGetGroupsData();
@@ -70,4 +70,4 @@ function Predictions() {
   );
 }
 
-export default Predictions;
+export default PredictionsPage;
