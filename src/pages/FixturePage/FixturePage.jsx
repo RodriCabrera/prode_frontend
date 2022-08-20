@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { FixtureTable } from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
