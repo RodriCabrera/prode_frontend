@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getFixture, getGroupStage } from '../../../api/fixture';
 import {
   createPredictions,
   getPredictions,
@@ -26,15 +25,11 @@ import {
 import { usePrompt } from '../../../hooks/usePrompt';
 import useToggleModal from '../../../hooks/useToggleModal';
 import Modal from '../../../common/Modal/Modal';
-
-const STAGE_NAMES = {
-  GRUPOS: 'GRUPOS',
-  OCTAVOS: 'OCTAVOS',
-  CUARTOS: 'CUARTOS',
-  SEMIS: 'SEMIFINALES',
-  FINAL: 'FINAL',
-  TERCER_PUESTO: 'TERCER PUESTO',
-};
+import {
+  getPhaseFixture,
+  getStageName,
+  STAGE_NAMES,
+} from './PredictionManagerUtils';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
@@ -50,30 +45,6 @@ function PredictionManager() {
   const { phase } = useParams();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
-
-  const getStageName = () => {
-    switch (phase) {
-      case '16':
-        return STAGE_NAMES.OCTAVOS;
-      case '8':
-        return STAGE_NAMES.CUARTOS;
-      case 'semis':
-        return STAGE_NAMES.SEMIS;
-      case 'final':
-        return STAGE_NAMES.FINAL;
-      case '3':
-        return STAGE_NAMES.TERCER_PUESTO;
-      case 'groups':
-      default:
-        return STAGE_NAMES.GRUPOS;
-    }
-  };
-  
-  const getPhaseFixture = () => {
-    if (getStageName() !== STAGE_NAMES.GRUPOS)
-      return getFixture('', getStageName());
-    return getGroupStage();
-  };
 
   useEffect(() => {
     if (selectedUserGroup) {
@@ -103,7 +74,7 @@ function PredictionManager() {
   };
 
   useEffect(() => {
-    if (stageData.length > 0) {
+    if (stageData?.length > 0) {
       updatePredictions();
     }
   }, [stageData, groupNumber, selectedUserGroup]);
@@ -204,8 +175,7 @@ function PredictionManager() {
           onClick={() => {
             toggleModal();
             switchGroupNumber(switchNumber);
-          }}
-        >
+          }}>
           Continuar
         </Button>
       </Modal>
