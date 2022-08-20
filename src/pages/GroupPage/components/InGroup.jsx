@@ -64,16 +64,16 @@ function InGroup({ groupData }) {
             {isEmpty(groupScoresData)
               ? 'Loading member scores...'
               : groupScoresData.scores?.map((score) => (
-                  <ListElement
-                    onClick={() => handleUserClick(score.user)}
-                    key={score.user}
-                    avatar={
-                      <UserMiniAvatar avatar={score.avatar} name={score.user} />
-                    }
-                  >
-                    <Text>{`${score.user} : ${score.score} pts`}</Text>
-                  </ListElement>
-                ))}
+                <ListElement
+                  onClick={() => handleUserClick(score.user)}
+                  key={score.user}
+                  avatar={
+                    <UserMiniAvatar avatar={score.avatar} name={score.user} />
+                  }
+                >
+                  <Text>{`${score.user} : ${score.score} pts`}</Text>
+                </ListElement>
+              ))}
             <GroupInvite />
             <CardContainer>
               <Button grayscale onClick={toggleModal}>
