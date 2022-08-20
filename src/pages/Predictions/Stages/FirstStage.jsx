@@ -157,18 +157,6 @@ function FirstStage() {
 
   return (
     <>
-      <Modal show={showModal} toggle={toggleModal}>
-        <CardTitle>Continuar sin enviar predicciones?</CardTitle>
-        <Button
-          type="button"
-          onClick={() => {
-            toggleModal();
-            switchGroupNumber(switchNumber);
-          }}
-        >
-          Continuar
-        </Button>
-      </Modal>
       <Link to="..">Volver a selección de fases</Link>
       {resultsMode && selectedUserGroup && (
         <References
@@ -208,6 +196,18 @@ function FirstStage() {
           NO ELEGISTE NINGUN GRUPO
         </Text>
       )}
+      <Modal show={showModal} toggle={toggleModal}>
+        <CardTitle>Continuar sin enviar predicciones?</CardTitle>
+        <Button
+          type="button"
+          onClick={() => {
+            toggleModal();
+            switchGroupNumber(switchNumber);
+          }}
+        >
+          Continuar
+        </Button>
+      </Modal>
     </>
   );
 }
