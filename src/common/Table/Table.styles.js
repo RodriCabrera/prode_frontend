@@ -23,9 +23,24 @@ export const TH = styled.th`
 `;
 export const TD = styled.td`
   padding: ${({ padding }) => padding || '1rem'};
-  text-align: center;
   vertical-align: middle;
   border-bottom: ${({ borderBottom }) => borderBottom || 'none'};
+  text-align: ${({ align }) => align || 'center'};
+  color: ${({ color }) => color || 'inherit'};
+  font-size: ${({ size }) => size};
+  font-weight: ${({ weight }) => weight};
+  margin: ${({ margin }) => margin || '0'};
+  transition: all ease 0.5s;
+  &:after {
+    ${({ withBottomBorder }) =>
+      withBottomBorder &&
+      `content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: white;
+    `}
+  }
 `;
 export const TR = styled.tr`
   border-bottom: ${({ borderBottom }) => borderBottom || 'none'};

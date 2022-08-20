@@ -104,7 +104,7 @@ export const getErrorMessageForMatch = (errors, matchId) => {
 
 export const checkPredictionResult = (
   stageData,
-  groupNumber,
+  // groupNumber,
   matchId,
   homeOrAway,
   predictionAway,

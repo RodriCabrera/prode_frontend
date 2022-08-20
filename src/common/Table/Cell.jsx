@@ -13,16 +13,16 @@ function Cell({ children, ...props }) {
     margin,
   } = props;
   return (
-    <TD borderBottom={borderBottom} colSpan={colSpan} padding={padding}>
-      <Text
-        align="center"
-        size={fontSize}
-        weight={fontWeight}
-        withBottomBorder={withBottomBorder}
-        margin={margin}
-      >
-        {children}
-      </Text>
+    <TD
+      borderBottom={borderBottom}
+      colSpan={colSpan}
+      padding={padding}
+      align="center"
+      size={fontSize}
+      weight={fontWeight}
+      withBottomBorder={withBottomBorder}
+      margin={margin}>
+      {children}
     </TD>
   );
 }

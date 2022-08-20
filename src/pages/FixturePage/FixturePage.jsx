@@ -34,7 +34,7 @@ function Fixture() {
 
   return (
     <FixtureWrapper>
-      <LaterStagesGraph />
+      {!isMobile && <LaterStagesGraph />}
       <Text size="2rem" weight="700" align="center">
         Fase de Grupos
       </Text>
