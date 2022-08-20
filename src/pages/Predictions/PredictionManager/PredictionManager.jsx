@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Link, useOutletContext, useParams } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   createPredictions,
@@ -25,39 +25,25 @@ import {
 import { usePrompt } from '../../../hooks/usePrompt';
 import useToggleModal from '../../../hooks/useToggleModal';
 import Modal from '../../../common/Modal/Modal';
-import {
-  getPhaseFixture,
-  getStageName,
-  STAGE_NAMES,
-} from './PredictionManagerUtils';
+import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
 import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
+import { useGetStageData } from './hooks/useGetStageData';
+import { isEmpty } from 'lodash';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
-  const [stageData, setStageData] = useState([]); // Toda la data de la fase seleccionada para este userGroup
-  const { selectedUserGroup, mode } = useOutletContext();
+  const { mode } = useOutletContext();
   const resultsMode = mode === 'results';
   const [errorMessages, setErrorMessages] = useState([]);
+  const { selectedUserGroup } = useOutletContext();
+  const { showModal, toggleModal } = useToggleModal();
+  const { groupNumber, switchGroupNumber } = useSwitchGroupNumber();
+  const { stageData } = useGetStageData();
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
 
-  const { phase } = useParams();
-  const { showModal, toggleModal } = useToggleModal();
-  const { groupNumber, switchGroupNumber } = useSwitchGroupNumber();
-
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
-
-  useEffect(() => {
-    if (selectedUserGroup) {
-      setIsLoading(true);
-      getPhaseFixture()
-        .then((res) => {
-          setStageData(res.data.fixture);
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [selectedUserGroup, phase]);
 
   const updatePredictionsByStage = () => {
     if (getStageName() !== STAGE_NAMES.GRUPOS)
@@ -114,7 +100,7 @@ function PredictionManager() {
     }
   };
 
-  if (isLoading)
+  if (isLoading || isEmpty(stageData))
     return (
       <CardContainer>
         <CardWrapper style={{ height: '400px' }}>
