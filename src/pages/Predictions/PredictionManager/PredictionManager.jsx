@@ -30,19 +30,21 @@ import {
   getStageName,
   STAGE_NAMES,
 } from './PredictionManagerUtils';
+import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
   const [stageData, setStageData] = useState([]); // Toda la data de la fase seleccionada para este userGroup
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
-  const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [errorMessages, setErrorMessages] = useState([]);
-  const { showModal, toggleModal } = useToggleModal();
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
+
   const { phase } = useParams();
+  const { showModal, toggleModal } = useToggleModal();
+  const { switchGroupNumber, groupNumber } = useSwitchGroupNumber();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
@@ -103,15 +105,9 @@ function PredictionManager() {
     );
   };
 
-  const switchGroupNumber = (jumpValue) => {
-    setGroupNumber((prevState) => prevState + jumpValue);
-  };
-
-  const [switchNumber, setSwitchNumber] = useState(null);
-
   const handleGroupSwitch = (value) => {
     if (dirty) {
-      setSwitchNumber(value);
+      switchGroupNumber(value);
       toggleModal();
     } else {
       switchGroupNumber(value);
@@ -152,13 +148,13 @@ function PredictionManager() {
           ) : (
             <PredictionForm
               groupNumber={groupNumber}
-              handleSubmit={!resultsMode && handleSubmit}
+              handleSubmit={!resultsMode ? handleSubmit : undefined}
               stageData={stageData}
               errorMessages={errorMessages}
               handleNextGroup={() => handleGroupSwitch(1)}
               handlePrevGroup={() => handleGroupSwitch(-1)}
               values={values}
-              handleChange={!resultsMode && handleChange}
+              handleChange={!resultsMode ? handleChange : undefined}
               groupPhase
             />
           )}
@@ -174,7 +170,7 @@ function PredictionManager() {
           type="button"
           onClick={() => {
             toggleModal();
-            switchGroupNumber(switchNumber);
+            switchGroupNumber(groupNumber);
           }}>
           Continuar
         </Button>

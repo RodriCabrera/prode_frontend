@@ -26,6 +26,7 @@ export const getStageName = (phase) => {
       return STAGE_NAMES.GRUPOS;
   }
 };
+
 export const getPhaseFixture = () => {
   if (getStageName() !== STAGE_NAMES.GRUPOS) {
     return getFixture('', getStageName());
