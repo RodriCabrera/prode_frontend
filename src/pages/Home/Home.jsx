@@ -50,6 +50,7 @@ function Home() {
       .finally(() => {});
   }, []);
 
+  // TODO: Solamente acá redirigimos si no esta loguado. en /scores o cualquier otra no...
   useEffect(() => {
     if (!userContext.user) {
       navigate('/auth');
@@ -65,8 +66,7 @@ function Home() {
           border="none"
           align="center"
           justify="center"
-          fullWidth={isMobile}
-        >
+          fullWidth={isMobile}>
           <NotificationBoard id="notification-board" />
           {showFixture && (
             <>

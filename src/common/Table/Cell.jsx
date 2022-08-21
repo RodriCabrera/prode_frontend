@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from '../common.styles';
 import { TD } from './Table.styles';
 
 function Cell({ children, ...props }) {
