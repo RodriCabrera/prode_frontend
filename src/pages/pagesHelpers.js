@@ -1,3 +1,5 @@
+import styled from '@emotion/styled';
+
 export const parseDate = (date, options = null) => {
   return new Date(date).toLocaleString(
     navigator.language,
@@ -11,12 +13,17 @@ export const parseDate = (date, options = null) => {
   );
 };
 
+const FlagImg = styled.img`
+  min-width: 42px;
+  min-height: 28px;
+`;
+
 export const getFlagUrl = (url, size) => {
   let newUrl;
   if (!url) {
     newUrl = 'https://via.placeholder.com/42x28';
   } else newUrl = url?.replace('{format}', 'sq').replace('{size}', size);
-  return <img src={newUrl} alt="Country flag" />;
+  return <FlagImg src={newUrl} alt="Country flag"/>;
 };
 
 export const translateDuration = (miliseconds) => {
