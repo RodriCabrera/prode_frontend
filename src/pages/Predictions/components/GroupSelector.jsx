@@ -24,6 +24,7 @@ export function GroupSelector({
         <ListWrapper>
           {userGroupList?.map((userGroup) => {
             const isSelected = selectedUserGroup?.id === userGroup.id;
+
             return (
               <ListElement
                 key={userGroup.id}
@@ -35,8 +36,7 @@ export function GroupSelector({
                   )
                 }
                 bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}
-              >
+                onClick={() => handleGroupSelect(userGroup)}>
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>
             );

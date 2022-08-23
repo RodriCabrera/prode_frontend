@@ -7,10 +7,11 @@ export const NavbarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: sticky;
+  position: auto;
   top: 0;
   z-index: 999;
 `;
+
 export const NavbarWrapper = styled.div`
   backdrop-filter: blur(4px);
   display: flex;
@@ -35,7 +36,7 @@ export const LogoContainer = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  gap: 1rem 0rem;
+  gap: 0.7rem 0rem;
 `;
 
 export const LogoMain = styled.p`
