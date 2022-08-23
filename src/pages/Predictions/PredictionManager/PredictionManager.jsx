@@ -106,7 +106,7 @@ function PredictionManager() {
     }
   };
 
-  if (isLoading || isEmpty(stageData))
+  if (isLoading)
     return (
       <CardContainer>
         <CardWrapper style={{ height: '400px' }}>
