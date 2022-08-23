@@ -132,8 +132,8 @@ export const checkPredictionResult = (
   const teamPrediction =
     homeOrAway === 'home' ? predictionHome : predictionAway;
 
-  if (teamResult === null || teamPrediction === undefined) {
-    return 'silver';
+  if (teamPrediction === undefined) {
+    return teamResult === null ? 'silver' : 'tomato';
   }
   if (getScoreStatus() === 'full') {
     return 'lightgreen';
