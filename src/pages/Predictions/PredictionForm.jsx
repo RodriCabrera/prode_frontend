@@ -12,7 +12,22 @@ import {
   getErrorMessageForMatch,
   numberToGroupLetter,
   groupNumberMod,
+  calculateIfCanPredict,
 } from './predictionsPageUtils';
+
+const useGetStageData = ({ stageData, groupNumber }) => {
+  const [data, setData] = useState(stageData);
+
+  useEffect(() => {
+    if (stageData.length > 0) {
+      if (typeof groupNumber === 'number') {
+        setData(stageData[groupNumberMod(groupNumber)]?.matches);
+      }
+    }
+  }, [stageData]);
+
+  return data;
+};
 
 // TODO: Para dehabilitar inputs si se pasó la fecha:
 // Si Date.now es mayor a la fecha del partido menos el time limit ya no podes hacer predicciones.
@@ -29,24 +44,10 @@ export function PredictionForm(props) {
     groupPhase,
   } = props;
 
-  const [data, setData] = useState(stageData);
+  const data = useGetStageData({ stageData, groupNumber });
+
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
-
-  useEffect(() => {
-    if (stageData.length > 0) {
-      if (typeof groupNumber === 'number') {
-        setData(stageData[groupNumberMod(groupNumber)]?.matches);
-      }
-    }
-  }, [stageData]);
-
-  const calculateCanPredict = (matchDate) => {
-    const now = Date.now();
-    const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
-    const matchTime = new Date(matchDate).getTime();
-    return now + timeLimit < matchTime;
-  };
 
   return (
     <FormWrapper id="prediction-form-wrapper">
@@ -61,16 +62,19 @@ export function PredictionForm(props) {
               const predictionStatus = () =>
                 match.status === 0
                   ? checkPredictionResult(
-                    data,
-                    groupNumberMod(groupNumber),
-                    match.id,
-                    'away',
-                    values[`${match.id}-away`],
-                    values[`${match.id}-home`]
-                  )
+                      data,
+                      // groupNumberMod(groupNumber),
+                      match.id,
+                      'away',
+                      values[`${match.id}-away`],
+                      values[`${match.id}-home`]
+                    )
                   : 'silver';
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
-              const canPredict = calculateCanPredict(match.date);
+              const canPredict = calculateIfCanPredict(
+                match.date,
+                selectedUserGroup
+              );
 
               const renderInfoIcon = () => {
                 if (resultsMode) {

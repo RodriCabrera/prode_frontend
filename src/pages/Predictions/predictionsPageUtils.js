@@ -144,3 +144,10 @@ export const checkPredictionResult = (
 
   return 'tomato';
 };
+
+export const calculateIfCanPredict = (matchDate, selectedUserGroup) => {
+  const now = Date.now();
+  const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
+  const matchTime = new Date(matchDate).getTime();
+  return now + timeLimit < matchTime;
+};
