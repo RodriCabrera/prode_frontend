@@ -15,6 +15,8 @@ const GroupsListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
+
+// ! ESTE COMPONENTE NO SE ESTA USANDO
 function PredictionResults() {
   const [userGroupList, setUserGroupList] = useState([]);
   const [predictions, setPredictions] = useState([]);
@@ -28,7 +30,7 @@ function PredictionResults() {
       .then(({ data }) => {
         setUserGroupList(data);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
@@ -39,7 +41,7 @@ function PredictionResults() {
     setIsLoading(true);
     getAllPredictions(signal)
       .then((res) => setPredictions(res.data))
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => setIsLoading(false));
     return cleanup;
   }, [selectedUserGroup]);
@@ -72,8 +74,7 @@ function PredictionResults() {
                   )
                 }
                 bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}
-              >
+                onClick={() => handleGroupSelect(userGroup)}>
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>
             );

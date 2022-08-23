@@ -10,9 +10,11 @@ import { ListWrapper } from '../../common/Lists/Lists.styles';
 import useCleanupController from '../../hooks/useCleanupController';
 
 const GroupsListWrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 `;
+
+// ! ESTE COMPONENTE NO SE ESTA USANDO
 
 function EditPredictions() {
   const [userGroupList, setUserGroupList] = useState([]);
@@ -26,7 +28,7 @@ function EditPredictions() {
       .then(({ data }) => {
         setUserGroupList(data);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });

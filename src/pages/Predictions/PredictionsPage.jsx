@@ -23,11 +23,9 @@ const useGetGroupsData = () => {
     getUserGroups(signal)
       .then(({ data }) => {
         setUserGroupList(data);
-        if (data.length === 1) {
-          setSelectedUserGroup(data[0]);
-        }
+        setSelectedUserGroup(data[0]);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
@@ -40,7 +38,7 @@ const useGetGroupsData = () => {
 function PredictionsPage() {
   const [mode, setMode] = useState('results');
   const { isLoading, userGroupList, selectedUserGroup, handleGroupSelect } =
-		useGetGroupsData();
+    useGetGroupsData();
 
   return (
     <PredictionsPageWrapper id="mi-prode-container">
@@ -58,7 +56,7 @@ function PredictionsPage() {
           {isLoading && <Spinner />}
           {!isLoading && (
             <Text align="center" size="1.3rem">
-							No perteneces a ningún grupo para hacer predicciones...
+              No perteneces a ningún grupo para hacer predicciones...
             </Text>
           )}
         </>
