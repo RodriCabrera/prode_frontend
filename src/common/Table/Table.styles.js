@@ -6,7 +6,7 @@ export const Container = styled.div`
 `;
 
 export const TableWrapper = styled.table`
-  border: ${({ fullWidth }) => (fullWidth ? 'none' : '1px solid darkgray')};
+  border: ${({ fullWidth }) => (fullWidth ? 'none' : '1px solid dimgray')};
   border-radius: 18px;
   border-collapse: separate;
   margin: auto;
