@@ -60,13 +60,16 @@ function Navbar() {
       </Modal>
       <NavbarContainer id="navbar-container">
         <NavbarWrapper id="navbar-wrapper">
-          <ButtonGroup id="button-group-left" onClick={() => navigate('/')}>
+          <ButtonGroup
+            id="button-group-left"
+            onClick={() => navigate('/')}
+            padding="1rem">
             <LogoContainer>
               <LogoMain>Prode </LogoMain>
               <LogoSub>الحمار</LogoSub>
             </LogoContainer>
           </ButtonGroup>
-          <ButtonGroup id="button-group-right">
+          <ButtonGroup id="button-group-right" padding="1rem">
             {userContext.user ? (
               <>
                 <NavLink onClick={() => navigate('/profile')}>
