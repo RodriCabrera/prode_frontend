@@ -17,7 +17,7 @@ const LinkbarContainer = styled.div`
   display: flex;
   justify-content: center;
   position: ${({ isMobile }) => (isMobile ? 'fixed' : 'sticky')};
-  top: ${({ isMobile }) => (isMobile ? 'auto' : '80px')};
+  top: ${({ isMobile }) => (isMobile ? 'auto' : '0')};
   bottom: ${({ isMobile }) => (isMobile ? '0' : 'auto')};
   z-index: 99998;
   background-color: #23272a;
