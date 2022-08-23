@@ -28,6 +28,7 @@ import Modal from '../../../common/Modal/Modal';
 import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
 import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 import { useGetStageData } from './hooks/useGetStageData';
+import useCleanupController from '../../../hooks/useCleanupController';
 import { isEmpty } from 'lodash';
 
 function PredictionManager() {
@@ -42,6 +43,7 @@ function PredictionManager() {
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
@@ -49,7 +51,11 @@ function PredictionManager() {
     if (getStageName() !== STAGE_NAMES.GRUPOS)
       return getPredictions(selectedUserGroup?.id, getStageName());
     const groupLeter = numberToGroupLetter(groupNumber);
-    return getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter);
+    return getFirstStagePredictionsByGroup(
+      selectedUserGroup?.id,
+      groupLeter,
+      signal
+    );
   };
 
   const updatePredictions = () => {
@@ -58,13 +64,13 @@ function PredictionManager() {
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
+      .catch((err) => handleCancel(err))
       .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
-    if (stageData?.length > 0) {
-      updatePredictions();
-    }
+    if (stageData?.length > 0) updatePredictions();
+    return cleanup;
   }, [stageData, groupNumber, selectedUserGroup]);
 
   const handleSubmit = (e) => {

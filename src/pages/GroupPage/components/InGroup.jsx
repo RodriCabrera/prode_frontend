@@ -19,6 +19,7 @@ import GroupRules from './GroupRules';
 import GroupInvite from './GroupInvite';
 import { AuthContext } from '../../../common/AuthProvider';
 import { GoBackButton } from '../../../common/GoBackButton/GoBackButton';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 function InGroup({ groupData }) {
   const navigate = useNavigate();
@@ -26,17 +27,20 @@ function InGroup({ groupData }) {
   const [isLoading, setIsLoading] = useState(false);
   const { showModal, toggleModal } = useToggleModal();
   const userContext = useContext(AuthContext);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
     if (!groupData.name) return;
-    getGroupScores(groupData.name)
+    getGroupScores(groupData.name, signal)
       .then((res) => {
         setGroupScoresData(res.data);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, []);
 
   const onGroupExit = () => {

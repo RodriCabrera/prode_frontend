@@ -7,11 +7,13 @@ import { ListElement } from '../../common/Lists/ListElement';
 import { GroupScoresForm } from './GroupScoresForm';
 import { getUserGroups } from '../../api/groups';
 import { Spinner } from '../../common/Spinner/Spinner';
+import useCleanupController from '../../hooks/useCleanupController';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [userGroupList, setUserGroupList] = useState([]);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -23,10 +25,11 @@ function Scores() {
 
   const loadUserGroups = () => {
     setIsLoading(true);
-    getUserGroups()
+    getUserGroups(signal)
       .then(({ data }) => {
         setUserGroupList(data);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
@@ -34,6 +37,7 @@ function Scores() {
 
   useEffect(() => {
     loadUserGroups();
+    return cleanup;
   }, []);
 
   if (isLoading) return <Spinner />;

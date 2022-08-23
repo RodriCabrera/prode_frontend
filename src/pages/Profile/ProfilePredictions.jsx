@@ -9,25 +9,28 @@ import {
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 import { FixtureTable } from '../FixturePage/components/FixtureTable';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
+import useCleanupController from '../../hooks/useCleanupController';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [otherUserPredictions, setOtherUserPredictions] = useState([]);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     if (!group || !user) return;
     setIsLoading(true);
-    getOtherUserPredictionsByGroup(user._id, group._id)
+    getOtherUserPredictionsByGroup(user._id, group._id, signal)
       .then(({ data }) => {
         setOtherUserPredictions(data);
       })
       .catch((err) => {
-        alert(err);
+        handleCancel(err) || alert(err);
       })
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, [props]);
 
   return (

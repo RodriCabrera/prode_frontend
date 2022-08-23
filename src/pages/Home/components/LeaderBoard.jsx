@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
 import Leader from './Leader';
 import { getUserGroups } from '../../../api/groups';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 const LeaderBoardWrapper = styled.div`
   width: 100%;
@@ -10,14 +11,17 @@ const LeaderBoardWrapper = styled.div`
 function LeaderBoard() {
   const [userGroups, setUserGroups] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
-    getUserGroups()
+    getUserGroups(signal)
       .then((res) => {
         setUserGroups(res?.data?.slice(0, 5));
       })
+      .catch(err => handleCancel(err))
       .finally(() => setIsLoading(false));
+    return cleanup;
   }, []);
 
   return (

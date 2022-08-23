@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getAvatars } from '../../../api/profiles';
 import { Button } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 const Container = styled.div`
   display: flex;
@@ -34,14 +35,17 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showAvatarList, setShowAvatarList] = useState(false);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     if (showAvatarList) {
       setIsLoading(true);
-      getAvatars()
+      getAvatars(signal)
         .then((res) => setAvatars(res.data))
+        .catch(err => handleCancel(err))
         .finally(() => setIsLoading(false));
     }
+    return cleanup;
   }, [showAvatarList]);
 
   return (

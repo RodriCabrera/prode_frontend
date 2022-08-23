@@ -34,11 +34,13 @@ export function PredictionForm(props) {
   const resultsMode = mode === 'results';
 
   useEffect(() => {
-    if (stageData.length > 0) {
+    let subscribed = true
+    if (stageData.length > 0 && subscribed) {
       if (typeof groupNumber === 'number') {
         setData(stageData[groupNumberMod(groupNumber)]?.matches);
       }
     }
+    return(() => subscribed=false);
   }, [stageData]);
 
   const calculateCanPredict = (matchDate) => {

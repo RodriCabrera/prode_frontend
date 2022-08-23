@@ -10,20 +10,24 @@ import {
 } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { getGroupRules, joinGroup } from '../../../api/groups';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 function NotInGroup({ name, updater }) {
   const [isLoading, setIsLoading] = useState(false);
   const [groupRules, setGroupRules] = useState();
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
-    getGroupRules(name)
+    getGroupRules(name, signal)
       .then((res) => {
         setGroupRules(res.data);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, []);
 
   const handleJoin = () => {

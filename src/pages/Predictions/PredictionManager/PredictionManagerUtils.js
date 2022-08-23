@@ -27,10 +27,10 @@ export const getStageName = (phase) => {
   }
 };
 
-export const getPhaseFixture = () => {
+export const getPhaseFixture = (signal) => {
   if (getStageName() !== STAGE_NAMES.GRUPOS) {
-    return getFixture('', getStageName());
+    return getFixture('', getStageName(), signal);
   } else {
-    return getGroupStage();
+    return getGroupStage(signal);
   }
 };
