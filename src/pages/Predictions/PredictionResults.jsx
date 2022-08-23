@@ -9,6 +9,7 @@ import { Text } from '../../common/common.styles';
 import { ListElement } from '../../common/Lists/ListElement';
 import { ListWrapper } from '../../common/Lists/Lists.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
+import useCleanupController from '../../hooks/useCleanupController';
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -19,23 +20,28 @@ function PredictionResults() {
   const [predictions, setPredictions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUserGroup, setSelectedUserGroup] = useState(null);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
-    getUserGroups()
+    getUserGroups(signal)
       .then(({ data }) => {
         setUserGroupList(data);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, []);
 
   useEffect(() => {
     setIsLoading(true);
-    getAllPredictions()
+    getAllPredictions(signal)
       .then((res) => setPredictions(res.data))
+      .catch(err => handleCancel(err))
       .finally(() => setIsLoading(false));
+    return cleanup;
   }, [selectedUserGroup]);
 
   const handleGroupSelect = (group) => {

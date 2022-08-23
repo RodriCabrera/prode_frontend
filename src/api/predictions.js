@@ -1,7 +1,7 @@
 import { withCredentials } from './instances';
 
-export const getAllPredictions = () => {
-  return withCredentials.get('/predictions');
+export const getAllPredictions = (signal) => {
+  return withCredentials.get('/predictions', { signal });
 };
 
 export const createPredictions = (predictions) => {
@@ -27,29 +27,34 @@ body {
 }
 */
 
-export const getPredictions = (userGroupId = '', stage = '') => {
+export const getPredictions = (userGroupId = '', stage = '', signal) => {
   return withCredentials.get(
-    `/predictions?userGroupId=${userGroupId}&stage=${stage}`
+    `/predictions?userGroupId=${userGroupId}&stage=${stage}`,
+    { signal }
   );
 };
 
-export const getPredictionCompletePercentage = (userGroupId = '') => {
+export const getPredictionCompletePercentage = (userGroupId = '', signal) => {
   return withCredentials.get(
-    `/predictions/percentage?userGroupId=${userGroupId}`
+    `/predictions/percentage?userGroupId=${userGroupId}`,
+    { signal }
   );
 };
 
 export const getFirstStagePredictionsByGroup = (
   userGroupId = '',
-  groupLeter = ''
+  groupLeter = '',
+  signal
 ) => {
   return withCredentials.get(
-    `/predictions?userGroupId=${userGroupId}&group=${groupLeter}`
+    `/predictions?userGroupId=${userGroupId}&group=${groupLeter}`,
+    { signal }
   );
 };
 
-export const getOtherUserPredictionsByGroup = (userId, userGroupId) => {
+export const getOtherUserPredictionsByGroup = (userId, userGroupId, signal) => {
   return withCredentials.get(
-    `/predictions/profile/${userId}?userGroupId=${userGroupId}`
+    `/predictions/profile/${userId}?userGroupId=${userGroupId}`,
+    { signal }
   );
 };

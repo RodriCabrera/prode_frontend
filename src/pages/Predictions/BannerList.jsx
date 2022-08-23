@@ -6,12 +6,14 @@ import { Text } from '../../common/common.styles';
 import { Banner } from './Banner';
 import { BannerContainer } from './Predictions.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
+import useCleanupController from '../../hooks/useCleanupController';
 
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(true);
   const { selectedUserGroup, mode } = useOutletContext();
   const [predictedPercentages, setPredictedPercentages] = useState([]);
+  const [signal, cleanup, handleCancel] = useCleanupController();
   const [stageStatus, setStageStatus] = useState({
     GRUPOS: false,
     OCTAVOS: false,
@@ -25,14 +27,16 @@ function BannerList() {
   useEffect(() => {
     if (editMode) {
       setIsLoading(true);
-      getPredictionCompletePercentage(selectedUserGroup?.id)
+      getPredictionCompletePercentage(selectedUserGroup?.id, signal)
         .then((res) => {
           setPredictedPercentages(res.data);
         })
+        .catch(err => handleCancel(err))
         .finally(() => {
           setIsLoading(false);
         });
     }
+    return cleanup;
   }, [selectedUserGroup, editMode]);
 
   const calculatePercentage = (quantities) => {

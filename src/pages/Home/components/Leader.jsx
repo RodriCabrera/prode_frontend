@@ -5,6 +5,7 @@ import { GiPodiumWinner } from 'react-icons/gi';
 import { getGroupScores } from '../../../api/groups';
 import { ListElement } from '../../../common/Lists/ListElement';
 import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 const LeaderElement = styled.div`
   display: flex;
@@ -19,15 +20,18 @@ const LeaderElement = styled.div`
 function Leader({ groupName, isUnique }) {
   const [leaders, setLeaders] = useState(isUnique ? [{}, {}, {}] : [{}]);
   const [isLoading, setIsLoading] = useState(true);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
-    getGroupScores(groupName)
+    getGroupScores(groupName, signal)
       .then((res) => {
         const groupLeaders = res.data.scores;
         setLeaders(isUnique ? groupLeaders.slice(0, 3) : [groupLeaders[0]]);
       })
+      .catch(err => handleCancel(err))
       .finally(() => setIsLoading(false));
+    return cleanup;
   }, [groupName, isUnique]);
 
   return (

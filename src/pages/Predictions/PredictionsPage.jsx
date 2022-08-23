@@ -6,11 +6,13 @@ import { Text } from '../../common/common.styles';
 import { getUserGroups } from '../../api/groups';
 import { GroupSelector } from './components/GroupSelector';
 import { Spinner } from '../../common/Spinner/Spinner';
+import useCleanupController from '../../hooks/useCleanupController';
 
 const useGetGroupsData = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userGroupList, setUserGroupList] = useState([]);
   const [selectedUserGroup, setSelectedUserGroup] = useState(null);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   const handleGroupSelect = (group) => {
     setSelectedUserGroup(group);
@@ -18,16 +20,18 @@ const useGetGroupsData = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getUserGroups()
+    getUserGroups(signal)
       .then(({ data }) => {
         setUserGroupList(data);
         if (data.length === 1) {
           setSelectedUserGroup(data[0]);
         }
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, []);
 
   return { isLoading, userGroupList, selectedUserGroup, handleGroupSelect };

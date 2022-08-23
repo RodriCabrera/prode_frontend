@@ -10,6 +10,7 @@ import LeaderBoard from './components/LeaderBoard';
 import Countdown from './components/Countdown';
 import { HomeGroups } from './components/HomeGroups';
 import NotificationBoard from './components/NotificationBoard';
+import useCleanupController from '../../hooks/useCleanupController';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -35,10 +36,11 @@ function Home() {
   const [showFixture, setShowFixture] = useState(false);
   const { width } = useWindowDimensions();
   const isMobile = width <= 768;
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setShowFixture(false);
-    getFixtureByStageId('GRUPOS')
+    getFixtureByStageId('GRUPOS', signal)
       .then((res) => {
         setFixtureShortData(
           res.data.fixture
@@ -47,14 +49,17 @@ function Home() {
         );
         setShowFixture(true);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {});
+    return cleanup;
   }, []);
 
-  // TODO: Solamente acá redirigimos si no esta loguado. en /scores o cualquier otra no...
   useEffect(() => {
-    if (!userContext.user) {
+    let subscribed = true
+    if (!userContext.user && subscribed) {
       navigate('/auth');
     }
+    return (() => subscribed = false)
   }, [userContext]);
 
   return (

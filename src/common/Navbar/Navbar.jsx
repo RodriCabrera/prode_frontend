@@ -43,6 +43,7 @@ function Navbar() {
     toggleModal();
     logoutUser()
       .then(() => {
+        // TODO: rebota de vuelta al home sin el usuario
         navigate('/auth');
       })
       .finally(() => {

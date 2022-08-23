@@ -6,19 +6,21 @@ import JoinGroupForm from './components/JoinGroupForm';
 import GroupList from './components/GroupList';
 import { getUserGroups } from '../../api/groups';
 import { Spinner } from '../../common/Spinner/Spinner';
+import useCleanupController from '../../hooks/useCleanupController';
 
 function Groups() {
   const [groupList, setGroupList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   const getGroupList = () => {
     setIsLoading(true);
-    getUserGroups()
+    getUserGroups(signal)
       .then(({ data }) => {
         setGroupList(data);
       })
       .catch((error) => {
-        console.error(error);
+        handleCancel(error) || console.error(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -27,6 +29,7 @@ function Groups() {
 
   useEffect(() => {
     getGroupList();
+    return cleanup;
   }, []);
 
   return (

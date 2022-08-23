@@ -3,19 +3,26 @@ import { getFixtureByStageId } from '../../../api/fixture';
 import { StageColumn, MatchData, Match } from './laterStages.styles';
 import { getFlagUrl, parseDate } from '../../pagesHelpers';
 import { datePreferences } from '../fixturePageHelpers';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 function FinalStage() {
   // const [isLoading, setIsLoading] = useState(false);
   const [finalData, setFinalData] = useState([]);
   const [thirdData, setThirdData] = useState([]);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
-    getFixtureByStageId('FINAL').then((res) => {
+    getFixtureByStageId('FINAL', signal).then((res) => {
       setFinalData(res.data.fixture[0]);
+    }).catch(err => {
+      handleCancel(err)
     });
-    getFixtureByStageId('TERCER_PUESTO').then((res) => {
+    getFixtureByStageId('TERCER_PUESTO', signal).then((res) => {
       setThirdData(res.data.fixture[0]);
+    }).catch(err => {
+      handleCancel(err)
     });
+    return cleanup;
   }, []);
 
   return (

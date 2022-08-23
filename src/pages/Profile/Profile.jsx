@@ -11,6 +11,7 @@ import { ListWrapper } from '../../common/Lists/Lists.styles';
 import { ListElement } from '../../common/Lists/ListElement';
 import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
+import useCleanupController from '../../hooks/useCleanupController';
 
 function Profile() {
   const { name } = useParams();
@@ -18,17 +19,20 @@ function Profile() {
   const [sharedGroups, setSharedGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [groupPredictions, setGroupPredictions] = useState({});
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
-    getProfile(name)
+    getProfile(name, signal)
       .then(({ data }) => {
         setProfile(data.profile);
         setSharedGroups(data.sharedGroups || []);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, []);
 
   const handleSwitchPredictions = (group) => {
