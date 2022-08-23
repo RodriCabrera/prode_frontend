@@ -40,6 +40,7 @@ export const CustomLink = styled(Text)`
   padding: 0.7rem 0.9rem;
   /* margin: 0.2rem; */
   border-radius: 4px;
+  user-select: none;
   :hover {
     background-color: #303030;
   }
