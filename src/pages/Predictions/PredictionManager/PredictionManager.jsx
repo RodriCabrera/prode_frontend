@@ -29,7 +29,6 @@ import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
 import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 import { useGetStageData } from './hooks/useGetStageData';
 import useCleanupController from '../../../hooks/useCleanupController';
-import { isEmpty } from 'lodash';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
