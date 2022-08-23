@@ -63,7 +63,7 @@ function Navbar() {
           <ButtonGroup
             id="button-group-left"
             onClick={() => navigate('/')}
-            padding="1rem">
+            padding=".5rem 2rem">
             <LogoContainer>
               <LogoMain>Prode </LogoMain>
               <LogoSub>الحمار</LogoSub>
