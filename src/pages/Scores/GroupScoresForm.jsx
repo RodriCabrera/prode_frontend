@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { getGroupScores } from '../../api/groups';
+import { GroupSelector } from '../Predictions/components/GroupSelector';
 import { Form, Label, Select } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 
