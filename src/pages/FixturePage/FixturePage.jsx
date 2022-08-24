@@ -1,5 +1,4 @@
 import React from 'react';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { FixtureTable } from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
 import { Spinner } from '../../common/Spinner/Spinner';
@@ -11,12 +10,11 @@ import {
   GroupTableWrapper,
 } from './FixturePage.styles';
 import { toast } from 'react-toastify';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 function Fixture() {
-  const { width } = useWindowDimensions();
   const { isLoading, fixtureData } = useFetchFixtureData();
-  // TODO: Ponerse de acuerdo en este número, si va a ser global o depende el caso. Porque me parece que sin hacer ajustes acá queda mejor así
-  const isMobile = width <= 600;
+  const isMobile = useIsMobile();
 
   const renderGroupsTables = () => {
     return (

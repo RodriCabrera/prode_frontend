@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { logoutUser } from '../../api/auth';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import useToggleModal from '../../hooks/useToggleModal';
 import { Linkbar } from '../Linkbar/Linkbar';
 import Modal from '../Modal/Modal';
@@ -18,6 +17,7 @@ import {
 } from './Navbar.styles';
 import { Button, CardTitle } from '../common.styles';
 import { Tooltip } from '../Tooltip/Tooltip';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -35,9 +35,7 @@ function Navbar() {
 
   const { showModal, toggleModal } = useToggleModal();
 
-  const { width } = useWindowDimensions();
-
-  const isMobile = width <= 768;
+  const isMobile = useIsMobile();
 
   const handleLogout = () => {
     toggleModal();

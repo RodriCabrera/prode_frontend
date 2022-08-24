@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { getFixtureByStageId } from '../../api/fixture';
 import { AuthContext } from '../../common/AuthProvider';
 import { CardTitle, CardWrapper } from '../../common/common.styles';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { FixtureTable } from '../FixturePage/components/FixtureTable';
 import LeaderBoard from './components/LeaderBoard';
 import Countdown from './components/Countdown';
 import { HomeGroups } from './components/HomeGroups';
 import NotificationBoard from './components/NotificationBoard';
 import useCleanupController from '../../hooks/useCleanupController';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -34,8 +34,7 @@ function Home() {
   const navigate = useNavigate();
   const [fixtureShortData, setFixtureShortData] = useState([]);
   const [showFixture, setShowFixture] = useState(false);
-  const { width } = useWindowDimensions();
-  const isMobile = width <= 768;
+  const isMobile = useIsMobile();
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
@@ -49,17 +48,17 @@ function Home() {
         );
         setShowFixture(true);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {});
     return cleanup;
   }, []);
 
   useEffect(() => {
-    let subscribed = true
+    let subscribed = true;
     if (!userContext.user && subscribed) {
       navigate('/auth');
     }
-    return (() => subscribed = false)
+    return () => (subscribed = false);
   }, [userContext]);
 
   return (
