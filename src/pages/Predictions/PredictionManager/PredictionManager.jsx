@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   createPredictions,
@@ -43,12 +43,13 @@ function PredictionManager() {
     initialValues: {},
   });
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { phase } = useParams();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
   const updatePredictionsByStage = () => {
-    if (getStageName() !== STAGE_NAMES.GRUPOS)
-      return getPredictions(selectedUserGroup?.id, getStageName());
+    if (getStageName(phase) !== STAGE_NAMES.GRUPOS)
+      return getPredictions(selectedUserGroup?.id, getStageName(phase));
     const groupLeter = numberToGroupLetter(groupNumber);
     return getFirstStagePredictionsByGroup(
       selectedUserGroup?.id,
@@ -127,7 +128,7 @@ function PredictionManager() {
       )}
       {selectedUserGroup ? (
         <>
-          {getStageName() !== STAGE_NAMES.GRUPOS ? (
+          {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
             <PredictionForm
               resultsMode={resultsMode}
               handleSubmit={!resultsMode && handleSubmit}

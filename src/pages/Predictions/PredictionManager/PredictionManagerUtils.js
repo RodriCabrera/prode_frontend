@@ -4,9 +4,9 @@ export const STAGE_NAMES = {
   GRUPOS: 'GRUPOS',
   OCTAVOS: 'OCTAVOS',
   CUARTOS: 'CUARTOS',
-  SEMIS: 'SEMIFINALES',
+  SEMIS: 'SEMIFINAL',
   FINAL: 'FINAL',
-  TERCER_PUESTO: 'TERCER PUESTO',
+  TERCER_PUESTO: 'TERCER_PUESTO',
 };
 
 export const getStageName = (phase) => {
@@ -27,9 +27,9 @@ export const getStageName = (phase) => {
   }
 };
 
-export const getPhaseFixture = (signal) => {
-  if (getStageName() !== STAGE_NAMES.GRUPOS) {
-    return getFixture('', getStageName(), signal);
+export const getPhaseFixture = (phase, signal) => {
+  if (getStageName(phase) !== STAGE_NAMES.GRUPOS) {
+    return getFixture('', getStageName(phase), signal);
   } else {
     return getGroupStage(signal);
   }

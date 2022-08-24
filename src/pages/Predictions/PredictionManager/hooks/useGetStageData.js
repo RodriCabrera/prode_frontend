@@ -13,7 +13,7 @@ export const useGetStageData = () => {
   useEffect(() => {
     if (selectedUserGroup) {
       setIsLoading(true);
-      getPhaseFixture(signal)
+      getPhaseFixture(phase, signal)
         .then((res) => {
           setStageData(res.data.fixture);
         })
