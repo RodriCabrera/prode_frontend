@@ -27,9 +27,7 @@ function LeaderBoard() {
   return (
     <LeaderBoardWrapper id="leaderboard-wrapper">
       <CardTitle>
-        {userGroups.length > 1
-          ? 'Punteros por grupo'
-          : `Puntero del grupo ${userGroups}`}
+        {userGroups?.length > 1 ? 'Punteros por grupo' : 'Puntero del grupo'}
       </CardTitle>
       {isLoading || !userGroups ? (
         <div>Loading leaderboard...</div>
