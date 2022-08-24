@@ -38,15 +38,8 @@ function Navbar() {
   const isMobile = useIsMobile();
 
   const handleLogout = () => {
+    userContext.logout();
     toggleModal();
-    logoutUser()
-      .then(() => {
-        // TODO: rebota de vuelta al home sin el usuario
-        navigate('/auth');
-      })
-      .finally(() => {
-        userContext.user = null;
-      });
   };
 
   return (

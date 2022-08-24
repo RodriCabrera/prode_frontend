@@ -55,6 +55,7 @@ function Home() {
 
   useEffect(() => {
     let subscribed = true;
+
     if (!userContext.user && subscribed) {
       navigate('/auth');
     }

@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import propTypes from 'prop-types';
-import { getAuth } from '../api/auth';
+import { getAuth, logoutUser } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 import Loading from './Loading/Loading';
 import useCleanupController from '../hooks/useCleanupController';
@@ -13,30 +13,40 @@ function AuthProvider({ children }) {
 
   const navigate = useNavigate();
 
+  const clearUser = () => setUser(null);
+
   const checkAuth = () => {
+    setIsLoading(true);
     getAuth(signal)
       .then(({ data }) => {
         setUser(data.user);
       })
       .catch((err) => {
-        handleCancel(err)
-        setUser(null);
+        clearUser();
         navigate('/auth');
+        handleCancel(err);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
 
+  const logout = () => {
+    clearUser();
+    logoutUser().finally(() => {
+      navigate('/');
+    });
+  };
+
   useEffect(() => {
     if (!user) checkAuth();
-    return cleanup;
-  }, [user, isLoading]);
+    return cleanup();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={useMemo(() => {
-        return { user, isLoading, checkAuth };
+        return { user, isLoading, checkAuth, logout };
       }, [user, isLoading, checkAuth])}>
       {isLoading ? <Loading /> : children}
     </AuthContext.Provider>
