@@ -34,7 +34,7 @@ function ProfileEdit() {
             </UserNameContainer>
             <ProfileEditForm
               profile={userContext.user}
-              updateProfile={() => userContext?.checkAuth()}
+              updateProfile={() => userContext?.updateAuth()}
             />
           </>
         )}

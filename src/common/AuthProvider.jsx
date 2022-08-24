@@ -15,14 +15,13 @@ function AuthProvider({ children }) {
 
   const clearUser = () => setUser(null);
 
-  const checkAuth = () => {
+  const updateAuth = () => {
     setIsLoading(true);
     getAuth(signal)
       .then(({ data }) => {
         setUser(data.user);
       })
       .catch((err) => {
-        clearUser();
         navigate('/auth');
         handleCancel(err);
       })
@@ -39,15 +38,18 @@ function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    if (!user) checkAuth();
+    if (!user) {
+      navigate('auth');
+      updateAuth();
+    }
     return cleanup();
   }, []);
 
   return (
     <AuthContext.Provider
       value={useMemo(() => {
-        return { user, isLoading, checkAuth, logout };
-      }, [user, isLoading, checkAuth])}>
+        return { user, isLoading, updateAuth, logout };
+      }, [user, isLoading, updateAuth])}>
       {isLoading ? <Loading /> : children}
     </AuthContext.Provider>
   );
