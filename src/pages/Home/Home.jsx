@@ -80,7 +80,9 @@ function Home() {
             </div>
           )}
         </CardWrapper>
-        <CardWrapper fullWidth={isMobile}>
+        <CardWrapper
+          fullWidth={isMobile}
+          border={isMobile ? 'none' : undefined}>
           <LeaderBoard />
         </CardWrapper>
       </Row>
