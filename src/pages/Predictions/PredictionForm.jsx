@@ -55,7 +55,7 @@ export function PredictionForm(props) {
         {typeof groupNumber === 'number' &&
           `GRUPO ${numberToGroupLetter(groupNumber)}`}
       </Text>
-      <Form id="prediction-form" onSubmit={handleSubmit}>
+      <Form id="prediction-form" onSubmit={handleSubmit ? handleSubmit : undefined}>
         <Table id="prediction-table">
           <Table.Body>
             {data?.map((match) => {
