@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
-import { GroupScoresForm } from './GroupScoresForm';
 import ScoreList from './components/ScoreList';
+import GroupScoreSelector from './components/GroupScoreSelector';
 import { getUserGroups } from '../../api/groups';
 import { Spinner } from '../../common/Spinner/Spinner';
 import useCleanupController from '../../hooks/useCleanupController';
@@ -40,9 +40,9 @@ function Scores() {
         {userGroupList.length === 0 ? (
           <Text>No estás en ningún grupo</Text>
         ) : (
-          <GroupScoresForm
-            setScores={setScores}
+          <GroupScoreSelector 
             userGroupList={userGroupList}
+            setScores={setScores}
           />
         )}
         <ScoreList scores={scores} />

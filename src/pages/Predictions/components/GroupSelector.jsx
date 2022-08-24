@@ -19,29 +19,29 @@ export function GroupSelector({
     <>
       <Text size="1.4rem">Seleccioná un grupo:</Text>
       <GroupsListWrapper>
-        {isLoading && <Spinner />}
 
         <ListWrapper>
           {userGroupList?.map((userGroup) => {
             const isSelected = selectedUserGroup?.id === userGroup.id;
-
+            
             return (
               <ListElement
-                key={userGroup.id}
-                avatar={
-                  isSelected ? (
-                    <HiCheck size="1.8rem" />
+              key={userGroup.id}
+              avatar={
+                isSelected ? (
+                  <HiCheck size="1.8rem" />
                   ) : (
                     <HiOutlineUserGroup size="1.8rem" />
-                  )
-                }
-                bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}>
+                    )
+                  }
+                  bgColor={isSelected && 'green'}
+                  onClick={() => handleGroupSelect(userGroup)}>
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>
             );
           })}
         </ListWrapper>
+        {isLoading && <Spinner />}
       </GroupsListWrapper>
     </>
   );
