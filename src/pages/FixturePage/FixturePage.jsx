@@ -3,13 +3,14 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { FixtureTable } from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
 import { Spinner } from '../../common/Spinner/Spinner';
-import { Text } from '../../common/common.styles';
+import { Button, Text } from '../../common/common.styles';
 import { useFetchFixtureData } from './hooks/useFetchFixtureData';
 import {
   FixtureTablesContainer,
   FixtureWrapper,
   GroupTableWrapper,
 } from './FixturePage.styles';
+import { toast } from 'react-toastify';
 
 function Fixture() {
   const { width } = useWindowDimensions();
@@ -31,9 +32,17 @@ function Fixture() {
       </FixtureTablesContainer>
     );
   };
-
+  const fireToast = () => {
+    toast('🦄 Wow so easy!', {});
+  };
   return (
     <FixtureWrapper>
+      <Button
+        onClick={() => {
+          fireToast();
+        }}>
+        AAOAOOA
+      </Button>
       {!isMobile && <LaterStagesGraph />}
       <Text size="2rem" weight="700" align="center">
         Fase de Grupos
