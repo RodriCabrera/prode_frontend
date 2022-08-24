@@ -30,17 +30,9 @@ function Fixture() {
       </FixtureTablesContainer>
     );
   };
-  const fireToast = () => {
-    toast('🦄 Wow so easy!', {});
-  };
+
   return (
     <FixtureWrapper>
-      <Button
-        onClick={() => {
-          fireToast();
-        }}>
-        AAOAOOA
-      </Button>
       {!isMobile && <LaterStagesGraph />}
       <Text size="2rem" weight="700" align="center">
         Fase de Grupos
