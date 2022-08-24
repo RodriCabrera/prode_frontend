@@ -17,6 +17,7 @@ const PageContainer = styled.div`
   justify-content: center;
   margin-bottom: 3rem;
 `;
+
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;

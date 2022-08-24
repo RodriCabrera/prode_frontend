@@ -1,12 +1,17 @@
 import styled from '@emotion/styled';
-
+/**
+ * h1
+ * No props
+ */
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 1.5rem;
   max-width: 100%;
 `;
-
+/**
+ *No props
+ */
 export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -85,12 +90,20 @@ export const Button = styled.button`
   }
 `;
 
+/**
+ * form
+ * No props
+ */
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 `;
 
+/**
+ * label
+ * No props
+ */
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
@@ -133,6 +146,9 @@ export function ScoreInput() {
   return <Input type="number" width="30px" />;
 }
 
+/**
+ *No props
+ */
 export const Select = styled.select`
   padding: 10px;
   background-color: #e5e5e5;

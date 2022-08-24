@@ -26,7 +26,6 @@ const Row = styled.div`
   flex-wrap: wrap;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 function Home() {
@@ -67,23 +66,21 @@ function Home() {
       <Countdown />
       <Row>
         <HomeGroups />
-        <CardWrapper
-          border="none"
-          align="center"
-          justify="center"
-          fullWidth={isMobile}>
+        <CardWrapper border={isMobile ? 'none' : undefined} isMobile={isMobile}>
           <NotificationBoard id="notification-board" />
           {showFixture && (
-            <>
-              <CardTitle id="next-5-title">Próximos partidos:</CardTitle>
+            <div>
+              <CardTitle>Próximos partidos:</CardTitle>
               <FixtureTable
                 id="next-5-card-container"
                 data={fixtureShortData}
                 isCompact
                 fullWidth
               />
-            </>
+            </div>
           )}
+        </CardWrapper>
+        <CardWrapper fullWidth={isMobile}>
           <LeaderBoard />
         </CardWrapper>
       </Row>
