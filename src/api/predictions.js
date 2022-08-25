@@ -58,3 +58,7 @@ export const getOtherUserPredictionsByGroup = (userId, userGroupId, signal) => {
     { signal }
   );
 };
+
+export const getRandomUnpredictedMatch = (signal) => {
+  return withCredentials.get('/predictions/random-missing', { signal });
+};

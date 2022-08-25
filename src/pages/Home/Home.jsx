@@ -9,6 +9,7 @@ import LeaderBoard from './components/LeaderBoard';
 import Countdown from './components/Countdown';
 import { HomeGroups } from './components/HomeGroups';
 import NotificationBoard from './components/NotificationBoard';
+import QuickPrediction from './components/QuickPrediction';
 import useCleanupController from '../../hooks/useCleanupController';
 import { useIsMobile } from '../../hooks/useIsMobile';
 
@@ -85,6 +86,7 @@ function Home() {
           border={isMobile ? 'none' : undefined}>
           <LeaderBoard />
         </CardWrapper>
+        <QuickPrediction />
       </Row>
     </PageWrapper>
   );
