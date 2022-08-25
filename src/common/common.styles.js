@@ -1,12 +1,17 @@
 import styled from '@emotion/styled';
-
+/**
+ * h1
+ * No props
+ */
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 1.5rem;
   max-width: 100%;
 `;
-
+/**
+ *No props
+ */
 export const CardContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -15,20 +20,31 @@ export const CardContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+/**
+ * You can pass to the CardWrapper:
+ * @props border // width // justify (justify-content) // align (align-items)
+ * @props isMobile: if true, it will be full width (100%).
+ */
 export const CardWrapper = styled.div`
-  border: ${({ border }) => border || '1px solid #bdbdbd'};
+  border: ${({ border }) => border || '1px solid dimgray'};
   border-radius: 8px;
   min-width: 200px;
-  width: 80%;
-  max-width: ${({ fullWidth }) => (fullWidth ? '100%' : '350px')};
+  width: ${({ width, isMobile }) =>
+    isMobile ? '100%' : width ? width : '600px'};
+  max-width: ${({ isMobile }) => (isMobile ? '100%' : '350px')};
   display: flex;
   padding: 1rem;
   gap: 1rem;
   flex-direction: column;
-  justify-content: ${({ justify }) => justify || 'intial'};
-  align-items: ${({ align }) => align || 'initial'};
+  justify-content: ${({ justify }) => justify};
+  align-items: ${({ align }) => align};
 `;
 
+/**
+ * You can pass to the Button:
+ * @props width // padding // weight (font-weight)
+ * @props for color schemas: tertiary // grayscale
+ */
 export const Button = styled.button`
   background-color: inherit;
   display: flex;
@@ -74,18 +90,30 @@ export const Button = styled.button`
   }
 `;
 
+/**
+ * form
+ * No props
+ */
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 `;
 
+/**
+ * label
+ * No props
+ */
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
 
+/**
+ * You can pass to the Input:
+ * @props showUppercase (text-transform) // width // align (text-align)
+ */
 export const Input = styled.input`
   text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
   width: ${({ width }) => width};
@@ -98,6 +126,10 @@ export const Input = styled.input`
   text-align: ${({ align }) => align || 'initial'};
 `;
 
+/**
+ * You can pass to the TextareaInput:
+ * @props showUppercase (text-transform) // width
+ */
 export const TextareaInput = styled.textarea`
   text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
   width: ${({ width }) => width};
@@ -114,12 +146,19 @@ export function ScoreInput() {
   return <Input type="number" width="30px" />;
 }
 
+/**
+ *No props
+ */
 export const Select = styled.select`
   padding: 10px;
   background-color: #e5e5e5;
   border-radius: 10px;
 `;
 
+/**
+ * You can pass to the Text:
+ * @props align (text-align) // color // size (font-size) // weight (font-weight) // margin // withBottomBorder
+ */
 export const Text = styled.p`
   text-align: ${({ align }) => align || 'left'};
   color: ${({ color }) => color || 'inherit'};

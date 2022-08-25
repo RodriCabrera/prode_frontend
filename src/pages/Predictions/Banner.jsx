@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { isNil } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { Text } from '../../common/common.styles';
-import { checkIfStageIsEnabled } from './predictionsPageUtils';
 import {
   BannerButton,
   BannerDataWrapper,
@@ -15,20 +14,12 @@ export function Banner({
   percentage,
   isLoading,
   editMode,
-  prevStage,
+  disabled,
 }) {
   const navigate = useNavigate();
 
-  const [isDisabled, setIsDisabled] = useState(true);
-
-  useEffect(() => {
-    checkIfStageIsEnabled(prevStage)
-      .then((res) => setIsDisabled(!res))
-      .catch(() => setIsDisabled(true));
-  }, [editMode, prevStage]);
-
   const renderPercentageInfo = () => {
-    if (editMode) {
+    if (editMode && disabled) {
       if (isLoading) {
         return <Text weight="200">Cargando %...</Text>;
       }
@@ -45,11 +36,10 @@ export function Banner({
 
   return (
     <BannerButton
-      disabled={isDisabled}
+      disabled={!disabled}
       onClick={() => navigate(path)}
-      tertiary={editMode && !isDisabled}
-      grayscale={isDisabled}
-    >
+      tertiary={editMode && disabled}
+      grayscale={!disabled}>
       <BannerDataWrapper>
         <BannerTitle>{title}</BannerTitle>
         <p>Ver/Editar</p>

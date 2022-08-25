@@ -7,7 +7,7 @@ import Home from '../pages/Home/Home';
 import Groups from '../pages/Groups/Groups';
 import Scores from '../pages/Scores/Scores';
 import GroupPage from '../pages/GroupPage/GroupPage';
-import Fixture from '../pages/Fixture/Fixture';
+import Fixture from '../pages/FixturePage/FixturePage';
 import App from '../App';
 import AuthRoutes from './AuthRoutes';
 import PredictionsRoutes from './PredictionsRoutes';

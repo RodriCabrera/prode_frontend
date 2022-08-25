@@ -1,25 +1,25 @@
 import { withCredentials, withoutCredentials } from './instances';
 
-export const getAuth = () => {
-  return withCredentials.get(`/auth`);
+export const getAuth = (signal) => {
+  return withCredentials.get('/auth', signal);
 };
 
 export const createUser = (userData) => {
-  return withCredentials.post(`/auth/email/create`, userData);
+  return withCredentials.post('/auth/email/create', userData);
 };
 
 export const loginUser = (userData) => {
-  return withCredentials.post(`/auth/email`, userData);
+  return withCredentials.post('/auth/email', userData);
 };
 
 export const logoutUser = () => {
-  return withCredentials.post(`/auth/logout`);
+  return withCredentials.post('/auth/logout');
 };
 
 export const forgotPassword = (email) => {
-  return withoutCredentials.post(`/auth/new-password`, email);
+  return withoutCredentials.post('/auth/new-password', email);
 };
 
 export const changePassword = (password) => {
-  return withCredentials.post(`/auth/change-password`, password);
+  return withCredentials.post('/auth/change-password', password);
 };

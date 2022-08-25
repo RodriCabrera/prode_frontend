@@ -34,7 +34,7 @@ export const MatchData = styled.div`
   justify-content: space-between;
   flex-wrap: nowrap;
   border-radius: 0.5rem;
-  border: 1px solid #e6e6e6;
+  border: 1px solid dimgray;
   padding: 0.65rem;
   gap: 5px;
   & > img {

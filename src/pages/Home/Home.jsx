@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { getFixtureByStageId } from '../../api/fixture';
 import { AuthContext } from '../../common/AuthProvider';
 import { CardTitle, CardWrapper } from '../../common/common.styles';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { FixtureTable } from '../Fixture/FixtureTable';
+import { FixtureTable } from '../FixturePage/components/FixtureTable';
 import LeaderBoard from './components/LeaderBoard';
 import Countdown from './components/Countdown';
 import { HomeGroups } from './components/HomeGroups';
 import NotificationBoard from './components/NotificationBoard';
+import QuickPrediction from './components/QuickPrediction';
+import useCleanupController from '../../hooks/useCleanupController';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -25,7 +27,6 @@ const Row = styled.div`
   flex-wrap: wrap;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 function Home() {
@@ -33,12 +34,12 @@ function Home() {
   const navigate = useNavigate();
   const [fixtureShortData, setFixtureShortData] = useState([]);
   const [showFixture, setShowFixture] = useState(false);
-  const { width } = useWindowDimensions();
-  const isMobile = width <= 768;
+  const isMobile = useIsMobile();
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setShowFixture(false);
-    getFixtureByStageId('GRUPOS')
+    getFixtureByStageId('GRUPOS', signal)
       .then((res) => {
         setFixtureShortData(
           res.data.fixture
@@ -47,13 +48,18 @@ function Home() {
         );
         setShowFixture(true);
       })
+      .catch((err) => handleCancel(err))
       .finally(() => {});
+    return cleanup;
   }, []);
 
   useEffect(() => {
-    if (!userContext.user) {
+    let subscribed = true;
+
+    if (!userContext.user && subscribed) {
       navigate('/auth');
     }
+    return () => (subscribed = false);
   }, [userContext]);
 
   return (
@@ -61,26 +67,26 @@ function Home() {
       <Countdown />
       <Row>
         <HomeGroups />
-        <CardWrapper
-          border="none"
-          align="center"
-          justify="center"
-          fullWidth={isMobile}
-        >
+        <CardWrapper border={isMobile ? 'none' : undefined} isMobile={isMobile}>
           <NotificationBoard id="notification-board" />
           {showFixture && (
-            <>
-              <CardTitle id="next-5-title">Próximos partidos:</CardTitle>
+            <div>
+              <CardTitle>Próximos partidos:</CardTitle>
               <FixtureTable
                 id="next-5-card-container"
                 data={fixtureShortData}
                 isCompact
                 fullWidth
               />
-            </>
+            </div>
           )}
+        </CardWrapper>
+        <CardWrapper
+          isMobile={isMobile}
+          border={isMobile ? 'none' : undefined}>
           <LeaderBoard />
         </CardWrapper>
+        <QuickPrediction />
       </Row>
     </PageWrapper>
   );

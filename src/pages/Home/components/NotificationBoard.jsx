@@ -4,6 +4,7 @@ import { getPredictions } from '../../../api/predictions';
 import { CardContainer, CardWrapper } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import { NoPredictionNotification } from './NoPredictionNotification';
+import useCleanupController from '../../../hooks/useCleanupController';
 
 function NotificationBoard() {
   const [predictions, setPredictions] = useState([]);
@@ -11,13 +12,16 @@ function NotificationBoard() {
     predictions: false,
     fixture: false,
   });
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
-    getPredictions()
+    getPredictions(undefined, undefined, signal)
       .then((res) => setPredictions(res.data))
+      .catch(err => handleCancel(err))
       .finally(() => {
         setloadingCheck({ ...loadingCheck, predictions: true });
       });
+    return cleanup;
   }, []);
 
   function renderBoards() {
@@ -41,7 +45,7 @@ function NotificationBoard() {
 
   return (
     <CardContainer>
-      <CardWrapper fullWidth>{renderBoards()}</CardWrapper>
+      <CardWrapper>{renderBoards()}</CardWrapper>
     </CardContainer>
   );
 }

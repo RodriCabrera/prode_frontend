@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Navbar from './common/Navbar/Navbar';
 import 'react-toastify/dist/ReactToastify.css';
+import { useIsMobile } from './hooks/useIsMobile';
 
 const Layout = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ const PageContainer = styled.div`
   justify-content: center;
   margin-bottom: 3rem;
 `;
+
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,6 +29,7 @@ const PageWrapper = styled.div`
 `;
 
 function App() {
+  const isMobile = useIsMobile();
   return (
     <Layout>
       <Navbar />
@@ -34,7 +37,7 @@ function App() {
         <PageWrapper id="app-page-wrapper">
           <Outlet />
           <ToastContainer
-            position="bottom-right"
+            position={isMobile ? 'top-right' : 'bottom-right'}
             autoClose={2500}
             hideProgressBar={false}
             newestOnTop={false}

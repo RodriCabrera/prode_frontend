@@ -1,7 +1,14 @@
+import styled from '@emotion/styled';
 import React from 'react';
-import Table from '../../common/Table/Table';
-import { getFlagUrl, parseDate } from '../pagesHelpers';
-import { parseMatchScore } from './fixturePageHelpers';
+import Table from '../../../common/Table/Table';
+import { getFlagUrl, parseDate } from '../../pagesHelpers';
+import { parseMatchScore } from '../fixturePageHelpers';
+
+const FlagCell = styled(Table.Cell)`
+  min-width: 42px;
+  min-height: 28px;
+  background-color: red;
+`;
 
 export function FixtureTable({ data, isCompact, fullWidth }) {
   return (
@@ -16,15 +23,14 @@ export function FixtureTable({ data, isCompact, fullWidth }) {
                   withBottomBorder
                   fontWeight="700"
                   fontSize="1.2rem"
-                  padding={isCompact && '10px'}
-                >
+                  padding={isCompact && '10px'}>
                   {parseDate(match.date)}
                 </Table.Cell>
               </Table.Row>
               <Table.Row borderBottom="1px solid red">
-                <Table.Cell padding={isCompact && '10px'}>
+                <FlagCell padding={isCompact && '10px'}>
                   {getFlagUrl(match.away.flag, 1)}
-                </Table.Cell>
+                </FlagCell>
                 <Table.Cell fontWeight="800" padding={isCompact && '10px'}>
                   {match.away.shortName || match.away}
                 </Table.Cell>
@@ -36,9 +42,9 @@ export function FixtureTable({ data, isCompact, fullWidth }) {
                 <Table.Cell fontWeight="800" padding={isCompact && '10px'}>
                   {match.home.shortName || match.home}
                 </Table.Cell>
-                <Table.Cell padding={isCompact && '10px'}>
+                <FlagCell padding={isCompact && '10px'}>
                   {getFlagUrl(match.home.flag, 1)}
-                </Table.Cell>
+                </FlagCell>
               </Table.Row>
             </React.Fragment>
           );

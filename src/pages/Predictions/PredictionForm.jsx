@@ -1,7 +1,7 @@
-/* eslint-disable react/forbid-prop-types */
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
+import { MdOutlineChevronRight, MdOutlineChevronLeft } from 'react-icons/md';
 import { Button, Form, Input, Text } from '../../common/common.styles';
 import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
 import Table from '../../common/Table/Table';
@@ -12,7 +12,22 @@ import {
   getErrorMessageForMatch,
   numberToGroupLetter,
   groupNumberMod,
+  calculateIfCanPredict,
 } from './predictionsPageUtils';
+
+const useGetStageData = ({ stageData, groupNumber }) => {
+  const [data, setData] = useState(stageData);
+
+  useEffect(() => {
+    if (stageData.length > 0) {
+      if (typeof groupNumber === 'number') {
+        setData(stageData[groupNumberMod(groupNumber)]?.matches);
+      }
+    }
+  }, [stageData]);
+
+  return data;
+};
 
 // TODO: Para dehabilitar inputs si se pasó la fecha:
 // Si Date.now es mayor a la fecha del partido menos el time limit ya no podes hacer predicciones.
@@ -29,24 +44,10 @@ export function PredictionForm(props) {
     groupPhase,
   } = props;
 
-  const [data, setData] = useState(stageData);
+  const data = useGetStageData({ stageData, groupNumber });
+
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
-
-  useEffect(() => {
-    if (stageData.length > 0) {
-      if (typeof groupNumber === 'number') {
-        setData(stageData[groupNumberMod(groupNumber)]?.matches);
-      }
-    }
-  }, [stageData]);
-
-  const calculateCanPredict = (matchDate) => {
-    const now = Date.now();
-    const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
-    const matchTime = new Date(matchDate).getTime();
-    return now + timeLimit < matchTime;
-  };
 
   return (
     <FormWrapper id="prediction-form-wrapper">
@@ -54,7 +55,7 @@ export function PredictionForm(props) {
         {typeof groupNumber === 'number' &&
           `GRUPO ${numberToGroupLetter(groupNumber)}`}
       </Text>
-      <Form id="prediction-form" onSubmit={handleSubmit}>
+      <Form id="prediction-form" onSubmit={handleSubmit ? handleSubmit : undefined}>
         <Table id="prediction-table">
           <Table.Body>
             {data?.map((match) => {
@@ -62,7 +63,7 @@ export function PredictionForm(props) {
                 match.status === 0
                   ? checkPredictionResult(
                       data,
-                      groupNumberMod(groupNumber),
+                      // groupNumberMod(groupNumber),
                       match.id,
                       'away',
                       values[`${match.id}-away`],
@@ -70,7 +71,10 @@ export function PredictionForm(props) {
                     )
                   : 'silver';
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
-              const canPredict = calculateCanPredict(match.date);
+              const canPredict = calculateIfCanPredict(
+                match.date,
+                selectedUserGroup
+              );
 
               const renderInfoIcon = () => {
                 if (resultsMode) {
@@ -188,19 +192,17 @@ export function PredictionForm(props) {
               onClick={handlePrevGroup}
               // disabled={groupNumber === 0}
               type="reset"
-              width="100%"
-            >
-              <span className="material-symbols-outlined">chevron_left</span>
+              width="100%">
+              <MdOutlineChevronLeft size={26} />
               {stageData[groupNumberMod(groupNumber - 1)]?.name}
             </Button>
             <Button
               grayscale
               onClick={handleNextGroup}
               type="reset"
-              width="100%"
-            >
+              width="100%">
               {stageData[groupNumberMod(groupNumber + 1)]?.name}
-              <span className="material-symbols-outlined">chevron_right</span>
+              <MdOutlineChevronRight size={26} />
             </Button>
           </FormButtonWrapper>
         )}

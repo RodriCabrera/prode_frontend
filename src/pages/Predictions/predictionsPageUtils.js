@@ -1,6 +1,5 @@
 /* eslint-disable no-extend-native */
 import { isEmpty } from 'lodash';
-import { getFixtureByStageId } from '../../api/fixture';
 
 export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
   //   const predictionsRawExample = {
@@ -105,7 +104,7 @@ export const getErrorMessageForMatch = (errors, matchId) => {
 
 export const checkPredictionResult = (
   stageData,
-  groupNumber,
+  // groupNumber,
   matchId,
   homeOrAway,
   predictionAway,
@@ -133,8 +132,8 @@ export const checkPredictionResult = (
   const teamPrediction =
     homeOrAway === 'home' ? predictionHome : predictionAway;
 
-  if (teamResult === null || teamPrediction === undefined) {
-    return 'silver';
+  if (teamPrediction === undefined) {
+    return teamResult === null ? 'silver' : 'tomato';
   }
   if (getScoreStatus() === 'full') {
     return 'lightgreen';
@@ -146,21 +145,9 @@ export const checkPredictionResult = (
   return 'tomato';
 };
 
-export const checkIfStageIsEnabled = (prevStageName) => {
-  return new Promise((resolve, reject) => {
-    if (!prevStageName) resolve(true);
-    getFixtureByStageId(prevStageName)
-      .then((res) => {
-        if (!res.data.fixture) resolve(true);
-        const prevStage = res.data.fixture;
-        if (!prevStage[0]) resolve(false);
-        if (prevStage.some((match) => match.status === 1)) {
-          resolve(false);
-        }
-        resolve(true);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+export const calculateIfCanPredict = (matchDate, selectedUserGroup) => {
+  const now = Date.now();
+  const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
+  const matchTime = new Date(matchDate).getTime();
+  return now + timeLimit < matchTime;
 };

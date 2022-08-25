@@ -1,37 +1,55 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import propTypes from 'prop-types';
-import { getAuth } from '../api/auth';
+import { getAuth, logoutUser } from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 import Loading from './Loading/Loading';
+import useCleanupController from '../hooks/useCleanupController';
 
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
-  const checkAuth = () => {
-    getAuth()
+  const navigate = useNavigate();
+
+  const clearUser = () => setUser(null);
+
+  const updateAuth = () => {
+    setIsLoading(true);
+    getAuth(signal)
       .then(({ data }) => {
         setUser(data.user);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((err) => {
+        navigate('/auth');
+        handleCancel(err);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
 
+  const logout = () => {
+    clearUser();
+    logoutUser().finally(() => {
+      navigate('/');
+    });
+  };
+
   useEffect(() => {
-    if (user) return;
-    checkAuth();
-  }, [user, isLoading]);
+    if (!user) {
+      navigate('auth');
+      updateAuth();
+    }
+    return cleanup();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={useMemo(() => {
-        return { user, isLoading, checkAuth };
-      }, [user, isLoading, checkAuth])}
-    >
+        return { user, isLoading, updateAuth, logout };
+      }, [user, isLoading, updateAuth])}>
       {isLoading ? <Loading /> : children}
     </AuthContext.Provider>
   );

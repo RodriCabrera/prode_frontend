@@ -1,49 +1,24 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:prettier/recommended",
-        "prettier"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "prettier",
-        "eslint-plugin-prettier"
-    ],
-    "rules": {
-        "no-unused-vars": 1,
-        "no-console": 0,
-        "no-underscore-dangle": 0,
-        "no-alert": 0,
-        "react/react-in-jsx-scope": 0,
-        "react/jsx-filename-extension": 0,
-        "import/prefer-default-export": 0,
-        "react/require-default-props": 0,
-        "react/prop-types": 0,
-        "no-debugger": 0,
-        "max-len": [
-            "error",
-            {
-                "code": 85,
-                "ignoreUrls": true,
-                "ignoreComments": true,
-                "ignoreStrings": true,
-                "ignoreTemplateLiterals": true
-            }
-        ],
-        "prettier/prettier": ["error", { "singleQuote": true }]
-
-    }
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "quotes": ["error", "single"],
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
+    "no-unused-vars": [
+      "warn",
+      { "vars": "all", "args": "all", "ignoreRestSiblings": false }
+    ]
+  }
 }

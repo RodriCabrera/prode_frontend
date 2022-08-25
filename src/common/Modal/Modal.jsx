@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useRef } from 'react';
-import { Button } from '../common.styles';
+import { MdOutlineClose } from 'react-icons/md';
 import { Backdrop, ModalContainer, CloseModalButton } from './modal.styles';
+import { Button } from '../common.styles';
 
 const ModalContentWrapper = styled.div`
   min-width: 200px;
@@ -31,7 +32,7 @@ function Modal({ children, show, toggle }) {
       <Backdrop />
       <ModalContainer ref={modalRef}>
         <CloseModalButton onClick={toggle} type="button">
-          <span className="material-symbols-outlined">close</span>
+          <MdOutlineClose size={24} />
         </CloseModalButton>
         <ModalContentWrapper>
           {children}

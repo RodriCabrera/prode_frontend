@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
+import { MdOutlineVisibilityOff } from 'react-icons/md';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import ProfilePredictions from './ProfilePredictions';
 import { getProfile } from '../../api/profiles';
@@ -10,6 +11,7 @@ import { ListWrapper } from '../../common/Lists/Lists.styles';
 import { ListElement } from '../../common/Lists/ListElement';
 import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
+import useCleanupController from '../../hooks/useCleanupController';
 
 function Profile() {
   const { name } = useParams();
@@ -17,17 +19,20 @@ function Profile() {
   const [sharedGroups, setSharedGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [groupPredictions, setGroupPredictions] = useState({});
+  const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
     setIsLoading(true);
-    getProfile(name)
+    getProfile(name, signal)
       .then(({ data }) => {
         setProfile(data.profile);
         setSharedGroups(data.sharedGroups || []);
       })
+      .catch(err => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
+    return cleanup;
   }, []);
 
   const handleSwitchPredictions = (group) => {
@@ -40,7 +45,7 @@ function Profile() {
     <Spinner />
   ) : (
     <CardContainer>
-      <CardWrapper fullWidth>
+      <CardWrapper>
         <GoBackButton />
         <UserNameContainer>
           <Text size="1.5rem" weight="bold">
@@ -59,9 +64,7 @@ function Profile() {
               }
               avatar={
                 groupPredictions?.group?._id === group._id ? (
-                  <span className="material-symbols-outlined">
-                    visibility_off
-                  </span>
+                  <MdOutlineVisibilityOff size={26} />
                 ) : (
                   <HiOutlineUserGroup size="1.8rem" />
                 )

@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { getFixture, getGroupStage } from '../../../api/fixture';
 import {
   createPredictions,
   getPredictions,
@@ -24,73 +22,40 @@ import {
   formatPredictionsToPost,
   numberToGroupLetter,
 } from '../predictionsPageUtils';
-import { usePrompt } from '../../../hooks/routerPrompt';
+import { usePrompt } from '../../../hooks/usePrompt';
 import useToggleModal from '../../../hooks/useToggleModal';
 import Modal from '../../../common/Modal/Modal';
+import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
+import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
+import { useGetStageData } from './hooks/useGetStageData';
+import useCleanupController from '../../../hooks/useCleanupController';
 
-const STAGE_NAMES = {
-  GRUPOS: 'GRUPOS',
-  OCTAVOS: 'OCTAVOS',
-  CUARTOS: 'CUARTOS',
-  SEMIS: 'SEMIFINAL',
-  FINAL: 'FINAL',
-  TERCER_PUESTO: 'TERCER_PUESTO',
-};
-
-function FirstStage() {
+function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
-  const [stageData, setStageData] = useState([]); // Toda la data de la fase seleccionada para este userGroup
-  const { selectedUserGroup, mode } = useOutletContext();
+  const { mode } = useOutletContext();
   const resultsMode = mode === 'results';
-  const [groupNumber, setGroupNumber] = useState(0); // 0 - A, 1 - B, etc.
   const [errorMessages, setErrorMessages] = useState([]);
+  const { selectedUserGroup } = useOutletContext();
   const { showModal, toggleModal } = useToggleModal();
+  const { groupNumber, switchGroupNumber } = useSwitchGroupNumber();
+  const { stageData } = useGetStageData();
   const { values, handleChange, resetForm, dirty } = useFormik({
     initialValues: {},
   });
+  const [signal, cleanup, handleCancel] = useCleanupController();
   const { phase } = useParams();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
-  const getStageName = () => {
-    switch (phase) {
-      case '16':
-        return STAGE_NAMES.OCTAVOS;
-      case '8':
-        return STAGE_NAMES.CUARTOS;
-      case 'semis':
-        return STAGE_NAMES.SEMIS;
-      case 'final':
-        return STAGE_NAMES.FINAL;
-      case '3':
-        return STAGE_NAMES.TERCER_PUESTO;
-      case 'groups':
-      default:
-        return STAGE_NAMES.GRUPOS;
-    }
-  };
-  const getPhaseFixture = () => {
-    if (getStageName() !== STAGE_NAMES.GRUPOS)
-      return getFixture('', getStageName());
-    return getGroupStage();
-  };
-
-  useEffect(() => {
-    if (selectedUserGroup) {
-      setIsLoading(true);
-      getPhaseFixture()
-        .then((res) => {
-          setStageData(res.data.fixture);
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [selectedUserGroup, phase]);
-
   const updatePredictionsByStage = () => {
-    if (getStageName() !== STAGE_NAMES.GRUPOS)
-      return getPredictions(selectedUserGroup?.id, getStageName());
+    if (getStageName(phase) !== STAGE_NAMES.GRUPOS)
+      return getPredictions(selectedUserGroup?.id, getStageName(phase));
     const groupLeter = numberToGroupLetter(groupNumber);
-    return getFirstStagePredictionsByGroup(selectedUserGroup?.id, groupLeter);
+    return getFirstStagePredictionsByGroup(
+      selectedUserGroup?.id,
+      groupLeter,
+      signal
+    );
   };
 
   const updatePredictions = () => {
@@ -99,13 +64,13 @@ function FirstStage() {
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
       })
+      .catch((err) => handleCancel(err))
       .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
-    if (stageData.length > 0) {
-      updatePredictions();
-    }
+    if (stageData?.length > 0) updatePredictions();
+    return cleanup;
   }, [stageData, groupNumber, selectedUserGroup]);
 
   const handleSubmit = (e) => {
@@ -132,15 +97,9 @@ function FirstStage() {
     );
   };
 
-  const switchGroupNumber = (jumpValue) => {
-    setGroupNumber((prevState) => prevState + jumpValue);
-  };
-
-  const [switchNumber, setSwitchNumber] = useState(null);
-
   const handleGroupSwitch = (value) => {
     if (dirty) {
-      setSwitchNumber(value);
+      switchGroupNumber(value);
       toggleModal();
     } else {
       switchGroupNumber(value);
@@ -158,18 +117,6 @@ function FirstStage() {
 
   return (
     <>
-      <Modal show={showModal} toggle={toggleModal}>
-        <CardTitle>Continuar sin enviar predicciones?</CardTitle>
-        <Button
-          type="button"
-          onClick={() => {
-            toggleModal();
-            switchGroupNumber(switchNumber);
-          }}
-        >
-          Continuar
-        </Button>
-      </Modal>
       <Link to="..">Volver a selección de fases</Link>
       {resultsMode && selectedUserGroup && (
         <References
@@ -181,7 +128,7 @@ function FirstStage() {
       )}
       {selectedUserGroup ? (
         <>
-          {getStageName() !== STAGE_NAMES.GRUPOS ? (
+          {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
             <PredictionForm
               resultsMode={resultsMode}
               handleSubmit={!resultsMode && handleSubmit}
@@ -193,13 +140,13 @@ function FirstStage() {
           ) : (
             <PredictionForm
               groupNumber={groupNumber}
-              handleSubmit={!resultsMode && handleSubmit}
+              handleSubmit={!resultsMode ? handleSubmit : undefined}
               stageData={stageData}
               errorMessages={errorMessages}
               handleNextGroup={() => handleGroupSwitch(1)}
               handlePrevGroup={() => handleGroupSwitch(-1)}
               values={values}
-              handleChange={!resultsMode && handleChange}
+              handleChange={!resultsMode ? handleChange : undefined}
               groupPhase
             />
           )}
@@ -209,8 +156,19 @@ function FirstStage() {
           NO ELEGISTE NINGUN GRUPO
         </Text>
       )}
+      <Modal show={showModal} toggle={toggleModal}>
+        <CardTitle>Continuar sin enviar predicciones?</CardTitle>
+        <Button
+          type="button"
+          onClick={() => {
+            toggleModal();
+            switchGroupNumber(groupNumber);
+          }}>
+          Continuar
+        </Button>
+      </Modal>
     </>
   );
 }
 
-export default FirstStage;
+export default PredictionManager;
