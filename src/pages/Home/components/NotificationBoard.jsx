@@ -45,7 +45,7 @@ function NotificationBoard() {
 
   return (
     <CardContainer>
-      <CardWrapper fullWidth>{renderBoards()}</CardWrapper>
+      <CardWrapper>{renderBoards()}</CardWrapper>
     </CardContainer>
   );
 }

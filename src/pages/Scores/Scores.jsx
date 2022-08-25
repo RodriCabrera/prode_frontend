@@ -33,7 +33,7 @@ function Scores() {
 
   return (
     <CardContainer>
-      <CardWrapper border="none" fullWidth>
+      <CardWrapper border="none">
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>

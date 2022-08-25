@@ -45,7 +45,7 @@ function Profile() {
     <Spinner />
   ) : (
     <CardContainer>
-      <CardWrapper fullWidth>
+      <CardWrapper>
         <GoBackButton />
         <UserNameContainer>
           <Text size="1.5rem" weight="bold">

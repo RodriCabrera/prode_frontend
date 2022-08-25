@@ -81,7 +81,7 @@ function Home() {
           )}
         </CardWrapper>
         <CardWrapper
-          fullWidth={isMobile}
+          isMobile={isMobile}
           border={isMobile ? 'none' : undefined}>
           <LeaderBoard />
         </CardWrapper>

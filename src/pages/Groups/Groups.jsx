@@ -35,7 +35,7 @@ function Groups() {
   return (
     <>
       <CardContainer>
-        <CardWrapper fullWidth border="none">
+        <CardWrapper border="none">
           <Text size="2.5rem" weight="500" align="center">
             GRUPOS
           </Text>
@@ -47,13 +47,13 @@ function Groups() {
       </CardContainer>
 
       <CardContainer>
-        <CardWrapper fullWidth>
+        <CardWrapper>
           <CreateGroupForm updateList={getGroupList} />
         </CardWrapper>
       </CardContainer>
 
       <CardContainer>
-        <CardWrapper fullWidth>
+        <CardWrapper>
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
       </CardContainer>
