@@ -65,10 +65,10 @@ function Home() {
   return (
     <PageWrapper>
       <Countdown />
+      <NotificationBoard id="notification-board" />
       <Row>
         <HomeGroups />
         <CardWrapper border={isMobile ? 'none' : undefined} isMobile={isMobile}>
-          <NotificationBoard id="notification-board" />
           {showFixture && (
             <div>
               <CardTitle>Próximos partidos:</CardTitle>
@@ -81,9 +81,7 @@ function Home() {
             </div>
           )}
         </CardWrapper>
-        <CardWrapper
-          isMobile={isMobile}
-          border={isMobile ? 'none' : undefined}>
+        <CardWrapper isMobile={isMobile} border={isMobile ? 'none' : undefined}>
           <LeaderBoard />
         </CardWrapper>
         <QuickPrediction />
