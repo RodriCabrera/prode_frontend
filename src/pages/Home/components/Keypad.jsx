@@ -27,21 +27,16 @@ function Keypad() {
   return (
     <KeypadWrapper>
       <KeypadRow>
-        {/* TODO: BTN: Va a gestion de grupos? O directamente hacemos shortcut a
-        agregar un nuevo grupo? */}
         <Button padding="5px" onClick={() => navigate('/groups')}>
           <HiOutlineUserGroup size="2rem" />
         </Button>
-        {/* TODO: BTN: A tabla de posiciones completa / O es lo mismo que la tabla q esta a la derecha?? */}
         <Button padding="5px">
           <GiPodiumWinner size="2rem" />
         </Button>
-        {/* BNT: A fixture mas completo */}
         <Button padding="5px" onClick={() => navigate('/proximos-partidos')}>
           <IoIosFootball size="2rem" />
         </Button>
       </KeypadRow>
-      {/* TODO: Ver que otros botones agregamos a la botonera */}
       <KeypadRow>
         <Button padding="5px">
           <GiAbstract018 size="2rem" />

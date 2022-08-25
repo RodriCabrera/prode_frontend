@@ -7,7 +7,6 @@ import propTypes from 'prop-types';
 import config from '../../Constants';
 import Container, { AuthLink } from './GoogleAuth.styles';
 
-// TODO: Refactorizar con la instancia de axios, y los toasts
 function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);
 
@@ -39,8 +38,7 @@ function GoogleAuth({ text }) {
             <AuthLink
               type="button"
               onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-            >
+              disabled={renderProps.disabled}>
               {text} con Google <FcGoogle size="1.2rem" />
             </AuthLink>
           )}
