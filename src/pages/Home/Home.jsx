@@ -5,11 +5,11 @@ import { getFixtureByStageId } from '../../api/fixture';
 import { AuthContext } from '../../common/AuthProvider';
 import { CardTitle, CardWrapper } from '../../common/common.styles';
 import { FixtureTable } from '../FixturePage/components/FixtureTable';
-import LeaderBoard from './components/LeaderBoard';
+import LeaderBoard from './components//LeaderBoard/LeaderBoard';
 import Countdown from './components/Countdown';
 import { HomeGroups } from './components/HomeGroups';
-import NotificationBoard from './components/NotificationBoard';
-import QuickPrediction from './components/QuickPrediction';
+import NotificationBoard from './components/NotificationBoard/NotificationBoard';
+import QuickPrediction from './components/QuickPredictions/QuickPrediction';
 import useCleanupController from '../../hooks/useCleanupController';
 import { useIsMobile } from '../../hooks/useIsMobile';
 

@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { GiPodiumWinner } from 'react-icons/gi';
-import { getGroupScores } from '../../../api/groups';
-import { ListElement } from '../../../common/Lists/ListElement';
-import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
-import useCleanupController from '../../../hooks/useCleanupController';
-import { Text } from '../../../common/common.styles';
+import { getGroupScores } from '../../../../api/groups';
+import { ListElement } from '../../../../common/Lists/ListElement';
+import { UserMiniAvatar } from '../../../../common/UserMiniAvatar/UserMiniAvatar';
+import useCleanupController from '../../../../hooks/useCleanupController';
+import { Text } from '../../../../common/common.styles';
 
 const LeaderElement = styled.div`
   display: flex;

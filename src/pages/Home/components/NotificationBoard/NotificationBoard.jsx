@@ -1,10 +1,10 @@
 import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { getPredictions } from '../../../api/predictions';
-import { CardContainer, CardWrapper } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
+import { getPredictions } from '../../../../api/predictions';
+import { CardContainer, CardWrapper } from '../../../../common/common.styles';
+import { Spinner } from '../../../../common/Spinner/Spinner';
 import { NoPredictionNotification } from './NoPredictionNotification';
-import useCleanupController from '../../../hooks/useCleanupController';
+import useCleanupController from '../../../../hooks/useCleanupController';
 
 function NotificationBoard() {
   const [predictions, setPredictions] = useState([]);
