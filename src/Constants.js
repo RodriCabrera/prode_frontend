@@ -1,5 +1,5 @@
 const prod = {
-  API_URL: 'https://prode-backend.vercel.app/',
+  API_URL: 'https://prode-backend.vercel.app',
 };
 
 const dev = {
