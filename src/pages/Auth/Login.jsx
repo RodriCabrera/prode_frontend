@@ -52,7 +52,7 @@ function Login() {
         success: 'Logueado con éxito',
         error: {
           render({ data }) {
-            return data.response.data.error;
+            return data?.response.data?.error || 'Error al autenticar...';
           },
         },
       }

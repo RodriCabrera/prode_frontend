@@ -17,7 +17,7 @@ function NotificationBoard() {
   useEffect(() => {
     getPredictions(undefined, undefined, signal)
       .then((res) => setPredictions(res.data))
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setloadingCheck({ ...loadingCheck, predictions: true });
       });
@@ -45,7 +45,9 @@ function NotificationBoard() {
 
   return (
     <CardContainer>
-      <CardWrapper>{renderBoards()}</CardWrapper>
+      <CardWrapper width="100%" isMobile border="none">
+        {renderBoards()}
+      </CardWrapper>
     </CardContainer>
   );
 }
