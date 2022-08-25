@@ -13,6 +13,7 @@ import {
   numberToGroupLetter,
   groupNumberMod,
   calculateIfCanPredict,
+  formatInputDisplayValue
 } from './predictionsPageUtils';
 
 const useGetStageData = ({ stageData, groupNumber }) => {
@@ -129,7 +130,7 @@ export function PredictionForm(props) {
                         min={0}
                         align="center"
                         id={`${match.id}-away`}
-                        value={values[`${match.id}-away`]}
+                        value={formatInputDisplayValue(values[`${match.id}-away`])}
                         name={`${match.id}-away`}
                         onChange={handleChange}
                         disabled={resultsMode || !canPredict}
@@ -158,7 +159,7 @@ export function PredictionForm(props) {
                         align="center"
                         name={`${match.id}-home`}
                         id={`${match.id}-home`}
-                        value={values[`${match.id}-home`]}
+                        value={formatInputDisplayValue(values[`${match.id}-home`])}
                         onChange={handleChange}
                         disabled={resultsMode || !canPredict}
                         predictionStatus={
