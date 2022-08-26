@@ -6,6 +6,7 @@ import {
   CardContainer,
   Text,
 } from '../../../../common/common.styles';
+import { HoverBaloon } from '../../../../common/Lists/Lists.styles';
 import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
 import MiniForm from './MiniForm';
 import { Spinner } from '../../../../common/Spinner/Spinner';
@@ -50,7 +51,9 @@ export default function QuickPrediction() {
           <>
             {groupData.name && (
               <GroupInfo>
-                <GroupAvatar onClick={() => navigate(`/groups/${groupData.name}`)}>
+                <GroupAvatar
+                  onClick={() => navigate(`/groups/${groupData.name}`)}
+                >
                   <HiOutlineUserGroup size="1.4rem" />
                 </GroupAvatar>
                 <Text>{groupData.name}</Text>
