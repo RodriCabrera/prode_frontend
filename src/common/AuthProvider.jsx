@@ -39,7 +39,8 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     if (!user) {
-      navigate('auth');
+      console.log('adsasdafeawaf');
+      // navigate('auth');
       updateAuth();
     }
     return cleanup();
@@ -49,7 +50,8 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={useMemo(() => {
         return { user, isLoading, updateAuth, logout };
-      }, [user, isLoading, updateAuth])}>
+      }, [user, isLoading, updateAuth])}
+    >
       {isLoading ? <Loading /> : children}
     </AuthContext.Provider>
   );
