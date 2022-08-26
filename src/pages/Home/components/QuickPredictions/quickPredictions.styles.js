@@ -24,13 +24,15 @@ export const GroupInfo = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  max-height: 2rem;
 `;
 
 export const GroupAvatar = styled(AvatarWrapper)`
   cursor: pointer;
   width: 2rem;
   height: 2rem;
+  max-width: 2rem;
   :hover {
-    padding: 3px;
+    padding: 4px;
   }
 `;
