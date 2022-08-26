@@ -9,6 +9,7 @@ import useCleanupController from '../../hooks/useCleanupController';
 function Scores() {
   const [scores, setScores] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingScores, setIsLoadingScores] = useState(false)
   const [userGroupList, setUserGroupList] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
@@ -45,11 +46,12 @@ function Scores() {
               <GroupScoreSelector
                 userGroupList={userGroupList}
                 setScores={setScores}
+                setIsLoadingScores={setIsLoadingScores}
               />
             )}
           </>
         )}
-        <ScoreList scores={scores} />
+        {!isLoadingScores && <ScoreList scores={scores} /> }
       </CardWrapper>
     </CardContainer>
   );
