@@ -29,6 +29,7 @@ import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
 import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 import { useGetStageData } from './hooks/useGetStageData';
 import useCleanupController from '../../../hooks/useCleanupController';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +45,8 @@ function PredictionManager() {
   });
   const [signal, cleanup, handleCancel] = useCleanupController();
   const { phase } = useParams();
+  const isMobile = useIsMobile();
+
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
@@ -114,7 +117,11 @@ function PredictionManager() {
   if (isLoading)
     return (
       <CardContainer>
-        <CardWrapper style={{ height: '400px' }}>
+        <CardWrapper 
+          isMobile={isMobile}
+          border={isMobile ? 'none' : null}
+          style={{ height: '400px' }}
+        >
           <Spinner />
         </CardWrapper>
       </CardContainer>

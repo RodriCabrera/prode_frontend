@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {
-  getRandomUnpredictedMatch,
-} from '../../../../api/predictions';
+import { useNavigate } from 'react-router-dom';
+import { getRandomUnpredictedMatch } from '../../../../api/predictions';
 import {
   CardWrapper,
   CardContainer,
-  Text
+  Text,
 } from '../../../../common/common.styles';
-import { Spinner } from '../../../../common/Spinner/Spinner';
-import {
-  GroupInfo,
-  GroupAvatar,
-} from './quickPredictions.styles';
+import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
 import MiniForm from './MiniForm';
+import { Spinner } from '../../../../common/Spinner/Spinner';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import useCleanupController from '../../../../hooks/useCleanupController';
 
@@ -21,6 +17,7 @@ export default function QuickPrediction() {
   const [matchData, setMatchData] = useState({});
   const [groupData, setGroupData] = useState({});
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const navigate = useNavigate();
 
   const getMatchData = () => {
     setIsLoading(true);
@@ -50,14 +47,18 @@ export default function QuickPrediction() {
           <>
             {groupData && (
               <GroupInfo>
-                <GroupAvatar>
+                <GroupAvatar onClick={() => navigate(`/groups/${groupData.name}`)}>
                   <HiOutlineUserGroup size="1.4rem" />
                 </GroupAvatar>
                 <Text>{groupData.name}</Text>
               </GroupInfo>
             )}
             {matchData.id && (
-              <MiniForm matchData={matchData} groupData={groupData} afterSubmit={getMatchData} />
+              <MiniForm
+                matchData={matchData}
+                groupData={groupData}
+                afterSubmit={getMatchData}
+              />
             )}
           </>
         )}
