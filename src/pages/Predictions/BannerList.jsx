@@ -5,8 +5,8 @@ import { getFixtureStatus } from '../../api/fixture';
 import { Text } from '../../common/common.styles';
 import { Banner } from './Banner';
 import { BannerContainer } from './Predictions.styles';
-import { Spinner } from '../../common/Spinner/Spinner';
 import useCleanupController from '../../hooks/useCleanupController';
+import { BallLoader } from '../../common/Spinner/BallLoader';
 
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ function BannerList() {
         .then((res) => {
           setPredictedPercentages(res.data);
         })
-        .catch(err => handleCancel(err))
+        .catch((err) => handleCancel(err))
         .finally(() => {
           setIsLoading(false);
         });
@@ -110,7 +110,7 @@ function BannerList() {
         FASES
       </Text>
       {loadingStatus ? (
-        <Spinner />
+        <BallLoader />
       ) : (
         bannerData.map((stage) => {
           return (

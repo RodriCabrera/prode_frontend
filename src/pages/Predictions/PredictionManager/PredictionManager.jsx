@@ -14,7 +14,6 @@ import {
   CardWrapper,
   Text,
 } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
 import { PredictionForm } from '../PredictionForm';
 import { References } from '../../../common/References';
 import {
@@ -30,6 +29,7 @@ import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 import { useGetStageData } from './hooks/useGetStageData';
 import useCleanupController from '../../../hooks/useCleanupController';
 import { useIsMobile } from '../../../hooks/useIsMobile';
+import { BallLoader } from '../../../common/Spinner/BallLoader';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
@@ -120,7 +120,7 @@ function PredictionManager() {
           border={isMobile ? 'none' : null}
           style={{ height: '400px' }}
         >
-          <Spinner />
+          <BallLoader />
         </CardWrapper>
       </CardContainer>
     );
