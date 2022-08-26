@@ -6,7 +6,7 @@ import {
   CardContainer,
   Text,
 } from '../../../../common/common.styles';
-import { HoverBaloon } from '../../../../common/Lists/Lists.styles';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
 import MiniForm from './MiniForm';
 import { Spinner } from '../../../../common/Spinner/Spinner';
@@ -20,6 +20,7 @@ export default function QuickPrediction() {
   const [noMatchsOrGroups, setMissingData] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const getMatchData = () => {
     setIsLoading(true);
@@ -41,7 +42,7 @@ export default function QuickPrediction() {
 
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper isMobile={isMobile}>
         <Text size="1.5rem" align="center">
           Predicción al paso
         </Text>
