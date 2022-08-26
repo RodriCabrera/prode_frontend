@@ -47,7 +47,6 @@ function PredictionManager() {
   const { phase } = useParams();
   const isMobile = useIsMobile();
 
-
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
   const updatePredictionsByStage = () => {
@@ -107,7 +106,6 @@ function PredictionManager() {
 
   const handleGroupSwitch = (value) => {
     if (dirty) {
-      switchGroupNumber(value);
       toggleModal();
     } else {
       switchGroupNumber(value);
@@ -117,7 +115,7 @@ function PredictionManager() {
   if (isLoading)
     return (
       <CardContainer>
-        <CardWrapper 
+        <CardWrapper
           isMobile={isMobile}
           border={isMobile ? 'none' : null}
           style={{ height: '400px' }}
@@ -177,7 +175,8 @@ function PredictionManager() {
           onClick={() => {
             toggleModal();
             switchGroupNumber(groupNumber);
-          }}>
+          }}
+        >
           Continuar
         </Button>
       </Modal>
