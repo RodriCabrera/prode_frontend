@@ -2,15 +2,16 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
-// import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import config from '../../Constants';
 import Container, { AuthLink } from './GoogleAuth.styles';
+import { toast } from 'react-toastify';
 
 function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);
 
   const responseGoogle = async (response) => {
+    toast('Validando cuenta...');
     const res = await axios.post(
       `${config.API_URL}/auth/google`,
       {
@@ -38,7 +39,8 @@ function GoogleAuth({ text }) {
             <AuthLink
               type="button"
               onClick={renderProps.onClick}
-              disabled={renderProps.disabled}>
+              disabled={renderProps.disabled}
+            >
               {text} con Google <FcGoogle size="1.2rem" />
             </AuthLink>
           )}
