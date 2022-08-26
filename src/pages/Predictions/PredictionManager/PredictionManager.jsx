@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -49,7 +49,7 @@ function PredictionManager() {
 
   const updatePredictionsByStage = () => {
     if (getStageName(phase) !== STAGE_NAMES.GRUPOS)
-      return getPredictions(selectedUserGroup?.id, getStageName(phase));
+      return getPredictions(selectedUserGroup?.id, getStageName(phase), signal);
     const groupLeter = numberToGroupLetter(groupNumber);
     return getFirstStagePredictionsByGroup(
       selectedUserGroup?.id,
@@ -60,18 +60,23 @@ function PredictionManager() {
 
   const updatePredictions = () => {
     setIsLoading(true);
+    resetForm({})
     updatePredictionsByStage()
-      .then((res) => {
-        resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
-      })
-      .catch((err) => handleCancel(err))
-      .finally(() => setIsLoading(false));
+    .then((res) => {
+      resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
+    })
+    .catch((err) => handleCancel(err))
+    .finally(() => setIsLoading(false));
   };
-
+  
   useEffect(() => {
-    if (stageData?.length > 0) updatePredictions();
+    updatePredictions();
     return cleanup;
-  }, [stageData, groupNumber, selectedUserGroup]);
+  }, [stageData])
+  
+  useMemo(() => {
+    if (stageData?.length > 0) updatePredictions();
+  }, [groupNumber, selectedUserGroup]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
