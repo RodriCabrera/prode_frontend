@@ -39,7 +39,6 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     if (!user) {
-      console.log('adsasdafeawaf');
       // navigate('auth');
       updateAuth();
     }
