@@ -31,8 +31,6 @@ const useGetStageData = ({ stageData, groupNumber }) => {
   return data;
 };
 
-// TODO: Para dehabilitar inputs si se pasó la fecha:
-// Si Date.now es mayor a la fecha del partido menos el time limit ya no podes hacer predicciones.
 export function PredictionForm(props) {
   const {
     stageData,

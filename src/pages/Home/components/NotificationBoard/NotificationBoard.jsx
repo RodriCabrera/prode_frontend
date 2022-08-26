@@ -37,14 +37,6 @@ function NotificationBoard() {
   }
 
   if (!isEmpty(predictions) && loadingCheck.predictions) return null;
-  // <CardContainer id="next-5-card-container">
-  /* TODO: manejar estilos más elegantemente? Otro styled component distinto para esto? */
-  /* <CardWrapper
-          style={{ flexGrow: 1, maxWidth: '100%', width: 'initial' }}
-        >
-          <h1>Otros contenidos para la página de inicio?</h1>
-        </CardWrapper> */
-  // </CardContainer>
 
   return (
     <CardContainer>
