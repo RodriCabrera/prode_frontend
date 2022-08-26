@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useOutletContext, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -29,6 +29,7 @@ import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
 import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 import { useGetStageData } from './hooks/useGetStageData';
 import useCleanupController from '../../../hooks/useCleanupController';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
@@ -44,12 +45,13 @@ function PredictionManager() {
   });
   const [signal, cleanup, handleCancel] = useCleanupController();
   const { phase } = useParams();
+  const isMobile = useIsMobile();
 
   usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
   const updatePredictionsByStage = () => {
     if (getStageName(phase) !== STAGE_NAMES.GRUPOS)
-      return getPredictions(selectedUserGroup?.id, getStageName(phase));
+      return getPredictions(selectedUserGroup?.id, getStageName(phase), signal);
     const groupLeter = numberToGroupLetter(groupNumber);
     return getFirstStagePredictionsByGroup(
       selectedUserGroup?.id,
@@ -60,6 +62,7 @@ function PredictionManager() {
 
   const updatePredictions = () => {
     setIsLoading(true);
+    resetForm({});
     updatePredictionsByStage()
       .then((res) => {
         resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
@@ -69,9 +72,13 @@ function PredictionManager() {
   };
 
   useEffect(() => {
-    if (stageData?.length > 0) updatePredictions();
+    updatePredictions();
     return cleanup;
-  }, [stageData, groupNumber, selectedUserGroup]);
+  }, [stageData]);
+
+  useMemo(() => {
+    if (stageData?.length > 0) updatePredictions();
+  }, [groupNumber, selectedUserGroup]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,7 +106,6 @@ function PredictionManager() {
 
   const handleGroupSwitch = (value) => {
     if (dirty) {
-      switchGroupNumber(value);
       toggleModal();
     } else {
       switchGroupNumber(value);
@@ -109,7 +115,11 @@ function PredictionManager() {
   if (isLoading)
     return (
       <CardContainer>
-        <CardWrapper style={{ height: '400px' }}>
+        <CardWrapper
+          isMobile={isMobile}
+          border={isMobile ? 'none' : null}
+          style={{ height: '400px' }}
+        >
           <Spinner />
         </CardWrapper>
       </CardContainer>
@@ -129,6 +139,7 @@ function PredictionManager() {
       {selectedUserGroup ? (
         <>
           {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
+            // Form para NO fase grupos:
             <PredictionForm
               resultsMode={resultsMode}
               handleSubmit={!resultsMode && handleSubmit}
@@ -138,6 +149,7 @@ function PredictionManager() {
               handleChange={handleChange}
             />
           ) : (
+            // Form para fase de grupos:
             <PredictionForm
               groupNumber={groupNumber}
               handleSubmit={!resultsMode ? handleSubmit : undefined}
@@ -163,7 +175,8 @@ function PredictionManager() {
           onClick={() => {
             toggleModal();
             switchGroupNumber(groupNumber);
-          }}>
+          }}
+        >
           Continuar
         </Button>
       </Modal>

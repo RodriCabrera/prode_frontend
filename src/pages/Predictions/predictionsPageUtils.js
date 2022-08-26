@@ -151,3 +151,8 @@ export const calculateIfCanPredict = (matchDate, selectedUserGroup) => {
   const matchTime = new Date(matchDate).getTime();
   return now + timeLimit < matchTime;
 };
+
+export const formatInputDisplayValue = (value) => {
+  if (value===0 || value) return value
+  else return ''
+}

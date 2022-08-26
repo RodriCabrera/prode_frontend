@@ -1,10 +1,10 @@
 import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { getPredictions } from '../../../api/predictions';
-import { CardContainer, CardWrapper } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
+import { getPredictions } from '../../../../api/predictions';
+import { CardContainer, CardWrapper } from '../../../../common/common.styles';
+import { Spinner } from '../../../../common/Spinner/Spinner';
 import { NoPredictionNotification } from './NoPredictionNotification';
-import useCleanupController from '../../../hooks/useCleanupController';
+import useCleanupController from '../../../../hooks/useCleanupController';
 
 function NotificationBoard() {
   const [predictions, setPredictions] = useState([]);
@@ -17,7 +17,7 @@ function NotificationBoard() {
   useEffect(() => {
     getPredictions(undefined, undefined, signal)
       .then((res) => setPredictions(res.data))
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setloadingCheck({ ...loadingCheck, predictions: true });
       });
@@ -25,6 +25,9 @@ function NotificationBoard() {
   }, []);
 
   function renderBoards() {
+    // TODO: Implementar esta situación
+    // NO GROUP - NO PREDICTIONS:
+    // <NoGroupNotification />;
     // YES GROUPS - NO PREDICTIONS:
     if (loadingCheck.predictions && isEmpty(predictions)) {
       return <NoPredictionNotification />;
@@ -34,18 +37,12 @@ function NotificationBoard() {
   }
 
   if (!isEmpty(predictions) && loadingCheck.predictions) return null;
-  // <CardContainer id="next-5-card-container">
-  /* TODO: manejar estilos más elegantemente? Otro styled component distinto para esto? */
-  /* <CardWrapper
-          style={{ flexGrow: 1, maxWidth: '100%', width: 'initial' }}
-        >
-          <h1>Otros contenidos para la página de inicio?</h1>
-        </CardWrapper> */
-  // </CardContainer>
 
   return (
     <CardContainer>
-      <CardWrapper>{renderBoards()}</CardWrapper>
+      <CardWrapper width="100%" isMobile border="none">
+        {renderBoards()}
+      </CardWrapper>
     </CardContainer>
   );
 }

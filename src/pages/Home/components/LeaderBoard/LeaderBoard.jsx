@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
 import Leader from './Leader';
-import { getUserGroups } from '../../../api/groups';
-import useCleanupController from '../../../hooks/useCleanupController';
-import { CardTitle } from '../../../common/common.styles';
+import { getUserGroups } from '../../../../api/groups';
+import useCleanupController from '../../../../hooks/useCleanupController';
+import { CardTitle } from '../../../../common/common.styles';
 const LeaderBoardWrapper = styled.div`
   /* width: 100%; */
 `;
