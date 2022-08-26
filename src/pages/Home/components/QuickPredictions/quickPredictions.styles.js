@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AvatarWrapper } from '../../../../common/Lists/Lists.styles';
+import { AvatarWrapper, HoverBaloon } from '../../../../common/Lists/Lists.styles';
 
 export const SinglePredictionForm = styled.form`
   width: 100%;
@@ -32,7 +32,8 @@ export const GroupAvatar = styled(AvatarWrapper)`
   width: 2rem;
   height: 2rem;
   max-width: 2rem;
+  background-color: darkorange;
   :hover {
-    padding: 4px;
+    transform: scale(1.1);
   }
 `;
