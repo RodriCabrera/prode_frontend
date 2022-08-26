@@ -10,12 +10,14 @@ import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 import { FixtureTable } from '../FixturePage/components/FixtureTable';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 import useCleanupController from '../../hooks/useCleanupController';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [otherUserPredictions, setOtherUserPredictions] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!group || !user) return;
@@ -46,6 +48,8 @@ function ProfilePredictions({ props }) {
                 (a, b) => new Date(a.date) - new Date(b.date)
               )}
               isCompact
+              isMobile={isMobile}
+              fullWidth={isMobile}
             />
           </CardWrapper>
         </CardContainer>

@@ -10,7 +10,7 @@ const FlagCell = styled(Table.Cell)`
   background-color: red;
 `;
 
-export function FixtureTable({ data, isCompact, fullWidth }) {
+export function FixtureTable({ data, isCompact, fullWidth, isMobile }) {
   return (
     <Table compact={isCompact} fullWidth={fullWidth}>
       <Table.Body>
@@ -18,14 +18,17 @@ export function FixtureTable({ data, isCompact, fullWidth }) {
           return (
             <React.Fragment key={match.id}>
               <Table.Row>
-                <Table.Cell
-                  colSpan="5"
-                  withBottomBorder
-                  fontWeight="700"
-                  fontSize="1.2rem"
-                  padding={isCompact && '10px'}>
-                  {parseDate(match.date)}
-                </Table.Cell>
+                {!isMobile && (
+                  <Table.Cell
+                    colSpan="5"
+                    withBottomBorder
+                    fontWeight="700"
+                    fontSize="1.2rem"
+                    padding={isCompact && '10px'}
+                  >
+                    {parseDate(match.date)}
+                  </Table.Cell>
+                )}
               </Table.Row>
               <Table.Row borderBottom="1px solid red">
                 <FlagCell padding={isCompact && '10px'}>
