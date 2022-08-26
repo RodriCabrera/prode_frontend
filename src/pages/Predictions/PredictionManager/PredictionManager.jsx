@@ -60,20 +60,20 @@ function PredictionManager() {
 
   const updatePredictions = () => {
     setIsLoading(true);
-    resetForm({})
+    resetForm({});
     updatePredictionsByStage()
-    .then((res) => {
-      resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
-    })
-    .catch((err) => handleCancel(err))
-    .finally(() => setIsLoading(false));
+      .then((res) => {
+        resetForm({ values: formatPredictionsToDisplay(res.data) || {} });
+      })
+      .catch((err) => handleCancel(err))
+      .finally(() => setIsLoading(false));
   };
-  
+
   useEffect(() => {
     updatePredictions();
     return cleanup;
-  }, [stageData])
-  
+  }, [stageData]);
+
   useMemo(() => {
     if (stageData?.length > 0) updatePredictions();
   }, [groupNumber, selectedUserGroup]);
@@ -134,6 +134,7 @@ function PredictionManager() {
       {selectedUserGroup ? (
         <>
           {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
+            // Form para NO fase grupos:
             <PredictionForm
               resultsMode={resultsMode}
               handleSubmit={!resultsMode && handleSubmit}
@@ -143,6 +144,7 @@ function PredictionManager() {
               handleChange={handleChange}
             />
           ) : (
+            // Form para fase de grupos:
             <PredictionForm
               groupNumber={groupNumber}
               handleSubmit={!resultsMode ? handleSubmit : undefined}

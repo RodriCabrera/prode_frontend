@@ -13,8 +13,9 @@ import {
   numberToGroupLetter,
   groupNumberMod,
   calculateIfCanPredict,
-  formatInputDisplayValue
+  formatInputDisplayValue,
 } from './predictionsPageUtils';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 const useGetStageData = ({ stageData, groupNumber }) => {
   const [data, setData] = useState(stageData);
@@ -49,15 +50,18 @@ export function PredictionForm(props) {
 
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
-
+  const isMobile = useIsMobile();
   return (
     <FormWrapper id="prediction-form-wrapper">
       <Text align="center" size="1.7rem" weight="600">
         {typeof groupNumber === 'number' &&
           `GRUPO ${numberToGroupLetter(groupNumber)}`}
       </Text>
-      <Form id="prediction-form" onSubmit={handleSubmit ? handleSubmit : undefined}>
-        <Table id="prediction-table">
+      <Form
+        id="prediction-form"
+        onSubmit={handleSubmit ? handleSubmit : undefined}
+      >
+        <Table fullWidth={isMobile} id="prediction-table">
           <Table.Body>
             {data?.map((match) => {
               const predictionStatus = () =>
@@ -130,7 +134,9 @@ export function PredictionForm(props) {
                         min={0}
                         align="center"
                         id={`${match.id}-away`}
-                        value={formatInputDisplayValue(values[`${match.id}-away`])}
+                        value={formatInputDisplayValue(
+                          values[`${match.id}-away`]
+                        )}
                         name={`${match.id}-away`}
                         onChange={handleChange}
                         disabled={resultsMode || !canPredict}
@@ -159,7 +165,9 @@ export function PredictionForm(props) {
                         align="center"
                         name={`${match.id}-home`}
                         id={`${match.id}-home`}
-                        value={formatInputDisplayValue(values[`${match.id}-home`])}
+                        value={formatInputDisplayValue(
+                          values[`${match.id}-home`]
+                        )}
                         onChange={handleChange}
                         disabled={resultsMode || !canPredict}
                         predictionStatus={
@@ -193,7 +201,8 @@ export function PredictionForm(props) {
               onClick={handlePrevGroup}
               // disabled={groupNumber === 0}
               type="reset"
-              width="100%">
+              width="100%"
+            >
               <MdOutlineChevronLeft size={26} />
               {stageData[groupNumberMod(groupNumber - 1)]?.name}
             </Button>
@@ -201,7 +210,8 @@ export function PredictionForm(props) {
               grayscale
               onClick={handleNextGroup}
               type="reset"
-              width="100%">
+              width="100%"
+            >
               {stageData[groupNumberMod(groupNumber + 1)]?.name}
               <MdOutlineChevronRight size={26} />
             </Button>
