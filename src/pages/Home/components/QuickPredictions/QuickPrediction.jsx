@@ -16,6 +16,7 @@ export default function QuickPrediction() {
   const [isLoading, setIsLoading] = useState(false);
   const [matchData, setMatchData] = useState({});
   const [groupData, setGroupData] = useState({});
+  const [noMatchsOrGroups, setMissingData] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export default function QuickPrediction() {
         setMatchData(res.data.match);
         setGroupData(res.data.group);
       })
-      .catch((err) => handleCancel(err))
+      .catch((err) => handleCancel(err) || setMissingData(true))
       .finally(() => setIsLoading(false));
   };
 
@@ -34,6 +35,8 @@ export default function QuickPrediction() {
     getMatchData();
     return cleanup;
   }, []);
+
+  if (noMatchsOrGroups) return null;
 
   return (
     <CardContainer>
@@ -45,7 +48,7 @@ export default function QuickPrediction() {
           <Spinner />
         ) : (
           <>
-            {groupData && (
+            {groupData.name && (
               <GroupInfo>
                 <GroupAvatar onClick={() => navigate(`/groups/${groupData.name}`)}>
                   <HiOutlineUserGroup size="1.4rem" />
