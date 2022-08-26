@@ -4,17 +4,24 @@ export const AvatarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ bgColor }) => bgColor || 'darkorange'};
   border-radius: 100%;
   height: 2.5rem;
   width: 2.5rem;
   max-height: 2.5rem;
   max-width: 2.5rem;
-  padding: 2px;
-  transition: 0.2s;
+  z-index: 2;
   & img {
     height: 105%;
   }
+`;
+export const HoverBaloon = styled.div`
+  transition: 0.2s;
+  height: 2.5rem;
+  width: 2.5rem;
+  position: absolute;
+  border-radius: 100%;
+  z-index: 1;
+  background-color: ${({ bgColor }) => bgColor || 'darkorange'};
 `;
 
 export const ListItemWrapper = styled.div`
@@ -23,9 +30,10 @@ export const ListItemWrapper = styled.div`
   align-items: center;
   height: 4rem;
   max-height: 4rem;
+  transform-origin: center;
   cursor: pointer;
-  :hover ${AvatarWrapper} {
-    padding: 5px;
+  :hover ${HoverBaloon} {
+    transform: scale(1.1);
   }
 `;
 

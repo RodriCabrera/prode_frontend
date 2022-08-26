@@ -1,9 +1,10 @@
-import { AvatarWrapper, ListItemWrapper } from './Lists.styles';
+import { AvatarWrapper, HoverBaloon, ListItemWrapper } from './Lists.styles';
 
 export function ListElement({ children, onClick, avatar, bgColor }) {
   return (
     <ListItemWrapper onClick={onClick} id="ListWrapper">
-      <AvatarWrapper bgColor={bgColor}>{avatar}</AvatarWrapper>
+      <HoverBaloon bgColor={bgColor} id="hoverbaloon" />
+      <AvatarWrapper>{avatar}</AvatarWrapper>
       {children}
     </ListItemWrapper>
   );
