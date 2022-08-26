@@ -12,7 +12,7 @@ const ScoreListWrapper = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: 1rem;
+  gap: ${({ isMobile }) => isMobile ? '0.4rem' : '1rem'};
   margin: ${({ isMobile }) => isMobile ? 0 : 'auto'};
   max-width: 100%;
 `;

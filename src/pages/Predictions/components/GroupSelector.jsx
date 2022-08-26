@@ -4,6 +4,7 @@ import { Text } from '../../../common/common.styles';
 import { ListElement } from '../../../common/Lists/ListElement';
 import { ListWrapper } from '../../../common/Lists/Lists.styles';
 import { BallLoader } from '../../../common/Spinner/BallLoader';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ export function GroupSelector({
   userGroupList,
   handleGroupSelect,
 }) {
+  const isMobile = useIsMobile();
   return (
     <>
       <Text size="1.4rem">Seleccioná un grupo:</Text>
@@ -37,6 +39,7 @@ export function GroupSelector({
                 }
                 bgColor={isSelected && 'green'}
                 onClick={() => handleGroupSelect(userGroup)}
+                isMobile={isMobile}
               >
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>

@@ -20,6 +20,7 @@ import GroupInvite from './GroupInvite';
 import { AuthContext } from '../../../common/AuthProvider';
 import { GoBackButton } from '../../../common/GoBackButton/GoBackButton';
 import useCleanupController from '../../../hooks/useCleanupController';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 
 function InGroup({ groupData }) {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function InGroup({ groupData }) {
   const { showModal, toggleModal } = useToggleModal();
   const userContext = useContext(AuthContext);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsLoading(true);
@@ -74,6 +76,7 @@ function InGroup({ groupData }) {
                   avatar={
                     <UserMiniAvatar avatar={score.avatar} name={score.user} />
                   }
+                  isMobile={isMobile}
                 >
                   <Text>{`${score.user} : ${score.score} pts`}</Text>
                 </ListElement>
