@@ -1,0 +1,22 @@
+.loader-container {
+  width: '100%';
+  display: flex;
+  justify-content: 'center';
+}
+.ball {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(360deg) scale(1.5);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
