@@ -74,14 +74,14 @@ function PredictionResults() {
                   )
                 }
                 bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}>
+                onClick={() => handleGroupSelect(userGroup)}
+              >
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>
             );
           })}
         </ListWrapper>
       </GroupsListWrapper>
-      {/* TODO: El context puede englobar un nivel mas */}
       {!isLoading && selectedUserGroup?.id && (
         <Outlet context={[selectedUserGroup]} />
       )}

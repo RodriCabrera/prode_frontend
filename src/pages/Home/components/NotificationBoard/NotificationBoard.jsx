@@ -25,6 +25,9 @@ function NotificationBoard() {
   }, []);
 
   function renderBoards() {
+    // TODO: Implementar esta situación
+    // NO GROUP - NO PREDICTIONS:
+    // <NoGroupNotification />;
     // YES GROUPS - NO PREDICTIONS:
     if (loadingCheck.predictions && isEmpty(predictions)) {
       return <NoPredictionNotification />;

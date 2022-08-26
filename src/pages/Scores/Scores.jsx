@@ -18,7 +18,7 @@ function Scores() {
       .then(({ data }) => {
         setUserGroupList(data);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
@@ -29,21 +29,25 @@ function Scores() {
     return cleanup;
   }, []);
 
-  if (isLoading) return <Spinner />;
-
   return (
     <CardContainer>
-      <CardWrapper border="none">
+      <CardWrapper border="none" isMobile={true}>
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>
-        {userGroupList.length === 0 ? (
-          <Text>No estás en ningún grupo</Text>
+        {isLoading ? (
+          <Spinner />
         ) : (
-          <GroupScoreSelector 
-            userGroupList={userGroupList}
-            setScores={setScores}
-          />
+          <>
+            {userGroupList.length === 0 ? (
+              <Text>No estás en ningún grupo</Text>
+            ) : (
+              <GroupScoreSelector
+                userGroupList={userGroupList}
+                setScores={setScores}
+              />
+            )}
+          </>
         )}
         <ScoreList scores={scores} />
       </CardWrapper>
