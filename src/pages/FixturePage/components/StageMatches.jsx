@@ -21,35 +21,34 @@ function StageMatches({ stageName, isFirst }) {
           : organizedBranches.right;
         setFixtureData(thisStage);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => setIsLoading(false));
     return cleanup;
   }, []);
 
   return (
-    !isLoading && (
-      <StageColumn>
-        {fixtureData[0] &&
-          fixtureData.map((match) => (
-            <Match key={match.id}>
-              {match.home.name ? (
-                <>
-                  {parseDate(match.date, datePreferences)}
-                  <MatchData>
-                    {getFlagUrl(match.home?.flag, 1)}
-                    {match.homeScore}
-                    <span>-</span>
-                    {match.awayScore}
-                    {getFlagUrl(match.away?.flag, 1)}
-                  </MatchData>
-                </>
-              ) : (
-                <h6>{match.home}</h6>
-              )}
-            </Match>
-          ))}
-      </StageColumn>
-    )
+    <StageColumn>
+      {!isLoading &&
+        fixtureData[0] &&
+        fixtureData.map((match) => (
+          <Match key={match.id}>
+            {match.home.name ? (
+              <>
+                {parseDate(match.date, datePreferences)}
+                <MatchData>
+                  {getFlagUrl(match.home?.flag, 1)}
+                  {match.homeScore}
+                  <span>-</span>
+                  {match.awayScore}
+                  {getFlagUrl(match.away?.flag, 1)}
+                </MatchData>
+              </>
+            ) : (
+              <h6>{match.home}</h6>
+            )}
+          </Match>
+        ))}
+    </StageColumn>
   );
 }
 

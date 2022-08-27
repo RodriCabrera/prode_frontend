@@ -6,6 +6,7 @@ export const LaterStages = styled.div`
   justify-content: center;
   align-items: stretch;
   width: 100%;
+  max-width: 100%;
   flex-wrap: nowrap;
   height: 50vh;
 `;
@@ -15,7 +16,7 @@ export const StageColumn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  flex-grow: 1;
+  flex-basis: ${({ isCenter }) => isCenter ? '16%' : '14%'};
   gap: 1rem;
 `;
 
