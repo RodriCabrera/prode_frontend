@@ -16,6 +16,7 @@
     "quotes": ["error", "single"],
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
+    "no-empty": "warn",
     "no-unused-vars": [
       "warn",
       { "vars": "all", "args": "all", "ignoreRestSiblings": false }

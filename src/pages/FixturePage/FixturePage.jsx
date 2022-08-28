@@ -1,15 +1,14 @@
 import React from 'react';
-import { FixtureTable } from './components/FixtureTable';
+import FixtureTable from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
 import { Spinner } from '../../common/Spinner/Spinner';
-import { Button, Text } from '../../common/common.styles';
+import { Text } from '../../common/common.styles';
 import { useFetchFixtureData } from './hooks/useFetchFixtureData';
 import {
   FixtureTablesContainer,
   FixtureWrapper,
   GroupTableWrapper,
 } from './FixturePage.styles';
-import { toast } from 'react-toastify';
 import { useIsMobile } from '../../hooks/useIsMobile';
 
 function Fixture() {

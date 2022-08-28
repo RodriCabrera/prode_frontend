@@ -60,7 +60,8 @@ function Login() {
   };
 
   return (
-    <CardContainer id="login-card-container">
+    // <CardContainer id="login-card-container">
+    <div>
       <CardWrapper id="login-card-wrapper">
         <CardTitle>Login</CardTitle>
         <Form onSubmit={handleSubmit}>
@@ -101,7 +102,9 @@ function Login() {
           Primera vez? Registrate
         </Button>
       </CardWrapper>
-    </CardContainer>
+    </div>
+
+    // </CardContainer>
   );
 }
 
