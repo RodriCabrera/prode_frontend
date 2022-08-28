@@ -34,8 +34,6 @@ export const translateDuration = (miliseconds) => {
       return ' doce horas antes del partido';
     case 1000 * 60 * 60 * 24:
       return ' un día antes del partido';
-    case 1000 * 60 * 60 * 24 * 7:
-      return ' una semana antes del partido';
     case 0:
     default:
       return ' el comienzo del partido';
