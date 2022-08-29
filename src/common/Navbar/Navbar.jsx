@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from '@emotion/styled';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import { logoutUser } from '../../api/auth';
 import useToggleModal from '../../hooks/useToggleModal';
@@ -30,6 +30,9 @@ const NavLink = styled.button`
 `;
 
 function Navbar() {
+  const { pathname } = useLocation();
+  if (pathname === '/auth') return;
+
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -55,7 +58,8 @@ function Navbar() {
           <ButtonGroup
             id="button-group-left"
             onClick={() => navigate('/')}
-            padding=".5rem 2rem">
+            padding=".5rem 2rem"
+          >
             <LogoContainer>
               <LogoMain>Prode </LogoMain>
               <LogoSub>الحمار</LogoSub>

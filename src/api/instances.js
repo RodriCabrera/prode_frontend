@@ -10,4 +10,4 @@ export const withoutCredentials = axios.create({ baseURL: config.API_URL });
 
 export const isCancel = (err) => {
   return axios.isCancel(err);
-}
+};
