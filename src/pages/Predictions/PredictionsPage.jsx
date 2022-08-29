@@ -8,6 +8,7 @@ import { GroupSelector } from './components/GroupSelector';
 import { Spinner } from '../../common/Spinner/Spinner';
 import useCleanupController from '../../hooks/useCleanupController';
 
+// CUSTOM HOOK:
 const useGetGroupsData = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userGroupList, setUserGroupList] = useState([]);
@@ -44,14 +45,7 @@ function PredictionsPage() {
     <PredictionsPageWrapper id="mi-prode-container">
       <BannerTitle align="center">PREDICCIONES</BannerTitle>
 
-      {userGroupList.length > 0 ? (
-        <GroupSelector
-          isLoading={isLoading}
-          selectedUserGroup={selectedUserGroup}
-          userGroupList={userGroupList}
-          handleGroupSelect={handleGroupSelect}
-        />
-      ) : (
+      {userGroupList.length === 0 && (
         <>
           {isLoading && <Spinner />}
           {!isLoading && (
@@ -60,6 +54,14 @@ function PredictionsPage() {
             </Text>
           )}
         </>
+      )}
+      {userGroupList.length > 1 && (
+        <GroupSelector
+          isLoading={isLoading}
+          selectedUserGroup={selectedUserGroup}
+          userGroupList={userGroupList}
+          handleGroupSelect={handleGroupSelect}
+        />
       )}
 
       {userGroupList.length > 0 && (

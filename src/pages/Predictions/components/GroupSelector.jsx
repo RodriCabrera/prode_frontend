@@ -12,6 +12,7 @@ const GroupsListWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 export function GroupSelector({
   isLoading,
   selectedUserGroup,
@@ -21,33 +22,37 @@ export function GroupSelector({
   const isMobile = useIsMobile();
   return (
     <>
-      <Text size="1.4rem">Seleccioná un grupo:</Text>
-      <GroupsListWrapper>
-        <ListWrapper>
-          {userGroupList?.map((userGroup) => {
-            const isSelected = selectedUserGroup?.id === userGroup.id;
+      {isLoading && <BallLoader />}
+      {userGroupList.length > 1 && (
+        <>
+          <Text size="1.4rem">Seleccioná un grupo:</Text>
+          <GroupsListWrapper>
+            <ListWrapper>
+              {userGroupList?.map((userGroup) => {
+                const isSelected = selectedUserGroup?.id === userGroup.id;
 
-            return (
-              <ListElement
-                key={userGroup.id}
-                avatar={
-                  isSelected ? (
-                    <HiCheck size="1.8rem" />
-                  ) : (
-                    <HiOutlineUserGroup size="1.8rem" />
-                  )
-                }
-                bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}
-                isMobile={isMobile}
-              >
-                <Text weight="600">{userGroup.name.toUpperCase()}</Text>
-              </ListElement>
-            );
-          })}
-        </ListWrapper>
-        {isLoading && <BallLoader />}
-      </GroupsListWrapper>
+                return (
+                  <ListElement
+                    key={userGroup.id}
+                    avatar={
+                      isSelected ? (
+                        <HiCheck size="1.8rem" />
+                      ) : (
+                        <HiOutlineUserGroup size="1.8rem" />
+                      )
+                    }
+                    bgColor={isSelected && 'green'}
+                    onClick={() => handleGroupSelect(userGroup)}
+                    isMobile={isMobile}
+                  >
+                    <Text weight="600">{userGroup.name.toUpperCase()}</Text>
+                  </ListElement>
+                );
+              })}
+            </ListWrapper>
+          </GroupsListWrapper>
+        </>
+      )}
     </>
   );
 }
