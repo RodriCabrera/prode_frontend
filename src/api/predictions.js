@@ -34,6 +34,10 @@ export const getPredictions = (userGroupId = '', stage = '', signal) => {
   );
 };
 
+export const getPredictionCount = (signal) => {
+  return withCredentials.get('/predictions/length', { signal });
+}
+
 export const getPredictionCompletePercentage = (userGroupId = '', signal) => {
   return withCredentials.get(
     `/predictions/percentage?userGroupId=${userGroupId}`,
