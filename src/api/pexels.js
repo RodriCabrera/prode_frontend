@@ -1,10 +1,14 @@
-import { pexelsAuth } from './instances';
+import axios from 'axios';
 
-export const getSoccerVideos = (signal) => {
-  return pexelsAuth.get(
-    'https://api.pexels.com/videos/search?query=nature&per_page=1',
-    {
-      signal,
-    }
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+export const getSoccerVideos = () => {
+  let page = getRandomArbitrary(1, 20);
+  return axios.get(
+    `https://api.pexels.com/videos/search?query=soccer&page=${page}`,
+    // eslint-disable-next-line no-undef
+    { headers: { Authorization: process.env.REACT_APP_PEXELS_API_KEY } }
   );
 };

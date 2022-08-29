@@ -1,18 +1,15 @@
-import styled from '@emotion/styled';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import { Text } from '../../../common/common.styles';
-import { keyframes } from '@emotion/react';
-import { LandingPageWrapper, LeftPlaceholder } from './LandingPage.styles';
+
+import { LandingPageContainer } from './LandingPage.styles';
+import LandingPageMain from './LandingPageMain';
+import LandingPageTeams from './LandingPageTeams';
 
 const LandingPage = () => {
   return (
-    <LandingPageWrapper id="landing-page-wrapper">
-      <LeftPlaceholder>
-        <Text size="4rem">Chumbazo</Text>
-      </LeftPlaceholder>
-      <Outlet />
-    </LandingPageWrapper>
+    <LandingPageContainer id="landing-page-container">
+      <LandingPageMain />
+      <LandingPageTeams />
+    </LandingPageContainer>
   );
 };
 
