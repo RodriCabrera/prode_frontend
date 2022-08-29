@@ -13,20 +13,39 @@ export const LandingPageContainer = styled.div`
     rgba(2, 8, 2, 1) 70%
   );
 `;
+
 export const LandingPageWrapper = styled.div`
   position: relative;
   display: flex;
   /* flex-direction: column; */
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   min-height: 100vh;
   width: 100%;
-  max-width: 1100px;
+  /* max-width: 1100px; */
+`;
+export const LPInfoContainer = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 70vh;
+  width: 100%;
+  gap: 1rem;
+`;
+export const LPInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
 `;
 export const LeftPlaceholder = styled.div`
   position: relative;
   max-width: 600px;
+  padding: 1rem;
 `;
 
 export const spin = keyframes`

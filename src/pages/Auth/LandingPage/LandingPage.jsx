@@ -2,13 +2,13 @@ import React from 'react';
 
 import { LandingPageContainer } from './LandingPage.styles';
 import LandingPageMain from './LandingPageMain';
-import LandingPageTeams from './LandingPageTeams';
+import LandingPageInfo from './LandingPageInfo';
 
 const LandingPage = () => {
   return (
     <LandingPageContainer id="landing-page-container">
       <LandingPageMain />
-      <LandingPageTeams />
+      <LandingPageInfo />
     </LandingPageContainer>
   );
 };
