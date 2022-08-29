@@ -60,7 +60,6 @@ function Login() {
   const isMobile = useIsMobile();
   return (
     // <CardContainer id="login-card-container">
-    // <div>
     <CardWrapper
       id="login-card-wrapper"
       isMobile={isMobile}
@@ -105,8 +104,6 @@ function Login() {
         Primera vez? Registrate
       </Button>
     </CardWrapper>
-    // </div>
-
     // </CardContainer>
   );
 }
