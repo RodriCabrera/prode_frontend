@@ -141,6 +141,7 @@ function PredictionManager() {
           {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
             // Form para NO fase grupos:
             <PredictionForm
+              dirty={dirty}
               resultsMode={resultsMode}
               handleSubmit={!resultsMode && handleSubmit}
               stageData={stageData}
@@ -151,6 +152,7 @@ function PredictionManager() {
           ) : (
             // Form para fase de grupos:
             <PredictionForm
+              dirty={dirty}
               groupNumber={groupNumber}
               handleSubmit={!resultsMode ? handleSubmit : undefined}
               stageData={stageData}
