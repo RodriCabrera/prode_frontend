@@ -33,7 +33,7 @@ function Groups() {
   }, []);
 
   return (
-    <>
+    <CardContainer>
       <CardWrapper border="none" isMobile={true}>
         <Text size="2.5rem" weight="500" align="center">
           GRUPOS
@@ -55,7 +55,7 @@ function Groups() {
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
       </CardContainer>
-    </>
+    </CardContainer>
   );
 }
 
