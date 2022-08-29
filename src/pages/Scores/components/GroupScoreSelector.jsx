@@ -8,33 +8,29 @@ export default function GroupScoreSelector({
   setScores,
   setIsLoadingScores,
 }) {
-  const [isLoading, setIsLoading] = useState(true);
   const [userGroup, setUserGroup] = useState(userGroupList[0]);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
-    getGroupScores(userGroup.name, signal)
+    getGroupScores(userGroup?.name, signal)
       .then((res) => {
         setScores(res);
       })
       .then(() => {
         setIsLoadingScores(false);
       })
-      .catch((err) => handleCancel(err))
-      .finally(() => setIsLoading(false));
+      .catch((err) => handleCancel(err));
     return cleanup;
   }, [userGroup]);
 
   const handleGroupSelect = (group) => {
     if (group.id === userGroup.id) return;
-    setIsLoading(true);
     setIsLoadingScores(true);
     setUserGroup(group);
   };
 
   return (
     <GroupSelector
-      isLoading={isLoading}
       selectedUserGroup={userGroup}
       userGroupList={userGroupList}
       handleGroupSelect={handleGroupSelect}

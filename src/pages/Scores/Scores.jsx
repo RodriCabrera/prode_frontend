@@ -1,34 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import ScoreList from './components/ScoreList';
 import GroupScoreSelector from './components/GroupScoreSelector';
-import { getUserGroups } from '../../api/groups';
-import useCleanupController from '../../hooks/useCleanupController';
+import { useGetUserGroupsData } from '../../hooks/useGetUserGroupsData';
 import { BallLoader } from '../../common/Spinner/BallLoader';
+import { isEmpty } from 'lodash';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingScores, setIsLoadingScores] = useState(false);
-  const [userGroupList, setUserGroupList] = useState([]);
-  const [signal, cleanup, handleCancel] = useCleanupController();
 
-  const loadUserGroups = () => {
-    setIsLoading(true);
-    getUserGroups(signal)
-      .then(({ data }) => {
-        setUserGroupList(data);
-      })
-      .catch((err) => handleCancel(err))
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    loadUserGroups();
-    return cleanup;
-  }, []);
+  const { userGroupList, selectedUserGroup, isLoadingUserGroupsData } =
+    useGetUserGroupsData();
 
   return (
     <CardContainer>
@@ -36,22 +19,23 @@ function Scores() {
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>
-        {isLoading ? (
+        {isLoadingUserGroupsData && <BallLoader />}
+        {!isLoadingUserGroupsData && userGroupList.length === 0 && (
+          <Text>No estás en ningún grupo</Text>
+        )}
+        {!isLoadingUserGroupsData && userGroupList.length > 0 && (
+          <GroupScoreSelector
+            userGroupList={userGroupList}
+            setScores={setScores}
+            setIsLoadingScores={setIsLoadingScores}
+          />
+        )}
+
+        {(selectedUserGroup && isEmpty(scores)) || isLoadingScores ? (
           <BallLoader />
         ) : (
-          <>
-            {userGroupList.length === 0 ? (
-              <Text>No estás en ningún grupo</Text>
-            ) : (
-              <GroupScoreSelector
-                userGroupList={userGroupList}
-                setScores={setScores}
-                setIsLoadingScores={setIsLoadingScores}
-              />
-            )}
-          </>
+          <ScoreList scores={scores} />
         )}
-        {!isLoadingScores && <ScoreList scores={scores} />}
       </CardWrapper>
     </CardContainer>
   );

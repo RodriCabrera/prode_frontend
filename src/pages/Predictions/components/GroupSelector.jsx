@@ -3,7 +3,6 @@ import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
 import { Text } from '../../../common/common.styles';
 import { ListElement } from '../../../common/Lists/ListElement';
 import { ListWrapper } from '../../../common/Lists/Lists.styles';
-import { BallLoader } from '../../../common/Spinner/BallLoader';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 
 const GroupsListWrapper = styled.div`
@@ -14,7 +13,6 @@ const GroupsListWrapper = styled.div`
 `;
 
 export function GroupSelector({
-  isLoading,
   selectedUserGroup,
   userGroupList,
   handleGroupSelect,
@@ -22,7 +20,6 @@ export function GroupSelector({
   const isMobile = useIsMobile();
   return (
     <>
-      {isLoading && <BallLoader />}
       {userGroupList.length > 1 && (
         <>
           <Text size="1.4rem">Seleccioná un grupo:</Text>
