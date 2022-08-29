@@ -39,7 +39,7 @@ export default function QuickPrediction() {
   }, []);
 
   if (noMatchsOrGroups) return null;
-
+  if (isLoading) return null;
   return (
     <CardContainer>
       <CardWrapper isMobile={isMobile}>

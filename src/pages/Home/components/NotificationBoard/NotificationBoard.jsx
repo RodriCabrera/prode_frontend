@@ -1,19 +1,17 @@
-import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { getPredictionCount } from '../../../../api/predictions';
 import { CardContainer, CardWrapper } from '../../../../common/common.styles';
 import { Spinner } from '../../../../common/Spinner/Spinner';
 import { NoPredictionNotification } from './NoPredictionNotification';
 import useCleanupController from '../../../../hooks/useCleanupController';
+import { NoGroupNotification } from './NoGroupNotification';
+import { useGetUserGroupsData } from '../../../../hooks/useGetUserGroupsData';
 
 function NotificationBoard() {
   const [hasPredictions, setHasPredictions] = useState(false);
-  // const [loadingCheck, setloadingCheck] = useState({
-  //   predictions: false,
-  //   fixture: false,
-  // });
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { userGroupList, isLoadingUserGroupsData } = useGetUserGroupsData();
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,23 +19,23 @@ function NotificationBoard() {
       .then((res) => res.data?.userPredictions > 0 && setHasPredictions(true))
       .catch((err) => handleCancel(err))
       .finally(() => {
-        setIsLoading(false)
+        setIsLoading(false);
       });
     return cleanup;
   }, []);
 
   function renderBoards() {
-    // TODO: Implementar esta situación
     // NO GROUP - NO PREDICTIONS:
-    // <NoGroupNotification />;
-    // YES GROUPS - NO PREDICTIONS:
-    if (!isLoading && !hasPredictions) {
-      return <NoPredictionNotification />;
+    if (!isLoadingUserGroupsData && userGroupList.length === 0) {
+      return <NoGroupNotification />;
     }
-
-    return <Spinner />;
+    // YES GROUPS - NO PREDICTIONS:
+    else if (!isLoading && !hasPredictions) {
+      return <NoPredictionNotification />;
+    } else return <Spinner />;
   }
 
+  // YES GROUP - YES PREDICTION:
   if (hasPredictions && !isLoading) return null;
 
   return (

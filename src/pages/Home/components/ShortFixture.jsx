@@ -1,12 +1,19 @@
+import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { getFixtureByStageId } from '../../../api/fixture';
-import { CardTitle } from '../../../common/common.styles';
+import { CardTitle, CardWrapper } from '../../../common/common.styles';
 import useCleanupController from '../../../hooks/useCleanupController';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 import FixtureTable from '../../FixturePage/components/FixtureTable';
+
+const ShortFixtureCardWrapper = styled(CardWrapper)`
+  min-height: 500px;
+`;
 
 const ShortFixture = () => {
   const [data, setData] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     getFixtureByStageId('GRUPOS', signal)
@@ -23,7 +30,10 @@ const ShortFixture = () => {
   }, []);
 
   return (
-    <div>
+    <ShortFixtureCardWrapper
+      border={isMobile ? 'none' : undefined}
+      isMobile={isMobile}
+    >
       <CardTitle>Próximos partidos:</CardTitle>
       {data ? (
         <FixtureTable
@@ -33,9 +43,9 @@ const ShortFixture = () => {
           fullWidth
         />
       ) : (
-        <div>ASJHDGAHGSDGFAHGSDFAHGSDFAHGFSD</div>
+        <div>Loading data...</div>
       )}
-    </div>
+    </ShortFixtureCardWrapper>
   );
 };
 

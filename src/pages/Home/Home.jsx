@@ -2,13 +2,10 @@ import styled from '@emotion/styled';
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
-import { CardWrapper } from '../../common/common.styles';
 import LeaderBoard from './components//LeaderBoard/LeaderBoard';
 import Countdown from './components/Countdown';
-import { HomeGroups } from './components/HomeGroups';
 import NotificationBoard from './components/NotificationBoard/NotificationBoard';
 import QuickPrediction from './components/QuickPredictions/QuickPrediction';
-import { useIsMobile } from '../../hooks/useIsMobile';
 import ShortFixture from './components/ShortFixture';
 
 const PageWrapper = styled.div`
@@ -29,7 +26,6 @@ const Row = styled.div`
 function Home() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     let subscribed = true;
@@ -45,10 +41,7 @@ function Home() {
       <Countdown />
       <NotificationBoard id="notification-board" />
       <Row>
-        <HomeGroups />
-        <CardWrapper border={isMobile ? 'none' : undefined} isMobile={isMobile}>
-          <ShortFixture />
-        </CardWrapper>
+        <ShortFixture />
         <LeaderBoard />
         <QuickPrediction />
       </Row>

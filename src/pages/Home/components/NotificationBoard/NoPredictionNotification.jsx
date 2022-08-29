@@ -5,10 +5,10 @@ import { Text } from '../../../../common/common.styles';
 export function NoPredictionNotification() {
   return (
     <>
-      <Text>Aún no hiciste ninguna predicción.</Text>
+      <Text size="2rem">Aún no hiciste ninguna predicción.</Text>
       <Text>
         {' '}
-        Hacelo desde <Link to="/predictions/edit?mode=edit">esta sección</Link>
+        Hacelas desde <Link to="/predictions/">esta sección</Link>
       </Text>
     </>
   );

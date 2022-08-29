@@ -13,9 +13,11 @@ const GroupsListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-
+// !
+// !
 // ! ESTE COMPONENTE NO SE ESTA USANDO
-
+// !
+// !
 function EditPredictions() {
   const [userGroupList, setUserGroupList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +61,8 @@ function EditPredictions() {
                   )
                 }
                 bgColor={isSelected && 'green'}
-                onClick={() => handleGroupSelect(userGroup)}>
+                onClick={() => handleGroupSelect(userGroup)}
+              >
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>
               </ListElement>
             );
