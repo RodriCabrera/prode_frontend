@@ -7,7 +7,6 @@ import { loginUser } from '../../api/auth';
 import { AuthContext } from '../../common/AuthProvider';
 import {
   Button,
-  CardContainer,
   CardTitle,
   CardWrapper,
   Input,
@@ -17,7 +16,7 @@ import {
 } from '../../common/common.styles';
 import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
 import { authSchema } from '../../validationSchemas/auth';
-
+import { useIsMobile } from '../../hooks/useIsMobile';
 function Login() {
   const userContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,50 +57,54 @@ function Login() {
       }
     );
   };
-
+  const isMobile = useIsMobile();
   return (
-    <CardContainer id="login-card-container">
-      <CardWrapper id="login-card-wrapper">
-        <CardTitle>Login</CardTitle>
-        <Form onSubmit={handleSubmit}>
-          <Label htmlFor="email">
-            <Text color={errors.email ? 'orange' : ''}>
-              {errors.email ? errors.email : 'Email:'}
-            </Text>
-            <Input
-              type="email"
-              placeholder="Email"
-              name="email"
-              required
-              value={values.email}
-              onChange={handleChange}
-            />
-          </Label>
+    // <CardContainer id="login-card-container">
+    <CardWrapper
+      id="login-card-wrapper"
+      isMobile={isMobile}
+      border={isMobile ? 'null' : ''}
+    >
+      <CardTitle>Login</CardTitle>
+      <Form onSubmit={handleSubmit}>
+        <Label htmlFor="email">
+          <Text color={errors.email ? 'orange' : ''}>
+            {errors.email ? errors.email : 'Email:'}
+          </Text>
+          <Input
+            type="email"
+            placeholder="Email"
+            name="email"
+            required
+            value={values.email}
+            onChange={handleChange}
+          />
+        </Label>
 
-          <Label htmlFor="password">
-            <Text color={errors.password ? 'orange' : ''}>
-              {errors.password ? errors.password : 'Password:'}
-            </Text>
-            <Input
-              type="password"
-              name="password"
-              required
-              placeholder="Al menos 6 caracteres"
-              value={values.password}
-              onChange={handleChange}
-            />
-          </Label>
-          <Button type="submit" disabled={!isEmpty(errors) || isLoading}>
-            LOGIN
-          </Button>
-          <GoogleAuth text="Login" />
-          <Link to="forgot-password">Olvidé mi contraseña</Link>
-        </Form>
-        <Button grayscale padding="8px" onClick={() => navigate('register')}>
-          Primera vez? Registrate
+        <Label htmlFor="password">
+          <Text color={errors.password ? 'orange' : ''}>
+            {errors.password ? errors.password : 'Password:'}
+          </Text>
+          <Input
+            type="password"
+            name="password"
+            required
+            placeholder="Al menos 6 caracteres"
+            value={values.password}
+            onChange={handleChange}
+          />
+        </Label>
+        <Button type="submit" disabled={!isEmpty(errors) || isLoading}>
+          LOGIN
         </Button>
-      </CardWrapper>
-    </CardContainer>
+        <GoogleAuth text="Login" />
+        <Link to="forgot-password">Olvidé mi contraseña</Link>
+      </Form>
+      <Button grayscale padding="8px" onClick={() => navigate('register')}>
+        Primera vez? Registrate
+      </Button>
+    </CardWrapper>
+    // </CardContainer>
   );
 }
 
