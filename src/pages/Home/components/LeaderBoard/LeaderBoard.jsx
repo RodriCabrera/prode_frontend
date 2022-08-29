@@ -1,17 +1,15 @@
-import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
 import Leader from './Leader';
 import { getUserGroups } from '../../../../api/groups';
 import useCleanupController from '../../../../hooks/useCleanupController';
-import { CardTitle } from '../../../../common/common.styles';
-const LeaderBoardWrapper = styled.div`
-  /* width: 100%; */
-`;
+import { CardTitle, CardWrapper } from '../../../../common/common.styles';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 
 function LeaderBoard() {
-  const [userGroups, setUserGroups] = useState();
+  const [userGroups, setUserGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,8 +22,10 @@ function LeaderBoard() {
     return cleanup;
   }, []);
 
+  if (userGroups?.length === 0) return;
+
   return (
-    <LeaderBoardWrapper id="leaderboard-wrapper">
+    <CardWrapper isMobile={isMobile} border={isMobile ? 'none' : undefined}>
       <CardTitle>
         {userGroups?.length > 1 ? 'Punteros por grupo' : 'Puntero del grupo'}
       </CardTitle>
@@ -40,7 +40,7 @@ function LeaderBoard() {
           />
         ))
       )}
-    </LeaderBoardWrapper>
+    </CardWrapper>
   );
 }
 

@@ -49,9 +49,7 @@ function Home() {
         <CardWrapper border={isMobile ? 'none' : undefined} isMobile={isMobile}>
           <ShortFixture />
         </CardWrapper>
-        <CardWrapper isMobile={isMobile} border={isMobile ? 'none' : undefined}>
-          <LeaderBoard />
-        </CardWrapper>
+        <LeaderBoard />
         <QuickPrediction />
       </Row>
     </PageWrapper>
