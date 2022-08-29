@@ -11,7 +11,6 @@ import {
   Text,
   CardContainer,
   Button,
-  CardWrapper,
   CardTitle,
 } from '../../../common/common.styles';
 import LeaveGroupForm from './LeaveGroupForm';
@@ -38,7 +37,7 @@ function InGroup({ groupData }) {
       .then((res) => {
         setGroupScoresData(res.data);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
@@ -55,45 +54,51 @@ function InGroup({ groupData }) {
   };
 
   return (
-    <CardContainer>
-      <CardWrapper>
-        <GoBackButton />
-        <CardTitle size="2.5rem" align="center">
-          {groupData?.name}
-        </CardTitle>
-        <GroupRules rules={groupData?.rules} />
-        {isLoading && <Spinner />}
-        {groupScoresData.group && (
-          <>
-            <Text size="1.5rem">Admin: {groupScoresData.group.owner}</Text>
-            <Text size="1.5rem">Miembros del grupo:</Text>
-            {isEmpty(groupScoresData)
-              ? 'Loading member scores...'
-              : groupScoresData.scores?.map((score) => (
-                <ListElement
-                  onClick={() => handleUserClick(score.user)}
-                  key={score.user}
-                  avatar={
-                    <UserMiniAvatar avatar={score.avatar} name={score.user} />
-                  }
-                  isMobile={isMobile}
-                >
-                  <Text>{`${score.user} : ${score.score} pts`}</Text>
-                </ListElement>
-              ))}
-            <GroupInvite />
-            <CardContainer>
-              <Button grayscale onClick={toggleModal}>
-                Salir del grupo?
-              </Button>
-            </CardContainer>
-            <Modal show={showModal} toggle={toggleModal}>
-              <LeaveGroupForm updater={onGroupExit} />
-            </Modal>
-          </>
-        )}
-      </CardWrapper>
-    </CardContainer>
+    <>
+      <GoBackButton />
+      <CardTitle size="2.5rem" align="center">
+        {groupData?.name}
+      </CardTitle>
+      <GroupRules rules={groupData?.rules} />
+      {isLoading && <Spinner />}
+      {groupScoresData.group && (
+        <>
+          {/* <Text size="1.5rem">Admin: {groupScoresData.group.owner}</Text> */}
+          <Text size="1.5rem">Miembros del grupo:</Text>
+          <Text size=".8rem" weight={100}>
+            (👑 es admin)
+          </Text>
+          {isEmpty(groupScoresData)
+            ? 'Loading member scores...'
+            : groupScoresData.scores?.map((score) => {
+                const isAdmin = score.user === groupScoresData.group.owner;
+                return (
+                  <ListElement
+                    onClick={() => handleUserClick(score.user)}
+                    key={score.user}
+                    avatar={
+                      <UserMiniAvatar avatar={score.avatar} name={score.user} />
+                    }
+                    isMobile={isMobile}
+                  >
+                    <Text>{`${isAdmin ? '[👑]' : ''} ${score.user} : ${
+                      score.score
+                    } pts`}</Text>
+                  </ListElement>
+                );
+              })}
+          <GroupInvite />
+          <CardContainer>
+            <Button grayscale onClick={toggleModal}>
+              Salir del grupo?
+            </Button>
+          </CardContainer>
+          <Modal show={showModal} toggle={toggleModal}>
+            <LeaveGroupForm updater={onGroupExit} />
+          </Modal>
+        </>
+      )}
+    </>
   );
 }
 

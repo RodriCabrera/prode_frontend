@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import styled from '@emotion/styled';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
-import { logoutUser } from '../../api/auth';
 import useToggleModal from '../../hooks/useToggleModal';
 import { Linkbar } from '../Linkbar/Linkbar';
 import Modal from '../Modal/Modal';

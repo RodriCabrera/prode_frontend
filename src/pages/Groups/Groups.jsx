@@ -20,7 +20,7 @@ function Groups() {
         setGroupList(data);
       })
       .catch((error) => {
-        handleCancel(error) || console.error(error);
+        handleCancel(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -34,17 +34,15 @@ function Groups() {
 
   return (
     <>
-      <CardContainer>
-        <CardWrapper border="none">
-          <Text size="2.5rem" weight="500" align="center">
-            GRUPOS
-          </Text>
-          {!isEmpty(groupList) && (
-            <Text size="1.5rem">Grupos en los que estás participando: </Text>
-          )}
-          {isLoading ? <BallLoader /> : <GroupList groups={groupList} />}
-        </CardWrapper>
-      </CardContainer>
+      <CardWrapper border="none" isMobile={true}>
+        <Text size="2.5rem" weight="500" align="center">
+          GRUPOS
+        </Text>
+        {!isEmpty(groupList) && (
+          <Text size="1.5rem">Grupos en los que estás participando: </Text>
+        )}
+        {isLoading ? <BallLoader /> : <GroupList groups={groupList} />}
+      </CardWrapper>
 
       <CardContainer>
         <CardWrapper>
