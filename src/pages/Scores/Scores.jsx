@@ -3,13 +3,13 @@ import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
 import ScoreList from './components/ScoreList';
 import GroupScoreSelector from './components/GroupScoreSelector';
 import { getUserGroups } from '../../api/groups';
-import { Spinner } from '../../common/Spinner/Spinner';
 import useCleanupController from '../../hooks/useCleanupController';
+import { BallLoader } from '../../common/Spinner/BallLoader';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingScores, setIsLoadingScores] = useState(false)
+  const [isLoadingScores, setIsLoadingScores] = useState(false);
   const [userGroupList, setUserGroupList] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
@@ -37,7 +37,7 @@ function Scores() {
           PUNTAJES
         </Text>
         {isLoading ? (
-          <Spinner />
+          <BallLoader />
         ) : (
           <>
             {userGroupList.length === 0 ? (
@@ -51,7 +51,7 @@ function Scores() {
             )}
           </>
         )}
-        {!isLoadingScores && <ScoreList scores={scores} /> }
+        {!isLoadingScores && <ScoreList scores={scores} />}
       </CardWrapper>
     </CardContainer>
   );
