@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../common/AuthProvider';
 import { Button } from '../../common/common.styles';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import LeaderBoard from './components//LeaderBoard/LeaderBoard';
 import NotificationBoard from './components/NotificationBoard/NotificationBoard';
 import QuickPrediction from './components/QuickPredictions/QuickPrediction';
@@ -32,7 +33,10 @@ const Row = styled.div`
 `;
 
 function Home() {
-  const [openSection, setOpenSection] = useState('fixture');
+  const isMobile = useIsMobile();
+  const [shownSections, setShownSection] = useState(
+    isMobile ? [] : ['fixture', 'leaders', 'quick']
+  );
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -45,39 +49,43 @@ function Home() {
     return () => (subscribed = false);
   }, [userContext]);
 
+  const renderButton = (section) => {
+    const buttonText = () => {
+      if (section === 'fixture') return 'Próximos partidos';
+      if (section === 'leaders') return 'Ranking de usuarios';
+      if (section === 'quick') return 'Predicción al paso';
+    };
+    const handleClick = () => {
+      if (shownSections.includes(section)) {
+        setShownSection([]);
+      } else setShownSection([section]);
+    };
+    return (
+      <Button
+        tertiary={isMobile && shownSections.includes(section)}
+        width="334px"
+        onClick={handleClick}
+      >
+        {buttonText()}
+      </Button>
+    );
+  };
+
   return (
     <PageWrapper>
       <NotificationBoard id="notification-board" />
       <Row>
         <Column>
-          <Button
-            tertiary={openSection === 'fixture'}
-            width="334px"
-            onClick={() => setOpenSection('fixture')}
-          >
-            Próximos partidos
-          </Button>
-          {openSection === 'fixture' && <ShortFixture />}
+          {isMobile && renderButton('fixture')}
+          {shownSections.includes('fixture') && <ShortFixture />}
         </Column>
         <Column>
-          <Button
-            tertiary={openSection === 'leaders'}
-            width="334px"
-            onClick={() => setOpenSection('leaders')}
-          >
-            Punteros de grupo
-          </Button>
-          {openSection === 'leaders' && <LeaderBoard />}
+          {isMobile && renderButton('leaders')}
+          {shownSections.includes('leaders') && <LeaderBoard />}
         </Column>
         <Column>
-          <Button
-            tertiary={openSection === 'quick'}
-            width="334px"
-            onClick={() => setOpenSection('quick')}
-          >
-            Predicción al paso
-          </Button>
-          {openSection === 'quick' && <QuickPrediction />}
+          {isMobile && renderButton('quick')}
+          {shownSections.includes('quick') && <QuickPrediction />}
         </Column>
       </Row>
     </PageWrapper>
