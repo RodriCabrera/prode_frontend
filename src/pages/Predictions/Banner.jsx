@@ -36,13 +36,14 @@ export function Banner({
 
   return (
     <BannerButton
+      padding="8px 16px"
       disabled={!disabled}
       onClick={() => navigate(path)}
       tertiary={editMode && disabled}
-      grayscale={!disabled}>
+      grayscale={!disabled}
+    >
       <BannerDataWrapper>
         <BannerTitle>{title}</BannerTitle>
-        <p>Ver/Editar</p>
       </BannerDataWrapper>
       {renderPercentageInfo()}
     </BannerButton>
