@@ -67,7 +67,6 @@ export function PredictionForm(props) {
                 match.status === 0
                   ? checkPredictionResult(
                       data,
-                      // groupNumberMod(groupNumber),
                       match.id,
                       'away',
                       values[`${match.id}-away`],
@@ -108,17 +107,6 @@ export function PredictionForm(props) {
               };
               return (
                 <React.Fragment key={match.id}>
-                  <Table.Row>
-                    {/* <Table.Cell
-                      colSpan="6"
-                      withBottomBorder
-                      fontWeight="500"
-                      fontSize="1.2rem"
-                      padding="5px"
-                    >
-                      {parseDate(match.date)}
-                    </Table.Cell> */}
-                  </Table.Row>
                   <Table.Row>
                     <Table.Cell padding="1rem 0" margin="0 0 0 1rem">
                       {getFlagUrl(match.away?.flag, 1)}
@@ -198,7 +186,6 @@ export function PredictionForm(props) {
             <Button
               grayscale
               onClick={handlePrevGroup}
-              // disabled={groupNumber === 0}
               type="reset"
               width="100%"
             >
