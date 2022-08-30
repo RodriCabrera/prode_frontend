@@ -19,20 +19,13 @@ const calculateTimeLeft = () => {
   return timeLeft;
 };
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 1rem;
-`;
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-around;
-  max-width: 500px;
+  max-width: 400px;
   flex-wrap: wrap;
+  margin-top: 1rem;
 `;
 const Block = styled.div`
   display: flex;
@@ -62,27 +55,24 @@ function Countdown() {
   });
 
   return timeLeft.days > 0 ? (
-    <Container>
-      <Text size="2rem">FALTAN:</Text>
-      <Wrapper>
-        <Block>
-          <Count>{timeLeft.days}</Count>
-          <Detail>D </Detail>
-        </Block>
-        <Block>
-          <Count>{timeLeft.hours}</Count>
-          <Detail>H</Detail>
-        </Block>
-        <Block>
-          <Count>{timeLeft.minutes}</Count>
-          <Detail>M</Detail>
-        </Block>
-        <Block>
-          <Count>{timeLeft.seconds}</Count>
-          <Detail>S</Detail>
-        </Block>
-      </Wrapper>
-    </Container>
+    <Wrapper>
+      <Block>
+        <Count>{timeLeft.days}</Count>
+        <Detail>D </Detail>
+      </Block>
+      <Block>
+        <Count>{timeLeft.hours}</Count>
+        <Detail>H</Detail>
+      </Block>
+      <Block>
+        <Count>{timeLeft.minutes}</Count>
+        <Detail>M</Detail>
+      </Block>
+      <Block>
+        <Count>{timeLeft.seconds}</Count>
+        <Detail>S</Detail>
+      </Block>
+    </Wrapper>
   ) : (
     ''
   );

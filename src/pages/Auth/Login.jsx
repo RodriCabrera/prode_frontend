@@ -65,7 +65,7 @@ function Login() {
       isMobile={isMobile}
       border={isMobile ? 'null' : ''}
     >
-      <CardTitle>Login</CardTitle>
+      {!isMobile && <CardTitle>Login</CardTitle>}
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="email">
           <Text color={errors.email ? 'orange' : ''}>

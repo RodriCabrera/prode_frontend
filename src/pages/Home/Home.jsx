@@ -38,7 +38,7 @@ function Home() {
 
   return (
     <PageWrapper>
-      <Countdown />
+      {/* <Countdown /> */}
       <NotificationBoard id="notification-board" />
       <Row>
         <ShortFixture />

@@ -17,14 +17,13 @@ export const LandingPageContainer = styled.div`
 export const LandingPageWrapper = styled.div`
   position: relative;
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   min-height: 100vh;
   width: 100%;
-  /* max-width: 1100px; */
 `;
+
 export const LPInfoContainer = styled.div`
   display: flex;
   align-content: center;
@@ -34,6 +33,7 @@ export const LPInfoContainer = styled.div`
   width: 100%;
   gap: 1rem;
 `;
+
 export const LPInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,10 +42,14 @@ export const LPInfoWrapper = styled.div`
   gap: 1rem;
   padding: 2rem;
 `;
+
 export const LeftPlaceholder = styled.div`
   position: relative;
   max-width: 600px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
 
 export const spin = keyframes`
@@ -70,6 +74,7 @@ export const spin = keyframes`
   )
   }
 `;
+
 export const VideoBg = styled.video`
   position: absolute;
   z-index: -1;

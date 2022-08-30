@@ -58,7 +58,7 @@ function Navbar() {
           <ButtonGroup
             id="button-group-left"
             onClick={() => navigate('/')}
-            padding=".5rem 2rem"
+            padding=".5rem 16px"
           >
             <LogoContainer>
               <Text weight="800" color="tomato" size="2rem">

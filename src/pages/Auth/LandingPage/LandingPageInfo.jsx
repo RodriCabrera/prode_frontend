@@ -16,7 +16,10 @@ const LandingPageInfo = () => {
         </Text>
         <Text size={isMobile ? '.8rem' : '1.2rem'} weight="600">
           Al crear un grupo podés elegir el sistema de puntajes por partido
-          acertado y las fechas topes para predecir
+          acertado.
+        </Text>
+        <Text size={isMobile ? '.8rem' : '1.2rem'} weight="600">
+          Definí el tiempo límite para predecir
         </Text>
         <Text size={isMobile ? '1rem' : '1.5rem'} weight="600" color="tomato">
           ⚽️ Unite a un grupo existente con 1 solo click.

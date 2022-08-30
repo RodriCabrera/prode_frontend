@@ -8,6 +8,7 @@ import {
   VideoBg,
 } from './LandingPage.styles';
 import { getSoccerVideos } from '../../../api/pexels';
+import Countdown from '../../Home/components/Countdown';
 
 const LandingPageMain = () => {
   const [video, setVideo] = useState();
@@ -29,8 +30,11 @@ const LandingPageMain = () => {
         <Text size={isMobile ? '3rem' : '4rem'} weight="800">
           Armá un prode con quien quieras. Predecí. Ganá.
         </Text>
+        <Countdown />
       </LeftPlaceholder>
-      <Outlet />
+      <div style={{ marginRight: '2rem' }}>
+        <Outlet />
+      </div>
       <VideoBg autoPlay loop muted src={video} type="video/mp4" poster="30" />
     </LandingPageWrapper>
   );
