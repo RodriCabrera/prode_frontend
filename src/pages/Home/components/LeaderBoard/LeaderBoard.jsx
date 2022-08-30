@@ -29,9 +29,7 @@ const LeaderBoard = () => {
       border={isMobile ? 'none' : undefined}
       minHeight="300px"
     >
-      <CardTitle>
-        {userGroups?.length > 1 ? 'Punteros por grupo' : 'Puntero del grupo'}
-      </CardTitle>
+      <CardTitle>Ranking de usuarios</CardTitle>
       {isLoading || !userGroups ? (
         <BallLoader />
       ) : (
