@@ -131,14 +131,7 @@ function PredictionManager() {
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
-      {resultsMode && selectedUserGroup && (
-        <References
-          green="Acertaste resultado"
-          red="No suma"
-          yellow="Acertaste ganador"
-          gray="No evaluado"
-        />
-      )}
+
       {selectedUserGroup ? (
         <>
           {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
@@ -183,6 +176,14 @@ function PredictionManager() {
         <Text size="1.5rem" weight="800" align="center" color="tomato">
           NO ELEGISTE NINGUN GRUPO
         </Text>
+      )}
+      {resultsMode && selectedUserGroup && (
+        <References
+          green="Acertaste resultado"
+          red="No suma"
+          yellow="Acertaste ganador"
+          gray="No evaluado"
+        />
       )}
       <Modal show={showModal} toggle={toggleModal}>
         <CardTitle>Continuar sin enviar predicciones?</CardTitle>
