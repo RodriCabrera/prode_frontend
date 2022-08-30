@@ -25,8 +25,7 @@ const LeaderBoard = () => {
 
   return (
     <CardWrapper
-      isMobile={isMobile}
-      width="300px"
+      width="290px"
       border={isMobile ? 'none' : undefined}
       minHeight="300px"
     >

@@ -38,10 +38,10 @@ export default function QuickPrediction() {
     return cleanup;
   }, []);
 
-  if (noMatchsOrGroups) return null;
+  // if (noMatchsOrGroups) return null;
   return (
     <CardContainer>
-      <CardWrapper isMobile={isMobile} width="300px" minHeight="200px">
+      <CardWrapper width="300px" minHeight="200px">
         <Text size="1.5rem" align="center">
           Predicción al paso
         </Text>
@@ -67,6 +67,11 @@ export default function QuickPrediction() {
               />
             )}
           </>
+        )}
+        {!isLoading && noMatchsOrGroups && (
+          <Text align="center" weight="600" color="gray" margin="2rem 0">
+            No hay predicciones pendientes
+          </Text>
         )}
       </CardWrapper>
     </CardContainer>

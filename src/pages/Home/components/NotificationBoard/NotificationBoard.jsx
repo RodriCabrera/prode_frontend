@@ -32,7 +32,7 @@ function NotificationBoard() {
     // YES GROUPS - NO PREDICTIONS:
     else if (!isLoading && !hasPredictions) {
       return <NoPredictionNotification />;
-    } else return <Spinner />;
+    } else return null;
   }
 
   // YES GROUP - YES PREDICTION:
