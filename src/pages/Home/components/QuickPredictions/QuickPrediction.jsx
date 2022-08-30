@@ -9,7 +9,7 @@ import {
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
 import MiniForm from './MiniForm';
-import { Spinner } from '../../../../common/Spinner/Spinner';
+import { BallLoader } from '../../../../common/Spinner/BallLoader';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import useCleanupController from '../../../../hooks/useCleanupController';
 
@@ -39,15 +39,14 @@ export default function QuickPrediction() {
   }, []);
 
   if (noMatchsOrGroups) return null;
-  if (isLoading) return null;
   return (
     <CardContainer>
-      <CardWrapper isMobile={isMobile}>
+      <CardWrapper isMobile={isMobile} width="300px" minHeight="200px">
         <Text size="1.5rem" align="center">
           Predicción al paso
         </Text>
         {isLoading ? (
-          <Spinner />
+          <BallLoader />
         ) : (
           <>
             {groupData.name && (

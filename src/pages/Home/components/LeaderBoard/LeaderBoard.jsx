@@ -4,8 +4,9 @@ import { getUserGroups } from '../../../../api/groups';
 import useCleanupController from '../../../../hooks/useCleanupController';
 import { CardTitle, CardWrapper } from '../../../../common/common.styles';
 import { useIsMobile } from '../../../../hooks/useIsMobile';
+import { BallLoader } from '../../../../common/Spinner/BallLoader';
 
-function LeaderBoard() {
+const LeaderBoard = () => {
   const [userGroups, setUserGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
@@ -22,15 +23,18 @@ function LeaderBoard() {
     return cleanup;
   }, []);
 
-  if (userGroups?.length === 0) return;
-
   return (
-    <CardWrapper isMobile={isMobile} border={isMobile ? 'none' : undefined}>
+    <CardWrapper
+      isMobile={isMobile}
+      width="300px"
+      border={isMobile ? 'none' : undefined}
+      minHeight="300px"
+    >
       <CardTitle>
         {userGroups?.length > 1 ? 'Punteros por grupo' : 'Puntero del grupo'}
       </CardTitle>
       {isLoading || !userGroups ? (
-        <div>Loading leaderboard...</div>
+        <BallLoader />
       ) : (
         userGroups.map((group) => (
           <Leader
@@ -42,6 +46,6 @@ function LeaderBoard() {
       )}
     </CardWrapper>
   );
-}
+};
 
 export default LeaderBoard;
