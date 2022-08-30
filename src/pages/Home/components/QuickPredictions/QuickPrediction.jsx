@@ -6,10 +6,10 @@ import {
   CardContainer,
   Text,
 } from '../../../../common/common.styles';
-import { HoverBaloon } from '../../../../common/Lists/Lists.styles';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
 import MiniForm from './MiniForm';
-import { Spinner } from '../../../../common/Spinner/Spinner';
+import { BallLoader } from '../../../../common/Spinner/BallLoader';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import useCleanupController from '../../../../hooks/useCleanupController';
 
@@ -20,6 +20,7 @@ export default function QuickPrediction() {
   const [noMatchsOrGroups, setMissingData] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const getMatchData = () => {
     setIsLoading(true);
@@ -37,16 +38,15 @@ export default function QuickPrediction() {
     return cleanup;
   }, []);
 
-  if (noMatchsOrGroups) return null;
-
+  // if (noMatchsOrGroups) return null;
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper width="300px" minHeight="200px">
         <Text size="1.5rem" align="center">
           Predicción al paso
         </Text>
         {isLoading ? (
-          <Spinner />
+          <BallLoader />
         ) : (
           <>
             {groupData.name && (
@@ -67,6 +67,11 @@ export default function QuickPrediction() {
               />
             )}
           </>
+        )}
+        {!isLoading && noMatchsOrGroups && (
+          <Text align="center" weight="600" color="gray" margin="2rem 0">
+            No hay predicciones pendientes
+          </Text>
         )}
       </CardWrapper>
     </CardContainer>

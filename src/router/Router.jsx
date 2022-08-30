@@ -19,6 +19,7 @@ function Router() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            <Route path="auth/*" element={<AuthRoutes />} />
             <Route path="/" element={<App />}>
               <Route index element={<Home />} />
               <Route path="groups" element={<Groups />} />
@@ -26,7 +27,6 @@ function Router() {
               <Route path="predictions/*" element={<PredictionsRoutes />} />
               <Route path="fixture" element={<Fixture />} />
               <Route path="scores" element={<Scores />} />
-              <Route path="auth/*" element={<AuthRoutes />} />
               <Route path="profile/*" element={<ProfileRoutes />} />
               <Route path="*" element={<NotFound />} />
             </Route>

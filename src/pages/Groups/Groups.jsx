@@ -6,7 +6,7 @@ import JoinGroupForm from './components/JoinGroupForm';
 import GroupList from './components/GroupList';
 import { getUserGroups } from '../../api/groups';
 import useCleanupController from '../../hooks/useCleanupController';
-import { BallLoader } from '../../common/Spinner/BallLoader';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 function Groups() {
   const [groupList, setGroupList] = useState([]);
@@ -20,7 +20,7 @@ function Groups() {
         setGroupList(data);
       })
       .catch((error) => {
-        handleCancel(error) || console.error(error);
+        handleCancel(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -33,18 +33,16 @@ function Groups() {
   }, []);
 
   return (
-    <>
-      <CardContainer>
-        <CardWrapper border="none">
-          <Text size="2.5rem" weight="500" align="center">
-            GRUPOS
-          </Text>
-          {!isEmpty(groupList) && (
-            <Text size="1.5rem">Grupos en los que estás participando: </Text>
-          )}
-          {isLoading ? <BallLoader /> : <GroupList groups={groupList} />}
-        </CardWrapper>
-      </CardContainer>
+    <CardContainer>
+      <CardWrapper border="none" isMobile={true}>
+        <Text size="2.5rem" weight="500" align="center">
+          GRUPOS
+        </Text>
+        {!isEmpty(groupList) && (
+          <Text size="1.5rem">Grupos en los que estás participando: </Text>
+        )}
+        {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
+      </CardWrapper>
 
       <CardContainer>
         <CardWrapper>
@@ -57,7 +55,7 @@ function Groups() {
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
       </CardContainer>
-    </>
+    </CardContainer>
   );
 }
 

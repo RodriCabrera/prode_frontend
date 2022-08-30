@@ -3,6 +3,7 @@ import { getUserGroups } from '../../../api/groups';
 import { Text } from '../../../common/common.styles';
 import useCleanupController from '../../../hooks/useCleanupController';
 
+// ! TODO: COMPONENTE EN DESUSO
 export function HomeGroups() {
   const [userGroups, setUserGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +12,7 @@ export function HomeGroups() {
   useEffect(() => {
     getUserGroups(signal)
       .then((res) => setUserGroups(res.data))
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });

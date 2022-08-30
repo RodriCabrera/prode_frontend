@@ -26,7 +26,7 @@ function FinalStage() {
   }, []);
 
   return (
-    <StageColumn>
+    <StageColumn isCenter>
       <Match>
         <h6>FINAL</h6>
         {finalData && (

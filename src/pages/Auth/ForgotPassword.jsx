@@ -11,14 +11,12 @@ import {
   Form,
   Text,
 } from '../../common/common.styles';
+import { toast } from 'react-toastify';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { forgotPassword } from '../../api/auth';
 import { authSchema } from '../../validationSchemas/auth';
 
 function ForgotPassword() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [showSuccess, setShowSuccess] = useState(false);
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.forgotPassword,
@@ -27,20 +25,24 @@ function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError(undefined);
-    forgotPassword(values)
-      .then(() => {
-        setShowSuccess(true);
-      })
-      .catch((err) => setError(err.response.data.error))
-      .finally(() => setIsLoading(false));
+    toast.promise(
+      forgotPassword(values),
+      {
+        pending: 'Buscando usuario',
+        success: `Mail enviado a ${values.email}`,
+        error: {
+          render({ data }) {
+            return data?.response.data?.error;
+          },
+        },
+      }
+    );
   };
 
   return (
     <CardContainer id="change-password-card-container">
       <CardWrapper id="change-password-card-wrapper">
-        {showSuccess ? (
+        {/* {showSuccess ? (
           <>
             <h5>
               Email de recuperación de contraseña enviado a {values.email}
@@ -49,8 +51,8 @@ function ForgotPassword() {
               Allí encontrarás un link para que puedas crear una nueva
               contraseña
             </p>
-          </>
-        ) : (
+          </> */}
+        {/* ) : ( */}
           <>
             <CardTitle>Recuperar Contraseña</CardTitle>
             <Form onSubmit={handleSubmit}>
@@ -66,14 +68,14 @@ function ForgotPassword() {
                 />
               </Label>
               {/* <Text color="orange">{errors.email}</Text> */}
-              <Text color={error && 'red'} align="center">
+              {/* <Text color={error && 'red'} align="center">
                 {isLoading && <Spinner />}
                 {error}
-              </Text>
+              </Text> */}
               <Button disabled={!isEmpty(errors)}>Recuperar contraseña</Button>
             </Form>
           </>
-        )}
+        {/* )} */}
       </CardWrapper>
     </CardContainer>
   );

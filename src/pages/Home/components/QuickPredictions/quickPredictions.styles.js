@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { AvatarWrapper, HoverBaloon } from '../../../../common/Lists/Lists.styles';
+import { AvatarWrapper } from '../../../../common/Lists/Lists.styles';
 
 export const SinglePredictionForm = styled.form`
   width: 100%;

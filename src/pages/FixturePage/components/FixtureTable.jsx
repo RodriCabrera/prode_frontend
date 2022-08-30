@@ -10,7 +10,7 @@ const FlagCell = styled(Table.Cell)`
   background-color: red;
 `;
 
-export function FixtureTable({ data, isCompact, fullWidth, isMobile }) {
+const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
   return (
     <Table compact={isCompact} fullWidth={fullWidth}>
       <Table.Body>
@@ -55,4 +55,6 @@ export function FixtureTable({ data, isCompact, fullWidth, isMobile }) {
       </Table.Body>
     </Table>
   );
-}
+};
+
+export default FixtureTable;

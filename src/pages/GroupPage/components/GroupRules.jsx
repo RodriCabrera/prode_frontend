@@ -9,14 +9,23 @@ function GroupRules({ rules }) {
     <>
       {rules.manifesto && (
         <>
-          <Text size="1.2rem" withBottomBorder>
+          <Text size="1.2rem" weight="600" withBottomBorder>
             Reglas
           </Text>
           <Text>{rules.manifesto}</Text>
           <br />
         </>
       )}
-      <Text size="1.2rem" withBottomBorder>
+      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+        <Text size="1.2rem" weight="600" withBottomBorder>
+          Tiempos límite:
+        </Text>
+        <Text withBottomBorder>
+          Puedes realizar predicciones hasta
+          {translateDuration(rules.timeLimit)}
+        </Text>
+      </div>
+      <Text size="1.2rem" weight="600" withBottomBorder>
         Sistema de puntaje
       </Text>
       <References
@@ -26,13 +35,6 @@ function GroupRules({ rules }) {
         red={`Resultado erróneo: ${rules.scoring.NONE}`}
       />
       <br />
-      <Text size="1.2rem" withBottomBorder>
-        Tiempos
-      </Text>
-      <Text>
-        Puedes realizar predicciones hasta
-        {translateDuration(rules.timeLimit)}
-      </Text>
     </>
   );
 }

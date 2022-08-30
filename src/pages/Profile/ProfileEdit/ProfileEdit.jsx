@@ -30,6 +30,7 @@ function ProfileEdit() {
               <UserMiniAvatar
                 name={userContext.user.name}
                 avatar={userContext.user.avatar}
+                emptySize="10rem"
               />
             </UserNameContainer>
             <ProfileEditForm

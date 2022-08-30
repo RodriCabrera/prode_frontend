@@ -7,7 +7,7 @@ import {
   Text,
 } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
-import { FixtureTable } from '../FixturePage/components/FixtureTable';
+import FixtureTable from '../FixturePage/components/FixtureTable';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 import useCleanupController from '../../hooks/useCleanupController';
 import { useIsMobile } from '../../hooks/useIsMobile';

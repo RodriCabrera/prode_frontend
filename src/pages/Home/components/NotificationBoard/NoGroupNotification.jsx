@@ -4,8 +4,14 @@ import { Text } from '../../../../common/common.styles';
 
 export function NoGroupNotification() {
   return (
-    <Text weight="500" align="center">
-      Empezá por crear o unirte a un grupo: <Link to="/groups">Aca</Link>
-    </Text>
+    <>
+      <Text weight="500" size="2rem">
+        Empezá por crear o unirte a un grupo:
+      </Text>
+      <Text>
+        {' '}
+        Desde <Link to="/groups/">esta sección</Link>
+      </Text>
+    </>
   );
 }

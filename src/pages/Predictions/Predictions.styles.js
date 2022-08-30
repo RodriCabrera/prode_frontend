@@ -19,6 +19,7 @@ export const BannerContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
+
 export const BannerButton = styled(Button)`
   width: 100%;
   margin-bottom: 1.5rem;
@@ -33,7 +34,7 @@ export const BannerDataWrapper = styled.div`
 `;
 export const BannerTitle = styled(Text)`
   font-weight: 500;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
 `;
 
 export const FormButtonWrapper = styled.div`

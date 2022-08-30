@@ -22,13 +22,14 @@ export const CardContainer = styled.div`
 
 /**
  * You can pass to the CardWrapper:
- * @props border // width // justify (justify-content) // align (align-items)
+ * @props border // width // justify (justify-content) // align (align-items) // minHeight
  * @props isMobile: if true, it will be full width (100%).
  */
 export const CardWrapper = styled.div`
   border: ${({ border }) => border || '1px solid dimgray'};
   border-radius: 8px;
   min-width: 200px;
+  min-height: ${({ minHeight }) => minHeight};
   width: ${({ width, isMobile }) =>
     isMobile ? '100%' : width ? width : '600px'};
   max-width: ${({ isMobile }) => (isMobile ? '100%' : '350px')};
@@ -173,7 +174,7 @@ export const Text = styled.p`
         display: block;
         width: 100%;
         height: 1px;
-        background: white;
+        background: #404040;
     `}
   }
 `;

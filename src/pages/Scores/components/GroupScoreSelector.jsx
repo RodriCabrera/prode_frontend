@@ -3,29 +3,34 @@ import useCleanupController from '../../../hooks/useCleanupController';
 import { GroupSelector } from '../../Predictions/components/GroupSelector';
 import { getGroupScores } from '../../../api/groups';
 
-export default function GroupScoreSelector({ userGroupList, setScores }) {
-  const [isLoading, setIsLoading] = useState(true);
+export default function GroupScoreSelector({
+  userGroupList,
+  setScores,
+  setIsLoadingScores,
+}) {
   const [userGroup, setUserGroup] = useState(userGroupList[0]);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
-    getGroupScores(userGroup.name, signal)
+    getGroupScores(userGroup?.name, signal)
       .then((res) => {
         setScores(res);
       })
-      .then(() => setIsLoading(false))
-      .catch((err) => handleCancel(err) || setIsLoading(false))
+      .then(() => {
+        setIsLoadingScores(false);
+      })
+      .catch((err) => handleCancel(err));
     return cleanup;
-  }, [userGroup])
+  }, [userGroup]);
 
   const handleGroupSelect = (group) => {
-    setIsLoading(true);
+    if (group.id === userGroup.id) return;
+    setIsLoadingScores(true);
     setUserGroup(group);
   };
 
   return (
     <GroupSelector
-      isLoading={isLoading}
       selectedUserGroup={userGroup}
       userGroupList={userGroupList}
       handleGroupSelect={handleGroupSelect}

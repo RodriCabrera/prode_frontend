@@ -26,10 +26,10 @@ export const HoverBaloon = styled.div`
 
 export const ListItemWrapper = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: ${({ isMobile }) => isMobile ? '0.2rem' : '1rem'};
   align-items: center;
-  height: 4rem;
-  max-height: 4rem;
+  height: ${({ isMobile }) => isMobile ? '2.5rem' : '4rem'};
+  max-height:  ${({ isMobile }) => isMobile ? '2.5rem' : '4rem'};
   transform-origin: center;
   cursor: pointer;
   :hover ${HoverBaloon} {

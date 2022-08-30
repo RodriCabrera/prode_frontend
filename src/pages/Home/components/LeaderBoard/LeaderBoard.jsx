@@ -1,17 +1,16 @@
-import styled from '@emotion/styled';
 import React, { useState, useEffect } from 'react';
 import Leader from './Leader';
 import { getUserGroups } from '../../../../api/groups';
 import useCleanupController from '../../../../hooks/useCleanupController';
-import { CardTitle } from '../../../../common/common.styles';
-const LeaderBoardWrapper = styled.div`
-  /* width: 100%; */
-`;
+import { CardTitle, CardWrapper } from '../../../../common/common.styles';
+import { useIsMobile } from '../../../../hooks/useIsMobile';
+import { BallLoader } from '../../../../common/Spinner/BallLoader';
 
-function LeaderBoard() {
-  const [userGroups, setUserGroups] = useState();
+const LeaderBoard = () => {
+  const [userGroups, setUserGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,12 +24,16 @@ function LeaderBoard() {
   }, []);
 
   return (
-    <LeaderBoardWrapper id="leaderboard-wrapper">
+    <CardWrapper
+      width="290px"
+      border={isMobile ? 'none' : undefined}
+      minHeight="300px"
+    >
       <CardTitle>
         {userGroups?.length > 1 ? 'Punteros por grupo' : 'Puntero del grupo'}
       </CardTitle>
       {isLoading || !userGroups ? (
-        <div>Loading leaderboard...</div>
+        <BallLoader />
       ) : (
         userGroups.map((group) => (
           <Leader
@@ -40,8 +43,8 @@ function LeaderBoard() {
           />
         ))
       )}
-    </LeaderBoardWrapper>
+    </CardWrapper>
   );
-}
+};
 
 export default LeaderBoard;

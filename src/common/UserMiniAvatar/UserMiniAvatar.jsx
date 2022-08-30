@@ -1,6 +1,6 @@
 import { HiUserCircle } from 'react-icons/hi';
 
-export function UserMiniAvatar({ name, avatar, isSmall }) {
+export function UserMiniAvatar({ name, avatar, isSmall, emptySize = '2rem' }) {
   return avatar ? (
     <img
       src={avatar}
@@ -8,6 +8,6 @@ export function UserMiniAvatar({ name, avatar, isSmall }) {
       style={isSmall && { width: '30px' }}
     />
   ) : (
-    <HiUserCircle size="2.2rem" />
+    <HiUserCircle size={emptySize} />
   );
 }

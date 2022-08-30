@@ -120,9 +120,6 @@ function CreateGroupForm({ updateList }) {
               <option value={1000 * 60 * 60 * 24}>
                 Un día antes del partido
               </option>
-              <option value={1000 * 60 * 60 * 24 * 7}>
-                Una semana antes del partido
-              </option>
             </Select>
           </Label>
           <Button

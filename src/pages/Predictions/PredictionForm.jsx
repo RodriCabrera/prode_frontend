@@ -42,6 +42,7 @@ export function PredictionForm(props) {
     handlePrevGroup,
     errorMessages,
     groupPhase,
+    dirty,
   } = props;
 
   const data = useGetStageData({ stageData, groupNumber });
@@ -186,7 +187,7 @@ export function PredictionForm(props) {
           </Table.Body>
         </Table>
         {!resultsMode && (
-          <Button type="submit" disabled={!selectedUserGroup?.id}>
+          <Button type="submit" disabled={!selectedUserGroup?.id || !dirty}>
             {selectedUserGroup?.id
               ? 'Enviar prediccion'
               : 'Seleccione un grupo'}

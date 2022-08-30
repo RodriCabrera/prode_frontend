@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import styled from '@emotion/styled';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
-import { logoutUser } from '../../api/auth';
 import useToggleModal from '../../hooks/useToggleModal';
 import { Linkbar } from '../Linkbar/Linkbar';
 import Modal from '../Modal/Modal';
@@ -12,10 +11,8 @@ import {
   ButtonGroup,
   NavbarContainer,
   LogoContainer,
-  LogoMain,
-  LogoSub,
 } from './Navbar.styles';
-import { Button, CardTitle } from '../common.styles';
+import { Button, CardTitle, Text } from '../common.styles';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { useIsMobile } from '../../hooks/useIsMobile';
 
@@ -28,8 +25,14 @@ const NavLink = styled.button`
     text-decoration: underline;
   }
 `;
+const SubLogo = styled(Text)`
+  letter-spacing: -2px;
+`;
 
 function Navbar() {
+  const { pathname } = useLocation();
+  if (pathname === '/auth') return;
+
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -55,10 +58,13 @@ function Navbar() {
           <ButtonGroup
             id="button-group-left"
             onClick={() => navigate('/')}
-            padding=".5rem 2rem">
+            padding=".5rem 16px"
+          >
             <LogoContainer>
-              <LogoMain>Prode </LogoMain>
-              <LogoSub>الحمار</LogoSub>
+              <Text weight="800" color="tomato" size="2rem">
+                Chumbazo
+              </Text>
+              <SubLogo weight="100">prode</SubLogo>
             </LogoContainer>
           </ButtonGroup>
           <ButtonGroup id="button-group-right" padding="1rem">

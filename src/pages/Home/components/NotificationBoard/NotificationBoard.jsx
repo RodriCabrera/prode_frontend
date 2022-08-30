@@ -1,42 +1,42 @@
-import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { getPredictions } from '../../../../api/predictions';
+import { getPredictionCount } from '../../../../api/predictions';
 import { CardContainer, CardWrapper } from '../../../../common/common.styles';
 import { Spinner } from '../../../../common/Spinner/Spinner';
 import { NoPredictionNotification } from './NoPredictionNotification';
 import useCleanupController from '../../../../hooks/useCleanupController';
+import { NoGroupNotification } from './NoGroupNotification';
+import { useGetUserGroupsData } from '../../../../hooks/useGetUserGroupsData';
 
 function NotificationBoard() {
-  const [predictions, setPredictions] = useState([]);
-  const [loadingCheck, setloadingCheck] = useState({
-    predictions: false,
-    fixture: false,
-  });
+  const [hasPredictions, setHasPredictions] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { userGroupList, isLoadingUserGroupsData } = useGetUserGroupsData();
 
   useEffect(() => {
-    getPredictions(undefined, undefined, signal)
-      .then((res) => setPredictions(res.data))
+    setIsLoading(true);
+    getPredictionCount(signal)
+      .then((res) => res.data?.userPredictions > 0 && setHasPredictions(true))
       .catch((err) => handleCancel(err))
       .finally(() => {
-        setloadingCheck({ ...loadingCheck, predictions: true });
+        setIsLoading(false);
       });
     return cleanup;
   }, []);
 
   function renderBoards() {
-    // TODO: Implementar esta situación
     // NO GROUP - NO PREDICTIONS:
-    // <NoGroupNotification />;
-    // YES GROUPS - NO PREDICTIONS:
-    if (loadingCheck.predictions && isEmpty(predictions)) {
-      return <NoPredictionNotification />;
+    if (!isLoadingUserGroupsData && userGroupList.length === 0) {
+      return <NoGroupNotification />;
     }
-
-    return <Spinner />;
+    // YES GROUPS - NO PREDICTIONS:
+    else if (!isLoading && !hasPredictions) {
+      return <NoPredictionNotification />;
+    } else return null;
   }
 
-  if (!isEmpty(predictions) && loadingCheck.predictions) return null;
+  // YES GROUP - YES PREDICTION:
+  if (hasPredictions && !isLoading) return null;
 
   return (
     <CardContainer>
