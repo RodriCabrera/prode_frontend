@@ -1,6 +1,7 @@
 import React from 'react';
 import FixtureTable from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
+import CollapsableStage from './components/CollapsableStage';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
 import { useFetchFixtureData } from './hooks/useFetchFixtureData';
@@ -15,10 +16,10 @@ function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
   const isMobile = useIsMobile();
 
-  const renderGroupsTables = () => {
+  const renderGroupsTables = (groups) => {
     return (
       <FixtureTablesContainer>
-        {fixtureData.map((group) => (
+        {groups.map((group) => (
           <GroupTableWrapper key={group.id} fullWidth={isMobile}>
             <Text size="2rem" align="center" color="darkorange">
               {group.name}
@@ -32,11 +33,24 @@ function Fixture() {
 
   return (
     <FixtureWrapper>
-      {!isMobile && <LaterStagesGraph />}
-      <Text size="2rem" weight="700" align="center">
-        Fase de Grupos
-      </Text>
-      {isLoading ? <Spinner /> : renderGroupsTables()}
+      {isMobile ? (
+      <>
+        {fixtureData.map(stage => {
+          if (stage.groups) return (<CollapsableStage stageName={stage.name}>
+            {renderGroupsTables(stage.groups)}
+          </CollapsableStage>)
+          else return <CollapsableStage stageName={stage.name} stageData={stage.matches} />
+        })}
+      </>
+      ) : (
+        <>
+          <LaterStagesGraph />
+          <Text size="2rem" weight="700" align="center">
+            Fase de Grupos
+          </Text>
+          {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0].groups)}
+        </>
+      )}
     </FixtureWrapper>
   );
 }

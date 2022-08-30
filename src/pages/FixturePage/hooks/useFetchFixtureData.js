@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getGroupStage } from '../../../api/fixture';
+import { getFixture } from '../../../api/fixture';
 import useCleanupController from '../../../hooks/useCleanupController';
 
 export function useFetchFixtureData() {
@@ -9,7 +9,7 @@ export function useFetchFixtureData() {
 
   useEffect(() => {
     setIsLoading(true);
-    getGroupStage(signal)
+    getFixture(undefined, undefined, signal)
       .then((res) => {
         setFixtureData(res.data.fixture);
       })
