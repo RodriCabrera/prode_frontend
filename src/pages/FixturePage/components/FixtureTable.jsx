@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import Table from '../../../common/Table/Table';
 import { getFlagUrl, parseDate } from '../../pagesHelpers';
-import { parseMatchScore } from '../fixturePageHelpers';
+import { parseMatchScore, datePreferences } from '../fixturePageHelpers';
 
 const FlagCell = styled(Table.Cell)`
   min-width: 42px;
@@ -26,7 +26,7 @@ const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
                     fontSize="1.2rem"
                     padding={isCompact && '10px'}
                   >
-                    {parseDate(match.date)}
+                    {parseDate(match.date, datePreferences)}
                   </Table.Cell>
                 )}
               </Table.Row>

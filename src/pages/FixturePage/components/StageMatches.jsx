@@ -3,6 +3,7 @@ import { getFixtureByStageId } from '../../../api/fixture';
 import { StageColumn, MatchData, Match } from './laterStages.styles';
 import { datePreferences, organizeStageBranches } from '../fixturePageHelpers';
 import { getFlagUrl, parseDate } from '../../pagesHelpers';
+import { Text } from '../../../common/common.styles';
 import useCleanupController from '../../../hooks/useCleanupController';
 
 function StageMatches({ stageName, isFirst }) {
@@ -32,20 +33,14 @@ function StageMatches({ stageName, isFirst }) {
         fixtureData[0] &&
         fixtureData.map((match) => (
           <Match key={match.id}>
-            {match.home.name ? (
-              <>
-                {parseDate(match.date, datePreferences)}
-                <MatchData>
-                  {getFlagUrl(match.home?.flag, 1)}
-                  {match.homeScore}
-                  <span>-</span>
-                  {match.awayScore}
-                  {getFlagUrl(match.away?.flag, 1)}
-                </MatchData>
-              </>
-            ) : (
-              <h6>{match.home}</h6>
-            )}
+            {parseDate(match.date, datePreferences)}
+            <MatchData>
+              {getFlagUrl(match.home?.flag, 1)}
+              <Text>{match.homeScore}</Text>
+              <span>-</span>
+              <Text>{match.awayScore}</Text>
+              {getFlagUrl(match.away?.flag, 1)}
+            </MatchData>
           </Match>
         ))}
     </StageColumn>
