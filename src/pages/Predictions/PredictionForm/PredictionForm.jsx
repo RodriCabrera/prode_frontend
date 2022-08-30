@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { MdOutlineChevronRight, MdOutlineChevronLeft } from 'react-icons/md';
-import { Button, Form, Input, Text } from '../../common/common.styles';
-import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
-import Table from '../../common/Table/Table';
-import { getFlagUrl } from '../pagesHelpers';
-import { FormButtonWrapper, FormWrapper } from './Predictions.styles';
+import { Button, Form, Input, Text } from '../../../common/common.styles';
+import ErrorInfo from '../../../common/MoreInfo/ErrorInfo';
+import Table from '../../../common/Table/Table';
+import { getFlagUrl } from '../../pagesHelpers';
+import { FormWrapper } from '../Predictions.styles';
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
@@ -14,10 +13,10 @@ import {
   groupNumberMod,
   calculateIfCanPredict,
   formatInputDisplayValue,
-} from './predictionsPageUtils';
-import { useIsMobile } from '../../hooks/useIsMobile';
+} from '../predictionsPageUtils';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 
-const useGetStageData = ({ stageData, groupNumber }) => {
+const useGetGroupStageData = ({ stageData, groupNumber }) => {
   const [data, setData] = useState(stageData);
 
   useEffect(() => {
@@ -38,14 +37,11 @@ export function PredictionForm(props) {
     values,
     handleChange,
     handleSubmit,
-    handleNextGroup,
-    handlePrevGroup,
     errorMessages,
-    groupPhase,
     dirty,
   } = props;
 
-  const data = useGetStageData({ stageData, groupNumber });
+  const data = useGetGroupStageData({ stageData, groupNumber });
 
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
@@ -81,27 +77,28 @@ export function PredictionForm(props) {
 
               const renderInfoIcon = () => {
                 if (resultsMode) {
-                  if (
-                    predictionStatus() === 'silver' ||
-                    predictionStatus() === 'lightgreen'
-                  )
-                    return '-';
-
-                  if (predictionStatus() === '#FFFF66')
-                    return (
-                      <ErrorInfo
-                        color={predictionStatus()}
-                        info={matchResultString}
-                      />
-                    );
-
-                  if (predictionStatus() === 'tomato')
-                    return (
-                      <ErrorInfo
-                        color={predictionStatus()}
-                        info={matchResultString}
-                      />
-                    );
+                  switch (predictionStatus()) {
+                    case 'silver':
+                      return '-';
+                    case 'lightgreen':
+                      return '-';
+                    case '#FFFF66':
+                      return (
+                        <ErrorInfo
+                          color={predictionStatus()}
+                          info={matchResultString}
+                        />
+                      );
+                    case 'tomato':
+                      return (
+                        <ErrorInfo
+                          color={predictionStatus()}
+                          info={matchResultString}
+                        />
+                      );
+                    default:
+                      return null;
+                  }
                 }
                 return null;
               };
@@ -180,28 +177,6 @@ export function PredictionForm(props) {
               ? 'Enviar prediccion'
               : 'Seleccione un grupo'}
           </Button>
-        )}
-        {groupPhase && (
-          <FormButtonWrapper>
-            <Button
-              grayscale
-              onClick={handlePrevGroup}
-              type="reset"
-              width="100%"
-            >
-              <MdOutlineChevronLeft size={26} />
-              {stageData[groupNumberMod(groupNumber - 1)]?.name}
-            </Button>
-            <Button
-              grayscale
-              onClick={handleNextGroup}
-              type="reset"
-              width="100%"
-            >
-              {stageData[groupNumberMod(groupNumber + 1)]?.name}
-              <MdOutlineChevronRight size={26} />
-            </Button>
-          </FormButtonWrapper>
         )}
       </Form>
     </FormWrapper>

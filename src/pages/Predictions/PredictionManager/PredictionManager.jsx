@@ -14,11 +14,12 @@ import {
   CardWrapper,
   Text,
 } from '../../../common/common.styles';
-import { PredictionForm } from '../PredictionForm';
+import { PredictionForm } from '../PredictionForm/PredictionForm';
 import { References } from '../../../common/References';
 import {
   formatPredictionsToDisplay,
   formatPredictionsToPost,
+  groupNumberMod,
   numberToGroupLetter,
 } from '../predictionsPageUtils';
 import { usePrompt } from '../../../hooks/usePrompt';
@@ -30,6 +31,8 @@ import { useGetStageData } from './hooks/useGetStageData';
 import useCleanupController from '../../../hooks/useCleanupController';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { BallLoader } from '../../../common/Spinner/BallLoader';
+import GroupSwitchButtons from '../PredictionForm/GroupSwitchButtons';
+import { FormWrapper } from '../Predictions.styles';
 
 function PredictionManager() {
   const [isLoading, setIsLoading] = useState(false);
@@ -151,18 +154,29 @@ function PredictionManager() {
             />
           ) : (
             // Form para fase de grupos:
-            <PredictionForm
-              dirty={dirty}
-              groupNumber={groupNumber}
-              handleSubmit={!resultsMode ? handleSubmit : undefined}
-              stageData={stageData}
-              errorMessages={errorMessages}
-              handleNextGroup={() => handleGroupSwitch(1)}
-              handlePrevGroup={() => handleGroupSwitch(-1)}
-              values={values}
-              handleChange={!resultsMode ? handleChange : undefined}
-              groupPhase
-            />
+            <>
+              <PredictionForm
+                dirty={dirty}
+                groupNumber={groupNumber}
+                handleSubmit={!resultsMode ? handleSubmit : undefined}
+                stageData={stageData}
+                errorMessages={errorMessages}
+                values={values}
+                handleChange={!resultsMode ? handleChange : undefined}
+              />
+              <FormWrapper>
+                <GroupSwitchButtons
+                  handlePrevGroup={() => handleGroupSwitch(-1)}
+                  handleNextGroup={() => handleGroupSwitch(1)}
+                  prevGroupName={
+                    stageData[groupNumberMod(groupNumber - 1)]?.name
+                  }
+                  nextGroupName={
+                    stageData[groupNumberMod(groupNumber + 1)]?.name
+                  }
+                />
+              </FormWrapper>
+            </>
           )}
         </>
       ) : (
