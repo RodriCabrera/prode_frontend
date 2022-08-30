@@ -18,7 +18,6 @@ import { useIsMobile } from '../../../hooks/useIsMobile';
 
 const useGetGroupStageData = ({ stageData, groupNumber }) => {
   const [data, setData] = useState(stageData);
-
   useEffect(() => {
     if (stageData.length > 0) {
       if (typeof groupNumber === 'number') {
@@ -26,7 +25,6 @@ const useGetGroupStageData = ({ stageData, groupNumber }) => {
       }
     }
   }, [stageData]);
-
   return data;
 };
 
@@ -43,21 +41,27 @@ export function PredictionForm(props) {
 
   const data = useGetGroupStageData({ stageData, groupNumber });
 
+  const GroupTitle = () => {
+    return (
+      <Text align="center" size="1.7rem" weight="600">
+        {typeof groupNumber === 'number' &&
+          `GRUPO ${numberToGroupLetter(groupNumber)}`}
+      </Text>
+    );
+  };
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
   const isMobile = useIsMobile();
   return (
     <FormWrapper id="prediction-form-wrapper">
-      <Text align="center" size="1.7rem" weight="600">
-        {typeof groupNumber === 'number' &&
-          `GRUPO ${numberToGroupLetter(groupNumber)}`}
-      </Text>
+      <GroupTitle />
       <Form
         id="prediction-form"
         onSubmit={handleSubmit ? handleSubmit : undefined}
       >
         <Table fullWidth={isMobile} id="prediction-table">
           <Table.Body>
+            {/* // TODO: Este mapeo está heavy, ver si se puede descomprimir un cacho... */}
             {data?.map((match) => {
               const predictionStatus = () =>
                 match.status === 0
@@ -76,36 +80,36 @@ export function PredictionForm(props) {
               );
 
               const renderInfoIcon = () => {
-                if (resultsMode) {
-                  switch (predictionStatus()) {
-                    case 'silver':
-                      return '-';
-                    case 'lightgreen':
-                      return '-';
-                    case '#FFFF66':
-                      return (
-                        <ErrorInfo
-                          color={predictionStatus()}
-                          info={matchResultString}
-                        />
-                      );
-                    case 'tomato':
-                      return (
-                        <ErrorInfo
-                          color={predictionStatus()}
-                          info={matchResultString}
-                        />
-                      );
-                    default:
-                      return null;
-                  }
+                if (!resultsMode) return null;
+                const colorStatus = predictionStatus();
+                switch (colorStatus) {
+                  case 'silver':
+                    return '-';
+                  case 'lightgreen':
+                    return '-';
+                  case '#FFFF66':
+                    return (
+                      <ErrorInfo
+                        color={predictionStatus()}
+                        info={matchResultString}
+                      />
+                    );
+                  case 'tomato':
+                    return (
+                      <ErrorInfo
+                        color={predictionStatus()}
+                        info={matchResultString}
+                      />
+                    );
+                  default:
+                    return null;
                 }
-                return null;
               };
+
               return (
                 <React.Fragment key={match.id}>
                   <Table.Row>
-                    <Table.Cell padding="1rem 0" margin="0 0 0 1rem">
+                    <Table.Cell padding="1rem 8px">
                       {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
@@ -143,10 +147,6 @@ export function PredictionForm(props) {
                     </Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
-                        type="number"
-                        width="30px"
-                        min={0}
-                        align="center"
                         name={`${match.id}-home`}
                         id={`${match.id}-home`}
                         value={formatInputDisplayValue(
@@ -157,12 +157,16 @@ export function PredictionForm(props) {
                         predictionStatus={
                           resultsMode ? predictionStatus('home') : ''
                         }
+                        type="number"
+                        width="30px"
+                        min={0}
+                        align="center"
                       />
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
                       {match.home?.shortName || match.home}
                     </Table.Cell>
-                    <Table.Cell padding="1rem 0" margin="0 1rem 0 0">
+                    <Table.Cell padding="1rem 8px" margin="0 1rem 0 0">
                       {getFlagUrl(match.home?.flag, 1)}
                     </Table.Cell>
                   </Table.Row>
