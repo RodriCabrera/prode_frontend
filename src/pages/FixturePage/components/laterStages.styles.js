@@ -29,6 +29,15 @@ export const Match = styled.div`
   }
 `;
 
+export const MatchPlaceHolder = styled.div`
+  text-align: center;
+  padding: 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid dimgray;
+  font-size: 1.2rem;
+`
+
+
 export const MatchData = styled.div`
   display: flex;
   flex-direction: row;

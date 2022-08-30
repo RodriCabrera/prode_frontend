@@ -17,6 +17,7 @@ function Fixture() {
   const isMobile = useIsMobile();
 
   const renderGroupsTables = (groups) => {
+    if (!groups) return <Spinner />
     return (
       <FixtureTablesContainer>
         {groups.map((group) => (
@@ -48,7 +49,7 @@ function Fixture() {
           <Text size="2rem" weight="700" align="center">
             Fase de Grupos
           </Text>
-          {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0].groups)}
+          {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0]?.groups)}
         </>
       )}
     </FixtureWrapper>

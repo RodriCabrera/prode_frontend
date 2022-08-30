@@ -3,25 +3,29 @@ import { getFixtureByStageId } from '../../../api/fixture';
 import { StageColumn, MatchData, Match } from './laterStages.styles';
 import { getFlagUrl, parseDate } from '../../pagesHelpers';
 import { datePreferences } from '../fixturePageHelpers';
+import { Text } from '../../../common/common.styles';
 import useCleanupController from '../../../hooks/useCleanupController';
 
 function FinalStage() {
-  // const [isLoading, setIsLoading] = useState(false);
   const [finalData, setFinalData] = useState([]);
   const [thirdData, setThirdData] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
-    getFixtureByStageId('FINAL', signal).then((res) => {
-      setFinalData(res.data.fixture[0]);
-    }).catch(err => {
-      handleCancel(err)
-    });
-    getFixtureByStageId('TERCER_PUESTO', signal).then((res) => {
-      setThirdData(res.data.fixture[0]);
-    }).catch(err => {
-      handleCancel(err)
-    });
+    getFixtureByStageId('FINAL', signal)
+      .then((res) => {
+        setFinalData(res.data.fixture[0]);
+      })
+      .catch((err) => {
+        handleCancel(err);
+      });
+    getFixtureByStageId('TERCER_PUESTO', signal)
+      .then((res) => {
+        setThirdData(res.data.fixture[0]);
+      })
+      .catch((err) => {
+        handleCancel(err);
+      });
     return cleanup;
   }, []);
 
@@ -33,19 +37,11 @@ function FinalStage() {
           <>
             {parseDate(finalData.date, datePreferences)}
             <MatchData>
-              {finalData.home?.name ? (
-                getFlagUrl(finalData.home?.flag, 1)
-              ) : (
-                <h6>{finalData.home}</h6>
-              )}
-              {finalData.homeScore}
+              {getFlagUrl(finalData.home?.flag, 1)}
+              <Text>{finalData.homeScore}</Text>
               <span>-</span>
-              {finalData.awayScore}
-              {finalData.away?.name ? (
-                getFlagUrl(finalData.away?.flag, 1)
-              ) : (
-                <h6>{finalData.away}</h6>
-              )}
+              <Text>{finalData.awayScore}</Text>
+              {getFlagUrl(finalData.away?.flag, 1)}
             </MatchData>
           </>
         )}
@@ -64,19 +60,11 @@ function FinalStage() {
           <>
             {parseDate(thirdData.date, datePreferences)}
             <MatchData>
-              {thirdData.home?.name ? (
-                getFlagUrl(thirdData.home?.flag, 1)
-              ) : (
-                <h6>{thirdData.home}</h6>
-              )}
+              {getFlagUrl(thirdData.home?.flag, 1)}
               {thirdData.homeScore}
               <span>-</span>
               {thirdData.awayScore}
-              {thirdData.away?.name ? (
-                getFlagUrl(thirdData.away?.flag, 1)
-              ) : (
-                <h6>{thirdData.away}</h6>
-              )}
+              {getFlagUrl(thirdData.away?.flag, 1)}
             </MatchData>
           </>
         )}
