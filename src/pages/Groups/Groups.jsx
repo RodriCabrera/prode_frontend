@@ -6,7 +6,7 @@ import JoinGroupForm from './components/JoinGroupForm';
 import GroupList from './components/GroupList';
 import { getUserGroups } from '../../api/groups';
 import useCleanupController from '../../hooks/useCleanupController';
-import { BallLoader } from '../../common/Spinner/BallLoader';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 function Groups() {
   const [groupList, setGroupList] = useState([]);
@@ -41,7 +41,7 @@ function Groups() {
         {!isEmpty(groupList) && (
           <Text size="1.5rem">Grupos en los que estás participando: </Text>
         )}
-        {isLoading ? <BallLoader /> : <GroupList groups={groupList} />}
+        {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
       </CardWrapper>
 
       <CardContainer>
