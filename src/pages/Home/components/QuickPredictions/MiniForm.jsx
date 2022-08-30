@@ -21,8 +21,8 @@ export default function MiniForm({ matchData, groupData, afterSubmit }) {
         prediction: {
           userGroupId: groupData._id,
           matchId: matchData.id,
-          homeScore: inputValues.home,
-          awayScore: inputValues.away,
+          homeScore: parseInt(inputValues.home),
+          awayScore: parseInt(inputValues.away),
         },
       }).then(() => {
         setInputValues({

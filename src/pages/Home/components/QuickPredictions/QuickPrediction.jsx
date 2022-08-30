@@ -6,7 +6,6 @@ import {
   CardContainer,
   Text,
 } from '../../../../common/common.styles';
-import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
 import MiniForm from './MiniForm';
 import { BallLoader } from '../../../../common/Spinner/BallLoader';
@@ -20,7 +19,6 @@ export default function QuickPrediction() {
   const [noMatchsOrGroups, setMissingData] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
 
   const getMatchData = () => {
     setIsLoading(true);
@@ -38,7 +36,6 @@ export default function QuickPrediction() {
     return cleanup;
   }, []);
 
-  // if (noMatchsOrGroups) return null;
   return (
     <CardContainer>
       <CardWrapper width="300px" minHeight="200px">
