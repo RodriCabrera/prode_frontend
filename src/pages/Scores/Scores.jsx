@@ -5,6 +5,7 @@ import GroupScoreSelector from './components/GroupScoreSelector';
 import { useGetUserGroupsData } from '../../hooks/useGetUserGroupsData';
 import { BallLoader } from '../../common/Spinner/BallLoader';
 import { isEmpty } from 'lodash';
+import { Spinner } from '../../common/Spinner/Spinner';
 
 function Scores() {
   const [scores, setScores] = useState(undefined);
@@ -19,7 +20,7 @@ function Scores() {
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>
-        {isLoadingUserGroupsData && <BallLoader />}
+        {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
           <Text>No estás en ningún grupo</Text>
         )}

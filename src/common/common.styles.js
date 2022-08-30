@@ -173,7 +173,7 @@ export const Text = styled.p`
         display: block;
         width: 100%;
         height: 1px;
-        background: white;
+        background: #404040;
     `}
   }
 `;
