@@ -22,6 +22,8 @@ export default function QuickPrediction() {
 
   const getMatchData = () => {
     setIsLoading(true);
+    setMatchData({});
+    setGroupData({});
     getRandomUnpredictedMatch(signal)
       .then((res) => {
         setMatchData(res.data.match);
