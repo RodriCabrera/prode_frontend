@@ -11,10 +11,8 @@ import {
   ButtonGroup,
   NavbarContainer,
   LogoContainer,
-  LogoMain,
-  LogoSub,
 } from './Navbar.styles';
-import { Button, CardTitle } from '../common.styles';
+import { Button, CardTitle, Text } from '../common.styles';
 import { Tooltip } from '../Tooltip/Tooltip';
 import { useIsMobile } from '../../hooks/useIsMobile';
 
@@ -26,6 +24,9 @@ const NavLink = styled.button`
   :hover {
     text-decoration: underline;
   }
+`;
+const SubLogo = styled(Text)`
+  letter-spacing: -2px;
 `;
 
 function Navbar() {
@@ -60,8 +61,10 @@ function Navbar() {
             padding=".5rem 2rem"
           >
             <LogoContainer>
-              <LogoMain>Prode </LogoMain>
-              <LogoSub>الحمار</LogoSub>
+              <Text weight="800" color="tomato" size="2rem">
+                Chumbazo
+              </Text>
+              <SubLogo weight="100">prode</SubLogo>
             </LogoContainer>
           </ButtonGroup>
           <ButtonGroup id="button-group-right" padding="1rem">
