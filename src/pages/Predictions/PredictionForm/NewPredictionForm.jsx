@@ -45,7 +45,6 @@ export default function NewPredictionForm({ fixture, hasChangedGroup }) {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    console.log(fixture);
     if (!fixture) return;
     setIsLoading(true);
     getPredictions(
@@ -57,7 +56,7 @@ export default function NewPredictionForm({ fixture, hasChangedGroup }) {
       .then((res) => setPredictions(res.data))
       .finally(() => setIsLoading(false))
       .catch((err) =>
-        handleCancel(err) ? setIsLoading(true) : console.log(err)
+        handleCancel(err) ? setIsLoading(true) : null
       );
     return cleanup;
   }, [fixture]);
@@ -72,7 +71,7 @@ export default function NewPredictionForm({ fixture, hasChangedGroup }) {
     toast.promise(
       createPredictions(formatPredictionsToPost(values, selectedUserGroup?.id))
         .then((res) => {
-          console.log(res);
+          setErrorMessages(res.data.errors)
         })
         .finally(() => {
           setIsLoading(false);
