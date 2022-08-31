@@ -156,3 +156,13 @@ export const formatInputDisplayValue = (value) => {
   if (value===0 || value) return value
   else return ''
 }
+
+export function debounce (cb, delay = 250) {
+  let timeout
+  return (...args) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      cb(...args)
+    }, delay)
+  }
+}

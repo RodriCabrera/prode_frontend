@@ -54,7 +54,7 @@ function PredictionManager() {
 
   const updatePredictionsByStage = () => {
     if (getStageName(phase) !== STAGE_NAMES.GRUPOS)
-      return getPredictions(selectedUserGroup?.id, getStageName(phase), signal);
+      return getPredictions(selectedUserGroup?.id, getStageName(phase), undefined, signal);
     const groupLeter = numberToGroupLetter(groupNumber);
     return getFirstStagePredictionsByGroup(
       selectedUserGroup?.id,
