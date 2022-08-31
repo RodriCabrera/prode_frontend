@@ -1,48 +1,48 @@
-import { useFormik } from 'formik';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+// import { useFormik } from 'formik';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useOutletContext, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+// import {
+//   createPredictions,
+//   getPredictions,
+//   getFirstStagePredictionsByGroup,
+// } from '../../../api/predictions';
 import {
-  createPredictions,
-  getPredictions,
-  getFirstStagePredictionsByGroup,
-} from '../../../api/predictions';
-import {
-  Button,
+  // Button,
   CardContainer,
   CardTitle,
   CardWrapper,
   Text,
 } from '../../../common/common.styles';
-import { PredictionForm } from '../PredictionForm/PredictionForm';
+// import { PredictionForm } from '../PredictionForm/PredictionForm';
 import { References } from '../../../common/References';
 import {
-  formatPredictionsToDisplay,
-  formatPredictionsToPost,
+  // formatPredictionsToDisplay,
+  // formatPredictionsToPost,
   groupNumberMod,
   numberToGroupLetter,
-  debounce
+  debounce,
 } from '../predictionsPageUtils';
-import { usePrompt } from '../../../hooks/usePrompt';
-import useToggleModal from '../../../hooks/useToggleModal';
-import Modal from '../../../common/Modal/Modal';
+// import { usePrompt } from '../../../hooks/usePrompt';
+// import useToggleModal from '../../../hooks/useToggleModal';
+// import Modal from '../../../common/Modal/Modal';
 import { getStageName, STAGE_NAMES } from './PredictionManagerUtils';
-import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
+// import { useSwitchGroupNumber } from './hooks/useSwitchGroupNumber';
 import { useGetStageData } from './hooks/useGetStageData';
 import useCleanupController from '../../../hooks/useCleanupController';
 import { useIsMobile } from '../../../hooks/useIsMobile';
 import { BallLoader } from '../../../common/Spinner/BallLoader';
-import GroupSwitchButtons from '../PredictionForm/GroupSwitchButtons';
+// import GroupSwitchButtons from '../PredictionForm/GroupSwitchButtons';
 import { FormWrapper } from '../Predictions.styles';
 import NewPredictionForm from '../PredictionForm/NewPredictionForm';
 import NewGroupSwitchButtons from '../PredictionForm/NewGroupSwitchButtons';
 
 function NewPredictionManager() {
   // const [isLoading, setIsLoading] = useState(false);
-  // const { mode } = useOutletContext();
-  // const resultsMode = mode === 'results';
+  const { mode } = useOutletContext();
+  const resultsMode = mode === 'results';
   // const [errorMessages, setErrorMessages] = useState([]);
-  // const { selectedUserGroup } = useOutletContext();
+  const { selectedUserGroup } = useOutletContext();
   // const { showModal, toggleModal } = useToggleModal();
   // const { groupNumber, switchGroupNumber } = useSwitchGroupNumber();
   const { stageData, isStageDataLoading } = useGetStageData();
@@ -52,9 +52,9 @@ function NewPredictionManager() {
   // const { values, handleChange, resetForm, dirty } = useFormik({
   //   initialValues: {},
   // });
-  // const [signal, cleanup, handleCancel] = useCleanupController();
+  const [signal, cleanup, handleCancel] = useCleanupController();
   const { phase } = useParams();
-  // const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
 
   // usePrompt('Continuar? Hay modificaciones sin guardar', dirty);
 
@@ -71,19 +71,20 @@ function NewPredictionManager() {
 
   useEffect(() => {
     setChangedGroup(true);
-    setNewGroup()
+    setNewGroup();
+    return cleanup;
   }, [targetGroupNumber]);
 
-  const debounceAction = debounce(newVal => {
-    setGroupNumber(newVal)
+  const debounceAction = debounce((newVal) => {
+    setGroupNumber(newVal);
     setChangedGroup(false);
-  }, 500)
+  }, 500);
 
-  const newGroupCb = useCallback(newVal => debounceAction(newVal), [])
+  const newGroupCb = useCallback((newVal) => debounceAction(newVal), []);
 
   const setNewGroup = () => {
-    newGroupCb(targetGroupNumber)
-  }
+    newGroupCb(targetGroupNumber);
+  };
 
   // const updatePredictions = () => {
   //   setIsLoading(true);
@@ -137,105 +138,69 @@ function NewPredictionManager() {
   //   }
   // };
 
-  // if (isLoading)
-  //   return (
-  //     <CardContainer>
-  //       <CardWrapper
-  //         isMobile={isMobile}
-  //         border={isMobile ? 'none' : null}
-  //         style={{ height: '400px' }}
-  //       >
-  //         <BallLoader />
-  //       </CardWrapper>
-  //     </CardContainer>
-  //   );
-
-  // if (isStageDataLoading) return <BallLoader />;
+  if (isStageDataLoading)
+    return (
+      <CardContainer>
+        <CardWrapper
+          isMobile={isMobile}
+          border={isMobile ? 'none' : null}
+          style={{ height: '400px' }}
+        >
+          <BallLoader />
+        </CardWrapper>
+      </CardContainer>
+    );
+  const isGroups = () => getStageName(phase) === STAGE_NAMES.GRUPOS;
   return (
     <>
-      <NewPredictionForm
-        fixture={
-          getStageName(phase) === STAGE_NAMES.GRUPOS
-            ? stageData[groupNumberMod(groupNumber)]
-            : stageData
-        }
-        hasChangedGroup={hasChangedGroup}
-      />
-      <NewGroupSwitchButtons setNewGroupNumber={setTargetGroupNumber} />
+      <Link to="..">Volver a selección de fases</Link>
+
+      {selectedUserGroup ? (
+        <>
+          {isGroups() && (
+            <CardTitle>
+              Grupo {numberToGroupLetter(groupNumberMod(targetGroupNumber))}
+            </CardTitle>
+          )}
+          <NewPredictionForm
+            fixture={
+              isGroups() ? stageData[groupNumberMod(groupNumber)] : stageData
+            }
+            hasChangedGroup={hasChangedGroup}
+          />
+          {isGroups() && (
+            <FormWrapper>
+              <NewGroupSwitchButtons setNewGroupNumber={setTargetGroupNumber} />
+            </FormWrapper>
+          )}
+        </>
+      ) : (
+        <Text size="1.5rem" weight="800" align="center" color="tomato">
+          NO ELEGISTE NINGUN GRUPO
+        </Text>
+      )}
+      {resultsMode && selectedUserGroup && (
+        <References
+          green="Acertaste resultado"
+          red="No suma"
+          yellow="Acertaste ganador"
+          gray="No evaluado"
+        />
+      )}
+      {/* <Modal show={showModal} toggle={toggleModal}>
+        <CardTitle>Continuar sin enviar predicciones?</CardTitle>
+        <Button
+          type="button"
+          onClick={() => {
+            toggleModal();
+            switchGroupNumber(groupNumber);
+          }}
+        >
+          Continuar
+        </Button>
+      </Modal> */}
     </>
   );
-
-  // return (
-  //   <>
-  //     <Link to="..">Volver a selección de fases</Link>
-
-  //     {selectedUserGroup ? (
-  //       <>
-  //         {getStageName(phase) !== STAGE_NAMES.GRUPOS ? (
-  //           // Form para NO fase grupos:
-  //           <PredictionForm
-  //             dirty={dirty}
-  //             resultsMode={resultsMode}
-  //             handleSubmit={!resultsMode && handleSubmit}
-  //             stageData={stageData}
-  //             errorMessages={errorMessages}
-  //             values={values}
-  //             handleChange={handleChange}
-  //           />
-  //         ) : (
-  //           // Form para fase de grupos:
-  //           <>
-  //             <PredictionForm
-  //               dirty={dirty}
-  //               groupNumber={groupNumber}
-  //               handleSubmit={!resultsMode ? handleSubmit : undefined}
-  //               stageData={stageData}
-  //               errorMessages={errorMessages}
-  //               values={values}
-  //               handleChange={!resultsMode ? handleChange : undefined}
-  //             />
-  //             <FormWrapper>
-  //               <GroupSwitchButtons
-  //                 handlePrevGroup={() => handleGroupSwitch(-1)}
-  //                 handleNextGroup={() => handleGroupSwitch(1)}
-  //                 prevGroupName={
-  //                   stageData[groupNumberMod(groupNumber - 1)]?.name
-  //                 }
-  //                 nextGroupName={
-  //                   stageData[groupNumberMod(groupNumber + 1)]?.name
-  //                 }
-  //               />
-  //             </FormWrapper>
-  //           </>
-  //         )}
-  //       </>
-  //     ) : (
-  //       <Text size="1.5rem" weight="800" align="center" color="tomato">
-  //         NO ELEGISTE NINGUN GRUPO
-  //       </Text>
-  //     )}
-  //     {resultsMode && selectedUserGroup && (
-  //       <References
-  //         green="Acertaste resultado"
-  //         red="No suma"
-  //         yellow="Acertaste ganador"
-  //         gray="No evaluado"
-  //       />
-  //     )}
-  //     <Modal show={showModal} toggle={toggleModal}>
-  //       <CardTitle>Continuar sin enviar predicciones?</CardTitle>
-  //       <Button
-  //         type="button"
-  //         onClick={() => {
-  //           toggleModal();
-  //           switchGroupNumber(groupNumber);
-  //         }}
-  //       >
-  //         Continuar
-  //       </Button>
-  //     </Modal>
-  //   </>
-  // );
 }
 
 export default NewPredictionManager;

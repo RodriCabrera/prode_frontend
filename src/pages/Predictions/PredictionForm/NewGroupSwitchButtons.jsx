@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md';
 import { Button } from '../../../common/common.styles';
 import { FormButtonWrapper } from '../Predictions.styles';
-import { groupNumberMod, numberToGroupLetter, debounce } from '../predictionsPageUtils';
+import { groupNumberMod, numberToGroupLetter } from '../predictionsPageUtils';
 
 const NewGroupSwitchButtons = ({ setNewGroupNumber }) => {
   const [groupNumber, setGroupNumber] = useState(0);
@@ -12,7 +12,6 @@ const NewGroupSwitchButtons = ({ setNewGroupNumber }) => {
   const [nextGroupName, setNextGroupName] = useState(
     () => `Grupo ${numberToGroupLetter(groupNumberMod(groupNumber + 1))}`
   );
-
 
   useEffect(() => {
     setPrevGroupName(
