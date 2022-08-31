@@ -17,3 +17,9 @@ export const getGroupStage = (signal) => {
 export const getFixtureStatus = (signal) => {
   return withoutCredentials.get('/fifa/fixture-status', { signal });
 };
+
+export const getNextMatches = (quantity = '', signal) => {
+  return withoutCredentials.get(`/fifa/next-matches?quantity=${quantity}`, {
+    signal,
+  });
+};

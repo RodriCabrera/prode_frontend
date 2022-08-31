@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFixtureByStageId } from '../../../api/fixture';
+import { getNextMatches } from '../../../api/fixture';
 import { CardTitle, CardWrapper } from '../../../common/common.styles';
 import { BallLoader } from '../../../common/Spinner/BallLoader';
 import useCleanupController from '../../../hooks/useCleanupController';
@@ -13,13 +13,9 @@ const ShortFixture = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    getFixtureByStageId('GRUPOS', signal)
+    getNextMatches(3, signal)
       .then((res) => {
-        setData(
-          res.data.fixture
-            .sort((a, b) => new Date(a.date) - new Date(b.date))
-            .splice(0, 3)
-        );
+        setData(res.data.fixture);
       })
       .catch((err) => handleCancel(err))
       .finally(() => {
