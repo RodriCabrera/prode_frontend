@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
-import { Button, Form, Input, Text } from '../../../common/common.styles';
+import {
+  Button,
+  CardContainer,
+  CardWrapper,
+  Form,
+  Input,
+} from '../../../common/common.styles';
 import ErrorInfo from '../../../common/MoreInfo/ErrorInfo';
 import Table from '../../../common/Table/Table';
 import { getFlagUrl } from '../../pagesHelpers';
@@ -20,7 +26,10 @@ import { getPredictions, createPredictions } from '../../../api/predictions';
 import { BallLoader } from '../../../common/Spinner/BallLoader';
 import useCleanupController from '../../../hooks/useCleanupController';
 import { toast } from 'react-toastify';
-import { STAGE_NAMES, getStageName } from '../PredictionManager/PredictionManagerUtils';
+import {
+  STAGE_NAMES,
+  getStageName,
+} from '../PredictionManager/PredictionManagerUtils';
 
 export default function NewPredictionForm({ fixture, hasChangedGroup }) {
   const { selectedUserGroup, mode } = useOutletContext();
@@ -82,11 +91,16 @@ export default function NewPredictionForm({ fixture, hasChangedGroup }) {
 
   const data = () => {
     if (!fixture) return null;
-    else if(getStageName(phase) === STAGE_NAMES.GRUPOS) return fixture?.matches;
+    else if (getStageName(phase) === STAGE_NAMES.GRUPOS)
+      return fixture?.matches;
     else return fixture;
-  }
+  };
   return isLoading || hasChangedGroup ? (
-    <BallLoader />
+    <CardContainer>
+      <CardWrapper minHeight="345px" width="365px">
+        <BallLoader />
+      </CardWrapper>
+    </CardContainer>
   ) : (
     <FormWrapper id="prediction-form-wrapper">
       <Form

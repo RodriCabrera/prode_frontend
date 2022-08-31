@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const TableWrapper = styled.table`
   border: ${({ fullWidth }) => (fullWidth ? 'none' : '1px solid dimgray')};
-  border-radius: 18px;
+  border-radius: 8px;
   border-collapse: separate;
   margin: auto;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'initial')};
