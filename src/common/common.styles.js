@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: ${({ marginBottom }) => marginBottom || '1.5rem'};
   max-width: 100%;
 `;
 /**

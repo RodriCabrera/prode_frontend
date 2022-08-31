@@ -158,9 +158,20 @@ function NewPredictionManager() {
       {selectedUserGroup ? (
         <>
           {isGroups() && (
-            <CardTitle>
-              Grupo {numberToGroupLetter(groupNumberMod(targetGroupNumber))}
-            </CardTitle>
+            <>
+              {' '}
+              <CardTitle marginBottom="0">
+                Grupo {numberToGroupLetter(groupNumberMod(targetGroupNumber))}
+              </CardTitle>
+              {resultsMode && selectedUserGroup && (
+                <References
+                  green="Acertaste resultado"
+                  red="No suma"
+                  yellow="Acertaste ganador"
+                  gray="No evaluado"
+                />
+              )}
+            </>
           )}
           <NewPredictionForm
             fixture={
@@ -179,14 +190,7 @@ function NewPredictionManager() {
           NO ELEGISTE NINGUN GRUPO
         </Text>
       )}
-      {resultsMode && selectedUserGroup && (
-        <References
-          green="Acertaste resultado"
-          red="No suma"
-          yellow="Acertaste ganador"
-          gray="No evaluado"
-        />
-      )}
+
       {/* <Modal show={showModal} toggle={toggleModal}>
         <CardTitle>Continuar sin enviar predicciones?</CardTitle>
         <Button

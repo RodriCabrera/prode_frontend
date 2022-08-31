@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const PillWrapper = styled.div`
+const ReferencesPillWrapper = styled.div`
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -15,7 +15,7 @@ const Pill = styled.div`
 `;
 export function References({ green, yellow, red, gray, size }) {
   return (
-    <PillWrapper>
+    <ReferencesPillWrapper>
       {green && (
         <Pill size={size} bg="lightgreen">
           {green}
@@ -36,6 +36,6 @@ export function References({ green, yellow, red, gray, size }) {
           {gray}
         </Pill>
       )}
-    </PillWrapper>
+    </ReferencesPillWrapper>
   );
 }
