@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Spinner } from '../../common/Spinner/Spinner';
 import {
+  Button,
   CardContainer,
   CardTitle,
   CardWrapper,
@@ -10,14 +11,13 @@ import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 import FixtureTable from '../FixturePage/components/FixtureTable';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 import useCleanupController from '../../hooks/useCleanupController';
-import { useIsMobile } from '../../hooks/useIsMobile';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [otherUserPredictions, setOtherUserPredictions] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
-  const isMobile = useIsMobile();
+  const [showShortList, setShowShortList] = useState(true);
 
   useEffect(() => {
     if (!group || !user) return;
@@ -35,30 +35,38 @@ function ProfilePredictions({ props }) {
     return cleanup;
   }, [props]);
 
+  const predictionsToRender = () => {
+    const predictions = showShortList
+      ? otherUserPredictions.slice(0, 10)
+      : otherUserPredictions;
+    return predictions.sort((a, b) => new Date(a.date) - new Date(b.date));
+  };
+
   return (
     <>
       {isLoading && <Spinner />}
       {otherUserPredictions.length > 0 ? (
         <CardContainer>
-          <CardWrapper border="none" >
+          <CardWrapper border="none">
             <CardTitle>Predicciones para {group.name}</CardTitle>
             <GoBackButton />
             <FixtureTable
-              data={otherUserPredictions.sort(
-                (a, b) => new Date(a.date) - new Date(b.date)
-              )}
+              data={predictionsToRender()}
               isCompact
               isMobile
               fullWidth
             />
+            <Button
+              padding="10px"
+              tertiary
+              onClick={() => setShowShortList(!showShortList)}
+            >
+              {showShortList ? 'Mostrar más' : 'Mostrar menos'}
+            </Button>
           </CardWrapper>
         </CardContainer>
       ) : (
-        !isLoading && (
-          <Text align="center">
-            Sin predicciones que mostrar
-          </Text>
-        )
+        !isLoading && <Text align="center">Sin predicciones que mostrar</Text>
       )}
     </>
   );
