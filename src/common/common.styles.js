@@ -132,6 +132,7 @@ export const Input = styled.input`
  * @props showUppercase (text-transform) // width
  */
 export const TextareaInput = styled.textarea`
+  font-family: 'Exo', sans-serif;
   text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
   width: ${({ width }) => width};
   padding: 10px;

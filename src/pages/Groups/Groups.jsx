@@ -7,11 +7,22 @@ import GroupList from './components/GroupList';
 import { getUserGroups } from '../../api/groups';
 import useCleanupController from '../../hooks/useCleanupController';
 import { Spinner } from '../../common/Spinner/Spinner';
+import styled from '@emotion/styled';
+import { useIsMobile } from '../../hooks/useIsMobile';
+
+const Row = styled.div`
+  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+`;
 
 function Groups() {
   const [groupList, setGroupList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   const getGroupList = () => {
     setIsLoading(true);
@@ -43,18 +54,19 @@ function Groups() {
         )}
         {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
       </CardWrapper>
-
-      <CardContainer>
-        <CardWrapper>
+      <Row>
+        {/* <CardContainer> */}
+        <CardWrapper border={isMobile ? 'none' : ''}>
           <CreateGroupForm updateList={getGroupList} />
         </CardWrapper>
-      </CardContainer>
+        {/* </CardContainer> */}
 
-      <CardContainer>
-        <CardWrapper>
+        {/* <CardContainer> */}
+        <CardWrapper border={isMobile ? 'none' : ''}>
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
-      </CardContainer>
+        {/* </CardContainer> */}
+      </Row>
     </CardContainer>
   );
 }

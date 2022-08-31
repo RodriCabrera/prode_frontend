@@ -15,6 +15,7 @@ import {
   Form,
   TextareaInput,
   Select,
+  Text,
 } from '../../../common/common.styles';
 import { groupsSchema } from '../../../validationSchemas/groups';
 
@@ -102,7 +103,9 @@ function CreateGroupForm({ updateList }) {
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} />
           <Label htmlFor="timeLimit">
-            ¿Hasta cuando se podrán realizar las predicciones?
+            <Text size=".8rem" align="center">
+              ¿Hasta cuando se podrán realizar las predicciones?
+            </Text>
             <Select
               value={values.timeLimit}
               name="timeLimit"
