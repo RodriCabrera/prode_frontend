@@ -63,6 +63,7 @@ export default function QuickPrediction() {
                 matchData={matchData}
                 groupData={groupData}
                 afterSubmit={getMatchData}
+                setIsLoading={setIsLoading}
               />
             )}
           </>

@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { createPredictions } from '../../../../api/predictions';
 import { getFlagUrl, parseDate } from '../../../pagesHelpers';
 
-export default function MiniForm({ matchData, groupData, afterSubmit }) {
+export default function MiniForm({ matchData, groupData, afterSubmit, setIsLoading }) {
   const [inputValues, setInputValues] = useState({
     home: '',
     away: '',
@@ -16,6 +16,7 @@ export default function MiniForm({ matchData, groupData, afterSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     toast.promise(
       createPredictions({
         prediction: {
@@ -36,6 +37,7 @@ export default function MiniForm({ matchData, groupData, afterSubmit }) {
         success: 'Predicción enviada',
         error: {
           render({ data }) {
+            setIsLoading(false);
             return data.response.data.error;
           },
         },
