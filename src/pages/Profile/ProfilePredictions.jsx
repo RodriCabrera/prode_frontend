@@ -40,7 +40,7 @@ function ProfilePredictions({ props }) {
       {isLoading && <Spinner />}
       {otherUserPredictions.length > 0 ? (
         <CardContainer>
-          <CardWrapper border="none">
+          <CardWrapper border="none" >
             <CardTitle>Predicciones para {group.name}</CardTitle>
             <GoBackButton />
             <FixtureTable
@@ -48,15 +48,15 @@ function ProfilePredictions({ props }) {
                 (a, b) => new Date(a.date) - new Date(b.date)
               )}
               isCompact
-              isMobile={isMobile}
-              fullWidth={isMobile}
+              isMobile
+              fullWidth
             />
           </CardWrapper>
         </CardContainer>
       ) : (
         !isLoading && (
           <Text align="center">
-            {user.name} no ha hecho predicciones para {group.name}
+            Sin predicciones que mostrar
           </Text>
         )
       )}

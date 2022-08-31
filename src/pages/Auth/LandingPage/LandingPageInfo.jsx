@@ -9,7 +9,7 @@ const LandingPageInfo = () => {
     <LPInfoContainer id="lp-info-container">
       <LPInfoWrapper>
         <Text size={isMobile ? '3rem' : '4rem'} weight="800">
-          Podés juegar en distintos grupos.
+          Podés jugar en distintos grupos.
         </Text>
         <Text size={isMobile ? '1rem' : '1.5rem'} weight="600" color="tomato">
           ⚽️ Creá un grupo y enviá invitaciones a quien quieras.
