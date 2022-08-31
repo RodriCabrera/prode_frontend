@@ -21,11 +21,14 @@ const FlagImg = styled.img`
 const FlagPlaceholder = styled.div`
   width: 48px;
   height: 28px;
+  min-width: 48px;
+  min-height: 28px;
   background: gray;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  margin: auto;
 `
 
 export const getFlagUrl = (url, size) => {
