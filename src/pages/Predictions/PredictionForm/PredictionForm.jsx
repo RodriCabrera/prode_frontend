@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
-import { Button, Form, Input, Text } from '../../../common/common.styles';
+import {
+  Button,
+  CardContainer,
+  CardWrapper,
+  Form,
+  Input,
+} from '../../../common/common.styles';
 import ErrorInfo from '../../../common/MoreInfo/ErrorInfo';
 import Table from '../../../common/Table/Table';
 import { getFlagUrl } from '../../pagesHelpers';
@@ -9,64 +13,109 @@ import { FormWrapper } from '../Predictions.styles';
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
-  numberToGroupLetter,
-  groupNumberMod,
+  formatPredictionsToPost,
+  formatPredictionsToDisplay,
   calculateIfCanPredict,
   formatInputDisplayValue,
 } from '../predictionsPageUtils';
 import { useIsMobile } from '../../../hooks/useIsMobile';
+import React, { useState, useEffect } from 'react';
+import { useFormik } from 'formik';
+import { useOutletContext, useParams } from 'react-router-dom';
+import { getPredictions, createPredictions } from '../../../api/predictions';
+import { BallLoader } from '../../../common/Spinner/BallLoader';
+import useCleanupController from '../../../hooks/useCleanupController';
+import { toast } from 'react-toastify';
+import {
+  STAGE_NAMES,
+  getStageName,
+} from '../PredictionManager/PredictionManagerUtils';
 
-const useGetGroupStageData = ({ stageData, groupNumber }) => {
-  const [data, setData] = useState(stageData);
-  useEffect(() => {
-    if (stageData.length > 0) {
-      if (typeof groupNumber === 'number') {
-        setData(stageData[groupNumberMod(groupNumber)]?.matches);
-      }
-    }
-  }, [stageData]);
-  return data;
-};
-
-export function PredictionForm(props) {
-  const {
-    stageData,
-    groupNumber,
-    values,
-    handleChange,
-    handleSubmit,
-    errorMessages,
-    dirty,
-  } = props;
-
-  const data = useGetGroupStageData({ stageData, groupNumber });
-
-  const GroupTitle = () => {
-    return (
-      <Text align="center" size="1.7rem" weight="600">
-        {typeof groupNumber === 'number' &&
-          `GRUPO ${numberToGroupLetter(groupNumber)}`}
-      </Text>
-    );
-  };
+export default function PredictionForm({ fixture, hasChangedGroup }) {
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
+  const [predictions, setPredictions] = useState({});
+  const [signal, cleanup, handleCancel] = useCleanupController();
+  const [isLoading, setIsLoading] = useState(hasChangedGroup || false);
+  const { phase } = useParams();
+  const { values, handleChange, resetForm, dirty } = useFormik({
+    initialValues: {},
+  });
+  const [errorMessages, setErrorMessages] = useState([]);
   const isMobile = useIsMobile();
-  return (
+
+  useEffect(() => {
+    if (!fixture) return;
+    setIsLoading(true);
+    getPredictions(
+      selectedUserGroup?.id,
+      fixture.id ? undefined : getStageName(phase),
+      fixture.id || undefined,
+      signal
+    )
+      .then((res) => setPredictions(res.data))
+      .finally(() => setIsLoading(false))
+      .catch((err) => (handleCancel(err) ? setIsLoading(true) : null));
+    return cleanup;
+  }, [fixture]);
+
+  useEffect(() => {
+    resetForm({ values: formatPredictionsToDisplay(predictions) } || {});
+  }, [predictions]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    toast.promise(
+      createPredictions(formatPredictionsToPost(values, selectedUserGroup?.id))
+        .then((res) => {
+          setErrorMessages(res.data.errors);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        }),
+      {
+        pending: 'Enviando predicciones...',
+        success: 'Predicciones enviadas con éxito',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
+  };
+
+  const data = () => {
+    if (!fixture) return null;
+    else if (getStageName(phase) === STAGE_NAMES.GRUPOS)
+      return fixture?.matches;
+    else return fixture;
+  };
+  return isLoading || hasChangedGroup ? (
+    <CardContainer>
+      <CardWrapper
+        minHeight={
+          resultsMode ? '360px' : '410px'
+        }
+        width="365px"
+      >
+        <BallLoader />
+      </CardWrapper>
+    </CardContainer>
+  ) : (
     <FormWrapper id="prediction-form-wrapper">
-      <GroupTitle />
       <Form
         id="prediction-form"
         onSubmit={handleSubmit ? handleSubmit : undefined}
       >
         <Table fullWidth={isMobile} id="prediction-table">
           <Table.Body>
-            {/* // TODO: Este mapeo está heavy, ver si se puede descomprimir un cacho... */}
-            {data?.map((match) => {
+            {data()?.map((match) => {
               const predictionStatus = () =>
                 match.status === 0
                   ? checkPredictionResult(
-                      data,
+                      data(),
                       match.id,
                       'away',
                       values[`${match.id}-away`],
