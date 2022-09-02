@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getNextMatches } from '../../../api/fixture';
-import { CardTitle, CardWrapper } from '../../../common/common.styles';
+import { CardTitle, CardWrapper, Text } from '../../../common/common.styles';
 import { BallLoader } from '../../../common/Spinner/BallLoader';
 import useCleanupController from '../../../hooks/useCleanupController';
 import { useIsMobile } from '../../../hooks/useIsMobile';
@@ -32,14 +32,19 @@ const ShortFixture = () => {
     >
       <CardTitle>Próximos partidos:</CardTitle>
       {isLoading && <BallLoader />}
-      {data && (
-        <FixtureTable
-          id="short-fixture-card-container"
-          data={data}
-          isCompact
-          fullWidth
-        />
-      )}
+      {data &&
+        (data.length > 0 ? (
+          <FixtureTable
+            id="short-fixture-card-container"
+            data={data}
+            isCompact
+            fullWidth
+          />
+        ) : (
+          <Text align="center" weight="600" color="gray" margin="2rem 0">
+            No se aproximan partidos
+          </Text>
+        ))}
     </CardWrapper>
   );
 };
