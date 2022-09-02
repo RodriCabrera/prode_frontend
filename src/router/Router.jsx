@@ -12,6 +12,7 @@ import App from '../App';
 import AuthRoutes from './AuthRoutes';
 import PredictionsRoutes from './PredictionsRoutes';
 import ProfileRoutes from './ProfileRoutes';
+import Cabecita from '../pages/Games/Cabecita';
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
               <Route path="fixture" element={<Fixture />} />
               <Route path="scores" element={<Scores />} />
               <Route path="profile/*" element={<ProfileRoutes />} />
+              <Route path="games/*" element={<Cabecita />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

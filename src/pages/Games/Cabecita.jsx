@@ -15,6 +15,7 @@ export default function Cabecita() {
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 999999999;
   `;
   const ExitBtn = styled.button`
     position: absolute;
@@ -24,7 +25,7 @@ export default function Cabecita() {
     background-color: gray;
     font-size: 1.2rem;
     cursor: pointer;
-    z-index: 999;
+    z-index: 9999999999;
     color: white;
     height: 1.5rem;
     width: 1.5rem;
@@ -35,7 +36,8 @@ export default function Cabecita() {
       <ExitBtn onClick={() => setShowGame(false)}>X</ExitBtn>
       <VentanaJueguito
         title="jueguito"
-        src="games/Cabecita.html"
+        src={`${window.location}/Cabecita.html`}
+        
       ></VentanaJueguito>
     </ContenedorJueguito>
   ) : (
