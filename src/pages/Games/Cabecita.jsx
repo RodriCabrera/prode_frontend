@@ -3,7 +3,7 @@ import { Button } from '../../common/common.styles';
 import styled from '@emotion/styled';
 
 export default function Cabecita() {
-  const [showGame, setShowGame] = useState(true);
+  const [showGame, setShowGame] = useState(false);
   const ContenedorJueguito = styled.div`
     width: 100vw;
     height: 100vh;
