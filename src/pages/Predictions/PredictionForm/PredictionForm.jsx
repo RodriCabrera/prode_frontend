@@ -51,6 +51,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
       selectedUserGroup?.id,
       fixture.id ? undefined : getStageName(phase),
       fixture.id || undefined,
+      undefined,
       signal
     )
       .then((res) => setPredictions(res.data))

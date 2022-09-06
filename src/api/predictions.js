@@ -27,9 +27,9 @@ body {
 }
 */
 
-export const getPredictions = (userGroupId = '', stage = '', group='', signal) => {
+export const getPredictions = (userGroupId = '', stage = '', group='', own='true', signal) => {
   return withCredentials.get(
-    `/predictions?userGroupId=${userGroupId}&stage=${stage}&group=${group}`,
+    `/predictions?userGroupId=${userGroupId}&stage=${stage}&group=${group}&own=${own}`,
     { signal }
   );
 };
