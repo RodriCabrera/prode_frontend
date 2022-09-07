@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
-import { ListElement } from '../../../common/Lists/ListElement';
-import { AuthContext } from '../../../common/AuthProvider';
-import { useIsMobile } from '../../../hooks/useIsMobile';
+import { UserMiniAvatar } from '../../../../../common/UserMiniAvatar/UserMiniAvatar';
+import { ListElement } from '../../../../../common/Lists/ListElement';
+import { AuthContext } from '../../../../../common/AuthProvider';
+import { useIsMobile } from '../../../../../hooks/useIsMobile';
 
 const ScoreListWrapper = styled.div`
   display: flex;
