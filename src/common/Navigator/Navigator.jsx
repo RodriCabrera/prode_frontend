@@ -1,54 +1,118 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import NavLayer from './NavLayer'
+import React, { useState, useEffect, useCallback } from 'react';
+import NavLayer from './NavLayer';
+import {
+  NavWrapper,
+  NavHistory,
+  NavLayers,
+  NavContent,
+  NavHistoryItem,
+} from './navigator.styles';
 
 const defaultFinalCheck = (data) => {
   if (data?.home) return data;
-  return false
-}
+  return false;
+};
 
 const defaultParseName = (data) => {
   if (data.name) return data.name;
-  if (data.home && data.away) return `${data.home.name} vs ${data.away.name}`
-  else return data.id 
-}
+  if (data.home && data.away)
+    return `${data.home.shortName} vs ${data.away.shortName}`;
+  else return data.id;
+};
 
-export default function Navigator({ children, data, isFinalCheck=defaultFinalCheck, parseName=defaultParseName }) {
-  const [filteredData, setFilteredData] = useState([...data])
-  const [isLoading, setIsLoading] = useState(false)
-  const [history, setHistory] = useState([{data: [...data], name: '...'}])
+export const NavContext = React.createContext();
 
-  const setFilter = useCallback(data => {
-    setIsLoading(true)
+export default function Navigator({
+  children,
+  data,
+  isFinalCheck = defaultFinalCheck,
+  parseName = defaultParseName,
+  baseName = '...',
+}) {
+  const [filteredData, setFilteredData] = useState([...data]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [history, setHistory] = useState([{ data: [...data], name: baseName }]);
+
+  const setFilter = useCallback((data) => {
+    setIsLoading(true);
     setFilteredData((current) => {
-      const filtered = current.find(c => c.id === data.id)
-      if (isFinalCheck(filtered)) return [filtered]
-      const res = Object.entries(filtered).find(([key, value]) => typeof(value) === 'object')[1]
-      if (isFinalCheck(res)) {
-        return isFinalCheck(res)
-      } else {
-        setHistory((prevHistory) => [...prevHistory, {data: res, name: parseName(data)}])
-        return res
+      const filtered = current.find((c) => c.id === data.id);
+      if (isFinalCheck(filtered)) {
+        setHistory((prevHistory) => [
+          ...prevHistory,
+          { data: filtered, name: parseName(data) },
+        ]);
+        return [filtered];
       }
-    })
-    setIsLoading(false)
-  }, [])
+      const res = Object.entries(filtered).find(
+        ([key, value]) => typeof value === 'object'
+      )[1];
+      setHistory((prevHistory) => [
+        ...prevHistory,
+        { data: res, name: parseName(data) },
+      ]);
+      if (isFinalCheck(res)) {
+        return isFinalCheck(res);
+      } else {
+        return res;
+      }
+    });
+    setIsLoading(false);
+  }, []);
 
   const handleGoBack = (index) => {
-    if (index >= history.length+1) return
-    setHistory((prevVal) => [...prevVal.slice(0, index+1)])
-    if (index === 0) return setFilteredData([...data])
-    setFilteredData(history[index].data)
-  }
+    if (index >= history.length + 1) return;
+    setHistory((prevVal) => [...prevVal.slice(0, index + 1)]);
+    if (index === 0) return setFilteredData([...data]);
+    setFilteredData(history[index].data);
+  };
 
   useEffect(() => {
-    setFilteredData([...data])
-  }, [data])
+    setFilteredData([...data]);
+  }, [data]);
 
   return (
-    <>
-        {history.map((historyElement, index) => <button key={index} onClick={() => handleGoBack(index)}>{parseName(historyElement)}</button>)}
-        {!isLoading && filteredData.map((item) => <NavLayer data={item} key={item.id} filterFunc={setFilter} parseName={parseName} /> )}
-        { children }
-    </>
-  )
+    <NavWrapper>
+      <NavHistory>
+        {history.map((historyElement, index) => {
+          if (index === history.length - 1)
+            return (
+              <NavHistoryItem disabled>
+                {parseName(historyElement)}
+              </NavHistoryItem>
+            );
+          else
+            return (
+              <>
+                <NavHistoryItem key={index} onClick={() => handleGoBack(index)}>
+                  {parseName(historyElement)}
+                </NavHistoryItem>
+                <div>/</div>
+              </>
+            );
+        })}
+      </NavHistory>
+      <NavLayers>
+        {!isLoading && (
+          <>
+            {filteredData.length > 1
+              ? filteredData.map((item) => (
+                  <NavLayer
+                    data={item}
+                    key={item.id}
+                    filterFunc={setFilter}
+                    parseName={parseName}
+                  />
+                ))
+              : null}
+          </>
+        )}
+      </NavLayers>
+      <NavContent>
+        <NavContext.Provider value={filteredData}>
+          {children}
+        </NavContext.Provider>
+      </NavContent>
+    </NavWrapper>
+  );
 }

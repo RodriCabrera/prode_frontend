@@ -32,29 +32,29 @@ function Fixture() {
       </FixtureTablesContainer>
     );
   };
-  // return <Navigator data={fixtureData} />
-  return (
-    <FixtureWrapper>
-      {isMobile ? (
-      <>
-        {fixtureData.map(stage => {
-          if (stage.groups) return (<CollapsableStage stageName={stage.name}>
-            {renderGroupsTables(stage.groups)}
-          </CollapsableStage>)
-          else return <CollapsableStage stageName={stage.name} stageData={stage.matches} />
-        })}
-      </>
-      ) : (
-        <>
-          <LaterStagesGraph />
-          <Text size="2rem" weight="700" align="center">
-            Fase de Grupos
-          </Text>
-          {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0]?.groups)}
-        </>
-      )}
-    </FixtureWrapper>
-  );
+  return <Navigator data={fixtureData} baseName="QATAR 2022">hola</Navigator>
+  // return (
+  //   <FixtureWrapper>
+  //     {isMobile ? (
+  //     <>
+  //       {fixtureData.map(stage => {
+  //         if (stage.groups) return (<CollapsableStage stageName={stage.name}>
+  //           {renderGroupsTables(stage.groups)}
+  //         </CollapsableStage>)
+  //         else return <CollapsableStage stageName={stage.name} stageData={stage.matches} />
+  //       })}
+  //     </>
+  //     ) : (
+  //       <>
+  //         <LaterStagesGraph />
+  //         <Text size="2rem" weight="700" align="center">
+  //           Fase de Grupos
+  //         </Text>
+  //         {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0]?.groups)}
+  //       </>
+  //     )}
+  //   </FixtureWrapper>
+  // );
 }
 
 export default Fixture;
