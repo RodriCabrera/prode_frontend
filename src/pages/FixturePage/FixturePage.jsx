@@ -11,6 +11,7 @@ import {
   GroupTableWrapper,
 } from './FixturePage.styles';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import Navigator from '../../common/Navigator/Navigator';
 
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
@@ -31,7 +32,7 @@ function Fixture() {
       </FixtureTablesContainer>
     );
   };
-
+  // return <Navigator data={fixtureData} />
   return (
     <FixtureWrapper>
       {isMobile ? (

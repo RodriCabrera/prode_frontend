@@ -38,7 +38,7 @@ export default function ScoreList({ scores }) {
   };
   return (
     <ScoreListWrapper isMobile={isMobile}>
-      {scores?.data.scores.map((score, index) => {
+      {scores?.scores.map((score, index) => {
         return (
           <ScoreItem key={score.user}>
             <ListElement
