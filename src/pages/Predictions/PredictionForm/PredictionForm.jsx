@@ -99,7 +99,9 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
         minHeight={
           resultsMode ? '360px' : '410px'
         }
+        isMobile={isMobile}
         width="365px"
+        border={isMobile ? 'none' : null}
       >
         <BallLoader />
       </CardWrapper>
