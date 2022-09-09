@@ -9,12 +9,14 @@ import { GroupSelector } from '../../../Predictions/components/GroupSelector';
 import { useGetUserGroupsData } from '../../../../hooks/useGetUserGroupsData';
 import { getGroupScores, getGroupRules } from '../../../../api/groups';
 import { getPredictions } from '../../../../api/predictions';
-import useCleanupController from '../../../../hooks/useCleanupController';
 import { BallLoader } from '../../../../common/Spinner/BallLoader';
 import { isEmpty } from 'lodash';
 import { Spinner } from '../../../../common/Spinner/Spinner';
-import CustomPieChart from '../PieChart';
-import { getCountByResultType } from '../../scoresPageHelpers';
+// import CustomPieChart from '../PieChart';
+import Graphs from './components/Graphs';
+import MatchNavigator from '../MatchNavigator';
+// import { getCountByResultType } from '../../scoresPageHelpers';
+import useCleanupController from '../../../../hooks/useCleanupController';
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
@@ -94,9 +96,12 @@ export default function ScoresByGroup() {
         ) : (
           <>
             <ScoreList scores={scores} />
-            <CustomPieChart
+            <MatchNavigator>
+              <Graphs predictions={predictions} rules={rules} />
+            </MatchNavigator>
+            {/* <CustomPieChart
               data={getCountByResultType(predictions, rules.scoring)}
-            />
+            /> */}
           </>
         )}
       </CardWrapper>

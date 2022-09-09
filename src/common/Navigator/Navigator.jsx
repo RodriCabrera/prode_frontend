@@ -8,25 +8,13 @@ import {
   NavHistoryItem,
 } from './navigator.styles';
 
-const defaultFinalCheck = (data) => {
-  if (data?.home) return data;
-  return false;
-};
-
-const defaultParseName = (data) => {
-  if (data.name) return data.name;
-  if (data.home && data.away)
-    return `${data.home.shortName} vs ${data.away.shortName}`;
-  else return data.id;
-};
-
 export const NavContext = React.createContext();
 
 export default function Navigator({
   children,
   data,
-  isFinalCheck = defaultFinalCheck,
-  parseName = defaultParseName,
+  isFinalCheck,
+  parseName,
   baseName = '...',
 }) {
   const [filteredData, setFilteredData] = useState([...data]);

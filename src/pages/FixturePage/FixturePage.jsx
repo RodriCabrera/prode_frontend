@@ -11,14 +11,13 @@ import {
   GroupTableWrapper,
 } from './FixturePage.styles';
 import { useIsMobile } from '../../hooks/useIsMobile';
-import Navigator from '../../common/Navigator/Navigator';
 
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
   const isMobile = useIsMobile();
 
   const renderGroupsTables = (groups) => {
-    if (!groups) return <Spinner />
+    if (!groups) return <Spinner />;
     return (
       <FixtureTablesContainer>
         {groups.map((group) => (
@@ -32,29 +31,37 @@ function Fixture() {
       </FixtureTablesContainer>
     );
   };
-  return <Navigator data={fixtureData} baseName="QATAR 2022">hola</Navigator>
-  // return (
-  //   <FixtureWrapper>
-  //     {isMobile ? (
-  //     <>
-  //       {fixtureData.map(stage => {
-  //         if (stage.groups) return (<CollapsableStage stageName={stage.name}>
-  //           {renderGroupsTables(stage.groups)}
-  //         </CollapsableStage>)
-  //         else return <CollapsableStage stageName={stage.name} stageData={stage.matches} />
-  //       })}
-  //     </>
-  //     ) : (
-  //       <>
-  //         <LaterStagesGraph />
-  //         <Text size="2rem" weight="700" align="center">
-  //           Fase de Grupos
-  //         </Text>
-  //         {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0]?.groups)}
-  //       </>
-  //     )}
-  //   </FixtureWrapper>
-  // );
+  return (
+    <FixtureWrapper>
+      {isMobile ? (
+        <>
+          {fixtureData.map((stage) => {
+            if (stage.groups)
+              return (
+                <CollapsableStage stageName={stage.name}>
+                  {renderGroupsTables(stage.groups)}
+                </CollapsableStage>
+              );
+            else
+              return (
+                <CollapsableStage
+                  stageName={stage.name}
+                  stageData={stage.matches}
+                />
+              );
+          })}
+        </>
+      ) : (
+        <>
+          <LaterStagesGraph />
+          <Text size="2rem" weight="700" align="center">
+            Fase de Grupos
+          </Text>
+          {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0]?.groups)}
+        </>
+      )}
+    </FixtureWrapper>
+  );
 }
 
 export default Fixture;
