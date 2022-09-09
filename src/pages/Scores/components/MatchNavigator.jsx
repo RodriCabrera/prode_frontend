@@ -13,7 +13,7 @@ export default function MatchNavigator({ children }) {
   const parseName = (data) => {
     if (data.name) return data.name;
     if (data.home && data.away)
-      return `${data.home.shortName} vs ${data.away.shortName}`;
+      return `${data.home.shortName || data.home} vs ${data.away.shortName || data.away}`;
     else return data.id;
   };
 

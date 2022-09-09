@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const NavWrapper = styled.div`
   width: 100%;
   min-height: 500px;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -44,6 +45,7 @@ export const NavButton = styled.button`
   padding: 0.75rem;
   font-weight: 600;
   box-shadow: none;
+  transition: transform ease-in 0.03s;
   &:hover {
     transform: translateY(-0.1rem) scale(1.05);
     box-shadow: 0 0.25rem 8px rgba(0,0,0,0.2);
