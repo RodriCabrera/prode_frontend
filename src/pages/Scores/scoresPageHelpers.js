@@ -1,5 +1,5 @@
 export const getCountByResultType = (predictions, groupScoring) => {
-  if (predictions.length < 1) return []
+  if (predictions.length < 1) return [];
   const result = {
     perfect: {
       name: 'exacto',
@@ -27,17 +27,21 @@ export const getCountByResultType = (predictions, groupScoring) => {
 };
 
 export const getMatchList = (data) => {
-  if (data.length < 1) return []
-  if (data[0]?.home) return data
-  return data.map((item) => {
-    if (item.groups) {
-      return item.groups.map(group => group.matches).flat()
-    }
-    return item.matches
-  }).flat()
-}
+  if (data.length < 1) return [];
+  if (data[0]?.home) return data;
+  return data
+    .map((item) => {
+      if (item.groups) {
+        return item.groups.map((group) => group.matches).flat();
+      }
+      return item.matches;
+    })
+    .flat();
+};
 
 export const filterPredictionsForFixture = (predictions, matches) => {
-  const matchIds = matches.map(m => m.id)
-  return predictions.filter(prediction => matchIds.includes(prediction.matchId))
-}
+  const matchIds = matches.map((m) => m.id);
+  return predictions.filter((prediction) =>
+    matchIds.includes(prediction.matchId)
+  );
+};

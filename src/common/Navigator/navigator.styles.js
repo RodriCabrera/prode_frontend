@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const NavWrapper = styled.div`
   width: 100%;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -21,10 +22,13 @@ export const NavHistory = styled.div`
 export const NavHistoryItem = styled.button`
   cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   background-color: transparent;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 0.5rem;
   margin: 0.35rem;
+  line-height: 1;
+  text-underline-offset: 2px;
   text-decoration: ${({ disabled }) => (disabled ? 'underline' : 'none')};
+  font-weight:  ${({ disabled }) => (disabled ? 'default' : 700)};
   transition: all ease-in-out 0.15s;
   &:hover {
     background-color: ${({ disabled }) =>
@@ -37,7 +41,17 @@ export const NavButton = styled.button`
   background-color: transparent;
   border: 1px solid white;
   border-radius: 12px;
-  padding: 0.5rem;
+  padding: 0.75rem;
+  font-weight: 600;
+  box-shadow: none;
+  &:hover {
+    transform: translateY(-0.1rem) scale(1.05);
+    box-shadow: 0 0.25rem 8px rgba(0,0,0,0.2);
+  }
+  &:active {
+    transform: initial;
+    box-shadow: 0 0.25rem 8px rgba(0,0,0,0.2) inset;
+  }
 `;
 
 export const NavLayers = styled.div`
