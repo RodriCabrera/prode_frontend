@@ -8,24 +8,21 @@ import ScoreList from '../ScoresByGroup/components/ScoreList';
 import { GroupSelector } from '../../../Predictions/components/GroupSelector';
 import { useGetUserGroupsData } from '../../../../hooks/useGetUserGroupsData';
 import { getGroupScores, getGroupRules } from '../../../../api/groups';
+
 import { getPredictions } from '../../../../api/predictions';
 import { BallLoader } from '../../../../common/Spinner/BallLoader';
 import { isEmpty } from 'lodash';
 import { Spinner } from '../../../../common/Spinner/Spinner';
-// import CustomPieChart from '../PieChart';
 import Graphs from './components/Graphs';
 import MatchNavigator from '../MatchNavigator';
-// import { getCountByResultType } from '../../scoresPageHelpers';
 import useCleanupController from '../../../../hooks/useCleanupController';
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
   const [predictions, setPredictions] = useState([]);
-  const [rules, setRules] = useState({});
   const [checked, setChecked] = useState({
     scores: false,
     predictions: false,
-    rules: false,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
@@ -38,12 +35,6 @@ export default function ScoresByGroup() {
   } = useGetUserGroupsData();
 
   const getGroupData = () => {
-    getGroupRules(selectedUserGroup?.name, signal)
-      .then((res) => {
-        setRules(res.data);
-        setChecked((prevState) => ({ ...prevState, rules: true }));
-      })
-      .catch((err) => handleCancel(err));
     getGroupScores(selectedUserGroup?.name, signal)
       .then((res) => {
         setScores(res.data);
@@ -67,9 +58,9 @@ export default function ScoresByGroup() {
   }, [selectedUserGroup]);
 
   useEffect(() => {
-    if (!checked.predictions || !checked.scores || !checked.rules) return;
+    if (!checked.predictions || !checked.scores) return;
     setIsLoading(false);
-  }, [checked.predictions, checked.scores, checked.rules]);
+  }, [checked.predictions, checked.scores]);
 
   return (
     <CardContainer>
@@ -97,11 +88,8 @@ export default function ScoresByGroup() {
           <>
             <ScoreList scores={scores} />
             <MatchNavigator>
-              <Graphs predictions={predictions} rules={rules} />
+              <Graphs predictions={predictions} groupData={selectedUserGroup} />
             </MatchNavigator>
-            {/* <CustomPieChart
-              data={getCountByResultType(predictions, rules.scoring)}
-            /> */}
           </>
         )}
       </CardWrapper>
