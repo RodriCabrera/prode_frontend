@@ -102,10 +102,10 @@ export const calcScoreProgressByDate = (fixture, predictions, groupData) => {
   for (let [key, value] of Object.entries(predictionsByDate)) {
     let newObj = { date: key };
     for (let member of memberAcc) {
-      newObj[member._id] = value
+      newObj[member.name] = value
         .filter((prediction) => prediction.userId === member._id)
         .reduce((acc, curr) => (acc += curr.score), member.score);
-      member.score = newObj[member._id];
+      member.score = newObj[member.name];
     }
     result.push(newObj);
   }
