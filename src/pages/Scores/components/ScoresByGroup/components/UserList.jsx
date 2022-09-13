@@ -41,7 +41,7 @@ export default function UserList({ users, displayInfo, handleClose }) {
           <MdOutlineChevronLeft size={24} />
         </CloseButton>
         <CardTitle>{displayInfo.stage}</CardTitle>
-        <Text align="center">
+        <Text align="center" size="1.2rem">
           <span style={{ color: displayInfo.color }}>{displayInfo.name}</span>
         </Text>
         {users.length > 0 ? (
