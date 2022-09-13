@@ -5,6 +5,7 @@ import {
   getCountByResultType,
   groupUsersByResultType,
   calcScoreProgressByDate,
+  pairUsernameWithAvatar
 } from '../../../scoresPageHelpers';
 import CustomPieChart from '../../../../../common/Charts/PieChart';
 import MultipleLines from '../../../../../common/Charts/MultipleLines';
@@ -47,7 +48,7 @@ export default function Graphs({ predictions, groupData }) {
           clickHandler={handlePieClick}
         />
       )}
-      {graph === GRAPHS.USER_PROGRESS && <MultipleLines data={data} />}
+      {graph === GRAPHS.USER_PROGRESS && <MultipleLines data={data} userAvatars={pairUsernameWithAvatar(groupData.members)} />}
       <div>
         <Button
           onClick={() =>
