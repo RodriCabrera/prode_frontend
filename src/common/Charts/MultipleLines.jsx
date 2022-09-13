@@ -29,7 +29,11 @@ export default function MultipleLines({
   userAvatars,
   height,
 }) {
-  function renderCustomDot({ cx, cy, dataKey, fill }) {
+  function renderCustomDot({ cx, cy, dataKey, fill, index }) {
+    if (index === data.length-1) {
+      cx -= 30;
+      cy -= 10;
+    }
     return !userAvatars[dataKey] ? (
       <>
         <svg
@@ -78,7 +82,7 @@ export default function MultipleLines({
     border-radius: 0.25rem;
     background: black;
     padding: 1rem;
-    margin: 1rem;
+    margin: 1rem 1.2rem;
     box-shadow: 15px 30px 40px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
@@ -114,10 +118,14 @@ export default function MultipleLines({
     <ResponsiveContainer width="95%" height={height || 400}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="1" />
-        <XAxis dataKey="date" dy={15} tickFormatter={(value) => new Date(value).toLocaleDateString()}/>
-        <YAxis unit="pts" dx={-10}/>
+        <XAxis
+          dataKey="date"
+          dy={15}
+          tickFormatter={(value) => new Date(value).toLocaleDateString()}
+        />
+        <YAxis unit="pts" dx={-10} />
         <Tooltip content={<CustomTooltip />} />
-        <Legend wrapperStyle={{marginBottom: '-1.2rem'}}/>
+        <Legend wrapperStyle={{ marginBottom: '-1.2rem' }} />
         {Object.keys(data[0]).map((key, index) => {
           if (key === 'date') return null;
           return (
