@@ -114,10 +114,10 @@ export default function MultipleLines({
     <ResponsiveContainer width="95%" height={height || 400}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="1" />
-        <XAxis dataKey="date" />
-        <YAxis unit="pts" />
+        <XAxis dataKey="date" dy={15} tickFormatter={(value) => new Date(value).toLocaleDateString()}/>
+        <YAxis unit="pts" dx={-10}/>
         <Tooltip content={<CustomTooltip />} />
-        <Legend />
+        <Legend wrapperStyle={{marginBottom: '-1.2rem'}}/>
         {Object.keys(data[0]).map((key, index) => {
           if (key === 'date') return null;
           return (
