@@ -121,7 +121,7 @@ export default function MultipleLines({
         <XAxis
           dataKey="date"
           dy={15}
-          tickFormatter={(value) => new Date(value).toLocaleDateString()}
+          tickFormatter={(value) => new Date(value).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric'})}
         />
         <YAxis unit="pts" dx={-10} allowDecimals={false}/>
         <Tooltip content={<CustomTooltip />} />

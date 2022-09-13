@@ -70,7 +70,7 @@ export default function Graphs({ predictions, groupData }) {
         />
       )}
       {graph === GRAPHS.USER_PROGRESS &&
-        (data.length > 1 ? (
+        (data.length > 1 || fixture.length > 1 ? (
           <MultipleLines
             data={data}
             userAvatars={pairUsernameWithAvatar(groupData.members)}
