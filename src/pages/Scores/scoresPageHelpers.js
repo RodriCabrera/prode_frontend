@@ -113,7 +113,7 @@ export const calcScoreProgressByDate = (fixture, predictions, groupData) => {
 };
 
 export const pairUsernameWithAvatar = (members) => {
-  const result = {}
-  members.forEach(member => result[member.name] = member.avatar)
+  const result = {};
+  members.forEach((member) => (result[member.name] = member.avatar));
   return result;
-}
+};

@@ -26,7 +26,7 @@ function CustomTooltip({ active, payload }) {
 
 // dataFormat = { name: 'NOMBRE_ELEMENTO', ammount: parseInt('VALOR A CONSIDERAR'), color: 'COLOR_REPRESENTATIVO'}
 
-export default function CustomPieChart({ data, clickHandler, height }) {
+export default function CustomPieChart({ data, clickHandler = null, height }) {
   const predictionAmmount = data.reduce(
     (acc, item) => (acc += item.ammount),
     0
@@ -44,7 +44,7 @@ export default function CustomPieChart({ data, clickHandler, height }) {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
     const percent = data[index].ammount / predictionAmmount;
-    if (percent === 0) return
+    if (percent === 0) return;
     return (
       <text
         x={x}
@@ -71,7 +71,12 @@ export default function CustomPieChart({ data, clickHandler, height }) {
           label={renderCustomLabel}
         >
           {data.map((d) => (
-            <Cell key={d.name} fill={d.color} onClick={() => clickHandler(d)}/>
+            <Cell
+              key={d.name}
+              fill={d.color}
+              onClick={() => clickHandler && clickHandler(d)}
+              style={{ cursor: clickHandler ? 'pointer' : 'default' }}
+            />
           ))}
         </Pie>
         <Tooltip content={<CustomTooltip />} />

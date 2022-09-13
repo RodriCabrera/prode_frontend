@@ -5,10 +5,11 @@ import {
   getCountByResultType,
   groupUsersByResultType,
   calcScoreProgressByDate,
-  pairUsernameWithAvatar
+  pairUsernameWithAvatar,
 } from '../../../scoresPageHelpers';
 import CustomPieChart from '../../../../../common/Charts/PieChart';
 import MultipleLines from '../../../../../common/Charts/MultipleLines';
+import UserList from './UserList';
 import { Button } from '../../../../../common/common.styles';
 
 const GRAPHS = {
@@ -17,9 +18,14 @@ const GRAPHS = {
 };
 
 export default function Graphs({ predictions, groupData }) {
-  const fixture = useNavContext();
+  const { data: fixture, current } = useNavContext();
   const [data, setData] = useState([]);
   const [graph, setGraph] = useState(GRAPHS.PIE_CHART);
+  const [usersInfo, setUsersInfo] = useState({
+    show: false,
+    users: null,
+    info: null,
+  });
 
   useEffect(() => {
     if (predictions?.length < 1 || fixture?.length < 1 || !graph) return;
@@ -36,10 +42,24 @@ export default function Graphs({ predictions, groupData }) {
   }, [fixture, predictions, graph]);
 
   const handlePieClick = (info) => {
-    console.log(groupUsersByResultType(data, info.type, groupData));
+    setUsersInfo({
+      show: true,
+      users: groupUsersByResultType(data, info.type, groupData),
+      info: { ...info, stage: current },
+    });
   };
 
   if (data.length < 1) return <div>No hay nada aquí</div>;
+  if (usersInfo.show === true)
+    return (
+      <UserList
+        users={usersInfo.users}
+        displayInfo={usersInfo.info}
+        handleClose={() =>
+          setUsersInfo((prevInfo) => ({ ...prevInfo, show: false }))
+        }
+      />
+    );
   return (
     <>
       {graph === GRAPHS.PIE_CHART && (
@@ -48,7 +68,12 @@ export default function Graphs({ predictions, groupData }) {
           clickHandler={handlePieClick}
         />
       )}
-      {graph === GRAPHS.USER_PROGRESS && <MultipleLines data={data} userAvatars={pairUsernameWithAvatar(groupData.members)} />}
+      {graph === GRAPHS.USER_PROGRESS && (
+        <MultipleLines
+          data={data}
+          userAvatars={pairUsernameWithAvatar(groupData.members)}
+        />
+      )}
       <div>
         <Button
           onClick={() =>

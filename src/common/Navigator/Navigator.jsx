@@ -97,7 +97,7 @@ export default function Navigator({
         )}
       </NavLayers>
       <NavContent>
-        <NavContext.Provider value={filteredData}>
+        <NavContext.Provider value={{data: filteredData, current: parseName(history[history.length-1])}}>
           {children}
         </NavContext.Provider>
       </NavContent>
