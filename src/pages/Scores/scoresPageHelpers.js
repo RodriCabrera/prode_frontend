@@ -2,19 +2,19 @@ export const getCountByResultType = (predictions, groupScoring) => {
   if (predictions.length < 1) return [];
   const result = {
     perfect: {
-      name: 'exacto',
+      name: 'Resultado exacto',
       ammount: 0,
       color: 'green',
       type: 'FULL',
     },
     winner: {
-      name: 'ganador',
+      name: 'Ganador acertado',
       ammount: 0,
       color: 'gold',
       type: 'WINNER',
     },
     lost: {
-      name: 'no suma',
+      name: 'Sin aciertos',
       ammount: 0,
       color: 'tomato',
       type: 'NONE',

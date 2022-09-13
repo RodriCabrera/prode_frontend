@@ -9,6 +9,7 @@ import {
 } from '../../../scoresPageHelpers';
 import CustomPieChart from '../../../../../common/Charts/PieChart';
 import MultipleLines from '../../../../../common/Charts/MultipleLines';
+import SingleMatchList from './SingleMatchList';
 import UserList from './UserList';
 import { Button } from '../../../../../common/common.styles';
 
@@ -68,12 +69,19 @@ export default function Graphs({ predictions, groupData }) {
           clickHandler={handlePieClick}
         />
       )}
-      {graph === GRAPHS.USER_PROGRESS && (
-        <MultipleLines
-          data={data}
-          userAvatars={pairUsernameWithAvatar(groupData.members)}
-        />
-      )}
+      {graph === GRAPHS.USER_PROGRESS &&
+        (data.length > 1 ? (
+          <MultipleLines
+            data={data}
+            userAvatars={pairUsernameWithAvatar(groupData.members)}
+          />
+        ) : (
+          <SingleMatchList
+            data={data[0]}
+            userAvatars={pairUsernameWithAvatar(groupData.members)}
+            scoring={groupData.rules.scoring}
+          />
+        ))}
       <div>
         <Button
           onClick={() =>

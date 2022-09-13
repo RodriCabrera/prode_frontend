@@ -123,7 +123,7 @@ export default function MultipleLines({
           dy={15}
           tickFormatter={(value) => new Date(value).toLocaleDateString()}
         />
-        <YAxis unit="pts" dx={-10} />
+        <YAxis unit="pts" dx={-10} allowDecimals={false}/>
         <Tooltip content={<CustomTooltip />} />
         <Legend wrapperStyle={{ marginBottom: '-1.2rem' }} />
         {Object.keys(data[0]).map((key, index) => {

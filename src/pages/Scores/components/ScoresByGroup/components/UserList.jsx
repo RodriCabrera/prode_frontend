@@ -42,7 +42,6 @@ export default function UserList({ users, displayInfo, handleClose }) {
         </CloseButton>
         <CardTitle>{displayInfo.stage}</CardTitle>
         <Text align="center">
-          Resultado:{' '}
           <span style={{ color: displayInfo.color }}>{displayInfo.name}</span>
         </Text>
         {users.length > 0 ? (
