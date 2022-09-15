@@ -15,8 +15,11 @@ const GroupsListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
-
+// !
+// !
 // ! ESTE COMPONENTE NO SE ESTA USANDO
+// !
+// !
 function PredictionResults() {
   const [userGroupList, setUserGroupList] = useState([]);
   const [predictions, setPredictions] = useState([]);

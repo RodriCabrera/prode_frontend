@@ -18,10 +18,23 @@ const FlagImg = styled.img`
   min-height: 28px;
 `;
 
+const FlagPlaceholder = styled.div`
+  width: 48px;
+  height: 28px;
+  min-width: 48px;
+  min-height: 28px;
+  background: gray;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+`
+
 export const getFlagUrl = (url, size) => {
   let newUrl;
   if (!url) {
-    newUrl = 'https://via.placeholder.com/42x28';
+    return <FlagPlaceholder>?</FlagPlaceholder>;
   } else newUrl = url?.replace('{format}', 'sq').replace('{size}', size);
   return <FlagImg src={newUrl} alt="Country flag"/>;
 };

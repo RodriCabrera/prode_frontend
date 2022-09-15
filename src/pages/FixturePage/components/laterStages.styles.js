@@ -9,6 +9,7 @@ export const LaterStages = styled.div`
   max-width: 100%;
   flex-wrap: nowrap;
   height: 50vh;
+  margin-bottom: 1rem;
 `;
 
 export const StageColumn = styled.div`
@@ -28,6 +29,15 @@ export const Match = styled.div`
   }
 `;
 
+export const MatchPlaceHolder = styled.div`
+  text-align: center;
+  padding: 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid dimgray;
+  font-size: 1.2rem;
+`
+
+
 export const MatchData = styled.div`
   display: flex;
   flex-direction: row;
@@ -42,3 +52,20 @@ export const MatchData = styled.div`
     width: 2rem;
   }
 `;
+
+export const CollapsableStageButton = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.2);
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  &: after {
+    width: 100%;
+    border-bottom: 1px white;
+  }
+`

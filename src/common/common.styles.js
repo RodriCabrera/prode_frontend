@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 export const CardTitle = styled.h1`
   font-size: 1.5rem;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: ${({ marginBottom }) => marginBottom || '1.5rem'};
   max-width: 100%;
 `;
 /**
@@ -132,6 +132,7 @@ export const Input = styled.input`
  * @props showUppercase (text-transform) // width
  */
 export const TextareaInput = styled.textarea`
+  font-family: 'Exo', sans-serif;
   text-transform: ${({ showUppercase }) => showUppercase && 'uppercase'};
   width: ${({ width }) => width};
   padding: 10px;

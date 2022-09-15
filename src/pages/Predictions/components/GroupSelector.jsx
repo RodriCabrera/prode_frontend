@@ -39,7 +39,7 @@ export function GroupSelector({
                       )
                     }
                     bgColor={isSelected && 'green'}
-                    onClick={() => handleGroupSelect(userGroup)}
+                    onClick={() => !isSelected && handleGroupSelect(userGroup)}
                     isMobile={isMobile}
                   >
                     <Text weight="600">{userGroup.name.toUpperCase()}</Text>

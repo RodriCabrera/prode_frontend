@@ -11,7 +11,7 @@ const InputWrapper = styled.div`
 `;
 
 const InputAndText = styled.div`
-  flex-grow: 1;
+  /* flex-grow: 1; */
   height: 100%;
   flex-wrap: nowrap;
   display: flex;

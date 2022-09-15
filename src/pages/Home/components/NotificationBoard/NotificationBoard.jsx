@@ -23,6 +23,7 @@ function NotificationBoard() {
       });
     return cleanup;
   }, []);
+  if (isLoading) return null;
 
   function renderBoards() {
     // NO GROUP - NO PREDICTIONS:

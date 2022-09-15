@@ -28,7 +28,7 @@ function Profile() {
         setProfile(data.profile);
         setSharedGroups(data.sharedGroups || []);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });

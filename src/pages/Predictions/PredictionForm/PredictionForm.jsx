@@ -1,73 +1,124 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
-import { MdOutlineChevronRight, MdOutlineChevronLeft } from 'react-icons/md';
-import { Button, Form, Input, Text } from '../../common/common.styles';
-import ErrorInfo from '../../common/MoreInfo/ErrorInfo';
-import Table from '../../common/Table/Table';
-import { getFlagUrl } from '../pagesHelpers';
-import { FormButtonWrapper, FormWrapper } from './Predictions.styles';
+import {
+  Button,
+  CardContainer,
+  CardWrapper,
+  Form,
+  Input,
+} from '../../../common/common.styles';
+import ErrorInfo from '../../../common/MoreInfo/ErrorInfo';
+import Table from '../../../common/Table/Table';
+import { getFlagUrl } from '../../pagesHelpers';
+import { FormWrapper } from '../Predictions.styles';
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
-  numberToGroupLetter,
-  groupNumberMod,
+  formatPredictionsToPost,
+  formatPredictionsToDisplay,
   calculateIfCanPredict,
   formatInputDisplayValue,
-} from './predictionsPageUtils';
-import { useIsMobile } from '../../hooks/useIsMobile';
+} from '../predictionsPageUtils';
+import { useIsMobile } from '../../../hooks/useIsMobile';
+import React, { useState, useEffect } from 'react';
+import { useFormik } from 'formik';
+import { useOutletContext, useParams } from 'react-router-dom';
+import { getPredictions, createPredictions } from '../../../api/predictions';
+import { BallLoader } from '../../../common/Spinner/BallLoader';
+import useCleanupController from '../../../hooks/useCleanupController';
+import { toast } from 'react-toastify';
+import {
+  STAGE_NAMES,
+  getStageName,
+} from '../PredictionManager/PredictionManagerUtils';
 
-const useGetStageData = ({ stageData, groupNumber }) => {
-  const [data, setData] = useState(stageData);
-
-  useEffect(() => {
-    if (stageData.length > 0) {
-      if (typeof groupNumber === 'number') {
-        setData(stageData[groupNumberMod(groupNumber)]?.matches);
-      }
-    }
-  }, [stageData]);
-
-  return data;
-};
-
-export function PredictionForm(props) {
-  const {
-    stageData,
-    groupNumber,
-    values,
-    handleChange,
-    handleSubmit,
-    handleNextGroup,
-    handlePrevGroup,
-    errorMessages,
-    groupPhase,
-    dirty,
-  } = props;
-
-  const data = useGetStageData({ stageData, groupNumber });
-
+export default function PredictionForm({ fixture, hasChangedGroup }) {
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
+  const [predictions, setPredictions] = useState({});
+  const [signal, cleanup, handleCancel] = useCleanupController();
+  const [isLoading, setIsLoading] = useState(hasChangedGroup || false);
+  const { phase } = useParams();
+  const { values, handleChange, resetForm, dirty } = useFormik({
+    initialValues: {},
+  });
+  const [errorMessages, setErrorMessages] = useState([]);
   const isMobile = useIsMobile();
-  return (
+
+  useEffect(() => {
+    if (!fixture) return;
+    setIsLoading(true);
+    getPredictions(
+      selectedUserGroup?.id,
+      fixture.id ? undefined : getStageName(phase),
+      fixture.id || undefined,
+      undefined,
+      signal
+    )
+      .then((res) => setPredictions(res.data))
+      .finally(() => setIsLoading(false))
+      .catch((err) => (handleCancel(err) ? setIsLoading(true) : null));
+    return cleanup;
+  }, [fixture]);
+
+  useEffect(() => {
+    resetForm({ values: formatPredictionsToDisplay(predictions) } || {});
+  }, [predictions]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    toast.promise(
+      createPredictions(formatPredictionsToPost(values, selectedUserGroup?.id))
+        .then((res) => {
+          setErrorMessages(res.data.errors);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        }),
+      {
+        pending: 'Enviando predicciones...',
+        success: 'Predicciones enviadas con éxito',
+        error: {
+          render({ data }) {
+            return data.response.data.error;
+          },
+        },
+      }
+    );
+  };
+
+  const data = () => {
+    if (!fixture) return null;
+    else if (getStageName(phase) === STAGE_NAMES.GRUPOS)
+      return fixture?.matches;
+    else return fixture;
+  };
+  return isLoading || hasChangedGroup ? (
+    <CardContainer>
+      <CardWrapper
+        minHeight={
+          resultsMode ? '360px' : '410px'
+        }
+        isMobile={isMobile}
+        width="365px"
+        border={isMobile ? 'none' : null}
+      >
+        <BallLoader />
+      </CardWrapper>
+    </CardContainer>
+  ) : (
     <FormWrapper id="prediction-form-wrapper">
-      <Text align="center" size="1.7rem" weight="600">
-        {typeof groupNumber === 'number' &&
-          `GRUPO ${numberToGroupLetter(groupNumber)}`}
-      </Text>
       <Form
         id="prediction-form"
         onSubmit={handleSubmit ? handleSubmit : undefined}
       >
         <Table fullWidth={isMobile} id="prediction-table">
           <Table.Body>
-            {data?.map((match) => {
+            {data()?.map((match) => {
               const predictionStatus = () =>
                 match.status === 0
                   ? checkPredictionResult(
-                      data,
-                      // groupNumberMod(groupNumber),
+                      data(),
                       match.id,
                       'away',
                       values[`${match.id}-away`],
@@ -81,46 +132,36 @@ export function PredictionForm(props) {
               );
 
               const renderInfoIcon = () => {
-                if (resultsMode) {
-                  if (
-                    predictionStatus() === 'silver' ||
-                    predictionStatus() === 'lightgreen'
-                  )
+                if (!resultsMode) return null;
+                const colorStatus = predictionStatus();
+                switch (colorStatus) {
+                  case 'silver':
                     return '-';
-
-                  if (predictionStatus() === '#FFFF66')
+                  case 'lightgreen':
+                    return '-';
+                  case '#FFFF66':
                     return (
                       <ErrorInfo
                         color={predictionStatus()}
                         info={matchResultString}
                       />
                     );
-
-                  if (predictionStatus() === 'tomato')
+                  case 'tomato':
                     return (
                       <ErrorInfo
                         color={predictionStatus()}
                         info={matchResultString}
                       />
                     );
+                  default:
+                    return null;
                 }
-                return null;
               };
+
               return (
                 <React.Fragment key={match.id}>
                   <Table.Row>
-                    {/* <Table.Cell
-                      colSpan="6"
-                      withBottomBorder
-                      fontWeight="500"
-                      fontSize="1.2rem"
-                      padding="5px"
-                    >
-                      {parseDate(match.date)}
-                    </Table.Cell> */}
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell padding="1rem 0" margin="0 0 0 1rem">
+                    <Table.Cell padding="1rem 8px">
                       {getFlagUrl(match.away?.flag, 1)}
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
@@ -158,10 +199,6 @@ export function PredictionForm(props) {
                     </Table.Cell>
                     <Table.Cell padding="5px">
                       <ResultsInput
-                        type="number"
-                        width="30px"
-                        min={0}
-                        align="center"
                         name={`${match.id}-home`}
                         id={`${match.id}-home`}
                         value={formatInputDisplayValue(
@@ -172,12 +209,16 @@ export function PredictionForm(props) {
                         predictionStatus={
                           resultsMode ? predictionStatus('home') : ''
                         }
+                        type="number"
+                        width="30px"
+                        min={0}
+                        align="center"
                       />
                     </Table.Cell>
                     <Table.Cell padding="5px" fontWeight="800">
                       {match.home?.shortName || match.home}
                     </Table.Cell>
-                    <Table.Cell padding="1rem 0" margin="0 1rem 0 0">
+                    <Table.Cell padding="1rem 8px" margin="0 1rem 0 0">
                       {getFlagUrl(match.home?.flag, 1)}
                     </Table.Cell>
                   </Table.Row>
@@ -192,29 +233,6 @@ export function PredictionForm(props) {
               ? 'Enviar prediccion'
               : 'Seleccione un grupo'}
           </Button>
-        )}
-        {groupPhase && (
-          <FormButtonWrapper>
-            <Button
-              grayscale
-              onClick={handlePrevGroup}
-              // disabled={groupNumber === 0}
-              type="reset"
-              width="100%"
-            >
-              <MdOutlineChevronLeft size={26} />
-              {stageData[groupNumberMod(groupNumber - 1)]?.name}
-            </Button>
-            <Button
-              grayscale
-              onClick={handleNextGroup}
-              type="reset"
-              width="100%"
-            >
-              {stageData[groupNumberMod(groupNumber + 1)]?.name}
-              <MdOutlineChevronRight size={26} />
-            </Button>
-          </FormButtonWrapper>
         )}
       </Form>
     </FormWrapper>

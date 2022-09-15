@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { getPredictionCompletePercentage } from '../../api/predictions';
-import { getFixtureStatus } from '../../api/fixture';
-import { Text } from '../../common/common.styles';
+import { getPredictionCompletePercentage } from '../../../api/predictions';
+import { getFixtureStatus } from '../../../api/fixture';
+import { Text } from '../../../common/common.styles';
+import useCleanupController from '../../../hooks/useCleanupController';
+import { BallLoader } from '../../../common/Spinner/BallLoader';
 import { Banner } from './Banner';
-import { BannerContainer } from './Predictions.styles';
-import useCleanupController from '../../hooks/useCleanupController';
-import { BallLoader } from '../../common/Spinner/BallLoader';
+import { BannerContainer } from '../Predictions.styles';
 
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);

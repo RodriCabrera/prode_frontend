@@ -1,12 +1,12 @@
 import React from 'react';
 import { isNil } from 'lodash';
 import { useNavigate } from 'react-router-dom';
-import { Text } from '../../common/common.styles';
 import {
   BannerButton,
   BannerDataWrapper,
   BannerTitle,
-} from './Predictions.styles';
+} from '../Predictions.styles';
+import { Text } from '../../../common/common.styles';
 
 export function Banner({
   title,
