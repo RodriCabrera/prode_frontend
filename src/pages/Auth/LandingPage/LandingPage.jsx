@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { LandingPageContainer } from './LandingPage.styles';
 import LandingPageMain from './LandingPageMain';
 import LandingPageInfo from './LandingPageInfo';
@@ -14,17 +12,17 @@ const LandingPage = () => {
       <LandingPageMain />
       <LandingPageInfo />
       <ToastContainer
-            position={isMobile ? 'top-right' : 'bottom-right'}
-            autoClose={2500}
-            hideProgressBar={false}
-            newestOnTop={false}
-            theme="dark"
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
+        position={isMobile ? 'top-right' : 'bottom-right'}
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        theme="dark"
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </LandingPageContainer>
   );
 };
