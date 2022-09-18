@@ -1,10 +1,10 @@
-import React from 'react';
-import { CardWrapper, Text } from '../../../common/common.styles';
-import { useIsMobile } from '../../../hooks/useIsMobile';
-import { LPInfoContainer, LPInfoWrapper } from './LandingPage.styles';
+import React from 'react'
+import { CardWrapper, Text } from '../../../common/common.styles'
+import { useIsMobile } from '../../../hooks/useIsMobile'
+import { LPInfoContainer, LPInfoWrapper } from './LandingPage.styles'
 
 const LandingPageInfo = () => {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile()
   return (
     <LPInfoContainer id="lp-info-container">
       <Text
@@ -63,7 +63,7 @@ const LandingPageInfo = () => {
         </CardWrapper>
       </LPInfoWrapper>
     </LPInfoContainer>
-  );
-};
+  )
+}
 
-export default LandingPageInfo;
+export default LandingPageInfo

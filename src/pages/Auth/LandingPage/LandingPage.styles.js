@@ -1,5 +1,5 @@
-import { keyframes } from '@emotion/react';
-import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react'
+import styled from '@emotion/styled'
 
 export const LandingPageContainer = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const LandingPageContainer = styled.div`
     rgba(71, 128, 77, 0.7) -20%,
     rgba(2, 8, 2, 1) 70%
   );
-`;
+`
 
 export const LandingPageWrapper = styled.div`
   position: relative;
@@ -22,7 +22,7 @@ export const LandingPageWrapper = styled.div`
   flex-wrap: wrap;
   min-height: 100vh;
   width: 100%;
-`;
+`
 
 export const LPInfoContainer = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ export const LPInfoContainer = styled.div`
   min-height: 70vh;
   width: 100%;
   gap: 1rem;
-`;
+`
 
 export const LPInfoWrapper = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ export const LPInfoWrapper = styled.div`
   align-content: center;
   justify-content: center;
   gap: 1rem;
-`;
+`
 
 export const LeftPlaceholder = styled.div`
   position: relative;
@@ -49,7 +49,7 @@ export const LeftPlaceholder = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-`;
+`
 
 export const spin = keyframes`
   from {
@@ -72,7 +72,7 @@ export const spin = keyframes`
     rgba(70, 74, 79, 1) 100%,
   )
   }
-`;
+`
 
 export const VideoBg = styled.video`
   position: absolute;
@@ -81,4 +81,4 @@ export const VideoBg = styled.video`
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
-`;
+`

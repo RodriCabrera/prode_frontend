@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
 /**
  * h1
  * No props
@@ -8,7 +8,7 @@ export const CardTitle = styled.h1`
   text-align: center;
   margin-bottom: ${({ marginBottom }) => marginBottom || '1.5rem'};
   max-width: 100%;
-`;
+`
 /**
  *No props
  */
@@ -18,7 +18,7 @@ export const CardContainer = styled.div`
   width: 100%;
   gap: 2rem;
   flex-wrap: wrap;
-`;
+`
 
 /**
  * You can pass to the CardWrapper:
@@ -39,7 +39,7 @@ export const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
-`;
+`
 
 /**
  * You can pass to the Button:
@@ -58,12 +58,12 @@ export const Button = styled.button`
   background-image: linear-gradient(
     ${({ tertiary, grayscale }) => {
       if (tertiary) {
-        return '45deg, #FA8072 0%, #FF7261 51%, #FA8072 100%';
+        return '45deg, #FA8072 0%, #FF7261 51%, #FA8072 100%'
       }
       if (grayscale) {
-        return '45deg, #818181 0%, #a4a4a4 51%, #818181 100%';
+        return '45deg, #818181 0%, #a4a4a4 51%, #818181 100%'
       }
-      return '45deg, darkorange 0%, tomato 51%, darkorange 100%';
+      return '45deg, darkorange 0%, tomato 51%, darkorange 100%'
     }}
   );
   background-color: ${({ tertiary }) => tertiary && 'salmon'};
@@ -89,7 +89,7 @@ export const Button = styled.button`
   :disabled {
     background-image: none;
   }
-`;
+`
 
 /**
  * form
@@ -99,7 +99,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
+`
 
 /**
  * label
@@ -109,7 +109,7 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 5px;
-`;
+`
 
 /**
  * You can pass to the Input:
@@ -125,7 +125,7 @@ export const Input = styled.input`
     background-color: darkgray;
   }
   text-align: ${({ align }) => align || 'initial'};
-`;
+`
 
 /**
  * You can pass to the TextareaInput:
@@ -142,10 +142,10 @@ export const TextareaInput = styled.textarea`
     background-color: darkgray;
   }
   resize: none;
-`;
+`
 
 export function ScoreInput() {
-  return <Input type="number" width="30px" />;
+  return <Input type="number" width="30px" />
 }
 
 /**
@@ -155,7 +155,7 @@ export const Select = styled.select`
   padding: 10px;
   background-color: #e5e5e5;
   border-radius: 10px;
-`;
+`
 
 /**
  * You can pass to the Text:
@@ -178,4 +178,9 @@ export const Text = styled.p`
         background: #404040;
     `}
   }
-`;
+`
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ gap }) => gap};
+`

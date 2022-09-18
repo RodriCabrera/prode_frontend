@@ -1,12 +1,12 @@
-import { LandingPageContainer } from './LandingPage.styles';
-import LandingPageMain from './LandingPageMain';
-import LandingPageInfo from './LandingPageInfo';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useIsMobile } from '../../../hooks/useIsMobile';
+import { LandingPageContainer } from './LandingPage.styles'
+import LandingPageMain from './LandingPageMain'
+import LandingPageInfo from './LandingPageInfo'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useIsMobile } from '../../../hooks/useIsMobile'
 
 const LandingPage = () => {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile()
   return (
     <LandingPageContainer id="landing-page-container">
       <LandingPageMain />
@@ -24,7 +24,7 @@ const LandingPage = () => {
         pauseOnHover
       />
     </LandingPageContainer>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage
