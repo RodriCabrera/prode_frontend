@@ -1,13 +1,16 @@
 {
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,
-  "prettier.semi": true,
+  "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.endOfLine": "auto",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
