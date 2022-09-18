@@ -12,16 +12,19 @@ import Countdown from '../../Home/components/Countdown'
 
 const LandingPageMain = () => {
   const [video, setVideo] = useState()
-  const [showForm, setShowForm] = useState(false)
   const isMobile = useIsMobile()
   // example video link:
   // 'https://player.vimeo.com/external/597733080.sd.mp4?s=236ee37314b933a41625f6a24b1670d6742f81d0&profile_id=164&oauth2_token_id=57447761'
+
   useEffect(() => {
     getSoccerVideos().then((res) => {
       setVideo(res.data.videos[0].video_files[5].link)
     })
   }, [])
-  const navigate = useNavigate()
+
+  // const [showForm, setShowForm] = useState(false)
+  // const navigate = useNavigate()
+
   return (
     <LandingPageWrapper id="landing-page-wrapper">
       <LeftPlaceholder>
@@ -33,8 +36,10 @@ const LandingPageMain = () => {
         </Text>
         <Countdown />
       </LeftPlaceholder>
+      <Outlet />
 
-      {showForm ? (
+      {/* TODO: La idea era primero mostrar 2 botones pero cuando me logueo se traba con los botones... */}
+      {/* {showForm ? (
         <Outlet />
       ) : (
         <Column gap="2rem">
@@ -49,7 +54,7 @@ const LandingPageMain = () => {
             Registrarse
           </Button>
         </Column>
-      )}
+      )} */}
       <VideoBg autoPlay loop muted src={video} type="video/mp4" poster="30" />
     </LandingPageWrapper>
   )

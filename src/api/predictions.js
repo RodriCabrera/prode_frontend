@@ -27,7 +27,13 @@ body {
 }
 */
 
-export const getPredictions = (userGroupId = '', stage = '', group='', own='true', signal) => {
+export const getPredictions = (
+  userGroupId = '',
+  stage = '',
+  group = '',
+  own = 'true',
+  signal
+) => {
   return withCredentials.get(
     `/predictions?userGroupId=${userGroupId}&stage=${stage}&group=${group}&own=${own}`,
     { signal }
@@ -36,7 +42,7 @@ export const getPredictions = (userGroupId = '', stage = '', group='', own='true
 
 export const getPredictionCount = (signal) => {
   return withCredentials.get('/predictions/length', { signal });
-}
+};
 
 export const getPredictionCompletePercentage = (userGroupId = '', signal) => {
   return withCredentials.get(
