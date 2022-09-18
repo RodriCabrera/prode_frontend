@@ -36,11 +36,10 @@ export const LPInfoContainer = styled.div`
 
 export const LPInfoWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-content: center;
   justify-content: center;
   gap: 1rem;
-  padding: 2rem;
 `;
 
 export const LeftPlaceholder = styled.div`
