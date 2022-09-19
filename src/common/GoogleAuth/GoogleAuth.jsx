@@ -23,6 +23,10 @@ function GoogleAuth({ text }) {
     );
     if (res.status === 200) {
       window.location.reload();
+      toast.success('Logueado con éxito');
+    }
+    if (res.status === 500) {
+      toast.error('Error al loguearse con Google');
     } else {
       setShowError(true);
     }
