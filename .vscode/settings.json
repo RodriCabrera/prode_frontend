@@ -1,7 +1,7 @@
 {
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,
-  "prettier.semi": false,
+  "prettier.semi": true,
   "prettier.singleQuote": true,
   "prettier.endOfLine": "auto",
   "[typescript]": {
