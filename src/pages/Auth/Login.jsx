@@ -91,6 +91,7 @@ function Login() {
             placeholder="Al menos 6 caracteres"
             value={values.password}
             onChange={handleChange}
+            autoComplete="current-password"
           />
         </Label>
         <Button type="submit" disabled={!isEmpty(errors) || isLoading}>
