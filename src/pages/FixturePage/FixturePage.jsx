@@ -5,6 +5,7 @@ import CollapsableStage from './components/CollapsableStage';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
 import { useFetchFixtureData } from './hooks/useFetchFixtureData';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import {
   FixtureTablesContainer,
   FixtureWrapper,
@@ -15,6 +16,7 @@ import { useIsMobile } from '../../hooks/useIsMobile';
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
   const isMobile = useIsMobile();
+  const { width } = useWindowDimensions();
 
   const renderGroupsTables = (groups) => {
     if (!groups) return <Spinner />
@@ -34,7 +36,7 @@ function Fixture() {
 
   return (
     <FixtureWrapper>
-      {isMobile ? (
+      {width < 1060 ? (
       <>
         {fixtureData.map(stage => {
           if (stage.groups) return (<CollapsableStage stageName={stage.name}>
