@@ -7,7 +7,7 @@ const fields = {
     .required('Ingresar contraseña'),
   name: string()
   .max(20, 'El nombre de usuario debe tener hasta 20 caracteres')
-  .nullable()
+  .required('Ingresa un nombre de usuario')
   .matches(/^[A-Za-z0-9]+$/, 'Solo puedes usar letras y números'),
   groupName: string().max(
     20,

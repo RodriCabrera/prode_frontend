@@ -23,7 +23,7 @@ function Register() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
-    initialValues: { name: null },
+    initialValues: { },
     validationSchema: authSchema.register,
     validateOnMount: true,
   });
@@ -75,6 +75,7 @@ function Register() {
             value={values.name}
             onChange={handleChange}
             maxLength={20}
+            required
           />
         </Label>
         <Label htmlFor="email">
