@@ -87,12 +87,17 @@ function CreateGroupForm({ updateList }) {
               value={values.name}
               onChange={handleChange}
               showUppercase
+              maxLength={20}
             />
           </Label>
           <Label htmlFor="manifesto">
             <TextareaInput
               type="text"
-              placeholder="Reglamento (los miembros deberán aceptar estos términos al ingresar)"
+              placeholder={
+                'Reglamento (los miembros deberán aceptar estos términos al ingresar)' +
+                '\n\n' +
+                '¿Qué se apuesta? ¿Hay prenda para el último?'
+              }
               name="manifesto"
               required
               value={values.manifesto}
