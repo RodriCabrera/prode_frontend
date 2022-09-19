@@ -66,7 +66,14 @@ function ProfilePredictions({ props }) {
           </CardWrapper>
         </CardContainer>
       ) : (
-        !isLoading && <Text align="center">Sin predicciones que mostrar</Text>
+        !isLoading && (
+          <>
+            <Text align="center">Sin predicciones que mostrar</Text>
+            <Text align="center">
+              Solo podrás ver predicciones de partidos ya jugados
+            </Text>
+          </>
+        )
       )}
     </>
   );
