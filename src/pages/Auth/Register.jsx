@@ -99,6 +99,7 @@ function Register() {
             required
             value={values.password}
             onChange={handleChange}
+            autoComplete="current-password"
           />
         </Label>
 
