@@ -38,7 +38,7 @@ function Login() {
     setIsLoading(true);
 
     toast.promise(
-      loginUser(values)
+      loginUser({...values, email: values.email.toLowerCase()})
         .then(() => {
           window.location.reload();
           return navigate('/');

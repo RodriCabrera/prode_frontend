@@ -39,7 +39,7 @@ function Register() {
     setIsLoading(true);
 
     toast.promise(
-      createUser(values)
+      createUser({...values, email: values.email.toLowerCase()})
         .then(() => {
           return navigate('/auth/account-created');
         })
