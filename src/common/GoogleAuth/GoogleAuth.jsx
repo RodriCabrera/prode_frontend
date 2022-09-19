@@ -11,6 +11,7 @@ function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);
 
   const responseGoogle = async (response) => {
+    if (response.error) return
     toast('Validando cuenta...');
     const res = await axios.post(
       `${config.API_URL}/auth/google`,
