@@ -5,7 +5,10 @@ const fields = {
   password: string()
     .min(6, 'La contraseña tiene que tener al menos 6 caracteres')
     .required('Ingresar contraseña'),
-  name: string().nullable(),
+  name: string()
+    .max(20, 'El nombre del grupo no puede tener mas de 20 caracteres')
+    .nullable()
+    .required('Nombre:'),
   groupName: string().max(
     20,
     'El nombre del grupo no puede tener mas de 20 caracteres'

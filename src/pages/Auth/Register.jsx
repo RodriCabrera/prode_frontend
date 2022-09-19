@@ -7,7 +7,6 @@ import { createUser } from '../../api/auth';
 import { AuthContext } from '../../common/AuthProvider';
 import {
   Button,
-  CardContainer,
   CardTitle,
   CardWrapper,
   Form,
@@ -58,7 +57,6 @@ function Register() {
   };
   const isMobile = useIsMobile();
   return (
-    // <CardContainer id="register-card-container">
     <CardWrapper
       id="register-card-wrapper"
       isMobile={isMobile}
@@ -67,7 +65,7 @@ function Register() {
       <CardTitle>Registrarse</CardTitle>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
-          Nombre:
+          {errors.name || 'Nombre:'}
           <Input
             type="text"
             placeholder="Username"
@@ -75,7 +73,6 @@ function Register() {
             value={values.name}
             onChange={handleChange}
           />
-          <Text color="orange">{errors.name}</Text>
         </Label>
         <Label htmlFor="email">
           <Text color={errors.email ? 'orange' : 'white'}>
@@ -114,7 +111,6 @@ function Register() {
         Ya tenés cuenta?
       </Button>
     </CardWrapper>
-    // </CardContainer>
   );
 }
 
