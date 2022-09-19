@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import { Text } from '../../../common/common.styles';
 
 // LOGICA DEL COUNTDOWN:
 const calculateTimeLeft = () => {
@@ -41,8 +40,11 @@ const Block = styled.div`
 const Count = styled.h5`
   font-weight: 700;
   font-size: 1.7rem;
+  user-select: none;
 `;
-const Detail = styled.h5``;
+const Detail = styled.h5`
+  user-select: none;
+`;
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
