@@ -78,7 +78,7 @@ export default function PredictionManager() {
               {resultsMode && selectedUserGroup && (
                 <References
                   green="Acertaste resultado"
-                  red="No suma"
+                  red="No acertaste"
                   yellow="Acertaste ganador"
                   gray="No evaluado"
                 />

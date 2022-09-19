@@ -8,6 +8,7 @@ export const CardTitle = styled.h1`
   text-align: center;
   margin-bottom: ${({ marginBottom }) => marginBottom || '1.5rem'};
   max-width: 100%;
+  user-select: none;
 `;
 /**
  *No props
@@ -54,7 +55,7 @@ export const Button = styled.button`
   width: ${({ width }) => width || 'auto'};
   cursor: pointer;
   border: none;
-
+  user-select: none;
   background-image: linear-gradient(
     ${({ tertiary, grayscale }) => {
       if (tertiary) {
