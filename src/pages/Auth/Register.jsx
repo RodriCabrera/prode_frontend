@@ -65,7 +65,7 @@ function Register() {
       <CardTitle>Registrarse</CardTitle>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
-          {errors.name || 'Nombre:'}
+          {errors.name || 'Nombre de usuario:'}
           <Input
             type="text"
             placeholder="Username"
