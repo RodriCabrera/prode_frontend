@@ -65,13 +65,16 @@ function Register() {
       <CardTitle>Registrarse</CardTitle>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
-          {errors.name || 'Nombre de usuario:'}
+          <Text color={errors.name ? 'orange' : 'white'}>
+            {errors.name || 'Nombre de usuario:'}
+          </Text>
           <Input
             type="text"
             placeholder="Username"
             name="name"
             value={values.name}
             onChange={handleChange}
+            maxLength={20}
           />
         </Label>
         <Label htmlFor="email">
