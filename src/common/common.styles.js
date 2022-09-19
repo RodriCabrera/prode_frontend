@@ -8,6 +8,7 @@ export const CardTitle = styled.h1`
   text-align: center;
   margin-bottom: ${({ marginBottom }) => marginBottom || '1.5rem'};
   max-width: 100%;
+  user-select: none;
 `;
 /**
  *No props
@@ -54,7 +55,7 @@ export const Button = styled.button`
   width: ${({ width }) => width || 'auto'};
   cursor: pointer;
   border: none;
-
+  user-select: none;
   background-image: linear-gradient(
     ${({ tertiary, grayscale }) => {
       if (tertiary) {
@@ -162,6 +163,7 @@ export const Select = styled.select`
  * @props align (text-align) // color // size (font-size) // weight (font-weight) // margin // withBottomBorder
  */
 export const Text = styled.p`
+  user-select: none;
   text-align: ${({ align }) => align || 'left'};
   color: ${({ color }) => color || 'inherit'};
   font-size: ${({ size }) => size};
@@ -178,4 +180,9 @@ export const Text = styled.p`
         background: #404040;
     `}
   }
+`;
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ gap }) => gap};
 `;

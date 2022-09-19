@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
+import { toast } from 'react-toastify';
 import { editProfile } from '../../../api/profiles';
 import Modal from '../../../common/Modal/Modal';
 import useToggleModal from '../../../hooks/useToggleModal';
@@ -15,31 +16,47 @@ import { Spinner } from '../../../common/Spinner/Spinner';
 import AvatarList from './AvatarList';
 
 export function ProfileEditForm({ profile, updateProfile }) {
-  const [userName, setuserName] = useState(profile.name);
+  const [userName, setUserName] = useState(profile.name);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState(profile?.avatar || '');
   const { showModal, toggleModal } = useToggleModal();
   const handleNameChange = (e) => {
-    setuserName(e.target.value);
+    setUserName(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if((userName === profile.name &&
+      selectedAvatar === profile.avatar) ||
+    /[^A-Za-z0-9]/.test(userName)) return;
+    if (!showModal) return toggleModal();
     setIsLoading(true);
-    editProfile({
-      name: userName || profile.name,
-      avatar: selectedAvatar || profile.avatar,
-    })
-      .then(() => {
-        toggleModal();
-        updateProfile();
+    toast.promise(
+      editProfile({
+        name: userName || profile.name,
+        avatar: selectedAvatar || profile.avatar,
       })
-      .catch((err) => alert(err))
-      .finally(() => {
-        setIsLoading(false);
-        setIsEditingEnabled(false);
-      });
+        .then(() => {
+          setTimeout(updateProfile, 1000);
+          // updateProfile();
+        })
+        .finally(() => {
+          toggleModal();
+          setUserName(profile.name);
+          setIsLoading(false);
+          setIsEditingEnabled(false);
+        }),
+      {
+        pending: 'Enviando cambios',
+        success: 'Perfil actualizado',
+        error: {
+          render({ data }) {
+            return data?.response.data?.error;
+          },
+        },
+      }
+    );
   };
 
   const handleAvatarClick = (avatar) => {
@@ -63,6 +80,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
               name="name"
               disabled={!isEditingEnabled}
               value={userName}
+              maxLength={20}
               onChange={handleNameChange}
             />
           </Label>
@@ -70,10 +88,14 @@ export function ProfileEditForm({ profile, updateProfile }) {
             type="button"
             onClick={toggleModal}
             disabled={
-              userName === profile.name && selectedAvatar === profile.avatar
+              (userName === profile.name &&
+                selectedAvatar === profile.avatar) ||
+              /[^A-Za-z0-9]/.test(userName)
             }
           >
-            Actualizar Perfil
+            {/[^A-Za-z0-9]/.test(userName)
+              ? 'Solo letras y números'
+              : 'Actualizar Perfil'}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>
