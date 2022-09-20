@@ -39,9 +39,12 @@ function Login() {
 
     toast.promise(
       loginUser({...values, email: values.email.toLowerCase()})
-        .then(() => {
-          window.location.reload();
-          return navigate('/');
+        .then((res) => {
+          if(res?.data?.token) {
+            localStorage.setItem('token', res.data.token)
+            window.location.reload();
+            return navigate('/');
+          }
         })
         .finally(() => {
           setIsLoading(false);
@@ -51,7 +54,7 @@ function Login() {
         success: 'Logueado con éxito',
         error: {
           render({ data }) {
-            return data?.response.data?.error || 'Error al autenticar...';
+            return data?.response?.data?.error || 'Error al autenticar...';
           },
         },
       }

@@ -1,25 +1,25 @@
-import { withoutCredentials } from './instances';
+import { api } from './instances';
 
 export const getFixture = (groupId = '', stageId = '', signal) => {
-  return withoutCredentials.get(
+  return api.get(
     `/fifa/fixture?groupId=${groupId}&stageId=${stageId}`,
     { signal }
   );
 };
 export const getFixtureByStageId = (stageId = '', signal) => {
-  return withoutCredentials.get(`/fifa/fixture?stageId=${stageId}`, { signal });
+  return api.get(`/fifa/fixture?stageId=${stageId}`, { signal });
 };
 
 export const getGroupStage = (signal) => {
-  return withoutCredentials.get('/fifa/fixture/groups', { signal });
+  return api.get('/fifa/fixture/groups', { signal });
 };
 
 export const getFixtureStatus = (signal) => {
-  return withoutCredentials.get('/fifa/fixture-status', { signal });
+  return api.get('/fifa/fixture-status', { signal });
 };
 
 export const getNextMatches = (quantity = '', signal) => {
-  return withoutCredentials.get(`/fifa/next-matches?quantity=${quantity}`, {
+  return api.get(`/fifa/next-matches?quantity=${quantity}`, {
     signal,
   });
 };

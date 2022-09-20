@@ -22,7 +22,8 @@ function GoogleAuth({ text }) {
         withCredentials: true,
       }
     );
-    if (res.status === 200) {
+    if (res.status === 200 && res.data.token) {
+      localStorage.setItem('token', res.data.token)
       window.location.reload();
       toast.success('Logueado con éxito');
     } else {
