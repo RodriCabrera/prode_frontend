@@ -1,5 +1,6 @@
 const prod = {
-  API_URL: 'https://prode-mundial-backend.herokuapp.com',
+  API_URL: 'http://localhost:8080',
+  // Since we want to always aim to local BE, this one wont be used in test branch: https://prode-mundial-backend.herokuapp.com
 };
 
 const dev = {
