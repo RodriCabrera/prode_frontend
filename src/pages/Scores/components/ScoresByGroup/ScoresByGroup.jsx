@@ -7,7 +7,7 @@ import {
 import ScoreList from '../ScoresByGroup/components/ScoreList';
 import { GroupSelector } from '../../../Predictions/components/GroupSelector';
 import { useGetUserGroupsData } from '../../../../hooks/useGetUserGroupsData';
-import { getGroupScores, getGroupRules } from '../../../../api/groups';
+import { getGroupScores } from '../../../../api/groups';
 
 import { getPredictions } from '../../../../api/predictions';
 import { BallLoader } from '../../../../common/Spinner/BallLoader';
@@ -16,6 +16,7 @@ import { Spinner } from '../../../../common/Spinner/Spinner';
 import Graphs from './components/Graphs';
 import MatchNavigator from '../MatchNavigator';
 import useCleanupController from '../../../../hooks/useCleanupController';
+import { Info } from '../../../../common/Info/Info';
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
@@ -68,6 +69,10 @@ export default function ScoresByGroup() {
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>
+        <Info>
+          Los puntajes se calculan automáticamente según el sistema de puntajes
+          {userGroupList.length === 1 ? ' del grupo' : ' de cada grupo grupo'}.
+        </Info>
         {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
           <Text>No estás en ningún grupo</Text>
