@@ -16,7 +16,7 @@ function AuthRoutes() {
         <Route path="register" element={<Register />} />
         <Route path="account-created" element={<ConfirmationEmail />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="change-password" element={<ChangePassword />} />
+        <Route path="change-password/:token" element={<ChangePassword />} />
         <Route path="verified" element={<VerifiedEmail />} />
       </Route>
     </Routes>

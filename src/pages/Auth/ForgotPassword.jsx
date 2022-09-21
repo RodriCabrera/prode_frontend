@@ -24,7 +24,7 @@ function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.promise(forgotPassword(values), {
+    toast.promise(forgotPassword({...values, email: values.email.toLowerCase()}), {
       pending: 'Buscando usuario',
       success: `Mail enviado a ${values.email}`,
       error: {

@@ -22,7 +22,9 @@ function Scores() {
         </Text>
         {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
-          <Text>No estás en ningún grupo</Text>
+          <Text size="1.5rem" align="center" margin="1rem">
+            No perteneces a ningún grupo
+          </Text>
         )}
         {!isLoadingUserGroupsData && userGroupList.length > 0 && (
           <GroupScoreSelector

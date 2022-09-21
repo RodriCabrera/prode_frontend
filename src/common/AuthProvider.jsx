@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import propTypes from 'prop-types';
 import { getAuth, logoutUser } from '../api/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Loading from './Loading/Loading';
 import useCleanupController from '../hooks/useCleanupController';
 
@@ -12,8 +12,12 @@ function AuthProvider({ children }) {
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const clearUser = () => setUser(null);
+  const clearUser = () => {
+    setUser(null);
+    localStorage.removeItem('token')
+  }
 
   const updateAuth = () => {
     setIsLoading(true);
@@ -22,6 +26,7 @@ function AuthProvider({ children }) {
         setUser(data.user);
       })
       .catch((err) => {
+        if (location.pathname.includes('change-password')) return;
         navigate('/auth');
         handleCancel(err);
       })

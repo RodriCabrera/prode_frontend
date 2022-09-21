@@ -18,7 +18,11 @@ function GroupList({ groups }) {
   };
 
   if (isEmpty(groups)) {
-    return <Text size="1.5rem">No perteneces a ningún grupo</Text>;
+    return (
+      <Text size="1.5rem" align="center" margin="1rem">
+        No perteneces a ningún grupo
+      </Text>
+    );
   }
 
   return (
