@@ -69,10 +69,14 @@ export default function ScoresByGroup() {
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>
-        <Info>
-          Los puntajes se calculan automáticamente según el sistema de puntajes
-          {userGroupList.length === 1 ? ' del grupo' : ' de cada grupo grupo'}.
-        </Info>
+        {!isLoading && (
+          <Info>
+            Los puntajes se calculan automáticamente según el sistema de
+            puntajes
+            {userGroupList.length === 1 ? ' del grupo' : ' de cada grupo grupo'}
+            .
+          </Info>
+        )}
         {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
           <Text>No estás en ningún grupo</Text>
