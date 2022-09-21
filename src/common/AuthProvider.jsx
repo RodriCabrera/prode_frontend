@@ -16,7 +16,6 @@ function AuthProvider({ children }) {
 
   const clearUser = () => {
     setUser(null);
-    localStorage.removeItem('token')
   }
 
   const updateAuth = () => {
@@ -38,6 +37,7 @@ function AuthProvider({ children }) {
   const logout = () => {
     clearUser();
     logoutUser().finally(() => {
+      localStorage.removeItem('token')
       navigate('/');
     });
   };
