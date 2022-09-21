@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   Button,
   CardContainer,
@@ -13,33 +13,27 @@ import {
 } from '../../common/common.styles';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { changePassword } from '../../api/auth';
-import { AuthContext } from '../../common/AuthProvider';
 import { authSchema } from '../../validationSchemas/auth';
 
 function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const userContext = useContext(AuthContext);
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.changePassword,
     validateOnMount: true,
   });
-
-  useEffect(() => {
-    if (!userContext.user) {
-      navigate('/auth');
-    }
-  }, [userContext]);
+  const { token } = useParams();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const userToken = localStorage.getItem('token') || token;
     setIsLoading(true);
     setError(undefined);
-    changePassword(values)
+    changePassword(values, userToken)
       .then(() => {
-        window.location.reload();
+        navigate('/')
       })
       .catch((err) => setError(err.response.data.error))
       .finally(() => setIsLoading(false));

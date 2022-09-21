@@ -1,11 +1,11 @@
-import { withCredentials } from './instances';
+import { api } from './instances';
 
 export const getAllPredictions = (signal) => {
-  return withCredentials.get('/predictions', { signal });
+  return api.get('/predictions', { signal });
 };
 
 export const createPredictions = (predictions) => {
-  return withCredentials.post('/predictions', predictions);
+  return api.post('/predictions', predictions);
 };
 /*
 * createPredictions recibe:
@@ -34,18 +34,18 @@ export const getPredictions = (
   own = 'true',
   signal
 ) => {
-  return withCredentials.get(
+  return api.get(
     `/predictions?userGroupId=${userGroupId}&stage=${stage}&group=${group}&own=${own}`,
     { signal }
   );
 };
 
 export const getPredictionCount = (signal) => {
-  return withCredentials.get('/predictions/length', { signal });
+  return api.get('/predictions/length', { signal });
 };
 
 export const getPredictionCompletePercentage = (userGroupId = '', signal) => {
-  return withCredentials.get(
+  return api.get(
     `/predictions/percentage?userGroupId=${userGroupId}`,
     { signal }
   );
@@ -56,19 +56,19 @@ export const getFirstStagePredictionsByGroup = (
   groupLeter = '',
   signal
 ) => {
-  return withCredentials.get(
+  return api.get(
     `/predictions?userGroupId=${userGroupId}&group=${groupLeter}`,
     { signal }
   );
 };
 
 export const getOtherUserPredictionsByGroup = (userId, userGroupId, signal) => {
-  return withCredentials.get(
+  return api.get(
     `/predictions/profile/${userId}?userGroupId=${userGroupId}`,
     { signal }
   );
 };
 
 export const getRandomUnpredictedMatch = (signal) => {
-  return withCredentials.get('/predictions/random-missing', { signal });
+  return api.get('/predictions/random-missing', { signal });
 };

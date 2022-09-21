@@ -23,7 +23,7 @@ function Register() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
-    initialValues: { name: null },
+    initialValues: { },
     validationSchema: authSchema.register,
     validateOnMount: true,
   });
@@ -39,7 +39,7 @@ function Register() {
     setIsLoading(true);
 
     toast.promise(
-      createUser(values)
+      createUser({...values, email: values.email.toLowerCase()})
         .then(() => {
           return navigate('/auth/account-created');
         })
@@ -65,13 +65,17 @@ function Register() {
       <CardTitle>Registrarse</CardTitle>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
-          {errors.name || 'Nombre:'}
+          <Text color={errors.name ? 'orange' : 'white'}>
+            {errors.name || 'Nombre de usuario:'}
+          </Text>
           <Input
             type="text"
             placeholder="Username"
             name="name"
             value={values.name}
             onChange={handleChange}
+            maxLength={20}
+            required
           />
         </Label>
         <Label htmlFor="email">

@@ -26,8 +26,13 @@ export default function QuickPrediction() {
     setGroupData({});
     getRandomUnpredictedMatch(signal)
       .then((res) => {
-        setMatchData(res.data.match);
-        setGroupData(res.data.group);
+        if (res.status === 204) {
+          setMissingData(true);
+        } 
+        else {
+          setMatchData(res.data.match);
+          setGroupData(res.data.group);
+        }
       })
       .catch((err) => handleCancel(err) || setMissingData(true))
       .finally(() => setIsLoading(false));
