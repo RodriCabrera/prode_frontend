@@ -8,14 +8,16 @@ import {
   CardWrapper,
   Text,
 } from '../../../common/common.styles';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 import { AuthContext } from '../../../common/AuthProvider';
 
 function ProfileEdit() {
   const userContext = useContext(AuthContext);
+  const isMobile = useIsMobile()
 
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper border={isMobile ? 'none' : null}>
         {userContext.isLoading ? (
           <Spinner />
         ) : (
