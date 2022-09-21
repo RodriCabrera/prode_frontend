@@ -49,20 +49,21 @@ function ProfilePredictions({ props }) {
         <CardContainer>
           <CardWrapper border="none">
             <CardTitle>Predicciones para {group.name}</CardTitle>
-            <GoBackButton />
             <FixtureTable
               data={predictionsToRender()}
               isCompact
               isMobile
               fullWidth
             />
-            <Button
-              padding="10px"
-              tertiary
-              onClick={() => setShowShortList(!showShortList)}
-            >
-              {showShortList ? 'Mostrar más' : 'Mostrar menos'}
-            </Button>
+            {otherUserPredictions.length > 10 && (
+              <Button
+                padding="10px"
+                tertiary
+                onClick={() => setShowShortList(!showShortList)}
+              >
+                {showShortList ? 'Mostrar más' : 'Mostrar menos'}
+              </Button>
+            )}
           </CardWrapper>
         </CardContainer>
       ) : (
