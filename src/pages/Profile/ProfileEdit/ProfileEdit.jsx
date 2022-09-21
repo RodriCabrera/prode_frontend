@@ -22,14 +22,14 @@ function ProfileEdit() {
           <>
             <UserNameContainer>
               <Text size="1.5rem" weight="bold">
-                {userContext.user.name}
+                {userContext.user?.name}
               </Text>
               <Text size="1rem" weight="300">
-                {userContext.user.email}
+                {userContext.user?.email}
               </Text>
               <UserMiniAvatar
-                name={userContext.user.name}
-                avatar={userContext.user.avatar}
+                name={userContext.user?.name}
+                avatar={userContext.user?.avatar}
                 emptySize="10rem"
               />
             </UserNameContainer>

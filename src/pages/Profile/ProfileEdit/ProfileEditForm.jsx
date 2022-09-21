@@ -14,9 +14,10 @@ import {
 } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import AvatarList from './AvatarList';
+import { isEmpty } from 'lodash';
 
 export function ProfileEditForm({ profile, updateProfile }) {
-  const [userName, setUserName] = useState(profile.name);
+  const [userName, setUserName] = useState(profile?.name);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(profile?.avatar || '');
@@ -27,9 +28,11 @@ export function ProfileEditForm({ profile, updateProfile }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if((userName === profile.name &&
-      selectedAvatar === profile.avatar) ||
-    /[^A-Za-z0-9]/.test(userName)) return;
+    if (
+      (userName === profile.name && selectedAvatar === profile.avatar) ||
+      /[^A-Za-z0-9]/.test(userName)
+    )
+      return;
     if (!showModal) return toggleModal();
     setIsLoading(true);
     toast.promise(
@@ -63,7 +66,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
     setSelectedAvatar(avatar);
   };
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || isEmpty(profile)) return <Spinner />;
   return (
     <>
       {!isEditingEnabled && (
