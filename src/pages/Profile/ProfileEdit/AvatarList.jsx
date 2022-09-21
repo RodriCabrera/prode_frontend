@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getAvatars } from '../../../api/profiles';
 import { Button } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
+import { FcEditImage } from 'react-icons/fc';
 import useCleanupController from '../../../hooks/useCleanupController';
 
 const Container = styled.div`
@@ -24,6 +25,9 @@ const AvatarWrapper = styled.div`
   border: ${({ selected }) =>
     selected ? '2px inset tomato' : '2px inset rgba(0, 0, 0, 0)'};
   background-color: darkgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Avatar = styled.img`
@@ -42,11 +46,16 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
       setIsLoading(true);
       getAvatars(signal)
         .then((res) => setAvatars(res.data))
-        .catch(err => handleCancel(err))
+        .catch((err) => handleCancel(err))
         .finally(() => setIsLoading(false));
     }
     return cleanup;
   }, [showAvatarList]);
+
+  const handleCustomAvatar = () => {
+    // implement image uploader here
+    handleAvatarClick('custom')
+  };
 
   return (
     <Container>
@@ -59,24 +68,35 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
             padding="10px"
             weight="400"
             onClick={() => setShowAvatarList(!showAvatarList)}
-            style={{ width: '100%' }}>
+            style={{ width: '100%' }}
+          >
             {showAvatarList ? 'Ocultar' : 'Mostrar'} lista de avatares
           </Button>
-          {showAvatarList &&
-            avatars.map((avatar) => {
-              return (
-                <AvatarWrapper
-                  selected={avatar === selectedAvatar}
-                  key={avatar}
-                  onClick={() => handleAvatarClick(avatar)}>
-                  <Avatar
-                    src={avatar}
-                    alt="avatar"
+          {showAvatarList && (
+            <>
+              <AvatarWrapper
+                selected={selectedAvatar && !avatars.includes(selectedAvatar)}
+                onClick={handleCustomAvatar}
+              >
+                <FcEditImage size={60} style={{filter: selectedAvatar && !avatars.includes(selectedAvatar) ? 'none' : 'grayscale(100%)' }} />
+              </AvatarWrapper>
+              {avatars.map((avatar) => {
+                return (
+                  <AvatarWrapper
                     selected={avatar === selectedAvatar}
-                  />
-                </AvatarWrapper>
-              );
-            })}
+                    key={avatar}
+                    onClick={() => handleAvatarClick(avatar)}
+                  >
+                    <Avatar
+                      src={avatar}
+                      alt="avatar"
+                      selected={avatar === selectedAvatar}
+                    />
+                  </AvatarWrapper>
+                );
+              })}
+            </>
+          )}
         </>
       )}
     </Container>
