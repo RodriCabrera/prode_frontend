@@ -17,10 +17,25 @@ const defaultColors = [
   'green',
   'lightblue',
   'orange',
+  'yellow',
   'violet',
   'pink',
-  'white',
+  'blue',
   'darkorange',
+  'salmon',
+  'cyan',
+  'darkorchid',
+  'aquamarine',
+  'lightseagreen',
+  'tomato',
+  'thistle',
+  'turqoise',
+  'peru',
+  'moccasin',
+  'magenta',
+  'lavender',
+  'lightcyan',
+  'deeppink'
 ];
 
 export default function MultipleLines({
