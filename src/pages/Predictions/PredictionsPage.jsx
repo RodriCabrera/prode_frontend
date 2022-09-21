@@ -24,8 +24,8 @@ function PredictionsPage() {
         <>
           {isLoadingUserGroupsData && <Spinner />}
           {!isLoadingUserGroupsData && (
-            <Text align="center" size="1.3rem">
-              No perteneces a ningún grupo para hacer predicciones...
+            <Text size="1.5rem" align="center" margin="1rem">
+              No perteneces a ningún grupo
             </Text>
           )}
         </>
