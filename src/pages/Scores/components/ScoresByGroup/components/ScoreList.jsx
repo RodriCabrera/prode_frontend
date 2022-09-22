@@ -27,6 +27,14 @@ const ScoreItem = styled.div`
   width: 100%;
 `;
 
+const renderPostion = (index) => {
+  if (index > 2) return `${index+1}.`
+  if(index === 0) return '🥇';
+  if(index === 1) return '🥈';
+  if(index === 2) return '🥉';
+  return ''
+}
+
 export default function ScoreList({ scores }) {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -46,7 +54,7 @@ export default function ScoreList({ scores }) {
               onClick={() => handleUserClick(score.user)}
               avatar={<UserMiniAvatar avatar={score.avatar} name={score.user} />}
             >
-                <div>{`${index+1}. ${score.user}`}</div>
+                <div>{`${renderPostion(index)} ${score.user}`}</div>
             </ListElement>
           <div>{score.score}</div>
           </ScoreItem>
