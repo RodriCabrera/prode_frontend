@@ -69,7 +69,7 @@ export default function ScoresByGroup() {
         <Text size="2.5rem" weight="500" align="center">
           PUNTAJES
         </Text>
-        {!isLoading && (
+        {!isLoading && userGroupList.length > 0 && (
           <Info>
             Los puntajes se calculan automáticamente según el sistema de
             puntajes
@@ -79,7 +79,9 @@ export default function ScoresByGroup() {
         )}
         {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
-          <Text>No estás en ningún grupo</Text>
+          <Text size="1.5rem" align="center" margin="1rem">
+            No perteneces a ningún grupo
+          </Text>
         )}
         {!isLoadingUserGroupsData && userGroupList.length > 0 && (
           <GroupSelector
@@ -92,7 +94,7 @@ export default function ScoresByGroup() {
         {(selectedUserGroup && isEmpty(scores)) ||
         isLoading ||
         !scores.scores ? (
-          <BallLoader />
+          userGroupList.length > 0 && <BallLoader />
         ) : (
           <>
             <ScoreList scores={scores} />
