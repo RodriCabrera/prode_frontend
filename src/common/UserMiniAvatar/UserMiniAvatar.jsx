@@ -1,11 +1,20 @@
 import { HiUserCircle } from 'react-icons/hi';
+import { useState } from 'react';
 
 export function UserMiniAvatar({ name, avatar, isSmall, emptySize = '2rem' }) {
-  return avatar ? (
+  const [isValid, setValid] = useState(true)
+  return avatar && isValid ? (
     <img
       src={avatar}
       alt={name || 'user avatar'}
-      style={isSmall && { width: '30px' }}
+      style={{
+        width: isSmall ? '30px' : 'inherit',
+        height: isSmall ? '30px' : 'inherit',
+        objectFit: 'cover',
+        borderRadius: '100%',
+        overflow: 'hidden',
+      }}
+      onError={() => setValid(false)}
     />
   ) : (
     <HiUserCircle size={emptySize} />

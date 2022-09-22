@@ -14,6 +14,17 @@ import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 import { useIsMobile } from '../../hooks/useIsMobile';
 import useCleanupController from '../../hooks/useCleanupController';
 
+export const BigAvatarWrapper = styled.div`
+  margin: auto;
+  border-radius: 100%;
+  overflow: hidden;
+  height: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 function Profile() {
   const { name } = useParams();
   const [profile, setProfile] = useState({});
@@ -53,7 +64,10 @@ function Profile() {
           <Text size="1.5rem" weight="bold">
             {profile?.name}
           </Text>
-          <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+          <BigAvatarWrapper>
+
+            <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+          </BigAvatarWrapper>
         </UserNameContainer>
         <Text margin="1.2rem 0 0 0">Predicciones de {profile.name}:</Text>
         <ListWrapper>

@@ -35,7 +35,7 @@ const defaultColors = [
   'magenta',
   'lavender',
   'lightcyan',
-  'deeppink'
+  'deeppink',
 ];
 
 export default function MultipleLines({
@@ -45,7 +45,7 @@ export default function MultipleLines({
   height,
 }) {
   function renderCustomDot({ cx, cy, dataKey, fill, index }) {
-    if (index === data.length-1) {
+    if (index === data.length - 1) {
       cx -= 30;
       cy -= 10;
     }
@@ -82,13 +82,9 @@ export default function MultipleLines({
       </>
     ) : (
       <svg>
-        <image
-          x={cx - 20}
-          y={cy - 20}
-          width={40}
-          height={40}
-          href={`${userAvatars[dataKey]}`}
-        />
+        <foreignObject x={cx - 20} y={cy - 20} width={40} height={40}>
+          <img width="100%" height="100%" style={{ borderRadius: '100%' }} src={`${userAvatars[dataKey]}`} />
+        </foreignObject>
       </svg>
     );
   }
@@ -136,9 +132,14 @@ export default function MultipleLines({
         <XAxis
           dataKey="date"
           dy={15}
-          tickFormatter={(value) => new Date(value).toLocaleDateString(undefined, { day: 'numeric', month: 'numeric'})}
+          tickFormatter={(value) =>
+            new Date(value).toLocaleDateString(undefined, {
+              day: 'numeric',
+              month: 'numeric',
+            })
+          }
         />
-        <YAxis unit="pts" dx={-10} allowDecimals={false}/>
+        <YAxis unit="pts" dx={-10} allowDecimals={false} />
         <Tooltip content={<CustomTooltip />} />
         <Legend wrapperStyle={{ marginBottom: '-1.2rem' }} />
         {Object.keys(data[0]).map((key, index) => {

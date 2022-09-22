@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Spinner } from '../../../common/Spinner/Spinner';
-import { UserNameContainer } from '../Profile';
+import { UserNameContainer, BigAvatarWrapper } from '../Profile';
 import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
 import { ProfileEditForm } from './ProfileEditForm';
 import {
@@ -29,11 +29,13 @@ function ProfileEdit() {
               <Text size="1rem" weight="300">
                 {userContext.user.email}
               </Text>
-              <UserMiniAvatar
-                name={userContext.user.name}
-                avatar={userContext.user.avatar}
-                emptySize="10rem"
-              />
+              <BigAvatarWrapper>
+                <UserMiniAvatar
+                  name={userContext.user.name}
+                  avatar={userContext.user.avatar}
+                  emptySize="10rem"
+                />
+              </BigAvatarWrapper>
             </UserNameContainer>
             <ProfileEditForm
               profile={userContext.user}
