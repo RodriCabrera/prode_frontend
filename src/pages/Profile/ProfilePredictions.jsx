@@ -9,8 +9,8 @@ import {
 } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 import FixtureTable from '../FixturePage/components/FixtureTable';
-import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 import useCleanupController from '../../hooks/useCleanupController';
+import { Info } from '../../common/Info/Info';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
@@ -70,9 +70,7 @@ function ProfilePredictions({ props }) {
         !isLoading && (
           <>
             <Text align="center">Sin predicciones que mostrar</Text>
-            <Text align="center">
-              Solo podrás ver predicciones de partidos ya jugados
-            </Text>
+            <Info>Solo podrás ver predicciones de partidos ya jugados</Info>
           </>
         )
       )}
