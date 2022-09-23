@@ -1,6 +1,6 @@
 import React from 'react';
 import { isNil } from 'lodash';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import {
   BannerButton,
   BannerDataWrapper,
@@ -13,10 +13,11 @@ export function Banner({
   path,
   percentage,
   isLoading,
-  editMode,
   disabled,
 }) {
   const navigate = useNavigate();
+  const { mode, setMode } = useOutletContext();
+  const editMode = mode === 'edit'
 
   const renderPercentageInfo = () => {
     if (editMode && disabled) {
@@ -34,11 +35,16 @@ export function Banner({
     return null;
   };
 
+  const handleClick = () => {
+    if (percentage === 100 && mode != 'results') setMode('results')
+    navigate(path)
+  }
+
   return (
     <BannerButton
       padding="8px 16px"
       disabled={!disabled}
-      onClick={() => navigate(path)}
+      onClick={handleClick}
       tertiary={editMode && disabled}
       grayscale={!disabled}
     >
