@@ -40,7 +40,7 @@ export const getFlagUrl = (url, size) => {
 };
 
 export const translateDuration = (miliseconds) => {
-  switch (miliseconds) {
+  switch (parseInt(miliseconds)) {
     case 1000 * 60 * 60 * 1:
       return ' una hora antes del partido';
     case 1000 * 60 * 60 * 12:

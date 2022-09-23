@@ -87,7 +87,7 @@ function InGroup({ groupData }) {
                       }
                       isMobile={isMobile}
                     >
-                      <Text>{`${isAdmin ? '[👑]' : ''} ${score.user} : ${
+                      <Text>{`${isAdmin ? '👑' : ''} ${score.user} : ${
                         score.score
                       } pts`}</Text>
                     </ListElement>

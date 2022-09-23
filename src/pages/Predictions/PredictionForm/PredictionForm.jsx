@@ -34,35 +34,38 @@ import {
 export default function PredictionForm({ fixture, hasChangedGroup }) {
   const { selectedUserGroup, mode } = useOutletContext();
   const resultsMode = mode === 'results';
-  const [predictions, setPredictions] = useState({});
   const [signal, cleanup, handleCancel] = useCleanupController();
   const [isLoading, setIsLoading] = useState(hasChangedGroup || false);
   const { phase } = useParams();
-  const { values, handleChange, resetForm, dirty } = useFormik({
+  const { values, handleChange, resetForm, dirty, setStatus, status } = useFormik({
     initialValues: {},
   });
   const [errorMessages, setErrorMessages] = useState([]);
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    if (!fixture) return;
-    setIsLoading(true);
+  const fetchAndSetPredictions = () => {
+    setStatus({loading: true})
     getPredictions(
       selectedUserGroup?.id,
       fixture.id ? undefined : getStageName(phase),
       fixture.id || undefined,
       undefined,
       signal
-    )
-      .then((res) => setPredictions(res.data))
+      )
+      .then((res) => {
+        resetForm({ values: formatPredictionsToDisplay(res.data) } || {})
+        setStatus({loading: false})
+      })
       .finally(() => setIsLoading(false))
       .catch((err) => (handleCancel(err) ? setIsLoading(true) : null));
-    return cleanup;
-  }, [fixture]);
+  }
 
   useEffect(() => {
-    resetForm({ values: formatPredictionsToDisplay(predictions) } || {});
-  }, [predictions]);
+    if (!fixture) return;
+    setIsLoading(true);
+    fetchAndSetPredictions();
+    return cleanup;
+  }, [fixture]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +74,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
       createPredictions(formatPredictionsToPost(values, selectedUserGroup?.id))
         .then((res) => {
           setErrorMessages(res.data.errors);
+          fetchAndSetPredictions();
         })
         .finally(() => {
           setIsLoading(false);
@@ -228,9 +232,9 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           </Table.Body>
         </Table>
         {!resultsMode && (
-          <Button type="submit" disabled={!selectedUserGroup?.id || !dirty}>
+          <Button type="submit" disabled={!selectedUserGroup?.id || !dirty || status?.loading}>
             {selectedUserGroup?.id
-              ? 'Enviar prediccion'
+              ? 'Enviar predicciones'
               : 'Seleccione un grupo'}
           </Button>
         )}

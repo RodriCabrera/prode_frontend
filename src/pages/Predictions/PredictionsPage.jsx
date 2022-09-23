@@ -8,7 +8,7 @@ import { Spinner } from '../../common/Spinner/Spinner';
 import { useGetUserGroupsData } from '../../hooks/useGetUserGroupsData';
 
 function PredictionsPage() {
-  const [mode, setMode] = useState('results');
+  const [mode, setMode] = useState('edit');
   const {
     isLoadingUserGroupsData,
     userGroupList,
@@ -43,7 +43,7 @@ function PredictionsPage() {
       {userGroupList.length > 0 && (
         <>
           <ToggleSwitch mode={mode} setMode={setMode} />
-          <Outlet context={{ mode, selectedUserGroup }} />
+          <Outlet context={{ mode, selectedUserGroup, setMode }} />
         </>
       )}
     </PredictionsPageWrapper>

@@ -11,7 +11,19 @@ import { ListWrapper } from '../../common/Lists/Lists.styles';
 import { ListElement } from '../../common/Lists/ListElement';
 import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
 import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
+import { useIsMobile } from '../../hooks/useIsMobile';
 import useCleanupController from '../../hooks/useCleanupController';
+
+export const BigAvatarWrapper = styled.div`
+  margin: auto;
+  border-radius: 100%;
+  overflow: hidden;
+  height: 200px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 function Profile() {
   const { name } = useParams();
@@ -20,6 +32,7 @@ function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [groupPredictions, setGroupPredictions] = useState({});
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,15 +58,18 @@ function Profile() {
     <Spinner />
   ) : (
     <CardContainer>
-      <CardWrapper>
-        <GoBackButton />
+      <CardWrapper border={isMobile ? 'none' : null}>
+        <GoBackButton collapse={isMobile}/>
         <UserNameContainer>
           <Text size="1.5rem" weight="bold">
             {profile?.name}
           </Text>
-          <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+          <BigAvatarWrapper>
+
+            <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+          </BigAvatarWrapper>
         </UserNameContainer>
-        <Text>Predicciones de {profile.name}:</Text>
+        <Text margin="1.2rem 0 0 0">Predicciones de {profile.name}:</Text>
         <ListWrapper>
           {sharedGroups.map((group) => (
             <ListElement

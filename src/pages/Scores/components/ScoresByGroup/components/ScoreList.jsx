@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
-import { ListElement } from '../../../common/Lists/ListElement';
-import { AuthContext } from '../../../common/AuthProvider';
-import { useIsMobile } from '../../../hooks/useIsMobile';
+import { UserMiniAvatar } from '../../../../../common/UserMiniAvatar/UserMiniAvatar';
+import { ListElement } from '../../../../../common/Lists/ListElement';
+import { AuthContext } from '../../../../../common/AuthProvider';
+import { useIsMobile } from '../../../../../hooks/useIsMobile';
 
 const ScoreListWrapper = styled.div`
   display: flex;
@@ -27,6 +27,14 @@ const ScoreItem = styled.div`
   width: 100%;
 `;
 
+const renderPostion = (index) => {
+  if (index > 2) return `${index+1}.`
+  if(index === 0) return '🥇';
+  if(index === 1) return '🥈';
+  if(index === 2) return '🥉';
+  return ''
+}
+
 export default function ScoreList({ scores }) {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -38,7 +46,7 @@ export default function ScoreList({ scores }) {
   };
   return (
     <ScoreListWrapper isMobile={isMobile}>
-      {scores?.data.scores.map((score, index) => {
+      {scores?.scores.map((score, index) => {
         return (
           <ScoreItem key={score.user}>
             <ListElement
@@ -46,7 +54,7 @@ export default function ScoreList({ scores }) {
               onClick={() => handleUserClick(score.user)}
               avatar={<UserMiniAvatar avatar={score.avatar} name={score.user} />}
             >
-                <div>{`${index+1}. ${score.user}`}</div>
+                <div>{`${renderPostion(index)} ${score.user}`}</div>
             </ListElement>
           <div>{score.score}</div>
           </ScoreItem>
