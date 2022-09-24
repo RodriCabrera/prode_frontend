@@ -20,6 +20,7 @@ import { BallLoader } from '../../../common/Spinner/BallLoader';
 import { FormWrapper } from '../Predictions.styles';
 import PredictionForm from '../PredictionForm/PredictionForm';
 import GroupSwitchButtons from '../PredictionForm/GroupSwitchButtons';
+import { Info } from '../../../common/Info/Info';
 
 export default function PredictionManager() {
   const { mode } = useOutletContext();
@@ -75,6 +76,11 @@ export default function PredictionManager() {
               <CardTitle marginBottom="0">
                 Grupo {numberToGroupLetter(groupNumberMod(targetGroupNumber))}
               </CardTitle>
+              {resultsMode && (
+                <Info>
+                  Si querés ingresar predicciones switcheá al modo PREDECIR.
+                </Info>
+              )}
               {resultsMode && selectedUserGroup && (
                 <References
                   green="Acertaste resultado"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getUserGroups } from '../api/groups';
+import { getUserGroups, getGroupData } from '../api/groups';
 import useCleanupController from './useCleanupController';
 
 export const useGetUserGroupsData = () => {
@@ -9,7 +9,12 @@ export const useGetUserGroupsData = () => {
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   const handleGroupSelect = (group) => {
-    setSelectedUserGroup(group);
+    setSelectedUserGroup(group)
+    getGroupData(group.name, signal)
+    .then(res => {
+      setSelectedUserGroup(res.data.groupData);
+    })
+    .catch((err) => handleCancel(err))
   };
 
   useEffect(() => {
@@ -17,7 +22,8 @@ export const useGetUserGroupsData = () => {
     getUserGroups(signal)
       .then(({ data }) => {
         setUserGroupList(data);
-        setSelectedUserGroup(data[0]);
+        handleGroupSelect(data[0]);
+        // setSelectedUserGroup(data[0]);
       })
       .catch((err) => handleCancel(err))
       .finally(() => {
