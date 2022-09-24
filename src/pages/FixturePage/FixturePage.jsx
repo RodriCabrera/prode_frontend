@@ -19,7 +19,7 @@ function Fixture() {
   const { width } = useWindowDimensions();
 
   const renderGroupsTables = (groups) => {
-    if (!groups) return <Spinner />
+    if (!groups) return <Spinner />;
     return (
       <FixtureTablesContainer>
         {groups.map((group) => (
@@ -33,7 +33,6 @@ function Fixture() {
       </FixtureTablesContainer>
     );
   };
-
   return (
     <FixtureWrapper>
       {width < 1060 ? (

@@ -122,6 +122,7 @@ export const Input = styled.input`
   padding: 10px;
   border-radius: 10px;
   background-color: #e5e5e5;
+  border: ${({ borderError }) => borderError ? '1px solid red' : 'none'};
   :disabled {
     background-color: darkgray;
   }
@@ -139,6 +140,7 @@ export const TextareaInput = styled.textarea`
   padding: 10px;
   border-radius: 10px;
   background-color: #e5e5e5;
+  border: ${({ borderError }) => borderError ? '1px solid red' : 'none'};
   :disabled {
     background-color: darkgray;
   }

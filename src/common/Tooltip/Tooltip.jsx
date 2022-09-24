@@ -11,6 +11,7 @@ const TooltipBubble = styled.div`
     }
     return '0px';
   }};
+  right: 30px;
   background-color: gray;
   padding: 6px;
   border-radius: 10px;

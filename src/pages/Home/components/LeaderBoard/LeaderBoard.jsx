@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Leader from './Leader';
 import { getUserGroups } from '../../../../api/groups';
 import useCleanupController from '../../../../hooks/useCleanupController';
-import { CardTitle, CardWrapper } from '../../../../common/common.styles';
+import { CardTitle, CardWrapper, Text } from '../../../../common/common.styles';
 import { useIsMobile } from '../../../../hooks/useIsMobile';
 import { BallLoader } from '../../../../common/Spinner/BallLoader';
 
@@ -32,7 +33,7 @@ const LeaderBoard = () => {
       <CardTitle>Ranking de usuarios</CardTitle>
       {isLoading || !userGroups ? (
         <BallLoader />
-      ) : (
+      ) : userGroups.length > 0 ? (
         userGroups.map((group) => (
           <Leader
             key={group.name}
@@ -40,6 +41,15 @@ const LeaderBoard = () => {
             isUnique={userGroups.length < 2}
           />
         ))
+      ) : (
+        <>
+          <Text weight="600" size="1rem" color='gray' align="center" margin="1rem">
+            No perteneces a ningún grupo
+          </Text>
+          <Text align="center" margin="1rem 0">
+            Puedes encontrar o crear uno desde <Link to="/groups/">esta sección</Link>
+          </Text>
+        </>
       )}
     </CardWrapper>
   );

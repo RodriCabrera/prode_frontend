@@ -14,6 +14,7 @@ import {
 } from '../../../common/common.styles';
 import { Spinner } from '../../../common/Spinner/Spinner';
 import AvatarList from './AvatarList';
+import { BigAvatarWrapper } from '../Profile';
 import { isEmpty } from 'lodash';
 
 export function ProfileEditForm({ profile, updateProfile }) {
@@ -110,12 +111,12 @@ export function ProfileEditForm({ profile, updateProfile }) {
             </Text>
             <br />
             <AvatarContainer>
-              <AvatarWrapper>
+              <BigAvatarWrapper>
                 <UserMiniAvatar
                   avatar={selectedAvatar || profile.avatar}
                   name={userName || profile.name}
                 />
-              </AvatarWrapper>
+              </BigAvatarWrapper>
             </AvatarContainer>
             <br />
             <Button type="submit">Confirmar</Button>
@@ -134,7 +135,4 @@ export function ProfileEditForm({ profile, updateProfile }) {
 const AvatarContainer = styled.div`
   display: flex;
   justify-content: center;
-`;
-const AvatarWrapper = styled.div`
-  max-height: 500px;
 `;

@@ -5,7 +5,7 @@ import '../index.css';
 import NotFound from '../pages/NotFound';
 import Home from '../pages/Home/Home';
 import Groups from '../pages/Groups/Groups';
-import Scores from '../pages/Scores/Scores';
+import ScoresPage from '../pages/Scores/ScoresPage';
 import GroupPage from '../pages/GroupPage/GroupPage';
 import Fixture from '../pages/FixturePage/FixturePage';
 import App from '../App';
@@ -26,7 +26,7 @@ function Router() {
               <Route path="groups/:name" element={<GroupPage />} />
               <Route path="predictions/*" element={<PredictionsRoutes />} />
               <Route path="fixture" element={<Fixture />} />
-              <Route path="scores" element={<Scores />} />
+              <Route path="scores" element={<ScoresPage />} />
               <Route path="profile/*" element={<ProfileRoutes />} />
               <Route path="*" element={<NotFound />} />
             </Route>

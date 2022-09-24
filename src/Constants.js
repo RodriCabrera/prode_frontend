@@ -1,5 +1,7 @@
 const prod = {
-  API_URL: 'https://prode-mundial-backend.herokuapp.com',
+  API_URL: ' https://prode-mundial-backend.herokuapp.com',
+  // if prod testing env:
+  // API_URL: 'http://localhost:8080',
 };
 
 const dev = {

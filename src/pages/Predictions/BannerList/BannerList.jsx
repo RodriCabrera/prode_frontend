@@ -22,10 +22,9 @@ function BannerList() {
     FINAL: false,
     TERCER_PUESTO: false,
   });
-  const editMode = mode === 'edit';
 
   useEffect(() => {
-    if (editMode) {
+    if (mode==='edit') {
       setIsLoading(true);
       getPredictionCompletePercentage(selectedUserGroup?.id, signal)
         .then((res) => {
@@ -37,7 +36,7 @@ function BannerList() {
         });
     }
     return cleanup;
-  }, [selectedUserGroup, editMode]);
+  }, [selectedUserGroup, mode]);
 
   const calculatePercentage = (quantities) => {
     return Math.round((quantities.predicted / quantities.total) * 100);
@@ -120,7 +119,6 @@ function BannerList() {
               path={stage.path}
               percentage={stage.percentage}
               isLoading={isLoading}
-              editMode={editMode}
               disabled={stageStatus[stage.title.replace(' ', '_')]}
             />
           );

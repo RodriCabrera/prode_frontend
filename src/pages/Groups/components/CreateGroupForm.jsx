@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import GroupConfirm from './GroupConfirm';
@@ -88,7 +88,9 @@ function CreateGroupForm({ updateList }) {
               onChange={handleChange}
               showUppercase
               maxLength={20}
+              borderError={errors.name}
             />
+            {errors.name && <Text size="0.85rem" color="red" align="left" margin="-0.2rem 0.65rem">*{errors.name}</Text>}
           </Label>
           <Label htmlFor="manifesto">
             <TextareaInput
@@ -104,7 +106,9 @@ function CreateGroupForm({ updateList }) {
               onChange={handleChange}
               rows="10"
               maxLength="1024"
+              borderError={errors.manifesto}
             />
+            {errors.manifesto && <Text size="0.85rem" color="red" align="left" margin="-0.2rem 0.65rem">*{errors.manifesto}</Text>}
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} />
           <Label htmlFor="timeLimit">
@@ -135,7 +139,7 @@ function CreateGroupForm({ updateList }) {
             disabled={isLoading || !isEmpty(errors) || isEmpty(values.name)}
             onClick={toggleModal}
           >
-            {!isEmpty(errors) ? errors.name || errors.manifesto : 'Crear grupo'}
+            Crear grupo
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <GroupConfirm

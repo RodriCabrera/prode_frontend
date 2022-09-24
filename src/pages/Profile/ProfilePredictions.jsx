@@ -9,8 +9,8 @@ import {
 } from '../../common/common.styles';
 import { getOtherUserPredictionsByGroup } from '../../api/predictions';
 import FixtureTable from '../FixturePage/components/FixtureTable';
-import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
 import useCleanupController from '../../hooks/useCleanupController';
+import { Info } from '../../common/Info/Info';
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;
@@ -49,29 +49,28 @@ function ProfilePredictions({ props }) {
         <CardContainer>
           <CardWrapper border="none">
             <CardTitle>Predicciones para {group.name}</CardTitle>
-            <GoBackButton />
             <FixtureTable
               data={predictionsToRender()}
               isCompact
               isMobile
               fullWidth
             />
-            <Button
-              padding="10px"
-              tertiary
-              onClick={() => setShowShortList(!showShortList)}
-            >
-              {showShortList ? 'Mostrar más' : 'Mostrar menos'}
-            </Button>
+            {otherUserPredictions.length > 10 && (
+              <Button
+                padding="10px"
+                tertiary
+                onClick={() => setShowShortList(!showShortList)}
+              >
+                {showShortList ? 'Mostrar más' : 'Mostrar menos'}
+              </Button>
+            )}
           </CardWrapper>
         </CardContainer>
       ) : (
         !isLoading && (
           <>
             <Text align="center">Sin predicciones que mostrar</Text>
-            <Text align="center">
-              Solo podrás ver predicciones de partidos ya jugados
-            </Text>
+            <Info>Solo podrás ver predicciones de partidos ya jugados</Info>
           </>
         )
       )}
