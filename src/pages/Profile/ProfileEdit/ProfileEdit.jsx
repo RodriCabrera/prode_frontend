@@ -13,7 +13,7 @@ import { AuthContext } from '../../../common/AuthProvider';
 
 function ProfileEdit() {
   const userContext = useContext(AuthContext);
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   return (
     <CardContainer>
@@ -24,18 +24,16 @@ function ProfileEdit() {
           <>
             <UserNameContainer>
               <Text size="1.5rem" weight="bold">
-                {userContext.user.name}
+                {userContext.user?.name}
               </Text>
               <Text size="1rem" weight="300">
-                {userContext.user.email}
+                {userContext.user?.email}
               </Text>
-              <BigAvatarWrapper>
-                <UserMiniAvatar
-                  name={userContext.user.name}
-                  avatar={userContext.user.avatar}
-                  emptySize="10rem"
-                />
-              </BigAvatarWrapper>
+              <UserMiniAvatar
+                name={userContext.user?.name}
+                avatar={userContext.user?.avatar}
+                emptySize="10rem"
+              />
             </UserNameContainer>
             <ProfileEditForm
               profile={userContext.user}
