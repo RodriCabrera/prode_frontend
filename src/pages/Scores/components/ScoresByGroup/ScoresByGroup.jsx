@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   CardContainer,
   CardWrapper,
   Text,
-} from '../../../../common/common.styles';
-import ScoreList from '../ScoresByGroup/components/ScoreList';
-import { GroupSelector } from '../../../Predictions/components/GroupSelector';
-import { useGetUserGroupsData } from '../../../../hooks/useGetUserGroupsData';
-import { getGroupScores } from '../../../../api/groups';
+} from "../../../../common/common.styles";
+import ScoreList from "../ScoresByGroup/components/ScoreList";
+import { GroupSelector } from "../../../Predictions/components/GroupSelector";
+import { useGetUserGroupsData } from "../../../../hooks/useGetUserGroupsData";
+import { getGroupScores } from "../../../../api/groups";
 
-import { getPredictions } from '../../../../api/predictions';
-import { BallLoader } from '../../../../common/Spinner/BallLoader';
-import { isEmpty } from 'lodash';
-import { Spinner } from '../../../../common/Spinner/Spinner';
-import Graphs from './components/Graphs';
-import MatchNavigator from '../MatchNavigator';
-import useCleanupController from '../../../../hooks/useCleanupController';
-import { Info } from '../../../../common/Info/Info';
+import { getPredictions } from "../../../../api/predictions";
+import { BallLoader } from "../../../../common/Spinner/BallLoader";
+import { isEmpty } from "lodash";
+import { Spinner } from "../../../../common/Spinner/Spinner";
+import useCleanupController from "../../../../hooks/useCleanupController";
+import { Info } from "../../../../common/Info/Info";
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
@@ -73,7 +71,7 @@ export default function ScoresByGroup() {
           <Info>
             Los puntajes se calculan automáticamente según el sistema de
             puntajes
-            {userGroupList.length === 1 ? ' del grupo' : ' de cada grupo grupo'}
+            {userGroupList.length === 1 ? " del grupo" : " de cada grupo grupo"}
             .
           </Info>
         )}

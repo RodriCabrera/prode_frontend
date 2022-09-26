@@ -1,26 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { isEmpty } from 'lodash';
-import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
-import { getGroupScores } from '../../../api/groups';
-import { ListElement } from '../../../common/Lists/ListElement';
-import { Spinner } from '../../../common/Spinner/Spinner';
-import useToggleModal from '../../../hooks/useToggleModal';
-import Modal from '../../../common/Modal/Modal';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { isEmpty } from "lodash";
+import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
+import { getGroupScores } from "../../../api/groups";
+import { ListElement } from "../../../common/Lists/ListElement";
+import { Spinner } from "../../../common/Spinner/Spinner";
+import useToggleModal from "../../../hooks/useToggleModal";
+import Modal from "../../../common/Modal/Modal";
 import {
   Text,
   CardContainer,
   Button,
-  CardTitle,
   CardWrapper,
-} from '../../../common/common.styles';
-import LeaveGroupForm from './LeaveGroupForm';
-import GroupRules from './GroupRules';
-import GroupInvite from './GroupInvite';
-import { AuthContext } from '../../../common/AuthProvider';
-import { GoBackButton } from '../../../common/GoBackButton/GoBackButton';
-import useCleanupController from '../../../hooks/useCleanupController';
-import { useIsMobile } from '../../../hooks/useIsMobile';
+} from "../../../common/common.styles";
+import LeaveGroupForm from "./LeaveGroupForm";
+import GroupRules from "./GroupRules";
+import GroupInvite from "./GroupInvite";
+import { AuthContext } from "../../../common/AuthProvider";
+import { GoBackButton } from "../../../common/GoBackButton/GoBackButton";
+import useCleanupController from "../../../hooks/useCleanupController";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 function InGroup({ groupData }) {
   const navigate = useNavigate();
@@ -46,11 +45,11 @@ function InGroup({ groupData }) {
   }, []);
 
   const onGroupExit = () => {
-    navigate('/groups');
+    navigate("/groups");
   };
 
   const handleUserClick = (user) => {
-    if (user === userContext.user.name) return navigate('/profile/');
+    if (user === userContext.user.name) return navigate("/profile/");
     return navigate(`/profile/${user}`);
   };
 
@@ -72,7 +71,7 @@ function InGroup({ groupData }) {
               (👑 es admin)
             </Text>
             {isEmpty(groupScoresData)
-              ? 'Loading member scores...'
+              ? "Loading member scores..."
               : groupScoresData.scores?.map((score) => {
                   const isAdmin = score.user === groupScoresData.group.owner;
                   return (
@@ -87,7 +86,7 @@ function InGroup({ groupData }) {
                       }
                       isMobile={isMobile}
                     >
-                      <Text>{`${isAdmin ? '👑' : ''} ${score.user} : ${
+                      <Text>{`${isAdmin ? "👑" : ""} ${score.user} : ${
                         score.score
                       } pts`}</Text>
                     </ListElement>
