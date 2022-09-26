@@ -1,7 +1,18 @@
-import React from 'react';
-import { TD } from './Table.styles';
+import React from "react";
+import { TD } from "./Table.styles";
 
-function Cell({ children, ...props }) {
+interface Props {
+  children: JSX.Element;
+  borderBottom: string;
+  fontSize: string;
+  fontWeight: string;
+  withBottomBorder: boolean;
+  padding: string;
+  margin: string;
+  colSpan: number;
+}
+
+function Cell({ children, ...props }: Props) {
   const {
     borderBottom,
     colSpan,
@@ -20,7 +31,8 @@ function Cell({ children, ...props }) {
       size={fontSize}
       weight={fontWeight}
       withBottomBorder={withBottomBorder}
-      margin={margin}>
+      margin={margin}
+    >
       {children}
     </TD>
   );
