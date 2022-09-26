@@ -1,4 +1,4 @@
-import styled from '@emotion/styled/macro';
+import styled from "@emotion/styled/macro";
 
 export const AvatarWrapper = styled.div`
   display: flex;
@@ -14,22 +14,29 @@ export const AvatarWrapper = styled.div`
     height: 105%;
   }
 `;
-export const HoverBaloon = styled.div`
+
+interface IHoverBaloonProps {
+  bgColor: string;
+}
+export const HoverBaloon = styled.div<IHoverBaloonProps>`
   transition: 0.2s;
   height: 2.5rem;
   width: 2.5rem;
   position: absolute;
   border-radius: 100%;
   z-index: 1;
-  background-color: ${({ bgColor }) => bgColor || 'darkorange'};
+  background-color: ${({ bgColor }) => bgColor || "darkorange"};
 `;
 
-export const ListItemWrapper = styled.div`
+interface IListItemWrapperProps {
+  isMobile: boolean;
+}
+export const ListItemWrapper = styled.div<IListItemWrapperProps>`
   display: flex;
-  gap: ${({ isMobile }) => isMobile ? '0.2rem' : '1rem'};
+  gap: ${({ isMobile }) => (isMobile ? "0.2rem" : "1rem")};
   align-items: center;
-  height: ${({ isMobile }) => isMobile ? '2.5rem' : '4rem'};
-  max-height:  ${({ isMobile }) => isMobile ? '2.5rem' : '4rem'};
+  height: ${({ isMobile }) => (isMobile ? "2.5rem" : "4rem")};
+  max-height: ${({ isMobile }) => (isMobile ? "2.5rem" : "4rem")};
   transform-origin: center;
   cursor: pointer;
   :hover ${HoverBaloon} {
