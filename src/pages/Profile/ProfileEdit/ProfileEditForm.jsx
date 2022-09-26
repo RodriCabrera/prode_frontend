@@ -63,6 +63,13 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const handleAvatarClick = (avatar) => {
     setSelectedAvatar(avatar);
   };
+  const isNumberAndLetters = /[^A-Za-z0-9]/.test(userName);
+  const isDisabled = () => {
+    return (
+      (userName === profile.name && selectedAvatar === profile.avatar) ||
+      isNumberAndLetters
+    );
+  };
 
   if (isLoading) return <Spinner />;
   return (
@@ -85,18 +92,8 @@ export function ProfileEditForm({ profile, updateProfile }) {
               onChange={handleNameChange}
             />
           </Label>
-          <Button
-            type="button"
-            onClick={toggleModal}
-            disabled={
-              (userName === profile.name &&
-                selectedAvatar === profile.avatar) ||
-              /[^A-Za-z0-9]/.test(userName)
-            }
-          >
-            {/[^A-Za-z0-9]/.test(userName)
-              ? 'Solo letras y números'
-              : 'Actualizar Perfil'}
+          <Button type="button" onClick={toggleModal} disabled={isDisabled()}>
+            {isNumberAndLetters ? 'Solo letras y números' : 'Actualizar Perfil'}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>
