@@ -1,6 +1,8 @@
-import React from 'react';
-
-function Head({ children }) {
+import React from "react";
+interface Props {
+  children: JSX.Element;
+}
+function Head({ children }: Props) {
   return <thead>{children}</thead>;
 }
 
