@@ -25,12 +25,15 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const handleNameChange = (e) => {
     setUserName(e.target.value);
   };
+  const isNumberAndLetters = /[^A-Za-z0-9]/.test(userName);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if((userName === profile.name &&
-      selectedAvatar === profile.avatar) ||
-    /[^A-Za-z0-9]/.test(userName)) return;
+    if (
+      (userName === profile.name && selectedAvatar === profile.avatar) ||
+      isNumberAndLetters
+    )
+      return;
     if (!showModal) return toggleModal();
     setIsLoading(true);
     toast.promise(
@@ -63,7 +66,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const handleAvatarClick = (avatar) => {
     setSelectedAvatar(avatar);
   };
-  const isNumberAndLetters = /[^A-Za-z0-9]/.test(userName);
+
   const isDisabled = () => {
     return (
       (userName === profile.name && selectedAvatar === profile.avatar) ||
