@@ -56,8 +56,8 @@ export const CardWrapper = styled.div<Props>`
   align-items: ${({ align }) => align};
 `;
 interface IButton extends Props {
-  tertiary: boolean;
-  grayscale: boolean;
+  tertiary?: boolean;
+  grayscale?: boolean;
 }
 /**
  * You can pass to the Button:
