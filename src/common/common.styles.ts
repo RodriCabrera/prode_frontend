@@ -129,8 +129,8 @@ export const Label = styled.label`
   gap: 5px;
 `;
 interface IInput extends Props {
-  showUppercase: boolean;
-  borderError: boolean;
+  showUppercase?: boolean;
+  borderError?: string;
 }
 /**
  * You can pass to the Input:

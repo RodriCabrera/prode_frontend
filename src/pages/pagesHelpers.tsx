@@ -1,14 +1,14 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-export const parseDate = (date, options = null) => {
+export const parseDate = (date: Date, options = null) => {
   return new Date(date).toLocaleString(
     navigator.language,
     options || {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      weekday: 'short',
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      weekday: "short",
     }
   );
 };
@@ -29,26 +29,26 @@ const FlagPlaceholder = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
-`
+`;
 
-export const getFlagUrl = (url, size) => {
+export const getFlagUrl = (url: string, size: string) => {
   let newUrl;
   if (!url) {
     return <FlagPlaceholder>?</FlagPlaceholder>;
-  } else newUrl = url?.replace('{format}', 'sq').replace('{size}', size);
-  return <FlagImg src={newUrl} alt="Country flag"/>;
+  } else newUrl = url?.replace("{format}", "sq").replace("{size}", size);
+  return <FlagImg src={newUrl} alt="Country flag" />;
 };
 
-export const translateDuration = (miliseconds) => {
+export const translateDuration = (miliseconds: string) => {
   switch (parseInt(miliseconds)) {
     case 1000 * 60 * 60 * 1:
-      return ' una hora antes del partido';
+      return " una hora antes del partido";
     case 1000 * 60 * 60 * 12:
-      return ' doce horas antes del partido';
+      return " doce horas antes del partido";
     case 1000 * 60 * 60 * 24:
-      return ' un día antes del partido';
+      return " un día antes del partido";
     case 0:
     default:
-      return ' el comienzo del partido';
+      return " el comienzo del partido";
   }
 };
