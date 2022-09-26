@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { MdOutlineInfo } from 'react-icons/md';
-import styled from '@emotion/styled';
+import React, { useState } from "react";
+import { MdOutlineInfo } from "react-icons/md";
+import styled from "@emotion/styled";
 
 const InfoButton = styled.span`
   cursor: default;
@@ -25,7 +25,7 @@ const ToolTipBox = styled.span`
   color: white;
   transform: translateY(-100%) translateX(-50%);
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 46%;
@@ -37,18 +37,25 @@ const ToolTipBox = styled.span`
   }
 `;
 
-const Tooltip = styled.span`
+interface ITooltipProps {
+  show: boolean;
+}
+const Tooltip = styled.span<ITooltipProps>`
   position: absolute;
   width: 0;
   height: 0;
   top: -7px;
   left: 50%;
-  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
-  opacity: ${({ show }) => (show ? '1' : '0')};
+  visibility: ${({ show }) => (show ? "visible" : "hidden")};
+  opacity: ${({ show }) => (show ? "1" : "0")};
   transition: opacity 0.5s, visibility 0.2s;
 `;
+interface Props {
+  info: string;
+  color: string;
+}
 
-function ErrorInfo({ info, color = 'red' }) {
+function ErrorInfo({ info, color = "red" }: Props) {
   if (!info) return null;
   const [show, setShow] = useState(false);
   const toggleTempShow = () => {
