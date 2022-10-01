@@ -8,8 +8,8 @@ export function UserMiniAvatar({ name, avatar, isSmall, emptySize = '2rem' }) {
       src={avatar}
       alt={name || 'user avatar'}
       style={{
-        width: isSmall ? '30px' : '250px',
-        height: isSmall ? '30px' : '250px',
+        width: isSmall ? '30px' : 'inherit',
+        height: isSmall ? '30px' : 'inherit',
         objectFit: 'cover',
         borderRadius: '100%',
         overflow: 'hidden',
