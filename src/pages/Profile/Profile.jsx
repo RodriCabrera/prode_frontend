@@ -65,7 +65,6 @@ function Profile() {
             {profile?.name}
           </Text>
           <BigAvatarWrapper>
-
             <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
           </BigAvatarWrapper>
         </UserNameContainer>
