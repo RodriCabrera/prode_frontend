@@ -7,16 +7,16 @@ import {
   ToggleWrapper,
 } from './ToggleSwitch.styles';
 
-function ToggleSwitch({ mode, setMode }) {
+function ToggleSwitch({ mode, setMode, modes }) {
   const handleChange = () => {
-    setMode(mode === 'results' ? 'edit' : 'results');
+    setMode(mode === modes.right.name ? modes.left.name : modes.right.name);
   };
 
   return (
     <ToggleContainer>
       <ToggleWrapper>
-        <Text weight="700" color={mode === 'results' ? 'orange' : undefined}>
-          RESULTADOS
+        <Text weight="700" color={mode === modes.left.name ? modes.left.color : undefined}>
+          {modes.left.display}
         </Text>
         <CheckBoxWrapper>
           <CheckBox
@@ -24,12 +24,12 @@ function ToggleSwitch({ mode, setMode }) {
             type="checkbox"
             onChange={handleChange}
             value={mode}
-            checked={mode === 'edit'}
+            checked={mode === modes.right.name}
           />
-          <CheckBoxLabel htmlFor="checkbox" />
+          <CheckBoxLabel htmlFor="checkbox" boxColor={mode === modes.right.name ? modes.right.color : modes.left.color} />
         </CheckBoxWrapper>
-        <Text weight="700" color={mode === 'edit' ? 'salmon' : undefined}>
-          PREDECIR
+        <Text weight="700" color={mode === modes.right.name ? modes.right.color : undefined}>
+           {modes.right.display}
         </Text>
       </ToggleWrapper>
     </ToggleContainer>
