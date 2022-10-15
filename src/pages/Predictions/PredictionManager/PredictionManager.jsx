@@ -63,7 +63,9 @@ export default function PredictionManager() {
         </CardWrapper>
       </CardContainer>
     );
+
   const isGroups = () => getStageName(phase) === STAGE_NAMES.GRUPOS;
+
   return (
     <>
       <Link to="..">Volver a selección de fases</Link>
