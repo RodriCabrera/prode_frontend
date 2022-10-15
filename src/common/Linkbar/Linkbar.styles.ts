@@ -29,6 +29,7 @@ export const LinkGroup = styled(ButtonGroup)<Props>`
   justify-content: space-around;
   align-items: center;
   padding: 0;
+  gap: 40px;
 `;
 
 export const LinkWrapper = styled.div`
