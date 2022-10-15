@@ -52,7 +52,7 @@ function App() {
           />
         </PageWrapper>
       </PageContainer>
-      <Footer />
+      {!isMobile && <Footer />}
     </Layout>
   );
 }
