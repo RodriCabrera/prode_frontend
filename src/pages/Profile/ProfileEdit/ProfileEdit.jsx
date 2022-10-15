@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Spinner } from "../../../common/Spinner/Spinner";
-import { UserNameContainer } from "../Profile";
+import { BigAvatarWrapper, UserNameContainer } from "../Profile";
 import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
 import { ProfileEditForm } from "./ProfileEditForm";
 import {

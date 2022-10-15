@@ -15,6 +15,8 @@ import { isEmpty } from "lodash";
 import { Spinner } from "../../../../common/Spinner/Spinner";
 import useCleanupController from "../../../../hooks/useCleanupController";
 import { Info } from "../../../../common/Info/Info";
+import Graphs from "./components/Graphs";
+import MatchNavigator from "../MatchNavigator";
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});

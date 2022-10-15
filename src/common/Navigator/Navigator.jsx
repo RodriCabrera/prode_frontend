@@ -34,7 +34,7 @@ export default function Navigator({
       }
       const res = Object.entries(filtered).find(
         // eslint-disable-next-line no-unused-vars
-        ([key, value]) => typeof value === "object"
+        ([value]) => typeof value === "object"
       )[1];
       setHistory((prevHistory) => [
         ...prevHistory,
