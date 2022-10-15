@@ -33,8 +33,8 @@ export default function Navigator({
         return [filtered];
       }
       const res = Object.entries(filtered).find(
-        // eslint-disable-next-line no-unused-vars
-        ([value]) => typeof value === "object"
+        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+        ([_, value]) => typeof value === "object"
       )[1];
       setHistory((prevHistory) => [
         ...prevHistory,
