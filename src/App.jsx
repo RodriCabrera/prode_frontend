@@ -1,21 +1,22 @@
-import styled from '@emotion/styled';
-import { Outlet } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import Navbar from './common/Navbar/Navbar';
-import 'react-toastify/dist/ReactToastify.css';
-import { useIsMobile } from './hooks/useIsMobile';
+import styled from "@emotion/styled";
+import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Navbar from "./common/Navbar/Navbar";
+import Footer from "./common/Footer/Footer";
+import "react-toastify/dist/ReactToastify.css";
+import { useIsMobile } from "./hooks/useIsMobile";
 
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #212121;
+  background-color: #111;
 `;
 
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 `;
 
 const PageWrapper = styled.div`
@@ -26,6 +27,7 @@ const PageWrapper = styled.div`
   max-width: 1100px;
   width: 100%;
   padding-top: 2rem;
+  min-height: calc(100vh - 148px - 50px);
 `;
 
 function App() {
@@ -37,7 +39,7 @@ function App() {
         <PageWrapper id="app-page-wrapper">
           <Outlet />
           <ToastContainer
-            position={isMobile ? 'top-right' : 'bottom-right'}
+            position={isMobile ? "top-right" : "bottom-right"}
             autoClose={2500}
             hideProgressBar={false}
             newestOnTop={false}
@@ -50,6 +52,7 @@ function App() {
           />
         </PageWrapper>
       </PageContainer>
+      <Footer />
     </Layout>
   );
 }
