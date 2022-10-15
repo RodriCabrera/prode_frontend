@@ -6,12 +6,12 @@ import {
   CardWrapper,
   Text,
 } from "../../../common/common.styles";
-import { References } from "../../../common/References";
 import {
   groupNumberMod,
   numberToGroupLetter,
   debounce,
 } from "../predictionsPageUtils";
+import { References } from "../../../common/References";
 import { getStageName, STAGE_NAMES } from "./PredictionManagerUtils";
 import { useGetStageData } from "./hooks/useGetStageData";
 import useCleanupController from "../../../hooks/useCleanupController";
