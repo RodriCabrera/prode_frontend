@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 
 export const NavbarContainer = styled.div`
   backdrop-filter: blur(5px);
-  background-color: #21212190;
+  /* background-color: #21212190; */
+  background-color: #000;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,6 +22,7 @@ export const NavbarWrapper = styled.div`
   font-size: 15px;
   width: 100%;
   flex-wrap: wrap;
+  height: 67px;
 `;
 interface IButtonGroup {
   padding?: string;

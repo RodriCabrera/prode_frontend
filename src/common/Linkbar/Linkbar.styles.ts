@@ -13,7 +13,8 @@ export const LinkbarContainer = styled.div<Props>`
   top: ${({ isMobile }) => (isMobile ? "auto" : "0")};
   bottom: ${({ isMobile }) => (isMobile ? "0" : "auto")};
   z-index: 99998;
-  background-color: #23272a;
+  /* background-color: #23272a; */
+  background-color: #000;
   border-bottom: 1px solid #303030;
 `;
 
@@ -21,6 +22,7 @@ export const LinkbarWrapper = styled(NavbarWrapper)`
   width: 100%;
   max-width: 700px;
   justify-content: center;
+  height: 48px;
 `;
 
 export const LinkGroup = styled(ButtonGroup)<Props>`

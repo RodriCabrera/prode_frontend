@@ -41,7 +41,7 @@ export const CardContainer = styled.div`
  * @props isMobile: if true, it will be full width (100%).
  */
 export const CardWrapper = styled.div<Props>`
-  border: ${({ border }) => border || "1px solid dimgray"};
+  border: ${({ border }) => border || "1px solid #333"};
   border-radius: 8px;
   min-width: 200px;
   min-height: ${({ minHeight }) => minHeight};
@@ -54,6 +54,7 @@ export const CardWrapper = styled.div<Props>`
   flex-direction: column;
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
+  background-color: #111;
 `;
 interface IButton extends Props {
   tertiary?: boolean;
