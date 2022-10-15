@@ -54,6 +54,13 @@ export const NavButton = styled.button`
     transform: initial;
     box-shadow: 0 0.25rem 8px rgba(0,0,0,0.2) inset;
   }
+  &:disabled {
+    transform: none;
+    box-shadow: none;
+    cursor: default;
+    border: 1px solid gray;
+    color: gray;
+  }
 `;
 
 export const NavLayers = styled.div`

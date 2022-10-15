@@ -29,11 +29,13 @@ function ProfileEdit() {
               <Text size="1rem" weight="300">
                 {userContext.user?.email}
               </Text>
-              <UserMiniAvatar
-                name={userContext.user?.name}
-                avatar={userContext.user?.avatar}
-                emptySize="10rem"
-              />
+              <BigAvatarWrapper>
+                <UserMiniAvatar
+                  name={userContext.user?.name}
+                  avatar={userContext.user?.avatar}
+                  emptySize="10rem"
+                />
+              </BigAvatarWrapper>
             </UserNameContainer>
             <ProfileEditForm
               profile={userContext.user}

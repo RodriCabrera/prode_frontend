@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavButton } from './navigator.styles';
 
-export default function NavLayer({ data, filterFunc, parseName }) {
+export default function NavLayer({ data, filterFunc, parseName, isFinalCheck }) {
   const handleClick = () => {
     return filterFunc(data);
   };

@@ -26,12 +26,13 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const handleNameChange = (e) => {
     setUserName(e.target.value);
   };
+  const isNumberAndLetters = /[^A-Za-z0-9]/.test(userName);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
       (userName === profile.name && selectedAvatar === profile.avatar) ||
-      /[^A-Za-z0-9]/.test(userName)
+      isNumberAndLetters
     )
       return;
     if (!showModal) return toggleModal();
@@ -68,6 +69,15 @@ export function ProfileEditForm({ profile, updateProfile }) {
   };
 
   if (isLoading || isEmpty(profile)) return <Spinner />;
+
+  const isDisabled = () => {
+    return (
+      (userName === profile.name && selectedAvatar === profile.avatar) ||
+      isNumberAndLetters
+    );
+  };
+
+  if (isLoading) return <Spinner />;
   return (
     <>
       {!isEditingEnabled && (
@@ -88,18 +98,8 @@ export function ProfileEditForm({ profile, updateProfile }) {
               onChange={handleNameChange}
             />
           </Label>
-          <Button
-            type="button"
-            onClick={toggleModal}
-            disabled={
-              (userName === profile.name &&
-                selectedAvatar === profile.avatar) ||
-              /[^A-Za-z0-9]/.test(userName)
-            }
-          >
-            {/[^A-Za-z0-9]/.test(userName)
-              ? 'Solo letras y números'
-              : 'Actualizar Perfil'}
+          <Button type="button" onClick={toggleModal} disabled={isDisabled()}>
+            {isNumberAndLetters ? 'Solo letras y números' : 'Actualizar Perfil'}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>

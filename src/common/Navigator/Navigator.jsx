@@ -91,6 +91,7 @@ export default function Navigator({
                     key={item.id}
                     filterFunc={setFilter}
                     parseName={parseName}
+                    isFinalCheck={isFinalCheck}
                   />
                 ))
               : null}
