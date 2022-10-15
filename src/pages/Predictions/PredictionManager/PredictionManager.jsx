@@ -31,7 +31,7 @@ export default function PredictionManager() {
   const [targetGroupNumber, setTargetGroupNumber] = useState(groupNumber);
   const [hasChangedGroup, setChangedGroup] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [signal, cleanup, handleCancel] = useCleanupController();
+  const [cleanup] = useCleanupController();
   const { phase } = useParams();
   const isMobile = useIsMobile();
 
