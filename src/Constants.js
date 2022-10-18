@@ -1,5 +1,5 @@
 const prod = {
-  API_URL: 'https://prode-mundial-backend.herokuapp.com',
+  API_URL: 'https://prode-backend.fly.dev',
   // if prod testing env:
   // API_URL: 'http://localhost:8080',
 };
