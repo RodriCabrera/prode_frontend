@@ -47,7 +47,7 @@ const LeaderBoard = () => {
             No perteneces a ningún grupo
           </Text>
           <Text align="center" margin="1rem 0">
-            Puedes encontrar o crear uno desde <Link to="/groups/">esta sección</Link>
+            Puedes encontrar o crear uno desde <br /><Link to="/groups/">esta sección</Link>
           </Text>
         </>
       )}

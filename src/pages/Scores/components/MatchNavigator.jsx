@@ -7,6 +7,7 @@ export default function MatchNavigator({ children }) {
   const { isLoading, fixtureData } = useFetchFixtureData();
 
   const finalCheck = (data) => {
+    if(data?.matches && data?.matches?.some(match => !match.home?.name)) return data;
     if (data?.home) return data;
     return false;
   };

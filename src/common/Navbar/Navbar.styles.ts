@@ -1,8 +1,9 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const NavbarContainer = styled.div`
   backdrop-filter: blur(5px);
-  background-color: #21212190;
+  /* background-color: #21212190; */
+  background-color: #000;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,14 +22,18 @@ export const NavbarWrapper = styled.div`
   font-size: 15px;
   width: 100%;
   flex-wrap: wrap;
+  height: 67px;
 `;
-
-export const ButtonGroup = styled.div`
+interface IButtonGroup {
+  padding?: string;
+  gap?: string;
+}
+export const ButtonGroup = styled.div<IButtonGroup>`
   background-color: inherit;
-  padding: ${({ padding }) => padding || '2rem 1rem'};
+  padding: ${({ padding }) => padding || "2rem 1rem"};
   display: flex;
   align-items: center;
-  gap: ${({ gap }) => gap || '1rem'};
+  gap: ${({ gap }) => gap || "1rem"};
 `;
 
 export const LogoContainer = styled.div`

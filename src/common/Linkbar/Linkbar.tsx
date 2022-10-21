@@ -1,52 +1,58 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { GiPodiumWinner } from 'react-icons/gi';
-import { FaListUl } from 'react-icons/fa';
-import { BiFootball } from 'react-icons/bi';
-import { HiUserGroup } from 'react-icons/hi';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { GiPodiumWinner } from "react-icons/gi";
+import { FaListUl } from "react-icons/fa";
+import { BiFootball } from "react-icons/bi";
+import { HiUserGroup } from "react-icons/hi";
 import {
   CustomLink,
   LinkbarContainer,
   LinkbarWrapper,
   LinkGroup,
   LinkWrapper,
-} from './Linkbar.styles';
+} from "./Linkbar.styles";
 
-export function Linkbar({ isMobile }) {
+interface ILinkbarProps {
+  isMobile: boolean;
+}
+
+export function Linkbar({ isMobile }: ILinkbarProps) {
   const location = useLocation();
-  const basePath = location.pathname.split('/')[1];
+  const basePath = location.pathname.split("/")[1];
   const navigate = useNavigate();
 
-  const isCurrent = (link) => {
+  const isCurrent = (link: string) => {
     return link === basePath;
   };
-  const handleLinkClick = (path) => {
+  const handleLinkClick = (path: string) => {
     return navigate(path);
   };
 
   return (
     <LinkbarContainer isMobile={isMobile} id="linkbar-container">
       <LinkbarWrapper>
-        <LinkGroup id="button-group-left">
+        <LinkGroup>
           <LinkWrapper
-            onClick={() => handleLinkClick('/fixture')}
-            isCurrent={isCurrent('fixture')}>
+            onClick={() => handleLinkClick("/fixture")}
+            isCurrent={isCurrent("fixture")}
+          >
             {isMobile ? (
               <BiFootball
                 size="2rem"
-                color={isCurrent('fixture') ? 'pink' : ''}
+                color={isCurrent("fixture") ? "pink" : ""}
               />
             ) : (
               <CustomLink>Fixture</CustomLink>
             )}
           </LinkWrapper>
           <LinkWrapper
-            onClick={() => handleLinkClick('/predictions')}
-            isCurrent={isCurrent('predictions')}>
+            onClick={() => handleLinkClick("/predictions")}
+            isCurrent={isCurrent("predictions")}
+          >
             {isMobile ? (
               <FaListUl
                 size="2rem"
-                color={isCurrent('predictions') ? 'pink' : ''}
+                color={isCurrent("predictions") ? "pink" : ""}
               />
             ) : (
               <CustomLink>Predicciones</CustomLink>
@@ -54,24 +60,26 @@ export function Linkbar({ isMobile }) {
           </LinkWrapper>
 
           <LinkWrapper
-            onClick={() => handleLinkClick('/scores')}
-            isCurrent={isCurrent('scores')}>
+            onClick={() => handleLinkClick("/scores")}
+            isCurrent={isCurrent("scores")}
+          >
             {isMobile ? (
               <GiPodiumWinner
                 size="2rem"
-                color={isCurrent('scores') ? 'pink' : ''}
+                color={isCurrent("scores") ? "pink" : ""}
               />
             ) : (
               <CustomLink>Puntajes</CustomLink>
             )}
           </LinkWrapper>
           <LinkWrapper
-            onClick={() => handleLinkClick('/groups')}
-            isCurrent={isCurrent('groups')}>
+            onClick={() => handleLinkClick("/groups")}
+            isCurrent={isCurrent("groups")}
+          >
             {isMobile ? (
               <HiUserGroup
                 size="2rem"
-                color={isCurrent('groups') ? 'pink' : ''}
+                color={isCurrent("groups") ? "pink" : ""}
               />
             ) : (
               <CustomLink>Grupos</CustomLink>

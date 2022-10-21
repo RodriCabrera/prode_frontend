@@ -5,7 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@types/react": "^18.0.6",
+    "@types/jest": "^29.0.3",
+    "@types/node": "^18.7.20",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
@@ -19,6 +22,7 @@
     "react-share": "^4.4.0",
     "react-toastify": "^9.0.1",
     "recharts": "^2.1.14",
+    "typescript": "^4.8.3",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -26,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tsc": "tsc"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +51,8 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.22.0",
     "eslint-config-airbnb": "^19.0.4",

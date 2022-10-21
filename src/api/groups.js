@@ -12,6 +12,10 @@ export const leaveGroup = (groupName, signal) => {
   return api.post(`/group/leave?groupName=${groupName}`, { signal });
 };
 
+export const deleteGroup = (groupId, signal) => {
+  return api.delete(`/group/delete?userGroupId=${groupId}`, { signal });
+}
+
 export const getGroupScores = (groupName, signal) => {
   return api.get(`/group/score?groupName=${groupName}`, { signal });
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 import useNavContext from '../../../../../common/Navigator/useNavContext';
 import {
   filterPredictionsForFixture,
@@ -9,19 +10,42 @@ import {
 } from '../../../scoresPageHelpers';
 import CustomPieChart from '../../../../../common/Charts/PieChart';
 import MultipleLines from '../../../../../common/Charts/MultipleLines';
+import ToggleSwitch from '../../../../../common/ToggleSwitch/ToggleSwitch';
 import SingleMatchList from './SingleMatchList';
 import UserList from './UserList';
-import { Button } from '../../../../../common/common.styles';
 
 const GRAPHS = {
   PIE_CHART: 'pie',
   USER_PROGRESS: 'users_p',
 };
 
+const switchModes = {
+  left: {
+    name: GRAPHS.PIE_CHART,
+    display: 'ACIERTOS',
+    color: 'gold'
+  },
+  right: {
+    name: GRAPHS.USER_PROGRESS,
+    display: 'PROGRESO',
+    color: 'darkorange'
+  }
+}
+
+const GraphContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+`
+
 export default function Graphs({ predictions, groupData }) {
   const { data: fixture, current } = useNavContext();
   const [data, setData] = useState([]);
-  const [graph, setGraph] = useState(GRAPHS.PIE_CHART);
+  const [graph, setGraph] = useState(switchModes.left.name);
   const [usersInfo, setUsersInfo] = useState({
     show: false,
     users: null,
@@ -62,7 +86,12 @@ export default function Graphs({ predictions, groupData }) {
       />
     );
   return (
-    <>
+    <GraphContainer>
+      <ToggleSwitch 
+        mode={graph}
+        setMode={setGraph}
+        modes={switchModes}
+      />
       {graph === GRAPHS.PIE_CHART && (
         <CustomPieChart
           data={getCountByResultType(data, groupData?.rules.scoring)}
@@ -82,19 +111,6 @@ export default function Graphs({ predictions, groupData }) {
             scoring={groupData.rules.scoring}
           />
         ))}
-      <div>
-        <Button
-          onClick={() =>
-            setGraph(
-              graph === GRAPHS.PIE_CHART
-                ? GRAPHS.USER_PROGRESS
-                : GRAPHS.PIE_CHART
-            )
-          }
-        >
-          Change graph
-        </Button>
-      </div>
-    </>
+    </GraphContainer>
   );
 }

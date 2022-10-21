@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import NavLayer from './NavLayer';
+import React, { useState, useEffect, useCallback } from "react";
+import NavLayer from "./NavLayer";
 import {
   NavWrapper,
   NavHistory,
   NavLayers,
   NavContent,
   NavHistoryItem,
-} from './navigator.styles';
+} from "./navigator.styles";
 
 export const NavContext = React.createContext();
 
@@ -15,7 +15,7 @@ export default function Navigator({
   data,
   isFinalCheck,
   parseName,
-  baseName = '...',
+  baseName = "...",
 }) {
   const [filteredData, setFilteredData] = useState([...data]);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +33,8 @@ export default function Navigator({
         return [filtered];
       }
       const res = Object.entries(filtered).find(
-        ([key, value]) => typeof value === 'object'
+        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+        ([_, value]) => typeof value === "object"
       )[1];
       setHistory((prevHistory) => [
         ...prevHistory,
@@ -90,6 +91,7 @@ export default function Navigator({
                     key={item.id}
                     filterFunc={setFilter}
                     parseName={parseName}
+                    isFinalCheck={isFinalCheck}
                   />
                 ))
               : null}
@@ -97,7 +99,12 @@ export default function Navigator({
         )}
       </NavLayers>
       <NavContent>
-        <NavContext.Provider value={{data: filteredData, current: parseName(history[history.length-1])}}>
+        <NavContext.Provider
+          value={{
+            data: filteredData,
+            current: parseName(history[history.length - 1]),
+          }}
+        >
           {children}
         </NavContext.Provider>
       </NavContent>

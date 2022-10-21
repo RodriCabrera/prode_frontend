@@ -1,6 +1,5 @@
-import React from 'react';
-import ScoresByGroup from './components/ScoresByGroup/ScoresByGroup';
-import UserStats from './components/UserStats/UserStats';
+import React from "react";
+import ScoresByGroup from "./components/ScoresByGroup/ScoresByGroup";
 
 export default function ScoresPage() {
   return (

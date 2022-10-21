@@ -1,13 +1,13 @@
-import { useFormik } from 'formik';
-import { isEmpty } from 'lodash';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import GroupConfirm from './GroupConfirm';
-import { createGroup } from '../../../api/groups';
-import ScoringInputs from './ScoringInputs';
-import useToggleModal from '../../../hooks/useToggleModal';
-import Modal from '../../../common/Modal/Modal';
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import GroupConfirm from "./GroupConfirm";
+import { createGroup } from "../../../api/groups";
+import ScoringInputs from "./ScoringInputs";
+import useToggleModal from "../../../hooks/useToggleModal";
+import Modal from "../../../common/Modal/Modal";
 import {
   Button,
   Input,
@@ -16,8 +16,8 @@ import {
   TextareaInput,
   Select,
   Text,
-} from '../../../common/common.styles';
-import { groupsSchema } from '../../../validationSchemas/groups';
+} from "../../../common/common.styles";
+import { groupsSchema } from "../../../validationSchemas/groups";
 
 function CreateGroupForm({ updateList }) {
   const navigate = useNavigate();
@@ -26,8 +26,8 @@ function CreateGroupForm({ updateList }) {
   const { showModal, toggleModal } = useToggleModal();
   const { values, handleChange, errors } = useFormik({
     initialValues: {
-      name: '',
-      manifesto: '',
+      name: "",
+      manifesto: "",
       scoringFull: 3,
       scoringWinner: 1,
       scoringNone: 0,
@@ -61,8 +61,8 @@ function CreateGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: 'Creando grupo...',
-        success: 'Grupo creado con éxito. Redirigiendo...',
+        pending: "Creando grupo...",
+        success: "Grupo creado con éxito. Redirigiendo...",
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -90,15 +90,24 @@ function CreateGroupForm({ updateList }) {
               maxLength={20}
               borderError={errors.name}
             />
-            {errors.name && <Text size="0.85rem" color="red" align="left" margin="-0.2rem 0.65rem">*{errors.name}</Text>}
+            {errors.name && (
+              <Text
+                size="0.85rem"
+                color="red"
+                align="left"
+                margin="-0.2rem 0.65rem"
+              >
+                *{errors.name}
+              </Text>
+            )}
           </Label>
           <Label htmlFor="manifesto">
             <TextareaInput
               type="text"
               placeholder={
-                'Reglamento (los miembros deberán aceptar estos términos al ingresar)' +
-                '\n\n' +
-                '¿Qué se apuesta? ¿Hay prenda para el último?'
+                "Reglamento (los miembros deberán aceptar estos términos al ingresar)" +
+                "\n\n" +
+                "¿Qué se apuesta? ¿Hay prenda para el último?"
               }
               name="manifesto"
               required
@@ -108,7 +117,16 @@ function CreateGroupForm({ updateList }) {
               maxLength="1024"
               borderError={errors.manifesto}
             />
-            {errors.manifesto && <Text size="0.85rem" color="red" align="left" margin="-0.2rem 0.65rem">*{errors.manifesto}</Text>}
+            {errors.manifesto && (
+              <Text
+                size="0.85rem"
+                color="red"
+                align="left"
+                margin="-0.2rem 0.65rem"
+              >
+                *{errors.manifesto}
+              </Text>
+            )}
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} />
           <Label htmlFor="timeLimit">
@@ -163,7 +181,7 @@ function CreateGroupForm({ updateList }) {
         grayscale={showForm}
         padding="10px"
       >
-        {showForm ? 'Ocultar' : 'Crear un nuevo grupo'}
+        {showForm ? "Ocultar" : "Crear un nuevo grupo"}
       </Button>
     </>
   );

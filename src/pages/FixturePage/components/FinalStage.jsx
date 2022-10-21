@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import styled from "@emotion/styled"
 import { getFixtureByStageId } from '../../../api/fixture';
 import { StageColumn, MatchData, Match } from './laterStages.styles';
 import { getFlagUrl, parseDate } from '../../pagesHelpers';
 import { datePreferences } from '../fixturePageHelpers';
 import { Text } from '../../../common/common.styles';
 import useCleanupController from '../../../hooks/useCleanupController';
+import WordlCup from "./WorldCup.png"
+
+const CupImg = styled.img`
+  width: 100px;
+  height: 100px;
+  background-image: radial-gradient(circle, silver, transparent 70%);
+`
 
 function FinalStage() {
   const [finalData, setFinalData] = useState([]);
@@ -47,8 +55,8 @@ function FinalStage() {
         )}
       </Match>
       <div>
-        <img
-          src="https://elsol-compress-release.s3-accelerate.amazonaws.com/images/large/1638529076802Copa%20FIFA.jpg"
+        <CupImg
+          src={WordlCup}
           alt="Copa del mundo"
           width="100px"
           height="100px"
