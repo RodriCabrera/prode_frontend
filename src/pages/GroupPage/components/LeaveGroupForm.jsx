@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { leaveGroup } from '../../../api/groups';
+import { leaveGroup, deleteGroup } from '../../../api/groups';
 import {
   Button,
   Input,
@@ -11,7 +11,7 @@ import {
   Form,
 } from '../../../common/common.styles';
 
-function LeaveGroupForm({ updater }) {
+function LeaveGroupForm({ updater, toDelete }) {
   const { name } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const { values, handleChange } = useFormik({ initialValues: { name: '' } });
@@ -39,14 +39,49 @@ function LeaveGroupForm({ updater }) {
     );
   };
 
+  const handleDelete = (e) => {
+      setIsLoading(true);
+      e.preventDefault();
+      toast.promise(
+        deleteGroup(toDelete)
+        .then(() => {
+          updater();
+        })
+        .finally(() => {
+          setIsLoading(false);
+        }),
+        {
+          pending: 'Eliminando grupo',
+          success: `Eliminaste el grupo ${values.name}`,
+          error: {
+            render({ data }) {
+              return data.response.data.error;
+            },
+          },
+        }
+      )
+  }
+
   return (
-    <Form onSubmit={handleSubmit}>
-      <Text align="center" color="salmon" size="1.3rem">
-        ¿Seguro que quieres irte?
-      </Text>
-      <Text align="center" color="salmon">
-        Se borrará tu progreso para este grupo
-      </Text>
+    <Form onSubmit={toDelete ? handleDelete : handleSubmit}>
+      {toDelete ? 
+        <>
+          <Text align="center" color="salmon" size="1.3rem">
+            ¿Seguro que quieres eliminar este grupo?
+          </Text>
+          <Text align="center" color="red" size="1.8rem" margin='1rem 0rem 0rem 0rem'>
+            Esta acción no puede deshacerse
+          </Text>
+        </> :
+        <>
+          <Text align="center" color="salmon" size="1.3rem">
+           ¿Seguro que quieres irte?
+          </Text>
+          <Text align="center" color="salmon">
+            Se borrará tu progreso para este grupo
+          </Text>
+      </>
+      }
       <br />
       <Label htmlFor="name">
         <Text size="1.3rem" align="center">
@@ -62,12 +97,11 @@ function LeaveGroupForm({ updater }) {
           showUppercase
         />
       </Label>
-
       <Button
         type="submit"
         disabled={isLoading || values.name?.toUpperCase() !== name}
       >
-        Salir
+        {toDelete ? 'Eliminar' : 'Salir'}
       </Button>
     </Form>
   );
