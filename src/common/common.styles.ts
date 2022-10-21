@@ -199,6 +199,7 @@ export const Text = styled.p<IText>`
   font-weight: ${({ weight }) => weight};
   margin: ${({ margin }) => margin || "0"};
   transition: all ease 0.5s;
+  word-break: break-all;
   &:after {
     ${({ withBottomBorder }) =>
       withBottomBorder &&
