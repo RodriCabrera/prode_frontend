@@ -34,10 +34,10 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install package dependencies
-        run: npm install
+        run: yarn install
 
       - name: Check linting and formatting
-        run: npm run lint
+        run: yarn run lint
 
       - name: Create test build
-        run: npm run build
+        run: yarn run build
