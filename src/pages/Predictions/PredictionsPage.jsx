@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import ToggleSwitch from '../../common/ToggleSwitch/ToggleSwitch';
-import { BannerTitle, PredictionsPageWrapper } from './Predictions.styles';
-import { Text } from '../../common/common.styles';
-import { GroupSelector } from './components/GroupSelector';
-import { Spinner } from '../../common/Spinner/Spinner';
-import { useGetUserGroupsData } from '../../hooks/useGetUserGroupsData';
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import ToggleSwitch from "../../common/ToggleSwitch/ToggleSwitch";
+import { PredictionsPageWrapper } from "./Predictions.styles";
+import { Text } from "../../common/common.styles";
+import { GroupSelector } from "./components/GroupSelector";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { useGetUserGroupsData } from "../../hooks/useGetUserGroupsData";
 
 const predictionModes = {
   left: {
-    display: 'RESULTADOS',
-    name: 'results',
-    color: 'orange'
+    display: "RESULTADOS",
+    name: "results",
+    color: "orange",
   },
   right: {
-    display: 'PREDECIR',
-    name: 'edit',
-    color: 'salmon'
-  }
-}
+    display: "PREDECIR",
+    name: "edit",
+    color: "salmon",
+  },
+};
 
 function PredictionsPage() {
-  const [mode, setMode] = useState('edit');
+  const [mode, setMode] = useState("edit");
   const {
     isLoadingUserGroupsData,
     userGroupList,
@@ -31,8 +31,9 @@ function PredictionsPage() {
 
   return (
     <PredictionsPageWrapper id="mi-prode-container">
-      <BannerTitle align="center">PREDICCIONES</BannerTitle>
-
+      <Text size="2.5rem" weight="500" align="center">
+        PREDICCIONES
+      </Text>
       {userGroupList.length === 0 && (
         <>
           {isLoadingUserGroupsData && <Spinner />}
