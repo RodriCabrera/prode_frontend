@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Leader from "./Leader";
-import { getUserGroups } from "../../../../api/groups";
-import useCleanupController from "../../../../hooks/useCleanupController";
-import { CardTitle, CardWrapper, Text } from "../../../../common/common.styles";
-import { useIsMobile } from "../../../../hooks/useIsMobile";
+
 import { BallLoader } from "../../../../common/Spinner/BallLoader";
+import { getUserGroups } from "../../../../api/groups";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
+import Leader from "./Leader";
+import useCleanupController from "../../../../hooks/useCleanupController";
+
+import { CardTitle, CardWrapper, Text } from "../../../../common/common.styles";
 
 const LeaderBoard = () => {
   const [userGroups, setUserGroups] = useState([]);

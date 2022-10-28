@@ -1,22 +1,25 @@
+import { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
-import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginUser } from "../../api/auth";
-import { AuthContext } from "../../common/AuthProvider";
+
+import { AuthContext } from "common/AuthProvider";
+import { authSchema } from "validationSchemas/auth";
+import { loginUser } from "api/auth";
+import { useIsMobile } from "hooks/useIsMobile";
+import GoogleAuth from "common/GoogleAuth/GoogleAuth";
+
 import {
   Button,
   CardTitle,
   CardWrapper,
+  Form,
   Input,
   Label,
-  Form,
   Text,
 } from "../../common/common.styles";
-import GoogleAuth from "../../common/GoogleAuth/GoogleAuth";
-import { authSchema } from "../../validationSchemas/auth";
-import { useIsMobile } from "../../hooks/useIsMobile";
+
 function Login() {
   const userContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);

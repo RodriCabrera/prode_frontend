@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getUserGroups } from "../../../api/groups";
-import { Text } from "../../../common/common.styles";
-import useCleanupController from "../../../hooks/useCleanupController";
+
+import { getUserGroups } from "api/groups";
+import { Text } from "common/common.styles";
+import useCleanupController from "hooks/useCleanupController";
 
 // ! TODO: COMPONENTE EN DESUSO
 export function HomeGroups() {

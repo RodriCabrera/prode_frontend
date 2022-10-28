@@ -1,20 +1,22 @@
 import React from "react";
+import { flagsmith } from "flagsmith";
+import { useFlags, useFlagsmith } from "flagsmith/react";
+
 import FixtureTable from "./components/FixtureTable";
 import LaterStagesGraph from "./components/LaterStagesGraph";
 import CollapsableStage from "./components/CollapsableStage";
 import CollapsedGroups from "./components/CollapsedGroups";
 import { Spinner } from "../../common/Spinner/Spinner";
-import { Text } from "../../common/common.styles";
 import { useFetchFixtureData } from "./hooks/useFetchFixtureData";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+
 import {
   FixtureTablesContainer,
   FixtureWrapper,
   GroupTableWrapper,
 } from "./FixturePage.styles";
-import { useIsMobile } from "../../hooks/useIsMobile";
-import { flagsmith } from "flagsmith";
-import { useFlags, useFlagsmith } from "flagsmith/react";
+import { Text } from "../../common/common.styles";
 
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();

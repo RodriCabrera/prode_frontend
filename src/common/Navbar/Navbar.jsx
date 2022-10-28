@@ -1,20 +1,22 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import styled from "@emotion/styled";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../AuthProvider";
-import useToggleModal from "../../hooks/useToggleModal";
 import { Linkbar } from "../Linkbar/Linkbar";
-import Modal from "../Modal/Modal";
+import { Tooltip } from "../Tooltip/Tooltip";
+import { useIsMobile } from "hooks/useIsMobile";
 import { UserMiniAvatar } from "../UserMiniAvatar/UserMiniAvatar";
+import Modal from "../Modal/Modal";
+import useToggleModal from "hooks/useToggleModal";
+
 import {
-  NavbarWrapper,
   ButtonGroup,
-  NavbarContainer,
   LogoContainer,
+  NavbarContainer,
+  NavbarWrapper,
 } from "./Navbar.styles";
 import { Button, CardTitle, Text } from "../common.styles";
-import { Tooltip } from "../Tooltip/Tooltip";
-import { useIsMobile } from "../../hooks/useIsMobile";
 
 const NavLink = styled.button`
   background-color: transparent;
