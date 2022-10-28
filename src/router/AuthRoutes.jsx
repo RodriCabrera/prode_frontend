@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
 import ChangePassword from "../pages/Auth/ChangePassword";
 import ConfirmationEmail from "../pages/Auth/ConfirmationEmail";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
