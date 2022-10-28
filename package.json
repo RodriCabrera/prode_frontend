@@ -10,6 +10,7 @@
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "axios": "^0.26.1",
+    "flagsmith": "^3.13.0",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",

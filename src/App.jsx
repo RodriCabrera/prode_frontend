@@ -5,6 +5,8 @@ import Navbar from "./common/Navbar/Navbar";
 import Footer from "./common/Footer/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import { useIsMobile } from "./hooks/useIsMobile";
+import flagsmith from "flagsmith";
+import { FlagsmithProvider } from "flagsmith/react";
 
 const Layout = styled.div`
   display: flex;
@@ -33,27 +35,34 @@ const PageWrapper = styled.div`
 function App() {
   const isMobile = useIsMobile();
   return (
-    <Layout>
-      <Navbar />
-      <PageContainer id="app-page-container">
-        <PageWrapper id="app-page-wrapper">
-          <Outlet />
-          <ToastContainer
-            position={isMobile ? "top-right" : "bottom-right"}
-            autoClose={2500}
-            hideProgressBar={false}
-            newestOnTop={false}
-            theme="dark"
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        </PageWrapper>
-      </PageContainer>
-      {!isMobile && <Footer />}
-    </Layout>
+    <FlagsmithProvider
+    options={{
+      environmentID: 'oMxSbmyCNm65oRQYZBUWq2'
+    }}
+    flagsmith={flagsmith}
+    >
+      <Layout>
+        <Navbar />
+        <PageContainer id="app-page-container">
+          <PageWrapper id="app-page-wrapper">
+            <Outlet />
+            <ToastContainer
+              position={isMobile ? "top-right" : "bottom-right"}
+              autoClose={2500}
+              hideProgressBar={false}
+              newestOnTop={false}
+              theme="dark"
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+          </PageWrapper>
+        </PageContainer>
+        {!isMobile && <Footer />}
+      </Layout>
+    </FlagsmithProvider>
   );
 }
 
