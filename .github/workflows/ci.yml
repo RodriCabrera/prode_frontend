@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  YARN_VERSION: 1.22.17
+  BUILD_TYPE: dev
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,28 +20,23 @@ jobs:
       - name: Checkout to the repository
         uses: actions/checkout@v2
 
-      - name: Set up NodeJS environment
-        uses: actions/setup-node@v2
+      - name: Setup node version ${{ steps.prepare.outputs.full_node_version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ steps.prepare.outputs.full_node_version }}
+          cache: yarn
 
-      - name: Cache node modules
-        id: cache-npm
+      - name: Restore node cache
         uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          path: node_modules
+          key: node-${{ inputs.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install package dependencies
         run: yarn install
 
       - name: Check linting and formatting
-        run: yarn run lint
+        run: yarn lint
 
       - name: Create test build
-        run: yarn run build
+        run: yarn build
