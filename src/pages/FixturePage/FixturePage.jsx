@@ -2,6 +2,7 @@ import React from 'react';
 import FixtureTable from './components/FixtureTable';
 import LaterStagesGraph from './components/LaterStagesGraph';
 import CollapsableStage from './components/CollapsableStage';
+import CollapsedGroups from './components/CollapsedGroups';
 import { Spinner } from '../../common/Spinner/Spinner';
 import { Text } from '../../common/common.styles';
 import { useFetchFixtureData } from './hooks/useFetchFixtureData';
@@ -12,15 +13,20 @@ import {
   GroupTableWrapper,
 } from './FixturePage.styles';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { flagsmith } from "flagsmith";
+import { useFlags, useFlagsmith } from "flagsmith/react";
 
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
   const isMobile = useIsMobile();
   const { width } = useWindowDimensions();
+  const flags = useFlags(["collapse_groups_fixture"])
 
   const renderGroupsTables = (groups) => {
     if (!groups) return <Spinner />;
-    return (
+    return flags.collapse_groups_fixture.enabled ? (
+      <CollapsedGroups groups={groups} isMobile={isMobile} />
+    ) : (
       <FixtureTablesContainer>
         {groups.map((group) => (
           <GroupTableWrapper key={group.id} fullWidth={isMobile}>
@@ -28,8 +34,8 @@ function Fixture() {
               {group.name}
             </Text>
             <FixtureTable data={group.matches} fullWidth={isMobile} />
-          </GroupTableWrapper>
-        ))}
+          </GroupTableWrapper>))
+        }
       </FixtureTablesContainer>
     );
   };

@@ -1,0 +1,34 @@
+import React, { useState } from 'react'
+import { GroupTableWrapper, FixtureTablesContainer, GroupButton, GroupButtonGroup } from '../FixturePage.styles';
+import FixtureTable from './FixtureTable';
+import { Text } from '../../../common/common.styles';
+
+
+export default function CollapsedGroups({ groups, isMobile }) {
+    const [selected, setSelected] = useState([]);
+    const handleButtonClick = (index) => {
+        if(selected.includes(index)) setSelected(prev => [...prev.filter(val => val !== index)])
+        else setSelected(prev => [...prev, index])
+    }
+  return (
+    <>
+        <GroupButtonGroup>
+            {groups.map((group, index) => (
+                <GroupButton key={group.name} onClick={() => handleButtonClick(index)} selected={selected.includes(index)}>
+                    {group.name}
+                </GroupButton>
+            ))}
+        </GroupButtonGroup>
+        <FixtureTablesContainer>        
+            {selected.sort().map(selection => (
+                <GroupTableWrapper key={groups[selection].id} fullWidth>
+                    <Text size="2rem" align="center" color="darkorange">
+                        {groups[selection].name}
+                    </Text>
+                    <FixtureTable data={groups[selection].matches} fullWidth={isMobile} isCompact/>
+                </GroupTableWrapper>
+            ))}
+        </FixtureTablesContainer>
+    </>
+  )
+}
