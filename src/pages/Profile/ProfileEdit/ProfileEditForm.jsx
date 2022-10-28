@@ -1,10 +1,16 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { toast } from "react-toastify";
+import { isEmpty } from "lodash";
+
 import { editProfile } from "../../../api/profiles";
 import Modal from "../../../common/Modal/Modal";
 import useToggleModal from "../../../hooks/useToggleModal";
 import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
+import { Spinner } from "../../../common/Spinner/Spinner";
+import AvatarList from "./AvatarList";
+import { BigAvatarWrapper } from "../Profile";
+
 import {
   Button,
   Form,
@@ -12,10 +18,6 @@ import {
   Label,
   Text,
 } from "../../../common/common.styles";
-import { Spinner } from "../../../common/Spinner/Spinner";
-import AvatarList from "./AvatarList";
-import { BigAvatarWrapper } from "../Profile";
-import { isEmpty } from "lodash";
 
 export function ProfileEditForm({ profile, updateProfile }) {
   const [userName, setUserName] = useState(profile?.name);

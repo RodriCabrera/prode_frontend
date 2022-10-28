@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import { HiOutlineUserGroup, HiCheck } from "react-icons/hi";
-import { Text } from "../../../common/common.styles";
+
 import { ListElement } from "../../../common/Lists/ListElement";
-import { ListWrapper } from "../../../common/Lists/Lists.styles";
 import { useIsMobile } from "../../../hooks/useIsMobile";
+
+import { ListWrapper } from "../../../common/Lists/Lists.styles";
+import { Text } from "../../../common/common.styles";
 
 const GroupsListWrapper = styled.div`
   display: flex;

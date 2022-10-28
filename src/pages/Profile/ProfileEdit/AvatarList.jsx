@@ -1,14 +1,16 @@
-import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import { getAvatars } from "../../../api/profiles";
-import { Button, Input, Text } from "../../../common/common.styles";
-import { Spinner } from "../../../common/Spinner/Spinner";
+import styled from "@emotion/styled";
 import { FcEditImage } from "react-icons/fc";
-import useCleanupController from "../../../hooks/useCleanupController";
-import Modal from "../../../common/Modal/Modal";
-import useToggleModal from "../../../hooks/useToggleModal";
+
 import { BigAvatarWrapper } from "../Profile";
-import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
+import { getAvatars } from "api/profiles";
+import { Spinner } from "common/Spinner/Spinner";
+import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
+import Modal from "common/Modal/Modal";
+import useCleanupController from "hooks/useCleanupController";
+import useToggleModal from "hooks/useToggleModal";
+
+import { Button, Input, Text } from "common/common.styles";
 
 const Container = styled.div`
   display: flex;

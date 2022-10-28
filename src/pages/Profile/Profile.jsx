@@ -3,16 +3,18 @@ import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
+
+import { getProfile } from "api/profiles";
+import { GoBackButton } from "common/GoBackButton/GoBackButton";
+import { ListElement } from "common/Lists/ListElement";
+import { Spinner } from "common/Spinner/Spinner";
+import { useIsMobile } from "hooks/useIsMobile";
+import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
 import ProfilePredictions from "./ProfilePredictions";
-import { getProfile } from "../../api/profiles";
-import { Spinner } from "../../common/Spinner/Spinner";
-import { CardContainer, CardWrapper, Text } from "../../common/common.styles";
-import { ListWrapper } from "../../common/Lists/Lists.styles";
-import { ListElement } from "../../common/Lists/ListElement";
-import { UserMiniAvatar } from "../../common/UserMiniAvatar/UserMiniAvatar";
-import { GoBackButton } from "../../common/GoBackButton/GoBackButton";
-import { useIsMobile } from "../../hooks/useIsMobile";
-import useCleanupController from "../../hooks/useCleanupController";
+import useCleanupController from "hooks/useCleanupController";
+
+import { ListWrapper } from "common/Lists/Lists.styles";
+import { CardContainer, CardWrapper, Text } from "common/common.styles";
 
 export const BigAvatarWrapper = styled.div`
   margin: auto;
