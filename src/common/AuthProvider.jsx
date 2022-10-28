@@ -1,9 +1,9 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react';
-import propTypes from 'prop-types';
-import { getAuth, logoutUser } from '../api/auth';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Loading from './Loading/Loading';
-import useCleanupController from '../hooks/useCleanupController';
+import React, { createContext, useEffect, useMemo, useState } from "react";
+import propTypes from "prop-types";
+import { getAuth, logoutUser } from "../api/auth";
+import { useNavigate, useLocation } from "react-router-dom";
+import Loading from "./Loading/Loading";
+import useCleanupController from "../hooks/useCleanupController";
 
 export const AuthContext = createContext(null);
 function AuthProvider({ children }) {
@@ -16,7 +16,7 @@ function AuthProvider({ children }) {
 
   const clearUser = () => {
     setUser(null);
-  }
+  };
 
   const updateAuth = () => {
     setIsLoading(true);
@@ -25,8 +25,8 @@ function AuthProvider({ children }) {
         setUser(data.user);
       })
       .catch((err) => {
-        if (location.pathname.includes('change-password')) return;
-        navigate('/auth');
+        if (location.pathname.includes("change-password")) return;
+        navigate("/auth");
         handleCancel(err);
       })
       .finally(() => {
@@ -37,8 +37,8 @@ function AuthProvider({ children }) {
   const logout = () => {
     clearUser();
     logoutUser().finally(() => {
-      localStorage.removeItem('token')
-      navigate('/');
+      localStorage.removeItem("token");
+      navigate("/");
     });
   };
 

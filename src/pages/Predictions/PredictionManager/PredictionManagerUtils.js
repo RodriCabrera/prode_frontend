@@ -1,27 +1,27 @@
-import { getFixture, getGroupStage } from '../../../api/fixture';
+import { getFixture, getGroupStage } from "../../../api/fixture";
 
 export const STAGE_NAMES = {
-  GRUPOS: 'GRUPOS',
-  OCTAVOS: 'OCTAVOS',
-  CUARTOS: 'CUARTOS',
-  SEMIS: 'SEMIFINAL',
-  FINAL: 'FINAL',
-  TERCER_PUESTO: 'TERCER_PUESTO',
+  GRUPOS: "GRUPOS",
+  OCTAVOS: "OCTAVOS",
+  CUARTOS: "CUARTOS",
+  SEMIS: "SEMIFINAL",
+  FINAL: "FINAL",
+  TERCER_PUESTO: "TERCER_PUESTO",
 };
 
 export const getStageName = (phase) => {
   switch (phase) {
-    case '16':
+    case "16":
       return STAGE_NAMES.OCTAVOS;
-    case '8':
+    case "8":
       return STAGE_NAMES.CUARTOS;
-    case 'semis':
+    case "semis":
       return STAGE_NAMES.SEMIS;
-    case 'final':
+    case "final":
       return STAGE_NAMES.FINAL;
-    case '3':
+    case "3":
       return STAGE_NAMES.TERCER_PUESTO;
-    case 'groups':
+    case "groups":
     default:
       return STAGE_NAMES.GRUPOS;
   }
@@ -29,7 +29,7 @@ export const getStageName = (phase) => {
 
 export const getPhaseFixture = (phase, signal) => {
   if (getStageName(phase) !== STAGE_NAMES.GRUPOS) {
-    return getFixture('', getStageName(phase), signal);
+    return getFixture("", getStageName(phase), signal);
   } else {
     return getGroupStage(signal);
   }

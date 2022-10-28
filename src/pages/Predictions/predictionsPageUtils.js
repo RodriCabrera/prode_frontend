@@ -1,5 +1,5 @@
 /* eslint-disable no-extend-native */
-import { isEmpty } from 'lodash';
+import { isEmpty } from "lodash";
 
 export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
   //   const predictionsRawExample = {
@@ -39,13 +39,13 @@ export const formatPredictionsToPost = (predictionsRaw, userGroupId) => {
     .map((key) => {
       let homeScore;
       let awayScore;
-      const matchId = key.split('-')[0];
-      const homeOrAway = key.split('-')[1];
+      const matchId = key.split("-")[0];
+      const homeOrAway = key.split("-")[1];
 
-      if (homeOrAway === 'home') {
+      if (homeOrAway === "home") {
         homeScore = predictionsRaw[key];
         awayScore = predictionsRaw[`${matchId}-away`];
-      } else if (homeOrAway === 'away') {
+      } else if (homeOrAway === "away") {
         homeScore = predictionsRaw[`${matchId}-home`];
         awayScore = predictionsRaw[key];
       }
@@ -87,7 +87,7 @@ export const numberToGroupLetter = (number) => {
   if (number === undefined) {
     return null;
   }
-  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  const letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
   return letters[number.mod(8)];
 };
 export const groupNumberMod = (number) => {
@@ -117,32 +117,32 @@ export const checkPredictionResult = (
     const resultAway = matchData.awayScore;
     const resultHome = matchData.homeScore;
     if (predictionAway === resultAway && predictionHome === resultHome) {
-      return 'full';
+      return "full";
     }
     if (
       (predictionAway > predictionHome && resultAway > resultHome) ||
       (predictionAway < predictionHome && resultAway < resultHome) ||
       (predictionAway === predictionHome && resultAway === resultHome)
     ) {
-      return 'half';
+      return "half";
     }
-    return 'none';
+    return "none";
   }
 
   const teamPrediction =
-    homeOrAway === 'home' ? predictionHome : predictionAway;
+    homeOrAway === "home" ? predictionHome : predictionAway;
 
   if (teamPrediction === undefined) {
-    return teamResult === null ? 'silver' : 'tomato';
+    return teamResult === null ? "silver" : "tomato";
   }
-  if (getScoreStatus() === 'full') {
-    return 'lightgreen';
+  if (getScoreStatus() === "full") {
+    return "lightgreen";
   }
-  if (getScoreStatus() === 'half') {
-    return '#FFFF66';
+  if (getScoreStatus() === "half") {
+    return "#FFFF66";
   }
 
-  return 'tomato';
+  return "tomato";
 };
 
 export const calculateIfCanPredict = (matchDate, selectedUserGroup) => {
@@ -153,16 +153,16 @@ export const calculateIfCanPredict = (matchDate, selectedUserGroup) => {
 };
 
 export const formatInputDisplayValue = (value) => {
-  if (value===0 || value) return value
-  else return ''
-}
+  if (value === 0 || value) return value;
+  else return "";
+};
 
-export function debounce (cb, delay = 250) {
-  let timeout
+export function debounce(cb, delay = 250) {
+  let timeout;
   return (...args) => {
-    clearTimeout(timeout)
+    clearTimeout(timeout);
     timeout = setTimeout(() => {
-      cb(...args)
-    }, delay)
-  }
+      cb(...args);
+    }, delay);
+  };
 }

@@ -1,4 +1,4 @@
-import { isCancel } from 'axios';
+import { isCancel } from "axios";
 
 // Handle cleanup in useEffect whith axios requests.
 // Returns a signal to pass to axios, a cleanup function for the effect hook and
@@ -11,7 +11,7 @@ export default function useCleanupController() {
   };
   const defaultHandler = () => {
     // eslint-disable-next-line no-console
-    console.log('request cancelled');
+    console.log("request cancelled");
   };
   const handleError = (err, cb = defaultHandler) => {
     if (isCancel(err)) {

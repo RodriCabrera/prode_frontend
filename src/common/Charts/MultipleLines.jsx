@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   LineChart,
   Line,
@@ -8,34 +8,34 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
-import styled from '@emotion/styled';
+} from "recharts";
+import styled from "@emotion/styled";
 
 const defaultColors = [
-  'gold',
-  'red',
-  'green',
-  'lightblue',
-  'orange',
-  'yellow',
-  'violet',
-  'pink',
-  'blue',
-  'darkorange',
-  'salmon',
-  'cyan',
-  'darkorchid',
-  'aquamarine',
-  'lightseagreen',
-  'tomato',
-  'thistle',
-  'turqoise',
-  'peru',
-  'moccasin',
-  'magenta',
-  'lavender',
-  'lightcyan',
-  'deeppink',
+  "gold",
+  "red",
+  "green",
+  "lightblue",
+  "orange",
+  "yellow",
+  "violet",
+  "pink",
+  "blue",
+  "darkorange",
+  "salmon",
+  "cyan",
+  "darkorchid",
+  "aquamarine",
+  "lightseagreen",
+  "tomato",
+  "thistle",
+  "turqoise",
+  "peru",
+  "moccasin",
+  "magenta",
+  "lavender",
+  "lightcyan",
+  "deeppink",
 ];
 
 export default function MultipleLines({
@@ -83,7 +83,12 @@ export default function MultipleLines({
     ) : (
       <svg>
         <foreignObject x={cx - 20} y={cy - 20} width={40} height={40}>
-          <img width="100%" height="100%" style={{ borderRadius: '100%' }} src={`${userAvatars[dataKey]}`} />
+          <img
+            width="100%"
+            height="100%"
+            style={{ borderRadius: "100%" }}
+            src={`${userAvatars[dataKey]}`}
+          />
         </foreignObject>
       </svg>
     );
@@ -134,16 +139,16 @@ export default function MultipleLines({
           dy={15}
           tickFormatter={(value) =>
             new Date(value).toLocaleDateString(undefined, {
-              day: 'numeric',
-              month: 'numeric',
+              day: "numeric",
+              month: "numeric",
             })
           }
         />
         <YAxis unit="pts" dx={-10} allowDecimals={false} />
         <Tooltip content={<CustomTooltip />} />
-        <Legend wrapperStyle={{ marginBottom: '-1.2rem' }} />
+        <Legend wrapperStyle={{ marginBottom: "-1.2rem" }} />
         {Object.keys(data[0]).map((key, index) => {
-          if (key === 'date') return null;
+          if (key === "date") return null;
           return (
             <Line
               key={key}

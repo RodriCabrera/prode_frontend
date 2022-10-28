@@ -1,12 +1,12 @@
-import { LaterStages } from './laterStages.styles';
-import StageMatches from './StageMatches';
-import FinalStage from './FinalStage';
+import { LaterStages } from "./laterStages.styles";
+import StageMatches from "./StageMatches";
+import FinalStage from "./FinalStage";
 
 const STAGE_DATA = {
-  OCTAVOS: 'Octavos',
-  CUARTOS: 'Cuartos',
-  SEMIS: 'Semifinal',
-  FINAL: 'Final',
+  OCTAVOS: "Octavos",
+  CUARTOS: "Cuartos",
+  SEMIS: "Semifinal",
+  FINAL: "Final",
 };
 
 function LaterStagesGraph() {

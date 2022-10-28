@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const NavWrapper = styled.div`
   width: 100%;
@@ -21,19 +21,19 @@ export const NavHistory = styled.div`
 `;
 
 export const NavHistoryItem = styled.button`
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
   background-color: transparent;
   border-radius: 6px;
   padding: 0.5rem;
   margin: 0.35rem;
   line-height: 1;
   text-underline-offset: 2px;
-  text-decoration: ${({ disabled }) => (disabled ? 'underline' : 'none')};
-  font-weight:  ${({ disabled }) => (disabled ? 'default' : 700)};
+  text-decoration: ${({ disabled }) => (disabled ? "underline" : "none")};
+  font-weight: ${({ disabled }) => (disabled ? "default" : 700)};
   transition: all ease-in-out 0.15s;
   &:hover {
     background-color: ${({ disabled }) =>
-      disabled ? 'transparent' : '#23272a'};
+      disabled ? "transparent" : "#23272a"};
   }
 `;
 
@@ -48,11 +48,11 @@ export const NavButton = styled.button`
   transition: transform ease-in 0.03s;
   &:hover {
     transform: translateY(-0.1rem) scale(1.05);
-    box-shadow: 0 0.25rem 8px rgba(0,0,0,0.2);
+    box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.2);
   }
   &:active {
     transform: initial;
-    box-shadow: 0 0.25rem 8px rgba(0,0,0,0.2) inset;
+    box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.2) inset;
   }
   &:disabled {
     transform: none;

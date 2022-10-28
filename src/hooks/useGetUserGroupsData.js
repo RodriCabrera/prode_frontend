@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getUserGroups, getGroupData } from '../api/groups';
-import useCleanupController from './useCleanupController';
+import { useEffect, useState } from "react";
+import { getUserGroups, getGroupData } from "../api/groups";
+import useCleanupController from "./useCleanupController";
 
 export const useGetUserGroupsData = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,12 +9,12 @@ export const useGetUserGroupsData = () => {
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   const handleGroupSelect = (group) => {
-    setSelectedUserGroup(group)
+    setSelectedUserGroup(group);
     getGroupData(group.name, signal)
-    .then(res => {
-      setSelectedUserGroup(res.data.groupData);
-    })
-    .catch((err) => handleCancel(err))
+      .then((res) => {
+        setSelectedUserGroup(res.data.groupData);
+      })
+      .catch((err) => handleCancel(err));
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled/macro';
+import styled from "@emotion/styled/macro";
 
 export const CheckBoxWrapper = styled.div`
   position: relative;
@@ -11,10 +11,10 @@ export const CheckBoxLabel = styled.label`
   width: 42px;
   height: 26px;
   border-radius: 15px;
-  background: ${({ boxColor }) => boxColor || 'default'};
+  background: ${({ boxColor }) => boxColor || "default"};
   cursor: pointer;
   &::after {
-    content: '';
+    content: "";
     display: block;
     border-radius: 50%;
     width: 18px;
@@ -35,7 +35,7 @@ export const CheckBox = styled.input`
 
   &:checked + ${CheckBoxLabel} {
     &::after {
-      content: '';
+      content: "";
       display: block;
       border-radius: 50%;
       width: 18px;

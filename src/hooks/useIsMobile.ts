@@ -1,4 +1,4 @@
-import useWindowDimensions from './useWindowDimensions';
+import useWindowDimensions from "./useWindowDimensions";
 
 export const useIsMobile = () => {
   const { width } = useWindowDimensions();

@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { Button, Text } from '../../common/common.styles';
+import styled from "@emotion/styled";
+import { Button, Text } from "../../common/common.styles";
 
 export const PredictionsPageWrapper = styled.div`
   display: flex;
