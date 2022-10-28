@@ -1,0 +1,43 @@
+name: Continuous Integration (CI)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  YARN_VERSION: 1.22.17
+  BUILD_TYPE: dev
+  CI: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the repository
+        uses: actions/checkout@v2
+
+      - name: Setup node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+
+      - name: Restore node cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: node-${{ inputs.node_version }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install package dependencies
+        run: yarn install
+
+      - name: Check linting and formatting
+        run: yarn lint
+
+      - name: Create test build
+        run: yarn build

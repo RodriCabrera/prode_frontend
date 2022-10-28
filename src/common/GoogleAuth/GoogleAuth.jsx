@@ -1,18 +1,17 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import GoogleLogin from 'react-google-login';
-import { FcGoogle } from 'react-icons/fc';
-import propTypes from 'prop-types';
-import config from '../../Constants';
-import Container, { AuthLink } from './GoogleAuth.styles';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import React, { useState } from "react";
+import GoogleLogin from "react-google-login";
+import { FcGoogle } from "react-icons/fc";
+import propTypes from "prop-types";
+import config from "../../Constants";
+import Container, { AuthLink } from "./GoogleAuth.styles";
+import { toast } from "react-toastify";
 
 function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);
 
   const responseGoogle = async (response) => {
-    if (response.error) return console.log('Google error', response.error);
-    toast('Validando cuenta...');
+    toast("Validando cuenta...");
     const res = await axios.post(
       `${config.API_URL}/auth/google`,
       {
@@ -23,11 +22,11 @@ function GoogleAuth({ text }) {
       }
     );
     if (res.status === 200 && res.data.token) {
-      localStorage.setItem('token', res.data.token);
+      localStorage.setItem("token", res.data.token);
       window.location.reload();
-      toast.success('Logueado con éxito');
+      toast.success("Logueado con éxito");
     } else {
-      toast.error('Error al loguearse con Google');
+      toast.error("Error al loguearse con Google");
       setShowError(true);
     }
   };

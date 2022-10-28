@@ -98,9 +98,14 @@ export default function ScoresByGroup() {
         ) : (
           <>
             <ScoreList scores={scores} />
-            {predictions.length > 0 && <MatchNavigator>
-              <Graphs predictions={predictions} groupData={selectedUserGroup} />
-            </MatchNavigator>}
+            {predictions.length > 0 && (
+              <MatchNavigator>
+                <Graphs
+                  predictions={predictions}
+                  groupData={selectedUserGroup}
+                />
+              </MatchNavigator>
+            )}
           </>
         )}
       </CardWrapper>

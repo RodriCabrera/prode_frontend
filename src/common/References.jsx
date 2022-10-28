@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const ReferencesPillWrapper = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ const ReferencesPillWrapper = styled.div`
   flex-wrap: wrap;
 `;
 const Pill = styled.div`
-  font-size: ${({ size }) => size || '12px'};
+  font-size: ${({ size }) => size || "12px"};
   background-color: ${({ bg }) => bg};
   color: black;
   padding: 6px;

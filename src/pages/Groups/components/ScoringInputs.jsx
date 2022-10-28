@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { Input, Text } from '../../../common/common.styles';
+import React from "react";
+import styled from "@emotion/styled";
+import { Input, Text } from "../../../common/common.styles";
 
 const InputWrapper = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;

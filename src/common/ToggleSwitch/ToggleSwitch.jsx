@@ -1,11 +1,11 @@
-import { Text } from '../common.styles';
+import { Text } from "../common.styles";
 import {
   CheckBox,
   CheckBoxLabel,
   CheckBoxWrapper,
   ToggleContainer,
   ToggleWrapper,
-} from './ToggleSwitch.styles';
+} from "./ToggleSwitch.styles";
 
 function ToggleSwitch({ mode, setMode, modes }) {
   const handleChange = () => {
@@ -15,7 +15,10 @@ function ToggleSwitch({ mode, setMode, modes }) {
   return (
     <ToggleContainer>
       <ToggleWrapper>
-        <Text weight="700" color={mode === modes.left.name ? modes.left.color : undefined}>
+        <Text
+          weight="700"
+          color={mode === modes.left.name ? modes.left.color : undefined}
+        >
           {modes.left.display}
         </Text>
         <CheckBoxWrapper>
@@ -26,10 +29,18 @@ function ToggleSwitch({ mode, setMode, modes }) {
             value={mode}
             checked={mode === modes.right.name}
           />
-          <CheckBoxLabel htmlFor="checkbox" boxColor={mode === modes.right.name ? modes.right.color : modes.left.color} />
+          <CheckBoxLabel
+            htmlFor="checkbox"
+            boxColor={
+              mode === modes.right.name ? modes.right.color : modes.left.color
+            }
+          />
         </CheckBoxWrapper>
-        <Text weight="700" color={mode === modes.right.name ? modes.right.color : undefined}>
-           {modes.right.display}
+        <Text
+          weight="700"
+          color={mode === modes.right.name ? modes.right.color : undefined}
+        >
+          {modes.right.display}
         </Text>
       </ToggleWrapper>
     </ToggleContainer>

@@ -1,14 +1,14 @@
-import React, { useRef, useEffect } from 'react';
-import styled from '@emotion/styled';
+import React, { useRef, useEffect } from "react";
+import styled from "@emotion/styled";
 import {
   CardContainer,
   CardWrapper,
   CardTitle,
   Text,
-} from '../../../../../common/common.styles';
-import { ListElement } from '../../../../../common/Lists/ListElement';
-import { UserMiniAvatar } from '../../../../../common/UserMiniAvatar/UserMiniAvatar';
-import { MdOutlineChevronLeft } from 'react-icons/md';
+} from "../../../../../common/common.styles";
+import { ListElement } from "../../../../../common/Lists/ListElement";
+import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
+import { MdOutlineChevronLeft } from "react-icons/md";
 
 const CloseButton = styled.button`
   align-self: flex-start;
@@ -29,9 +29,9 @@ export default function UserList({ users, displayInfo, handleClose }) {
         handleClose();
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [listRef]);
   return (

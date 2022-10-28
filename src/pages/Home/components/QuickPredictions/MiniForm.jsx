@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
-import { Text, Input, Button } from '../../../../common/common.styles';
+import React, { useState } from "react";
+import { Text, Input, Button } from "../../../../common/common.styles";
 import {
   SinglePredictionForm,
   PredictionMatch,
-} from './quickPredictions.styles';
-import { toast } from 'react-toastify';
-import { createPredictions } from '../../../../api/predictions';
-import { getFlagUrl, parseDate } from '../../../pagesHelpers';
+} from "./quickPredictions.styles";
+import { toast } from "react-toastify";
+import { createPredictions } from "../../../../api/predictions";
+import { getFlagUrl, parseDate } from "../../../pagesHelpers";
 
-export default function MiniForm({ matchData, groupData, afterSubmit, setIsLoading }) {
+export default function MiniForm({
+  matchData,
+  groupData,
+  afterSubmit,
+  setIsLoading,
+}) {
   const [inputValues, setInputValues] = useState({
-    home: '',
-    away: '',
+    home: "",
+    away: "",
   });
 
   const handleSubmit = (e) => {
@@ -27,14 +32,14 @@ export default function MiniForm({ matchData, groupData, afterSubmit, setIsLoadi
         },
       }).then(() => {
         setInputValues({
-          home: '',
-          away: '',
+          home: "",
+          away: "",
         });
         afterSubmit();
       }),
       {
-        pending: 'Enviando predicción',
-        success: 'Predicción enviada',
+        pending: "Enviando predicción",
+        success: "Predicción enviada",
         error: {
           render({ data }) {
             setIsLoading(false);
@@ -46,7 +51,7 @@ export default function MiniForm({ matchData, groupData, afterSubmit, setIsLoadi
   };
 
   const handleChange = (e) => {
-    if (e.target.name === 'awayScore')
+    if (e.target.name === "awayScore")
       setInputValues((prevState) => ({ ...prevState, away: e.target.value }));
     else
       setInputValues((prevState) => ({ ...prevState, home: e.target.value }));
@@ -88,7 +93,8 @@ export default function MiniForm({ matchData, groupData, afterSubmit, setIsLoadi
       </PredictionMatch>
       <Button
         type="submit"
-        disabled={inputValues.away === '' || inputValues.home === ''}>
+        disabled={inputValues.away === "" || inputValues.home === ""}
+      >
         Enviar
       </Button>
     </SinglePredictionForm>

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
-import ScoreList from './components/ScoreList';
-import GroupScoreSelector from './components/GroupScoreSelector';
-import { useGetUserGroupsData } from '../../hooks/useGetUserGroupsData';
-import { BallLoader } from '../../common/Spinner/BallLoader';
-import { isEmpty } from 'lodash';
-import { Spinner } from '../../common/Spinner/Spinner';
+import { useState } from "react";
+import { CardContainer, CardWrapper, Text } from "../../common/common.styles";
+import ScoreList from "./components/ScoreList";
+import GroupScoreSelector from "./components/GroupScoreSelector";
+import { useGetUserGroupsData } from "../../hooks/useGetUserGroupsData";
+import { BallLoader } from "../../common/Spinner/BallLoader";
+import { isEmpty } from "lodash";
+import { Spinner } from "../../common/Spinner/Spinner";
 
 function Scores() {
   const [scores, setScores] = useState(undefined);

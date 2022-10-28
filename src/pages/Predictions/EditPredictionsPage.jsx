@@ -1,13 +1,13 @@
-import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
-import { getUserGroups } from '../../api/groups';
-import { Text } from '../../common/common.styles';
-import { ListElement } from '../../common/Lists/ListElement';
-import { Spinner } from '../../common/Spinner/Spinner';
-import { ListWrapper } from '../../common/Lists/Lists.styles';
-import useCleanupController from '../../hooks/useCleanupController';
+import styled from "@emotion/styled";
+import React, { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { HiOutlineUserGroup, HiCheck } from "react-icons/hi";
+import { getUserGroups } from "../../api/groups";
+import { Text } from "../../common/common.styles";
+import { ListElement } from "../../common/Lists/ListElement";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { ListWrapper } from "../../common/Lists/Lists.styles";
+import useCleanupController from "../../hooks/useCleanupController";
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ function EditPredictions() {
                     <HiOutlineUserGroup size="1.8rem" />
                   )
                 }
-                bgColor={isSelected && 'green'}
+                bgColor={isSelected && "green"}
                 onClick={() => handleGroupSelect(userGroup)}
               >
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>

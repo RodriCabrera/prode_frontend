@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getNextMatches } from '../../../api/fixture';
-import { CardTitle, CardWrapper, Text } from '../../../common/common.styles';
-import { BallLoader } from '../../../common/Spinner/BallLoader';
-import useCleanupController from '../../../hooks/useCleanupController';
-import { useIsMobile } from '../../../hooks/useIsMobile';
-import FixtureTable from '../../FixturePage/components/FixtureTable';
+import React, { useEffect, useState } from "react";
+import { getNextMatches } from "../../../api/fixture";
+import { CardTitle, CardWrapper, Text } from "../../../common/common.styles";
+import { BallLoader } from "../../../common/Spinner/BallLoader";
+import useCleanupController from "../../../hooks/useCleanupController";
+import { useIsMobile } from "../../../hooks/useIsMobile";
+import FixtureTable from "../../FixturePage/components/FixtureTable";
 
 const ShortFixture = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ const ShortFixture = () => {
 
   return (
     <CardWrapper
-      border={isMobile ? 'none' : undefined}
+      border={isMobile ? "none" : undefined}
       width="300px"
       minHeight="300px"
     >

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import GroupRules from './GroupRules';
-import { GoBackButton } from '../../../common/GoBackButton/GoBackButton';
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import GroupRules from "./GroupRules";
+import { GoBackButton } from "../../../common/GoBackButton/GoBackButton";
 import {
   CardContainer,
   Button,
   CardWrapper,
   CardTitle,
-} from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
-import { getGroupRules, joinGroup } from '../../../api/groups';
-import useCleanupController from '../../../hooks/useCleanupController';
+} from "../../../common/common.styles";
+import { Spinner } from "../../../common/Spinner/Spinner";
+import { getGroupRules, joinGroup } from "../../../api/groups";
+import useCleanupController from "../../../hooks/useCleanupController";
 
 function NotInGroup({ name, updater }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,7 @@ function NotInGroup({ name, updater }) {
       .then((res) => {
         setGroupRules(res.data);
       })
-      .catch(err => handleCancel(err))
+      .catch((err) => handleCancel(err))
       .finally(() => {
         setIsLoading(false);
       });
@@ -37,8 +37,8 @@ function NotInGroup({ name, updater }) {
         .then(() => updater())
         .finally(() => setIsLoading(false)),
       {
-        pending: 'Uniéndote al grupo...',
-        success: 'Te has unido',
+        pending: "Uniéndote al grupo...",
+        success: "Te has unido",
         error: {
           render({ data }) {
             return data.response.data.error;

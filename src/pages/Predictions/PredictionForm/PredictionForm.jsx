@@ -1,15 +1,15 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 import {
   Button,
   CardContainer,
   CardWrapper,
   Form,
   Input,
-} from '../../../common/common.styles';
-import ErrorInfo from '../../../common/MoreInfo/ErrorInfo';
-import Table from '../../../common/Table/Table';
-import { getFlagUrl } from '../../pagesHelpers';
-import { FormWrapper } from '../Predictions.styles';
+} from "../../../common/common.styles";
+import ErrorInfo from "../../../common/MoreInfo/ErrorInfo";
+import Table from "../../../common/Table/Table";
+import { getFlagUrl } from "../../pagesHelpers";
+import { FormWrapper } from "../Predictions.styles";
 import {
   checkPredictionResult,
   getErrorMessageForMatch,
@@ -17,48 +17,49 @@ import {
   formatPredictionsToDisplay,
   calculateIfCanPredict,
   formatInputDisplayValue,
-} from '../predictionsPageUtils';
-import { useIsMobile } from '../../../hooks/useIsMobile';
-import React, { useState, useEffect } from 'react';
-import { useFormik } from 'formik';
-import { useOutletContext, useParams } from 'react-router-dom';
-import { getPredictions, createPredictions } from '../../../api/predictions';
-import { BallLoader } from '../../../common/Spinner/BallLoader';
-import useCleanupController from '../../../hooks/useCleanupController';
-import { toast } from 'react-toastify';
+} from "../predictionsPageUtils";
+import { useIsMobile } from "../../../hooks/useIsMobile";
+import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
+import { useOutletContext, useParams } from "react-router-dom";
+import { getPredictions, createPredictions } from "../../../api/predictions";
+import { BallLoader } from "../../../common/Spinner/BallLoader";
+import useCleanupController from "../../../hooks/useCleanupController";
+import { toast } from "react-toastify";
 import {
   STAGE_NAMES,
   getStageName,
-} from '../PredictionManager/PredictionManagerUtils';
+} from "../PredictionManager/PredictionManagerUtils";
 
 export default function PredictionForm({ fixture, hasChangedGroup }) {
   const { selectedUserGroup, mode } = useOutletContext();
-  const resultsMode = mode === 'results';
+  const resultsMode = mode === "results";
   const [signal, cleanup, handleCancel] = useCleanupController();
   const [isLoading, setIsLoading] = useState(hasChangedGroup || false);
   const { phase } = useParams();
-  const { values, handleChange, resetForm, dirty, setStatus, status } = useFormik({
-    initialValues: {},
-  });
+  const { values, handleChange, resetForm, dirty, setStatus, status } =
+    useFormik({
+      initialValues: {},
+    });
   const [errorMessages, setErrorMessages] = useState([]);
   const isMobile = useIsMobile();
 
   const fetchAndSetPredictions = () => {
-    setStatus({loading: true})
+    setStatus({ loading: true });
     getPredictions(
       selectedUserGroup?.id,
       fixture.id ? undefined : getStageName(phase),
       fixture.id || undefined,
       undefined,
       signal
-      )
+    )
       .then((res) => {
-        resetForm({ values: formatPredictionsToDisplay(res.data) } || {})
-        setStatus({loading: false})
+        resetForm({ values: formatPredictionsToDisplay(res.data) } || {});
+        setStatus({ loading: false });
       })
       .finally(() => setIsLoading(false))
       .catch((err) => (handleCancel(err) ? setIsLoading(true) : null));
-  }
+  };
 
   useEffect(() => {
     if (!fixture) return;
@@ -80,8 +81,8 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           setIsLoading(false);
         }),
       {
-        pending: 'Enviando predicciones...',
-        success: 'Predicciones enviadas con éxito',
+        pending: "Enviando predicciones...",
+        success: "Predicciones enviadas con éxito",
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -100,12 +101,10 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
   return isLoading || hasChangedGroup ? (
     <CardContainer>
       <CardWrapper
-        minHeight={
-          resultsMode ? '360px' : '410px'
-        }
+        minHeight={resultsMode ? "360px" : "410px"}
         isMobile={isMobile}
         width="365px"
-        border={isMobile ? 'none' : null}
+        border={isMobile ? "none" : null}
       >
         <BallLoader />
       </CardWrapper>
@@ -124,11 +123,11 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                   ? checkPredictionResult(
                       data(),
                       match.id,
-                      'away',
+                      "away",
                       values[`${match.id}-away`],
                       values[`${match.id}-home`]
                     )
-                  : 'silver';
+                  : "silver";
               const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
               const canPredict = calculateIfCanPredict(
                 match.date,
@@ -139,18 +138,18 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                 if (!resultsMode) return null;
                 const colorStatus = predictionStatus();
                 switch (colorStatus) {
-                  case 'silver':
-                    return '-';
-                  case 'lightgreen':
-                    return '-';
-                  case '#FFFF66':
+                  case "silver":
+                    return "-";
+                  case "lightgreen":
+                    return "-";
+                  case "#FFFF66":
                     return (
                       <ErrorInfo
                         color={predictionStatus()}
                         info={matchResultString}
                       />
                     );
-                  case 'tomato':
+                  case "tomato":
                     return (
                       <ErrorInfo
                         color={predictionStatus()}
@@ -185,7 +184,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                         onChange={handleChange}
                         disabled={resultsMode || !canPredict}
                         predictionStatus={
-                          resultsMode ? predictionStatus('away') : ''
+                          resultsMode ? predictionStatus("away") : ""
                         }
                       />
                     </Table.Cell>
@@ -211,7 +210,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                         onChange={handleChange}
                         disabled={resultsMode || !canPredict}
                         predictionStatus={
-                          resultsMode ? predictionStatus('home') : ''
+                          resultsMode ? predictionStatus("home") : ""
                         }
                         type="number"
                         width="30px"
@@ -232,10 +231,13 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           </Table.Body>
         </Table>
         {!resultsMode && (
-          <Button type="submit" disabled={!selectedUserGroup?.id || !dirty || status?.loading}>
+          <Button
+            type="submit"
+            disabled={!selectedUserGroup?.id || !dirty || status?.loading}
+          >
             {selectedUserGroup?.id
-              ? 'Enviar predicciones'
-              : 'Seleccione un grupo'}
+              ? "Enviar predicciones"
+              : "Seleccione un grupo"}
           </Button>
         )}
       </Form>

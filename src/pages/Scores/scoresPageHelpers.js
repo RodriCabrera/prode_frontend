@@ -2,22 +2,22 @@ export const getCountByResultType = (predictions, groupScoring) => {
   if (predictions.length < 1) return [];
   const result = {
     perfect: {
-      name: 'Resultado exacto',
+      name: "Resultado exacto",
       ammount: 0,
-      color: 'green',
-      type: 'FULL',
+      color: "green",
+      type: "FULL",
     },
     winner: {
-      name: 'Ganador acertado',
+      name: "Ganador acertado",
       ammount: 0,
-      color: 'gold',
-      type: 'WINNER',
+      color: "gold",
+      type: "WINNER",
     },
     lost: {
-      name: 'Sin aciertos',
+      name: "Sin aciertos",
       ammount: 0,
-      color: 'tomato',
-      type: 'NONE',
+      color: "tomato",
+      type: "NONE",
     },
   };
   predictions.forEach((prediction) => {
@@ -59,7 +59,7 @@ export const groupUsersByResultType = (predictions, type, groupData) => {
 };
 
 function standarizeDateString(datestring) {
-  return new Date(datestring).toLocaleDateString('en-en');
+  return new Date(datestring).toLocaleDateString("en-en");
 }
 
 function groupPredictionsByDate(fixture, predictions) {
