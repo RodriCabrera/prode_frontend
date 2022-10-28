@@ -1,9 +1,11 @@
-import { LandingPageContainer } from "./LandingPage.styles";
+import { ToastContainer } from "react-toastify";
+
 import LandingPageMain from "./LandingPageMain";
 import LandingPageInfo from "./LandingPageInfo";
-import { ToastContainer } from "react-toastify";
+import { useIsMobile } from "hooks/useIsMobile";
+
 import "react-toastify/dist/ReactToastify.css";
-import { useIsMobile } from "../../../hooks/useIsMobile";
+import { LandingPageContainer } from "./LandingPage.styles";
 
 const LandingPage = () => {
   const isMobile = useIsMobile();

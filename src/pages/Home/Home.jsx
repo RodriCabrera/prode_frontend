@@ -1,13 +1,15 @@
-import styled from "@emotion/styled";
 import React, { useContext, useEffect, useState } from "react";
+import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
+
 import { AuthContext } from "../../common/AuthProvider";
-import { Button } from "../../common/common.styles";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import LeaderBoard from "./components//LeaderBoard/LeaderBoard";
 import NotificationBoard from "./components/NotificationBoard/NotificationBoard";
 import QuickPrediction from "./components/QuickPredictions/QuickPrediction";
 import ShortFixture from "./components/ShortFixture";
+
+import { Button } from "../../common/common.styles";
 
 const PageWrapper = styled.div`
   display: flex;

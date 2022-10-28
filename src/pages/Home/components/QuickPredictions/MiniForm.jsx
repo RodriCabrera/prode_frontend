@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Text, Input, Button } from "../../../../common/common.styles";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
+import { createPredictions } from "../../../../api/predictions";
+import { getFlagUrl, parseDate } from "../../../pagesHelpers";
+
 import {
   SinglePredictionForm,
   PredictionMatch,
 } from "./quickPredictions.styles";
-import { toast } from "react-toastify";
-import { createPredictions } from "../../../../api/predictions";
-import { getFlagUrl, parseDate } from "../../../pagesHelpers";
+import { Text, Input, Button } from "../../../../common/common.styles";
 
 export default function MiniForm({
   matchData,

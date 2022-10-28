@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Text } from "../../../common/common.styles";
-import { useIsMobile } from "../../../hooks/useIsMobile";
+
+import { getSoccerVideos } from "api/pexels";
+import { useIsMobile } from "hooks/useIsMobile";
+import Countdown from "../../Home/components/Countdown";
+
+import { Text } from "common/common.styles";
 import {
   LandingPageWrapper,
   LeftPlaceholder,
   VideoBg,
 } from "./LandingPage.styles";
-import { getSoccerVideos } from "../../../api/pexels";
-import Countdown from "../../Home/components/Countdown";
 
 const LandingPageMain = () => {
   const [video, setVideo] = useState();

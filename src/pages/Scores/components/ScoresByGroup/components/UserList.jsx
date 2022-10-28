@@ -1,14 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import styled from "@emotion/styled";
-import {
-  CardContainer,
-  CardWrapper,
-  CardTitle,
-  Text,
-} from "../../../../../common/common.styles";
+import { MdOutlineChevronLeft } from "react-icons/md";
+
 import { ListElement } from "../../../../../common/Lists/ListElement";
 import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
-import { MdOutlineChevronLeft } from "react-icons/md";
+
+import {
+  CardContainer,
+  CardTitle,
+  CardWrapper,
+  Text,
+} from "../../../../../common/common.styles";
 
 const CloseButton = styled.button`
   align-self: flex-start;

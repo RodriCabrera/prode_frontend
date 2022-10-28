@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
 import React from "react";
+import styled from "@emotion/styled";
+
 import Table from "../../../common/Table/Table";
 import { getFlagUrl, parseDate } from "../../pagesHelpers";
 import { parseMatchScore, datePreferences } from "../fixturePageHelpers";

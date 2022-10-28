@@ -1,6 +1,6 @@
-import React from "react";
 import { isNil } from "lodash";
 import { useNavigate, useOutletContext } from "react-router-dom";
+
 import {
   BannerButton,
   BannerDataWrapper,

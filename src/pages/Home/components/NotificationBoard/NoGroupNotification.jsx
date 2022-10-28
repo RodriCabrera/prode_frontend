@@ -1,6 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { Text } from "../../../../common/common.styles";
+
+import { Text } from "common/common.styles";
 
 export function NoGroupNotification() {
   return (

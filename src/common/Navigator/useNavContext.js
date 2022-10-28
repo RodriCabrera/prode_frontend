@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { NavContext } from "./Navigator";
 
 export default function useNavContext() {

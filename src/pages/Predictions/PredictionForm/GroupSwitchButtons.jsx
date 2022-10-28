@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from "react-icons/md";
+
+import { groupNumberMod, numberToGroupLetter } from "../predictionsPageUtils";
+
 import { Button } from "../../../common/common.styles";
 import { FormButtonWrapper } from "../Predictions.styles";
-import { groupNumberMod, numberToGroupLetter } from "../predictionsPageUtils";
 
 export default function GroupSwitchButtons({ setNewGroupNumber }) {
   const [groupNumber, setGroupNumber] = useState(0);

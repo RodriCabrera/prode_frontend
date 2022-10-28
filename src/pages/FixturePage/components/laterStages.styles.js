@@ -63,7 +63,7 @@ export const CollapsableStageButton = styled.button`
   font-size: 1.8rem;
   text-transform: uppercase;
   cursor: pointer;
-  &: after {
+  &:after {
     width: 100%;
     border-bottom: 1px white;
   }

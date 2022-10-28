@@ -1,10 +1,15 @@
-import { useFormik } from "formik";
+import { useContext, useEffect, useState } from "react";
 import { isEmpty } from "lodash";
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createUser } from "../../api/auth";
-import { AuthContext } from "../../common/AuthProvider";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "common/AuthProvider";
+import { authSchema } from "validationSchemas/auth";
+import { createUser } from "api/auth";
+import { useIsMobile } from "hooks/useIsMobile";
+import GoogleAuth from "common/GoogleAuth/GoogleAuth";
+
 import {
   Button,
   CardTitle,
@@ -14,9 +19,6 @@ import {
   Label,
   Text,
 } from "../../common/common.styles";
-import GoogleAuth from "../../common/GoogleAuth/GoogleAuth";
-import { useIsMobile } from "../../hooks/useIsMobile";
-import { authSchema } from "../../validationSchemas/auth";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);

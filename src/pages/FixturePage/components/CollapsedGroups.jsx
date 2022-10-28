@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import FixtureTable from "./FixtureTable";
+
+import { Text } from "common/common.styles";
 import {
-  GroupTableWrapper,
   FixtureTablesContainer,
   GroupButton,
   GroupButtonGroup,
+  GroupTableWrapper,
 } from "../FixturePage.styles";
-import FixtureTable from "./FixtureTable";
-import { Text } from "../../../common/common.styles";
 
 export default function CollapsedGroups({ groups, isMobile }) {
   const [selected, setSelected] = useState([]);

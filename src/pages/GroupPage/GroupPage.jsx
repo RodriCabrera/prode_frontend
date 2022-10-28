@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { getGroupData } from "../../api/groups";
 import { Spinner } from "../../common/Spinner/Spinner";
 import NotFound from "../NotFound";
