@@ -20,10 +20,10 @@ jobs:
       - name: Checkout to the repository
         uses: actions/checkout@v2
 
-      - name: Setup node version ${{ steps.prepare.outputs.full_node_version }}
+      - name: Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ steps.prepare.outputs.full_node_version }}
+          node-version: 16
           cache: yarn
 
       - name: Restore node cache
