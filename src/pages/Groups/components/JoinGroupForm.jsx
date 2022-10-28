@@ -1,11 +1,11 @@
-import { useFormik } from 'formik';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import GroupConfirm from './GroupConfirm';
-import { joinGroup, getGroupRules } from '../../../api/groups';
-import { Button, Input, Label, Form } from '../../../common/common.styles';
-import useToggleModal from '../../../hooks/useToggleModal';
-import Modal from '../../../common/Modal/Modal';
+import { useFormik } from "formik";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import GroupConfirm from "./GroupConfirm";
+import { joinGroup, getGroupRules } from "../../../api/groups";
+import { Button, Input, Label, Form } from "../../../common/common.styles";
+import useToggleModal from "../../../hooks/useToggleModal";
+import Modal from "../../../common/Modal/Modal";
 
 function JoinGroupForm({ updateList }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,8 +26,8 @@ function JoinGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: 'Buscando grupo...',
-        success: 'Grupo encontrado',
+        pending: "Buscando grupo...",
+        success: "Grupo encontrado",
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -53,8 +53,8 @@ function JoinGroupForm({ updateList }) {
           toggleModal();
         }),
       {
-        pending: 'Uniendote al grupo...',
-        success: 'Te uniste al grupo',
+        pending: "Uniendote al grupo...",
+        success: "Te uniste al grupo",
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -108,7 +108,7 @@ function JoinGroupForm({ updateList }) {
         grayscale={showForm}
         padding="10px"
       >
-        {showForm ? 'Ocultar' : 'Unirse a un Grupo'}
+        {showForm ? "Ocultar" : "Unirse a un Grupo"}
       </Button>
     </>
   );

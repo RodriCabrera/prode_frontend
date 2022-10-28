@@ -36,10 +36,10 @@ function App() {
   const isMobile = useIsMobile();
   return (
     <FlagsmithProvider
-    options={{
-      environmentID: 'oMxSbmyCNm65oRQYZBUWq2'
-    }}
-    flagsmith={flagsmith}
+      options={{
+        environmentID: "oMxSbmyCNm65oRQYZBUWq2",
+      }}
+      flagsmith={flagsmith}
     >
       <Layout>
         <Navbar />

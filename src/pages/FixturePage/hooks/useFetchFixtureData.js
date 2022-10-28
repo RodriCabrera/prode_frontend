@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getFixture } from '../../../api/fixture';
-import useCleanupController from '../../../hooks/useCleanupController';
+import { useEffect, useState } from "react";
+import { getFixture } from "../../../api/fixture";
+import useCleanupController from "../../../hooks/useCleanupController";
 
 export function useFetchFixtureData() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,13 +13,13 @@ export function useFetchFixtureData() {
       .then((res) => {
         setFixtureData(res.data.fixture);
       })
-      .catch(err => {
-        handleCancel(err)
+      .catch((err) => {
+        handleCancel(err);
       })
       .finally(() => {
         setIsLoading(false);
       });
-      return cleanup;
+    return cleanup;
   }, []);
 
   return { isLoading, fixtureData };

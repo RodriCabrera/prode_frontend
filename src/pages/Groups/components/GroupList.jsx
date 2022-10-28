@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
-import { isEmpty } from 'lodash';
-import { useNavigate } from 'react-router-dom';
-import { HiOutlineUserGroup } from 'react-icons/hi';
-import { Text } from '../../../common/common.styles';
-import { ListElement } from '../../../common/Lists/ListElement';
+import styled from "@emotion/styled";
+import { isEmpty } from "lodash";
+import { useNavigate } from "react-router-dom";
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { Text } from "../../../common/common.styles";
+import { ListElement } from "../../../common/Lists/ListElement";
 
 const GroupListWrapper = styled.div`
   display: flex;

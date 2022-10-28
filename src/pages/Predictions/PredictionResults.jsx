@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import { isEmpty } from 'lodash';
-import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
-import { Outlet } from 'react-router-dom';
-import { getUserGroups } from '../../api/groups';
-import { getAllPredictions } from '../../api/predictions';
-import { Text } from '../../common/common.styles';
-import { ListElement } from '../../common/Lists/ListElement';
-import { ListWrapper } from '../../common/Lists/Lists.styles';
-import { Spinner } from '../../common/Spinner/Spinner';
-import useCleanupController from '../../hooks/useCleanupController';
+import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { isEmpty } from "lodash";
+import { HiOutlineUserGroup, HiCheck } from "react-icons/hi";
+import { Outlet } from "react-router-dom";
+import { getUserGroups } from "../../api/groups";
+import { getAllPredictions } from "../../api/predictions";
+import { Text } from "../../common/common.styles";
+import { ListElement } from "../../common/Lists/ListElement";
+import { ListWrapper } from "../../common/Lists/Lists.styles";
+import { Spinner } from "../../common/Spinner/Spinner";
+import useCleanupController from "../../hooks/useCleanupController";
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -76,7 +76,7 @@ function PredictionResults() {
                     <HiOutlineUserGroup size="1.8rem" />
                   )
                 }
-                bgColor={isSelected && 'green'}
+                bgColor={isSelected && "green"}
                 onClick={() => handleGroupSelect(userGroup)}
               >
                 <Text weight="600">{userGroup.name.toUpperCase()}</Text>

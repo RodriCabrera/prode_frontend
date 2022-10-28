@@ -1,17 +1,17 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AuthProvider from '../common/AuthProvider';
-import '../index.css';
-import NotFound from '../pages/NotFound';
-import Home from '../pages/Home/Home';
-import Groups from '../pages/Groups/Groups';
-import ScoresPage from '../pages/Scores/ScoresPage';
-import GroupPage from '../pages/GroupPage/GroupPage';
-import Fixture from '../pages/FixturePage/FixturePage';
-import App from '../App';
-import AuthRoutes from './AuthRoutes';
-import PredictionsRoutes from './PredictionsRoutes';
-import ProfileRoutes from './ProfileRoutes';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AuthProvider from "../common/AuthProvider";
+import "../index.css";
+import NotFound from "../pages/NotFound";
+import Home from "../pages/Home/Home";
+import Groups from "../pages/Groups/Groups";
+import ScoresPage from "../pages/Scores/ScoresPage";
+import GroupPage from "../pages/GroupPage/GroupPage";
+import Fixture from "../pages/FixturePage/FixturePage";
+import App from "../App";
+import AuthRoutes from "./AuthRoutes";
+import PredictionsRoutes from "./PredictionsRoutes";
+import ProfileRoutes from "./ProfileRoutes";
 
 function Router() {
   return (

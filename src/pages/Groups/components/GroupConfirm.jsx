@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text, CardTitle, Button } from '../../../common/common.styles';
-import { translateDuration } from '../../pagesHelpers';
+import React from "react";
+import { Text, CardTitle, Button } from "../../../common/common.styles";
+import { translateDuration } from "../../pagesHelpers";
 
 function GroupConfirm({ groupName, userGroupData, confirmText }) {
   return (

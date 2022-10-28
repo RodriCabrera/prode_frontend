@@ -1,12 +1,12 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import ChangePassword from '../pages/Auth/ChangePassword';
-import ConfirmationEmail from '../pages/Auth/ConfirmationEmail';
-import ForgotPassword from '../pages/Auth/ForgotPassword';
-import LandingPage from '../pages/Auth/LandingPage/LandingPage';
-import Login from '../pages/Auth/Login';
-import Register from '../pages/Auth/Register';
-import VerifiedEmail from '../pages/Auth/VerifiedEmail';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import ChangePassword from "../pages/Auth/ChangePassword";
+import ConfirmationEmail from "../pages/Auth/ConfirmationEmail";
+import ForgotPassword from "../pages/Auth/ForgotPassword";
+import LandingPage from "../pages/Auth/LandingPage/LandingPage";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
+import VerifiedEmail from "../pages/Auth/VerifiedEmail";
 
 function AuthRoutes() {
   return (

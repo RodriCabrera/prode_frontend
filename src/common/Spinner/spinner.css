@@ -16,7 +16,7 @@
 }
 
 .line-wobble::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -27,7 +27,7 @@
 }
 
 .line-wobble::after {
-  content: '';
+  content: "";
   height: 100%;
   width: 100%;
   border-radius: calc(var(--uib-line-weight) / 2);

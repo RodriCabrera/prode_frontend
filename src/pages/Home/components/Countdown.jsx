@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
 
 // LOGICA DEL COUNTDOWN:
 const calculateTimeLeft = () => {
@@ -76,7 +76,7 @@ function Countdown() {
       </Block>
     </Wrapper>
   ) : (
-    ''
+    ""
   );
 }
 

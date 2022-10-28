@@ -1,27 +1,27 @@
-import { useState } from 'react';
-import styled from '@emotion/styled';
-import { toast } from 'react-toastify';
-import { editProfile } from '../../../api/profiles';
-import Modal from '../../../common/Modal/Modal';
-import useToggleModal from '../../../hooks/useToggleModal';
-import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
+import { useState } from "react";
+import styled from "@emotion/styled";
+import { toast } from "react-toastify";
+import { editProfile } from "../../../api/profiles";
+import Modal from "../../../common/Modal/Modal";
+import useToggleModal from "../../../hooks/useToggleModal";
+import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
 import {
   Button,
   Form,
   Input,
   Label,
   Text,
-} from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
-import AvatarList from './AvatarList';
-import { BigAvatarWrapper } from '../Profile';
-import { isEmpty } from 'lodash';
+} from "../../../common/common.styles";
+import { Spinner } from "../../../common/Spinner/Spinner";
+import AvatarList from "./AvatarList";
+import { BigAvatarWrapper } from "../Profile";
+import { isEmpty } from "lodash";
 
 export function ProfileEditForm({ profile, updateProfile }) {
   const [userName, setUserName] = useState(profile?.name);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(profile?.avatar || '');
+  const [selectedAvatar, setSelectedAvatar] = useState(profile?.avatar || "");
   const { showModal, toggleModal } = useToggleModal();
   const handleNameChange = (e) => {
     setUserName(e.target.value);
@@ -53,8 +53,8 @@ export function ProfileEditForm({ profile, updateProfile }) {
           setIsEditingEnabled(false);
         }),
       {
-        pending: 'Enviando cambios',
-        success: 'Perfil actualizado',
+        pending: "Enviando cambios",
+        success: "Perfil actualizado",
         error: {
           render({ data }) {
             return data?.response.data?.error;
@@ -99,7 +99,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
             />
           </Label>
           <Button type="button" onClick={toggleModal} disabled={isDisabled()}>
-            {isNumberAndLetters ? 'Solo letras y números' : 'Actualizar Perfil'}
+            {isNumberAndLetters ? "Solo letras y números" : "Actualizar Perfil"}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>

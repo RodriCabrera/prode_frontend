@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { getFixtureByStageId } from '../../../api/fixture';
-import { StageColumn, MatchData, Match } from './laterStages.styles';
-import { datePreferences, organizeStageBranches } from '../fixturePageHelpers';
-import { getFlagUrl, parseDate } from '../../pagesHelpers';
-import { Text } from '../../../common/common.styles';
-import useCleanupController from '../../../hooks/useCleanupController';
+import React, { useState, useEffect } from "react";
+import { getFixtureByStageId } from "../../../api/fixture";
+import { StageColumn, MatchData, Match } from "./laterStages.styles";
+import { datePreferences, organizeStageBranches } from "../fixturePageHelpers";
+import { getFlagUrl, parseDate } from "../../pagesHelpers";
+import { Text } from "../../../common/common.styles";
+import useCleanupController from "../../../hooks/useCleanupController";
 
 function StageMatches({ stageName, isFirst }) {
   const [isLoading, setIsLoading] = useState(false);

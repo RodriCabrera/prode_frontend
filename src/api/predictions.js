@@ -1,11 +1,11 @@
-import { api } from './instances';
+import { api } from "./instances";
 
 export const getAllPredictions = (signal) => {
-  return api.get('/predictions', { signal });
+  return api.get("/predictions", { signal });
 };
 
 export const createPredictions = (predictions) => {
-  return api.post('/predictions', predictions);
+  return api.post("/predictions", predictions);
 };
 /*
 * createPredictions recibe:
@@ -28,10 +28,10 @@ body {
 */
 
 export const getPredictions = (
-  userGroupId = '',
-  stage = '',
-  group = '',
-  own = 'true',
+  userGroupId = "",
+  stage = "",
+  group = "",
+  own = "true",
   signal
 ) => {
   return api.get(
@@ -41,19 +41,18 @@ export const getPredictions = (
 };
 
 export const getPredictionCount = (signal) => {
-  return api.get('/predictions/length', { signal });
+  return api.get("/predictions/length", { signal });
 };
 
-export const getPredictionCompletePercentage = (userGroupId = '', signal) => {
-  return api.get(
-    `/predictions/percentage?userGroupId=${userGroupId}`,
-    { signal }
-  );
+export const getPredictionCompletePercentage = (userGroupId = "", signal) => {
+  return api.get(`/predictions/percentage?userGroupId=${userGroupId}`, {
+    signal,
+  });
 };
 
 export const getFirstStagePredictionsByGroup = (
-  userGroupId = '',
-  groupLeter = '',
+  userGroupId = "",
+  groupLeter = "",
   signal
 ) => {
   return api.get(
@@ -63,12 +62,11 @@ export const getFirstStagePredictionsByGroup = (
 };
 
 export const getOtherUserPredictionsByGroup = (userId, userGroupId, signal) => {
-  return api.get(
-    `/predictions/profile/${userId}?userGroupId=${userGroupId}`,
-    { signal }
-  );
+  return api.get(`/predictions/profile/${userId}?userGroupId=${userGroupId}`, {
+    signal,
+  });
 };
 
 export const getRandomUnpredictedMatch = (signal) => {
-  return api.get('/predictions/random-missing', { signal });
+  return api.get("/predictions/random-missing", { signal });
 };

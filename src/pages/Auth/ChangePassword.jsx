@@ -1,7 +1,7 @@
-import { useFormik } from 'formik';
-import { isEmpty } from 'lodash';
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Button,
   CardContainer,
@@ -10,14 +10,14 @@ import {
   Input,
   Label,
   Form,
-} from '../../common/common.styles';
-import { Spinner } from '../../common/Spinner/Spinner';
-import { changePassword } from '../../api/auth';
-import { authSchema } from '../../validationSchemas/auth';
+} from "../../common/common.styles";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { changePassword } from "../../api/auth";
+import { authSchema } from "../../validationSchemas/auth";
 
 function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
@@ -28,12 +28,12 @@ function ChangePassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userToken = localStorage.getItem('token') || token;
+    const userToken = localStorage.getItem("token") || token;
     setIsLoading(true);
     setError(undefined);
     changePassword(values, userToken)
       .then(() => {
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => setError(err.response.data.error))
       .finally(() => setIsLoading(false));

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Text } from '../../../common/common.styles';
-import { References } from '../../../common/References';
-import { translateDuration } from '../../pagesHelpers';
+import React from "react";
+import { Text } from "../../../common/common.styles";
+import { References } from "../../../common/References";
+import { translateDuration } from "../../pagesHelpers";
 
 function GroupRules({ rules }) {
   if (!rules) return null;
@@ -16,7 +16,7 @@ function GroupRules({ rules }) {
           <br />
         </>
       )}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
+      <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
         <Text size="1.2rem" weight="600" withBottomBorder>
           Tiempos límite:
         </Text>
