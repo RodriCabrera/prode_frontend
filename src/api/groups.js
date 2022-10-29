@@ -1,7 +1,7 @@
 import { api } from './instances';
 
-export const createGroup = (groupName, signal) => {
-  return api.post('/group/create', groupName, { signal });
+export const createGroup = (groupData, signal) => {
+  return api.post('/group/create', groupData, { signal });
 };
 
 export const joinGroup = (groupName, signal) => {
@@ -14,6 +14,10 @@ export const leaveGroup = (groupName, signal) => {
 
 export const deleteGroup = (groupId, signal) => {
   return api.delete(`/group/delete?userGroupId=${groupId}`, { signal });
+}
+
+export const editGroup = (groupId, groupData, signal) => {
+  return api.post(`/group/edit/${groupId}`, groupData, { signal });
 }
 
 export const getGroupScores = (groupName, signal) => {

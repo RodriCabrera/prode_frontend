@@ -38,7 +38,9 @@ function GroupConfirm({ groupName, userGroupData, confirmText }) {
         </Text>
         <Text>
           Puedes realizar predicciones hasta
-          {translateDuration(userGroupData.timeLimit)}
+          {userGroupData.limitByPhase ? 
+            translateDuration(userGroupData.timeLimit).replace("del partido", "de la fase")
+            : translateDuration(userGroupData.timeLimit) }
         </Text>
         <br />
         <Button type="submit">{confirmText}</Button>

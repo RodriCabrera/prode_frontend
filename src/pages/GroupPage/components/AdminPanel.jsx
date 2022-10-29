@@ -1,12 +1,10 @@
+import React from "react";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
-import { useFlags } from "flagsmith/react"
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import GroupConfirm from "./GroupConfirm";
-import { createGroup } from "../../../api/groups";
-import ScoringInputs from "./ScoringInputs";
+import GroupConfirm from "../../Groups/components/GroupConfirm";
+import { editGroup } from "../../../api/groups";
+import ScoringInputs from "../../Groups/components/ScoringInputs";
 import useToggleModal from "../../../hooks/useToggleModal";
 import Modal from "../../../common/Modal/Modal";
 import {
@@ -17,73 +15,60 @@ import {
   TextareaInput,
   Select,
   Text,
-  TextGroup
+  TextGroup,
 } from "../../../common/common.styles";
 import { groupsSchema } from "../../../validationSchemas/groups";
 
-function CreateGroupForm({ updateList }) {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const { showModal, toggleModal } = useToggleModal();
-  const { values, handleChange, errors } = useFormik({
-    initialValues: {
-      name: "",
-      manifesto: "",
-      scoringFull: 3,
-      scoringWinner: 1,
-      scoringNone: 0,
-      timeLimit: 0,
-      limitByPhase: "false"
-    },
-    validationSchema: groupsSchema.create,
-  });
-  const flags = useFlags(["show_admin_functions"])
+// TODO> Setear limite de tiempo para poder editar esta info
 
-  const handleSubmit = (e) => {
-    setIsLoading(true);
-    e.preventDefault();
+export default function AdminPanel({ groupData }) {
+    const { showModal, toggleModal } = useToggleModal();
+    const { values, handleChange, errors } = useFormik({
+        initialValues: {
+            name: groupData.name,
+            manifesto: groupData.rules.manifesto,
+            scoringFull: groupData.rules.scoring.FULL,
+            scoringWinner: groupData.rules.scoring.WINNER,
+            scoringNone: groupData.rules.scoring.NONE,
+            timeLimit: groupData.rules.timeLimit,
+            limitByPhase: groupData.rules.limitByPhase ? "true" : "false"
+        },
+        validationSchema: groupsSchema.create
+    });
 
-    toast.promise(
-      createGroup({
-        name: values.name.trim().toUpperCase(),
-        rules: {
-          manifesto: values.manifesto,
-          scoring: {
-            FULL: values.scoringFull,
-            WINNER: values.scoringWinner,
-            NONE: values.scoringNone,
-          },
-          timeLimit: values.timeLimit,
-          limitByPhase: values.limitByPhase === "true"
-        },
-      })
-        .then(() => {
-          updateList();
-          navigate(`/groups/${values.name.trim().toUpperCase()}`);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        }),
-      {
-        pending: "Creando grupo...",
-        success: "Grupo creado con éxito. Redirigiendo...",
-        error: {
-          render({ data }) {
-            return data.response.data.error;
-          },
-        },
-      }
-    );
-  };
-  const handleShowFormSwitch = () => {
-    setShowForm(!showForm);
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        toast.promise(
+            editGroup(groupData.id, {
+                name: values.name.trim().toUpperCase(),
+                rules: {
+                    manifesto: values.manifesto,
+                    scoring: {
+                        FULL: values.scoringFull,
+                        WINNER: values.scoringWinner,
+                        NONE: values.scoringNone,
+                    },
+                    timeLimit: values.timeLimit,
+                    limitByPhase: values.limitByPhase === "true"
+                },
+            })
+            .then(res => {
+              if(res.status === 200) return // TODO> retrigger user group data fetch
+            }),
+            {
+                pending: "Editando grupo...",
+                success: "Grupo editado con éxito",
+                error: {
+                    render({ data }) {
+                      return data.response.data.error;
+                    },
+                },
+            }
+        );
+    };
   return (
-    <>
-      {showForm && (
-        <Form onSubmit={handleSubmit}>
-          <Label htmlFor="name">
+    <Form onSubmit={handleSubmit}>
+        <Label htmlFor="name">
             <Input
               type="text"
               placeholder="Nombre del nuevo grupo"
@@ -134,26 +119,25 @@ function CreateGroupForm({ updateList }) {
             )}
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} />
-          <Text size=".8rem" align="center">
-            ¿Hasta cuando se podrán realizar las predicciones?
+          <Text align="center" margin="1rem">
+                ¿Hasta cuando se podrán realizar las predicciones?
           </Text>
-          {flags.show_admin_functions.enabled && 
-          <TextGroup align="center" margin="0">
+          <TextGroup align="center" margin=".2rem">
             <Label htmlFor="DontLimitByPhase">
-                <TextGroup margin="0">
+                <TextGroup>
                     <Text>Por partido</Text>
                     <Input type="radio" name="limitByPhase" id="DontLimitByPhase" 
                         value={false} onChange={handleChange} checked={values.limitByPhase==="false"} />
                 </TextGroup>
             </Label>
             <Label htmlFor="DoLimitByPhase">
-                <TextGroup margin="0">
+                <TextGroup>
                     <Text>Por fase</Text>
                     <Input type="radio" name="limitByPhase" id="DoLimitByPhase" 
                         value={true} onChange={handleChange} checked={values.limitByPhase==="true"} />
                 </TextGroup>
             </Label>
-          </TextGroup>}
+          </TextGroup>
           <Label htmlFor="timeLimit">
             <Select
               value={values.timeLimit}
@@ -180,10 +164,10 @@ function CreateGroupForm({ updateList }) {
           </Label>
           <Button
             type="button"
-            disabled={isLoading || !isEmpty(errors) || isEmpty(values.name)}
+            disabled={!isEmpty(errors) || isEmpty(values.name)}
             onClick={toggleModal}
           >
-            Crear grupo
+            Editar grupo
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <GroupConfirm
@@ -198,20 +182,9 @@ function CreateGroupForm({ updateList }) {
                 timeLimit: values.timeLimit,
                 limitByPhase: values.limitByPhase === "true"
               }}
-              confirmText="Crear grupo"
+              confirmText="Editar grupo"
             />
           </Modal>
-        </Form>
-      )}
-      <Button
-        onClick={handleShowFormSwitch}
-        grayscale={showForm}
-        padding="10px"
-      >
-        {showForm ? "Ocultar" : "Crear un nuevo grupo"}
-      </Button>
-    </>
-  );
+    </Form>
+  )
 }
-
-export default CreateGroupForm;
