@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
+
 import GroupConfirm from "../../Groups/components/GroupConfirm";
 import { editGroup } from "../../../api/groups";
 import ScoringInputs from "../../Groups/components/ScoringInputs";
@@ -21,7 +23,7 @@ import { groupsSchema } from "../../../validationSchemas/groups";
 
 // TODO> Setear limite de tiempo para poder editar esta info
 
-export default function AdminPanel({ groupData }) {
+export default function AdminPanel({ groupData, updater }) {
     const { showModal, toggleModal } = useToggleModal();
     const { values, handleChange, errors } = useFormik({
         initialValues: {
@@ -35,6 +37,7 @@ export default function AdminPanel({ groupData }) {
         },
         validationSchema: groupsSchema.create
     });
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,7 +56,11 @@ export default function AdminPanel({ groupData }) {
                 },
             })
             .then(res => {
-              if(res.status === 200) return // TODO> retrigger user group data fetch
+              if(res.status === 200) {
+                navigate(`/groups/${values.name}`)
+                updater(values.name);
+              } 
+                
             }),
             {
                 pending: "Editando grupo...",

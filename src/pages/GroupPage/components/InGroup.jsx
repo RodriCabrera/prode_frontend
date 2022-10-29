@@ -23,7 +23,7 @@ import { GoBackButton } from "../../../common/GoBackButton/GoBackButton";
 import useCleanupController from "../../../hooks/useCleanupController";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 
-function InGroup({ groupData }) {
+function InGroup({ groupData, updater }) {
   const navigate = useNavigate();
   const [groupScoresData, setGroupScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -74,7 +74,8 @@ function InGroup({ groupData }) {
         <Button onClick={toggleAdminPanel} tertiary={showAdminPanel}>
           {showAdminPanel ? 'Hide Admin Panel' : 'Show Admin Panel'}
         </Button>}
-        {showAdminPanel ? <AdminPanel groupData={groupData}/> : <GroupRules rules={groupData?.rules} />}
+        {showAdminPanel ? <AdminPanel groupData={groupData} updater={updater} /> 
+        : <GroupRules rules={groupData?.rules} />}
         {isLoading && <Spinner />}
         {groupScoresData.group && (
           <>
