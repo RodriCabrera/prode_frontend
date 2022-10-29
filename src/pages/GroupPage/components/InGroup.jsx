@@ -57,18 +57,12 @@ function InGroup({ groupData }) {
     return navigate(`/profile/${user}`);
   };
 
-<<<<<<< HEAD
   const toggleAdminPanel = () => {
     setShowAdminPanel(prev => !prev)
   }
 
   const isAdmin = userContext.user._id === groupData.owner._id
-  const isAdminAlone = isAdmin && groupData.members.length === 1
-=======
-  const isAdminAlone =
-    userContext.user._id === groupData.owner._id &&
-    groupData.members.length === 1;
->>>>>>> a4568261c9c39d5bc652e02819e8ff5c29600dce
+  const isAdminAlone = isAdmin && groupData.members.length === 1;
   return (
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>

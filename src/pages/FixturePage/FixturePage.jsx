@@ -1,7 +1,5 @@
 import React from "react";
-import { flagsmith } from "flagsmith";
-import { useFlags, useFlagsmith } from "flagsmith/react";
-
+import { useFlags } from "flagsmith/react";
 import FixtureTable from "./components/FixtureTable";
 import LaterStagesGraph from "./components/LaterStagesGraph";
 import CollapsableStage from "./components/CollapsableStage";
