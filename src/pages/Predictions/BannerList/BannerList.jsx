@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
-import { getPredictionCompletePercentage } from '../../../api/predictions';
-import { getFixtureStatus } from '../../../api/fixture';
-import { Text } from '../../../common/common.styles';
-import useCleanupController from '../../../hooks/useCleanupController';
-import { BallLoader } from '../../../common/Spinner/BallLoader';
-import { Banner } from './Banner';
-import { BannerContainer } from '../Predictions.styles';
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+
+import { getPredictionCompletePercentage } from "../../../api/predictions";
+import { getFixtureStatus } from "api/fixture";
+import useCleanupController from "hooks/useCleanupController";
+import { BallLoader } from "common/Spinner/BallLoader";
+import { Banner } from "./Banner";
+
+import { Text } from "../../../common/common.styles";
+import { BannerContainer } from "../Predictions.styles";
 
 function BannerList() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +26,7 @@ function BannerList() {
   });
 
   useEffect(() => {
-    if (mode==='edit') {
+    if (mode === "edit") {
       setIsLoading(true);
       getPredictionCompletePercentage(selectedUserGroup?.id, signal)
         .then((res) => {
@@ -55,48 +57,48 @@ function BannerList() {
   const bannerData = [
     {
       id: 1,
-      title: 'GRUPOS',
-      path: 'groups',
+      title: "GRUPOS",
+      path: "groups",
       percentage: predictedPercentages.GRUPOS
         ? calculatePercentage(predictedPercentages.GRUPOS)
         : null,
     },
     {
       id: 2,
-      title: 'OCTAVOS',
-      path: '16',
+      title: "OCTAVOS",
+      path: "16",
       percentage: predictedPercentages.OCTAVOS
         ? calculatePercentage(predictedPercentages.OCTAVOS)
         : null,
     },
     {
       id: 3,
-      title: 'CUARTOS',
-      path: '8',
+      title: "CUARTOS",
+      path: "8",
       percentage: predictedPercentages.CUARTOS
         ? calculatePercentage(predictedPercentages.CUARTOS)
         : null,
     },
     {
       id: 4,
-      title: 'SEMIFINAL',
-      path: 'semis',
+      title: "SEMIFINAL",
+      path: "semis",
       percentage: predictedPercentages.SEMIFINAL
         ? calculatePercentage(predictedPercentages.SEMIFINAL)
         : null,
     },
     {
       id: 5,
-      title: 'TERCER PUESTO',
-      path: '3',
+      title: "TERCER PUESTO",
+      path: "3",
       percentage: predictedPercentages.TERCER_PUESTO
         ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
         : null,
     },
     {
       id: 6,
-      title: 'FINAL',
-      path: 'final',
+      title: "FINAL",
+      path: "final",
       percentage: predictedPercentages.FINAL
         ? calculatePercentage(predictedPercentages.FINAL)
         : null,
@@ -119,7 +121,7 @@ function BannerList() {
               path={stage.path}
               percentage={stage.percentage}
               isLoading={isLoading}
-              disabled={stageStatus[stage.title.replace(' ', '_')]}
+              disabled={stageStatus[stage.title.replace(" ", "_")]}
             />
           );
         })

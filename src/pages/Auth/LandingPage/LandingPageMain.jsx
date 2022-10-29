@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { Text } from '../../../common/common.styles';
-import { useIsMobile } from '../../../hooks/useIsMobile';
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+
+import { getSoccerVideos } from "api/pexels";
+import { useIsMobile } from "hooks/useIsMobile";
+import Countdown from "../../Home/components/Countdown";
+
+import { Text } from "common/common.styles";
 import {
   LandingPageWrapper,
   LeftPlaceholder,
   VideoBg,
-} from './LandingPage.styles';
-import { getSoccerVideos } from '../../../api/pexels';
-import Countdown from '../../Home/components/Countdown';
+} from "./LandingPage.styles";
 
 const LandingPageMain = () => {
   const [video, setVideo] = useState();
@@ -28,10 +30,10 @@ const LandingPageMain = () => {
   return (
     <LandingPageWrapper id="landing-page-wrapper">
       <LeftPlaceholder>
-        <Text size={isMobile ? '3.5rem' : '5.5rem'} weight="800" color="tomato">
+        <Text size={isMobile ? "3.5rem" : "5.5rem"} weight="800" color="tomato">
           Chumbazo.
         </Text>
-        <Text size={isMobile ? '1.5rem' : '2.5rem'} weight="800">
+        <Text size={isMobile ? "1.5rem" : "2.5rem"} weight="800">
           El prode para Qatar 2022.
         </Text>
         <Countdown />

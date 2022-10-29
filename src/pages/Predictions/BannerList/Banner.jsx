@@ -1,23 +1,17 @@
-import React from 'react';
-import { isNil } from 'lodash';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { isNil } from "lodash";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
 import {
   BannerButton,
   BannerDataWrapper,
   BannerTitle,
-} from '../Predictions.styles';
-import { Text } from '../../../common/common.styles';
+} from "../Predictions.styles";
+import { Text } from "../../../common/common.styles";
 
-export function Banner({
-  title,
-  path,
-  percentage,
-  isLoading,
-  disabled,
-}) {
+export function Banner({ title, path, percentage, isLoading, disabled }) {
   const navigate = useNavigate();
   const { mode, setMode } = useOutletContext();
-  const editMode = mode === 'edit'
+  const editMode = mode === "edit";
 
   const renderPercentageInfo = () => {
     if (editMode && disabled) {
@@ -27,7 +21,7 @@ export function Banner({
       return (
         editMode && (
           <Text weight="200">
-            {!isNil(percentage) ? `${percentage} % completo` : ''}
+            {!isNil(percentage) ? `${percentage} % completo` : ""}
           </Text>
         )
       );
@@ -36,9 +30,9 @@ export function Banner({
   };
 
   const handleClick = () => {
-    if (percentage === 100 && mode != 'results') setMode('results')
-    navigate(path)
-  }
+    if (percentage === 100 && mode != "results") setMode("results");
+    navigate(path);
+  };
 
   return (
     <BannerButton

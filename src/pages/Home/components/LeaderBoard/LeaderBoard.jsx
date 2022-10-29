@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Leader from './Leader';
-import { getUserGroups } from '../../../../api/groups';
-import useCleanupController from '../../../../hooks/useCleanupController';
-import { CardTitle, CardWrapper, Text } from '../../../../common/common.styles';
-import { useIsMobile } from '../../../../hooks/useIsMobile';
-import { BallLoader } from '../../../../common/Spinner/BallLoader';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import { BallLoader } from "../../../../common/Spinner/BallLoader";
+import { getUserGroups } from "../../../../api/groups";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
+import Leader from "./Leader";
+import useCleanupController from "../../../../hooks/useCleanupController";
+
+import { CardTitle, CardWrapper, Text } from "../../../../common/common.styles";
 
 const LeaderBoard = () => {
   const [userGroups, setUserGroups] = useState([]);
@@ -27,7 +29,7 @@ const LeaderBoard = () => {
   return (
     <CardWrapper
       width="290px"
-      border={isMobile ? 'none' : undefined}
+      border={isMobile ? "none" : undefined}
       minHeight="300px"
     >
       <CardTitle>Ranking de usuarios</CardTitle>
@@ -43,11 +45,18 @@ const LeaderBoard = () => {
         ))
       ) : (
         <>
-          <Text weight="600" size="1rem" color='gray' align="center" margin="1rem">
+          <Text
+            weight="600"
+            size="1rem"
+            color="gray"
+            align="center"
+            margin="1rem"
+          >
             No perteneces a ningún grupo
           </Text>
           <Text align="center" margin="1rem 0">
-            Puedes encontrar o crear uno desde <br /><Link to="/groups/">esta sección</Link>
+            Puedes encontrar o crear uno desde <br />
+            <Link to="/groups/">esta sección</Link>
           </Text>
         </>
       )}

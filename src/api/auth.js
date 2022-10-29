@@ -1,29 +1,29 @@
-import { api } from './instances';
+import { api } from "./instances";
 
 export const getAuth = (signal) => {
-  return api.get('/auth', signal);
+  return api.get("/auth", signal);
 };
 
 export const createUser = (userData) => {
-  return api.post('/auth/email/create', userData);
+  return api.post("/auth/email/create", userData);
 };
 
 export const loginUser = (userData) => {
-  return api.post('/auth/email', userData);
+  return api.post("/auth/email", userData);
 };
 
 export const logoutUser = () => {
-  return api.post('/auth/logout');
+  return api.post("/auth/logout");
 };
 
 export const forgotPassword = (email) => {
-  return api.post('/auth/new-password', email);
+  return api.post("/auth/new-password", email);
 };
 
 export const changePassword = (password, token) => {
-  return api.post('/auth/change-password', password, {
+  return api.post("/auth/change-password", password, {
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
 };

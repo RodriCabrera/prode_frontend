@@ -1,13 +1,13 @@
-import React from 'react';
-import { useFetchFixtureData } from '../../FixturePage/hooks/useFetchFixtureData';
-import Navigator from '../../../common/Navigator/Navigator';
-import { BallLoader } from '../../../common/Spinner/BallLoader';
+import { BallLoader } from "../../../common/Spinner/BallLoader";
+import { useFetchFixtureData } from "../../FixturePage/hooks/useFetchFixtureData";
+import Navigator from "../../../common/Navigator/Navigator";
 
 export default function MatchNavigator({ children }) {
   const { isLoading, fixtureData } = useFetchFixtureData();
 
   const finalCheck = (data) => {
-    if(data?.matches && data?.matches?.some(match => !match.home?.name)) return data;
+    if (data?.matches && data?.matches?.some((match) => !match.home?.name))
+      return data;
     if (data?.home) return data;
     return false;
   };

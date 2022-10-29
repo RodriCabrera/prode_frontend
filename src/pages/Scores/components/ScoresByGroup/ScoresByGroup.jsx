@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { getGroupScores } from "../../../../api/groups";
+import { GroupSelector } from "../../../Predictions/components/GroupSelector";
+import { useGetUserGroupsData } from "../../../../hooks/useGetUserGroupsData";
+import ScoreList from "../ScoresByGroup/components/ScoreList";
+
+import { BallLoader } from "../../../../common/Spinner/BallLoader";
+import { getPredictions } from "../../../../api/predictions";
+import { Info } from "../../../../common/Info/Info";
+import { isEmpty } from "lodash";
+import { Spinner } from "../../../../common/Spinner/Spinner";
+import Graphs from "./components/Graphs";
+import MatchNavigator from "../MatchNavigator";
+import useCleanupController from "../../../../hooks/useCleanupController";
+
 import {
   CardContainer,
   CardWrapper,
   Text,
 } from "../../../../common/common.styles";
-import ScoreList from "../ScoresByGroup/components/ScoreList";
-import { GroupSelector } from "../../../Predictions/components/GroupSelector";
-import { useGetUserGroupsData } from "../../../../hooks/useGetUserGroupsData";
-import { getGroupScores } from "../../../../api/groups";
-
-import { getPredictions } from "../../../../api/predictions";
-import { BallLoader } from "../../../../common/Spinner/BallLoader";
-import { isEmpty } from "lodash";
-import { Spinner } from "../../../../common/Spinner/Spinner";
-import useCleanupController from "../../../../hooks/useCleanupController";
-import { Info } from "../../../../common/Info/Info";
-import Graphs from "./components/Graphs";
-import MatchNavigator from "../MatchNavigator";
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
@@ -98,9 +99,14 @@ export default function ScoresByGroup() {
         ) : (
           <>
             <ScoreList scores={scores} />
-            {predictions.length > 0 && <MatchNavigator>
-              <Graphs predictions={predictions} groupData={selectedUserGroup} />
-            </MatchNavigator>}
+            {predictions.length > 0 && (
+              <MatchNavigator>
+                <Graphs
+                  predictions={predictions}
+                  groupData={selectedUserGroup}
+                />
+              </MatchNavigator>
+            )}
           </>
         )}
       </CardWrapper>

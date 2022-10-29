@@ -1,14 +1,15 @@
-import { IoIosFootball } from 'react-icons/io';
-import { HiOutlineUserGroup } from 'react-icons/hi';
+import { IoIosFootball } from "react-icons/io";
+import { HiOutlineUserGroup } from "react-icons/hi";
 import {
   GiPodiumWinner,
   GiAbstract018,
   GiBodyBalance,
   GiBookStorm,
-} from 'react-icons/gi';
-import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../../../common/common.styles';
+} from "react-icons/gi";
+import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+
+import { Button } from "../../../common/common.styles";
 
 const KeypadWrapper = styled.div`
   display: flex;
@@ -27,13 +28,13 @@ function Keypad() {
   return (
     <KeypadWrapper>
       <KeypadRow>
-        <Button padding="5px" onClick={() => navigate('/groups')}>
+        <Button padding="5px" onClick={() => navigate("/groups")}>
           <HiOutlineUserGroup size="2rem" />
         </Button>
         <Button padding="5px">
           <GiPodiumWinner size="2rem" />
         </Button>
-        <Button padding="5px" onClick={() => navigate('/proximos-partidos')}>
+        <Button padding="5px" onClick={() => navigate("/proximos-partidos")}>
           <IoIosFootball size="2rem" />
         </Button>
       </KeypadRow>

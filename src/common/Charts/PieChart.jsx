@@ -1,12 +1,11 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { PieChart, Pie, ResponsiveContainer, Cell, Tooltip } from 'recharts';
+import styled from "@emotion/styled";
+import { PieChart, Pie, ResponsiveContainer, Cell, Tooltip } from "recharts";
 
 const TTip = styled.div`
   border-radius: 0.25rem;
   background: #26313c;
   padding: 1rem;
-  color: ${({ color }) => (color ? color : '#fff')};
+  color: ${({ color }) => (color ? color : "#fff")};
   box-shadow: 15px 30px 40px 5px rgba(0, 0, 0, 0.5);
   text-align: center;
   font-size: 1.2rem;
@@ -50,7 +49,7 @@ export default function CustomPieChart({ data, clickHandler = null, height }) {
         x={x}
         y={y}
         fill="black"
-        textAnchor={x > cx ? 'start' : 'center'}
+        textAnchor={x > cx ? "start" : "center"}
         dominantBaseline="central"
       >
         {`${(percent * 100).toFixed(0)}%`}
@@ -75,7 +74,7 @@ export default function CustomPieChart({ data, clickHandler = null, height }) {
               key={d.name}
               fill={d.color}
               onClick={() => clickHandler && clickHandler(d)}
-              style={{ cursor: clickHandler ? 'pointer' : 'default' }}
+              style={{ cursor: clickHandler ? "pointer" : "default" }}
             />
           ))}
         </Pie>

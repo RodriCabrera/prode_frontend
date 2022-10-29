@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
-import React from 'react';
-import { Spinner } from '../Spinner/Spinner';
+import styled from "@emotion/styled";
+import { Spinner } from "../Spinner/Spinner";
 
 const LoadingWrapper = styled.div`
   width: 100%;

@@ -4,13 +4,16 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
 
 env:
   YARN_VERSION: 1.22.17
   BUILD_TYPE: dev
+  CI: false
 
 jobs:
   build:

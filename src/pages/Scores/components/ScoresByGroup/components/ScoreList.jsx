@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from '@emotion/styled';
-import { UserMiniAvatar } from '../../../../../common/UserMiniAvatar/UserMiniAvatar';
-import { ListElement } from '../../../../../common/Lists/ListElement';
-import { AuthContext } from '../../../../../common/AuthProvider';
-import { useIsMobile } from '../../../../../hooks/useIsMobile';
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
+
+import { AuthContext } from "../../../../../common/AuthProvider";
+import { ListElement } from "../../../../../common/Lists/ListElement";
+import { useIsMobile } from "../../../../../hooks/useIsMobile";
+import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
 
 const ScoreListWrapper = styled.div`
   display: flex;
@@ -12,8 +13,8 @@ const ScoreListWrapper = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: ${({ isMobile }) => isMobile ? '0.4rem' : '1rem'};
-  margin: ${({ isMobile }) => isMobile ? 0 : 'auto'};
+  gap: ${({ isMobile }) => (isMobile ? "0.4rem" : "1rem")};
+  margin: ${({ isMobile }) => (isMobile ? 0 : "auto")};
   max-width: 100%;
 `;
 
@@ -28,20 +29,20 @@ const ScoreItem = styled.div`
 `;
 
 const renderPostion = (index) => {
-  if (index > 2) return `${index+1}.`
-  if(index === 0) return '🥇';
-  if(index === 1) return '🥈';
-  if(index === 2) return '🥉';
-  return ''
-}
+  if (index > 2) return `${index + 1}.`;
+  if (index === 0) return "🥇";
+  if (index === 1) return "🥈";
+  if (index === 2) return "🥉";
+  return "";
+};
 
 export default function ScoreList({ scores }) {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   const handleUserClick = (user) => {
-    if (user === userContext.user.name) return navigate('/profile/');
+    if (user === userContext.user.name) return navigate("/profile/");
     return navigate(`/profile/${user}`);
   };
   return (
@@ -52,11 +53,13 @@ export default function ScoreList({ scores }) {
             <ListElement
               key={score.user}
               onClick={() => handleUserClick(score.user)}
-              avatar={<UserMiniAvatar avatar={score.avatar} name={score.user} />}
+              avatar={
+                <UserMiniAvatar avatar={score.avatar} name={score.user} />
+              }
             >
-                <div>{`${renderPostion(index)} ${score.user}`}</div>
+              <div>{`${renderPostion(index)} ${score.user}`}</div>
             </ListElement>
-          <div>{score.score}</div>
+            <div>{score.score}</div>
           </ScoreItem>
         );
       })}

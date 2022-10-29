@@ -1,22 +1,25 @@
-import { useFormik } from 'formik';
-import { isEmpty } from 'lodash';
-import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { loginUser } from '../../api/auth';
-import { AuthContext } from '../../common/AuthProvider';
+import { useContext, useEffect, useState } from "react";
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import { AuthContext } from "common/AuthProvider";
+import { authSchema } from "validationSchemas/auth";
+import { loginUser } from "api/auth";
+import { useIsMobile } from "hooks/useIsMobile";
+import GoogleAuth from "common/GoogleAuth/GoogleAuth";
+
 import {
   Button,
   CardTitle,
   CardWrapper,
+  Form,
   Input,
   Label,
-  Form,
   Text,
-} from '../../common/common.styles';
-import GoogleAuth from '../../common/GoogleAuth/GoogleAuth';
-import { authSchema } from '../../validationSchemas/auth';
-import { useIsMobile } from '../../hooks/useIsMobile';
+} from "../../common/common.styles";
+
 function Login() {
   const userContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +32,7 @@ function Login() {
 
   useEffect(() => {
     if (userContext.user) {
-      navigate('/');
+      navigate("/");
     }
   }, [userContext]);
 
@@ -38,23 +41,23 @@ function Login() {
     setIsLoading(true);
 
     toast.promise(
-      loginUser({...values, email: values.email.toLowerCase()})
+      loginUser({ ...values, email: values.email.toLowerCase() })
         .then((res) => {
-          if(res?.data?.token) {
-            localStorage.setItem('token', res.data.token)
+          if (res?.data?.token) {
+            localStorage.setItem("token", res.data.token);
             window.location.reload();
-            return navigate('/');
+            return navigate("/");
           }
         })
         .finally(() => {
           setIsLoading(false);
         }),
       {
-        pending: 'Logueandote...',
-        success: 'Logueado con éxito',
+        pending: "Logueandote...",
+        success: "Logueado con éxito",
         error: {
           render({ data }) {
-            return data?.response?.data?.error || 'Error al autenticar...';
+            return data?.response?.data?.error || "Error al autenticar...";
           },
         },
       }
@@ -65,13 +68,13 @@ function Login() {
     <CardWrapper
       id="login-card-wrapper"
       isMobile={isMobile}
-      border={isMobile ? 'null' : ''}
+      border={isMobile ? "null" : ""}
     >
       {!isMobile && <CardTitle>Login</CardTitle>}
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="email">
-          <Text color={errors.email ? 'orange' : ''}>
-            {errors.email ? errors.email : 'Email:'}
+          <Text color={errors.email ? "orange" : ""}>
+            {errors.email ? errors.email : "Email:"}
           </Text>
           <Input
             type="email"
@@ -84,8 +87,8 @@ function Login() {
         </Label>
 
         <Label htmlFor="password">
-          <Text color={errors.password ? 'orange' : ''}>
-            {errors.password ? errors.password : 'Password:'}
+          <Text color={errors.password ? "orange" : ""}>
+            {errors.password ? errors.password : "Password:"}
           </Text>
           <Input
             type="password"
@@ -103,7 +106,7 @@ function Login() {
         <GoogleAuth text="Login" />
         <Link to="forgot-password">Olvidé mi contraseña</Link>
       </Form>
-      <Button grayscale padding="8px" onClick={() => navigate('register')}>
+      <Button grayscale padding="8px" onClick={() => navigate("register")}>
         Primera vez? Registrate
       </Button>
     </CardWrapper>

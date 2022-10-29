@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, createContext } from "react";
+
 import NavLayer from "./NavLayer";
+
 import {
   NavWrapper,
   NavHistory,
@@ -8,7 +10,7 @@ import {
   NavHistoryItem,
 } from "./navigator.styles";
 
-export const NavContext = React.createContext();
+export const NavContext = createContext();
 
 export default function Navigator({
   children,

@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function VerifiedEmail() {
   const navigate = useNavigate();
   useEffect(() => {
     const t = setTimeout(() => {
-      navigate('/auth');
+      navigate("/auth");
     }, 2000);
-    return(() => clearTimeout(t) )
+    return () => clearTimeout(t);
   }, []);
   return (
     <div>

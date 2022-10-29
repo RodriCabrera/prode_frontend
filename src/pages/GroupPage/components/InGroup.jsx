@@ -57,12 +57,18 @@ function InGroup({ groupData }) {
     return navigate(`/profile/${user}`);
   };
 
+<<<<<<< HEAD
   const toggleAdminPanel = () => {
     setShowAdminPanel(prev => !prev)
   }
 
   const isAdmin = userContext.user._id === groupData.owner._id
   const isAdminAlone = isAdmin && groupData.members.length === 1
+=======
+  const isAdminAlone =
+    userContext.user._id === groupData.owner._id &&
+    groupData.members.length === 1;
+>>>>>>> a4568261c9c39d5bc652e02819e8ff5c29600dce
   return (
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
@@ -108,17 +114,21 @@ function InGroup({ groupData }) {
                 })}
             <GroupInvite />
             <CardContainer>
-              {isAdminAlone ?
-              <Button tertiary onClick={toggleModal}>
-                Eliminar grupo
-              </Button> :
-              <Button grayscale onClick={toggleModal}>
-                Salir del grupo?
-              </Button>
-              }
+              {isAdminAlone ? (
+                <Button tertiary onClick={toggleModal}>
+                  Eliminar grupo
+                </Button>
+              ) : (
+                <Button grayscale onClick={toggleModal}>
+                  Salir del grupo?
+                </Button>
+              )}
             </CardContainer>
             <Modal show={showModal} toggle={toggleModal}>
-              <LeaveGroupForm updater={onGroupExit} toDelete={isAdminAlone && groupData.id} />
+              <LeaveGroupForm
+                updater={onGroupExit}
+                toDelete={isAdminAlone && groupData.id}
+              />
             </Modal>
           </>
         )}

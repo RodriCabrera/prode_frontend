@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
 import { getPredictionCount } from "../../../../api/predictions";
-import { CardContainer, CardWrapper } from "../../../../common/common.styles";
-import { NoPredictionNotification } from "./NoPredictionNotification";
-import useCleanupController from "../../../../hooks/useCleanupController";
 import { NoGroupNotification } from "./NoGroupNotification";
+import { NoPredictionNotification } from "./NoPredictionNotification";
 import { useGetUserGroupsData } from "../../../../hooks/useGetUserGroupsData";
+import useCleanupController from "../../../../hooks/useCleanupController";
+
+import { CardContainer, CardWrapper } from "../../../../common/common.styles";
 
 function NotificationBoard() {
   const [hasPredictions, setHasPredictions] = useState(false);

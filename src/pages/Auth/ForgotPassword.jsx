@@ -1,18 +1,20 @@
-import { useFormik } from 'formik';
-import { isEmpty } from 'lodash';
+import { isEmpty } from "lodash";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+
+import { authSchema } from "../../validationSchemas/auth";
+import { forgotPassword } from "../../api/auth";
+import { useIsMobile } from "../../hooks/useIsMobile";
+
 import {
   Button,
   CardTitle,
   CardWrapper,
+  Form,
   Input,
   Label,
-  Form,
-} from '../../common/common.styles';
-import { toast } from 'react-toastify';
-import { forgotPassword } from '../../api/auth';
-import { authSchema } from '../../validationSchemas/auth';
-import { useNavigate } from 'react-router-dom';
-import { useIsMobile } from '../../hooks/useIsMobile';
+} from "../../common/common.styles";
 
 function ForgotPassword() {
   const { values, errors, handleChange } = useFormik({
@@ -24,22 +26,25 @@ function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.promise(forgotPassword({...values, email: values.email.toLowerCase()}), {
-      pending: 'Buscando usuario',
-      success: `Mail enviado a ${values.email}`,
-      error: {
-        render({ data }) {
-          return data?.response.data?.error;
+    toast.promise(
+      forgotPassword({ ...values, email: values.email.toLowerCase() }),
+      {
+        pending: "Buscando usuario",
+        success: `Mail enviado a ${values.email}`,
+        error: {
+          render({ data }) {
+            return data?.response.data?.error;
+          },
         },
-      },
-    });
+      }
+    );
   };
   const isMobile = useIsMobile();
 
   return (
     <CardWrapper
       isMobile={isMobile}
-      border={isMobile ? 'null' : ''}
+      border={isMobile ? "null" : ""}
       id="change-password-card-wrapper"
     >
       <>
@@ -57,7 +62,7 @@ function ForgotPassword() {
             />
           </Label>
           <Button disabled={!isEmpty(errors)}>Recuperar contraseña</Button>
-          <Button grayscale padding="8px" onClick={() => navigate('/auth')}>
+          <Button grayscale padding="8px" onClick={() => navigate("/auth")}>
             Volver al login
           </Button>
         </Form>

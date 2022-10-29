@@ -1,14 +1,16 @@
-import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
-import { getAvatars } from '../../../api/profiles';
-import { Button, Input, Text } from '../../../common/common.styles';
-import { Spinner } from '../../../common/Spinner/Spinner';
-import { FcEditImage } from 'react-icons/fc';
-import useCleanupController from '../../../hooks/useCleanupController';
-import Modal from '../../../common/Modal/Modal';
-import useToggleModal from '../../../hooks/useToggleModal';
-import { BigAvatarWrapper } from '../Profile';
-import { UserMiniAvatar } from '../../../common/UserMiniAvatar/UserMiniAvatar';
+import React, { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { FcEditImage } from "react-icons/fc";
+
+import { BigAvatarWrapper } from "../Profile";
+import { getAvatars } from "api/profiles";
+import { Spinner } from "common/Spinner/Spinner";
+import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
+import Modal from "common/Modal/Modal";
+import useCleanupController from "hooks/useCleanupController";
+import useToggleModal from "hooks/useToggleModal";
+
+import { Button, Input, Text } from "common/common.styles";
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +28,7 @@ const AvatarWrapper = styled.div`
   min-height: 70px;
   min-width: 70px;
   border: ${({ selected }) =>
-    selected ? '2px inset tomato' : '2px inset rgba(0, 0, 0, 0)'};
+    selected ? "2px inset tomato" : "2px inset rgba(0, 0, 0, 0)"};
   background-color: darkgray;
   display: flex;
   align-items: center;
@@ -35,7 +37,7 @@ const AvatarWrapper = styled.div`
 
 const Avatar = styled.img`
   width: 70px;
-  filter: grayscale(${({ selected }) => (selected ? '30%' : '100%')});
+  filter: grayscale(${({ selected }) => (selected ? "30%" : "100%")});
 `;
 
 function AvatarList({ handleAvatarClick, selectedAvatar }) {
@@ -44,7 +46,7 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
   const [showAvatarList, setShowAvatarList] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const { showModal, toggleModal } = useToggleModal();
-  const [customAvatarLink, setCustomAvatarLink] = useState('')
+  const [customAvatarLink, setCustomAvatarLink] = useState("");
 
   useEffect(() => {
     if (showAvatarList) {
@@ -58,7 +60,7 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
   }, [showAvatarList]);
 
   const handleCustomAvatar = () => {
-    if(customAvatarLink) handleAvatarClick(customAvatarLink);
+    if (customAvatarLink) handleAvatarClick(customAvatarLink);
     toggleModal();
   };
 
@@ -73,9 +75,9 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
             padding="10px"
             weight="400"
             onClick={() => setShowAvatarList(!showAvatarList)}
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
           >
-            {showAvatarList ? 'Ocultar' : 'Mostrar'} lista de avatares
+            {showAvatarList ? "Ocultar" : "Mostrar"} lista de avatares
           </Button>
           {showAvatarList && (
             <>
@@ -83,7 +85,15 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
                 selected={selectedAvatar && !avatars.includes(selectedAvatar)}
                 onClick={toggleModal}
               >
-                <FcEditImage size={60} style={{filter: selectedAvatar && !avatars.includes(selectedAvatar) ? 'none' : 'grayscale(100%)' }} />
+                <FcEditImage
+                  size={60}
+                  style={{
+                    filter:
+                      selectedAvatar && !avatars.includes(selectedAvatar)
+                        ? "none"
+                        : "grayscale(100%)",
+                  }}
+                />
               </AvatarWrapper>
               {avatars.map((avatar) => {
                 return (
@@ -102,13 +112,21 @@ function AvatarList({ handleAvatarClick, selectedAvatar }) {
               })}
             </>
           )}
-          <Modal show={showModal}  toggle={toggleModal}>
-              <Text size="2rem" align="center">Introduce un link a tu imagen</Text>
-              <Input type="url" value={customAvatarLink} onChange={(e) => setCustomAvatarLink(e.target.value)} />
-              <BigAvatarWrapper>
-                <UserMiniAvatar avatar={customAvatarLink} />
-              </BigAvatarWrapper>
-              <Button type="button" onClick={handleCustomAvatar}>Enviar</Button>
+          <Modal show={showModal} toggle={toggleModal}>
+            <Text size="2rem" align="center">
+              Introduce un link a tu imagen
+            </Text>
+            <Input
+              type="url"
+              value={customAvatarLink}
+              onChange={(e) => setCustomAvatarLink(e.target.value)}
+            />
+            <BigAvatarWrapper>
+              <UserMiniAvatar avatar={customAvatarLink} />
+            </BigAvatarWrapper>
+            <Button type="button" onClick={handleCustomAvatar}>
+              Enviar
+            </Button>
           </Modal>
         </>
       )}

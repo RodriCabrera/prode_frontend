@@ -1,12 +1,12 @@
-import React from 'react';
-import { isNil } from 'lodash';
-import { useNavigate } from 'react-router-dom';
-import { Text } from '../../common/common.styles';
+import React from "react";
+import { isNil } from "lodash";
+import { useNavigate } from "react-router-dom";
+import { Text } from "../../common/common.styles";
 import {
   BannerButton,
   BannerDataWrapper,
   BannerTitle,
-} from './Predictions.styles';
+} from "./Predictions.styles";
 
 export function Banner({
   title,
@@ -26,7 +26,7 @@ export function Banner({
       return (
         editMode && (
           <Text weight="200">
-            {!isNil(percentage) ? `${percentage} % completo` : ''}
+            {!isNil(percentage) ? `${percentage} % completo` : ""}
           </Text>
         )
       );

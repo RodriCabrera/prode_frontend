@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
-import { useParams } from 'react-router-dom';
-import { MdOutlineVisibilityOff } from 'react-icons/md';
-import { HiOutlineUserGroup } from 'react-icons/hi';
-import ProfilePredictions from './ProfilePredictions';
-import { getProfile } from '../../api/profiles';
-import { Spinner } from '../../common/Spinner/Spinner';
-import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
-import { ListWrapper } from '../../common/Lists/Lists.styles';
-import { ListElement } from '../../common/Lists/ListElement';
-import { UserMiniAvatar } from '../../common/UserMiniAvatar/UserMiniAvatar';
-import { GoBackButton } from '../../common/GoBackButton/GoBackButton';
-import { useIsMobile } from '../../hooks/useIsMobile';
-import useCleanupController from '../../hooks/useCleanupController';
+import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { useParams } from "react-router-dom";
+import { MdOutlineVisibilityOff } from "react-icons/md";
+import { HiOutlineUserGroup } from "react-icons/hi";
+
+import { getProfile } from "api/profiles";
+import { GoBackButton } from "common/GoBackButton/GoBackButton";
+import { ListElement } from "common/Lists/ListElement";
+import { Spinner } from "common/Spinner/Spinner";
+import { useIsMobile } from "hooks/useIsMobile";
+import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
+import ProfilePredictions from "./ProfilePredictions";
+import useCleanupController from "hooks/useCleanupController";
+
+import { ListWrapper } from "common/Lists/Lists.styles";
+import { CardContainer, CardWrapper, Text } from "common/common.styles";
 
 export const BigAvatarWrapper = styled.div`
   margin: auto;
@@ -58,8 +60,8 @@ function Profile() {
     <Spinner />
   ) : (
     <CardContainer>
-      <CardWrapper border={isMobile ? 'none' : null}>
-        <GoBackButton collapse={isMobile}/>
+      <CardWrapper border={isMobile ? "none" : null}>
+        <GoBackButton collapse={isMobile} />
         <UserNameContainer>
           <Text size="1.5rem" weight="bold">
             {profile?.name}
@@ -75,7 +77,7 @@ function Profile() {
               key={group._id}
               onClick={() => handleSwitchPredictions(group)}
               bgColor={
-                groupPredictions.group?._id === group._id ? 'salmon' : null
+                groupPredictions.group?._id === group._id ? "salmon" : null
               }
               avatar={
                 groupPredictions?.group?._id === group._id ? (

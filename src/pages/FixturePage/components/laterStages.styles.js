@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const LaterStages = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ export const StageColumn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  flex-basis: ${({ isCenter }) => isCenter ? '16%' : '14%'};
+  flex-basis: ${({ isCenter }) => (isCenter ? "16%" : "14%")};
   gap: 1rem;
 `;
 
@@ -35,8 +35,7 @@ export const MatchPlaceHolder = styled.div`
   border-radius: 0.5rem;
   border: 1px solid dimgray;
   font-size: 1.2rem;
-`
-
+`;
 
 export const MatchData = styled.div`
   display: flex;
@@ -58,14 +57,14 @@ export const CollapsableStageButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border: none;
   padding: 0.5rem;
   font-size: 1.8rem;
   text-transform: uppercase;
   cursor: pointer;
-  &: after {
+  &:after {
     width: 100%;
     border-bottom: 1px white;
   }
-`
+`;

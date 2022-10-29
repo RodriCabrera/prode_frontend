@@ -1,26 +1,28 @@
-import React from 'react';
-import FixtureTable from './components/FixtureTable';
-import LaterStagesGraph from './components/LaterStagesGraph';
-import CollapsableStage from './components/CollapsableStage';
-import CollapsedGroups from './components/CollapsedGroups';
-import { Spinner } from '../../common/Spinner/Spinner';
-import { Text } from '../../common/common.styles';
-import { useFetchFixtureData } from './hooks/useFetchFixtureData';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
+import React from "react";
+import { flagsmith } from "flagsmith";
+import { useFlags, useFlagsmith } from "flagsmith/react";
+
+import FixtureTable from "./components/FixtureTable";
+import LaterStagesGraph from "./components/LaterStagesGraph";
+import CollapsableStage from "./components/CollapsableStage";
+import CollapsedGroups from "./components/CollapsedGroups";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { useFetchFixtureData } from "./hooks/useFetchFixtureData";
+import { useIsMobile } from "../../hooks/useIsMobile";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+
 import {
   FixtureTablesContainer,
   FixtureWrapper,
   GroupTableWrapper,
-} from './FixturePage.styles';
-import { useIsMobile } from '../../hooks/useIsMobile';
-import { flagsmith } from "flagsmith";
-import { useFlags, useFlagsmith } from "flagsmith/react";
+} from "./FixturePage.styles";
+import { Text } from "../../common/common.styles";
 
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
   const isMobile = useIsMobile();
   const { width } = useWindowDimensions();
-  const flags = useFlags(["collapse_groups_fixture"])
+  const flags = useFlags(["collapse_groups_fixture"]);
 
   const renderGroupsTables = (groups) => {
     if (!groups) return <Spinner />;
@@ -34,22 +36,31 @@ function Fixture() {
               {group.name}
             </Text>
             <FixtureTable data={group.matches} fullWidth={isMobile} />
-          </GroupTableWrapper>))
-        }
+          </GroupTableWrapper>
+        ))}
       </FixtureTablesContainer>
     );
   };
   return (
     <FixtureWrapper>
       {width < 1060 ? (
-      <>
-        {fixtureData.map(stage => {
-          if (stage.groups) return (<CollapsableStage stageName={stage.name}>
-            {renderGroupsTables(stage.groups)}
-          </CollapsableStage>)
-          else return <CollapsableStage stageName={stage.name} stageData={stage.matches} />
-        })}
-      </>
+        <>
+          {fixtureData.map((stage) => {
+            if (stage.groups)
+              return (
+                <CollapsableStage stageName={stage.name}>
+                  {renderGroupsTables(stage.groups)}
+                </CollapsableStage>
+              );
+            else
+              return (
+                <CollapsableStage
+                  stageName={stage.name}
+                  stageData={stage.matches}
+                />
+              );
+          })}
+        </>
       ) : (
         <>
           <LaterStagesGraph />

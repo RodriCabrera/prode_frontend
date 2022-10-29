@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { isEmpty } from 'lodash';
-import { CardContainer, CardWrapper, Text } from '../../common/common.styles';
-import CreateGroupForm from './components/CreateGroupForm';
-import JoinGroupForm from './components/JoinGroupForm';
-import GroupList from './components/GroupList';
-import { getUserGroups } from '../../api/groups';
-import useCleanupController from '../../hooks/useCleanupController';
-import { Spinner } from '../../common/Spinner/Spinner';
-import styled from '@emotion/styled';
-import { useIsMobile } from '../../hooks/useIsMobile';
+import { useEffect, useState } from "react";
+import { isEmpty } from "lodash";
+import styled from "@emotion/styled";
+
+import CreateGroupForm from "./components/CreateGroupForm";
+import JoinGroupForm from "./components/JoinGroupForm";
+import GroupList from "./components/GroupList";
+import { getUserGroups } from "../../api/groups";
+import useCleanupController from "../../hooks/useCleanupController";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { useIsMobile } from "../../hooks/useIsMobile";
+
+import { CardContainer, CardWrapper, Text } from "../../common/common.styles";
 
 const Row = styled.div`
   gap: 2rem;
@@ -56,13 +58,13 @@ function Groups() {
       </CardWrapper>
       <Row>
         {/* <CardContainer> */}
-        <CardWrapper border={isMobile ? 'none' : ''}>
+        <CardWrapper border={isMobile ? "none" : ""}>
           <CreateGroupForm updateList={getGroupList} />
         </CardWrapper>
         {/* </CardContainer> */}
 
         {/* <CardContainer> */}
-        <CardWrapper border={isMobile ? 'none' : ''}>
+        <CardWrapper border={isMobile ? "none" : ""}>
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
         {/* </CardContainer> */}

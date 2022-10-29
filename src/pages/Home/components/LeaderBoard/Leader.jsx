@@ -1,14 +1,16 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState, useEffect, useContext } from 'react';
-import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import { GiPodiumWinner } from 'react-icons/gi';
-import { getGroupScores } from '../../../../api/groups';
-import { AuthContext } from '../../../../common/AuthProvider';
-import { ListElement } from '../../../../common/Lists/ListElement';
-import { UserMiniAvatar } from '../../../../common/UserMiniAvatar/UserMiniAvatar';
-import useCleanupController from '../../../../hooks/useCleanupController';
-import { Text } from '../../../../common/common.styles';
+import React, { useState, useEffect, useContext } from "react";
+import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+import { GiPodiumWinner } from "react-icons/gi";
+
+import { getGroupScores } from "../../../../api/groups";
+import { AuthContext } from "../../../../common/AuthProvider";
+import { ListElement } from "../../../../common/Lists/ListElement";
+import { UserMiniAvatar } from "../../../../common/UserMiniAvatar/UserMiniAvatar";
+import useCleanupController from "../../../../hooks/useCleanupController";
+
+import { Text } from "../../../../common/common.styles";
 
 const LeaderElement = styled.div`
   display: flex;
@@ -24,7 +26,7 @@ const UserGroupTitle = styled(Text)`
   cursor: pointer;
   margin: 0;
   padding-right: 0%;
-  &: hover {
+  &:hover {
     padding-right: 70%;
   }
   &:after {
@@ -52,7 +54,7 @@ function Leader({ groupName, isUnique }) {
   }, [groupName, isUnique]);
 
   const handleProfileNavigate = (username) => {
-    if (username === userContext.user.name) return navigate('/profile');
+    if (username === userContext.user.name) return navigate("/profile");
     return navigate(`/profile/${username}`);
   };
 

@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { AiFillCopy } from 'react-icons/ai';
+import React from "react";
+import styled from "@emotion/styled";
+import { AiFillCopy } from "react-icons/ai";
 import {
   EmailShareButton,
   WhatsappShareButton,
@@ -8,9 +8,9 @@ import {
   EmailIcon,
   WhatsappIcon,
   TelegramIcon,
-} from 'react-share';
-import { toast } from 'react-toastify';
-import { Text } from '../../../common/common.styles';
+} from "react-share";
+import { toast } from "react-toastify";
+import { Text } from "../../../common/common.styles";
 
 const ShareButtons = styled.div`
   display: flex;
@@ -35,8 +35,8 @@ const CopyLinkButton = styled.button`
 export default function GroupInvite() {
   const copyShareLink = () => {
     navigator.clipboard.writeText(window.location.href);
-    return toast.info('Link copiado!', {
-      position: 'bottom-right',
+    return toast.info("Link copiado!", {
+      position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,

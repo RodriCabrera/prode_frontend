@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
+
 import { Text } from "../common.styles";
 import { ButtonGroup, NavbarWrapper } from "../Navbar/Navbar.styles";
+
 interface Props {
   isMobile?: boolean;
   isCurrent?: boolean;

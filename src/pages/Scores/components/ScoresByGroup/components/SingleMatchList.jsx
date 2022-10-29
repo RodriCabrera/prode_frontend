@@ -1,12 +1,13 @@
-import React from 'react';
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
+
+import { ListElement } from "../../../../../common/Lists/ListElement";
+import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
+
 import {
   CardWrapper,
   CardTitle,
   Text,
-} from '../../../../../common/common.styles';
-import { ListElement } from '../../../../../common/Lists/ListElement';
-import { UserMiniAvatar } from '../../../../../common/UserMiniAvatar/UserMiniAvatar';
+} from "../../../../../common/common.styles";
 
 const ListContainer = styled.div`
   display: flex;
@@ -31,25 +32,25 @@ const UserListContainer = styled.div`
 export default function SingleMatchList({ data, userAvatars, scoring }) {
   const groupedUsers = [
     {
-      name: 'Resultado exacto',
+      name: "Resultado exacto",
       users: Object.entries(data)
         .filter(([key, value]) => value === scoring.FULL && key)
         .map(([key]) => key),
-      color: 'green',
+      color: "green",
     },
     {
-      name: 'Ganador acertado',
+      name: "Ganador acertado",
       users: Object.entries(data)
         .filter(([key, value]) => value === scoring.WINNER && key)
         .map(([key]) => key),
-      color: 'gold',
+      color: "gold",
     },
     {
-      name: 'Sin aciertos',
+      name: "Sin aciertos",
       users: Object.entries(data)
         .filter(([key, value]) => value === scoring.NONE && key)
         .map(([key]) => key),
-      color: 'tomato',
+      color: "tomato",
     },
   ];
   return (
@@ -58,7 +59,7 @@ export default function SingleMatchList({ data, userAvatars, scoring }) {
         return (
           <CardWrapper isMobile key={group.name}>
             <CardTitle>
-              <span style={{ color: group.color, textDecoration: 'underline' }}>
+              <span style={{ color: group.color, textDecoration: "underline" }}>
                 {group.name}
               </span>
             </CardTitle>

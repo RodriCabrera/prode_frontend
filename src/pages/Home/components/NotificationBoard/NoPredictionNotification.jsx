@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Text } from '../../../../common/common.styles';
+import { Link } from "react-router-dom";
+
+import { Text } from "common/common.styles";
 
 export function NoPredictionNotification() {
   return (
@@ -9,7 +9,7 @@ export function NoPredictionNotification() {
         Aún no hiciste ninguna predicción.
       </Text>
       <Text align="center" size="1.2rem">
-        {' '}
+        {" "}
         Hacelas desde <Link to="/predictions/">esta sección</Link>
       </Text>
     </>

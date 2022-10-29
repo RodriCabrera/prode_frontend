@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import styled from "@emotion/styled"
-import { getFixtureByStageId } from '../../../api/fixture';
-import { StageColumn, MatchData, Match } from './laterStages.styles';
-import { getFlagUrl, parseDate } from '../../pagesHelpers';
-import { datePreferences } from '../fixturePageHelpers';
-import { Text } from '../../../common/common.styles';
-import useCleanupController from '../../../hooks/useCleanupController';
-import WordlCup from "./WorldCup.png"
+import { useState, useEffect } from "react";
+import styled from "@emotion/styled";
+
+import { getFixtureByStageId } from "api/fixture";
+import { getFlagUrl, parseDate } from "../../pagesHelpers";
+import { datePreferences } from "../fixturePageHelpers";
+import useCleanupController from "hooks/useCleanupController";
+
+import { StageColumn, MatchData, Match } from "./laterStages.styles";
+import { Text } from "common/common.styles";
+import WordlCup from "./WorldCup.png";
 
 const CupImg = styled.img`
   width: 100px;
   height: 100px;
   background-image: radial-gradient(circle, silver, transparent 70%);
-`
+`;
 
 function FinalStage() {
   const [finalData, setFinalData] = useState([]);
@@ -20,14 +22,14 @@ function FinalStage() {
   const [signal, cleanup, handleCancel] = useCleanupController();
 
   useEffect(() => {
-    getFixtureByStageId('FINAL', signal)
+    getFixtureByStageId("FINAL", signal)
       .then((res) => {
         setFinalData(res.data.fixture[0]);
       })
       .catch((err) => {
         handleCancel(err);
       });
-    getFixtureByStageId('TERCER_PUESTO', signal)
+    getFixtureByStageId("TERCER_PUESTO", signal)
       .then((res) => {
         setThirdData(res.data.fixture[0]);
       })

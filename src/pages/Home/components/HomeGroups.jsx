@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { getUserGroups } from '../../../api/groups';
-import { Text } from '../../../common/common.styles';
-import useCleanupController from '../../../hooks/useCleanupController';
+import { useEffect, useState } from "react";
+
+import { getUserGroups } from "api/groups";
+import { Text } from "common/common.styles";
+import useCleanupController from "hooks/useCleanupController";
 
 // ! TODO: COMPONENTE EN DESUSO
 export function HomeGroups() {
@@ -19,7 +20,7 @@ export function HomeGroups() {
     return cleanup;
   }, []);
   if (isLoading) {
-    return '';
+    return "";
   }
   if (userGroups.length !== 0) {
     return null;

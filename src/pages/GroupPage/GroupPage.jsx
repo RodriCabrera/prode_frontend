@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getGroupData } from '../../api/groups';
-import { Spinner } from '../../common/Spinner/Spinner';
-import NotFound from '../NotFound';
-import InGroup from './components/InGroup';
-import NotInGroup from './components/NotInGroup';
-import useCleanupController from '../../hooks/useCleanupController';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { getGroupData } from "../../api/groups";
+import { Spinner } from "../../common/Spinner/Spinner";
+import NotFound from "../NotFound";
+import InGroup from "./components/InGroup";
+import NotInGroup from "./components/NotInGroup";
+import useCleanupController from "../../hooks/useCleanupController";
 
 function GroupPage() {
   const { name } = useParams();

@@ -1,20 +1,22 @@
-import { useContext } from 'react';
-import styled from '@emotion/styled';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthProvider';
-import useToggleModal from '../../hooks/useToggleModal';
-import { Linkbar } from '../Linkbar/Linkbar';
-import Modal from '../Modal/Modal';
-import { UserMiniAvatar } from '../UserMiniAvatar/UserMiniAvatar';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import styled from "@emotion/styled";
+
+import { AuthContext } from "../AuthProvider";
+import { Linkbar } from "../Linkbar/Linkbar";
+import { Tooltip } from "../Tooltip/Tooltip";
+import { useIsMobile } from "hooks/useIsMobile";
+import { UserMiniAvatar } from "../UserMiniAvatar/UserMiniAvatar";
+import Modal from "../Modal/Modal";
+import useToggleModal from "hooks/useToggleModal";
+
 import {
-  NavbarWrapper,
   ButtonGroup,
-  NavbarContainer,
   LogoContainer,
-} from './Navbar.styles';
-import { Button, CardTitle, Text } from '../common.styles';
-import { Tooltip } from '../Tooltip/Tooltip';
-import { useIsMobile } from '../../hooks/useIsMobile';
+  NavbarContainer,
+  NavbarWrapper,
+} from "./Navbar.styles";
+import { Button, CardTitle, Text } from "../common.styles";
 
 const NavLink = styled.button`
   background-color: transparent;
@@ -31,7 +33,7 @@ const SubLogo = styled(Text)`
 
 function Navbar() {
   const { pathname } = useLocation();
-  if (pathname === '/auth') return;
+  if (pathname === "/auth") return;
 
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -57,7 +59,7 @@ function Navbar() {
         <NavbarWrapper id="navbar-wrapper">
           <ButtonGroup
             id="button-group-left"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             padding=".5rem 16px"
           >
             <LogoContainer>
@@ -70,12 +72,12 @@ function Navbar() {
           <ButtonGroup id="button-group-right" padding="1rem">
             {userContext.user ? (
               <>
-                <NavLink onClick={() => navigate('/profile')}>
+                <NavLink onClick={() => navigate("/profile")}>
                   <Tooltip text={userContext.user.name} position="top">
                     <UserMiniAvatar
                       avatar={userContext.user.avatar}
                       isSmall
-                      onClick={() => navigate('/profile')}
+                      onClick={() => navigate("/profile")}
                     />
                   </Tooltip>
                 </NavLink>

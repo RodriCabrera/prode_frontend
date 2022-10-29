@@ -1,9 +1,11 @@
-import styled from '@emotion/styled';
-import { HiOutlineUserGroup, HiCheck } from 'react-icons/hi';
-import { Text } from '../../../common/common.styles';
-import { ListElement } from '../../../common/Lists/ListElement';
-import { ListWrapper } from '../../../common/Lists/Lists.styles';
-import { useIsMobile } from '../../../hooks/useIsMobile';
+import styled from "@emotion/styled";
+import { HiOutlineUserGroup, HiCheck } from "react-icons/hi";
+
+import { ListElement } from "../../../common/Lists/ListElement";
+import { useIsMobile } from "../../../hooks/useIsMobile";
+
+import { ListWrapper } from "../../../common/Lists/Lists.styles";
+import { Text } from "../../../common/common.styles";
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -38,7 +40,7 @@ export function GroupSelector({
                         <HiOutlineUserGroup size="1.8rem" />
                       )
                     }
-                    bgColor={isSelected && 'green'}
+                    bgColor={isSelected && "green"}
                     onClick={() => !isSelected && handleGroupSelect(userGroup)}
                     isMobile={isMobile}
                   >

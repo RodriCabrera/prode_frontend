@@ -1,5 +1,5 @@
-import React from 'react';
-import { CardContainer, CardTitle, CardWrapper } from '../common/common.styles';
+import React from "react";
+import { CardContainer, CardTitle, CardWrapper } from "../common/common.styles";
 
 // Otras propuestas para la imagen:
 // https://thumbs.gfycat.com/FeistyScalyIsabellineshrike-size_restricted.gif

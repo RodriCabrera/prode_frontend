@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getRandomUnpredictedMatch } from '../../../../api/predictions';
-import {
-  CardWrapper,
-  CardContainer,
-  Text,
-} from '../../../../common/common.styles';
-import { GroupInfo, GroupAvatar } from './quickPredictions.styles';
-import MiniForm from './MiniForm';
-import { BallLoader } from '../../../../common/Spinner/BallLoader';
-import { HiOutlineUserGroup } from 'react-icons/hi';
-import useCleanupController from '../../../../hooks/useCleanupController';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { HiOutlineUserGroup } from "react-icons/hi";
+
+import { BallLoader } from "common/Spinner/BallLoader";
+import { getRandomUnpredictedMatch } from "api/predictions";
+import MiniForm from "./MiniForm";
+import useCleanupController from "hooks/useCleanupController";
+
+import { CardContainer, CardWrapper, Text } from "common/common.styles";
+import { GroupInfo, GroupAvatar } from "./quickPredictions.styles";
 
 export default function QuickPrediction() {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,8 +26,7 @@ export default function QuickPrediction() {
       .then((res) => {
         if (res.status === 204) {
           setMissingData(true);
-        } 
-        else {
+        } else {
           setMatchData(res.data.match);
           setGroupData(res.data.group);
         }
