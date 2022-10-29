@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import React from 'react';
 import { Text, TextGroup } from '../../../common/common.styles';
 import { References } from '../../../common/References';
 import { translateDuration } from '../../pagesHelpers';
-=======
-import React from "react";
-import { Text } from "../../../common/common.styles";
-import { References } from "../../../common/References";
-import { translateDuration } from "../../pagesHelpers";
->>>>>>> a4568261c9c39d5bc652e02819e8ff5c29600dce
 
 function GroupRules({ rules }) {
   if (!rules) return null;
@@ -23,11 +16,7 @@ function GroupRules({ rules }) {
           <br />
         </>
       )}
-<<<<<<< HEAD
       <TextGroup>
-=======
-      <div style={{ display: "flex", gap: "1rem", marginBottom: "2rem" }}>
->>>>>>> a4568261c9c39d5bc652e02819e8ff5c29600dce
         <Text size="1.2rem" weight="600" withBottomBorder>
           Tiempos límite:
         </Text>
