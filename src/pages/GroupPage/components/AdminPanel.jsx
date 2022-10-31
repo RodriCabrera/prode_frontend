@@ -19,6 +19,7 @@ import {
   Text,
   TextGroup,
 } from "../../../common/common.styles";
+import { Info } from "../../../common/Info/Info";
 import { groupsSchema } from "../../../validationSchemas/groups";
 
 // TODO> Setear limite de tiempo para poder editar esta info
@@ -73,8 +74,15 @@ export default function AdminPanel({ groupData, updater }) {
             }
         );
     };
+    const isEditAvailable = Date.now() < Date.parse("11-15-2022 13:00 GMT-0300");
   return (
     <Form onSubmit={handleSubmit}>
+        <Info>
+          {isEditAvailable ?
+            "Podrás editar estos datos hasta 5 días antes del comienzo del mundial"
+            : "Ya no puedes editar esta configuración"
+          }
+        </Info>
         <Label htmlFor="name">
             <Input
               type="text"
@@ -86,6 +94,7 @@ export default function AdminPanel({ groupData, updater }) {
               showUppercase
               maxLength={20}
               borderError={errors.name}
+              disabled={!isEditAvailable}
             />
             {errors.name && (
               <Text
@@ -113,6 +122,7 @@ export default function AdminPanel({ groupData, updater }) {
               rows="10"
               maxLength="1024"
               borderError={errors.manifesto}
+              disabled={!isEditAvailable}
             />
             {errors.manifesto && (
               <Text
@@ -125,7 +135,7 @@ export default function AdminPanel({ groupData, updater }) {
               </Text>
             )}
           </Label>
-          <ScoringInputs values={values} handleChange={handleChange} />
+          <ScoringInputs values={values} handleChange={handleChange} disable={!isEditAvailable} />
           <Text align="center" margin="1rem">
                 ¿Hasta cuando se podrán realizar las predicciones?
           </Text>
@@ -134,14 +144,16 @@ export default function AdminPanel({ groupData, updater }) {
                 <TextGroup>
                     <Text>Por partido</Text>
                     <Input type="radio" name="limitByPhase" id="DontLimitByPhase" 
-                        value={false} onChange={handleChange} checked={values.limitByPhase==="false"} />
+                        value={false} onChange={handleChange} checked={values.limitByPhase==="false"} 
+                        disabled={!isEditAvailable}/>
                 </TextGroup>
             </Label>
             <Label htmlFor="DoLimitByPhase">
                 <TextGroup>
                     <Text>Por fase</Text>
                     <Input type="radio" name="limitByPhase" id="DoLimitByPhase" 
-                        value={true} onChange={handleChange} checked={values.limitByPhase==="true"} />
+                        value={true} onChange={handleChange} checked={values.limitByPhase==="true"} 
+                        disabled={!isEditAvailable}/>
                 </TextGroup>
             </Label>
           </TextGroup>
@@ -150,6 +162,7 @@ export default function AdminPanel({ groupData, updater }) {
               value={values.timeLimit}
               name="timeLimit"
               onChange={handleChange}
+              disabled={!isEditAvailable}
             >
               <option value={0} defaultChecked>
                 {values.limitByPhase === "true" ? 
@@ -171,7 +184,7 @@ export default function AdminPanel({ groupData, updater }) {
           </Label>
           <Button
             type="button"
-            disabled={!isEmpty(errors) || isEmpty(values.name)}
+            disabled={!isEmpty(errors) || isEmpty(values.name) || !isEditAvailable}
             onClick={toggleModal}
           >
             Editar grupo
