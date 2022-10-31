@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
+
 import { Text } from "../common.styles";
 
 const TooltipWrapper = styled.div``;
+
 const TooltipBubble = styled.div`
   position: absolute;
   top: ${({ position }) => {

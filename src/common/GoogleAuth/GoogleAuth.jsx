@@ -1,11 +1,13 @@
-import axios from "axios";
-import React, { useState } from "react";
-import GoogleLogin from "react-google-login";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import propTypes from "prop-types";
-import config from "../../Constants";
-import Container, { AuthLink } from "./GoogleAuth.styles";
 import { toast } from "react-toastify";
+import axios from "axios";
+import GoogleLogin from "react-google-login";
+import propTypes from "prop-types";
+
+import config from "../../Constants";
+
+import Container, { AuthLink } from "./GoogleAuth.styles";
 
 function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);

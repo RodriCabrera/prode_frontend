@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import propTypes from "prop-types";
+
 import { getAuth, logoutUser } from "../api/auth";
 import { useNavigate, useLocation } from "react-router-dom";
 import Loading from "./Loading/Loading";

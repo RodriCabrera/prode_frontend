@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+
+import CustomPieChart from "../../../../../common/Charts/PieChart";
+import MultipleLines from "../../../../../common/Charts/MultipleLines";
+import SingleMatchList from "./SingleMatchList";
+import ToggleSwitch from "../../../../../common/ToggleSwitch/ToggleSwitch";
 import useNavContext from "../../../../../common/Navigator/useNavContext";
+import UserList from "./UserList";
 import {
   filterPredictionsForFixture,
   getCountByResultType,
@@ -8,11 +14,6 @@ import {
   calcScoreProgressByDate,
   pairUsernameWithAvatar,
 } from "../../../scoresPageHelpers";
-import CustomPieChart from "../../../../../common/Charts/PieChart";
-import MultipleLines from "../../../../../common/Charts/MultipleLines";
-import ToggleSwitch from "../../../../../common/ToggleSwitch/ToggleSwitch";
-import SingleMatchList from "./SingleMatchList";
-import UserList from "./UserList";
 
 const GRAPHS = {
   PIE_CHART: "pie",

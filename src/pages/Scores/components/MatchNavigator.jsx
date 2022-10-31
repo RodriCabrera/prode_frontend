@@ -1,7 +1,6 @@
-import React from "react";
+import { BallLoader } from "../../../common/Spinner/BallLoader";
 import { useFetchFixtureData } from "../../FixturePage/hooks/useFetchFixtureData";
 import Navigator from "../../../common/Navigator/Navigator";
-import { BallLoader } from "../../../common/Spinner/BallLoader";
 
 export default function MatchNavigator({ children }) {
   const { isLoading, fixtureData } = useFetchFixtureData();

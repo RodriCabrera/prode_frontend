@@ -1,4 +1,5 @@
 import { GiSoccerBall } from "react-icons/gi";
+
 import "./ball-loader.css";
 
 export const BallLoader = () => {

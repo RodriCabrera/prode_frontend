@@ -1,6 +1,7 @@
-import { LaterStages } from "./laterStages.styles";
 import StageMatches from "./StageMatches";
 import FinalStage from "./FinalStage";
+
+import { LaterStages } from "./laterStages.styles";
 
 const STAGE_DATA = {
   OCTAVOS: "Octavos",

@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useIsMobile } from "./hooks/useIsMobile";
 import flagsmith from "flagsmith";
 import { FlagsmithProvider } from "flagsmith/react";
+import config from "./Constants";
 
 const Layout = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ function App() {
   return (
     <FlagsmithProvider
       options={{
-        environmentID: "oMxSbmyCNm65oRQYZBUWq2",
+        environmentID: config.FS_ENVIRONMENT_ID,
       }}
       flagsmith={flagsmith}
     >

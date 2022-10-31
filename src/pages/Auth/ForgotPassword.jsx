@@ -1,18 +1,20 @@
-import { useFormik } from "formik";
 import { isEmpty } from "lodash";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+
+import { authSchema } from "../../validationSchemas/auth";
+import { forgotPassword } from "../../api/auth";
+import { useIsMobile } from "../../hooks/useIsMobile";
+
 import {
   Button,
   CardTitle,
   CardWrapper,
+  Form,
   Input,
   Label,
-  Form,
 } from "../../common/common.styles";
-import { toast } from "react-toastify";
-import { forgotPassword } from "../../api/auth";
-import { authSchema } from "../../validationSchemas/auth";
-import { useNavigate } from "react-router-dom";
-import { useIsMobile } from "../../hooks/useIsMobile";
 
 function ForgotPassword() {
   const { values, errors, handleChange } = useFormik({

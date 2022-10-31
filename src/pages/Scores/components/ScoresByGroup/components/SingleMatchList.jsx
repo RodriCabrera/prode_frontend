@@ -1,12 +1,13 @@
-import React from "react";
 import styled from "@emotion/styled";
+
+import { ListElement } from "../../../../../common/Lists/ListElement";
+import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
+
 import {
   CardWrapper,
   CardTitle,
   Text,
 } from "../../../../../common/common.styles";
-import { ListElement } from "../../../../../common/Lists/ListElement";
-import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
 
 const ListContainer = styled.div`
   display: flex;

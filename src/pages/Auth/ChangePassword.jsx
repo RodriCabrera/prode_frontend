@@ -1,7 +1,12 @@
-import { useFormik } from "formik";
 import { isEmpty } from "lodash";
-import React, { useState } from "react";
+import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+
+import { Spinner } from "common/Spinner/Spinner";
+import { changePassword } from "api/auth";
+import { authSchema } from "validationSchemas/auth";
+
 import {
   Button,
   CardContainer,
@@ -10,10 +15,7 @@ import {
   Input,
   Label,
   Form,
-} from "../../common/common.styles";
-import { Spinner } from "../../common/Spinner/Spinner";
-import { changePassword } from "../../api/auth";
-import { authSchema } from "../../validationSchemas/auth";
+} from "common/common.styles";
 
 function ChangePassword() {
   const [isLoading, setIsLoading] = useState(false);

@@ -1,4 +1,30 @@
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import { toast } from "react-toastify";
+import { useOutletContext, useParams } from "react-router-dom";
+
+import ErrorInfo from "../../../common/MoreInfo/ErrorInfo";
+import Table from "../../../common/Table/Table";
+import { getFlagUrl } from "../../pagesHelpers";
+import {
+  calculateIfCanPredict,
+  checkPredictionResult,
+  formatInputDisplayValue,
+  formatPredictionsToDisplay,
+  formatPredictionsToPost,
+  getErrorMessageForMatch,
+} from "../predictionsPageUtils";
+import { useIsMobile } from "../../../hooks/useIsMobile";
+import { useFormik } from "formik";
+import { getPredictions, createPredictions } from "../../../api/predictions";
+import { BallLoader } from "common/Spinner/BallLoader";
+import useCleanupController from "../../../hooks/useCleanupController";
+import {
+  STAGE_NAMES,
+  getStageName,
+} from "../PredictionManager/PredictionManagerUtils";
+
+import { FormWrapper } from "../Predictions.styles";
 import {
   Button,
   CardContainer,
@@ -6,30 +32,6 @@ import {
   Form,
   Input,
 } from "../../../common/common.styles";
-import ErrorInfo from "../../../common/MoreInfo/ErrorInfo";
-import Table from "../../../common/Table/Table";
-import { getFlagUrl } from "../../pagesHelpers";
-import { FormWrapper } from "../Predictions.styles";
-import {
-  checkPredictionResult,
-  getErrorMessageForMatch,
-  formatPredictionsToPost,
-  formatPredictionsToDisplay,
-  calculateIfCanPredict,
-  formatInputDisplayValue,
-} from "../predictionsPageUtils";
-import { useIsMobile } from "../../../hooks/useIsMobile";
-import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import { useOutletContext, useParams } from "react-router-dom";
-import { getPredictions, createPredictions } from "../../../api/predictions";
-import { BallLoader } from "../../../common/Spinner/BallLoader";
-import useCleanupController from "../../../hooks/useCleanupController";
-import { toast } from "react-toastify";
-import {
-  STAGE_NAMES,
-  getStageName,
-} from "../PredictionManager/PredictionManagerUtils";
 
 export default function PredictionForm({ fixture, hasChangedGroup }) {
   const { selectedUserGroup, mode } = useOutletContext();
