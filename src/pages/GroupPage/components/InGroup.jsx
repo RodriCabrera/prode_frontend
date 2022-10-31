@@ -63,6 +63,7 @@ function InGroup({ groupData, updater }) {
 
   const isAdmin = userContext.user._id === groupData.owner._id
   const isAdminAlone = isAdmin && groupData.members.length === 1;
+
   return (
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
