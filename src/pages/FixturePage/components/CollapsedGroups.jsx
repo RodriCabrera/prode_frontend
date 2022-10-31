@@ -30,7 +30,7 @@ export default function CollapsedGroups({ groups, isMobile }) {
           </GroupButton>
         ))}
       </GroupButtonGroup>
-      <FixtureTablesContainer>
+      <FixtureTablesContainer isMobile>
         {selected.sort().map((selection) => (
           <GroupTableWrapper key={groups[selection].id} fullWidth>
             <Text size="2rem" align="center" color="darkorange">
