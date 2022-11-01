@@ -73,7 +73,7 @@ function InGroup({ groupData, updater }) {
         </Text>
         {isAdmin && flags.show_admin_functions.enabled && 
         <Button onClick={toggleAdminPanel} tertiary={showAdminPanel}>
-          {showAdminPanel ? 'Hide Admin Panel' : 'Show Admin Panel'}
+          {showAdminPanel ? 'Ocultar panel de administrador' : 'Mostrar panel de administrador'}
         </Button>}
         {showAdminPanel ? <AdminPanel groupData={groupData} updater={updater} /> 
         : <GroupRules rules={groupData?.rules} />}
