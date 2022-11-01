@@ -22,8 +22,6 @@ import {
 import { Info } from "../../../common/Info/Info";
 import { groupsSchema } from "../../../validationSchemas/groups";
 
-// TODO> Setear limite de tiempo para poder editar esta info
-
 export default function AdminPanel({ groupData, updater }) {
     const { showModal, toggleModal } = useToggleModal();
     const { values, handleChange, errors } = useFormik({
@@ -136,12 +134,12 @@ export default function AdminPanel({ groupData, updater }) {
             )}
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} disable={!isEditAvailable} />
-          <Text align="center" margin="1rem">
+          <Text align="center" margin="1.2rem 0rem 0.2rem">
                 ¿Hasta cuando se podrán realizar las predicciones?
           </Text>
           <TextGroup align="center" margin=".2rem">
             <Label htmlFor="DontLimitByPhase">
-                <TextGroup>
+                <TextGroup margin="0.2rem">
                     <Text>Por partido</Text>
                     <Input type="radio" name="limitByPhase" id="DontLimitByPhase" 
                         value={false} onChange={handleChange} checked={values.limitByPhase==="false"} 
@@ -149,7 +147,7 @@ export default function AdminPanel({ groupData, updater }) {
                 </TextGroup>
             </Label>
             <Label htmlFor="DoLimitByPhase">
-                <TextGroup>
+                <TextGroup margin="0.2rem">
                     <Text>Por fase</Text>
                     <Input type="radio" name="limitByPhase" id="DoLimitByPhase" 
                         value={true} onChange={handleChange} checked={values.limitByPhase==="true"} 
@@ -157,6 +155,10 @@ export default function AdminPanel({ groupData, updater }) {
                 </TextGroup>
             </Label>
           </TextGroup>
+          <Info>
+          {values.limitByPhase === "false" ? "Cada partido tendrá su fecha límite" :
+          "Todos los partidos de cada fase tendrán la misma fecha límite"}
+          </Info>
           <Label htmlFor="timeLimit">
             <Select
               value={values.timeLimit}
