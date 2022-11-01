@@ -1,28 +1,36 @@
-import { useContext } from "react";
+import React, { useContext, useState } from 'react'
 
 import { Spinner } from "../../../common/Spinner/Spinner";
 import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
-import { ProfileEditForm } from "./ProfileEditForm";
+import ProfileEdit from "./ProfileEditNew"
 import { useIsMobile } from "../../../hooks/useIsMobile";
 import { AuthContext } from "../../../common/AuthProvider";
 
-import { BigAvatarWrapper, UserNameContainer } from "../profile.styles";
 import {
-  CardContainer,
-  CardWrapper,
-  Text,
+    Button,
+    CardContainer,
+    CardWrapper,
+    Text,
 } from "../../../common/common.styles";
+import { BigAvatarWrapper, UserNameContainer } from "../profile.styles";
 
-function ProfileEdit() {
-  const userContext = useContext(AuthContext);
-  const isMobile = useIsMobile();
+export default function OwnProfile() {
+    const userContext = useContext(AuthContext);
+    const isMobile = useIsMobile();
 
+    const [editMode, setEditMode] = useState(false);
+
+    const toggleEditMode = () => {
+        setEditMode(edit => !edit);
+    }
   return (
     <CardContainer>
       <CardWrapper border={isMobile ? "none" : null}>
         {userContext.isLoading ? (
           <Spinner />
         ) : (
+          editMode ? 
+          <ProfileEdit toggleEditMode={toggleEditMode}/> : 
           <>
             <UserNameContainer>
               <Text size="1.5rem" weight="bold">
@@ -39,15 +47,12 @@ function ProfileEdit() {
                 />
               </BigAvatarWrapper>
             </UserNameContainer>
-            <ProfileEditForm
-              profile={userContext.user}
-              updateProfile={() => userContext?.updateAuth()}
-            />
+            <Button onClick={toggleEditMode}>
+                Editar perfil
+            </Button>
           </>
         )}
       </CardWrapper>
     </CardContainer>
-  );
+  )
 }
-
-export default ProfileEdit;

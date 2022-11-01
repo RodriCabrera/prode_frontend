@@ -1,44 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
 import { FcEditImage } from "react-icons/fc";
 
-import { BigAvatarWrapper } from "../Profile";
-import { getAvatars } from "api/profiles";
+import { getAvatars } from "../../../api/profiles";
 import { Spinner } from "common/Spinner/Spinner";
 import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
 import Modal from "common/Modal/Modal";
 import useCleanupController from "hooks/useCleanupController";
 import useToggleModal from "hooks/useToggleModal";
 
+import { Container, AvatarWrapper, Avatar, BigAvatarWrapper } from "../profile.styles";
 import { Button, Input, Text } from "common/common.styles";
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  min-height: 40px;
-`;
-
-const AvatarWrapper = styled.div`
-  border-radius: 100%;
-  cursor: pointer;
-  overflow: hidden;
-  min-height: 70px;
-  min-width: 70px;
-  border: ${({ selected }) =>
-    selected ? "2px inset tomato" : "2px inset rgba(0, 0, 0, 0)"};
-  background-color: darkgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Avatar = styled.img`
-  width: 70px;
-  filter: grayscale(${({ selected }) => (selected ? "30%" : "100%")});
-`;
 
 function AvatarList({ handleAvatarClick, selectedAvatar }) {
   const [avatars, setAvatars] = useState([]);

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import { HiOutlineUserGroup } from "react-icons/hi";
@@ -15,17 +14,7 @@ import useCleanupController from "hooks/useCleanupController";
 
 import { ListWrapper } from "common/Lists/Lists.styles";
 import { CardContainer, CardWrapper, Text } from "common/common.styles";
-
-export const BigAvatarWrapper = styled.div`
-  margin: auto;
-  border-radius: 100%;
-  overflow: hidden;
-  height: 200px;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { BigAvatarWrapper, UserNameContainer } from "./profile.styles";
 
 function Profile() {
   const { name } = useParams();
@@ -101,12 +90,5 @@ function Profile() {
     </CardContainer>
   );
 }
-
-export const UserNameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-`;
 
 export default Profile;
