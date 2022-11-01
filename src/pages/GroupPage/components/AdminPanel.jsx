@@ -156,8 +156,8 @@ export default function AdminPanel({ groupData, updater }) {
             </Label>
           </TextGroup>
           <Info>
-          {values.limitByPhase === "false" ? "Cada partido tendrá su fecha límite" :
-          "Todos los partidos de cada fase tendrán la misma fecha límite"}
+            {values.limitByPhase === "false" ? "Cada partido tendrá su fecha límite" :
+            "Todos los partidos de cada fase tendrán la misma fecha límite"}
           </Info>
           <Label htmlFor="timeLimit">
             <Select
