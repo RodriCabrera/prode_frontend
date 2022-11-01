@@ -75,5 +75,5 @@ export const AvatarContainer = styled.div`
 `;
 export const Avatar = styled.img`
   width: 70px;
-  /* filter: grayscale(${({ selected }) => (selected ? "30%" : "100%")}); */
+  filter: grayscale(${({ selected }) => (selected ? "30%" : "100%")});
 `;

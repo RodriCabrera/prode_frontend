@@ -54,6 +54,7 @@ function AvatarList({ handleNewAvatar }) {
                         onClick={() => handleAvatarClick(avatar)}
                     >
                     <Avatar
+                        selected={true}
                         src={avatar}
                         alt="avatar"
                     />
