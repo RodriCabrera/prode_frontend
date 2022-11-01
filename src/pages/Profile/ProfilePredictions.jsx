@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { Spinner } from "../../common/Spinner/Spinner";
+
+import { getOtherUserPredictionsByGroup } from "api/predictions";
+import { Info } from "common/Info/Info";
+import { Spinner } from "common/Spinner/Spinner";
+import FixtureTable from "../FixturePage/components/FixtureTable";
+import useCleanupController from "hooks/useCleanupController";
+
 import {
   Button,
   CardContainer,
   CardTitle,
   CardWrapper,
   Text,
-} from "../../common/common.styles";
-import { getOtherUserPredictionsByGroup } from "../../api/predictions";
-import FixtureTable from "../FixturePage/components/FixtureTable";
-import useCleanupController from "../../hooks/useCleanupController";
-import { Info } from "../../common/Info/Info";
+} from "common/common.styles";
 
 function ProfilePredictions({ props }) {
   const { group, user } = props;

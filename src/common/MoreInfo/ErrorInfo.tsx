@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdOutlineInfo } from "react-icons/md";
 import styled from "@emotion/styled";
 

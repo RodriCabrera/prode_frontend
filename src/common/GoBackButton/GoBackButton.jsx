@@ -1,7 +1,7 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Text } from "../common.styles";
 import { HiOutlineChevronLeft } from "react-icons/hi";
+
+import { Text } from "../common.styles";
 
 export function GoBackButton({ text, collapse = false }) {
   const navigate = useNavigate();

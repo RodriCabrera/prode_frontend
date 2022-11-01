@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmpty } from "lodash";
+import { useFlags } from "flagsmith/react";
 import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
 import { getGroupScores } from "../../../api/groups";
 import { ListElement } from "../../../common/Lists/ListElement";
@@ -16,19 +17,22 @@ import {
 import LeaveGroupForm from "./LeaveGroupForm";
 import GroupRules from "./GroupRules";
 import GroupInvite from "./GroupInvite";
+import AdminPanel from "./AdminPanel";
 import { AuthContext } from "../../../common/AuthProvider";
 import { GoBackButton } from "../../../common/GoBackButton/GoBackButton";
 import useCleanupController from "../../../hooks/useCleanupController";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 
-function InGroup({ groupData }) {
+function InGroup({ groupData, updater }) {
   const navigate = useNavigate();
   const [groupScoresData, setGroupScoresData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
   const { showModal, toggleModal } = useToggleModal();
   const userContext = useContext(AuthContext);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const isMobile = useIsMobile();
+  const flags = useFlags(["show_admin_functions"])
 
   useEffect(() => {
     setIsLoading(true);
@@ -53,9 +57,13 @@ function InGroup({ groupData }) {
     return navigate(`/profile/${user}`);
   };
 
-  const isAdminAlone =
-    userContext.user._id === groupData.owner._id &&
-    groupData.members.length === 1;
+  const toggleAdminPanel = () => {
+    setShowAdminPanel(prev => !prev)
+  }
+
+  const isAdmin = userContext.user._id === groupData.owner._id
+  const isAdminAlone = isAdmin && groupData.members.length === 1;
+
   return (
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
@@ -63,7 +71,12 @@ function InGroup({ groupData }) {
         <Text size="2.5rem" align="center" weight="800">
           {groupData?.name}
         </Text>
-        <GroupRules rules={groupData?.rules} />
+        {isAdmin && flags.show_admin_functions.enabled && 
+        <Button onClick={toggleAdminPanel} tertiary={showAdminPanel}>
+          {showAdminPanel ? 'Ocultar panel de administrador' : 'Mostrar panel de administrador'}
+        </Button>}
+        {showAdminPanel ? <AdminPanel groupData={groupData} updater={updater} /> 
+        : <GroupRules rules={groupData?.rules} />}
         {isLoading && <Spinner />}
         {groupScoresData.group && (
           <>

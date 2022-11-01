@@ -1,4 +1,5 @@
 import React from "react";
+
 import { NavButton } from "./navigator.styles";
 
 export default function NavLayer({ data, filterFunc, parseName }) {

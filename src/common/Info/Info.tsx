@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
 import { FiInfo } from "react-icons/fi";
+
 import { Text } from "../common.styles";
 
 const InfoContainer = styled.div`

@@ -1,6 +1,6 @@
-import React from "react";
-import { CardWrapper, Text } from "../../../common/common.styles";
-import { useIsMobile } from "../../../hooks/useIsMobile";
+import { useIsMobile } from "hooks/useIsMobile";
+
+import { CardWrapper, Text } from "common/common.styles";
 import { LPInfoContainer, LPInfoWrapper } from "./LandingPage.styles";
 
 const LandingPageInfo = () => {

@@ -20,7 +20,7 @@ const InputAndText = styled.div`
   justify-content: space-between;
 `;
 
-function ScoringInputs({ values, handleChange }) {
+function ScoringInputs({ values, handleChange, disable=false }) {
   return (
     <InputWrapper>
       <InputAndText>
@@ -34,6 +34,7 @@ function ScoringInputs({ values, handleChange }) {
           type="number"
           width="50%"
           align="center"
+          disabled={disable}
         />
       </InputAndText>
       <InputAndText>
@@ -47,6 +48,7 @@ function ScoringInputs({ values, handleChange }) {
           type="number"
           width="50%"
           align="center"
+          disabled={disable}
         />
       </InputAndText>
       <InputAndText>
@@ -60,6 +62,7 @@ function ScoringInputs({ values, handleChange }) {
           type="number"
           width="50%"
           align="center"
+          disabled={disable}
         />
       </InputAndText>
     </InputWrapper>

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+
 import { getPredictionCompletePercentage } from "../../../api/predictions";
-import { getFixtureStatus } from "../../../api/fixture";
-import { Text } from "../../../common/common.styles";
-import useCleanupController from "../../../hooks/useCleanupController";
-import { BallLoader } from "../../../common/Spinner/BallLoader";
+import { getFixtureStatus } from "api/fixture";
+import useCleanupController from "hooks/useCleanupController";
+import { BallLoader } from "common/Spinner/BallLoader";
 import { Banner } from "./Banner";
+
+import { Text } from "../../../common/common.styles";
 import { BannerContainer } from "../Predictions.styles";
 
 function BannerList() {

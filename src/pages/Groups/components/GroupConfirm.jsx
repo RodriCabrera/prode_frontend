@@ -1,6 +1,6 @@
-import React from "react";
-import { Text, CardTitle, Button } from "../../../common/common.styles";
-import { translateDuration } from "../../pagesHelpers";
+import React from 'react';
+import { Text, CardTitle, Button } from '../../../common/common.styles';
+import { translateDuration } from '../../pagesHelpers';
 
 function GroupConfirm({ groupName, userGroupData, confirmText }) {
   return (
@@ -38,7 +38,9 @@ function GroupConfirm({ groupName, userGroupData, confirmText }) {
         </Text>
         <Text>
           Puedes realizar predicciones hasta
-          {translateDuration(userGroupData.timeLimit)}
+          {userGroupData.limitByPhase ? 
+            translateDuration(userGroupData.timeLimit).replace("del partido", "de la fase")
+            : translateDuration(userGroupData.timeLimit) }
         </Text>
         <br />
         <Button type="submit">{confirmText}</Button>

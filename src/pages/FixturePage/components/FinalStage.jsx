@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { getFixtureByStageId } from "../../../api/fixture";
-import { StageColumn, MatchData, Match } from "./laterStages.styles";
+
+import { getFixtureByStageId } from "api/fixture";
 import { getFlagUrl, parseDate } from "../../pagesHelpers";
 import { datePreferences } from "../fixturePageHelpers";
-import { Text } from "../../../common/common.styles";
-import useCleanupController from "../../../hooks/useCleanupController";
+import useCleanupController from "hooks/useCleanupController";
+
+import { StageColumn, MatchData, Match } from "./laterStages.styles";
+import { Text } from "common/common.styles";
 import WordlCup from "./WorldCup.png";
 
 const CupImg = styled.img`

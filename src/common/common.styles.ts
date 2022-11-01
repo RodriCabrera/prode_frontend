@@ -216,3 +216,12 @@ export const Column = styled.div<Props>`
   flex-direction: column;
   gap: ${({ gap }) => gap};
 `;
+
+export const TextGroup = styled.div<IText>`
+  display: flex;
+  gap: 1rem;
+  margin-bottom: ${({ margin }) => (margin || '2rem')};;
+  align-items: center;
+  justify-content: ${({ align }) => (align || 'flex-start')};
+  line-height: 1rem;
+`

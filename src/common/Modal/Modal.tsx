@@ -1,6 +1,7 @@
+import { useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import React, { useEffect, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
+
 import { Backdrop, ModalContainer, CloseModalButton } from "./modal.styles";
 import { Button } from "../common.styles";
 
