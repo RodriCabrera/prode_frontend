@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
 import styled from "@emotion/styled";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -36,8 +38,12 @@ const PageWrapper = styled.div`
 function App() {
   const isMobile = useIsMobile();
 
-  // eslint-disable-next-line no-undef, no-console
-  console.log("NODE_ENV", process.env.NODE_ENV);
+  console.log(
+    "NODE_ENV",
+    process.env.NODE_ENV,
+    "VERCEL_ENV",
+    process.env.VERCEL_ENV
+  );
 
   return (
     <FlagsmithProvider
