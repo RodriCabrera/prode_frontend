@@ -35,6 +35,10 @@ const PageWrapper = styled.div`
 
 function App() {
   const isMobile = useIsMobile();
+
+  // eslint-disable-next-line no-undef, no-console
+  console.log("NODE_ENV", process.env.NODE_ENV);
+
   return (
     <FlagsmithProvider
       options={{
