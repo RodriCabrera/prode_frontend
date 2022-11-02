@@ -9,6 +9,7 @@ export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 99998;
 `;
+
 export const ModalContentWrapper = styled.div`
   min-width: 200px;
   width: 100%;
@@ -18,6 +19,7 @@ export const ModalContentWrapper = styled.div`
   flex-direction: column;
   height: 100%;
 `;
+
 export const ModalContainer = styled.div`
   position: fixed;
   z-index: 99999;
