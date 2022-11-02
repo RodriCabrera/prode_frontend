@@ -35,6 +35,7 @@ const PageWrapper = styled.div`
 
 function App() {
   const isMobile = useIsMobile();
+
   return (
     <FlagsmithProvider
       options={{

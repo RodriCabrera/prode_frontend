@@ -18,15 +18,18 @@ export const GroupTableWrapper = styled.div`
 export const FixtureTablesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem 4rem;
+  gap: ${({ isMobile }) => (isMobile ? "2rem" : "2rem 4rem")};
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 
 export const GroupButtonGroup = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  max-width: 100vw;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 1rem;

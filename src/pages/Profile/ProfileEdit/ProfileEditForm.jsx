@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
 import { toast } from "react-toastify";
 import { isEmpty } from "lodash";
 
@@ -9,8 +8,8 @@ import useToggleModal from "../../../hooks/useToggleModal";
 import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
 import { Spinner } from "../../../common/Spinner/Spinner";
 import AvatarList from "./AvatarList";
-import { BigAvatarWrapper } from "../Profile";
 
+import { BigAvatarWrapper, AvatarContainer } from "../profile.styles";
 import {
   Button,
   Form,
@@ -46,7 +45,6 @@ export function ProfileEditForm({ profile, updateProfile }) {
       })
         .then(() => {
           setTimeout(updateProfile, 1000);
-          // updateProfile();
         })
         .finally(() => {
           toggleModal();
@@ -134,7 +132,3 @@ export function ProfileEditForm({ profile, updateProfile }) {
     </>
   );
 }
-const AvatarContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;

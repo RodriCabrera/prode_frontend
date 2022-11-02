@@ -34,7 +34,8 @@ const ShortFixture = () => {
     >
       <CardTitle>Próximos partidos:</CardTitle>
       {isLoading && <BallLoader />}
-      {data &&
+      {!isLoading &&
+        data &&
         (data.length > 0 ? (
           <FixtureTable
             id="short-fixture-card-container"

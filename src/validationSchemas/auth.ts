@@ -24,6 +24,10 @@ export const authSchema = {
   changePassword: object({ password }),
 };
 
+export const profileSchema = {
+  edit: object({ name })
+}
+
 export const groupsSchema = {
   create: object({ groupName }),
 };

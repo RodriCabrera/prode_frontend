@@ -27,7 +27,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
