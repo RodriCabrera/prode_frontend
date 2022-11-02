@@ -38,12 +38,7 @@ const PageWrapper = styled.div`
 function App() {
   const isMobile = useIsMobile();
 
-  console.log(
-    "NODE_ENV",
-    process.env.NODE_ENV,
-    "VERCEL_ENV",
-    process.env.VERCEL_ENV
-  );
+  console.log("VERCEL_ENV", process.env.REACT_APP_VERCEL_ENV);
 
   return (
     <FlagsmithProvider

@@ -14,6 +14,6 @@ const dev = {
 };
 
 // eslint-disable-next-line no-undef
-const config = process.env.VERCEL_ENV === "production" ? prod : dev;
+const config = process.env.REACT_APP_VERCEL_ENV === "production" ? prod : dev;
 
 export default config;
