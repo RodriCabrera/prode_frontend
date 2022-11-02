@@ -26,8 +26,6 @@ export const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 35rem;
   max-width: 90vw;
-  /* max-height: 90vh; */
-  /* overflow-y: auto; */
   overflow-x: hidden;
   border: 1px solid #bdbdbd;
   border-radius: 8px;
