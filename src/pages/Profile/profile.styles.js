@@ -60,6 +60,7 @@ export const Container = styled.div`
 `;
 
 export const AvatarListContainer = styled.div`
+  padding-top: 3rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

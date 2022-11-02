@@ -50,7 +50,12 @@ function AvatarList({ handleNewAvatar }) {
           >
             O elige de la lista
           </Button>
-          <Modal show={showModal} toggle={toggleModal}>
+          <Modal
+            show={showModal}
+            toggle={toggleModal}
+            backdrop={false}
+            cancelText="Volver"
+          >
             <AvatarListContainer id="avatar-list-container">
               {avatars.map((avatar) => {
                 return (
