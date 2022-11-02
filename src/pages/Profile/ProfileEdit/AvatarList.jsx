@@ -8,7 +8,12 @@ import Modal from "common/Modal/Modal";
 import useCleanupController from "hooks/useCleanupController";
 import useToggleModal from "hooks/useToggleModal";
 
-import { Container, AvatarWrapper, Avatar, BigAvatarWrapper } from "../profile.styles";
+import {
+  Container,
+  AvatarWrapper,
+  Avatar,
+  BigAvatarWrapper,
+} from "../profile.styles";
 import { Button, Input, Text } from "common/common.styles";
 
 function AvatarList({ handleAvatarClick, selectedAvatar }) {
