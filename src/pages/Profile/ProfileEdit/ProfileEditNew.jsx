@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
-import { BsFillCameraFill } from "react-icons/bs"
+import { BsFillCameraFill } from "react-icons/bs";
 
 import { editProfile } from "../../../api/profiles";
 import AvatarList from "./AvatarListNew";
@@ -11,9 +11,20 @@ import { AuthContext } from "../../../common/AuthProvider";
 import { profileSchema } from "../../../validationSchemas/auth";
 
 import Modal from "../../../common/Modal/Modal";
-import { Info } from "../../../common/Info/Info"
-import { Form, Label, Input, Text, Button } from "../../../common/common.styles";
-import { AvatarEditWrapper, AvatarOverlay, BigAvatarWrapper, UserNameContainer } from "../profile.styles";
+import { Info } from "../../../common/Info/Info";
+import {
+  Form,
+  Label,
+  Input,
+  Text,
+  Button,
+} from "../../../common/common.styles";
+import {
+  AvatarEditWrapper,
+  AvatarOverlay,
+  BigAvatarWrapper,
+  UserNameContainer,
+} from "../profile.styles";
 import { isEmpty } from "lodash";
 
 function ProfileEdit({ toggleEditMode, isMobile }) {
@@ -21,18 +32,18 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
   const { values, handleChange, errors, setFieldValue, dirty } = useFormik({
     initialValues: {
       name: userContext?.user?.name,
-      avatar: userContext?.user?.avatar
+      avatar: userContext?.user?.avatar,
     },
-    validationSchema: profileSchema.edit
+    validationSchema: profileSchema.edit,
   });
   const { showModal, toggleModal } = useToggleModal();
-  const [customAvatarLink, setCustomAvatarLink] = useState("")
+  const [customAvatarLink, setCustomAvatarLink] = useState("");
 
   const handleNewAvatar = (value) => {
-    setFieldValue('avatar', value);
-    setCustomAvatarLink("")
+    setFieldValue("avatar", value);
+    setCustomAvatarLink("");
     toggleModal();
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,7 +118,11 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
           onChange={(e) => setCustomAvatarLink(e.target.value)}
         />
         <AvatarList handleNewAvatar={handleNewAvatar} />
-        <Button type="button" onClick={() => handleNewAvatar(customAvatarLink)} disabled={!customAvatarLink}>
+        <Button
+          type="button"
+          onClick={() => handleNewAvatar(customAvatarLink)}
+          disabled={!customAvatarLink}
+        >
           Seleccionar
         </Button>
       </Modal>

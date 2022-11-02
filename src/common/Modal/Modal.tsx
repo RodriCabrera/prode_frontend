@@ -1,18 +1,14 @@
 import { useEffect, useRef } from "react";
-import styled from "@emotion/styled";
 import { MdOutlineClose } from "react-icons/md";
 
-import { Backdrop, ModalContainer, CloseModalButton } from "./modal.styles";
+import {
+  Backdrop,
+  ModalContainer,
+  CloseModalButton,
+  ModalContentWrapper,
+} from "./modal.styles";
 import { Button } from "../common.styles";
 
-const ModalContentWrapper = styled.div`
-  min-width: 200px;
-  width: 100%;
-  display: flex;
-  padding: 1rem;
-  gap: 1rem;
-  flex-direction: column;
-`;
 interface IModalProps {
   children: JSX.Element;
   show: boolean;

@@ -7,9 +7,17 @@ export const Backdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.35);
-  z-index: 999;
+  z-index: 99998;
 `;
-
+export const ModalContentWrapper = styled.div`
+  min-width: 200px;
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  flex-direction: column;
+  height: 100%;
+`;
 export const ModalContainer = styled.div`
   position: fixed;
   z-index: 99999;
@@ -18,6 +26,9 @@ export const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 35rem;
   max-width: 90vw;
+  /* max-height: 90vh; */
+  /* overflow-y: auto; */
+  overflow-x: hidden;
   border: 1px solid #bdbdbd;
   border-radius: 8px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
