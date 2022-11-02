@@ -74,8 +74,7 @@ export default function ScoresByGroup() {
           <Info>
             Los puntajes se calculan automáticamente según el sistema de
             puntajes
-            {userGroupList.length === 1 ? " del grupo" : " de cada grupo grupo"}
-            .
+            {userGroupList.length === 1 ? " del grupo" : " de cada grupo"}.
           </Info>
         )}
         {isLoadingUserGroupsData && <Spinner />}
