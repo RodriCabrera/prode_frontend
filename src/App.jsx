@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-console */
 import styled from "@emotion/styled";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -37,8 +35,6 @@ const PageWrapper = styled.div`
 
 function App() {
   const isMobile = useIsMobile();
-
-  console.log("VERCEL_ENV", process.env.REACT_APP_VERCEL_ENV);
 
   return (
     <FlagsmithProvider
