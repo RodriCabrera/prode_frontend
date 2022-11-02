@@ -12,6 +12,7 @@ const GroupsListWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  background-color: yellow;
 `;
 
 export function GroupSelector({
