@@ -30,7 +30,7 @@ export default function OwnProfile() {
           <Spinner />
         ) : (
           editMode ? 
-          <ProfileEdit toggleEditMode={toggleEditMode}/> : 
+          <ProfileEdit toggleEditMode={toggleEditMode} isMobile={isMobile} /> : 
           <>
             <UserNameContainer>
               <Text size="1.5rem" weight="bold">

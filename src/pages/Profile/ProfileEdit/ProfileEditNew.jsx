@@ -16,7 +16,7 @@ import { Form, Label, Input, Text, Button } from "../../../common/common.styles"
 import { AvatarEditWrapper, AvatarOverlay, BigAvatarWrapper, UserNameContainer } from "../profile.styles";
 import { isEmpty } from "lodash";
 
-function ProfileEdit({ toggleEditMode }) {
+function ProfileEdit({ toggleEditMode, isMobile }) {
   const userContext = useContext(AuthContext);
   const { values, handleChange, errors, setFieldValue, dirty } = useFormik({
     initialValues: {
@@ -74,6 +74,7 @@ function ProfileEdit({ toggleEditMode }) {
             />
           </AvatarEditWrapper>
         </BigAvatarWrapper>
+        {isMobile && <Info>Haz click en el avatar para elegir otro</Info>}
       </UserNameContainer>
       <Label htmlFor="name">
         <Input
