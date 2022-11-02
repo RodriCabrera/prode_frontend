@@ -66,7 +66,7 @@ export default function MiniForm({
       </Text>
       <PredictionMatch>
         {getFlagUrl(matchData.away.flag, 1)}
-        <Text>{matchData.away.shortName}</Text>
+        <Text noBreak>{matchData.away.shortName}</Text>
         <Input
           type="number"
           width="30px"
@@ -90,7 +90,7 @@ export default function MiniForm({
           value={inputValues.home}
           onChange={handleChange}
         />
-        <Text>{matchData.home.shortName}</Text>
+        <Text noBreak>{matchData.home.shortName}</Text>
         {getFlagUrl(matchData.home.flag, 1)}
       </PredictionMatch>
       <Button
