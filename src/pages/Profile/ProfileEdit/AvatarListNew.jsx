@@ -6,14 +6,19 @@ import useCleanupController from "hooks/useCleanupController";
 import useToggleModal from "../../../hooks/useToggleModal";
 
 import Modal from "../../../common/Modal/Modal";
-import { Container, AvatarWrapper, Avatar } from "../profile.styles";
+import {
+  Container,
+  AvatarWrapper,
+  Avatar,
+  AvatarListContainer,
+} from "../profile.styles";
 import { Button } from "common/common.styles";
 
 function AvatarList({ handleNewAvatar }) {
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
-  const { showModal, toggleModal } = useToggleModal()
+  const { showModal, toggleModal } = useToggleModal();
 
   useEffect(() => {
     if (showModal) {
@@ -29,7 +34,7 @@ function AvatarList({ handleNewAvatar }) {
   const handleAvatarClick = (avatar) => {
     handleNewAvatar(avatar);
     toggleModal();
-  }
+  };
   return (
     <Container>
       {isLoading ? (
@@ -45,24 +50,25 @@ function AvatarList({ handleNewAvatar }) {
           >
             O elige de la lista
           </Button>
-        <Modal show={showModal} toggle={toggleModal}>
-            <Container>
-                {avatars.map((avatar) => {
+          <Modal
+            show={showModal}
+            toggle={toggleModal}
+            backdrop={false}
+            cancelText="Volver"
+          >
+            <AvatarListContainer id="avatar-list-container">
+              {avatars.map((avatar) => {
                 return (
-                    <AvatarWrapper
-                        key={avatar}
-                        onClick={() => handleAvatarClick(avatar)}
-                    >
-                    <Avatar
-                        selected={true}
-                        src={avatar}
-                        alt="avatar"
-                    />
-                    </AvatarWrapper>
+                  <AvatarWrapper
+                    key={avatar}
+                    onClick={() => handleAvatarClick(avatar)}
+                  >
+                    <Avatar selected={true} src={avatar} alt="avatar" />
+                  </AvatarWrapper>
                 );
-                })}
-            </Container>
-        </Modal>
+              })}
+            </AvatarListContainer>
+          </Modal>
         </>
       )}
     </Container>

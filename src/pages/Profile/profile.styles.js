@@ -25,7 +25,7 @@ export const AvatarEditWrapper = styled.div`
     opacity: 0;
   }
   :hover {
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     & > img {
       opacity: 50%;
     }
@@ -40,6 +40,7 @@ export const AvatarEditWrapper = styled.div`
     }
   }
 `;
+
 export const AvatarOverlay = styled.div`
   position: absolute;
   display: flex;
@@ -47,7 +48,8 @@ export const AvatarOverlay = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-`
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -56,6 +58,16 @@ export const Container = styled.div`
   gap: 1rem;
   min-height: 40px;
 `;
+
+export const AvatarListContainer = styled.div`
+  padding-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+`;
+
 export const AvatarWrapper = styled.div`
   border-radius: 100%;
   cursor: pointer;

@@ -1,24 +1,28 @@
 import { useEffect, useRef } from "react";
-import styled from "@emotion/styled";
 import { MdOutlineClose } from "react-icons/md";
 
-import { Backdrop, ModalContainer, CloseModalButton } from "./modal.styles";
+import {
+  Backdrop,
+  ModalContainer,
+  CloseModalButton,
+  ModalContentWrapper,
+} from "./modal.styles";
 import { Button } from "../common.styles";
 
-const ModalContentWrapper = styled.div`
-  min-width: 200px;
-  width: 100%;
-  display: flex;
-  padding: 1rem;
-  gap: 1rem;
-  flex-direction: column;
-`;
 interface IModalProps {
   children: JSX.Element;
   show: boolean;
   toggle: () => void;
+  backdrop: boolean;
+  cancelText: string;
 }
-function Modal({ children, show, toggle }: IModalProps) {
+function Modal({
+  children,
+  show,
+  toggle,
+  backdrop = true,
+  cancelText = "Cancelar",
+}: IModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,7 +40,7 @@ function Modal({ children, show, toggle }: IModalProps) {
 
   return show ? (
     <>
-      <Backdrop />
+      {backdrop && <Backdrop />}
       <ModalContainer ref={modalRef}>
         <CloseModalButton onClick={toggle} type="button">
           <MdOutlineClose size={24} />
@@ -44,7 +48,7 @@ function Modal({ children, show, toggle }: IModalProps) {
         <ModalContentWrapper>
           {children}
           <Button grayscale onClick={toggle}>
-            Cancelar
+            {cancelText}
           </Button>
         </ModalContentWrapper>
       </ModalContainer>

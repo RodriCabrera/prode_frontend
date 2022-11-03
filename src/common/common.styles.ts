@@ -186,6 +186,7 @@ interface IText extends Props {
   size?: string;
   margin?: string;
   withBottomBorder?: boolean;
+  noBreak?: boolean
 }
 /**
  * You can pass to the Text:
@@ -199,7 +200,7 @@ export const Text = styled.p<IText>`
   font-weight: ${({ weight }) => weight};
   margin: ${({ margin }) => margin || "0"};
   transition: all ease 0.5s;
-  word-break: break-word;
+  overflow-wrap: ${({ noBreak }) => (noBreak ? "normal" : "anywhere")};
   &:after {
     ${({ withBottomBorder }) =>
       withBottomBorder &&
