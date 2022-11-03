@@ -32,7 +32,7 @@ function InGroup({ groupData, updater }) {
   const userContext = useContext(AuthContext);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const isMobile = useIsMobile();
-  const flags = useFlags(["show_admin_functions"])
+  const flags = useFlags(["show_admin_functions"]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -58,27 +58,43 @@ function InGroup({ groupData, updater }) {
   };
 
   const toggleAdminPanel = () => {
-    setShowAdminPanel(prev => !prev)
-  }
+    setShowAdminPanel((prev) => !prev);
+  };
 
-  const isAdmin = userContext.user._id === groupData.owner._id
+  const isAdmin = userContext.user._id === groupData.owner._id;
   const isAdminAlone = isAdmin && groupData.members.length === 1;
 
   return (
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
         <GoBackButton />
+
         <Text size="2.5rem" align="center" weight="800">
           {groupData?.name}
         </Text>
-        {isAdmin && flags.show_admin_functions.enabled && 
-        <Button onClick={toggleAdminPanel} tertiary={showAdminPanel}>
-          {showAdminPanel ? 'Ocultar panel de administrador' : 'Mostrar panel de administrador'}
-        </Button>}
-        {showAdminPanel ? <AdminPanel groupData={groupData} updater={updater} /> 
-        : <GroupRules rules={groupData?.rules} />}
+
+        {isAdmin && flags.show_admin_functions.enabled && (
+          <Button
+            onClick={toggleAdminPanel}
+            tertiary={showAdminPanel}
+            width="fit-content"
+            padding="10px"
+          >
+            {showAdminPanel
+              ? "Ocultar panel de administrador"
+              : "Mostrar panel de administrador"}
+          </Button>
+        )}
+
+        {showAdminPanel ? (
+          <AdminPanel groupData={groupData} updater={updater} />
+        ) : (
+          <GroupRules rules={groupData?.rules} />
+        )}
+
         {isLoading && <Spinner />}
-        {groupScoresData.group && (
+
+        {!showAdminPanel && groupScoresData.group && (
           <>
             <Text size="1.2rem" weight="600" withBottomBorder>
               Miembros del grupo:
