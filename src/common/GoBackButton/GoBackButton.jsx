@@ -16,7 +16,7 @@ export function GoBackButton({ text, collapse = false }) {
       onClick={() => navigate(-1)}
       style={{ cursor: "pointer", textDecoration: "underline" }}
     >
-      {text || "Volver"}
+      {text || "< Volver"}
     </Text>
   );
 }
