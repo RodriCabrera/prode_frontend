@@ -25,8 +25,8 @@ export const authSchema = {
 };
 
 export const profileSchema = {
-  edit: object({ name })
-}
+  edit: object({ name }),
+};
 
 export const groupsSchema = {
   create: object({ groupName }),
