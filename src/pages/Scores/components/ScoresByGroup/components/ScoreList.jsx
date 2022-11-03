@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
-import { AuthContext } from "../../../../../common/AuthProvider";
-import { ListElement } from "../../../../../common/Lists/ListElement";
-import { useIsMobile } from "../../../../../hooks/useIsMobile";
-import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
+import { AuthContext } from "common/AuthProvider";
+import { ListElement } from "common/Lists/ListElement";
+import { useIsMobile } from "hooks/useIsMobile";
+import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
 
 const ScoreListWrapper = styled.div`
   display: flex;
@@ -28,18 +28,23 @@ const ScoreItem = styled.div`
   width: 100%;
 `;
 
-const renderPostion = (index) => {
-  if (index > 2) return `${index + 1}.`;
-  if (index === 0) return "🥇";
-  if (index === 1) return "🥈";
-  if (index === 2) return "🥉";
-  return "";
-};
-
 export default function ScoreList({ scores }) {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+
+  const renderPostion = (index) => {
+    if (scores.scores.filter((score) => score.score !== 0).length === 0) {
+      return "";
+    }
+
+    // TODO : Qué pasa si dos usuarios o más tienen el mismo puntaje?
+    if (index > 2) return `${index + 1}.`;
+    if (index === 0) return "🥇";
+    if (index === 1) return "🥈";
+    if (index === 2) return "🥉";
+    return "";
+  };
 
   const handleUserClick = (user) => {
     if (user === userContext.user.name) return navigate("/profile/");
