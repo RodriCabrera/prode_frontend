@@ -22,7 +22,7 @@ function GroupRules({ rules }) {
       </Text>
       <Text>
         Puedes realizar predicciones hasta
-        {translateDuration(rules.timeLimit)}
+        {translateDuration(rules)}
       </Text>
       <br />
 

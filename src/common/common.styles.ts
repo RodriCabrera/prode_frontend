@@ -186,7 +186,7 @@ interface IText extends Props {
   size?: string;
   margin?: string;
   withBottomBorder?: boolean;
-  noBreak?: boolean
+  noBreak?: boolean;
 }
 /**
  * You can pass to the Text:
@@ -221,8 +221,8 @@ export const Column = styled.div<Props>`
 export const TextGroup = styled.div<IText>`
   display: flex;
   gap: 1rem;
-  margin-bottom: ${({ margin }) => (margin || '2rem')};;
+  margin-bottom: ${({ margin }) => margin || "2rem"};
   align-items: center;
-  justify-content: ${({ align }) => (align || 'flex-start')};
+  justify-content: ${({ align }) => align || "flex-start"};
   line-height: 1rem;
-`
+`;
