@@ -22,8 +22,7 @@ function GroupRules({ rules }) {
       </Text>
       <Text>
         Puedes realizar predicciones hasta
-        {/* TODO : adaptar a que las predicciones pueden realizarse hasta antes del partido o de la fase  */}
-        {translateDuration(rules.timeLimit)}
+        {translateDuration(rules)}
       </Text>
       <br />
 

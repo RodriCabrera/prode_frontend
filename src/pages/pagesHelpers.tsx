@@ -39,16 +39,25 @@ export const getFlagUrl = (url: string, size: string) => {
   return <FlagImg src={newUrl} alt="Country flag" />;
 };
 
-export const translateDuration = (miliseconds: string) => {
-  switch (parseInt(miliseconds)) {
+export interface IRules {
+  limitByPhase: boolean;
+  manifiesto: string;
+  scoring: { FULL: number; WINNER: number; NONE: number };
+  timeLimit: string;
+}
+
+export const translateDuration = (rules: IRules) => {
+  const phaseOrMatch = () =>
+    rules.limitByPhase ? "de la fase" : "del partido";
+  switch (parseInt(rules.timeLimit)) {
     case 1000 * 60 * 60 * 1:
-      return " una hora antes del partido";
+      return ` una hora antes ${phaseOrMatch()}`;
     case 1000 * 60 * 60 * 12:
-      return " doce horas antes del partido";
+      return ` doce horas antes ${phaseOrMatch()}`;
     case 1000 * 60 * 60 * 24:
-      return " un día antes del partido";
+      return ` un día antes ${phaseOrMatch()}`;
     case 0:
     default:
-      return " el comienzo del partido";
+      return ` el comienzo ${phaseOrMatch()}`;
   }
 };
