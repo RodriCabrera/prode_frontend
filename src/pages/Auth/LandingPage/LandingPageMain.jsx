@@ -15,12 +15,10 @@ import {
 const LandingPageMain = () => {
   const [video, setVideo] = useState();
   const isMobile = useIsMobile();
-  // example video link:
-  // 'https://player.vimeo.com/external/597733080.sd.mp4?s=236ee37314b933a41625f6a24b1670d6742f81d0&profile_id=164&oauth2_token_id=57447761'
 
   useEffect(() => {
     getSoccerVideos().then((res) => {
-      setVideo(res.data.videos[0].video_files[5].link);
+      setVideo(res.data.video_files[5].link);
     });
   }, []);
 
