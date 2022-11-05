@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { AuthContext } from "../AuthProvider";
 import { Linkbar } from "../Linkbar/Linkbar";
@@ -17,7 +18,6 @@ import {
   NavbarWrapper,
 } from "./Navbar.styles";
 import { Button, CardTitle, Text } from "../common.styles";
-import { useTranslation } from "react-i18next";
 
 const NavLink = styled.button`
   background-color: transparent;

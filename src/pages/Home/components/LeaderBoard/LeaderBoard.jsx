@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { BallLoader } from "../../../../common/Spinner/BallLoader";
 import { getUserGroups } from "../../../../api/groups";
@@ -14,6 +15,7 @@ const LeaderBoard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,7 +34,7 @@ const LeaderBoard = () => {
       border={isMobile ? "none" : undefined}
       minHeight="300px"
     >
-      <CardTitle>Ranking de usuarios</CardTitle>
+      <CardTitle>{t("leaderBoard")}</CardTitle>
       {isLoading || !userGroups ? (
         <BallLoader />
       ) : userGroups.length > 0 ? (
@@ -52,11 +54,11 @@ const LeaderBoard = () => {
             align="center"
             margin="1rem"
           >
-            No perteneces a ningún grupo
+            {t("dontBelongToGroups")}
           </Text>
           <Text align="center" margin="1rem 0">
-            Puedes encontrar o crear uno desde <br />
-            <Link to="/groups/">esta sección</Link>
+            {t("canFindOrCreate")} <br />
+            <Link to="/groups/">{t("thisSection")}</Link>
           </Text>
         </>
       )}

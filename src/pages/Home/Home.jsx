@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { AuthContext } from "../../common/AuthProvider";
 import { useIsMobile } from "../../hooks/useIsMobile";
@@ -36,6 +37,7 @@ const Row = styled.div`
 
 function Home() {
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
   const [shownSections, setShownSection] = useState(
     isMobile ? [] : ["fixture", "leaders", "quick"]
   );
@@ -53,9 +55,9 @@ function Home() {
 
   const renderButton = (section) => {
     const buttonText = () => {
-      if (section === "fixture") return "Próximos partidos";
-      if (section === "leaders") return "Ranking de usuarios";
-      if (section === "quick") return "Predicción al paso";
+      if (section === "fixture") return t("nextMatches");
+      if (section === "leaders") return t("leaderBoard");
+      if (section === "quick") return t("quickPredictions");
     };
     const handleClick = () => {
       if (shownSections.includes(section)) {
