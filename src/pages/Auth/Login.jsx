@@ -69,6 +69,7 @@ function Login() {
       id="login-card-wrapper"
       isMobile={isMobile}
       border={isMobile ? "null" : ""}
+      bg="black"
     >
       {!isMobile && <CardTitle>Login</CardTitle>}
       <Form onSubmit={handleSubmit}>

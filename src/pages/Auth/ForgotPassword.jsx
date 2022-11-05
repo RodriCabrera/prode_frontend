@@ -46,6 +46,7 @@ function ForgotPassword() {
       isMobile={isMobile}
       border={isMobile ? "null" : ""}
       id="change-password-card-wrapper"
+      bg="black"
     >
       <>
         <CardTitle>Recuperar Contraseña</CardTitle>
