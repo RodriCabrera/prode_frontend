@@ -19,6 +19,8 @@ export const esTranslation = {
     results: "Resultados",
     predict: "Predecir",
     scores: "Puntajes",
+    scoresAutomatically:
+      "Los puntajes se calculan automáticamente según el sistema de puntajes de cada grupo",
     selectGroup: "Seleccioná un grupo:",
     thirdPosition: "Tercer puesto",
     thisSection: "esta sección",

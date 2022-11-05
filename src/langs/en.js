@@ -19,6 +19,8 @@ export const enTranslation = {
     results: "Results",
     predict: "Predict",
     scores: "Scores",
+    scoresAutomatically:
+      "The scores are automatically calculated based on the group's score system",
     selectGroup: "Select a group:",
     thirdPosition: "Third position",
     thisSection: "this section",

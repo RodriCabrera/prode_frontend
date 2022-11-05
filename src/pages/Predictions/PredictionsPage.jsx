@@ -10,28 +10,30 @@ import { useGetUserGroupsData } from "../../hooks/useGetUserGroupsData";
 
 import { Text } from "../../common/common.styles";
 
-const predictionModes = {
-  left: {
-    display: "RESULTADOS",
-    name: "results",
-    color: "orange",
-  },
-  right: {
-    display: "PREDECIR",
-    name: "edit",
-    color: "salmon",
-  },
-};
-
 function PredictionsPage() {
   const [mode, setMode] = useState("edit");
-  const { t } = useTranslation();
+
   const {
     isLoadingUserGroupsData,
     userGroupList,
     selectedUserGroup,
     handleGroupSelect,
   } = useGetUserGroupsData();
+
+  const { t } = useTranslation();
+
+  const predictionModes = {
+    left: {
+      display: t("predict").toUpperCase(),
+      name: "results",
+      color: "orange",
+    },
+    right: {
+      display: t("results").toUpperCase(),
+      name: "edit",
+      color: "salmon",
+    },
+  };
 
   return (
     <PredictionsPageWrapper id="mi-prode-container">

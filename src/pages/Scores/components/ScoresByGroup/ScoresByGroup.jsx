@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { getGroupScores } from "../../../../api/groups";
-import { GroupSelector } from "../../../Predictions/components/GroupSelector";
-import { useGetUserGroupsData } from "../../../../hooks/useGetUserGroupsData";
-import ScoreList from "../ScoresByGroup/components/ScoreList";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-import { BallLoader } from "../../../../common/Spinner/BallLoader";
-import { getPredictions } from "../../../../api/predictions";
-import { Info } from "../../../../common/Info/Info";
+import { getGroupScores } from "api/groups";
+import { GroupSelector } from "../../../Predictions/components/GroupSelector";
+import { useGetUserGroupsData } from "hooks/useGetUserGroupsData";
+import ScoreList from "../ScoresByGroup/components/ScoreList";
+import { BallLoader } from "common/Spinner/BallLoader";
+import { getPredictions } from "api/predictions";
+import { Info } from "common/Info/Info";
 import { isEmpty } from "lodash";
-import { Spinner } from "../../../../common/Spinner/Spinner";
+import { Spinner } from "common/Spinner/Spinner";
 import Graphs from "./components/Graphs";
 import MatchNavigator from "../MatchNavigator";
-import useCleanupController from "../../../../hooks/useCleanupController";
+import useCleanupController from "hooks/useCleanupController";
 
 import {
   CardContainer,
@@ -27,8 +28,9 @@ export default function ScoresByGroup() {
     predictions: false,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [signal, cleanup, handleCancel] = useCleanupController();
 
+  const [signal, cleanup, handleCancel] = useCleanupController();
+  const { t } = useTranslation();
   const {
     userGroupList,
     selectedUserGroup,
@@ -68,19 +70,15 @@ export default function ScoresByGroup() {
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
         <Text size="2.5rem" weight="500" align="center">
-          PUNTAJES
+          {t("scores").toUpperCase()}
         </Text>
         {!isLoading && userGroupList.length > 0 && (
-          <Info>
-            Los puntajes se calculan automáticamente según el sistema de
-            puntajes
-            {userGroupList.length === 1 ? " del grupo" : " de cada grupo"}.
-          </Info>
+          <Info>{t("scoresAutomatically")}</Info>
         )}
         {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
           <Text size="1.5rem" align="center" margin="1rem">
-            No perteneces a ningún grupo
+            {t("noGroups")}
           </Text>
         )}
         {!isLoadingUserGroupsData && userGroupList.length > 0 && (
