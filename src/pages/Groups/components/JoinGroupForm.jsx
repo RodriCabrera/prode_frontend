@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 import GroupConfirm from "./GroupConfirm";
 import { joinGroup, getGroupRules } from "../../../api/groups";
 import { Button, Input, Label, Form } from "../../../common/common.styles";
@@ -13,6 +15,7 @@ function JoinGroupForm({ updateList }) {
   const [showForm, setShowForm] = useState(false);
   const [groupRules, setGroupRules] = useState(null);
   const { showModal, toggleModal } = useToggleModal();
+  const { t } = useTranslation();
 
   const getGroupInformation = () => {
     setIsLoading(true);
@@ -26,8 +29,8 @@ function JoinGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: "Buscando grupo...",
-        success: "Grupo encontrado",
+        pending: t('groupSearchin'),
+        success: t('groupSearchSuccess'),
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -53,8 +56,8 @@ function JoinGroupForm({ updateList }) {
           toggleModal();
         }),
       {
-        pending: "Uniendote al grupo...",
-        success: "Te uniste al grupo",
+        pending: t('joiningGroup'),
+        success: t('joinedGroup'),
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -79,7 +82,7 @@ function JoinGroupForm({ updateList }) {
           <Label htmlFor="groupName">
             <Input
               type="text"
-              placeholder="Nombre del grupo"
+              placeholder={t('groupNamePH')}
               name="groupName"
               required
               value={values.groupName}
@@ -92,13 +95,13 @@ function JoinGroupForm({ updateList }) {
             onClick={handleGroupSearch}
             disabled={isLoading}
           >
-            Buscar grupo
+            {t('groupSearch')}
           </Button>
           <Modal show={showModal && groupRules} toggle={toggleModal}>
             <GroupConfirm
               groupName={values.groupName}
               userGroupData={groupRules}
-              confirmText="Unirme"
+              confirmText={t('join')}
             />
           </Modal>
         </Form>
@@ -108,7 +111,7 @@ function JoinGroupForm({ updateList }) {
         grayscale={showForm}
         padding="10px"
       >
-        {showForm ? "Ocultar" : "Unirse a un Grupo"}
+        {showForm ? t('hide') : t('joinGroup')}
       </Button>
     </>
   );

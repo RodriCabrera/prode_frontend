@@ -1,5 +1,7 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
+
 import { Input, Text } from "../../../common/common.styles";
 
 const InputWrapper = styled.div`
@@ -21,11 +23,12 @@ const InputAndText = styled.div`
 `;
 
 function ScoringInputs({ values, handleChange, disable=false }) {
+  const { t } = useTranslation();
   return (
     <InputWrapper>
       <InputAndText>
         <Text align="center" size="0.8rem">
-          Resultado exacto
+          {t('resultExact')}
         </Text>
         <Input
           name="scoringFull"
@@ -39,7 +42,7 @@ function ScoringInputs({ values, handleChange, disable=false }) {
       </InputAndText>
       <InputAndText>
         <Text align="center" size="0.8rem">
-          Ganador
+        {t('resultWinner')}
         </Text>
         <Input
           name="scoringWinner"
@@ -53,7 +56,7 @@ function ScoringInputs({ values, handleChange, disable=false }) {
       </InputAndText>
       <InputAndText>
         <Text align="center" size="0.8rem">
-          Resultado erróneo
+        {t('resultNone')}
         </Text>
         <Input
           name="scoringNone"

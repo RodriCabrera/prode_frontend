@@ -114,9 +114,9 @@ function CreateGroupForm({ updateList }) {
             <TextareaInput
               type="text"
               placeholder={
-                "Reglamento (los miembros deberán aceptar estos términos al ingresar)" +
+                t('groupManifestPH1') +
                 "\n\n" +
-                "¿Qué se apuesta? ¿Hay prenda para el último?"
+                t('groupManifestPH2')
               }
               name="manifesto"
               required
@@ -139,20 +139,20 @@ function CreateGroupForm({ updateList }) {
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} />
           <Text size=".8rem" align="center">
-            ¿Hasta cuando se podrán realizar las predicciones?
+            {t('timeLimitTitle')}
           </Text>
           {flags.show_admin_functions.enabled && 
           <TextGroup align="center" margin="0">
             <Label htmlFor="DontLimitByPhase">
                 <TextGroup margin="0">
-                    <Text>Por partido</Text>
+                    <Text>{t('byMatch')}</Text>
                     <Input type="radio" name="limitByPhase" id="DontLimitByPhase" 
                         value={false} onChange={handleChange} checked={values.limitByPhase==="false"} />
                 </TextGroup>
             </Label>
             <Label htmlFor="DoLimitByPhase">
                 <TextGroup margin="0">
-                    <Text>Por fase</Text>
+                    <Text>{t('byStage')}</Text>
                     <Input type="radio" name="limitByPhase" id="DoLimitByPhase" 
                         value={true} onChange={handleChange} checked={values.limitByPhase==="true"} />
                 </TextGroup>
@@ -166,19 +166,19 @@ function CreateGroupForm({ updateList }) {
             >
               <option value={0} defaultChecked>
                 {values.limitByPhase === "true" ? 
-                    "Al comenzar la fase" : "Al comienzo del partido" }
+                    t('timeLimitOptionStage0') : t('timeLimitOptionMatch0') }
               </option>
               <option value={1000 * 60 * 60 * 1}>
                 {values.limitByPhase === "true" ? 
-                    "Una hora antes de la fase" : "Una hora antes del partido" }
+                    t('timeLimitOptionStage1') : t('timeLimitOptionMatch1') }
               </option>
               <option value={1000 * 60 * 60 * 12}>
                 {values.limitByPhase === "true" ? 
-                    "Doce horas antes de comenzar la fase" : "Doce horas antes de comenzar el partido" }
+                    t('timeLimitOptionStage2') : t('timeLimitOptionMatch2') }
               </option>
               <option value={1000 * 60 * 60 * 24}>
                 {values.limitByPhase === "true" ? 
-                    "Un día antes de comenzar la fase" : "Un día antes de comenzar el partido" }
+                    t('timeLimitOptionStage3') : t('timeLimitOptionMatch3') }
               </option>
             </Select>
           </Label>
@@ -187,7 +187,7 @@ function CreateGroupForm({ updateList }) {
             disabled={isLoading || !isEmpty(errors) || isEmpty(values.name)}
             onClick={toggleModal}
           >
-            Crear grupo
+            {t('createGroup')}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <GroupConfirm
@@ -202,7 +202,7 @@ function CreateGroupForm({ updateList }) {
                 timeLimit: values.timeLimit,
                 limitByPhase: values.limitByPhase === "true"
               }}
-              confirmText="Crear grupo"
+              confirmText={t('createGroup')}
             />
           </Modal>
         </Form>
@@ -212,7 +212,7 @@ function CreateGroupForm({ updateList }) {
         grayscale={showForm}
         padding="10px"
       >
-        {showForm ? "Ocultar" : "Crear un nuevo grupo"}
+        {showForm ? t('hide') : t('createNewGroup')}
       </Button>
     </>
   );
