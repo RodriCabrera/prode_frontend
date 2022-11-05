@@ -2,9 +2,11 @@ export const esTranslation = {
   translation: {
     canFindOrCreate: "Puedes encontrar o crear uno desde",
     createdBy: "Creado por",
+    editProfile: "Editar perfil",
     eight: "Octavos",
     exit: "Salir",
     groups: "Grupos",
+    groupPhase: "Fase de grupos",
     leaderBoard: "Ranking de usuarios",
     nextMatches: "Próximos partidos",
     noGroups: "No perteneces a ningún grupo",

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { isEmpty } from "lodash";
+import { useTranslation } from "react-i18next";
 
 import { editProfile } from "../../../api/profiles";
 import Modal from "../../../common/Modal/Modal";
@@ -23,10 +24,14 @@ export function ProfileEditForm({ profile, updateProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditingEnabled, setIsEditingEnabled] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(profile?.avatar || "");
+
   const { showModal, toggleModal } = useToggleModal();
+  const { t } = useTranslation();
+
   const handleNameChange = (e) => {
     setUserName(e.target.value);
   };
+
   const isNumberAndLetters = /[^A-Za-z0-9]/.test(userName);
 
   const handleSubmit = (e) => {
@@ -82,7 +87,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
     <>
       {!isEditingEnabled && (
         <Button onClick={() => setIsEditingEnabled(!isEditingEnabled)}>
-          Editar Perfil
+          {t("editProfile")}
         </Button>
       )}
       {isEditingEnabled && (

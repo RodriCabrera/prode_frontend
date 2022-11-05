@@ -2,9 +2,11 @@ export const enTranslation = {
   translation: {
     canFindOrCreate: "You can find or create a group from",
     createdBy: "Created by",
+    editProfile: "Edit Profile",
     eight: "Eight-finals",
     exit: "Exit",
     groups: "Groups",
+    groupPhase: "Group Phase",
     leaderBoard: "Leader Board",
     nextMatches: "Next Matches",
     noGroups: "You don't belong to any group",
