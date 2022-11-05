@@ -16,5 +16,9 @@ export const enTranslation = {
     scores: "Scores",
     groups: "Groups",
     selectGroup: "Select a group:",
+    eight: "Eight-finals",
+    quarterfinals: "Quarterfinals",
+    thirdPosition: "Third position",
+    phases: "Phases",
   },
 };

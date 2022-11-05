@@ -16,5 +16,9 @@ export const esTranslation = {
     scores: "Puntajes",
     groups: "Grupos",
     selectGroup: "Seleccioná un grupo:",
+    eight: "Octavos",
+    quarterfinals: "Cuartos",
+    thirdPosition: "Tercer puesto",
+    phases: "Fases",
   },
 };

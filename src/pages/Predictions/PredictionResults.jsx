@@ -10,6 +10,7 @@ import { ListElement } from "../../common/Lists/ListElement";
 import { ListWrapper } from "../../common/Lists/Lists.styles";
 import { Spinner } from "../../common/Spinner/Spinner";
 import useCleanupController from "../../hooks/useCleanupController";
+import { useTranslation } from "react-i18next";
 
 const GroupsListWrapper = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ function PredictionResults() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUserGroup, setSelectedUserGroup] = useState(null);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsLoading(true);
@@ -55,7 +57,7 @@ function PredictionResults() {
 
   if (isLoading) return <Spinner />;
 
-  if (isEmpty(predictions)) return <Text>Aún no hiciste predicciones</Text>;
+  if (isEmpty(predictions)) return <Text>{t("noPredictionsYet")}</Text>;
 
   return (
     <>

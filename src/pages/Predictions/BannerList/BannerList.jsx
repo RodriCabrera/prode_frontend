@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { getPredictionCompletePercentage } from "../../../api/predictions";
 import { getFixtureStatus } from "api/fixture";
@@ -16,6 +17,7 @@ function BannerList() {
   const { selectedUserGroup, mode } = useOutletContext();
   const [predictedPercentages, setPredictedPercentages] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { t } = useTranslation();
   const [stageStatus, setStageStatus] = useState({
     GRUPOS: false,
     OCTAVOS: false,
@@ -57,7 +59,7 @@ function BannerList() {
   const bannerData = [
     {
       id: 1,
-      title: "GRUPOS",
+      title: t("groups").toUpperCase(),
       path: "groups",
       percentage: predictedPercentages.GRUPOS
         ? calculatePercentage(predictedPercentages.GRUPOS)
@@ -65,7 +67,7 @@ function BannerList() {
     },
     {
       id: 2,
-      title: "OCTAVOS",
+      title: t("eight").toUpperCase(),
       path: "16",
       percentage: predictedPercentages.OCTAVOS
         ? calculatePercentage(predictedPercentages.OCTAVOS)
@@ -73,7 +75,7 @@ function BannerList() {
     },
     {
       id: 3,
-      title: "CUARTOS",
+      title: t("quarterfinals").toUpperCase(),
       path: "8",
       percentage: predictedPercentages.CUARTOS
         ? calculatePercentage(predictedPercentages.CUARTOS)
@@ -89,7 +91,7 @@ function BannerList() {
     },
     {
       id: 5,
-      title: "TERCER PUESTO",
+      title: t("thirdPosition").toUpperCase(),
       path: "3",
       percentage: predictedPercentages.TERCER_PUESTO
         ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
@@ -108,7 +110,7 @@ function BannerList() {
   return (
     <BannerContainer>
       <Text align="center" size="2rem" weight="700">
-        FASES
+        {t("phases").toUpperCase()}
       </Text>
       {loadingStatus ? (
         <BallLoader />
