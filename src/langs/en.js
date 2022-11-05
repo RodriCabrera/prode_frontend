@@ -14,6 +14,7 @@ export const enTranslation = {
     profileUpdated: "Profile updated",
     yourNewProfile: "Your new profile",
     clickAvatarToChoose: "Click the avatar to choose another one",
+    goBack: "Go Back",
     eight: "Eight-finals",
     exit: "Exit",
     groupCreated: "Created group. Redirecting...",
