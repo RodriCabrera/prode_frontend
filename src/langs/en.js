@@ -99,7 +99,7 @@ export const enTranslation = {
     thirdPosition: "Third position",
     thisSection: "this section",
     yourGroups: "Your groups:",
-
+    areYouSure: "Are you sure?",
     insertEmail: "Enter email",
     insertPass: "Enter password",
     insertValidEmail: "Enter valid email",

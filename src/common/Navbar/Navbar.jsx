@@ -52,9 +52,9 @@ function Navbar() {
   return (
     <>
       <Modal show={showModal} toggle={toggleModal}>
-        <CardTitle>¿Estás seguro?</CardTitle>
+        <CardTitle>{t("areYouSure")}</CardTitle>
         <Button type="button" onClick={handleLogout}>
-          {t("salir")}
+          {t("exit")}
         </Button>
       </Modal>
       <NavbarContainer id="navbar-container">

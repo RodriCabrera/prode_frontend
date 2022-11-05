@@ -98,7 +98,7 @@ export const esTranslation = {
     thirdPosition: "Tercer puesto",
     thisSection: "esta sección",
     yourGroups: "Grupos en los que estás participando:",
-
+    areYouSure: "Estas seguro?",
     insertEmail: "Ingresa un email",
     insertPass: "Ingresar contraseña",
     insertValidEmail: "Ingresa un email válido",
