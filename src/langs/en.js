@@ -16,6 +16,8 @@ export const enTranslation = {
     quarterfinals: "Quarterfinals",
     quickPredictions: "Quick Predictions",
     register: "Register",
+    results: "Results",
+    predict: "Predecir",
     scores: "Scores",
     selectGroup: "Select a group:",
     thirdPosition: "Third position",

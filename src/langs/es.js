@@ -16,6 +16,8 @@ export const esTranslation = {
     quarterfinals: "Cuartos",
     quickPredictions: "Predicciones al paso",
     register: "Registrarse",
+    results: "Resultados",
+    predict: "Predecir",
     scores: "Puntajes",
     selectGroup: "Seleccioná un grupo:",
     thirdPosition: "Tercer puesto",
