@@ -37,12 +37,12 @@ const Row = styled.div`
 
 function Home() {
   const isMobile = useIsMobile();
-  const { t } = useTranslation();
   const [shownSections, setShownSection] = useState(
     isMobile ? [] : ["fixture", "leaders", "quick"]
   );
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     let subscribed = true;

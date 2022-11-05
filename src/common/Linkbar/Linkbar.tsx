@@ -1,9 +1,10 @@
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GiPodiumWinner } from "react-icons/gi";
 import { FaListUl } from "react-icons/fa";
 import { BiFootball } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
+
 import {
   CustomLink,
   LinkbarContainer,
@@ -11,7 +12,6 @@ import {
   LinkGroup,
   LinkWrapper,
 } from "./Linkbar.styles";
-import { useTranslation } from "react-i18next";
 
 interface ILinkbarProps {
   isMobile: boolean;

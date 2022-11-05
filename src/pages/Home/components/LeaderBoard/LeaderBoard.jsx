@@ -54,7 +54,7 @@ const LeaderBoard = () => {
             align="center"
             margin="1rem"
           >
-            {t("dontBelongToGroups")}
+            {t("noGroups")}
           </Text>
           <Text align="center" margin="1rem 0">
             {t("canFindOrCreate")} <br />
