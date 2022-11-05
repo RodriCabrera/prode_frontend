@@ -9,10 +9,12 @@ export const enTranslation = {
     thisSection: "this section",
     noGroups: "You don't belong to any group",
     noPredictions: "No pending predictions",
+    noPredictionsYet: "You haven't made predictions yet",
     canFindOrCreate: "You can find or create a group from",
     createdBy: "Created by",
     predictions: "Predictions",
     scores: "Scores",
     groups: "Groups",
+    selectGroup: "Select a group:",
   },
 };
