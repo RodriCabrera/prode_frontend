@@ -45,6 +45,8 @@ export const enTranslation = {
     leaderBoard: "Leader Board",
     loginIn: "Login in...",
     loginSuccess: "Login successful",
+    loginError: "Error while logging in with Google",
+    loginValidation: "Validating account...",
     members: "Members",
     nextMatches: "Next Matches",
     noGroups: "You don't belong to any group",

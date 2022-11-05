@@ -2,6 +2,7 @@ export const esTranslation = {
   translation: {
     areYouSure: "Estas seguro?",
     atLeast6: "Al menos 6 caracteres",
+    accountValidating: "Validando cuenta...",
     backToLogin: "Volver al login",
     byMatch: "Por partido",
     byStage: "Por fase",
@@ -46,6 +47,8 @@ export const esTranslation = {
     leaderBoard: "Ranking de usuarios",
     loginIn: "Logueandote...",
     loginSuccess: "Logueado con éxito",
+    loginError: "Error al loguearse con Google",
+    loginValidation: "Validando cuenta...",
     members: "Integrantes",
     nextMatches: "Próximos partidos",
     noGroups: "No perteneces a ningún grupo",

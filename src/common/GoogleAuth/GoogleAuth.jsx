@@ -15,7 +15,7 @@ function GoogleAuth({ text }) {
   const { t } = useTranslation();
 
   const responseGoogle = async (response) => {
-    toast("Validando cuenta...");
+    toast(t("loginValidation"));
     const res = await axios.post(
       `${config.API_URL}/auth/google`,
       {
@@ -28,9 +28,9 @@ function GoogleAuth({ text }) {
     if (res.status === 200 && res.data.token) {
       localStorage.setItem("token", res.data.token);
       window.location.reload();
-      toast.success("Logueado con éxito");
+      toast.success(t("loginSuccess"));
     } else {
-      toast.error("Error al loguearse con Google");
+      toast.error(t("loginError"));
       setShowError(true);
     }
   };
