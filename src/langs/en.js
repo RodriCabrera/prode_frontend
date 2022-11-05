@@ -10,5 +10,8 @@ export const enTranslation = {
     dontBelongToGroups: "You don't belong to any group",
     canFindOrCreate: "You can find or create a group from",
     createdBy: "Created by",
+    predictions: "Predictions",
+    scores: "Scores",
+    groups: "Groups",
   },
 };

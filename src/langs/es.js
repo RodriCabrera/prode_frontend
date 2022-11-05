@@ -10,5 +10,8 @@ export const esTranslation = {
     dontBelongToGroups: "No perteneces a ningún grupo",
     canFindOrCreate: "Puedes encontrar o crear uno desde",
     createdBy: "Creado por",
+    predictions: "Predicciones",
+    scores: "Puntajes",
+    groups: "Grupos",
   },
 };
