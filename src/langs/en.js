@@ -10,6 +10,29 @@ export const enTranslation = {
     insertImageLink: "Enter a link to an image",
     orChooseFromList: "choose from list",
     select: "Select",
+    slogan: "Predict Qatar 2022",
+    loginIn: "Login in...",
+    loginSuccess: "Login successful",
+    atLeast6: "At least 6 characters",
+    forgotPass: "Forgot password",
+    firstTime: "First Time? Register",
+    loginWithGoogle: "Login With Google",
+    landing: {
+      main: "Join, predict and win",
+      first: {
+        title: "Create a group and send invitations",
+        subtitle:
+          "You can customize the score system and the prediction limit date",
+      },
+      second: {
+        title: "Join existing groups",
+        subtitle: "You can get the invite through WhatsApp, email or Telegram",
+      },
+      third: {
+        title: "Check the included fixture",
+        subtitle: "It's updated with the latest data from the FIFA.",
+      },
+    },
     sendingChanges: "Sending changes...",
     profileUpdated: "Profile updated",
     yourNewProfile: "Your new profile",

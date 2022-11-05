@@ -11,6 +11,7 @@ import {
   LeftPlaceholder,
   VideoBg,
 } from "./LandingPage.styles";
+import { t } from "i18next";
 
 const LandingPageMain = () => {
   const [video, setVideo] = useState();
@@ -32,7 +33,7 @@ const LandingPageMain = () => {
           Chumbazo.
         </Text>
         <Text size={isMobile ? "1.5rem" : "2.5rem"} weight="800">
-          El prode para Qatar 2022.
+          {t("slogan")}
         </Text>
         <Countdown />
       </LeftPlaceholder>

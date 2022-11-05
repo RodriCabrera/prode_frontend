@@ -10,6 +10,29 @@ export const esTranslation = {
     insertImageLink: "Introduce un link a tu imagen",
     orChooseFromList: "o elegí de la lista",
     select: "Seleccionar",
+    slogan: "El prode para Qatar 2022.",
+    loginIn: "Logueandote...",
+    loginSuccess: "Logueado con éxito",
+    atLeast6: "Al menos 6 caracteres",
+    forgotPass: "Recuperar Contraseña",
+    firstTime: "Crear cuenta",
+    loginWithGoogle: "Login Con Google",
+    landing: {
+      main: "Unite, Predecí y Ganá",
+      first: {
+        title: "Creá un grupo y enviá invitaciones a quien quieras",
+        subtitle:
+          "Podés personalizar el sistema de puntajes y la fecha tope para hacer las predicciones",
+      },
+      second: {
+        title: "Unite a un grupo existente con un solo click",
+        subtitle: "Vas a recibir la invitación por WhatsApp, email o Telegram",
+      },
+      third: {
+        title: "Consultá el fixture incorporado",
+        subtitle: "Se mantiene actualizado con los datos de la FIFA",
+      },
+    },
     sendingChanges: "Enviando cambios",
     profileUpdated: "Perfil actualizado",
     yourNewProfile: "Tu nuevo perfil",
