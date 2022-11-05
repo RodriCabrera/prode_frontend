@@ -79,5 +79,7 @@ export const esTranslation = {
     groupNameRequirements:
       "El nombre del grupo debe tener menos de 20 caracteres",
     username: "Nombre de usuario",
+    createAccount: "Crear cuenta",
+    backToLogin: "Volver al login",
   },
 };

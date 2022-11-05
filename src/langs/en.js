@@ -77,5 +77,7 @@ export const enTranslation = {
     insertUsername: "Enter username",
     groupNameRequirements: "Group name must be less than 20 characters.",
     username: "Username",
+    createAccount: "Create Account",
+    backToLogin: "Back to Login",
   },
 };

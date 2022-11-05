@@ -73,7 +73,7 @@ function Register() {
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
           <Text color={errors.name ? "orange" : "white"}>
-            {t("username") || "Nombre de usuario:"}
+            {t(errors.name) || t("username")}
           </Text>
           <Input
             type="text"
@@ -87,7 +87,7 @@ function Register() {
         </Label>
         <Label htmlFor="email">
           <Text color={errors.email ? "orange" : "white"}>
-            {errors.email || "Email:"}
+            {t(errors.email) || "Email:"}
           </Text>
           <Input
             type="email"
@@ -101,7 +101,7 @@ function Register() {
 
         <Label htmlFor="password">
           <Text color={errors.password ? "orange" : "white"}>
-            {errors.password || "Password:"}
+            {t(errors.password) || "Password:"}
           </Text>
           <Input
             type="password"
@@ -115,12 +115,12 @@ function Register() {
         </Label>
 
         <Button onClick={handleSubmit} disabled={!isEmpty(errors) || isLoading}>
-          CREAR CUENTA
+          {t("createAccount")}
         </Button>
       </Form>
       <GoogleAuth text="Register" />
       <Button grayscale padding="5px" onClick={() => navigate("/auth")}>
-        Ya tenés cuenta?
+        {t("backToLogin")}
       </Button>
     </CardWrapper>
   );
