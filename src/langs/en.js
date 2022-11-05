@@ -17,7 +17,7 @@ export const enTranslation = {
     quickPredictions: "Quick Predictions",
     register: "Register",
     results: "Results",
-    predict: "Predecir",
+    predict: "Predict",
     scores: "Scores",
     selectGroup: "Select a group:",
     thirdPosition: "Third position",
