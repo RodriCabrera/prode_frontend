@@ -108,7 +108,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>
-              Tu nuevo perfil
+              {t("yourNewProfile")}
             </Text>
             <br />
             <Text size="2rem" align="center">
@@ -124,7 +124,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
               </BigAvatarWrapper>
             </AvatarContainer>
             <br />
-            <Button type="submit">Confirmar</Button>
+            <Button type="submit">{t("confirm")}ghj</Button>
           </Modal>
         </Form>
       )}

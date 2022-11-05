@@ -8,6 +8,7 @@ import {
   ModalContentWrapper,
 } from "./modal.styles";
 import { Button } from "../common.styles";
+import { t } from "i18next";
 
 interface IModalProps {
   children: JSX.Element;
@@ -21,7 +22,7 @@ function Modal({
   show,
   toggle,
   backdrop = true,
-  cancelText = "Cancelar",
+  cancelText = t("cancel"),
 }: IModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
