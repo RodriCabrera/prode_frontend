@@ -4,10 +4,13 @@ import { useFlags } from "flagsmith/react"
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 import GroupConfirm from "./GroupConfirm";
 import { createGroup } from "../../../api/groups";
 import ScoringInputs from "./ScoringInputs";
 import useToggleModal from "../../../hooks/useToggleModal";
+
 import Modal from "../../../common/Modal/Modal";
 import {
   Button,
@@ -39,6 +42,7 @@ function CreateGroupForm({ updateList }) {
     validationSchema: groupsSchema.create,
   });
   const flags = useFlags(["show_admin_functions"])
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -66,8 +70,8 @@ function CreateGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: "Creando grupo...",
-        success: "Grupo creado con éxito. Redirigiendo...",
+        pending: t('creatingGroup'),
+        success: t('groupCreated'),
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -86,7 +90,7 @@ function CreateGroupForm({ updateList }) {
           <Label htmlFor="name">
             <Input
               type="text"
-              placeholder="Nombre del nuevo grupo"
+              placeholder={t('groupNamePH')}
               name="name"
               required
               value={values.name}
