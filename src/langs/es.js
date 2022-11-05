@@ -16,7 +16,7 @@ export const esTranslation = {
     atLeast6: "Al menos 6 caracteres",
     forgotPass: "Recuperar Contraseña",
     firstTime: "Crear cuenta",
-    loginWithGoogle: "Login Con Google",
+    withGoogle: "con Google",
     landing: {
       main: "Unite, Predecí y Ganá",
       first: {
@@ -67,5 +67,17 @@ export const esTranslation = {
     thirdPosition: "Tercer puesto",
     thisSection: "esta sección",
     yourGroups: "Grupos en los que estás participando:",
+
+    insertEmail: "Ingresa un email",
+    insertPass: "Ingresar contraseña",
+    insertValidEmail: "Ingresa un email válido",
+    passRequirements: "La contraseña tiene que tener al menos 6 caracteres",
+    usernameRequirementsMax:
+      "El nombre de usuario debe tener 20 caracteres como máximo",
+    usernameRequirementsMatches: "El nombre de usuario debe ser alfanumérico",
+    insertUsername: "Ingresar nombre de usuario",
+    groupNameRequirements:
+      "El nombre del grupo debe tener menos de 20 caracteres",
+    username: "Nombre de usuario",
   },
 };

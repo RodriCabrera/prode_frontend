@@ -76,7 +76,7 @@ function Login() {
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="email">
           <Text color={errors.email ? "orange" : ""}>
-            {errors.email ? errors.email : "Email:"}
+            {errors.email ? t(errors.email) : "Email:"}
           </Text>
           <Input
             type="email"
@@ -90,7 +90,7 @@ function Login() {
 
         <Label htmlFor="password">
           <Text color={errors.password ? "orange" : ""}>
-            {errors.password ? errors.password : "Password:"}
+            {errors.password ? t(errors.password) : "Password:"}
           </Text>
           <Input
             type="password"

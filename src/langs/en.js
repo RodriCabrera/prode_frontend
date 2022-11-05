@@ -16,7 +16,7 @@ export const enTranslation = {
     atLeast6: "At least 6 characters",
     forgotPass: "Forgot password",
     firstTime: "First Time? Register",
-    loginWithGoogle: "Login With Google",
+    withGoogle: "with Google",
     landing: {
       main: "Join, predict and win",
       first: {
@@ -67,5 +67,15 @@ export const enTranslation = {
     thirdPosition: "Third position",
     thisSection: "this section",
     yourGroups: "Your groups:",
+
+    insertEmail: "Enter email",
+    insertPass: "Enter password",
+    insertValidEmail: "Enter valid email",
+    passRequirements: "Password must have at least 6 characters",
+    usernameRequirementsMax: "Username must be less than 20 characters",
+    usernameRequirementsMatches: "Username must be alpha numeric",
+    insertUsername: "Enter username",
+    groupNameRequirements: "Group name must be less than 20 characters.",
+    username: "Username",
   },
 };

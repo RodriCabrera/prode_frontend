@@ -19,11 +19,16 @@ import {
   Label,
   Text,
 } from "../../common/common.styles";
+import { useTranslation } from "react-i18next";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
+
   const userContext = useContext(AuthContext);
+
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const { t } = useTranslation();
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.register,
@@ -57,18 +62,18 @@ function Register() {
       }
     );
   };
-  const isMobile = useIsMobile();
+
   return (
     <CardWrapper
       id="register-card-wrapper"
       isMobile={isMobile}
       border={isMobile ? "null" : ""}
     >
-      <CardTitle>Registrarse</CardTitle>
+      <CardTitle>{t("register")}</CardTitle>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
           <Text color={errors.name ? "orange" : "white"}>
-            {errors.name || "Nombre de usuario:"}
+            {t("username") || "Nombre de usuario:"}
           </Text>
           <Input
             type="text"
