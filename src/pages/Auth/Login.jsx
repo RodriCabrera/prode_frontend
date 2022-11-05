@@ -19,6 +19,7 @@ import {
   Label,
   Text,
 } from "../../common/common.styles";
+import { useTranslation } from "react-i18next";
 
 function Login() {
   const userContext = useContext(AuthContext);
@@ -29,6 +30,7 @@ function Login() {
     validationSchema: authSchema.login,
     validateOnMount: true,
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (userContext.user) {
@@ -53,8 +55,8 @@ function Login() {
           setIsLoading(false);
         }),
       {
-        pending: "Logueandote...",
-        success: "Logueado con éxito",
+        pending: t("loginIn"),
+        success: t("loginSuccess"),
         error: {
           render({ data }) {
             return data?.response?.data?.error || "Error al autenticar...";
@@ -74,7 +76,7 @@ function Login() {
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="email">
           <Text color={errors.email ? "orange" : ""}>
-            {errors.email ? errors.email : "Email:"}
+            {errors.email ? t(errors.email) : "Email:"}
           </Text>
           <Input
             type="email"
@@ -88,13 +90,13 @@ function Login() {
 
         <Label htmlFor="password">
           <Text color={errors.password ? "orange" : ""}>
-            {errors.password ? errors.password : "Password:"}
+            {errors.password ? t(errors.password) : "Password:"}
           </Text>
           <Input
             type="password"
             name="password"
             required
-            placeholder="Al menos 6 caracteres"
+            placeholder={t("atLeast6")}
             value={values.password}
             onChange={handleChange}
             autoComplete="current-password"
@@ -104,10 +106,10 @@ function Login() {
           LOGIN
         </Button>
         <GoogleAuth text="Login" />
-        <Link to="forgot-password">Olvidé mi contraseña</Link>
+        <Link to="forgot-password">{t("forgotPass")}</Link>
       </Form>
       <Button grayscale padding="8px" onClick={() => navigate("register")}>
-        Primera vez? Registrate
+        {t("firstTime")}
       </Button>
     </CardWrapper>
   );

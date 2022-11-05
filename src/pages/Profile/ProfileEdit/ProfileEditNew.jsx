@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { BsFillCameraFill } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 import { editProfile } from "../../../api/profiles";
 import AvatarList from "./AvatarListNew";
@@ -28,7 +29,12 @@ import {
 import { isEmpty } from "lodash";
 
 function ProfileEdit({ toggleEditMode, isMobile }) {
+  const [customAvatarLink, setCustomAvatarLink] = useState("");
+
   const userContext = useContext(AuthContext);
+
+  const { t } = useTranslation();
+  const { showModal, toggleModal } = useToggleModal();
   const { values, handleChange, errors, setFieldValue, dirty } = useFormik({
     initialValues: {
       name: userContext?.user?.name,
@@ -36,8 +42,6 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
     },
     validationSchema: profileSchema.edit,
   });
-  const { showModal, toggleModal } = useToggleModal();
-  const [customAvatarLink, setCustomAvatarLink] = useState("");
 
   const handleNewAvatar = (value) => {
     setFieldValue("avatar", value);
@@ -52,15 +56,11 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
         name: values.name,
         avatar: values.avatar,
       })
-        .then(() => {
-          setTimeout(userContext.updateAuth, 1000);
-        })
-        .finally(() => {
-          toggleEditMode();
-        }),
+        .then(() => setTimeout(userContext.updateAuth, 1000))
+        .finally(() => toggleEditMode()),
       {
-        pending: "Enviando cambios",
-        success: "Perfil actualizado",
+        pending: t("sendingChanges"),
+        success: t("profileUpdate"),
         error: {
           render({ data }) {
             return data?.response.data?.error;
@@ -85,7 +85,7 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
             />
           </AvatarEditWrapper>
         </BigAvatarWrapper>
-        {isMobile && <Info>Haz click en el avatar para elegir otro</Info>}
+        {isMobile && <Info>{t("clickAvatarToChoose")}</Info>}
       </UserNameContainer>
       <Label htmlFor="name">
         <Input
@@ -100,17 +100,17 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
         {errors.name && <Info>{errors.name}</Info>}
       </Label>
       <Button type="submit" disabled={!dirty || !isEmpty(errors)}>
-        Confirmar
+        {t("confirm")}
       </Button>
       <Button type="reset" grayscale onClick={toggleEditMode}>
-        Cancelar
+        {t("cancel")}
       </Button>
       <Modal show={showModal} toggle={toggleModal}>
         <BigAvatarWrapper>
           <UserMiniAvatar avatar={customAvatarLink || values.avatar} />
         </BigAvatarWrapper>
         <Text size="2rem" align="center">
-          Introduce un link a tu imagen
+          {t("insertImageLink")}
         </Text>
         <Input
           type="url"
@@ -123,7 +123,7 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
           onClick={() => handleNewAvatar(customAvatarLink)}
           disabled={!customAvatarLink}
         >
-          Seleccionar
+          {t("select")}
         </Button>
       </Modal>
     </Form>

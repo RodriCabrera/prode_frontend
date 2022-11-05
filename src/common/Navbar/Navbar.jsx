@@ -36,10 +36,10 @@ function Navbar() {
   const { pathname } = useLocation();
   if (pathname === "/auth") return;
 
-  const { t, i18n } = useTranslation();
-
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const { t, i18n } = useTranslation();
   const isCurrentLang = (lang) => lang === i18n.language;
   const { showModal, toggleModal } = useToggleModal();
 

@@ -19,11 +19,16 @@ import {
   Label,
   Text,
 } from "../../common/common.styles";
+import { useTranslation } from "react-i18next";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
+
   const userContext = useContext(AuthContext);
+
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const { t } = useTranslation();
   const { values, errors, handleChange } = useFormik({
     initialValues: {},
     validationSchema: authSchema.register,
@@ -57,18 +62,18 @@ function Register() {
       }
     );
   };
-  const isMobile = useIsMobile();
+
   return (
     <CardWrapper
       id="register-card-wrapper"
       isMobile={isMobile}
       border={isMobile ? "null" : ""}
     >
-      <CardTitle>Registrarse</CardTitle>
+      <CardTitle>{t("register")}</CardTitle>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="name">
           <Text color={errors.name ? "orange" : "white"}>
-            {errors.name || "Nombre de usuario:"}
+            {t(errors.name) || t("username")}
           </Text>
           <Input
             type="text"
@@ -82,7 +87,7 @@ function Register() {
         </Label>
         <Label htmlFor="email">
           <Text color={errors.email ? "orange" : "white"}>
-            {errors.email || "Email:"}
+            {t(errors.email) || "Email:"}
           </Text>
           <Input
             type="email"
@@ -96,7 +101,7 @@ function Register() {
 
         <Label htmlFor="password">
           <Text color={errors.password ? "orange" : "white"}>
-            {errors.password || "Password:"}
+            {t(errors.password) || "Password:"}
           </Text>
           <Input
             type="password"
@@ -110,12 +115,12 @@ function Register() {
         </Label>
 
         <Button onClick={handleSubmit} disabled={!isEmpty(errors) || isLoading}>
-          CREAR CUENTA
+          {t("createAccount")}
         </Button>
       </Form>
       <GoogleAuth text="Register" />
       <Button grayscale padding="5px" onClick={() => navigate("/auth")}>
-        Ya tenés cuenta?
+        {t("backToLogin")}
       </Button>
     </CardWrapper>
   );

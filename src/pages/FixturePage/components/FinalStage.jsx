@@ -9,6 +9,7 @@ import useCleanupController from "hooks/useCleanupController";
 import { StageColumn, MatchData, Match } from "./laterStages.styles";
 import { Text } from "common/common.styles";
 import WordlCup from "./WorldCup.png";
+import { useTranslation } from "react-i18next";
 
 const CupImg = styled.img`
   width: 100px;
@@ -20,6 +21,7 @@ function FinalStage() {
   const [finalData, setFinalData] = useState([]);
   const [thirdData, setThirdData] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { t } = useTranslation();
 
   useEffect(() => {
     getFixtureByStageId("FINAL", signal)
@@ -65,7 +67,7 @@ function FinalStage() {
         />
       </div>
       <Match>
-        <h6>TERCER PUESTO</h6>
+        <h6>{t("thirdPosition").toUpperCase()}</h6>
         {thirdData && (
           <>
             {parseDate(thirdData.date, datePreferences)}
