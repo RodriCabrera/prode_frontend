@@ -10,7 +10,7 @@ export const enTranslation = {
     insertImageLink: "Enter a link to an image",
     orChooseFromList: "choose from list",
     select: "Select",
-    slogan: "Predict Qatar 2022",
+    slogan: "Predict Qatar 2022 results",
     loginIn: "Login in...",
     loginSuccess: "Login successful",
     atLeast6: "At least 6 characters",

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { getSoccerVideos } from "api/pexels";
 import { useIsMobile } from "hooks/useIsMobile";
@@ -11,12 +12,11 @@ import {
   LeftPlaceholder,
   VideoBg,
 } from "./LandingPage.styles";
-import { t } from "i18next";
 
 const LandingPageMain = () => {
   const [video, setVideo] = useState();
   const isMobile = useIsMobile();
-
+  const { t } = useTranslation();
   useEffect(() => {
     getSoccerVideos().then((res) => {
       setVideo(res.data.video_files[5].link);
