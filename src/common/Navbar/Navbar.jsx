@@ -77,6 +77,7 @@ function Navbar() {
                 <Text
                   color={isCurrentLang("en") ? "orange" : "gray"}
                   onClick={() => i18n.changeLanguage("en")}
+                  style={{ cursor: "pointer" }}
                 >
                   ENG
                 </Text>
@@ -84,6 +85,7 @@ function Navbar() {
                 <Text
                   color={isCurrentLang("es") ? "orange" : "gray"}
                   onClick={() => i18n.changeLanguage("es")}
+                  style={{ cursor: "pointer" }}
                 >
                   ESP
                 </Text>
