@@ -58,7 +58,7 @@ function BannerList() {
 
   const bannerData = [
     {
-      id: 1,
+      id: "GRUPOS",
       title: t("groups").toUpperCase(),
       path: "groups",
       percentage: predictedPercentages.GRUPOS
@@ -66,7 +66,7 @@ function BannerList() {
         : null,
     },
     {
-      id: 2,
+      id: "OCTAVOS",
       title: t("eight").toUpperCase(),
       path: "16",
       percentage: predictedPercentages.OCTAVOS
@@ -74,7 +74,7 @@ function BannerList() {
         : null,
     },
     {
-      id: 3,
+      id: "CUARTOS",
       title: t("quarterfinals").toUpperCase(),
       path: "8",
       percentage: predictedPercentages.CUARTOS
@@ -82,7 +82,7 @@ function BannerList() {
         : null,
     },
     {
-      id: 4,
+      id: "SEMIFINAL",
       title: "SEMIFINAL",
       path: "semis",
       percentage: predictedPercentages.SEMIFINAL
@@ -90,7 +90,7 @@ function BannerList() {
         : null,
     },
     {
-      id: 5,
+      id: "TERCER_PUESTO",
       title: t("thirdPosition").toUpperCase(),
       path: "3",
       percentage: predictedPercentages.TERCER_PUESTO
@@ -98,7 +98,7 @@ function BannerList() {
         : null,
     },
     {
-      id: 6,
+      id: "FINAL",
       title: "FINAL",
       path: "final",
       percentage: predictedPercentages.FINAL
@@ -123,7 +123,7 @@ function BannerList() {
               path={stage.path}
               percentage={stage.percentage}
               isLoading={isLoading}
-              disabled={stageStatus[stage.title.replace(" ", "_")]}
+              disabled={stageStatus[stage.id]}
             />
           );
         })

@@ -15,6 +15,7 @@ export const esTranslation = {
     cancel: "Cancelar",
     canFindOrCreate: "Puedes encontrar o crear uno desde",
     clickAvatarToChoose: "Haz click en el avatar para elegir otro",
+    completed: "completo",
     confirm: "Confirmar",
     confirmChanges: "Confirmar cambios",
     copiedLink: "Copied link!",

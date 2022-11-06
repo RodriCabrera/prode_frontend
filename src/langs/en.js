@@ -14,6 +14,7 @@ export const enTranslation = {
     cancel: "Cancel",
     canFindOrCreate: "You can find or create a group from",
     clickAvatarToChoose: "Click the avatar to choose another one",
+    completed: "completed",
     confirm: "Confirm",
     confirmChanges: "Confirm changes",
     copiedLink: "Copied link!",
