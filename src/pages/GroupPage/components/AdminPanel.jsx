@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { editGroup } from "api/groups";
 import ScoringInputs from "../../Groups/components/ScoringInputs";
@@ -32,6 +33,7 @@ export default function AdminPanel({ groupData, updater }) {
     validationSchema: groupsSchema.create,
   });
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,8 +57,8 @@ export default function AdminPanel({ groupData, updater }) {
         }
       }),
       {
-        pending: "Editando grupo...",
-        success: "Grupo editado con éxito",
+        pending: t('groupEditing'),
+        success: t('groupEdited'),
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -72,13 +74,13 @@ export default function AdminPanel({ groupData, updater }) {
     <Form onSubmit={handleSubmit}>
       <Info>
         {isEditAvailable
-          ? "Podrás editar estos datos hasta 5 días antes del comienzo del mundial"
-          : "Ya no puedes editar esta configuración"}
+          ? t('adminEditTimeInfo1')
+          : t('adminEditTimeInfo2')}
       </Info>
       <Label htmlFor="name">
         <Input
           type="text"
-          placeholder="Nombre del nuevo grupo"
+          placeholder={t('groupNamePH')}
           name="name"
           required
           value={values.name}
@@ -103,9 +105,9 @@ export default function AdminPanel({ groupData, updater }) {
         <TextareaInput
           type="text"
           placeholder={
-            "Reglamento (los miembros deberán aceptar estos términos al ingresar)" +
+            t('groupManifestPH1') +
             "\n\n" +
-            "¿Qué se apuesta? ¿Hay prenda para el último?"
+            t('groupManifestPH2')
           }
           name="manifesto"
           required
@@ -133,12 +135,12 @@ export default function AdminPanel({ groupData, updater }) {
         disable={!isEditAvailable}
       />
       <Text align="center" margin="1.2rem 0rem 0.2rem">
-        ¿Hasta cuando se podrán realizar las predicciones?
+        {t('timeLimitTitle')}
       </Text>
       <TextGroup align="center" margin=".2rem">
         <Label htmlFor="DontLimitByPhase">
           <TextGroup margin="0.2rem">
-            <Text>Por partido</Text>
+            <Text>{t('byMatch')}</Text>
             <Input
               type="radio"
               name="limitByPhase"
@@ -152,7 +154,7 @@ export default function AdminPanel({ groupData, updater }) {
         </Label>
         <Label htmlFor="DoLimitByPhase">
           <TextGroup margin="0.2rem">
-            <Text>Por fase</Text>
+            <Text>{t('byStage')}</Text>
             <Input
               type="radio"
               name="limitByPhase"
@@ -167,8 +169,9 @@ export default function AdminPanel({ groupData, updater }) {
       </TextGroup>
       <Info>
         {values.limitByPhase === "false"
-          ? "Cada partido tendrá su fecha límite"
-          : "Todos los partidos de cada fase tendrán la misma fecha límite"}
+          ? t('byMatchDetail')
+          : t('byStageDetail')
+        }
       </Info>
       <Label htmlFor="timeLimit">
         <Select
@@ -178,24 +181,20 @@ export default function AdminPanel({ groupData, updater }) {
           disabled={!isEditAvailable}
         >
           <option value={0} defaultChecked>
-            {values.limitByPhase === "true"
-              ? "Al comenzar la fase"
-              : "Al comienzo del partido"}
+            {values.limitByPhase === "true" ? 
+                t('timeLimitOptionStage0') : t('timeLimitOptionMatch0') }
           </option>
           <option value={1000 * 60 * 60 * 1}>
-            {values.limitByPhase === "true"
-              ? "Una hora antes de la fase"
-              : "Una hora antes del partido"}
+            {values.limitByPhase === "true" ? 
+                t('timeLimitOptionStage1') : t('timeLimitOptionMatch1') }
           </option>
           <option value={1000 * 60 * 60 * 12}>
-            {values.limitByPhase === "true"
-              ? "Doce horas antes de comenzar la fase"
-              : "Doce horas antes de comenzar el partido"}
+            {values.limitByPhase === "true" ? 
+                t('timeLimitOptionStage2') : t('timeLimitOptionMatch2') }
           </option>
           <option value={1000 * 60 * 60 * 24}>
-            {values.limitByPhase === "true"
-              ? "Un día antes de comenzar la fase"
-              : "Un día antes de comenzar el partido"}
+            {values.limitByPhase === "true" ? 
+                t('timeLimitOptionStage3') : t('timeLimitOptionMatch3') }
           </option>
         </Select>
       </Label>
@@ -203,7 +202,7 @@ export default function AdminPanel({ groupData, updater }) {
         type="submit"
         disabled={!isEmpty(errors) || isEmpty(values.name) || !isEditAvailable}
       >
-        Confirmar cambios
+        {t('confirmChanges')}
       </Button>
     </Form>
   );
