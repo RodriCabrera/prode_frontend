@@ -58,6 +58,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
           setIsEditingEnabled(false);
         }),
       {
+        // TODO: translate
         pending: "Enviando cambios",
         success: "Perfil actualizado",
         error: {

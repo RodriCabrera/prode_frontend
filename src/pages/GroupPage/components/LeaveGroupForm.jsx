@@ -31,7 +31,7 @@ function LeaveGroupForm({ updater, toDelete }) {
           setIsLoading(false);
         }),
       {
-        pending: t('groupLeaving'),
+        pending: `${t('groupLeaving')}`,
         success: `${t('groupLeft')} ${values.name}`,
         error: {
           render({ data }) {
@@ -54,7 +54,7 @@ function LeaveGroupForm({ updater, toDelete }) {
           setIsLoading(false);
         }),
       {
-        pending: t('groupDeleteing'),
+        pending: `${t('groupDeleteing')}`,
         success: `${t('groupDeleted')} ${values.name}`,
         error: {
           render({ data }) {

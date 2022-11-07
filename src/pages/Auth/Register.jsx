@@ -52,6 +52,7 @@ function Register() {
         })
         .finally(() => setIsLoading(false)),
       {
+        // TODO: translate
         pending: "Registrandote...",
         success: "Registrado con éxito",
         error: {

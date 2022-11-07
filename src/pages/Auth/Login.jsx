@@ -55,11 +55,11 @@ function Login() {
           setIsLoading(false);
         }),
       {
-        pending: t("loginIn"),
-        success: t("loginSuccess"),
+        pending: `${t("loginIn")}`,
+        success: `${t("loginSuccess")}`,
         error: {
           render({ data }) {
-            return data?.response?.data?.error || "Error al autenticar...";
+            return data?.response?.data?.error || "Error";
           },
         },
       }

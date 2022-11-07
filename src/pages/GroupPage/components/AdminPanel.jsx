@@ -57,8 +57,8 @@ export default function AdminPanel({ groupData, updater }) {
         }
       }),
       {
-        pending: t('groupEditing'),
-        success: t('groupEdited'),
+        pending: `${t('groupEditing')}`,
+        success: `${t('groupEdited')}`,
         error: {
           render({ data }) {
             return data.response.data.error;

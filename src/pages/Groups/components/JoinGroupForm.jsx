@@ -29,8 +29,8 @@ function JoinGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: t('groupSearchin'),
-        success: t('groupSearchSuccess'),
+        pending: `${t('groupSearching')}`,
+        success: `${t('groupSearchSuccess')}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -56,8 +56,8 @@ function JoinGroupForm({ updateList }) {
           toggleModal();
         }),
       {
-        pending: t('joiningGroup'),
-        success: t('joinedGroup'),
+        pending: `${t('joiningGroup')}`,
+        success: `${t('joinedGroup')}`,
         error: {
           render({ data }) {
             return data.response.data.error;

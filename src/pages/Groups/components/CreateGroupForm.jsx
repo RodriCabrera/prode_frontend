@@ -70,8 +70,8 @@ function CreateGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: t('creatingGroup'),
-        success: t('groupCreated'),
+        pending: `${t('creatingGroup')}`,
+        success: `${t('groupCreated')}`,
         error: {
           render({ data }) {
             return data.response.data.error;

@@ -59,8 +59,8 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
         .then(() => setTimeout(userContext.updateAuth, 1000))
         .finally(() => toggleEditMode()),
       {
-        pending: t("sendingChanges"),
-        success: t("profileUpdate"),
+        pending: `${t("sendingChanges")}`,
+        success: `${t("profileUpdate")}`,
         error: {
           render({ data }) {
             return data?.response.data?.error;

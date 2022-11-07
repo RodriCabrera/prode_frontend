@@ -83,6 +83,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           setIsLoading(false);
         }),
       {
+        // TODO: translate
         pending: "Enviando predicciones...",
         success: "Predicciones enviadas con éxito",
         error: {

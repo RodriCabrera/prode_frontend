@@ -40,6 +40,7 @@ export default function MiniForm({
         afterSubmit();
       }),
       {
+        // TODO: translate
         pending: "Enviando predicción",
         success: "Predicción enviada",
         error: {
