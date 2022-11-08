@@ -3,6 +3,9 @@ import { initReactI18next } from "react-i18next";
 import { enTranslation } from "./langs/en";
 import { esTranslation } from "./langs/es";
 
+const lang = navigator.language.substring(0,2)
+console.log(lang)
+
 i18n
 
   // detect user language
@@ -13,9 +16,9 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    lng: "es",
+    lng: lang,
     debug: true,
-    fallbackLng: "es",
+    fallbackLng: lang || "es",
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
