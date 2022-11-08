@@ -4,7 +4,6 @@ import { enTranslation } from "./langs/en";
 import { esTranslation } from "./langs/es";
 
 const lang = navigator.language.substring(0,2)
-console.log(lang)
 
 i18n
 
