@@ -85,8 +85,8 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           setIsLoading(false);
         }),
       {
-        pending: `${t('predictionSending.plural')}`,
-        success:  `${t('predictionSent.plural')}`,
+        pending: `${t('predictionsSending.plural')}`,
+        success:  `${t('predictionsSent.plural')}`,
         error: {
           render({ data }) {
             return data.response.data.error;
