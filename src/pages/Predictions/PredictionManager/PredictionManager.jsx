@@ -1,26 +1,29 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import { getStageName, STAGE_NAMES } from "./PredictionManagerUtils";
+import { useGetStageData } from "./hooks/useGetStageData";
+import useCleanupController from "../../../hooks/useCleanupController";
+import { useIsMobile } from "../../../hooks/useIsMobile";
+import {
+  groupNumberMod,
+  numberToGroupLetter,
+  debounce,
+} from "../predictionsPageUtils";
+
+import { References } from "../../../common/References";
+import { BallLoader } from "../../../common/Spinner/BallLoader";
+import { FormWrapper } from "../Predictions.styles";
+import PredictionForm from "../PredictionForm/PredictionForm";
+import GroupSwitchButtons from "../PredictionForm/GroupSwitchButtons";
+import { Info } from "../../../common/Info/Info";
 import {
   CardContainer,
   CardTitle,
   CardWrapper,
   Text,
 } from "../../../common/common.styles";
-import {
-  groupNumberMod,
-  numberToGroupLetter,
-  debounce,
-} from "../predictionsPageUtils";
-import { References } from "../../../common/References";
-import { getStageName, STAGE_NAMES } from "./PredictionManagerUtils";
-import { useGetStageData } from "./hooks/useGetStageData";
-import useCleanupController from "../../../hooks/useCleanupController";
-import { useIsMobile } from "../../../hooks/useIsMobile";
-import { BallLoader } from "../../../common/Spinner/BallLoader";
-import { FormWrapper } from "../Predictions.styles";
-import PredictionForm from "../PredictionForm/PredictionForm";
-import GroupSwitchButtons from "../PredictionForm/GroupSwitchButtons";
-import { Info } from "../../../common/Info/Info";
 
 export default function PredictionManager() {
   const { mode } = useOutletContext();
@@ -34,6 +37,7 @@ export default function PredictionManager() {
   const [signal, cleanup, handleCancel] = useCleanupController();
   const { phase } = useParams();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setChangedGroup(true);
@@ -69,7 +73,7 @@ export default function PredictionManager() {
 
   return (
     <>
-      <Link to="..">Volver a selección de fases</Link>
+      <Link to="..">{t('goBackStage')}</Link>
 
       {selectedUserGroup ? (
         <>
@@ -77,19 +81,19 @@ export default function PredictionManager() {
             <>
               {" "}
               <CardTitle marginBottom="0">
-                Grupo {numberToGroupLetter(groupNumberMod(targetGroupNumber))}
+                {t('groups').replace('s', '')} {numberToGroupLetter(groupNumberMod(targetGroupNumber))}
               </CardTitle>
               {resultsMode && (
                 <Info>
-                  Si querés ingresar predicciones switcheá al modo PREDECIR.
+                  {t('switchToPredict')}
                 </Info>
               )}
               {resultsMode && selectedUserGroup && (
                 <References
-                  green="Acertaste resultado"
-                  red="No acertaste"
-                  yellow="Acertaste ganador"
-                  gray="No evaluado"
+                  green={t('resultReferences.green')}
+                  red={t('resultReferences.red')}
+                  yellow={t('resultReferences.yellow')}
+                  gray={t('resultReferences.gray')}
                 />
               )}
             </>
@@ -108,7 +112,7 @@ export default function PredictionManager() {
         </>
       ) : (
         <Text size="1.5rem" weight="800" align="center" color="tomato">
-          NO ELEGISTE NINGUN GRUPO
+          {t('selectGroup').replace(':', '').toUpperCase()}
         </Text>
       )}
     </>

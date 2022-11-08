@@ -60,7 +60,7 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
         .finally(() => toggleEditMode()),
       {
         pending: `${t("sendingChanges")}`,
-        success: `${t("profileUpdate")}`,
+        success: `${t("profileUpdated")}`,
         error: {
           render({ data }) {
             return data?.response.data?.error;

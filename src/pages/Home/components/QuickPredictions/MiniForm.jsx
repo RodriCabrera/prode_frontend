@@ -42,9 +42,8 @@ export default function MiniForm({
         afterSubmit();
       }),
       {
-        // TODO: translate
-        pending: "Enviando predicción",
-        success: "Predicción enviada",
+        pending: `${t('predictionSending.single')}`,
+        success:  `${t('predictionSent.single')}`,
         error: {
           render({ data }) {
             setIsLoading(false);

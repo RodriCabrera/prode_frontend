@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "common/common.styles";
 
 export function NoPredictionNotification() {
+  const { t } = useTranslation();
   return (
     <>
       <Text weight="500" size="2rem" align="center">
-        Aún no hiciste ninguna predicción.
+        {t('noPredictionsYet')}
       </Text>
       <Text align="center" size="1.2rem">
         {" "}
-        Hacelas desde <Link to="/predictions/">esta sección</Link>
+        {t('fromThisSection.a')} <Link to="/predictions/">{t('fromThisSection.b')}</Link>
       </Text>
     </>
   );

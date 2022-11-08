@@ -58,9 +58,8 @@ export function ProfileEditForm({ profile, updateProfile }) {
           setIsEditingEnabled(false);
         }),
       {
-        // TODO: translate
-        pending: "Enviando cambios",
-        success: "Perfil actualizado",
+        pending: `${t('sendingChanges')}`,
+        success: `${t('profileUpdated')}`,
         error: {
           render({ data }) {
             return data?.response.data?.error;
@@ -105,7 +104,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
             />
           </Label>
           <Button type="button" onClick={toggleModal} disabled={isDisabled()}>
-            {isNumberAndLetters ? "Solo letras y números" : "Actualizar Perfil"}
+            {isNumberAndLetters ? "Solo letras y números" : t('profileUpdate')}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <Text size="1.2rem" align="center" withBottomBorder>
@@ -125,7 +124,7 @@ export function ProfileEditForm({ profile, updateProfile }) {
               </BigAvatarWrapper>
             </AvatarContainer>
             <br />
-            <Button type="submit">{t("confirm")}ghj</Button>
+            <Button type="submit">{t("confirm")}</Button>
           </Modal>
         </Form>
       )}

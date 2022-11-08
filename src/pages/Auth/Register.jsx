@@ -3,6 +3,7 @@ import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { AuthContext } from "common/AuthProvider";
 import { authSchema } from "validationSchemas/auth";
@@ -19,7 +20,6 @@ import {
   Label,
   Text,
 } from "../../common/common.styles";
-import { useTranslation } from "react-i18next";
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,9 +52,8 @@ function Register() {
         })
         .finally(() => setIsLoading(false)),
       {
-        // TODO: translate
-        pending: "Registrandote...",
-        success: "Registrado con éxito",
+        pending: `${t('registering')}...`,
+        success: `${t('registerSuccess')}`,
         error: {
           render({ data }) {
             return data.response.data.error;
