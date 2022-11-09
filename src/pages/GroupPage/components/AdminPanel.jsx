@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
+import { ImCancelCircle } from "react-icons/im";
+import styled from "@emotion/styled";
 
 import { editGroup } from "api/groups";
 import ScoringInputs from "../../Groups/components/ScoringInputs";
@@ -20,6 +21,28 @@ import {
 import { Info } from "common/Info/Info";
 import { groupsSchema } from "validationSchemas/groups";
 
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  & label {
+    font-size: .8rem;
+    & input {
+      font-size: 1rem;
+    }
+  }
+  & .icon {
+    cursor: pointer;
+    margin: 1rem 0 0 .5rem;
+  }
+  & :nth-child(2) {
+    flex-grow: 1
+  }
+`;
+
 export default function AdminPanel({ groupData, updater }) {
   const { values, handleChange, errors, setFieldValue } = useFormik({
     initialValues: {
@@ -30,7 +53,7 @@ export default function AdminPanel({ groupData, updater }) {
       scoringNone: groupData.rules.scoring.NONE,
       timeLimit: groupData.rules.timeLimit,
       limitByPhase: groupData.rules.limitByPhase ? "true" : "false",
-      extraPredictions: groupData.extraPredictions
+      extraPredictions: groupData.extraPredictions || []
     },
     validationSchema: groupsSchema.edit,
   });
@@ -211,10 +234,9 @@ export default function AdminPanel({ groupData, updater }) {
         </Select>
       </Label>
       <Button type="button" onClick={handleNewCustomPredictionField}>Add new custom prediction field</Button>
-      {values.extraPredictions[0] && values.extraPredictions.map((field, index) => {
+      {values.extraPredictions && values.extraPredictions.map((field, index) => {
         return (
-          <div key={index}>
-            <Button type="button" onClick={() => handleRemoveCustomEntry(field.key)}>Remove this field</Button>
+          <InputGroup key={index}>
             <Label htmlFor={`extraPredictions[${index}].key`}>
               Title
               <Input name={`extraPredictions[${index}].key`} value={field.key} type="text" onChange={handleChange} /> 
@@ -227,7 +249,8 @@ export default function AdminPanel({ groupData, updater }) {
               Deadline
               <Input name={`extraPredictions[${index}].timeLimit`} value={parseInputDate(field.timeLimit)} type="date" onChange={handleChange} />
             </Label>
-          </div>
+            <ImCancelCircle className="icon" size={20} onClick={() => handleRemoveCustomEntry(field.key)} />
+          </InputGroup>
       )
       }) }
       <Button
