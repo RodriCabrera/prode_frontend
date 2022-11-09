@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
@@ -5,6 +6,7 @@ import { toast } from "react-toastify";
 
 import { editGroup } from "api/groups";
 import ScoringInputs from "../../Groups/components/ScoringInputs";
+import { parseInputDate } from "../../pagesHelpers";
 import {
   Button,
   Input,
@@ -19,7 +21,7 @@ import { Info } from "common/Info/Info";
 import { groupsSchema } from "validationSchemas/groups";
 
 export default function AdminPanel({ groupData, updater }) {
-  const { values, handleChange, errors } = useFormik({
+  const { values, handleChange, errors, setFieldValue } = useFormik({
     initialValues: {
       name: groupData.name,
       manifesto: groupData.rules.manifesto,
@@ -28,8 +30,9 @@ export default function AdminPanel({ groupData, updater }) {
       scoringNone: groupData.rules.scoring.NONE,
       timeLimit: groupData.rules.timeLimit,
       limitByPhase: groupData.rules.limitByPhase ? "true" : "false",
+      extraPredictions: groupData.extraPredictions
     },
-    validationSchema: groupsSchema.create,
+    validationSchema: groupsSchema.edit,
   });
   const navigate = useNavigate();
 
@@ -48,6 +51,7 @@ export default function AdminPanel({ groupData, updater }) {
           timeLimit: values.timeLimit,
           limitByPhase: values.limitByPhase === "true",
         },
+        extraPredictions: values.extraPredictions,
       }).then((res) => {
         if (res.status === 200) {
           navigate(`/groups/${values.name}`);
@@ -67,6 +71,13 @@ export default function AdminPanel({ groupData, updater }) {
   };
 
   const isEditAvailable = Date.now() < Date.parse("11-15-2022 13:00 GMT-0300");
+
+  const handleNewCustomPredictionField = () => {
+    setFieldValue("extraPredictions", [...values.extraPredictions, {key: "", description: "", timeLimit: "11-20-2022 13:00 GMT-0300"}])
+  }
+  const handleRemoveCustomEntry = (key) => {
+    setFieldValue("extraPredictions", values.extraPredictions.filter(field => field.key !== key))
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -199,6 +210,26 @@ export default function AdminPanel({ groupData, updater }) {
           </option>
         </Select>
       </Label>
+      <Button type="button" onClick={handleNewCustomPredictionField}>Add new custom prediction field</Button>
+      {values.extraPredictions[0] && values.extraPredictions.map((field, index) => {
+        return (
+          <div key={index}>
+            <Button type="button" onClick={() => handleRemoveCustomEntry(field.key)}>Remove this field</Button>
+            <Label htmlFor={`extraPredictions[${index}].key`}>
+              Title
+              <Input name={`extraPredictions[${index}].key`} value={field.key} type="text" onChange={handleChange} /> 
+            </Label>
+            <Label htmlFor={`extraPredictions[${index}].description`}>
+              Description
+              <Input name={`extraPredictions[${index}].description`} value={field.description} type="text" onChange={handleChange}/> 
+            </Label>
+            <Label htmlFor={`extraPredictions[${index}].timeLimit`}>
+              Deadline
+              <Input name={`extraPredictions[${index}].timeLimit`} value={parseInputDate(field.timeLimit)} type="date" onChange={handleChange} />
+            </Label>
+          </div>
+      )
+      }) }
       <Button
         type="submit"
         disabled={!isEmpty(errors) || isEmpty(values.name) || !isEditAvailable}

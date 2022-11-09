@@ -13,6 +13,10 @@ export const parseDate = (date: Date, options = null) => {
   );
 };
 
+export const parseInputDate = (date: Date) => {
+  return new Date(date).toISOString().split('T')[0];
+}
+
 const FlagImg = styled.img`
   min-width: 42px;
   min-height: 28px;

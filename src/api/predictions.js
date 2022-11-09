@@ -27,6 +27,10 @@ body {
 }
 */
 
+export const createExtraPredictions = (userGroupId, predictions, signal) => {
+  return api.post(`/predictions/extra?userGroupId=${userGroupId}`, predictions, { signal })
+}
+
 export const getPredictions = (
   userGroupId = "",
   stage = "",
