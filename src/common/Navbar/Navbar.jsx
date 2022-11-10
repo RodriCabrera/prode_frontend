@@ -71,7 +71,11 @@ function Navbar() {
               <SubLogo weight="100">prode</SubLogo>
             </LogoContainer>
           </ButtonGroup>
-          <ButtonGroup id="navbar-btn-group-right" padding="1rem">
+          <ButtonGroup
+            id="navbar-btn-group-right"
+            padding="0 10px 0 0"
+            gap=".3rem"
+          >
             {userContext.user ? (
               <>
                 <Text
