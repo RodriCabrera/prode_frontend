@@ -74,7 +74,7 @@ function Navbar() {
           <ButtonGroup
             id="navbar-btn-group-right"
             padding="0 10px 0 0"
-            gap=".3rem"
+            gap={isMobile ? ".3rem" : "1rem"}
           >
             {userContext.user ? (
               <>
