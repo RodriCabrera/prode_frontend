@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { isEmpty } from "lodash";
+import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 
 import CreateGroupForm from "./components/CreateGroupForm";
@@ -25,6 +26,7 @@ function Groups() {
   const [isLoading, setIsLoading] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const getGroupList = () => {
     setIsLoading(true);
@@ -49,25 +51,20 @@ function Groups() {
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
         <Text size="2.5rem" weight="500" align="center">
-          GRUPOS
+          {t('groups').toUpperCase()}
         </Text>
         {!isEmpty(groupList) && (
-          <Text size="1.5rem">Grupos en los que estás participando: </Text>
+          <Text size="1.5rem">{t('yourGroups')} </Text>
         )}
         {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
       </CardWrapper>
       <Row>
-        {/* <CardContainer> */}
         <CardWrapper border={isMobile ? "none" : ""}>
           <CreateGroupForm updateList={getGroupList} />
         </CardWrapper>
-        {/* </CardContainer> */}
-
-        {/* <CardContainer> */}
         <CardWrapper border={isMobile ? "none" : ""}>
           <JoinGroupForm updateList={getGroupList} />
         </CardWrapper>
-        {/* </CardContainer> */}
       </Row>
     </CardContainer>
   );

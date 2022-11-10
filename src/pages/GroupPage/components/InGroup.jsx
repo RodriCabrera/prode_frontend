@@ -2,18 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmpty } from "lodash";
 import { useFlags } from "flagsmith/react";
+import { useTranslation } from "react-i18next";
+
 import { UserMiniAvatar } from "../../../common/UserMiniAvatar/UserMiniAvatar";
 import { getGroupScores } from "../../../api/groups";
 import { ListElement } from "../../../common/Lists/ListElement";
-import { Spinner } from "../../../common/Spinner/Spinner";
 import useToggleModal from "../../../hooks/useToggleModal";
-import Modal from "../../../common/Modal/Modal";
-import {
-  Text,
-  CardContainer,
-  Button,
-  CardWrapper,
-} from "../../../common/common.styles";
 import LeaveGroupForm from "./LeaveGroupForm";
 import GroupRules from "./GroupRules";
 import GroupInvite from "./GroupInvite";
@@ -22,6 +16,15 @@ import { AuthContext } from "../../../common/AuthProvider";
 import { GoBackButton } from "../../../common/GoBackButton/GoBackButton";
 import useCleanupController from "../../../hooks/useCleanupController";
 import { useIsMobile } from "../../../hooks/useIsMobile";
+
+import Modal from "../../../common/Modal/Modal";
+import {
+  Text,
+  CardContainer,
+  Button,
+  CardWrapper,
+} from "../../../common/common.styles";
+import { Spinner } from "../../../common/Spinner/Spinner";
 
 function InGroup({ groupData, updater }) {
   const navigate = useNavigate();
@@ -33,6 +36,7 @@ function InGroup({ groupData, updater }) {
   const [signal, cleanup, handleCancel] = useCleanupController();
   const isMobile = useIsMobile();
   const flags = useFlags(["show_admin_functions"]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsLoading(true);
@@ -81,8 +85,8 @@ function InGroup({ groupData, updater }) {
             padding="10px"
           >
             {showAdminPanel
-              ? "Ocultar panel de administrador"
-              : "Mostrar panel de administrador"}
+              ? t('adminPanelHide')
+              : t('adminPanelShow')}
           </Button>
         )}
 
@@ -97,13 +101,13 @@ function InGroup({ groupData, updater }) {
         {!showAdminPanel && groupScoresData.group && (
           <>
             <Text size="1.2rem" weight="600" withBottomBorder>
-              Miembros del grupo:
+              {t('members')}:
             </Text>
             <Text size=".8rem" weight={100}>
-              (👑 es admin)
+              (👑 admin)
             </Text>
             {isEmpty(groupScoresData)
-              ? "Loading member scores..."
+              ? "Loading..."
               : groupScoresData.scores?.map((score) => {
                   const isAdmin = score.user === groupScoresData.group.owner;
                   return (
@@ -128,11 +132,11 @@ function InGroup({ groupData, updater }) {
             <CardContainer>
               {isAdminAlone ? (
                 <Button tertiary onClick={toggleModal}>
-                  Eliminar grupo
+                  {t('deleteGroup')}
                 </Button>
               ) : (
                 <Button grayscale onClick={toggleModal}>
-                  Salir del grupo?
+                  {t('exitGroup')}
                 </Button>
               )}
             </CardContainer>

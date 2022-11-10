@@ -1,27 +1,18 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import ToggleSwitch from "../../common/ToggleSwitch/ToggleSwitch";
 import { PredictionsPageWrapper } from "./Predictions.styles";
-import { Text } from "../../common/common.styles";
 import { GroupSelector } from "./components/GroupSelector";
 import { Spinner } from "../../common/Spinner/Spinner";
 import { useGetUserGroupsData } from "../../hooks/useGetUserGroupsData";
 
-const predictionModes = {
-  left: {
-    display: "RESULTADOS",
-    name: "results",
-    color: "orange",
-  },
-  right: {
-    display: "PREDECIR",
-    name: "edit",
-    color: "salmon",
-  },
-};
+import { Text } from "../../common/common.styles";
 
 function PredictionsPage() {
   const [mode, setMode] = useState("edit");
+
   const {
     isLoadingUserGroupsData,
     userGroupList,
@@ -29,17 +20,32 @@ function PredictionsPage() {
     handleGroupSelect,
   } = useGetUserGroupsData();
 
+  const { t } = useTranslation();
+
+  const predictionModes = {
+    left: {
+      display: t("predict").toUpperCase(),
+      name: "results",
+      color: "orange",
+    },
+    right: {
+      display: t("results").toUpperCase(),
+      name: "edit",
+      color: "salmon",
+    },
+  };
+
   return (
     <PredictionsPageWrapper id="mi-prode-container">
       <Text size="2.5rem" weight="500" align="center">
-        PREDICCIONES
+        {t("predictions").toUpperCase()}
       </Text>
       {userGroupList.length === 0 && (
         <>
           {isLoadingUserGroupsData && <Spinner />}
           {!isLoadingUserGroupsData && (
             <Text size="1.5rem" align="center" margin="1rem">
-              No perteneces a ningún grupo
+              {t("noGroups")}
             </Text>
           )}
         </>

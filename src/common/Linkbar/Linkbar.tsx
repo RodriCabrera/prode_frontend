@@ -1,9 +1,10 @@
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GiPodiumWinner } from "react-icons/gi";
 import { FaListUl } from "react-icons/fa";
 import { BiFootball } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
+
 import {
   CustomLink,
   LinkbarContainer,
@@ -20,6 +21,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
   const location = useLocation();
   const basePath = location.pathname.split("/")[1];
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const isCurrent = (link: string) => {
     return link === basePath;
@@ -55,7 +57,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
                 color={isCurrent("predictions") ? "pink" : ""}
               />
             ) : (
-              <CustomLink>Predicciones</CustomLink>
+              <CustomLink>{t("predictions")}</CustomLink>
             )}
           </LinkWrapper>
 
@@ -69,7 +71,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
                 color={isCurrent("scores") ? "pink" : ""}
               />
             ) : (
-              <CustomLink>Puntajes</CustomLink>
+              <CustomLink>{t("scores")}</CustomLink>
             )}
           </LinkWrapper>
           <LinkWrapper
@@ -82,7 +84,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
                 color={isCurrent("groups") ? "pink" : ""}
               />
             ) : (
-              <CustomLink>Grupos</CustomLink>
+              <CustomLink>{t("groups")}</CustomLink>
             )}
           </LinkWrapper>
         </LinkGroup>

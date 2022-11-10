@@ -1,9 +1,11 @@
 import { useIsMobile } from "hooks/useIsMobile";
+import { useTranslation } from "react-i18next";
 
 import { CardWrapper, Text } from "common/common.styles";
 import { LPInfoContainer, LPInfoWrapper } from "./LandingPage.styles";
 
 const LandingPageInfo = () => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
   return (
     <LPInfoContainer id="lp-info-container">
@@ -13,7 +15,7 @@ const LandingPageInfo = () => {
         align="center"
         margin="2rem"
       >
-        Unite, predecí y ganá
+        {t("landing.main")}
       </Text>
       <LPInfoWrapper>
         <CardWrapper isMobile={isMobile}>
@@ -23,11 +25,10 @@ const LandingPageInfo = () => {
             color="tomato"
             align="center"
           >
-            ⚽️ Creá un grupo y enviá invitaciones a quien quieras
+            ⚽️ {t("landing.first.title")}
           </Text>
           <Text size={isMobile ? ".8rem" : "1.2rem"} weight="400">
-            Podés personalizar el sistema de puntajes y la fecha tope para hacer
-            las predicciones
+            {t("landing.first.subtitle")}
           </Text>
           <Text
             size={isMobile ? "1rem" : "1.5rem"}
@@ -42,10 +43,10 @@ const LandingPageInfo = () => {
             color="tomato"
             align="center"
           >
-            ⚽️ Unite a un grupo existente con 1 solo click.
+            ⚽️ {t("landing.second.title")}
           </Text>
           <Text size={isMobile ? ".8rem" : "1.2rem"} weight="400">
-            Vas a recibir la invitación por WhatsApp, mail o Telegram.
+            {t("landing.second.subtitle")}
           </Text>
         </CardWrapper>
         <CardWrapper isMobile={isMobile}>
@@ -55,10 +56,10 @@ const LandingPageInfo = () => {
             color="tomato"
             align="center"
           >
-            ⚽️ Consultá el fixture interno
+            ⚽️ {t("landing.third.title")}
           </Text>
           <Text size={isMobile ? ".8rem" : "1.2rem"} weight="400">
-            El fixture interno se mantiene actualizado con los datos de la FIFA.
+            {t("landing.third.subtitle")}
           </Text>
         </CardWrapper>
       </LPInfoWrapper>

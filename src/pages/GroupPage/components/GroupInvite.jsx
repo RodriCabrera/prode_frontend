@@ -10,6 +10,8 @@ import {
   TelegramIcon,
 } from "react-share";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 import { Text } from "../../../common/common.styles";
 
 const ShareButtons = styled.div`
@@ -33,9 +35,12 @@ const CopyLinkButton = styled.button`
 `;
 
 export default function GroupInvite() {
+
+  const { t } = useTranslation();
+
   const copyShareLink = () => {
     navigator.clipboard.writeText(window.location.href);
-    return toast.info("Link copiado!", {
+    return toast.info(t('copiedLink'), {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: true,
@@ -46,27 +51,29 @@ export default function GroupInvite() {
   };
   return (
     <>
-      <Text align="center">Invita a nuevos miembros!</Text>
+      <Text align="center">
+        {t('inviteToGroup')}
+      </Text>
       <ShareButtons>
         <CopyLinkButton onClick={copyShareLink}>
           <AiFillCopy size={28} />
         </CopyLinkButton>
         <EmailShareButton
           url={window.location.href}
-          subject="Te invito a unirte a mi grupo de Prode"
-          body="Podés unirte ingresando al siguiente link: "
+          subject={t('inviteTitle')}
+          body={t('inviteBody')}
         >
           <EmailIcon size={36} round />
         </EmailShareButton>
         <WhatsappShareButton
           url={window.location.href}
-          title="Te invito a unirte a mi grupo de Prode: "
+          title={t('inviteTitle')}
         >
           <WhatsappIcon size={36} round />
         </WhatsappShareButton>
         <TelegramShareButton
           url={window.location.href}
-          title="Te invito a unirte a mi grupo de Prode: "
+          title={t('inviteTitle')}
         >
           <TelegramIcon size={36} round />
         </TelegramShareButton>
