@@ -1,23 +1,25 @@
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
+import { useIsMobile } from "../../../hooks/useIsMobile";
 import { Text } from "../../../common/common.styles";
 
-const Container = styled.div`
-  position: fixed;
-  top: 2rem;
-  right: 4rem;
-  display: flex;
-  gap: 1rem;
-  background-color: darkslategray;
-  padding: 0.75rem;
-  border-radius: 20px;
-  z-index: 10;
-`;
-
 const LandingPageSwitch = () => {
+  const isMobile = useIsMobile();
   const { i18n } = useTranslation();
   const isCurrentLang = (lang) => lang === i18n.language;
+
+  const Container = styled.div`
+    position: fixed;
+    top: ${isMobile ? "3%" : "5%"};
+    right: 5%;
+    display: flex;
+    gap: 1rem;
+    background-color: darkslategray;
+    padding: 0.75rem;
+    border-radius: 20px;
+    z-index: 10;
+  `;
 
   return (
     <Container>

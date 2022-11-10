@@ -28,7 +28,7 @@ const LandingPageMain = () => {
 
   return (
     <LandingPageWrapper id="landing-page-wrapper">
-      <LeftPlaceholder>
+      <LeftPlaceholder isMobile={isMobile}>
         <Text size={isMobile ? "3.5rem" : "5.5rem"} weight="800" color="tomato">
           Chumbazo.
         </Text>

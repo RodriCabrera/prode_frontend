@@ -49,6 +49,7 @@ export const LeftPlaceholder = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-top: ${({ isMobile }) => (isMobile && "2rem")};
 `;
 
 export const spin = keyframes`
