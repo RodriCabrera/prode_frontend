@@ -72,7 +72,6 @@ function InGroup({ groupData, updater }) {
         <Text size="2.5rem" align="center" weight="800">
           {groupData?.name}
         </Text>
-
         {isAdmin && flags.show_admin_functions.enabled && (
           <Button
             onClick={toggleAdminPanel}
