@@ -24,12 +24,12 @@ function PredictionsPage() {
 
   const predictionModes = {
     left: {
-      display: t("predict").toUpperCase(),
+      display: t("results").toUpperCase(),
       name: "results",
       color: "orange",
     },
     right: {
-      display: t("results").toUpperCase(),
+      display: t("predict").toUpperCase(),
       name: "edit",
       color: "salmon",
     },
