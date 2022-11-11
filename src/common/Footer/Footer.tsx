@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 const FooterWrapper = styled.div`
   width: 100%;
@@ -14,9 +15,10 @@ const NameLink = styled.a`
   color: #888;
 `;
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <FooterWrapper>
-      Creado por
+      {t("createdBy")}
       <NameLink
         href="https://www.linkedin.com/in/santiago-javier-rubio/"
         target={"_blank"}
@@ -30,5 +32,4 @@ const Footer = () => {
     </FooterWrapper>
   );
 };
-
 export default Footer;

@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { isEmpty } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { Text } from "../../../common/common.styles";
 import { ListElement } from "../../../common/Lists/ListElement";
@@ -10,8 +12,10 @@ const GroupListWrapper = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
 `;
+
 function GroupList({ groups }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleClick = (group) => {
     navigate(`/groups/${group.name}`);
@@ -20,7 +24,7 @@ function GroupList({ groups }) {
   if (isEmpty(groups)) {
     return (
       <Text size="1.5rem" align="center" margin="1rem">
-        No perteneces a ningún grupo
+        {t('noGroups')}
       </Text>
     );
   }
@@ -36,7 +40,7 @@ function GroupList({ groups }) {
           <div>
             <Text size="1.3rem">{group.name}</Text>
             <Text>Admin: {group.owner}</Text>
-            <Text>Integrantes: {group.members.length}</Text>
+            <Text>{t('members')}: {group.members.length}</Text>
           </div>
         </ListElement>
       ))}

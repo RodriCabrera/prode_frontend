@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 import { createPredictions } from "../../../../api/predictions";
 import { getFlagUrl, parseDate } from "../../../pagesHelpers";
@@ -20,6 +21,7 @@ export default function MiniForm({
     home: "",
     away: "",
   });
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,8 +42,8 @@ export default function MiniForm({
         afterSubmit();
       }),
       {
-        pending: "Enviando predicción",
-        success: "Predicción enviada",
+        pending: `${t('predictionSending.single')}`,
+        success:  `${t('predictionSent.single')}`,
         error: {
           render({ data }) {
             setIsLoading(false);
@@ -97,7 +99,7 @@ export default function MiniForm({
         type="submit"
         disabled={inputValues.away === "" || inputValues.home === ""}
       >
-        Enviar
+        {t('send')}
       </Button>
     </SinglePredictionForm>
   );

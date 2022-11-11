@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
 import propTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 import config from "../../Constants";
 
@@ -11,9 +12,10 @@ import Container, { AuthLink } from "./GoogleAuth.styles";
 
 function GoogleAuth({ text }) {
   const [showError, setShowError] = useState(false);
+  const { t } = useTranslation();
 
   const responseGoogle = async (response) => {
-    toast("Validando cuenta...");
+    toast(t("loginValidation"));
     const res = await axios.post(
       `${config.API_URL}/auth/google`,
       {
@@ -26,9 +28,9 @@ function GoogleAuth({ text }) {
     if (res.status === 200 && res.data.token) {
       localStorage.setItem("token", res.data.token);
       window.location.reload();
-      toast.success("Logueado con éxito");
+      toast.success(t("loginSuccess"));
     } else {
-      toast.error("Error al loguearse con Google");
+      toast.error(t("loginError"));
       setShowError(true);
     }
   };
@@ -46,7 +48,7 @@ function GoogleAuth({ text }) {
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
             >
-              {text} con Google <FcGoogle size="1.2rem" />
+              {text} {t("withGoogle")} <FcGoogle size="1.2rem" />
             </AuthLink>
           )}
           onSuccess={responseGoogle}

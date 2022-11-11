@@ -4,6 +4,7 @@ import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
 import { ImCancelCircle } from "react-icons/im";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { editGroup } from "api/groups";
 import ScoringInputs from "../../Groups/components/ScoringInputs";
@@ -21,7 +22,6 @@ import {
 import { Info } from "common/Info/Info";
 import { groupsSchema } from "validationSchemas/groups";
 
-
 const InputGroup = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,17 +29,17 @@ const InputGroup = styled.div`
   gap: 0.5rem;
   flex-wrap: wrap;
   & label {
-    font-size: .8rem;
+    font-size: 0.8rem;
     & input {
       font-size: 1rem;
     }
   }
   & .icon {
     cursor: pointer;
-    margin: 1rem 0 0 .5rem;
+    margin: 1rem 0 0 0.5rem;
   }
   & :nth-child(2) {
-    flex-grow: 1
+    flex-grow: 1;
   }
 `;
 
@@ -53,11 +53,12 @@ export default function AdminPanel({ groupData, updater }) {
       scoringNone: groupData.rules.scoring.NONE,
       timeLimit: groupData.rules.timeLimit,
       limitByPhase: groupData.rules.limitByPhase ? "true" : "false",
-      extraPredictions: groupData.extraPredictions || []
+      extraPredictions: groupData.extraPredictions || [],
     },
     validationSchema: groupsSchema.edit,
   });
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,8 +83,8 @@ export default function AdminPanel({ groupData, updater }) {
         }
       }),
       {
-        pending: "Editando grupo...",
-        success: "Grupo editado con éxito",
+        pending: `${t("groupEditing")}`,
+        success: `${t("groupEdited")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -96,23 +97,27 @@ export default function AdminPanel({ groupData, updater }) {
   const isEditAvailable = Date.now() < Date.parse("11-15-2022 13:00 GMT-0300");
 
   const handleNewCustomPredictionField = () => {
-    setFieldValue("extraPredictions", [...values.extraPredictions, {key: "", description: "", timeLimit: "11-20-2022 13:00 GMT-0300"}])
-  }
+    setFieldValue("extraPredictions", [
+      ...values.extraPredictions,
+      { key: "", description: "", timeLimit: "11-20-2022 13:00 GMT-0300" },
+    ]);
+  };
   const handleRemoveCustomEntry = (key) => {
-    setFieldValue("extraPredictions", values.extraPredictions.filter(field => field.key !== key))
-  }
+    setFieldValue(
+      "extraPredictions",
+      values.extraPredictions.filter((field) => field.key !== key)
+    );
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Info>
-        {isEditAvailable
-          ? "Podrás editar estos datos hasta 5 días antes del comienzo del mundial"
-          : "Ya no puedes editar esta configuración"}
+        {isEditAvailable ? t("adminEditTimeInfo1") : t("adminEditTimeInfo2")}
       </Info>
       <Label htmlFor="name">
         <Input
           type="text"
-          placeholder="Nombre del nuevo grupo"
+          placeholder={t("groupNamePH")}
           name="name"
           required
           value={values.name}
@@ -136,11 +141,7 @@ export default function AdminPanel({ groupData, updater }) {
       <Label htmlFor="manifesto">
         <TextareaInput
           type="text"
-          placeholder={
-            "Reglamento (los miembros deberán aceptar estos términos al ingresar)" +
-            "\n\n" +
-            "¿Qué se apuesta? ¿Hay prenda para el último?"
-          }
+          placeholder={t("groupManifestPH1") + "\n\n" + t("groupManifestPH2")}
           name="manifesto"
           required
           value={values.manifesto}
@@ -167,12 +168,12 @@ export default function AdminPanel({ groupData, updater }) {
         disable={!isEditAvailable}
       />
       <Text align="center" margin="1.2rem 0rem 0.2rem">
-        ¿Hasta cuando se podrán realizar las predicciones?
+        {t("timeLimitTitle")}
       </Text>
       <TextGroup align="center" margin=".2rem">
         <Label htmlFor="DontLimitByPhase">
           <TextGroup margin="0.2rem">
-            <Text>Por partido</Text>
+            <Text>{t("byMatch")}</Text>
             <Input
               type="radio"
               name="limitByPhase"
@@ -186,7 +187,7 @@ export default function AdminPanel({ groupData, updater }) {
         </Label>
         <Label htmlFor="DoLimitByPhase">
           <TextGroup margin="0.2rem">
-            <Text>Por fase</Text>
+            <Text>{t("byStage")}</Text>
             <Input
               type="radio"
               name="limitByPhase"
@@ -201,8 +202,8 @@ export default function AdminPanel({ groupData, updater }) {
       </TextGroup>
       <Info>
         {values.limitByPhase === "false"
-          ? "Cada partido tendrá su fecha límite"
-          : "Todos los partidos de cada fase tendrán la misma fecha límite"}
+          ? t("byMatchDetail")
+          : t("byStageDetail")}
       </Info>
       <Label htmlFor="timeLimit">
         <Select
@@ -213,51 +214,73 @@ export default function AdminPanel({ groupData, updater }) {
         >
           <option value={0} defaultChecked>
             {values.limitByPhase === "true"
-              ? "Al comenzar la fase"
-              : "Al comienzo del partido"}
+              ? t("timeLimitOptionStage0")
+              : t("timeLimitOptionMatch0")}
           </option>
           <option value={1000 * 60 * 60 * 1}>
             {values.limitByPhase === "true"
-              ? "Una hora antes de la fase"
-              : "Una hora antes del partido"}
+              ? t("timeLimitOptionStage1")
+              : t("timeLimitOptionMatch1")}
           </option>
           <option value={1000 * 60 * 60 * 12}>
             {values.limitByPhase === "true"
-              ? "Doce horas antes de comenzar la fase"
-              : "Doce horas antes de comenzar el partido"}
+              ? t("timeLimitOptionStage2")
+              : t("timeLimitOptionMatch2")}
           </option>
           <option value={1000 * 60 * 60 * 24}>
             {values.limitByPhase === "true"
-              ? "Un día antes de comenzar la fase"
-              : "Un día antes de comenzar el partido"}
+              ? t("timeLimitOptionStage3")
+              : t("timeLimitOptionMatch3")}
           </option>
         </Select>
       </Label>
-      <Button type="button" onClick={handleNewCustomPredictionField}>Add new custom prediction field</Button>
-      {values.extraPredictions && values.extraPredictions.map((field, index) => {
-        return (
-          <InputGroup key={index}>
-            <Label htmlFor={`extraPredictions[${index}].key`}>
-              Title
-              <Input name={`extraPredictions[${index}].key`} value={field.key} type="text" onChange={handleChange} /> 
-            </Label>
-            <Label htmlFor={`extraPredictions[${index}].description`}>
-              Description
-              <Input name={`extraPredictions[${index}].description`} value={field.description} type="text" onChange={handleChange}/> 
-            </Label>
-            <Label htmlFor={`extraPredictions[${index}].timeLimit`}>
-              Deadline
-              <Input name={`extraPredictions[${index}].timeLimit`} value={parseInputDate(field.timeLimit)} type="date" onChange={handleChange} />
-            </Label>
-            <ImCancelCircle className="icon" size={20} onClick={() => handleRemoveCustomEntry(field.key)} />
-          </InputGroup>
-      )
-      }) }
+      <Button type="button" onClick={handleNewCustomPredictionField}>
+        Add new custom prediction field
+      </Button>
+      {values.extraPredictions &&
+        values.extraPredictions.map((field, index) => {
+          return (
+            <InputGroup key={index}>
+              <Label htmlFor={`extraPredictions[${index}].key`}>
+                Title
+                <Input
+                  name={`extraPredictions[${index}].key`}
+                  value={field.key}
+                  type="text"
+                  onChange={handleChange}
+                />
+              </Label>
+              <Label htmlFor={`extraPredictions[${index}].description`}>
+                Description
+                <Input
+                  name={`extraPredictions[${index}].description`}
+                  value={field.description}
+                  type="text"
+                  onChange={handleChange}
+                />
+              </Label>
+              <Label htmlFor={`extraPredictions[${index}].timeLimit`}>
+                Deadline
+                <Input
+                  name={`extraPredictions[${index}].timeLimit`}
+                  value={parseInputDate(field.timeLimit)}
+                  type="date"
+                  onChange={handleChange}
+                />
+              </Label>
+              <ImCancelCircle
+                className="icon"
+                size={20}
+                onClick={() => handleRemoveCustomEntry(field.key)}
+              />
+            </InputGroup>
+          );
+        })}
       <Button
         type="submit"
         disabled={!isEmpty(errors) || isEmpty(values.name) || !isEditAvailable}
       >
-        Confirmar cambios
+        {t("confirmChanges")}
       </Button>
     </Form>
   );

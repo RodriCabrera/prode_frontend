@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineUserGroup } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
 
 import { BallLoader } from "common/Spinner/BallLoader";
 import { getRandomUnpredictedMatch } from "api/predictions";
@@ -17,6 +18,7 @@ export default function QuickPrediction() {
   const [noMatchsOrGroups, setMissingData] = useState(false);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const getMatchData = () => {
     setIsLoading(true);
@@ -44,7 +46,7 @@ export default function QuickPrediction() {
     <CardContainer>
       <CardWrapper width="300px" minHeight="200px">
         <Text size="1.5rem" align="center">
-          Predicción al paso
+          {t("quickPredictions")}
         </Text>
         {isLoading ? (
           <BallLoader />
@@ -72,7 +74,7 @@ export default function QuickPrediction() {
         )}
         {!isLoading && noMatchsOrGroups && (
           <Text align="center" weight="600" color="gray" margin="2rem 0">
-            No hay predicciones pendientes
+            {t("noPredictions")}
           </Text>
         )}
       </CardWrapper>

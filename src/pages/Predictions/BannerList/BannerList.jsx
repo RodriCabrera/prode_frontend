@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { getPredictionCompletePercentage } from "../../../api/predictions";
 import { getFixtureStatus } from "api/fixture";
@@ -16,6 +17,7 @@ function BannerList() {
   const { selectedUserGroup, mode } = useOutletContext();
   const [predictedPercentages, setPredictedPercentages] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { t } = useTranslation();
   const [stageStatus, setStageStatus] = useState({
     GRUPOS: false,
     OCTAVOS: false,
@@ -56,31 +58,31 @@ function BannerList() {
 
   const bannerData = [
     {
-      id: 1,
-      title: "GRUPOS",
+      id: "GRUPOS",
+      title: t("groups").toUpperCase(),
       path: "groups",
       percentage: predictedPercentages.GRUPOS
         ? calculatePercentage(predictedPercentages.GRUPOS)
         : null,
     },
     {
-      id: 2,
-      title: "OCTAVOS",
+      id: "OCTAVOS",
+      title: t("eight").toUpperCase(),
       path: "16",
       percentage: predictedPercentages.OCTAVOS
         ? calculatePercentage(predictedPercentages.OCTAVOS)
         : null,
     },
     {
-      id: 3,
-      title: "CUARTOS",
+      id: "CUARTOS",
+      title: t("quarterfinals").toUpperCase(),
       path: "8",
       percentage: predictedPercentages.CUARTOS
         ? calculatePercentage(predictedPercentages.CUARTOS)
         : null,
     },
     {
-      id: 4,
+      id: "SEMIFINAL",
       title: "SEMIFINAL",
       path: "semis",
       percentage: predictedPercentages.SEMIFINAL
@@ -88,15 +90,15 @@ function BannerList() {
         : null,
     },
     {
-      id: 5,
-      title: "TERCER PUESTO",
+      id: "TERCER_PUESTO",
+      title: t("thirdPosition").toUpperCase(),
       path: "3",
       percentage: predictedPercentages.TERCER_PUESTO
         ? calculatePercentage(predictedPercentages.TERCER_PUESTO)
         : null,
     },
     {
-      id: 6,
+      id: "FINAL",
       title: "FINAL",
       path: "final",
       percentage: predictedPercentages.FINAL
@@ -108,7 +110,7 @@ function BannerList() {
   return (
     <BannerContainer>
       <Text align="center" size="2rem" weight="700">
-        FASES
+        {t("phases").toUpperCase()}
       </Text>
       {loadingStatus ? (
         <BallLoader />
@@ -121,7 +123,7 @@ function BannerList() {
               path={stage.path}
               percentage={stage.percentage}
               isLoading={isLoading}
-              disabled={stageStatus[stage.title.replace(" ", "_")]}
+              disabled={stageStatus[stage.id]}
             />
           );
         })

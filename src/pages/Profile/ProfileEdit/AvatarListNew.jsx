@@ -13,6 +13,7 @@ import {
   AvatarListContainer,
 } from "../profile.styles";
 import { Button } from "common/common.styles";
+import { t } from "i18next";
 
 function AvatarList({ handleNewAvatar }) {
   const [avatars, setAvatars] = useState([]);
@@ -48,13 +49,13 @@ function AvatarList({ handleNewAvatar }) {
             onClick={toggleModal}
             style={{ width: "100%" }}
           >
-            O elige de la lista
+            {t("orChooseFromList")}
           </Button>
           <Modal
             show={showModal}
             toggle={toggleModal}
             backdrop={false}
-            cancelText="Volver"
+            cancelText={t("goBack")}
           >
             <AvatarListContainer id="avatar-list-container">
               {avatars.map((avatar) => {

@@ -15,15 +15,18 @@ import {
   GroupTableWrapper,
 } from "./FixturePage.styles";
 import { Text } from "../../common/common.styles";
+import { useTranslation } from "react-i18next";
 
 function Fixture() {
   const { isLoading, fixtureData } = useFetchFixtureData();
   const isMobile = useIsMobile();
   const { width } = useWindowDimensions();
   const flags = useFlags(["collapse_groups_fixture"]);
+  const { t } = useTranslation();
 
   const renderGroupsTables = (groups) => {
     if (!groups) return <Spinner />;
+
     return flags.collapse_groups_fixture.enabled ? (
       <CollapsedGroups groups={groups} isMobile={isMobile} />
     ) : (
@@ -63,7 +66,7 @@ function Fixture() {
         <>
           <LaterStagesGraph />
           <Text size="2rem" weight="700" align="center">
-            Fase de Grupos
+            {t("groupPhase")}
           </Text>
           {isLoading ? <Spinner /> : renderGroupsTables(fixtureData[0]?.groups)}
         </>

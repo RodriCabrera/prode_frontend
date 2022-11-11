@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { getSoccerVideos } from "api/pexels";
 import { useIsMobile } from "hooks/useIsMobile";
@@ -15,7 +16,7 @@ import {
 const LandingPageMain = () => {
   const [video, setVideo] = useState();
   const isMobile = useIsMobile();
-
+  const { t } = useTranslation();
   useEffect(() => {
     getSoccerVideos().then((res) => {
       setVideo(res.data.video_files[5].link);
@@ -27,12 +28,12 @@ const LandingPageMain = () => {
 
   return (
     <LandingPageWrapper id="landing-page-wrapper">
-      <LeftPlaceholder>
+      <LeftPlaceholder isMobile={isMobile}>
         <Text size={isMobile ? "3.5rem" : "5.5rem"} weight="800" color="tomato">
           Chumbazo.
         </Text>
         <Text size={isMobile ? "1.5rem" : "2.5rem"} weight="800">
-          El prode para Qatar 2022.
+          {t("slogan")}
         </Text>
         <Countdown />
       </LeftPlaceholder>

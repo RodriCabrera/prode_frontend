@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import { AuthContext } from "../AuthProvider";
 import { Linkbar } from "../Linkbar/Linkbar";
@@ -38,6 +39,8 @@ function Navbar() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const { t, i18n } = useTranslation();
+  const isCurrentLang = (lang) => lang === i18n.language;
   const { showModal, toggleModal } = useToggleModal();
 
   const isMobile = useIsMobile();
@@ -46,19 +49,18 @@ function Navbar() {
     userContext.logout();
     toggleModal();
   };
-
   return (
     <>
       <Modal show={showModal} toggle={toggleModal}>
-        <CardTitle>¿Estás seguro?</CardTitle>
+        <CardTitle>{t("areYouSure")}</CardTitle>
         <Button type="button" onClick={handleLogout}>
-          Salir
+          {t("exit")}
         </Button>
       </Modal>
       <NavbarContainer id="navbar-container">
         <NavbarWrapper id="navbar-wrapper">
           <ButtonGroup
-            id="button-group-left"
+            id="navbar-btn-group-left"
             onClick={() => navigate("/")}
             padding=".5rem 16px"
           >
@@ -69,9 +71,28 @@ function Navbar() {
               <SubLogo weight="100">prode</SubLogo>
             </LogoContainer>
           </ButtonGroup>
-          <ButtonGroup id="button-group-right" padding="1rem">
+          <ButtonGroup
+            id="navbar-btn-group-right"
+            padding="0 10px 0 0"
+            gap={isMobile ? ".3rem" : "1rem"}
+          >
             {userContext.user ? (
               <>
+                <Text
+                  color={isCurrentLang("en") ? "orange" : "gray"}
+                  onClick={() => i18n.changeLanguage("en")}
+                  style={{ cursor: "pointer" }}
+                >
+                  ENG
+                </Text>
+                <Text color="gray">|</Text>
+                <Text
+                  color={isCurrentLang("es") ? "orange" : "gray"}
+                  onClick={() => i18n.changeLanguage("es")}
+                  style={{ cursor: "pointer" }}
+                >
+                  ESP
+                </Text>
                 <NavLink onClick={() => navigate("/profile")}>
                   <Tooltip text={userContext.user.name} position="top">
                     <UserMiniAvatar
@@ -81,12 +102,12 @@ function Navbar() {
                     />
                   </Tooltip>
                 </NavLink>
-                <NavLink onClick={toggleModal}>Salir</NavLink>
+                <NavLink onClick={toggleModal}>{t("exit")}</NavLink>
               </>
             ) : (
               <>
                 <Link to="/auth">Login</Link>
-                <Link to="/auth/register">Registrarse</Link>
+                <Link to="/auth/register">{t("register")}</Link>
               </>
             )}
           </ButtonGroup>

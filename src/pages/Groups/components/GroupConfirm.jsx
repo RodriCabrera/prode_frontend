@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, CardTitle, Button } from '../../../common/common.styles';
+import { useTranslation } from "react-i18next";
 import { translateDuration } from '../../pagesHelpers';
+import { Text, CardTitle, Button } from '../../../common/common.styles';
 
 function GroupConfirm({ groupName, userGroupData, confirmText }) {
+  const { t } = useTranslation();
   return (
     userGroupData && (
       <>
@@ -10,37 +12,35 @@ function GroupConfirm({ groupName, userGroupData, confirmText }) {
         {userGroupData.manifesto && (
           <>
             <Text size="1.2rem" withBottomBorder>
-              Reglas
+              {t('rules')}
             </Text>
             <Text>{userGroupData.manifesto}</Text>
             <br />
           </>
         )}
         <Text size="1.2rem" withBottomBorder>
-          Sistema de puntaje
+          {t('scoringSystem')}
         </Text>
         <div>
           <Text align="center" color="lightgreen">
-            Resultado exacto: {userGroupData.scoring.FULL}
+            {t('resultExact')}: {userGroupData.scoring.FULL}
           </Text>
           <br />
           <Text align="center" color="yellow">
-            Ganador: {userGroupData.scoring.WINNER}
+          {t('resultWinner')}: {userGroupData.scoring.WINNER}
           </Text>
           <br />
           <Text align="center" color="red">
-            Resultado erróneo: {userGroupData.scoring.NONE}
+          {t('resultNone')}: {userGroupData.scoring.NONE}
           </Text>
         </div>
         <br />
         <Text size="1.2rem" withBottomBorder>
-          Tiempos
+          {t('timeLimit')}
         </Text>
         <Text>
-          Puedes realizar predicciones hasta
-          {userGroupData.limitByPhase ? 
-            translateDuration(userGroupData.timeLimit).replace("del partido", "de la fase")
-            : translateDuration(userGroupData.timeLimit) }
+          {t('timeLimitInfoText')}
+          {translateDuration(userGroupData, t)}
         </Text>
         <br />
         <Button type="submit">{confirmText}</Button>

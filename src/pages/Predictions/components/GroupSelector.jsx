@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { HiOutlineUserGroup, HiCheck } from "react-icons/hi";
+import { useTranslation } from "react-i18next";
 
 import { ListElement } from "../../../common/Lists/ListElement";
 import { useIsMobile } from "../../../hooks/useIsMobile";
@@ -20,11 +21,13 @@ export function GroupSelector({
   handleGroupSelect,
 }) {
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
+
   return (
     <>
       {userGroupList.length > 1 && (
         <>
-          <Text size="1.4rem">Seleccioná un grupo:</Text>
+          <Text size="1.4rem">{t("selectGroup")}</Text>
           <GroupsListWrapper>
             <ListWrapper>
               {userGroupList?.map((userGroup) => {

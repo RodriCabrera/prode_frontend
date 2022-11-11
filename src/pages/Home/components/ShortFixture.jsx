@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { getNextMatches } from "api/fixture";
 import { BallLoader } from "common/Spinner/BallLoader";
@@ -13,6 +14,7 @@ const ShortFixture = () => {
   const [data, setData] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   useEffect(() => {
     getNextMatches(3, signal)
@@ -32,7 +34,7 @@ const ShortFixture = () => {
       width="300px"
       minHeight="300px"
     >
-      <CardTitle>Próximos partidos:</CardTitle>
+      <CardTitle>{t("nextMatches")}</CardTitle>
       {isLoading && <BallLoader />}
       {!isLoading &&
         data &&
@@ -45,7 +47,7 @@ const ShortFixture = () => {
           />
         ) : (
           <Text align="center" weight="600" color="gray" margin="2rem 0">
-            No se aproximan partidos
+            {t("notComingMatches")}
           </Text>
         ))}
     </CardWrapper>

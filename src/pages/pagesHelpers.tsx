@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import type { TFunction } from "i18next";
 
 export const parseDate = (date: Date, options = null) => {
   return new Date(date).toLocaleString(
@@ -50,18 +51,23 @@ export interface IRules {
   timeLimit: string;
 }
 
-export const translateDuration = (rules: IRules) => {
-  const phaseOrMatch = () =>
-    rules.limitByPhase ? "de la fase" : "del partido";
+export const translateDuration = (rules: IRules, t: TFunction) => {
   switch (parseInt(rules.timeLimit)) {
     case 1000 * 60 * 60 * 1:
-      return ` una hora antes ${phaseOrMatch()}`;
+      return ` ${rules.limitByPhase ? 
+        t('timeLimitOptionStage1').toLowerCase()
+        : t('timeLimitOptionMatch1').toLowerCase()}`;
     case 1000 * 60 * 60 * 12:
-      return ` doce horas antes ${phaseOrMatch()}`;
+      return ` ${rules.limitByPhase ? 
+        t('timeLimitOptionStage2').toLowerCase() 
+        : t('timeLimitOptionMatch2').toLowerCase()}`;
     case 1000 * 60 * 60 * 24:
-      return ` un día antes ${phaseOrMatch()}`;
+      return ` ${rules.limitByPhase ?
+        t('timeLimitOptionStage3').toLowerCase() 
+        : t('timeLimitOptionMatch3').toLowerCase()}`;
     case 0:
     default:
-      return ` el comienzo ${phaseOrMatch()}`;
+      return ` ${rules.limitByPhase ?
+        t('timeLimitInfoStage0') : t('timeLimitInfoMatch0')}`;
   }
 };

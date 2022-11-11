@@ -7,6 +7,7 @@ import {
   BannerDataWrapper,
   BannerTitle,
 } from "./Predictions.styles";
+import { useTranslation } from "react-i18next";
 
 export function Banner({
   title,
@@ -17,16 +18,17 @@ export function Banner({
   disabled,
 }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const renderPercentageInfo = () => {
     if (editMode && disabled) {
       if (isLoading) {
-        return <Text weight="200">Cargando %...</Text>;
+        return <Text weight="200">Loading %...</Text>;
       }
       return (
         editMode && (
           <Text weight="200">
-            {!isNil(percentage) ? `${percentage} % completo` : ""}
+            {!isNil(percentage) ? `${percentage} % ${(t('completed'))}` : ""}
           </Text>
         )
       );

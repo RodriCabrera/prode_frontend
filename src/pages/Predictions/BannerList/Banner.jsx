@@ -1,5 +1,6 @@
 import { isNil } from "lodash";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
   BannerButton,
@@ -12,16 +13,17 @@ export function Banner({ title, path, percentage, isLoading, disabled }) {
   const navigate = useNavigate();
   const { mode, setMode } = useOutletContext();
   const editMode = mode === "edit";
+  const { t } = useTranslation();
 
   const renderPercentageInfo = () => {
     if (editMode && disabled) {
       if (isLoading) {
-        return <Text weight="200">Cargando %...</Text>;
+        return <Text weight="200">Loading %...</Text>;
       }
       return (
         editMode && (
           <Text weight="200">
-            {!isNil(percentage) ? `${percentage} % completo` : ""}
+            {!isNil(percentage) ? `${percentage} % ${t('completed')}` : ""}
           </Text>
         )
       );

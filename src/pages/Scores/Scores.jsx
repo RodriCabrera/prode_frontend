@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { isEmpty } from "lodash";
+import { useTranslation } from "react-i18next";
 
 import { BallLoader } from "../../common/Spinner/BallLoader";
 import { CardContainer, CardWrapper, Text } from "../../common/common.styles";
@@ -11,6 +12,7 @@ import ScoreList from "./components/ScoreList";
 function Scores() {
   const [scores, setScores] = useState(undefined);
   const [isLoadingScores, setIsLoadingScores] = useState(false);
+  const { t } = useTranslation();
 
   const { userGroupList, selectedUserGroup, isLoadingUserGroupsData } =
     useGetUserGroupsData();
@@ -19,12 +21,12 @@ function Scores() {
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
         <Text size="2.5rem" weight="500" align="center">
-          PUNTAJES
+          {t("scores").toUpperCase()}
         </Text>
         {isLoadingUserGroupsData && <Spinner />}
         {!isLoadingUserGroupsData && userGroupList.length === 0 && (
           <Text size="1.5rem" align="center" margin="1rem">
-            No perteneces a ningún grupo
+            {t("noGroups")}
           </Text>
         )}
         {!isLoadingUserGroupsData && userGroupList.length > 0 && (

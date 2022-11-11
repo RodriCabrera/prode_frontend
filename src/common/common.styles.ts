@@ -11,6 +11,7 @@ interface Props {
   padding?: string;
   weight?: string;
   gap?: string;
+  bg?: string;
 }
 
 /**
@@ -54,7 +55,7 @@ export const CardWrapper = styled.div<Props>`
   flex-direction: column;
   justify-content: ${({ justify }) => justify};
   align-items: ${({ align }) => align};
-  background-color: #111;
+  background-color: ${({ bg }) => (bg ? bg : "#111")};
 `;
 interface IButton extends Props {
   tertiary?: boolean;

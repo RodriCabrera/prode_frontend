@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { toast } from "react-toastify";
 import { useOutletContext, useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import ErrorInfo from "../../../common/MoreInfo/ErrorInfo";
 import Table from "../../../common/Table/Table";
@@ -15,7 +17,6 @@ import {
   getErrorMessageForMatch,
 } from "../predictionsPageUtils";
 import { useIsMobile } from "../../../hooks/useIsMobile";
-import { useFormik } from "formik";
 import { getPredictions, createPredictions } from "../../../api/predictions";
 import { BallLoader } from "common/Spinner/BallLoader";
 import useCleanupController from "../../../hooks/useCleanupController";
@@ -45,6 +46,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
     });
   const [errorMessages, setErrorMessages] = useState([]);
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const fetchAndSetPredictions = () => {
     setStatus({ loading: true });
@@ -83,8 +85,8 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           setIsLoading(false);
         }),
       {
-        pending: "Enviando predicciones...",
-        success: "Predicciones enviadas con éxito",
+        pending: `${t('predictionsSending.plural')}`,
+        success:  `${t('predictionsSent.plural')}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -130,7 +132,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                       values[`${match.id}-home`]
                     )
                   : "silver";
-              const matchResultString = `Resultado: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
+              const matchResultString = `${t('results')}: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
               const canPredict = calculateIfCanPredict(
                 match.date,
                 selectedUserGroup
@@ -237,9 +239,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
             type="submit"
             disabled={!selectedUserGroup?.id || !dirty || status?.loading}
           >
-            {selectedUserGroup?.id
-              ? "Enviar predicciones"
-              : "Seleccione un grupo"}
+            {t('send') + ' ' + t('predictions').toLowerCase() }
           </Button>
         )}
       </Form>

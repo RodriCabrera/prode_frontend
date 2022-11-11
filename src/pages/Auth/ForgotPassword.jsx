@@ -2,6 +2,7 @@ import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { authSchema } from "../../validationSchemas/auth";
 import { forgotPassword } from "../../api/auth";
@@ -23,14 +24,15 @@ function ForgotPassword() {
     validateOnMount: true,
   });
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.promise(
       forgotPassword({ ...values, email: values.email.toLowerCase() }),
       {
-        pending: "Buscando usuario",
-        success: `Mail enviado a ${values.email}`,
+        pending: `${t('userFetch')}`,
+        success: `${t('mailSent')} ${values.email}`,
         error: {
           render({ data }) {
             return data?.response.data?.error;
@@ -46,9 +48,10 @@ function ForgotPassword() {
       isMobile={isMobile}
       border={isMobile ? "null" : ""}
       id="change-password-card-wrapper"
+      bg="black"
     >
       <>
-        <CardTitle>Recuperar Contraseña</CardTitle>
+        <CardTitle>{t('passRecovery')}</CardTitle>
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="email">
             Email:
@@ -61,9 +64,9 @@ function ForgotPassword() {
               onChange={handleChange}
             />
           </Label>
-          <Button disabled={!isEmpty(errors)}>Recuperar contraseña</Button>
+          <Button disabled={!isEmpty(errors)}>{t('passRecovery')}</Button>
           <Button grayscale padding="8px" onClick={() => navigate("/auth")}>
-            Volver al login
+            {t('goBackLogin')}
           </Button>
         </Form>
       </>

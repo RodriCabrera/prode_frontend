@@ -10,7 +10,7 @@ export const LandingPageContainer = styled.div`
   background: radial-gradient(
     circle at left top,
     rgba(71, 128, 77, 0.7) -20%,
-    rgba(2, 8, 2, 1) 70%
+    rgba(2, 8, 2, 1) 50%
   );
 `;
 
@@ -49,6 +49,7 @@ export const LeftPlaceholder = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-top: ${({ isMobile }) => (isMobile && "2rem")};
 `;
 
 export const spin = keyframes`
