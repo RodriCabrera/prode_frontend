@@ -9,10 +9,11 @@ import { Container, TableWrapper } from "./Table.styles";
 interface ITable extends FC {
   fullWidth: boolean;
   children: JSX.Element;
+  padding?: string
 }
-function Table({ fullWidth, children }: ITable) {
+function Table({ fullWidth, children, padding }: ITable) {
   return (
-    <Container>
+    <Container style={{ padding }}>
       <TableWrapper fullWidth={fullWidth}>{children}</TableWrapper>
     </Container>
   );

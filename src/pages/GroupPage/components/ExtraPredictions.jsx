@@ -73,7 +73,7 @@ export default function ExtraPredictions({ groupData }) {
 
   useEffect(() => {
     setLoading(true);
-    getExtraPredictions(groupData.id, signal)
+    getExtraPredictions(groupData.id, true, signal)
       .then((res) => {
         const predictions = res.data?.extraPredictions[0].predictions;
         Object.entries(predictions).forEach(([key, value]) => {

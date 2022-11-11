@@ -51,20 +51,3 @@ export const MatchData = styled.div`
     width: 2rem;
   }
 `;
-
-export const CollapsableStageButton = styled.button`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.2);
-  border: none;
-  padding: 0.5rem;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  &:after {
-    width: 100%;
-    border-bottom: 1px white;
-  }
-`;

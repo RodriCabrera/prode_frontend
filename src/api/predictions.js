@@ -28,12 +28,18 @@ body {
 */
 
 export const createExtraPredictions = (userGroupId, predictions, signal) => {
-  return api.post(`/predictions/extra?userGroupId=${userGroupId}`, predictions, { signal })
-}
+  return api.post(
+    `/predictions/extra?userGroupId=${userGroupId}`,
+    predictions,
+    { signal }
+  );
+};
 
-export const getExtraPredictions = (userGroupId, signal) => {
-  return api.get(`/predictions/extra?userGroupId=${userGroupId}&own=true`, { signal })
-}
+export const getExtraPredictions = (userGroupId, own, signal) => {
+  return api.get(`/predictions/extra?userGroupId=${userGroupId}&own=${own}`, {
+    signal,
+  });
+};
 
 export const getPredictions = (
   userGroupId = "",
