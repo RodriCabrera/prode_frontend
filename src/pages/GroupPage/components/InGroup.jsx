@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { isEmpty } from "lodash";
 import { useFlags } from "flagsmith/react";
 import { useTranslation } from "react-i18next";
@@ -24,6 +24,7 @@ import {
   Button,
   CardWrapper,
 } from "../../../common/common.styles";
+import { Info } from "../../../common/Info/Info";
 import { Spinner } from "../../../common/Spinner/Spinner";
 
 function InGroup({ groupData, updater }) {
@@ -83,10 +84,15 @@ function InGroup({ groupData, updater }) {
             width="fit-content"
             padding="10px"
           >
-            {showAdminPanel
-              ? t('adminPanelHide')
-              : t('adminPanelShow')}
+            {showAdminPanel ? t("adminPanelHide") : t("adminPanelShow")}
           </Button>
+        )}
+
+        {groupData.extraPredictions?.length > 0 && (
+          <Info>
+            {t("extraPredictionsWarning")}
+            <Link to={`/groups/${groupData.name}?extra=true`}>{t("here")}</Link>
+          </Info>
         )}
 
         {showAdminPanel ? (
@@ -100,7 +106,7 @@ function InGroup({ groupData, updater }) {
         {!showAdminPanel && groupScoresData.group && (
           <>
             <Text size="1.2rem" weight="600" withBottomBorder>
-              {t('members')}:
+              {t("members")}:
             </Text>
             <Text size=".8rem" weight={100}>
               (👑 admin)
@@ -131,11 +137,11 @@ function InGroup({ groupData, updater }) {
             <CardContainer>
               {isAdminAlone ? (
                 <Button tertiary onClick={toggleModal}>
-                  {t('deleteGroup')}
+                  {t("deleteGroup")}
                 </Button>
               ) : (
                 <Button grayscale onClick={toggleModal}>
-                  {t('exitGroup')}
+                  {t("exitGroup")}
                 </Button>
               )}
             </CardContainer>

@@ -32,6 +32,7 @@ export const enTranslation = {
     exit: "Exit",
     exitGroup: "Leave group",
     extraPredictions: "Extra predictions",
+    extraPredictionsWarning: "This group has extra predictions, complete them ",
     expired: "Expired",
     firstTime: "First Time? Register",
     fromThisSection: {
@@ -64,6 +65,7 @@ export const enTranslation = {
     groupSearch: "Look for group",
     groupSearching: "Looking for group...",
     groupSearchSuccess: "Group found",
+    here: "here",
     hide: "Hide",
     insertEmail: "Enter email",
     insertImageLink: "Enter a link to an image",

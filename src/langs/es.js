@@ -34,6 +34,8 @@ export const esTranslation = {
     exit: "Salir",
     exitGroup: "Salir del grupo",
     extraPredictions: "Predicciones extra",
+    extraPredictionsWarning:
+      "Este grupo tiene predicciones extra, completalas ",
     expired: "Expirado",
     firstTime: "Crear cuenta",
     fromThisSection: {
@@ -67,6 +69,7 @@ export const esTranslation = {
     groupSearch: "Buscar grupo",
     groupSearching: "Buscando grupo...",
     groupSearchSuccess: "Grupo encontrado",
+    here: "aquí",
     hide: "Ocultar",
     inviteToGroup: "¡Invita a nuevos miembros!",
     inviteTitle: "Te invito a unirte a mi grupo de Prode Chumbazo",
