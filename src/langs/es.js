@@ -2,7 +2,8 @@ export const esTranslation = {
   translation: {
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",
-    adminEditTimeInfo1: "Podrás editar estos datos hasta 5 días antes del comienzo del mundial",
+    adminEditTimeInfo1:
+      "Podrás editar estos datos hasta 5 días antes del comienzo del mundial",
     adminEditTimeInfo2: "Ya no puedes editar esta configuración",
     areYouSure: "Estas seguro?",
     atLeast6: "Al menos 6 caracteres",
@@ -11,11 +12,14 @@ export const esTranslation = {
     byMatch: "Por partido",
     byMatchDetail: "Cada partido tendrá su fecha límite",
     byStage: "Por fase",
-    byStageDetail: "Todos los partidos de cada fase tendrán la misma fecha límite",
+    byStageDetail:
+      "Todos los partidos de cada fase tendrán la misma fecha límite",
+    canEditUntil: "Puedes editar hasta el",
     cancel: "Cancelar",
     canFindOrCreate: "Puedes encontrar o crear uno desde",
     clickAvatarToChoose: "Haz click en el avatar para elegir otro",
     completed: "completo",
+    completeBefore: "Completar antes del",
     confirm: "Confirmar",
     confirmChanges: "Confirmar cambios",
     copiedLink: "Copied link!",
@@ -29,10 +33,12 @@ export const esTranslation = {
     eight: "Octavos",
     exit: "Salir",
     exitGroup: "Salir del grupo",
+    extraPredictions: "Predicciones extra",
+    expired: "Expirado",
     firstTime: "Crear cuenta",
     fromThisSection: {
       a: "Empieza desde",
-      b: "esta sección"
+      b: "esta sección",
     },
     forgotPass: "Recuperar Contraseña",
     goBack: "Volver",
@@ -118,7 +124,7 @@ export const esTranslation = {
       green: "Acertaste resultado",
       red: "No acertaste",
       yellow: "Acertaste ganador",
-      gray: "No evaluado"
+      gray: "No evaluado",
     },
     scores: "Puntajes",
     scoresAutomatically:
@@ -129,7 +135,8 @@ export const esTranslation = {
     send: "Enviar",
     sendingChanges: "Enviando cambios",
     slogan: "El prode para Qatar 2022.",
-    switchToPredict: "Si querés ingresar predicciones switcheá al modo PREDECIR.",
+    switchToPredict:
+      "Si querés ingresar predicciones switcheá al modo PREDECIR.",
     thirdPosition: "Tercer puesto",
     thisSection: "esta sección",
     timeLimit: "Tiempos",
