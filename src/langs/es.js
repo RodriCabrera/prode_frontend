@@ -8,6 +8,7 @@ export const esTranslation = {
     adminEditTimeInfo2: "Ya no puedes editar esta configuración",
     areYouSure: "Estas seguro?",
     atLeast6: "Al menos 6 caracteres",
+    availableOn: "Disponible el",
     accountValidating: "Validando cuenta...",
     backToLogin: "Volver al login",
     byMatch: "Por partido",
@@ -37,6 +38,8 @@ export const esTranslation = {
     exit: "Salir",
     exitGroup: "Salir del grupo",
     extraPredictions: "Predicciones extra",
+    extraPredictionsScoreWarning:
+      "Estos resultados no se calcularán automáticamente",
     extraPredictionsWarning:
       "Este grupo tiene predicciones extra, completalas ",
     expired: "Expirado",
@@ -97,6 +100,7 @@ export const esTranslation = {
     members: "Integrantes",
     next: "Siguiente",
     nextMatches: "Próximos partidos",
+    noExtraPredictions: "Sin predicciones",
     noGroups: "No perteneces a ningún grupo",
     noGroupsNotification: "Empezá por crear o unirte a un grupo:",
     noPredictions: "No hay predicciones pendientes",

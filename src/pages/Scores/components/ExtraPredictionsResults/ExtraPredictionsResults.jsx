@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import styled from "@emotion/styled";
 
 import useCleanupController from "hooks/useCleanupController";
@@ -38,6 +39,7 @@ export default function ExtraPredictionsResults() {
   const isMobile = useIsMobile();
   const [signal, cleanup] = useCleanupController();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     getGroupData(name, signal).then((res) => {
@@ -79,20 +81,20 @@ export default function ExtraPredictionsResults() {
         ) : (
           <>
             <Text align="center" size="2.5rem">
-              Extra Predictions for {groupData.name}
+              {t("extraPredictions")}: {groupData.name}
             </Text>
-            <Info>These results will not be calculated automatically</Info>
+            <Info>{t("extraPredictionsScoreWarning")}</Info>
             {groupData.extraPredictions.map((field) => (
               <Collapsable key={field.key} name={field.key}>
                 {Date.parse(field.timeLimit) > Date.now() ? (
                   <NotAvailableBox>
                     <Text color="salmon">
-                      Available on {parseDate(field.timeLimit)}
+                      {`${t("availableOn")} ${parseDate(field.timeLimit)}`}
                     </Text>
                   </NotAvailableBox>
                 ) : !hasPredictions(field.key) ? (
                   <NotAvailableBox>
-                    <Text color="salmon">No predictions</Text>
+                    <Text color="salmon">{t("noExtraPredictions")}</Text>
                   </NotAvailableBox>
                 ) : (
                   <Table fullWidth padding={!isMobile && "0rem 1rem"}>
