@@ -105,6 +105,7 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
       <Button type="reset" grayscale onClick={toggleEditMode}>
         {t("cancel")}
       </Button>
+
       <Modal show={showModal} toggle={toggleModal}>
         <BigAvatarWrapper>
           <UserMiniAvatar avatar={customAvatarLink || values.avatar} />
