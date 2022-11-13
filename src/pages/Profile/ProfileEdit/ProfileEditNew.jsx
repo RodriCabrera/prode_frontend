@@ -90,14 +90,14 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
       <Label htmlFor="name">
         <Input
           type="string"
-          placeholder="Nombre de usuario"
+          placeholder={t("username")}
           name="name"
           value={values.name}
           maxLength={20}
           onChange={handleChange}
           autoComplete="new-password"
         />
-        {errors.name && <Info>{errors.name}</Info>}
+        {errors.name && <Info>{t(errors.name)}</Info>}
       </Label>
       <Button type="submit" disabled={!dirty || !isEmpty(errors)}>
         {t("confirm")}
