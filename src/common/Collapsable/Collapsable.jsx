@@ -11,6 +11,7 @@ const CollapsableButton = styled.button`
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
   border: none;
+  border-radius: 6px 6px 0 0;
   padding: 0.5rem;
   font-size: 1.8rem;
   text-transform: uppercase;

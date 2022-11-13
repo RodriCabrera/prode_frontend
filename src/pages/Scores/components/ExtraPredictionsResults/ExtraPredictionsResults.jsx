@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import useCleanupController from "../../../../hooks/useCleanupController";
@@ -8,6 +8,7 @@ import { getExtraPredictions } from "../../../../api/predictions";
 import { useIsMobile } from "../../../../hooks/useIsMobile";
 import { parseDate } from "../../../pagesHelpers";
 
+import { AuthContext } from "../../../../common/AuthProvider";
 import { UserMiniAvatar } from "../../../../common/UserMiniAvatar/UserMiniAvatar";
 import { ListElement } from "../../../../common/Lists/ListElement";
 import { BallLoader } from "../../../../common/Spinner/BallLoader";
@@ -26,16 +27,19 @@ const NotAvailableBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(100, 100, 100, 0.1);
+  border-radius: 0 0 6px 6px;
 `;
 
 export default function ExtraPredictionsResults() {
   const { name } = useParams();
+  const userContext = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [groupData, setGroupData] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
   const isMobile = useIsMobile();
   const [signal, cleanup] = useCleanupController();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getGroupData(name, signal).then((res) => {
@@ -53,6 +57,18 @@ export default function ExtraPredictionsResults() {
         .finally(() => setLoading(false));
   }, [groupData.id]);
 
+  const handleUserClick = (user) => {
+    if (user === userContext.user.name) return navigate("/profile/");
+    return navigate(`/profile/${user}`);
+  };
+
+  const hasPredictions = (fieldName) => {
+    if (!fieldName) return false;
+    return Object.entries(userPredictions).some(
+      ([_, user]) => user.predictions[fieldName]
+    );
+  };
+
   return (
     <CardContainer>
       <CardWrapper border="none" padding="0rem" isMobile={true}>
@@ -67,6 +83,10 @@ export default function ExtraPredictionsResults() {
                     <Text color="salmon">
                       Available on {parseDate(field.timeLimit)}
                     </Text>
+                  </NotAvailableBox>
+                ) : !hasPredictions(field.key) ? (
+                  <NotAvailableBox>
+                    <Text color="salmon">No predictions</Text>
                   </NotAvailableBox>
                 ) : (
                   <Table fullWidth padding={!isMobile && "0rem 1rem"}>
@@ -86,7 +106,7 @@ export default function ExtraPredictionsResults() {
                                       name={user.name}
                                     />
                                   }
-                                  onClick={() => console.log("navigate")}
+                                  onClick={() => handleUserClick(user.name)}
                                 >
                                   <Text margin="1rem">{user.name}</Text>
                                 </ListElement>
