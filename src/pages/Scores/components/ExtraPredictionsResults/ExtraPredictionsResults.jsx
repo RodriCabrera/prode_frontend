@@ -14,6 +14,8 @@ import { ListElement } from "../../../../common/Lists/ListElement";
 import { BallLoader } from "../../../../common/Spinner/BallLoader";
 import { Collapsable } from "../../../../common/Collapsable/Collapsable";
 import Table from "../../../../common/Table/Table";
+import { Info } from "../../../../common/Info/Info";
+import { GoBackButton } from "../../../../common/GoBackButton/GoBackButton";
 import {
   CardContainer,
   CardWrapper,
@@ -49,12 +51,14 @@ export default function ExtraPredictionsResults() {
   }, [name]);
 
   useEffect(() => {
-    if (groupData.id && groupData.extraPredictions?.length > 0)
+    if (!groupData.id) return;
+    if (groupData.extraPredictions?.length > 0)
       getExtraPredictions(groupData.id, false, signal)
         .then(
           (res) => res.data && setUserPredictions(res.data.extraPredictions)
         )
         .finally(() => setLoading(false));
+    else navigate(-1);
   }, [groupData.id]);
 
   const handleUserClick = (user) => {
@@ -72,10 +76,15 @@ export default function ExtraPredictionsResults() {
   return (
     <CardContainer>
       <CardWrapper border="none" padding="0rem" isMobile={true}>
+        <GoBackButton />
         {loading ? (
           <BallLoader />
         ) : (
           <>
+            <Text align="center" size="2.5rem">
+              Extra Predictions for {groupData.name}
+            </Text>
+            <Info>These results will not be calculated automatically</Info>
             {groupData.extraPredictions.map((field) => (
               <Collapsable key={field.key} name={field.key}>
                 {Date.parse(field.timeLimit) > Date.now() ? (
