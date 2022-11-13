@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useFlags } from "flagsmith/react";
 
 import { AuthContext } from "../../common/AuthProvider";
 import { useIsMobile } from "../../hooks/useIsMobile";
@@ -43,6 +44,7 @@ function Home() {
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const flags = useFlags(["quick_predictions"]);
 
   useEffect(() => {
     let subscribed = true;
@@ -89,7 +91,8 @@ function Home() {
         </Column>
         <Column>
           {isMobile && renderButton("quick")}
-          {shownSections.includes("quick") && <QuickPrediction />}
+          {shownSections.includes("quick") &&
+            flags.quick_predictions.enabled && <QuickPrediction />}
         </Column>
       </Row>
     </PageWrapper>
