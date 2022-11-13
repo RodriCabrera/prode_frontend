@@ -142,6 +142,7 @@ export const enTranslation = {
     selectGroup: "Select a group:",
     send: "Send",
     sendingChanges: "Sending changes...",
+    sending: "Sending...",
     slogan: "Predict Qatar 2022 results",
     switchToPredict: "To create new predictions switch to PREDICT mode.",
     thirdPosition: "Third place",

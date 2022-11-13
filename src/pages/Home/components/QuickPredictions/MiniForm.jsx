@@ -47,7 +47,7 @@ export default function MiniForm({
         error: {
           render({ data }) {
             setIsLoading(false);
-            return data.response.data.error;
+            return data.response.data.error || "Error";
           },
         },
       }
