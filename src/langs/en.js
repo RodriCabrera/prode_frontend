@@ -1,6 +1,5 @@
 export const enTranslation = {
   translation: {
-    addExtraPrediction: "Add new custom prediction field",
     adminPanelHide: "Hide Admin Panel",
     adminPanelShow: "Show Admin Panel",
     adminEditTimeInfo1:
@@ -27,6 +26,7 @@ export const enTranslation = {
     createGroup: "Create group",
     createNewGroup: "Create new group",
     creatingGroup: "Creating group...",
+    defaultUsername: "Your username was set by default",
     deleteGroup: "Delete group",
     description: "Description",
     editProfile: "Edit Profile",

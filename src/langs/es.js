@@ -29,6 +29,7 @@ export const esTranslation = {
     createGroup: "Crear grupo",
     createNewGroup: "Crear nuevo grupo",
     creatingGroup: "Creando grupo...",
+    defaultUsername: "Tu nombre de usuario fue asignado automáticamente",
     deleteGroup: "Eliminar grupo",
     description: "Descripción",
     editProfile: "Editar perfil",
