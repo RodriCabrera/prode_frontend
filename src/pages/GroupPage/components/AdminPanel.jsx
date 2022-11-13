@@ -253,6 +253,9 @@ export default function AdminPanel({ groupData, updater }) {
           </option>
         </Select>
       </Label>
+      <Text size="1.7rem" weight="500" margin="2rem 0 0 0">
+        {t("extraPredictions")}
+      </Text>
       <StyledButton
         width={isMobile ? "100%" : "50%"}
         border="1px solid yellowgreen"
@@ -287,7 +290,7 @@ export default function AdminPanel({ groupData, updater }) {
               <Label htmlFor={`extraPredictions[${index}].description`}>
                 {t("extraPoints")}
                 <Input
-                  type="text"
+                  type="number"
                   name={`extraPredictions[${index}].score`}
                   value={field.score}
                   onChange={handleChange}
@@ -313,6 +316,8 @@ export default function AdminPanel({ groupData, updater }) {
         })}
       <Button
         type="submit"
+        margin="2rem 0 0 0"
+        padding="1rem"
         disabled={!isEmpty(errors) || isEmpty(values.name) || !isEditAvailable}
       >
         {t("confirmChanges")}

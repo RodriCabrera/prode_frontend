@@ -82,7 +82,7 @@ function InGroup({ groupData, updater }) {
             onClick={toggleAdminPanel}
             tertiary={showAdminPanel}
             width="fit-content"
-            padding="10px"
+            padding="15px"
           >
             {showAdminPanel ? t("adminPanelHide") : t("adminPanelShow")}
           </Button>

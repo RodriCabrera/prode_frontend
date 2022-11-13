@@ -60,6 +60,7 @@ export const CardWrapper = styled.div<Props>`
 interface IButton extends Props {
   tertiary?: boolean;
   grayscale?: boolean;
+  margin?: string;
 }
 /**
  * You can pass to the Button:
@@ -86,14 +87,14 @@ export const Button = styled.button<IButton>`
   );
   background-color: ${({ tertiary }) => tertiary && "salmon"};
   padding: ${({ padding }) => padding || "15px 30px"};
+  margin: ${({ margin }) => margin};
   text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
-  color: white;
+  color: ${({ color }) => (color ? color : "white")};
   letter-spacing: 1px;
   border-radius: 10px;
   border: ${({ border }) => border || "600"};
-  color: white;
   font-weight: ${({ weight }) => weight || "600"};
   box-shadow: 0px 0px 14px -7px #fff;
   :hover {

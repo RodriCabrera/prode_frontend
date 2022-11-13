@@ -1,6 +1,6 @@
 export const esTranslation = {
   translation: {
-    addExtraPrediction: "Agregar nueva predicción custom",
+    addExtraPrediction: "Agregar nueva predicción extra",
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",
     adminEditTimeInfo1:
