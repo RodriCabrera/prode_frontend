@@ -51,7 +51,7 @@ export const enTranslation = {
     groupDeleted: "Group deleted",
     groupDeleteConfirmMsg1: "Are you sure you want to delete this group?",
     groupDeleteConfirmMsg2: "This action cannot be undone",
-    grupEditing: "Editing group info...",
+    groupEditing: "Editing group info...",
     groupEdited: "Group info edited",
     groupManifestPH1:
       "Set of rules (new members must accept them before joining this group)",

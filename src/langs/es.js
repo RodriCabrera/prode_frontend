@@ -54,7 +54,7 @@ export const esTranslation = {
     groupDeleted: "Eliminaste el grupo",
     groupDeleteConfirmMsg1: "¿Seguro que quieres eliminar este grupo?",
     groupDeleteConfirmMsg2: "Esta acción no puede deshacerse",
-    grupEditing: "Editando grupo...",
+    groupEditing: "Editando grupo...",
     groupEdited: "Grupo editado con éxito",
     groupManifestPH1:
       "Reglamento (los miembros deberán aceptar estos términos al ingresar)",
