@@ -2,25 +2,21 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 
-import useCleanupController from "../../../../hooks/useCleanupController";
-import { getGroupData } from "../../../../api/groups";
-import { getExtraPredictions } from "../../../../api/predictions";
-import { useIsMobile } from "../../../../hooks/useIsMobile";
+import useCleanupController from "hooks/useCleanupController";
+import { getGroupData } from "api/groups";
+import { getExtraPredictions } from "api/predictions";
+import { useIsMobile } from "hooks/useIsMobile";
 import { parseDate } from "../../../pagesHelpers";
 
-import { AuthContext } from "../../../../common/AuthProvider";
-import { UserMiniAvatar } from "../../../../common/UserMiniAvatar/UserMiniAvatar";
-import { ListElement } from "../../../../common/Lists/ListElement";
-import { BallLoader } from "../../../../common/Spinner/BallLoader";
-import { Collapsable } from "../../../../common/Collapsable/Collapsable";
-import Table from "../../../../common/Table/Table";
-import { Info } from "../../../../common/Info/Info";
-import { GoBackButton } from "../../../../common/GoBackButton/GoBackButton";
-import {
-  CardContainer,
-  CardWrapper,
-  Text,
-} from "../../../../common/common.styles";
+import { AuthContext } from "common/AuthProvider";
+import { UserMiniAvatar } from "common/UserMiniAvatar/UserMiniAvatar";
+import { ListElement } from "common/Lists/ListElement";
+import { BallLoader } from "common/Spinner/BallLoader";
+import { Collapsable } from "common/Collapsable/Collapsable";
+import Table from "common/Table/Table";
+import { Info } from "common/Info/Info";
+import { GoBackButton } from "common/GoBackButton/GoBackButton";
+import { CardContainer, CardWrapper, Text } from "common/common.styles";
 
 const NotAvailableBox = styled.div`
   width: 100%;
