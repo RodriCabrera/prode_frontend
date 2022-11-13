@@ -19,6 +19,7 @@ import {
   CardWrapper,
   Text,
 } from "../../../../common/common.styles";
+import { Link } from "react-router-dom";
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
@@ -95,6 +96,13 @@ export default function ScoresByGroup() {
           userGroupList.length > 0 && <BallLoader />
         ) : (
           <>
+            {selectedUserGroup.extraPredictions?.length > 0 && (
+              <Text align="right">
+                <Link to={`/scores/${selectedUserGroup.name}/extra`}>
+                  {`${t("extraPredictions")} >`}
+                </Link>
+              </Text>
+            )}
             <ScoreList scores={scores} />
             {predictions.length > 0 && (
               <MatchNavigator>

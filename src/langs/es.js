@@ -1,5 +1,6 @@
 export const esTranslation = {
   translation: {
+    addExtraPrediction: "Agregar nueva predicción extra",
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",
     adminEditTimeInfo1:
@@ -14,10 +15,12 @@ export const esTranslation = {
     byStage: "Por fase",
     byStageDetail:
       "Todos los partidos de cada fase tendrán la misma fecha límite",
+    canEditUntil: "Puedes editar hasta el",
     cancel: "Cancelar",
     canFindOrCreate: "Puedes encontrar o crear uno desde",
     clickAvatarToChoose: "Haz click en el avatar para elegir otro",
     completed: "completo",
+    completeBefore: "Completar antes del",
     confirm: "Confirmar",
     confirmChanges: "Confirmar cambios",
     copiedLink: "Copied link!",
@@ -28,10 +31,16 @@ export const esTranslation = {
     creatingGroup: "Creando grupo...",
     defaultUsername: "Tu nombre de usuario fue asignado automáticamente",
     deleteGroup: "Eliminar grupo",
+    description: "Descripción",
     editProfile: "Editar perfil",
     eight: "Octavos",
     exit: "Salir",
     exitGroup: "Salir del grupo",
+    extraPredictions: "Predicciones extra",
+    extraPredictionsWarning:
+      "Este grupo tiene predicciones extra, completalas ",
+    expired: "Expirado",
+    extraPoints: "Puntos extra",
     firstTime: "Crear cuenta",
     fromThisSection: {
       a: "Empieza desde",
@@ -42,11 +51,11 @@ export const esTranslation = {
     goBackLogin: "Volver al login",
     goBackStage: "Volver a selección de fases",
     groupCreated: "Grupo creado con éxito. Redirigiendo...",
-    groupDeleteing: "Eliminando grupo",
+    groupDeleting: "Eliminando grupo",
     groupDeleted: "Eliminaste el grupo",
     groupDeleteConfirmMsg1: "¿Seguro que quieres eliminar este grupo?",
     groupDeleteConfirmMsg2: "Esta acción no puede deshacerse",
-    grupEditing: "Editando grupo...",
+    groupEditing: "Editando grupo...",
     groupEdited: "Grupo editado con éxito",
     groupManifestPH1:
       "Reglamento (los miembros deberán aceptar estos términos al ingresar)",
@@ -64,6 +73,7 @@ export const esTranslation = {
     groupSearch: "Buscar grupo",
     groupSearching: "Buscando grupo...",
     groupSearchSuccess: "Grupo encontrado",
+    here: "aquí",
     hide: "Ocultar",
     inviteToGroup: "¡Invita a nuevos miembros!",
     inviteTitle: "Te invito a unirte a mi grupo de Prode Chumbazo",
@@ -149,6 +159,7 @@ export const esTranslation = {
     timeLimitOptionStage2: "Doce horas antes de comenzar la fase",
     timeLimitOptionStage3: "Un día antes de comenzar la fase",
     timeLimitTitle: "¿Hasta cuándo se podrán realizar las predicciones?",
+    title: "Título",
     userFetch: "Buscando usuario",
     username: "Nombre de usuario",
     usernameRequirementsMatches: "El nombre de usuario debe ser alfanumérico",

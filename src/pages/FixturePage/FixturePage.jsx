@@ -1,20 +1,19 @@
-import React from "react";
 import { useFlags } from "flagsmith/react";
+
 import FixtureTable from "./components/FixtureTable";
 import LaterStagesGraph from "./components/LaterStagesGraph";
-import CollapsableStage from "./components/CollapsableStage";
 import CollapsedGroups from "./components/CollapsedGroups";
 import { Spinner } from "../../common/Spinner/Spinner";
 import { useFetchFixtureData } from "./hooks/useFetchFixtureData";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-
 import {
   FixtureTablesContainer,
   FixtureWrapper,
   GroupTableWrapper,
 } from "./FixturePage.styles";
 import { Text } from "../../common/common.styles";
+import { Collapsable } from "../../common/Collapsable/Collapsable";
 import { useTranslation } from "react-i18next";
 
 function Fixture() {
@@ -49,16 +48,15 @@ function Fixture() {
           {fixtureData.map((stage) => {
             if (stage.groups)
               return (
-                <CollapsableStage stageName={stage.name}>
+                <Collapsable name={stage.name}>
                   {renderGroupsTables(stage.groups)}
-                </CollapsableStage>
+                </Collapsable>
               );
             else
               return (
-                <CollapsableStage
-                  stageName={stage.name}
-                  stageData={stage.matches}
-                />
+                <Collapsable name={stage.name}>
+                  <FixtureTable data={stage.matches} fullWidth isCompact />
+                </Collapsable>
               );
           })}
         </>

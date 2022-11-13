@@ -7,9 +7,11 @@ import NotFound from "../NotFound";
 import InGroup from "./components/InGroup";
 import NotInGroup from "./components/NotInGroup";
 import useCleanupController from "../../hooks/useCleanupController";
+import ExtraPredictions from "./components/ExtraPredictions";
 
 function GroupPage() {
   const { name } = useParams();
+  const extra = new URLSearchParams(window.location.search).get("extra")
 
   const [isUserInGroup, setIsUserInGroup] = useState(undefined);
   const [groupData, setGroupData] = useState({});
@@ -42,7 +44,7 @@ function GroupPage() {
   if (groupExists === false) return <NotFound />;
   if (isLoading || isUserInGroup === undefined) return <Spinner />;
   return isUserInGroup ? (
-    <InGroup groupData={groupData} updater={updateGroupData}/>
+    (extra && groupData.extraPredictions) ? <ExtraPredictions groupData={groupData} /> : <InGroup groupData={groupData} updater={updateGroupData} />
   ) : (
     <NotInGroup name={name} updater={updateGroupData} />
   );
