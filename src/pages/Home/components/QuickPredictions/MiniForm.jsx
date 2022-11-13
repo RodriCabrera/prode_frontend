@@ -42,8 +42,8 @@ export default function MiniForm({
         afterSubmit();
       }),
       {
-        pending: `${t('predictionSending.single')}`,
-        success:  `${t('predictionSent.single')}`,
+        pending: `${t("predictionsSending.single")}`,
+        success: `${t("predictionsSent.single")}`,
         error: {
           render({ data }) {
             setIsLoading(false);
@@ -99,7 +99,7 @@ export default function MiniForm({
         type="submit"
         disabled={inputValues.away === "" || inputValues.home === ""}
       >
-        {t('send')}
+        {t("send")}
       </Button>
     </SinglePredictionForm>
   );
