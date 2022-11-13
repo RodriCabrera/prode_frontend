@@ -1,7 +1,8 @@
 export const enTranslation = {
   translation: {
-    adminPanelHide: "Hide admin panel",
-    adminPanelShow: "Show admin panel",
+    addExtraPrediction: "Add new custom prediction field",
+    adminPanelHide: "Hide Admin Panel",
+    adminPanelShow: "Show Admin Panel",
     adminEditTimeInfo1:
       "You can edit this info up to 5 days before the cup starts",
     adminEditTimeInfo2: "You cannot edit this info anymore",
@@ -27,6 +28,7 @@ export const enTranslation = {
     createNewGroup: "Create new group",
     creatingGroup: "Creating group...",
     deleteGroup: "Delete group",
+    description: "Description",
     editProfile: "Edit Profile",
     eight: "Eight-finals",
     exit: "Exit",
@@ -34,6 +36,7 @@ export const enTranslation = {
     extraPredictions: "Extra predictions",
     extraPredictionsWarning: "This group has extra predictions, complete them ",
     expired: "Expired",
+    extraPoints: "Extra points",
     firstTime: "First Time? Register",
     fromThisSection: {
       a: "Start from",
@@ -44,7 +47,7 @@ export const enTranslation = {
     goBackLogin: "Go back to login",
     goBackStage: "Go back to stage selection",
     groupCreated: "Created group. Redirecting...",
-    groupDeleteing: "Removing group",
+    groupDeleting: "Removing group",
     groupDeleted: "Group deleted",
     groupDeleteConfirmMsg1: "Are you sure you want to delete this group?",
     groupDeleteConfirmMsg2: "This action cannot be undone",
@@ -151,6 +154,7 @@ export const enTranslation = {
     timeLimitOptionStage3: "One day before stage begins",
     timeLimitPresent: "You can predict up to",
     timeLimitTitle: "What time do users have to make their predictions?",
+    title: "Title",
     userFetch: "Fetching user",
     username: "Username",
     usernameRequirementsMatches: "Username must be alpha numeric",

@@ -1,5 +1,6 @@
 export const esTranslation = {
   translation: {
+    addExtraPrediction: "Agregar nueva predicción custom",
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",
     adminEditTimeInfo1:
@@ -29,6 +30,7 @@ export const esTranslation = {
     createNewGroup: "Crear nuevo grupo",
     creatingGroup: "Creando grupo...",
     deleteGroup: "Eliminar grupo",
+    description: "Descripción",
     editProfile: "Editar perfil",
     eight: "Octavos",
     exit: "Salir",
@@ -37,6 +39,7 @@ export const esTranslation = {
     extraPredictionsWarning:
       "Este grupo tiene predicciones extra, completalas ",
     expired: "Expirado",
+    extraPoints: "Puntos extra",
     firstTime: "Crear cuenta",
     fromThisSection: {
       a: "Empieza desde",
@@ -47,7 +50,7 @@ export const esTranslation = {
     goBackLogin: "Volver al login",
     goBackStage: "Volver a selección de fases",
     groupCreated: "Grupo creado con éxito. Redirigiendo...",
-    groupDeleteing: "Eliminando grupo",
+    groupDeleting: "Eliminando grupo",
     groupDeleted: "Eliminaste el grupo",
     groupDeleteConfirmMsg1: "¿Seguro que quieres eliminar este grupo?",
     groupDeleteConfirmMsg2: "Esta acción no puede deshacerse",
@@ -155,6 +158,7 @@ export const esTranslation = {
     timeLimitOptionStage2: "Doce horas antes de comenzar la fase",
     timeLimitOptionStage3: "Un día antes de comenzar la fase",
     timeLimitTitle: "¿Hasta cuándo se podrán realizar las predicciones?",
+    title: "Título",
     userFetch: "Buscando usuario",
     username: "Nombre de usuario",
     usernameRequirementsMatches: "El nombre de usuario debe ser alfanumérico",
