@@ -27,7 +27,7 @@ const UserGroupTitle = styled(Text)`
   margin: 0;
   padding-right: 0%;
   &:hover {
-    padding-right: 70%;
+    padding-right: 20%;
   }
   &:after {
     margin-top: 0.5rem;
