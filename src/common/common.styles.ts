@@ -67,13 +67,11 @@ interface IButton extends Props {
  * @props for color schemas: tertiary // grayscale
  */
 export const Button = styled.button<IButton>`
-  background-color: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${({ width }) => width || "auto"};
   cursor: pointer;
-  border: none;
   user-select: none;
   background-image: linear-gradient(
     ${({ tertiary, grayscale }) => {
@@ -94,7 +92,7 @@ export const Button = styled.button<IButton>`
   color: white;
   letter-spacing: 1px;
   border-radius: 10px;
-  border: 0px;
+  border: ${({ border }) => border || "600"};
   color: white;
   font-weight: ${({ weight }) => weight || "600"};
   box-shadow: 0px 0px 14px -7px #fff;

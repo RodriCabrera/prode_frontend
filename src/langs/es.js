@@ -1,5 +1,6 @@
 export const esTranslation = {
   translation: {
+    addExtraPrediction: "Agregar nueva predicción custom",
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",
     adminEditTimeInfo1:
@@ -29,6 +30,7 @@ export const esTranslation = {
     createNewGroup: "Crear nuevo grupo",
     creatingGroup: "Creando grupo...",
     deleteGroup: "Eliminar grupo",
+    description: "Descripción",
     editProfile: "Editar perfil",
     eight: "Octavos",
     exit: "Salir",
@@ -155,6 +157,7 @@ export const esTranslation = {
     timeLimitOptionStage2: "Doce horas antes de comenzar la fase",
     timeLimitOptionStage3: "Un día antes de comenzar la fase",
     timeLimitTitle: "¿Hasta cuándo se podrán realizar las predicciones?",
+    title: "Título",
     userFetch: "Buscando usuario",
     username: "Nombre de usuario",
     usernameRequirementsMatches: "El nombre de usuario debe ser alfanumérico",

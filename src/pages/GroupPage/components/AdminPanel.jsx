@@ -2,25 +2,26 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
 import { toast } from "react-toastify";
-import { ImCancelCircle } from "react-icons/im";
+import { ImCancelCircle, ImPlus } from "react-icons/im";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
 
 import { editGroup } from "api/groups";
 import ScoringInputs from "../../Groups/components/ScoringInputs";
 import { parseInputDate } from "../../pagesHelpers";
-import {
-  Button,
-  Input,
-  Label,
-  Form,
-  TextareaInput,
-  Select,
-  Text,
-  TextGroup,
-} from "common/common.styles";
 import { Info } from "common/Info/Info";
 import { groupsSchema } from "validationSchemas/groups";
+
+import {
+  Button,
+  Form,
+  Input,
+  Label,
+  Select,
+  Text,
+  TextareaInput,
+  TextGroup,
+} from "common/common.styles";
 
 const InputGroup = styled.div`
   display: flex;
@@ -41,6 +42,15 @@ const InputGroup = styled.div`
   & :nth-child(2) {
     flex-grow: 1;
   }
+`;
+
+const StyledButton = styled(Button)`
+  background: black;
+  color: yellowgreen;
+  width: 50%;
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
 `;
 
 export default function AdminPanel({ groupData, updater }) {
@@ -102,6 +112,7 @@ export default function AdminPanel({ groupData, updater }) {
       { key: "", description: "", timeLimit: "11-20-2022 13:00 GMT-0300" },
     ]);
   };
+
   const handleRemoveCustomEntry = (key) => {
     setFieldValue(
       "extraPredictions",
@@ -115,6 +126,7 @@ export default function AdminPanel({ groupData, updater }) {
         {isEditAvailable ? t("adminEditTimeInfo1") : t("adminEditTimeInfo2")}
       </Info>
       <Label htmlFor="name">
+        {t("groupNamePH")}
         <Input
           type="text"
           placeholder={t("groupNamePH")}
@@ -139,6 +151,7 @@ export default function AdminPanel({ groupData, updater }) {
         )}
       </Label>
       <Label htmlFor="manifesto">
+        {t("rules")}
         <TextareaInput
           type="text"
           placeholder={t("groupManifestPH1") + "\n\n" + t("groupManifestPH2")}
@@ -146,7 +159,7 @@ export default function AdminPanel({ groupData, updater }) {
           required
           value={values.manifesto}
           onChange={handleChange}
-          rows="10"
+          rows="4"
           maxLength="1024"
           borderError={errors.manifesto}
           disabled={!isEditAvailable}
@@ -234,15 +247,20 @@ export default function AdminPanel({ groupData, updater }) {
           </option>
         </Select>
       </Label>
-      <Button type="button" onClick={handleNewCustomPredictionField}>
-        Add new custom prediction field
-      </Button>
+      <StyledButton
+        border="1px solid yellowgreen"
+        type="button"
+        onClick={handleNewCustomPredictionField}
+      >
+        <ImPlus className="icon" size={20} />
+        {t("addExtraPrediction")}
+      </StyledButton>
       {values.extraPredictions &&
         values.extraPredictions.map((field, index) => {
           return (
             <InputGroup key={index}>
               <Label htmlFor={`extraPredictions[${index}].key`}>
-                Title
+                {t("title")}
                 <Input
                   name={`extraPredictions[${index}].key`}
                   value={field.key}
@@ -251,7 +269,7 @@ export default function AdminPanel({ groupData, updater }) {
                 />
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
-                Description
+                {t("description")}
                 <Input
                   name={`extraPredictions[${index}].description`}
                   value={field.description}
@@ -271,6 +289,7 @@ export default function AdminPanel({ groupData, updater }) {
               <ImCancelCircle
                 className="icon"
                 size={20}
+                color="tomato"
                 onClick={() => handleRemoveCustomEntry(field.key)}
               />
             </InputGroup>
