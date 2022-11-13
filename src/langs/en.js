@@ -2,7 +2,8 @@ export const enTranslation = {
   translation: {
     adminPanelHide: "Hide admin panel",
     adminPanelShow: "Show admin panel",
-    adminEditTimeInfo1: "You can edit this info up to 5 days before the cup starts",
+    adminEditTimeInfo1:
+      "You can edit this info up to 5 days before the cup starts",
     adminEditTimeInfo2: "You cannot edit this info anymore",
     areYouSure: "Are you sure?",
     atLeast6: "At least 6 characters",
@@ -23,6 +24,7 @@ export const enTranslation = {
     createGroup: "Create group",
     createNewGroup: "Create new group",
     creatingGroup: "Creating group...",
+    defaultUsername: "Your username was set by default",
     deleteGroup: "Delete group",
     editProfile: "Edit Profile",
     eight: "Eight-finals",
@@ -31,7 +33,7 @@ export const enTranslation = {
     firstTime: "First Time? Register",
     fromThisSection: {
       a: "Start from",
-      b: "this section"
+      b: "this section",
     },
     forgotPass: "Forgot password",
     goBack: "Go Back",
@@ -92,13 +94,13 @@ export const enTranslation = {
     phases: "Phases",
     predict: "Predict",
     predictions: "Predictions",
-    predictionsSending: { 
+    predictionsSending: {
       single: "Sending prediction",
       plural: "Sending predictions",
     },
-    predictionsSent: { 
+    predictionsSent: {
       single: "Prediction sent",
-      plural: "Predictions sent"
+      plural: "Predictions sent",
     },
     profileUpdate: "Update profile",
     profileUpdated: "Profile updated",
@@ -115,7 +117,7 @@ export const enTranslation = {
       green: "Guessed exact result",
       red: "No guesses",
       yellow: "Guessed winner",
-      gray: "Not evaluated"
+      gray: "Not evaluated",
     },
     rules: "Rules",
     scores: "Scores",
