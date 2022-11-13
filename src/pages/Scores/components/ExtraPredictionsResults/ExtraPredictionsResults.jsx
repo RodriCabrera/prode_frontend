@@ -65,6 +65,7 @@ export default function ExtraPredictionsResults() {
   const hasPredictions = (fieldName) => {
     if (!fieldName) return false;
     return Object.entries(userPredictions).some(
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
       ([_, user]) => user.predictions[fieldName]
     );
   };
