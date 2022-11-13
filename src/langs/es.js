@@ -39,6 +39,7 @@ export const esTranslation = {
     extraPredictionsWarning:
       "Este grupo tiene predicciones extra, completalas ",
     expired: "Expirado",
+    extraPoints: "Puntos extra",
     firstTime: "Crear cuenta",
     fromThisSection: {
       a: "Empieza desde",
@@ -49,7 +50,7 @@ export const esTranslation = {
     goBackLogin: "Volver al login",
     goBackStage: "Volver a selección de fases",
     groupCreated: "Grupo creado con éxito. Redirigiendo...",
-    groupDeleteing: "Eliminando grupo",
+    groupDeleting: "Eliminando grupo",
     groupDeleted: "Eliminaste el grupo",
     groupDeleteConfirmMsg1: "¿Seguro que quieres eliminar este grupo?",
     groupDeleteConfirmMsg2: "Esta acción no puede deshacerse",

@@ -22,6 +22,7 @@ import {
   TextareaInput,
   TextGroup,
 } from "common/common.styles";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 const InputGroup = styled.div`
   display: flex;
@@ -47,7 +48,6 @@ const InputGroup = styled.div`
 const StyledButton = styled(Button)`
   background: black;
   color: yellowgreen;
-  width: 50%;
   display: flex;
   gap: 1rem;
   margin: 1rem 0;
@@ -69,6 +69,7 @@ export default function AdminPanel({ groupData, updater }) {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const isMobile = useIsMobile();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,7 +110,12 @@ export default function AdminPanel({ groupData, updater }) {
   const handleNewCustomPredictionField = () => {
     setFieldValue("extraPredictions", [
       ...values.extraPredictions,
-      { key: "", description: "", timeLimit: "11-20-2022 13:00 GMT-0300" },
+      {
+        key: "",
+        description: "",
+        score: "5",
+        timeLimit: "11-20-2022 13:00 GMT-0300",
+      },
     ]);
   };
 
@@ -248,6 +254,7 @@ export default function AdminPanel({ groupData, updater }) {
         </Select>
       </Label>
       <StyledButton
+        width={isMobile ? "100%" : "50%"}
         border="1px solid yellowgreen"
         type="button"
         onClick={handleNewCustomPredictionField}
@@ -270,10 +277,19 @@ export default function AdminPanel({ groupData, updater }) {
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
                 {t("description")}
-                <Input
+                <TextareaInput
+                  type="text"
                   name={`extraPredictions[${index}].description`}
                   value={field.description}
+                  onChange={handleChange}
+                />
+              </Label>
+              <Label htmlFor={`extraPredictions[${index}].description`}>
+                {t("extraPoints")}
+                <Input
                   type="text"
+                  name={`extraPredictions[${index}].score`}
+                  value={field.score}
                   onChange={handleChange}
                 />
               </Label>

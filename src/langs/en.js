@@ -36,6 +36,7 @@ export const enTranslation = {
     extraPredictions: "Extra predictions",
     extraPredictionsWarning: "This group has extra predictions, complete them ",
     expired: "Expired",
+    extraPoints: "Extra points",
     firstTime: "First Time? Register",
     fromThisSection: {
       a: "Start from",
@@ -46,7 +47,7 @@ export const enTranslation = {
     goBackLogin: "Go back to login",
     goBackStage: "Go back to stage selection",
     groupCreated: "Created group. Redirecting...",
-    groupDeleteing: "Removing group",
+    groupDeleting: "Removing group",
     groupDeleted: "Group deleted",
     groupDeleteConfirmMsg1: "Are you sure you want to delete this group?",
     groupDeleteConfirmMsg2: "This action cannot be undone",
