@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import ToggleSwitch from "../../common/ToggleSwitch/ToggleSwitch";
@@ -7,6 +7,7 @@ import { PredictionsPageWrapper } from "./Predictions.styles";
 import { GroupSelector } from "./components/GroupSelector";
 import { Spinner } from "../../common/Spinner/Spinner";
 import { useGetUserGroupsData } from "../../hooks/useGetUserGroupsData";
+import { Info } from "../../common/Info/Info";
 
 import { Text } from "../../common/common.styles";
 
@@ -62,6 +63,14 @@ function PredictionsPage() {
 
       {userGroupList.length > 0 && (
         <>
+          {selectedUserGroup.extraPredictions?.length > 0 && (
+            <Info>
+              {t("extraPredictionsWarning")}
+              <Link to={`/groups/${selectedUserGroup.name}?extra=true`}>
+                {t("here")}
+              </Link>
+            </Info>
+          )}
           <ToggleSwitch mode={mode} setMode={setMode} modes={predictionModes} />
           <Outlet context={{ mode, selectedUserGroup, setMode }} />
         </>

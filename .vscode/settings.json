@@ -3,6 +3,7 @@
   "prettier.useTabs": false,
   "prettier.semi": true,
   "prettier.endOfLine": "auto",
+  "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

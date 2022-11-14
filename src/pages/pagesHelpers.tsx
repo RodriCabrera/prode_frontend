@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
+import __ from "i18next"
 import type { TFunction } from "i18next";
 
 export const parseDate = (date: Date, options = null) => {
   return new Date(date).toLocaleString(
-    navigator.language,
+    __.language,
     options || {
       month: "short",
       day: "numeric",
@@ -13,6 +14,10 @@ export const parseDate = (date: Date, options = null) => {
     }
   );
 };
+
+export const parseInputDate = (date: Date) => {
+  return new Date(date).toISOString().split('T')[0];
+}
 
 const FlagImg = styled.img`
   min-width: 42px;

@@ -60,7 +60,7 @@ export const Container = styled.div`
 `;
 
 export const AvatarListContainer = styled.div`
-  padding-top: 3rem;
+  padding-top: 1rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -88,4 +88,10 @@ export const AvatarContainer = styled.div`
 export const Avatar = styled.img`
   width: 70px;
   filter: grayscale(${({ selected }) => (selected ? "30%" : "100%")});
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 `;

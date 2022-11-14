@@ -17,7 +17,7 @@ function LeaveGroupForm({ updater, toDelete }) {
   const { name } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const { values, handleChange } = useFormik({ initialValues: { name: "" } });
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const handleSubmit = (e) => {
     setIsLoading(true);
@@ -31,8 +31,8 @@ function LeaveGroupForm({ updater, toDelete }) {
           setIsLoading(false);
         }),
       {
-        pending: `${t('groupLeaving')}`,
-        success: `${t('groupLeft')} ${values.name}`,
+        pending: `${t("groupLeaving")}`,
+        success: `${t("groupLeft")} ${values.name}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -54,8 +54,8 @@ function LeaveGroupForm({ updater, toDelete }) {
           setIsLoading(false);
         }),
       {
-        pending: `${t('groupDeleteing')}`,
-        success: `${t('groupDeleted')} ${values.name}`,
+        pending: `${t("groupDeleting")}`,
+        success: `${t("groupDeleted")} ${values.name}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -70,35 +70,35 @@ function LeaveGroupForm({ updater, toDelete }) {
       {toDelete ? (
         <>
           <Text align="center" color="salmon" size="1.3rem">
-            {t('groupDeleteConfirmMsg1')}
+            {t("groupDeleteConfirmMsg1")}
           </Text>
           <Text
             align="center"
             color="red"
             size="1.8rem"
             margin="1rem 0rem 0rem 0rem"
-            >
-            {t('groupDeleteConfirmMsg2')}
+          >
+            {t("groupDeleteConfirmMsg2")}
           </Text>
         </>
       ) : (
         <>
           <Text align="center" color="salmon" size="1.3rem">
-            {t('groupLeaveConfirmMsg1')}
+            {t("groupLeaveConfirmMsg1")}
           </Text>
           <Text align="center" color="salmon">
-            {t('groupLeaveConfirmMsg2')}
+            {t("groupLeaveConfirmMsg2")}
           </Text>
         </>
       )}
       <br />
       <Label htmlFor="name">
         <Text size="1.3rem" align="center">
-          {t('groupCheckConfirm')}
+          {t("groupCheckConfirm")}
         </Text>
         <Input
           type="text"
-          placeholder={t('groupNamePH')}
+          placeholder={t("groupNamePH")}
           name="name"
           required
           value={values.name}
@@ -110,7 +110,7 @@ function LeaveGroupForm({ updater, toDelete }) {
         type="submit"
         disabled={isLoading || values.name?.toUpperCase() !== name}
       >
-        {toDelete ? t('deleteGroup') : t('exit')}
+        {toDelete ? t("deleteGroup") : t("exit")}
       </Button>
     </Form>
   );

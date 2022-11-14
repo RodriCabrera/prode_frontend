@@ -50,7 +50,7 @@ export const CardWrapper = styled.div<Props>`
     isMobile ? "100%" : width ? width : "600px"};
   max-width: ${({ isMobile }) => (isMobile ? "100%" : "350px")};
   display: flex;
-  padding: 1rem;
+  padding: ${({ padding }) => (padding ? padding : "1rem")};
   gap: 1rem;
   flex-direction: column;
   justify-content: ${({ justify }) => justify};
@@ -60,6 +60,7 @@ export const CardWrapper = styled.div<Props>`
 interface IButton extends Props {
   tertiary?: boolean;
   grayscale?: boolean;
+  margin?: string;
 }
 /**
  * You can pass to the Button:
@@ -67,13 +68,11 @@ interface IButton extends Props {
  * @props for color schemas: tertiary // grayscale
  */
 export const Button = styled.button<IButton>`
-  background-color: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${({ width }) => width || "auto"};
   cursor: pointer;
-  border: none;
   user-select: none;
   background-image: linear-gradient(
     ${({ tertiary, grayscale }) => {
@@ -88,14 +87,14 @@ export const Button = styled.button<IButton>`
   );
   background-color: ${({ tertiary }) => tertiary && "salmon"};
   padding: ${({ padding }) => padding || "15px 30px"};
+  margin: ${({ margin }) => margin};
   text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
-  color: white;
+  color: ${({ color }) => (color ? color : "white")};
   letter-spacing: 1px;
   border-radius: 10px;
-  border: 0px;
-  color: white;
+  border: ${({ border }) => border || "600"};
   font-weight: ${({ weight }) => weight || "600"};
   box-shadow: 0px 0px 14px -7px #fff;
   :hover {

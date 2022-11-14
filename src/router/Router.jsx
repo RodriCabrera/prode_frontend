@@ -12,6 +12,7 @@ import NotFound from "../pages/NotFound";
 import PredictionsRoutes from "./PredictionsRoutes";
 import ProfileRoutes from "./ProfileRoutes";
 import ScoresPage from "../pages/Scores/ScoresPage";
+import ExtraPredictionsResults from "../pages/Scores/components/ExtraPredictionsResults/ExtraPredictionsResults";
 
 import "../index.css";
 
@@ -28,6 +29,10 @@ function Router() {
             <Route path="predictions/*" element={<PredictionsRoutes />} />
             <Route path="fixture" element={<Fixture />} />
             <Route path="scores" element={<ScoresPage />} />
+            <Route
+              path="scores/:name/extra"
+              element={<ExtraPredictionsResults />}
+            />
             <Route path="profile/*" element={<ProfileRoutes />} />
             <Route path="*" element={<NotFound />} />
           </Route>
