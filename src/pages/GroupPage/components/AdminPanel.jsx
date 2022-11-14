@@ -126,6 +126,10 @@ export default function AdminPanel({ groupData, updater }) {
     );
   };
 
+  const existedInGroup = (fieldName) => {
+    return groupData.extraPredictions.map((ep) => ep.key).includes(fieldName);
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <Info>
@@ -275,7 +279,8 @@ export default function AdminPanel({ groupData, updater }) {
                   name={`extraPredictions[${index}].key`}
                   value={field.key}
                   type="text"
-                  onChange={handleChange}
+                  disabled={existedInGroup(field.key)}
+                  onChange={!existedInGroup(field.key) && handleChange}
                 />
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
