@@ -127,7 +127,10 @@ export default function AdminPanel({ groupData, updater }) {
   };
 
   const existedInGroup = (fieldName) => {
-    return groupData.extraPredictions.map((ep) => ep.key).includes(fieldName);
+    return (
+      groupData?.extraPredictions &&
+      groupData.extraPredictions.map((ep) => ep.key).includes(fieldName)
+    );
   };
 
   return (

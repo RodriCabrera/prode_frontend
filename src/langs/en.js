@@ -1,5 +1,6 @@
 export const enTranslation = {
   translation: {
+    addExtraPrediction: "Add extra prediction",
     adminPanelHide: "Hide Admin Panel",
     adminPanelShow: "Show Admin Panel",
     adminEditTimeInfo1:
