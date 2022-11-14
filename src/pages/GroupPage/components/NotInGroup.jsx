@@ -42,7 +42,7 @@ function NotInGroup({ name, updater }) {
         .finally(() => setIsLoading(false)),
       {
         pending: `${t("joiningGroup")}`,
-        success: `${t("joinedgGroup")}`,
+        success: `${t("joinedGroup")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
