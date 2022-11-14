@@ -147,6 +147,7 @@ export const esTranslation = {
     selectGroup: "Seleccioná un grupo:",
     send: "Enviar",
     sendingChanges: "Enviando cambios",
+    sending: "Enviando...",
     slogan: "El prode para Qatar 2022.",
     switchToPredict:
       "Si querés ingresar predicciones switcheá al modo PREDECIR.",
