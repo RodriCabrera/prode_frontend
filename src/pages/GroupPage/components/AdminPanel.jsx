@@ -105,7 +105,7 @@ export default function AdminPanel({ groupData, updater }) {
     );
   };
 
-  const isEditAvailable = Date.now() < Date.parse("11-15-2022 13:00 GMT-0300");
+  const isEditAvailable = Date.now() < Date.parse("11-18-2022 13:00 GMT-0300");
 
   const handleNewCustomPredictionField = () => {
     setFieldValue("extraPredictions", [
