@@ -29,8 +29,8 @@ function JoinGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: `${t('groupSearching')}`,
-        success: `${t('groupSearchSuccess')}`,
+        pending: `${t("groupSearching")}`,
+        success: `${t("groupSearchSuccess")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -56,8 +56,8 @@ function JoinGroupForm({ updateList }) {
           toggleModal();
         }),
       {
-        pending: `${t('joiningGroup')}`,
-        success: `${t('joinedGroup')}`,
+        pending: `${t("joiningGroup")}`,
+        success: `${t("joinedGroup")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -82,7 +82,7 @@ function JoinGroupForm({ updateList }) {
           <Label htmlFor="groupName">
             <Input
               type="text"
-              placeholder={t('groupNamePH')}
+              placeholder={t("groupNamePH")}
               name="groupName"
               required
               value={values.groupName}
@@ -95,13 +95,13 @@ function JoinGroupForm({ updateList }) {
             onClick={handleGroupSearch}
             disabled={isLoading}
           >
-            {t('groupSearch')}
+            {t("groupSearch")}
           </Button>
           <Modal show={showModal && groupRules} toggle={toggleModal}>
             <GroupConfirm
               groupName={values.groupName}
               userGroupData={groupRules}
-              confirmText={t('join')}
+              confirmText={t("join")}
             />
           </Modal>
         </Form>
@@ -110,8 +110,9 @@ function JoinGroupForm({ updateList }) {
         onClick={handleShowFormSwitch}
         grayscale={showForm}
         padding="10px"
+        background={showForm && "black"}
       >
-        {showForm ? t('hide') : t('joinGroup')}
+        {showForm ? t("hide") : t("joinGroup")}
       </Button>
     </>
   );

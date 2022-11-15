@@ -226,7 +226,7 @@ function CreateGroupForm({ updateList }) {
         onClick={handleShowFormSwitch}
         grayscale={showForm}
         padding="10px"
-        // width="90%"
+        background={showForm && "black"}
       >
         {showForm ? t("hide") : t("createNewGroup")}
       </Button>

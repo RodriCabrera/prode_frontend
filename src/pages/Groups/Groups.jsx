@@ -19,6 +19,7 @@ const Row = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
+  margin-bottom: 2rem;
 `;
 
 function Groups() {
@@ -51,11 +52,9 @@ function Groups() {
     <CardContainer>
       <CardWrapper border="none" isMobile={true}>
         <Text size="2.5rem" weight="500" align="center">
-          {t('groups').toUpperCase()}
+          {t("groups").toUpperCase()}
         </Text>
-        {!isEmpty(groupList) && (
-          <Text size="1.5rem">{t('yourGroups')} </Text>
-        )}
+        {!isEmpty(groupList) && <Text size="1.5rem">{t("yourGroups")} </Text>}
         {isLoading ? <Spinner /> : <GroupList groups={groupList} />}
       </CardWrapper>
       <Row>
