@@ -31,6 +31,8 @@ export const esTranslation = {
     createGroup: "Crear grupo",
     createNewGroup: "Crear nuevo grupo",
     creatingGroup: "Creando grupo...",
+    customImageInfo:
+      "Para elegir una imagen personalizada, buscala en Google, hace click derecho en la imagen, copia la dirección de la misma y pegala acá",
     defaultUsername: "Tu nombre de usuario fue asignado automáticamente",
     deleteGroup: "Eliminar grupo",
     description: "Descripción",

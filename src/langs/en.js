@@ -29,6 +29,8 @@ export const enTranslation = {
     createGroup: "Create group",
     createNewGroup: "Create new group",
     creatingGroup: "Creating group...",
+    customImageInfo:
+      "To select a custom image, google an image, right click on it, Copy Image Adress and paste it here",
     defaultUsername: "Your username was set by default",
     deleteGroup: "Delete group",
     description: "Description",

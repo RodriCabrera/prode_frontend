@@ -113,6 +113,7 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
         <Text size="1.5rem" align="left">
           {t("insertImageLink")}
         </Text>
+        <Info>{t("customImageInfo")}</Info>
         <Input
           type="url"
           value={customAvatarLink}
