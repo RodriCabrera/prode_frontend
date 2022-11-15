@@ -24,7 +24,7 @@ function ProfilePredictions({ props }) {
   useEffect(() => {
     if (!group || !user) return;
     setIsLoading(true);
-    getOtherUserPredictionsByGroup(user._id, group._id, signal)
+    getOtherUserPredictionsByGroup(user.id, group._id, signal)
       .then(({ data }) => {
         setOtherUserPredictions(data);
       })
