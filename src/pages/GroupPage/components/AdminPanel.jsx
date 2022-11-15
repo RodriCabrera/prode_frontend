@@ -133,6 +133,14 @@ export default function AdminPanel({ groupData, updater }) {
     );
   };
 
+  console.log(
+    "DISABLED REASONS",
+
+    !isEmpty(errors),
+    isEmpty(values.name),
+    !isEditAvailable
+  );
+  console.log("errors", errors);
   return (
     <Form onSubmit={handleSubmit}>
       <Info>
@@ -285,6 +293,16 @@ export default function AdminPanel({ groupData, updater }) {
                   disabled={existedInGroup(field.key)}
                   onChange={!existedInGroup(field.key) && handleChange}
                 />
+                {errors?.extraPredictions?.[index]?.key && (
+                  <Text
+                    size="0.85rem"
+                    color="red"
+                    align="left"
+                    margin="-0.2rem 0.65rem"
+                  >
+                    *{errors?.extraPredictions?.[index]?.key}
+                  </Text>
+                )}
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
                 {t("description")}
@@ -294,6 +312,16 @@ export default function AdminPanel({ groupData, updater }) {
                   value={field.description}
                   onChange={handleChange}
                 />
+                {errors?.extraPredictions?.[index]?.description && (
+                  <Text
+                    size="0.85rem"
+                    color="red"
+                    align="left"
+                    margin="-0.2rem 0.65rem"
+                  >
+                    *{errors?.extraPredictions?.[index]?.description}
+                  </Text>
+                )}
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
                 {t("extraPoints")}

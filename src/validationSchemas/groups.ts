@@ -1,9 +1,16 @@
 import { object, string, number, array, date } from "yup";
 
-const containsBadChars = (string: string | undefined, allowWhitespace: boolean) => {
-  if(!string) return false;
-  return allowWhitespace ? /[/"?&$:'#%{}();,+@]/.test(string) : /[/"?&$:'#%{}();,+@\s]/.test(string);
-}
+// TODO Implementar traducción.
+
+const containsBadChars = (
+  string: string | undefined,
+  allowWhitespace: boolean
+) => {
+  if (!string) return false;
+  return allowWhitespace
+    ? /[/"?&$:'#%{}();,+@]/.test(string)
+    : /[/"?&$:'#%{}();,+@\s]/.test(string);
+};
 
 const fields = {
   name: string()
@@ -11,7 +18,7 @@ const fields = {
     .matches(/[a-zA-Z0-9]/, "El nombre debe tener al menos una letra o número")
     .test(
       "El nombre no debe contener caracteres especiales",
-      "El nombre no debe contener caracteres especiales",
+      "Debe ser alfanumerico",
       (value) => !containsBadChars(value, true)
     )
     .required("Completar nombre"),
@@ -23,27 +30,35 @@ const fields = {
   scoringWinner: number().integer(),
   scoringNone: number().integer(),
   extraPredictions: array(
-    object(
-      {
-        key: string()
-          .max(20, "Maximo de titulo 20 caracteres")
-          .required()
-          .test("Bad format",
-            "El titulo del elemento no debe contener caracteres especiales",
-            (value) => (!containsBadChars(value, false))
-          ),
-        description: string().max(155),
-        timeLimit: date().default(new Date("11-15-2022 13:00 GMT-0300"))
-      }
-    )
+    object({
+      key: string()
+        .max(20, "Maximo de titulo 20 caracteres")
+        .required("Required")
+        .test(
+          "Bad format",
+          "Alfanumerico sin espacios",
+          (value) => !containsBadChars(value, false)
+        ),
+      description: string().max(155, "Max 155"),
+      timeLimit: date().default(new Date("11-15-2022 13:00 GMT-0300")),
+    })
   ).test(
     "Unique",
     "Los titulos deben ser diferentes",
-    (value) => value?.length === [...new Set(value?.map(val => val.key))].length
-  )
+    (value) =>
+      value?.length === [...new Set(value?.map((val) => val.key))].length
+  ),
 };
 
-const { name, manifesto, timeLimit, scoringFull, scoringWinner, scoringNone, extraPredictions } = fields;
+const {
+  name,
+  manifesto,
+  timeLimit,
+  scoringFull,
+  scoringWinner,
+  scoringNone,
+  extraPredictions,
+} = fields;
 
 export const groupsSchema = {
   create: object({
@@ -61,6 +76,6 @@ export const groupsSchema = {
     scoringFull,
     scoringWinner,
     scoringNone,
-    extraPredictions
+    extraPredictions,
   }),
 };
