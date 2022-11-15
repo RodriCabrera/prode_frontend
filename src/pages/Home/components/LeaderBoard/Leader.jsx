@@ -65,7 +65,7 @@ function Leader({ group, isUnique }) {
 
   const allSameScore = () =>
     !groupScores.scores.some(
-      (userScore) => userScore.score !== groupScores.scores[0].score
+      (userScore) => userScore.score !== groupScores?.scores?.[0]?.score
     );
 
   if (group.members.length === 1) return null;
@@ -80,7 +80,7 @@ function Leader({ group, isUnique }) {
       </UserGroupTitle>
       {allSameScore && (
         <Text margin="10px 0" color="gray">
-          {t("allSameScore")} {groupScores.scores[0].score} pts.
+          {t("allSameScore")} {groupScores?.scores?.[0]?.score} pts.
         </Text>
       )}
       {!allSameScore &&
