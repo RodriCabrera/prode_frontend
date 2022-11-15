@@ -79,7 +79,7 @@ export const esTranslation = {
     here: "aquí",
     hide: "Ocultar",
     inviteToGroup: "¡Invita a nuevos miembros!",
-    inviteTitle: "Te invito a unirte a mi grupo de Prode Chumbazo",
+    inviteTitle: "Prode Chumbazo: Te invito a unirte a mi grupo",
     inviteBody: "Podés unirte ingresando al siguiente link: ",
     insertEmail: "Ingresa un email",
     insertImageLink: "Introduce un link a tu imagen",

@@ -81,7 +81,7 @@ export const enTranslation = {
     insertUserName: "Enter username",
     insertValidEmail: "Enter valid email",
     inviteToGroup: "Invite other players!",
-    inviteTitle: "Join my Chumbazo group",
+    inviteTitle: "Chumbazo: Join my group",
     inviteBody: "You can join by clicking the following link: ",
     join: "Join",
     joinedGroup: "Group joined",

@@ -133,7 +133,7 @@ function InGroup({ groupData, updater }) {
                     </ListElement>
                   );
                 })}
-            <GroupInvite />
+            <GroupInvite groupName={groupData.name} />
             <CardContainer>
               {isAdminAlone ? (
                 <Button tertiary onClick={toggleModal}>
