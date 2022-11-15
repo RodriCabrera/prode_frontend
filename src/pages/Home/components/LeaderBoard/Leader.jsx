@@ -78,10 +78,16 @@ function Leader({ group, isUnique }) {
       >
         🏆 {name}
       </UserGroupTitle>
-      {allSameScore && (
+      {isLoading ? (
         <Text margin="10px 0" color="gray">
-          {t("allSameScore")} {groupScores?.scores?.[0]?.score} pts.
+          Loading...
         </Text>
+      ) : (
+        allSameScore && (
+          <Text margin="10px 0" color="gray">
+            {t("allSameScore")} {groupScores?.scores?.[0]?.score} pts.
+          </Text>
+        )
       )}
       {!allSameScore &&
         leaders.map((leader, index) => (
