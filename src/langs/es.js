@@ -1,5 +1,6 @@
 export const esTranslation = {
   translation: {
+    allSameScore: "Todos los usuarios tienen ",
     addExtraPrediction: "Agregar nueva predicción extra",
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",

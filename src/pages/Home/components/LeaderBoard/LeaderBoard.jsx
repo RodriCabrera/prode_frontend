@@ -41,7 +41,7 @@ const LeaderBoard = () => {
         userGroups.map((group) => (
           <Leader
             key={group.name}
-            groupName={group.name}
+            group={group}
             isUnique={userGroups.length < 2}
           />
         ))

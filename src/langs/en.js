@@ -1,5 +1,6 @@
 export const enTranslation = {
   translation: {
+    allSameScore: "All team members have ",
     addExtraPrediction: "Add extra prediction",
     adminPanelHide: "Hide Admin Panel",
     adminPanelShow: "Show Admin Panel",

@@ -11,6 +11,7 @@ import { UserMiniAvatar } from "../../../../common/UserMiniAvatar/UserMiniAvatar
 import useCleanupController from "../../../../hooks/useCleanupController";
 
 import { Text } from "../../../../common/common.styles";
+import { t } from "i18next";
 
 const LeaderElement = styled.div`
   display: flex;
@@ -34,57 +35,74 @@ const UserGroupTitle = styled(Text)`
   }
 `;
 
-function Leader({ groupName, isUnique }) {
+function Leader({ group, isUnique }) {
   const [leaders, setLeaders] = useState(isUnique ? [{}, {}, {}] : [{}]);
   const [isLoading, setIsLoading] = useState(true);
+  const [groupScores, setGroupScores] = useState([]);
+
   const [signal, cleanup, handleCancel] = useCleanupController();
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const { name } = group;
 
   useEffect(() => {
     setIsLoading(true);
-    getGroupScores(groupName, signal)
+    getGroupScores(name, signal)
       .then((res) => {
         const groupLeaders = res.data.scores;
+        setGroupScores(res.data);
         setLeaders(isUnique ? groupLeaders.slice(0, 3) : [groupLeaders[0]]);
       })
       .catch((err) => handleCancel(err))
       .finally(() => setIsLoading(false));
     return cleanup;
-  }, [groupName, isUnique]);
+  }, [name, isUnique]);
 
   const handleProfileNavigate = (username) => {
     if (username === userContext.user.name) return navigate("/profile");
     return navigate(`/profile/${username}`);
   };
 
+  const allSameScore = () =>
+    !groupScores.scores.some(
+      (userScore) => userScore.score !== groupScores.scores[0].score
+    );
+
+  if (group.members.length === 1) return null;
+
   return (
     <div>
       <UserGroupTitle
         withBottomBorder
-        onClick={() => navigate(`/groups/${groupName}`)}
+        onClick={() => navigate(`/groups/${name}`)}
       >
-        🏆 {groupName}
+        🏆 {name}
       </UserGroupTitle>
-      {leaders.map((leader, index) => (
-        <LeaderElement key={`${groupName}-${index}`}>
-          {isUnique && <span>{index + 1}.</span>}
-          {isLoading ? (
-            <ListElement avatar={<GiPodiumWinner size="1.5rem" />}>
-              <p>. . .</p>
-            </ListElement>
-          ) : (
-            <ListElement
-              onClick={() => handleProfileNavigate(leader.user)}
-              avatar={
-                <UserMiniAvatar avatar={leader.avatar} name={leader.user} />
-              }
-            >
-              <p>{leader.user}</p>
-            </ListElement>
-          )}
-        </LeaderElement>
-      ))}
+      {allSameScore && (
+        <Text margin="10px 0" color="gray">
+          {t("allSameScore")} {groupScores.scores[0].score} pts.
+        </Text>
+      )}
+      {!allSameScore &&
+        leaders.map((leader, index) => (
+          <LeaderElement key={`${name}-${index}`}>
+            {isUnique && <span>{index + 1}.</span>}
+            {isLoading ? (
+              <ListElement avatar={<GiPodiumWinner size="1.5rem" />}>
+                <p>. . .</p>
+              </ListElement>
+            ) : (
+              <ListElement
+                onClick={() => handleProfileNavigate(leader.user)}
+                avatar={
+                  <UserMiniAvatar avatar={leader.avatar} name={leader.user} />
+                }
+              >
+                <p>{leader.user}</p>
+              </ListElement>
+            )}
+          </LeaderElement>
+        ))}
     </div>
   );
 }
