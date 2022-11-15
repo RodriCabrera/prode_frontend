@@ -83,7 +83,7 @@ export const esTranslation = {
     inviteTitle: "Prode Chumbazo: Te invito a unirte a mi grupo",
     inviteBody: "Podés unirte ingresando al siguiente link: ",
     insertEmail: "Ingresa un email",
-    insertImageLink: "Introduce un link a tu imagen",
+    insertImageLink: "Introduce un link a tu imagen:",
     insertPass: "Ingresar contraseña",
     insertUserName: "Ingresa un nombre de usuario",
     insertUsername: "Ingresar nombre de usuario",

@@ -76,7 +76,7 @@ export const enTranslation = {
     here: "here",
     hide: "Hide",
     insertEmail: "Enter email",
-    insertImageLink: "Enter a link to an image",
+    insertImageLink: "Enter a link to an image:",
     insertPass: "Enter password",
     insertUsername: "Enter username",
     insertUserName: "Enter username",
