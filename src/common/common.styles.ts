@@ -50,7 +50,7 @@ export const CardWrapper = styled.div<Props>`
     isMobile ? "100%" : width ? width : "600px"};
   max-width: ${({ isMobile }) => (isMobile ? "100%" : "350px")};
   display: flex;
-  padding: ${({ padding }) => (padding ? padding : "1rem")};
+  padding: ${({ padding }) => (padding ? padding : ".75rem")};
   gap: 1rem;
   flex-direction: column;
   justify-content: ${({ justify }) => justify};

@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { isEmpty } from "lodash";
-import { useFlags } from "flagsmith/react"
+import { useFlags } from "flagsmith/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,7 +20,7 @@ import {
   TextareaInput,
   Select,
   Text,
-  TextGroup
+  TextGroup,
 } from "../../../common/common.styles";
 import { groupsSchema } from "../../../validationSchemas/groups";
 
@@ -37,11 +37,11 @@ function CreateGroupForm({ updateList }) {
       scoringWinner: 1,
       scoringNone: 0,
       timeLimit: 0,
-      limitByPhase: "false"
+      limitByPhase: "false",
     },
     validationSchema: groupsSchema.create,
   });
-  const flags = useFlags(["show_admin_functions"])
+  const flags = useFlags(["show_admin_functions"]);
   const { t } = useTranslation();
 
   const handleSubmit = (e) => {
@@ -59,7 +59,7 @@ function CreateGroupForm({ updateList }) {
             NONE: values.scoringNone,
           },
           timeLimit: values.timeLimit,
-          limitByPhase: values.limitByPhase === "true"
+          limitByPhase: values.limitByPhase === "true",
         },
       })
         .then(() => {
@@ -70,8 +70,8 @@ function CreateGroupForm({ updateList }) {
           setIsLoading(false);
         }),
       {
-        pending: `${t('creatingGroup')}`,
-        success: `${t('groupCreated')}`,
+        pending: `${t("creatingGroup")}`,
+        success: `${t("groupCreated")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -90,7 +90,7 @@ function CreateGroupForm({ updateList }) {
           <Label htmlFor="name">
             <Input
               type="text"
-              placeholder={t('groupNamePH')}
+              placeholder={t("groupNamePH")}
               name="name"
               required
               value={values.name}
@@ -114,9 +114,7 @@ function CreateGroupForm({ updateList }) {
             <TextareaInput
               type="text"
               placeholder={
-                t('groupManifestPH1') +
-                "\n\n" +
-                t('groupManifestPH2')
+                t("groupManifestPH1") + "\n\n" + t("groupManifestPH2")
               }
               name="manifesto"
               required
@@ -139,25 +137,38 @@ function CreateGroupForm({ updateList }) {
           </Label>
           <ScoringInputs values={values} handleChange={handleChange} />
           <Text size=".8rem" align="center">
-            {t('timeLimitTitle')}
+            {t("timeLimitTitle")}
           </Text>
-          {flags.show_admin_functions.enabled && 
-          <TextGroup align="center" margin="0">
-            <Label htmlFor="DontLimitByPhase">
+          {flags.show_admin_functions.enabled && (
+            <TextGroup align="center" margin="0">
+              <Label htmlFor="DontLimitByPhase">
                 <TextGroup margin="0">
-                    <Text>{t('byMatch')}</Text>
-                    <Input type="radio" name="limitByPhase" id="DontLimitByPhase" 
-                        value={false} onChange={handleChange} checked={values.limitByPhase==="false"} />
+                  <Text>{t("byMatch")}</Text>
+                  <Input
+                    type="radio"
+                    name="limitByPhase"
+                    id="DontLimitByPhase"
+                    value={false}
+                    onChange={handleChange}
+                    checked={values.limitByPhase === "false"}
+                  />
                 </TextGroup>
-            </Label>
-            <Label htmlFor="DoLimitByPhase">
+              </Label>
+              <Label htmlFor="DoLimitByPhase">
                 <TextGroup margin="0">
-                    <Text>{t('byStage')}</Text>
-                    <Input type="radio" name="limitByPhase" id="DoLimitByPhase" 
-                        value={true} onChange={handleChange} checked={values.limitByPhase==="true"} />
+                  <Text>{t("byStage")}</Text>
+                  <Input
+                    type="radio"
+                    name="limitByPhase"
+                    id="DoLimitByPhase"
+                    value={true}
+                    onChange={handleChange}
+                    checked={values.limitByPhase === "true"}
+                  />
                 </TextGroup>
-            </Label>
-          </TextGroup>}
+              </Label>
+            </TextGroup>
+          )}
           <Label htmlFor="timeLimit">
             <Select
               value={values.timeLimit}
@@ -165,20 +176,24 @@ function CreateGroupForm({ updateList }) {
               onChange={handleChange}
             >
               <option value={0} defaultChecked>
-                {values.limitByPhase === "true" ? 
-                    t('timeLimitOptionStage0') : t('timeLimitOptionMatch0') }
+                {values.limitByPhase === "true"
+                  ? t("timeLimitOptionStage0")
+                  : t("timeLimitOptionMatch0")}
               </option>
               <option value={1000 * 60 * 60 * 1}>
-                {values.limitByPhase === "true" ? 
-                    t('timeLimitOptionStage1') : t('timeLimitOptionMatch1') }
+                {values.limitByPhase === "true"
+                  ? t("timeLimitOptionStage1")
+                  : t("timeLimitOptionMatch1")}
               </option>
               <option value={1000 * 60 * 60 * 12}>
-                {values.limitByPhase === "true" ? 
-                    t('timeLimitOptionStage2') : t('timeLimitOptionMatch2') }
+                {values.limitByPhase === "true"
+                  ? t("timeLimitOptionStage2")
+                  : t("timeLimitOptionMatch2")}
               </option>
               <option value={1000 * 60 * 60 * 24}>
-                {values.limitByPhase === "true" ? 
-                    t('timeLimitOptionStage3') : t('timeLimitOptionMatch3') }
+                {values.limitByPhase === "true"
+                  ? t("timeLimitOptionStage3")
+                  : t("timeLimitOptionMatch3")}
               </option>
             </Select>
           </Label>
@@ -187,7 +202,7 @@ function CreateGroupForm({ updateList }) {
             disabled={isLoading || !isEmpty(errors) || isEmpty(values.name)}
             onClick={toggleModal}
           >
-            {t('createGroup')}
+            {t("createGroup")}
           </Button>
           <Modal show={showModal} toggle={toggleModal}>
             <GroupConfirm
@@ -200,9 +215,9 @@ function CreateGroupForm({ updateList }) {
                   NONE: values.scoringNone,
                 },
                 timeLimit: values.timeLimit,
-                limitByPhase: values.limitByPhase === "true"
+                limitByPhase: values.limitByPhase === "true",
               }}
-              confirmText={t('createGroup')}
+              confirmText={t("createGroup")}
             />
           </Modal>
         </Form>
@@ -211,8 +226,9 @@ function CreateGroupForm({ updateList }) {
         onClick={handleShowFormSwitch}
         grayscale={showForm}
         padding="10px"
+        // width="90%"
       >
-        {showForm ? t('hide') : t('createNewGroup')}
+        {showForm ? t("hide") : t("createNewGroup")}
       </Button>
     </>
   );
