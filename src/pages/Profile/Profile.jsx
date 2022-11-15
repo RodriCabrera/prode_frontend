@@ -45,7 +45,6 @@ function Profile() {
     return setGroupPredictions({ user: profile, group });
   };
 
-  console.log(groupPredictions);
   return isLoading ? (
     <Spinner />
   ) : (
