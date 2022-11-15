@@ -1,3 +1,5 @@
+// TODO: Este componente no se esta usando!!!
+
 import React, { useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import { MdOutlineChevronLeft } from "react-icons/md";
