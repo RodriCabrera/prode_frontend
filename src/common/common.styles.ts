@@ -61,6 +61,7 @@ interface IButton extends Props {
   tertiary?: boolean;
   grayscale?: boolean;
   margin?: string;
+  background?: string;
 }
 /**
  * You can pass to the Button:
@@ -86,6 +87,7 @@ export const Button = styled.button<IButton>`
     }}
   );
   background-color: ${({ tertiary }) => tertiary && "salmon"};
+  background: ${({ background }) => background};
   padding: ${({ padding }) => padding || "15px 30px"};
   margin: ${({ margin }) => margin};
   text-align: center;
