@@ -4,10 +4,19 @@ import { BrowserRouter } from "react-router-dom";
 import { FlagsmithProvider } from "flagsmith/react";
 import flagsmith from "flagsmith";
 import config from "../../Constants";
-import AuthProvider from "../../common/AuthProvider";
+import { AuthContext } from "../../common/AuthProvider";
 import "@testing-library/jest-dom";
 import "@testing-library/user-event";
-
+const mockUser = {
+  isLoading: false,
+  user: {
+    avatar:
+      "http://res.cloudinary.com/dg5m04nxn/image/upload/c_thumb,h_200,w_200,r_max/avatars/messi4.png",
+    email: "testuser@gmail.com",
+    name: "TestUser",
+    _id: "634a1b02ed14d80f4bdee2a8",
+  },
+};
 const AllTheProviders = ({ children }) => {
   return (
     <FlagsmithProvider
@@ -17,7 +26,7 @@ const AllTheProviders = ({ children }) => {
       flagsmith={flagsmith}
     >
       <BrowserRouter>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthContext.Provider value={mockUser}>{children}</AuthContext.Provider>
       </BrowserRouter>
     </FlagsmithProvider>
   );
