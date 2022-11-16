@@ -76,7 +76,7 @@ function Navbar() {
             padding="0 10px 0 0"
             gap={isMobile ? ".3rem" : "1rem"}
           >
-            {userContext.user ? (
+            {userContext?.user ? (
               <>
                 <Text
                   color={isCurrentLang("en") ? "orange" : "gray"}
@@ -113,7 +113,7 @@ function Navbar() {
           </ButtonGroup>
         </NavbarWrapper>
       </NavbarContainer>
-      {userContext.user && <Linkbar isMobile={isMobile} />}
+      {userContext?.user && <Linkbar isMobile={isMobile} />}
     </>
   );
 }
