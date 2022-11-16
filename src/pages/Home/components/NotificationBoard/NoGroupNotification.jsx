@@ -8,11 +8,12 @@ export function NoGroupNotification() {
   return (
     <>
       <Text weight="500" size="2rem" align="center">
-        {t('noGroupsNotification')}
+        {t("noGroupsNotification")}
       </Text>
-      <Text align="center" size="1.2rem">
+      <Text align="center" size="1.2rem" margin="1rem 0 0 0">
         {" "}
-        {t('fromThisSection.a')} <Link to="/groups/">{t('fromThisSection.b')}</Link>
+        {t("fromThisSection.a")}{" "}
+        <Link to="/groups/">{t("fromThisSection.b")}</Link>
       </Text>
     </>
   );
