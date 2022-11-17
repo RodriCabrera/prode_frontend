@@ -58,7 +58,6 @@ function AuthProvider({ children }) {
       }, [user, isLoading, updateAuth])}
     >
       {isLoading ? <Loading /> : children}
-      {/* {children} */}
     </AuthContext.Provider>
   );
 }
