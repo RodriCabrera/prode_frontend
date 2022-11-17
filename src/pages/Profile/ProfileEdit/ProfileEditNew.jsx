@@ -69,6 +69,8 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
       }
     );
   };
+  const customLinkError = customAvatarLink.includes("data:");
+  const isDisabled = !customAvatarLink || customLinkError;
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -114,17 +116,19 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
           {t("insertImageLink")}
         </Text>
         <Info>{t("customImageInfo")}</Info>
+
         <Input
           type="url"
           value={customAvatarLink}
           onChange={(e) => setCustomAvatarLink(e.target.value)}
           placeholder="https://brandemia.org/contenido/subidas/2012/07/the-rolling-stones-logo.webp"
         />
+        {customLinkError && <Text color="tomato">{t("customImageError")}</Text>}
         <AvatarList handleNewAvatar={handleNewAvatar} />
         <Button
           type="button"
           onClick={() => handleNewAvatar(customAvatarLink)}
-          disabled={!customAvatarLink}
+          disabled={isDisabled}
         >
           {t("select")}
         </Button>

@@ -31,6 +31,7 @@ export const enTranslation = {
     creatingGroup: "Creating group...",
     customImageInfo:
       "To select a custom image, google an image, right click on it, Copy Image Adress and paste it here",
+    customImageError: "Unsupported image adress, please try another",
     defaultUsername: "Your username was set by default",
     deleteGroup: "Delete group",
     description: "Description",
