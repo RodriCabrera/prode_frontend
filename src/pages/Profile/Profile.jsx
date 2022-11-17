@@ -58,7 +58,11 @@ function Profile() {
             {profile?.name}
           </Text>
           <BigAvatarWrapper>
-            <UserMiniAvatar name={profile?.name} avatar={profile?.avatar} />
+            <UserMiniAvatar
+              name={profile?.name}
+              avatar={profile?.avatar}
+              emptySize="15rem"
+            />
           </BigAvatarWrapper>
         </UserNameContainer>
         {sharedGroups.length > 0 ? (

@@ -21,7 +21,7 @@ export const AvatarEditWrapper = styled.div`
   position: relative;
   height: inherit;
   width: inherit;
-  & > div {
+  & > .overlay {
     opacity: 0;
   }
   :hover {
@@ -29,7 +29,7 @@ export const AvatarEditWrapper = styled.div`
     & > img {
       opacity: 50%;
     }
-    & > div {
+    & > .overlay {
       opacity: 100%;
     }
   }

@@ -77,13 +77,13 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
       <UserNameContainer>
         <BigAvatarWrapper>
           <AvatarEditWrapper onClick={toggleModal}>
-            <AvatarOverlay>
+            <AvatarOverlay className="overlay">
               <BsFillCameraFill size="3rem" />
             </AvatarOverlay>
             <UserMiniAvatar
               name={userContext.user?.name}
               avatar={values.avatar}
-              emptySize="10rem"
+              emptySize="15rem"
             />
           </AvatarEditWrapper>
         </BigAvatarWrapper>
@@ -110,7 +110,10 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
 
       <Modal show={showModal} toggle={toggleModal}>
         <BigAvatarWrapper>
-          <UserMiniAvatar avatar={customAvatarLink || values.avatar} />
+          <UserMiniAvatar
+            avatar={customAvatarLink || values.avatar}
+            emptySize="15rem"
+          />
         </BigAvatarWrapper>
         <Text size="1.5rem" align="left">
           {t("insertImageLink")}
