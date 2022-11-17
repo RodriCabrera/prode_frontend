@@ -23,7 +23,6 @@ export const CardTitle = styled.h1<Props>`
   text-align: center;
   margin-bottom: ${({ marginBottom }) => marginBottom || "1.5rem"};
   max-width: 100%;
-  user-select: none;
 `;
 /**
  *No props
@@ -195,7 +194,6 @@ interface IText extends Props {
  * @props align (text-align) // color // size (font-size) // weight (font-weight) // margin // withBottomBorder
  */
 export const Text = styled.p<IText>`
-  user-select: none;
   text-align: ${({ align }) => align || "left"};
   color: ${({ color }) => color || "inherit"};
   font-size: ${({ size }) => size};
