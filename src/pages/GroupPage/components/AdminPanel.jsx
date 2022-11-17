@@ -132,15 +132,7 @@ export default function AdminPanel({ groupData, updater }) {
       groupData.extraPredictions.map((ep) => ep.key).includes(fieldName)
     );
   };
-  // TODO: keep?
-  // console.log(
-  //   "DISABLED REASONS",
 
-  //   !isEmpty(errors),
-  //   isEmpty(values.name),
-  //   !isEditAvailable
-  // );
-  // console.log("errors", errors);
   return (
     <Form onSubmit={handleSubmit}>
       {/* <Info>
