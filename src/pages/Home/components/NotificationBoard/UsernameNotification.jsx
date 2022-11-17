@@ -10,7 +10,7 @@ export function UsernameNotification() {
       <Text weight="500" size="2rem" align="center">
         {t("defaultUsername")}
       </Text>
-      <Text align="center" size="1.2rem">
+      <Text align="center" size="1.2rem" margin="1rem 0 0 0">
         <Link to="/profile">{t("editProfile")}</Link>
       </Text>
     </>

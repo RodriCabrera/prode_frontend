@@ -23,7 +23,6 @@ export const CardTitle = styled.h1<Props>`
   text-align: center;
   margin-bottom: ${({ marginBottom }) => marginBottom || "1.5rem"};
   max-width: 100%;
-  user-select: none;
 `;
 /**
  *No props
@@ -50,7 +49,7 @@ export const CardWrapper = styled.div<Props>`
     isMobile ? "100%" : width ? width : "600px"};
   max-width: ${({ isMobile }) => (isMobile ? "100%" : "350px")};
   display: flex;
-  padding: ${({ padding }) => (padding ? padding : "1rem")};
+  padding: ${({ padding }) => (padding ? padding : ".75rem")};
   gap: 1rem;
   flex-direction: column;
   justify-content: ${({ justify }) => justify};
@@ -61,6 +60,7 @@ interface IButton extends Props {
   tertiary?: boolean;
   grayscale?: boolean;
   margin?: string;
+  background?: string;
 }
 /**
  * You can pass to the Button:
@@ -86,6 +86,7 @@ export const Button = styled.button<IButton>`
     }}
   );
   background-color: ${({ tertiary }) => tertiary && "salmon"};
+  background: ${({ background }) => background};
   padding: ${({ padding }) => padding || "15px 30px"};
   margin: ${({ margin }) => margin};
   text-align: center;
@@ -193,7 +194,6 @@ interface IText extends Props {
  * @props align (text-align) // color // size (font-size) // weight (font-weight) // margin // withBottomBorder
  */
 export const Text = styled.p<IText>`
-  user-select: none;
   text-align: ${({ align }) => align || "left"};
   color: ${({ color }) => color || "inherit"};
   font-size: ${({ size }) => size};

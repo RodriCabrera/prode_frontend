@@ -8,11 +8,12 @@ export function NoPredictionNotification() {
   return (
     <>
       <Text weight="500" size="2rem" align="center">
-        {t('noPredictionsYet')}
+        {t("noPredictionsYet")}
       </Text>
-      <Text align="center" size="1.2rem">
+      <Text align="center" size="1.2rem" margin="1rem 0 0 0">
         {" "}
-        {t('fromThisSection.a')} <Link to="/predictions/">{t('fromThisSection.b')}</Link>
+        {t("fromThisSection.a")}{" "}
+        <Link to="/predictions/">{t("fromThisSection.b")}</Link>
       </Text>
     </>
   );

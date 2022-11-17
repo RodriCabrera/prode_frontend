@@ -1,5 +1,6 @@
 export const esTranslation = {
   translation: {
+    allSameScore: "Todos los usuarios tienen ",
     addExtraPrediction: "Agregar nueva predicción extra",
     adminPanelHide: "Ocultar panel de administrador",
     adminPanelShow: "Mostrar panel de administrador",
@@ -30,6 +31,8 @@ export const esTranslation = {
     createGroup: "Crear grupo",
     createNewGroup: "Crear nuevo grupo",
     creatingGroup: "Creando grupo...",
+    customImageInfo:
+      "Para elegir una imagen personalizada, buscala en Google, hace click derecho en la imagen, copia la dirección de la misma y pegala acá",
     defaultUsername: "Tu nombre de usuario fue asignado automáticamente",
     deleteGroup: "Eliminar grupo",
     description: "Descripción",
@@ -79,10 +82,10 @@ export const esTranslation = {
     here: "aquí",
     hide: "Ocultar",
     inviteToGroup: "¡Invita a nuevos miembros!",
-    inviteTitle: "Te invito a unirte a mi grupo de Prode Chumbazo",
+    inviteTitle: "Prode Chumbazo: Te invito a unirte a mi grupo",
     inviteBody: "Podés unirte ingresando al siguiente link: ",
     insertEmail: "Ingresa un email",
-    insertImageLink: "Introduce un link a tu imagen",
+    insertImageLink: "Introduce un link a tu imagen:",
     insertPass: "Ingresar contraseña",
     insertUserName: "Ingresa un nombre de usuario",
     insertUsername: "Ingresar nombre de usuario",

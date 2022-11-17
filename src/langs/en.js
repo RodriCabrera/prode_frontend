@@ -1,5 +1,6 @@
 export const enTranslation = {
   translation: {
+    allSameScore: "All team members have ",
     addExtraPrediction: "Add extra prediction",
     adminPanelHide: "Hide Admin Panel",
     adminPanelShow: "Show Admin Panel",
@@ -28,6 +29,8 @@ export const enTranslation = {
     createGroup: "Create group",
     createNewGroup: "Create new group",
     creatingGroup: "Creating group...",
+    customImageInfo:
+      "To select a custom image, google an image, right click on it, Copy Image Adress and paste it here",
     defaultUsername: "Your username was set by default",
     deleteGroup: "Delete group",
     description: "Description",
@@ -75,13 +78,13 @@ export const enTranslation = {
     here: "here",
     hide: "Hide",
     insertEmail: "Enter email",
-    insertImageLink: "Enter a link to an image",
+    insertImageLink: "Enter a link to an image:",
     insertPass: "Enter password",
     insertUsername: "Enter username",
     insertUserName: "Enter username",
     insertValidEmail: "Enter valid email",
     inviteToGroup: "Invite other players!",
-    inviteTitle: "Join my Chumbazo group",
+    inviteTitle: "Chumbazo: Join my group",
     inviteBody: "You can join by clicking the following link: ",
     join: "Join",
     joinedGroup: "Group joined",

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { GiPodiumWinner } from "react-icons/gi";
-import { FaListUl } from "react-icons/fa";
+import { FaListUl, FaHome } from "react-icons/fa";
 import { BiFootball } from "react-icons/bi";
 import { HiUserGroup } from "react-icons/hi";
 import { useTranslation } from "react-i18next";
@@ -26,6 +26,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
   const isCurrent = (link: string) => {
     return link === basePath;
   };
+
   const handleLinkClick = (path: string) => {
     return navigate(path);
   };
@@ -34,6 +35,17 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
     <LinkbarContainer isMobile={isMobile} id="linkbar-container">
       <LinkbarWrapper>
         <LinkGroup>
+          <LinkWrapper
+            onClick={() => handleLinkClick("/")}
+            isCurrent={isCurrent("")}
+          >
+            {isMobile ? (
+              <FaHome size="2rem" color={isCurrent("") ? "pink" : ""} />
+            ) : (
+              <CustomLink>Home</CustomLink>
+            )}
+          </LinkWrapper>
+
           <LinkWrapper
             onClick={() => handleLinkClick("/fixture")}
             isCurrent={isCurrent("fixture")}
@@ -47,6 +59,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
               <CustomLink>Fixture</CustomLink>
             )}
           </LinkWrapper>
+
           <LinkWrapper
             onClick={() => handleLinkClick("/predictions")}
             isCurrent={isCurrent("predictions")}
@@ -80,7 +93,7 @@ export function Linkbar({ isMobile }: ILinkbarProps) {
           >
             {isMobile ? (
               <HiUserGroup
-                size="2rem"
+                size="1.8rem"
                 color={isCurrent("groups") ? "pink" : ""}
               />
             ) : (

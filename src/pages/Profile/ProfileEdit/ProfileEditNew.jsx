@@ -85,7 +85,7 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
             />
           </AvatarEditWrapper>
         </BigAvatarWrapper>
-        {isMobile && <Info>{t("clickAvatarToChoose")}</Info>}
+        <Info>{t("clickAvatarToChoose")}</Info>
       </UserNameContainer>
       <Label htmlFor="name">
         <Input
@@ -110,13 +110,15 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
         <BigAvatarWrapper>
           <UserMiniAvatar avatar={customAvatarLink || values.avatar} />
         </BigAvatarWrapper>
-        <Text size="2rem" align="center">
+        <Text size="1.5rem" align="left">
           {t("insertImageLink")}
         </Text>
+        <Info>{t("customImageInfo")}</Info>
         <Input
           type="url"
           value={customAvatarLink}
           onChange={(e) => setCustomAvatarLink(e.target.value)}
+          placeholder="https://brandemia.org/contenido/subidas/2012/07/the-rolling-stones-logo.webp"
         />
         <AvatarList handleNewAvatar={handleNewAvatar} />
         <Button

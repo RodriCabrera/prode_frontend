@@ -26,6 +26,7 @@ export const LandingPageWrapper = styled.div`
 
 export const LPInfoContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-content: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -49,7 +50,7 @@ export const LeftPlaceholder = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: ${({ isMobile }) => (isMobile && "2rem")};
+  margin-top: ${({ isMobile }) => isMobile && "2rem"};
 `;
 
 export const spin = keyframes`

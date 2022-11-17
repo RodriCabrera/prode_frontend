@@ -55,7 +55,7 @@ export const groupUsersByResultType = (predictions, type, groupData) => {
   const targetUsers = predictions
     .filter((prediction) => prediction.score === targetScore)
     .map((p) => p.userId);
-  return groupData.members.filter((user) => targetUsers.includes(user._id));
+  return groupData.members.filter((user) => targetUsers.includes(user.id));
 };
 
 function standarizeDateString(datestring) {

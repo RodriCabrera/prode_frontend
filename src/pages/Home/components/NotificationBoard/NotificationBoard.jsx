@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from "react";
+import { MdOutlineClose } from "react-icons/md";
 
+import { CloseModalButton } from "../../../../common/Modal/modal.styles";
 import { getPredictionCount } from "../../../../api/predictions";
 import { NoGroupNotification } from "./NoGroupNotification";
 import { NoPredictionNotification } from "./NoPredictionNotification";
@@ -7,15 +9,18 @@ import { UsernameNotification } from "./UsernameNotification";
 import { useGetUserGroupsData } from "../../../../hooks/useGetUserGroupsData";
 import useCleanupController from "../../../../hooks/useCleanupController";
 import { AuthContext } from "../../../../common/AuthProvider";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 import { CardContainer, CardWrapper } from "../../../../common/common.styles";
 
 function NotificationBoard() {
   const [hasPredictions, setHasPredictions] = useState(false);
+  const [show, setShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const { userGroupList, isLoadingUserGroupsData } = useGetUserGroupsData();
   const userContext = useContext(AuthContext);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,10 +50,21 @@ function NotificationBoard() {
   // YES GROUP - YES PREDICTION - USERNAME OK:
   if (hasPredictions && !isLoading) return null;
 
+  if (!show) return null;
   return (
     <CardContainer>
-      <CardWrapper width="100%" isMobile border="none">
-        {renderBoards()}
+      <CardWrapper
+        padding="1.8rem"
+        bg="rgba(200, 200, 200, 0.1)"
+        style={{ boxShadow: "#ffeea921 0px 2px 9px 1px", minWidth: "50%" }}
+        isMobile={isMobile}
+      >
+        <div>
+          <CloseModalButton type="button" onClick={() => setShow(false)}>
+            <MdOutlineClose size={24} />
+          </CloseModalButton>
+          {renderBoards()}
+        </div>
       </CardWrapper>
     </CardContainer>
   );

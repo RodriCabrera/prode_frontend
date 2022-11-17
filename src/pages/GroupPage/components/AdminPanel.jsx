@@ -135,9 +135,9 @@ export default function AdminPanel({ groupData, updater }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Info>
+      {/* <Info>
         {isEditAvailable ? t("adminEditTimeInfo1") : t("adminEditTimeInfo2")}
-      </Info>
+      </Info> */}
       <Label htmlFor="name">
         {t("groupNamePH")}
         <Input
@@ -285,6 +285,16 @@ export default function AdminPanel({ groupData, updater }) {
                   disabled={existedInGroup(field.key)}
                   onChange={!existedInGroup(field.key) && handleChange}
                 />
+                {errors?.extraPredictions?.[index]?.key && (
+                  <Text
+                    size="0.85rem"
+                    color="red"
+                    align="left"
+                    margin="-0.2rem 0.65rem"
+                  >
+                    *{errors?.extraPredictions?.[index]?.key}
+                  </Text>
+                )}
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
                 {t("description")}
@@ -294,6 +304,16 @@ export default function AdminPanel({ groupData, updater }) {
                   value={field.description}
                   onChange={handleChange}
                 />
+                {errors?.extraPredictions?.[index]?.description && (
+                  <Text
+                    size="0.85rem"
+                    color="red"
+                    align="left"
+                    margin="-0.2rem 0.65rem"
+                  >
+                    *{errors?.extraPredictions?.[index]?.description}
+                  </Text>
+                )}
               </Label>
               <Label htmlFor={`extraPredictions[${index}].description`}>
                 {t("extraPoints")}

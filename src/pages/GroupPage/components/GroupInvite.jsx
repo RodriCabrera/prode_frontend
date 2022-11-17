@@ -34,13 +34,12 @@ const CopyLinkButton = styled.button`
   padding: 0.15rem;
 `;
 
-export default function GroupInvite() {
-
+export default function GroupInvite({ groupName }) {
   const { t } = useTranslation();
 
   const copyShareLink = () => {
     navigator.clipboard.writeText(window.location.href);
-    return toast.info(t('copiedLink'), {
+    return toast.info(t("copiedLink"), {
       position: "bottom-right",
       autoClose: 2000,
       hideProgressBar: true,
@@ -51,29 +50,27 @@ export default function GroupInvite() {
   };
   return (
     <>
-      <Text align="center">
-        {t('inviteToGroup')}
-      </Text>
+      <Text align="center">{t("inviteToGroup")}</Text>
       <ShareButtons>
         <CopyLinkButton onClick={copyShareLink}>
           <AiFillCopy size={28} />
         </CopyLinkButton>
         <EmailShareButton
           url={window.location.href}
-          subject={t('inviteTitle')}
-          body={t('inviteBody')}
+          subject={t("inviteTitle")}
+          body={t("inviteBody")}
         >
           <EmailIcon size={36} round />
         </EmailShareButton>
         <WhatsappShareButton
           url={window.location.href}
-          title={t('inviteTitle')}
+          title={`${t("inviteTitle")} ${groupName}`}
         >
           <WhatsappIcon size={36} round />
         </WhatsappShareButton>
         <TelegramShareButton
           url={window.location.href}
-          title={t('inviteTitle')}
+          title={t("inviteTitle")}
         >
           <TelegramIcon size={36} round />
         </TelegramShareButton>
