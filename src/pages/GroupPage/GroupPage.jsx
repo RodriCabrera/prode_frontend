@@ -11,7 +11,7 @@ import ExtraPredictions from "./components/ExtraPredictions";
 
 function GroupPage() {
   const { name } = useParams();
-  const extra = new URLSearchParams(window.location.search).get("extra")
+  const extra = new URLSearchParams(window.location.search).get("extra");
 
   const [isUserInGroup, setIsUserInGroup] = useState(undefined);
   const [groupData, setGroupData] = useState({});
@@ -19,7 +19,7 @@ function GroupPage() {
   const [groupExists, setGroupExists] = useState(true);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
-  const updateGroupData = (newName=null) => {
+  const updateGroupData = (newName = null) => {
     setIsUserInGroup(undefined);
     getGroupData(newName || name, signal)
       .then((res) => {
@@ -44,7 +44,11 @@ function GroupPage() {
   if (groupExists === false) return <NotFound />;
   if (isLoading || isUserInGroup === undefined) return <Spinner />;
   return isUserInGroup ? (
-    (extra && groupData.extraPredictions) ? <ExtraPredictions groupData={groupData} /> : <InGroup groupData={groupData} updater={updateGroupData} />
+    extra && groupData.extraPredictions ? (
+      <ExtraPredictions groupData={groupData} />
+    ) : (
+      <InGroup groupData={groupData} updater={updateGroupData} />
+    )
   ) : (
     <NotInGroup name={name} updater={updateGroupData} />
   );

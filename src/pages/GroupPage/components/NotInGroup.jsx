@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 import GroupRules from "./GroupRules";
+import { getGroupRules, joinGroup } from "../../../api/groups";
+import useCleanupController from "../../../hooks/useCleanupController";
+
 import { GoBackButton } from "../../../common/GoBackButton/GoBackButton";
+import { Spinner } from "../../../common/Spinner/Spinner";
 import {
   CardContainer,
   Button,
   CardWrapper,
   CardTitle,
 } from "../../../common/common.styles";
-import { Spinner } from "../../../common/Spinner/Spinner";
-import { getGroupRules, joinGroup } from "../../../api/groups";
-import useCleanupController from "../../../hooks/useCleanupController";
 
 function NotInGroup({ name, updater }) {
   const [isLoading, setIsLoading] = useState(false);
   const [groupRules, setGroupRules] = useState();
   const [signal, cleanup, handleCancel] = useCleanupController();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,8 +41,8 @@ function NotInGroup({ name, updater }) {
         .then(() => updater())
         .finally(() => setIsLoading(false)),
       {
-        pending: "Uniéndote al grupo...",
-        success: "Te has unido",
+        pending: `${t("joiningGroup")}`,
+        success: `${t("joinedGroup")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -51,14 +55,14 @@ function NotInGroup({ name, updater }) {
   if (isLoading) return <Spinner />;
   return (
     <CardContainer>
-      <CardWrapper>
+      <CardWrapper isMobile={true} border="none">
         <GoBackButton />
         <CardTitle size="2.5rem" align="center">
           {name}
         </CardTitle>
         {groupRules && <GroupRules rules={groupRules} />}
         <CardContainer>
-          <Button onClick={handleJoin}>Unirse</Button>
+          <Button onClick={handleJoin}>{t("join")}</Button>
         </CardContainer>
       </CardWrapper>
     </CardContainer>
