@@ -69,19 +69,21 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
       }
     );
   };
+  const customLinkError = customAvatarLink.includes("data:");
+  const isDisabled = !customAvatarLink || customLinkError;
 
   return (
     <Form onSubmit={handleSubmit}>
       <UserNameContainer>
         <BigAvatarWrapper>
           <AvatarEditWrapper onClick={toggleModal}>
-            <AvatarOverlay>
+            <AvatarOverlay className="overlay">
               <BsFillCameraFill size="3rem" />
             </AvatarOverlay>
             <UserMiniAvatar
               name={userContext.user?.name}
               avatar={values.avatar}
-              emptySize="10rem"
+              emptySize="15rem"
             />
           </AvatarEditWrapper>
         </BigAvatarWrapper>
@@ -108,7 +110,10 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
 
       <Modal show={showModal} toggle={toggleModal}>
         <BigAvatarWrapper>
-          <UserMiniAvatar avatar={customAvatarLink || values.avatar} />
+          <UserMiniAvatar
+            avatar={customAvatarLink || values.avatar}
+            emptySize="15rem"
+          />
         </BigAvatarWrapper>
         <Text size="1.5rem" align="left">
           {t("insertImageLink")}
@@ -120,11 +125,12 @@ function ProfileEdit({ toggleEditMode, isMobile }) {
           onChange={(e) => setCustomAvatarLink(e.target.value)}
           placeholder="https://brandemia.org/contenido/subidas/2012/07/the-rolling-stones-logo.webp"
         />
+        {customLinkError && <Text color="tomato">{t("customImageError")}</Text>}
         <AvatarList handleNewAvatar={handleNewAvatar} />
         <Button
           type="button"
           onClick={() => handleNewAvatar(customAvatarLink)}
-          disabled={!customAvatarLink}
+          disabled={isDisabled}
         >
           {t("select")}
         </Button>

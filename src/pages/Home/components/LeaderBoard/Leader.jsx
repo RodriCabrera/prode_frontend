@@ -64,9 +64,18 @@ function Leader({ group, isUnique }) {
   };
 
   const allSameScore = () =>
+    groupScores.scores &&
     !groupScores.scores.some(
       (userScore) => userScore.score !== groupScores?.scores?.[0]?.score
     );
+
+  const getSharedPosition = (leader) => {
+    const sharedPos = groupScores.scores.filter(
+      (user) => user.score === leader.score
+    );
+    if (sharedPos.length > 1) return sharedPos.map((u) => u.user);
+    return [];
+  };
 
   if (group.members.length === 1) return null;
 
@@ -83,19 +92,26 @@ function Leader({ group, isUnique }) {
           Loading...
         </Text>
       ) : (
-        allSameScore && (
+        allSameScore() && (
           <Text margin="10px 0" color="gray">
             {t("allSameScore")} {groupScores?.scores?.[0]?.score} pts.
           </Text>
         )
       )}
-      {!allSameScore &&
+      {!allSameScore() &&
         leaders.map((leader, index) => (
           <LeaderElement key={`${name}-${index}`}>
             {isUnique && <span>{index + 1}.</span>}
             {isLoading ? (
               <ListElement avatar={<GiPodiumWinner size="1.5rem" />}>
                 <p>. . .</p>
+              </ListElement>
+            ) : getSharedPosition(leader) ? (
+              <ListElement
+                avatar={<GiPodiumWinner size="1.5rem" />}
+                onClick={() => navigate("/scores")}
+              >
+                {getSharedPosition(leader).toString().replaceAll(",", ", ")}
               </ListElement>
             ) : (
               <ListElement

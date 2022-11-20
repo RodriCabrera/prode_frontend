@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { getOtherUserPredictionsByGroup } from "api/predictions";
 import { Info } from "common/Info/Info";
@@ -20,6 +21,7 @@ function ProfilePredictions({ props }) {
   const [otherUserPredictions, setOtherUserPredictions] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
   const [showShortList, setShowShortList] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!group || !user) return;
@@ -50,7 +52,7 @@ function ProfilePredictions({ props }) {
       {otherUserPredictions.length > 0 ? (
         <CardContainer>
           <CardWrapper border="none">
-            <CardTitle>Predicciones para {group.name}</CardTitle>
+            <CardTitle>{`${t("predictionsFor")} ${group.name}`}</CardTitle>
             <FixtureTable
               data={predictionsToRender()}
               isCompact
@@ -71,8 +73,8 @@ function ProfilePredictions({ props }) {
       ) : (
         !isLoading && (
           <>
-            <Text align="center">Sin predicciones que mostrar</Text>
-            <Info>Solo podrás ver predicciones de partidos ya jugados</Info>
+            <Text align="center">{t("noPredictionsToShow")}</Text>
+            <Info>{t("onlyPlayedPredictions")}</Info>
           </>
         )
       )}

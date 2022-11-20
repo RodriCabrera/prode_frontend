@@ -33,6 +33,7 @@ export const esTranslation = {
     creatingGroup: "Creando grupo...",
     customImageInfo:
       "Para elegir una imagen personalizada, buscala en Google, hace click derecho en la imagen, copia la dirección de la misma y pegala acá",
+    customImageError: "Imagen no compatible, por favor ingresá otro link",
     defaultUsername: "Tu nombre de usuario fue asignado automáticamente",
     deleteGroup: "Eliminar grupo",
     description: "Descripción",
@@ -107,13 +108,18 @@ export const esTranslation = {
     noGroups: "No perteneces a ningún grupo",
     noGroupsNotification: "Empezá por crear o unirte a un grupo:",
     noPredictions: "No hay predicciones pendientes",
+    noPredictionsToShow: "Sin predicciones que mostrar",
     noPredictionsYet: "Aún no hiciste predicciones",
+    noSharedGroups: "No compartes ningún grupo con este usuario",
     notComingMatches: "No se aproximan partidos",
+    onlyPlayedPredictions:
+      "Solo podrás ver predicciones de partidos ya jugados",
     orChooseFromList: "o elegí de la lista",
     passRecovery: "Recuperar contraseña",
     passRequirements: "La contraseña tiene que tener al menos 6 caracteres",
     phases: "Fases",
     predict: "Predecir",
+    predictionsFor: "Predicciones para",
     predictionsSending: {
       single: "Enviando predicción",
       plural: "Enviando predicciones",
