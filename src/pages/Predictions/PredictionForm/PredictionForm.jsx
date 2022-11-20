@@ -85,8 +85,8 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
           setIsLoading(false);
         }),
       {
-        pending: `${t('predictionsSending.plural')}`,
-        success:  `${t('predictionsSent.plural')}`,
+        pending: `${t("predictionsSending.plural")}`,
+        success: `${t("predictionsSent.plural")}`,
         error: {
           render({ data }) {
             return data.response.data.error;
@@ -132,10 +132,13 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                       values[`${match.id}-home`]
                     )
                   : "silver";
-              const matchResultString = `${t('results')}: ${match.away?.shortName} ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
+              const matchResultString = `${t("results")}: ${
+                match.away?.shortName
+              } ${match.awayScore}-${match.homeScore} ${match.home?.shortName}`;
               const canPredict = calculateIfCanPredict(
                 match.date,
-                selectedUserGroup
+                selectedUserGroup,
+                phase
               );
 
               const renderInfoIcon = () => {
@@ -239,7 +242,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
             type="submit"
             disabled={!selectedUserGroup?.id || !dirty || status?.loading}
           >
-            {t('send') + ' ' + t('predictions').toLowerCase() }
+            {t("send") + " " + t("predictions").toLowerCase()}
           </Button>
         )}
       </Form>
