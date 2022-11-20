@@ -145,9 +145,15 @@ export const checkPredictionResult = (
   return "tomato";
 };
 
-export const calculateIfCanPredict = (matchDate, selectedUserGroup) => {
+export const calculateIfCanPredict = (matchDate, selectedUserGroup, phase) => {
   const now = Date.now();
   const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
+
+  if (selectedUserGroup.limitByPhase && phase === "groups") {
+    const groupPhaseStart = new Date("2022-11-20T16:00:00.000Z").getTime();
+    return now + timeLimit < groupPhaseStart;
+  }
+
   const matchTime = new Date(matchDate).getTime();
   return now + timeLimit < matchTime;
 };
