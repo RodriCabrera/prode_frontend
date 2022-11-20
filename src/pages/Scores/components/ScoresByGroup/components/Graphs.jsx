@@ -53,8 +53,6 @@ export default function Graphs({ predictions, groupData }) {
     info: null,
   });
 
-  console.log(fixture);
-
   useEffect(() => {
     if (predictions?.length < 1 || fixture?.length < 1 || !graph || !fixture)
       return;
