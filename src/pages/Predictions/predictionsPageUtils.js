@@ -149,7 +149,7 @@ export const calculateIfCanPredict = (matchDate, selectedUserGroup, phase) => {
   const now = Date.now();
   const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
 
-  if (selectedUserGroup.limitByPhase && phase === "groups") {
+  if (selectedUserGroup.rules.limitByPhase && phase === "groups") {
     const groupPhaseStart = new Date("2022-11-20T16:00:00.000Z").getTime();
     return now + timeLimit < groupPhaseStart;
   }
