@@ -35,8 +35,8 @@ export default function Navigator({
         return [filtered];
       }
       const res = Object.entries(filtered).find(
-        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-        ([_, value]) => typeof value === "object"
+        ([key, value]) =>
+          (key === "groups" || key === "matches") && value?.length > 0
       )[1];
       setHistory((prevHistory) => [
         ...prevHistory,
@@ -52,10 +52,10 @@ export default function Navigator({
   }, []);
 
   const handleGoBack = (index) => {
-    if (index >= history.length + 1) return;
+    if (index >= history?.length + 1) return;
     setHistory((prevVal) => [...prevVal.slice(0, index + 1)]);
     if (index === 0) return setFilteredData([...data]);
-    setFilteredData(history[index].data);
+    setFilteredData(history[index]?.data);
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function Navigator({
     <NavWrapper>
       <NavHistory>
         {history.map((historyElement, index) => {
-          if (index === history.length - 1)
+          if (index === history?.length - 1)
             return (
               <NavHistoryItem disabled>
                 {parseName(historyElement)}
@@ -86,7 +86,7 @@ export default function Navigator({
       <NavLayers>
         {!isLoading && (
           <>
-            {filteredData.length > 1
+            {filteredData?.length > 1
               ? filteredData.map((item) => (
                   <NavLayer
                     data={item}
@@ -104,7 +104,7 @@ export default function Navigator({
         <NavContext.Provider
           value={{
             data: filteredData,
-            current: parseName(history[history.length - 1]),
+            current: parseName(history[history?.length - 1]),
           }}
         >
           {children}

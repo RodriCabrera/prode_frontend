@@ -53,8 +53,11 @@ export default function Graphs({ predictions, groupData }) {
     info: null,
   });
 
+  console.log(fixture);
+
   useEffect(() => {
-    if (predictions?.length < 1 || fixture?.length < 1 || !graph) return;
+    if (predictions?.length < 1 || fixture?.length < 1 || !graph || !fixture)
+      return;
     switch (graph) {
       case GRAPHS.USER_PROGRESS:
         setData(calcScoreProgressByDate(fixture, predictions, groupData));

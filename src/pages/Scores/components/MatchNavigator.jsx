@@ -21,6 +21,7 @@ export default function MatchNavigator({ children }) {
   };
 
   if (isLoading) return <BallLoader />;
+
   return (
     <Navigator
       data={fixtureData}
