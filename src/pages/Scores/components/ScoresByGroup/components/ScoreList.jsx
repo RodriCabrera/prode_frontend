@@ -33,16 +33,28 @@ export default function ScoreList({ scores }) {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
-  const renderPostion = (index) => {
+  const renderPosition = (score) => {
+    // Case: All in 0:
     if (scores.scores.filter((score) => score.score !== 0).length === 0) {
       return "";
     }
+    const sortedList = scores.scores.sort((a, b) => a.value - b.value); // sortedList : []
 
-    // TODO : Qué pasa si dos usuarios o más tienen el mismo puntaje?
-    if (index > 2) return `${index + 1}.`;
-    if (index === 0) return "🥇";
-    if (index === 1) return "🥈";
-    if (index === 2) return "🥉";
+    // goldScore, silverScore & bronzeScore type number.
+    const goldScore = sortedList?.[0].score;
+
+    const silverScore = sortedList
+      ?.filter((s) => s.score !== goldScore)
+      .sort((a, b) => a.value - b.value)[0].score;
+
+    const bronzeScore = sortedList
+      ?.filter((s) => s.score !== goldScore)
+      ?.filter((s) => s.score !== silverScore)
+      .sort((a, b) => a.value - b.value)[0].score;
+
+    if (score === goldScore) return "🥇";
+    if (score === silverScore) return "🥈";
+    if (score === bronzeScore) return "🥉";
     return "";
   };
 
@@ -52,7 +64,7 @@ export default function ScoreList({ scores }) {
   };
   return (
     <ScoreListWrapper isMobile={isMobile}>
-      {scores?.scores.map((score, index) => {
+      {scores?.scores.map((score) => {
         return (
           <ScoreItem key={score.user}>
             <ListElement
@@ -62,7 +74,7 @@ export default function ScoreList({ scores }) {
                 <UserMiniAvatar avatar={score.avatar} name={score.user} />
               }
             >
-              <div>{`${renderPostion(index)} ${score.user}`}</div>
+              <div>{`${renderPosition(score.score)} ${score.user}`}</div>
             </ListElement>
             <div>{score.score}</div>
           </ScoreItem>
