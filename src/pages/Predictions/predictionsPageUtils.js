@@ -149,7 +149,7 @@ export const calculateIfCanPredict = (
   matchDate,
   selectedUserGroup,
   phase,
-  isNew
+  isNew // TODO -> Pass this from groupData request
 ) => {
   const now = Date.now();
   const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
