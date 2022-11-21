@@ -19,6 +19,7 @@ function PredictionsPage() {
     userGroupList,
     selectedUserGroup,
     handleGroupSelect,
+    isNew,
   } = useGetUserGroupsData();
 
   const { t } = useTranslation();
@@ -72,7 +73,7 @@ function PredictionsPage() {
             </Info>
           )}
           <ToggleSwitch mode={mode} setMode={setMode} modes={predictionModes} />
-          <Outlet context={{ mode, selectedUserGroup, setMode }} />
+          <Outlet context={{ mode, selectedUserGroup, setMode, isNew }} />
         </>
       )}
     </PredictionsPageWrapper>

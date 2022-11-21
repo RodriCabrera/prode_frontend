@@ -148,3 +148,16 @@ table {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to left, #8391a6, #536175);
 }
+
+@keyframes pulse {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 40%;
+  }
+}
+
+.pulser {
+  animation: pulse 2s infinite ease-in-out alternate both;
+}
