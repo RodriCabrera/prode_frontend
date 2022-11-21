@@ -35,7 +35,7 @@ import {
 } from "../../../common/common.styles";
 
 export default function PredictionForm({ fixture, hasChangedGroup }) {
-  const { selectedUserGroup, mode } = useOutletContext();
+  const { selectedUserGroup, mode, isNew } = useOutletContext();
   const resultsMode = mode === "results";
   const [signal, cleanup, handleCancel] = useCleanupController();
   const [isLoading, setIsLoading] = useState(hasChangedGroup || false);
@@ -138,7 +138,8 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
               const canPredict = calculateIfCanPredict(
                 match.date,
                 selectedUserGroup,
-                phase
+                phase,
+                isNew
               );
 
               const renderInfoIcon = () => {
