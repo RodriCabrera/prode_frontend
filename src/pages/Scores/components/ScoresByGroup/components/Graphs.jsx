@@ -87,6 +87,7 @@ export default function Graphs({ predictions, groupData }) {
         }
       />
     );
+
   return (
     <GraphContainer>
       <ToggleSwitch mode={graph} setMode={setGraph} modes={switchModes} />
