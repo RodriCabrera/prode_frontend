@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 import { CgMediaLive } from "react-icons/cg";
 
 import Table from "../../../common/Table/Table";
@@ -16,6 +17,7 @@ const FlagCell = styled(Table.Cell)`
 const isLive = (match) => (match.status === 3 ? "red" : null);
 
 const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
+  const { t } = useTranslation();
   return (
     <Table compact={isCompact} fullWidth={fullWidth}>
       <Table.Body>
@@ -33,7 +35,8 @@ const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
                   >
                     {isLive(match) ? (
                       <Text align="center" color="red">
-                        <CgMediaLive size={15} className="pulser" /> LIVE
+                        <CgMediaLive size={15} className="pulser" />{" "}
+                        {t("live").toUpperCase()}
                       </Text>
                     ) : (
                       parseDate(match.date, datePreferences)

@@ -92,6 +92,7 @@ export const enTranslation = {
     joinGroup: "Join a group",
     joiningGroup: "Joining group...",
     leaderBoard: "Leader Board",
+    live: "live",
     loginIn: "Login in...",
     loginSuccess: "Login successful",
     loginError: "Error while logging in with Google",

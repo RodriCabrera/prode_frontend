@@ -96,6 +96,7 @@ export const esTranslation = {
     joinGroup: "Unirse a un grupo",
     joiningGroup: "Uniendote al grupo...",
     leaderBoard: "Ranking de usuarios",
+    live: "en vivo",
     loginIn: "Logueandote...",
     loginSuccess: "Logueado con éxito",
     loginError: "Error al loguearse con Google",
