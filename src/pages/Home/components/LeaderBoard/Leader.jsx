@@ -74,7 +74,7 @@ function Leader({ group, isUnique }) {
       (user) => user.score === leader.score
     );
     if (sharedPos.length > 1) return sharedPos.map((u) => u.user);
-    return [];
+    return false;
   };
 
   if (group.members.length === 1) return null;
