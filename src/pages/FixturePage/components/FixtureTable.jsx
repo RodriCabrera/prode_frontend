@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { CgMediaLive } from "react-icons/cg";
 
 import Table from "../../../common/Table/Table";
 import { getFlagUrl, parseDate } from "../../pagesHelpers";
 import { parseMatchScore, datePreferences } from "../fixturePageHelpers";
+import { Text } from "../../../common/common.styles";
 
 const FlagCell = styled(Table.Cell)`
   min-width: 42px;
   min-height: 28px;
   background-color: red;
 `;
+
+const isLive = (match) => (match.status === 3 ? "red" : null);
 
 const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
   return (
@@ -27,7 +31,13 @@ const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
                     fontSize="1.2rem"
                     padding={isCompact && "10px"}
                   >
-                    {parseDate(match.date, datePreferences)}
+                    {isLive(match) ? (
+                      <Text align="center" color="red">
+                        <CgMediaLive size={15} className="pulser" /> LIVE
+                      </Text>
+                    ) : (
+                      parseDate(match.date, datePreferences)
+                    )}
                   </Table.Cell>
                 )}
               </Table.Row>
@@ -36,15 +46,21 @@ const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
                   {getFlagUrl(match.away.flag, 1)}
                 </FlagCell>
                 <Table.Cell fontWeight="800" padding={isCompact && "10px"}>
-                  {match.away.shortName || match.away}
+                  <Text color={isLive(match)}>
+                    {match.away.shortName || match.away}
+                  </Text>
                 </Table.Cell>
                 <Table.Cell padding={isCompact && "10px"}>
-                  {`${parseMatchScore(match.awayScore)}-${parseMatchScore(
-                    match.homeScore
-                  )}`}
+                  <Text color={isLive(match)}>
+                    {`${parseMatchScore(match.awayScore)}-${parseMatchScore(
+                      match.homeScore
+                    )}`}
+                  </Text>
                 </Table.Cell>
                 <Table.Cell fontWeight="800" padding={isCompact && "10px"}>
-                  {match.home.shortName || match.home}
+                  <Text color={isLive(match)}>
+                    {match.home.shortName || match.home}
+                  </Text>
                 </Table.Cell>
                 <FlagCell padding={isCompact && "10px"}>
                   {getFlagUrl(match.home.flag, 1)}
