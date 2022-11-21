@@ -46,19 +46,19 @@ const FixtureTable = ({ data, isCompact, fullWidth, isMobile }) => {
                   {getFlagUrl(match.away.flag, 1)}
                 </FlagCell>
                 <Table.Cell fontWeight="800" padding={isCompact && "10px"}>
-                  <Text color={isLive(match)}>
+                  <Text align="center" color={isLive(match)}>
                     {match.away.shortName || match.away}
                   </Text>
                 </Table.Cell>
                 <Table.Cell padding={isCompact && "10px"}>
-                  <Text color={isLive(match)}>
+                  <Text align="center" color={isLive(match)}>
                     {`${parseMatchScore(match.awayScore)}-${parseMatchScore(
                       match.homeScore
                     )}`}
                   </Text>
                 </Table.Cell>
                 <Table.Cell fontWeight="800" padding={isCompact && "10px"}>
-                  <Text color={isLive(match)}>
+                  <Text align="center" color={isLive(match)}>
                     {match.home.shortName || match.home}
                   </Text>
                 </Table.Cell>
