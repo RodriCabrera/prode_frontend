@@ -5,6 +5,7 @@ import useCleanupController from "./useCleanupController";
 export const useGetUserGroupsData = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userGroupList, setUserGroupList] = useState([]);
+  const [isNew, setIsNew] = useState(false);
   const [selectedUserGroup, setSelectedUserGroup] = useState(null);
   const [signal, cleanup, handleCancel] = useCleanupController();
 
@@ -13,6 +14,7 @@ export const useGetUserGroupsData = () => {
     getGroupData(group.name, signal)
       .then((res) => {
         setSelectedUserGroup(res.data.groupData);
+        res.data && setIsNew(res.data.isNew);
       })
       .catch((err) => handleCancel(err));
   };
@@ -37,5 +39,6 @@ export const useGetUserGroupsData = () => {
     selectedUserGroup,
     handleGroupSelect,
     isLoadingUserGroupsData: isLoading,
+    isNew,
   };
 };
