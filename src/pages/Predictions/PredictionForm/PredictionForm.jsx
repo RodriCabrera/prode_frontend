@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
+import { useFlags } from "flagsmith/react";
 
 import ErrorInfo from "../../../common/MoreInfo/ErrorInfo";
 import Table from "../../../common/Table/Table";
@@ -47,6 +48,8 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
   const [errorMessages, setErrorMessages] = useState([]);
   const isMobile = useIsMobile();
   const { t } = useTranslation();
+  const flags = useFlags(["allow_new_user_predict"]);
+  const newCanPredict = flags.allow_new_user_predict.enabled;
 
   const fetchAndSetPredictions = () => {
     setStatus({ loading: true });
@@ -139,7 +142,7 @@ export default function PredictionForm({ fixture, hasChangedGroup }) {
                 match.date,
                 selectedUserGroup,
                 phase,
-                isNew
+                newCanPredict ? isNew : false
               );
 
               const renderInfoIcon = () => {
