@@ -1,5 +1,3 @@
-// TODO: Este componente no se esta usando!!!
-
 import React, { useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 import { MdOutlineChevronLeft } from "react-icons/md";
@@ -26,6 +24,7 @@ const CloseButton = styled.button`
 
 export default function UserList({ users, displayInfo, handleClose }) {
   const listRef = useRef();
+  if (users.length === 0) handleClose();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -48,24 +47,16 @@ export default function UserList({ users, displayInfo, handleClose }) {
         <Text align="center" size="1.2rem">
           <span style={{ color: displayInfo.color }}>{displayInfo.name}</span>
         </Text>
-        {users.length > 0 ? (
-          users.map((user) => {
-            return (
-              <ListElement
-                key={user._id}
-                avatar={
-                  <UserMiniAvatar avatar={user.avatar} name={user.name} />
-                }
-              >
-                <Text>{user.name}</Text>
-              </ListElement>
-            );
-          })
-        ) : (
-          <Text align="center" margin="auto">
-            Nadie
-          </Text>
-        )}
+        {users.map((user) => {
+          return (
+            <ListElement
+              key={user._id}
+              avatar={<UserMiniAvatar avatar={user.avatar} name={user.name} />}
+            >
+              <Text>{user.name}</Text>
+            </ListElement>
+          );
+        })}
       </CardWrapper>
     </CardContainer>
   );

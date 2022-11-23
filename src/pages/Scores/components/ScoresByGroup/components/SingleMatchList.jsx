@@ -1,22 +1,23 @@
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../../../../../common/AuthProvider";
 import { ListElement } from "../../../../../common/Lists/ListElement";
 import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
+import { useIsMobile } from "../../../../../hooks/useIsMobile";
 
-import {
-  CardWrapper,
-  CardTitle,
-  Text,
-} from "../../../../../common/common.styles";
+import { CardWrapper, CardTitle } from "../../../../../common/common.styles";
 
 const ListContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${({ isMobile }) => (isMobile ? "column" : "row")};
   width: 100%;
   justify-content: center;
   align-items: stretch;
   flex-wrap: nowrap;
-  gap: 0.75rem;
+  gap: ${({ isMobile }) => (isMobile ? "0.25rem" : "0.75rem")};
   margin: 1rem;
 `;
 
@@ -30,23 +31,33 @@ const UserListContainer = styled.div`
 `;
 
 export default function SingleMatchList({ data, userAvatars, scoring }) {
+  const isMobile = useIsMobile();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const userContext = useContext(AuthContext);
+
+  const handleProfileNavigate = (username) => {
+    if (username === userContext.user.name) return navigate("/profile");
+    return navigate(`/profile/${username}`);
+  };
+
   const groupedUsers = [
     {
-      name: "Resultado exacto",
+      name: t("resultExact"),
       users: Object.entries(data)
         .filter(([key, value]) => value === scoring.FULL && key)
         .map(([key]) => key),
       color: "green",
     },
     {
-      name: "Ganador acertado",
+      name: t("resultWinner"),
       users: Object.entries(data)
         .filter(([key, value]) => value === scoring.WINNER && key)
         .map(([key]) => key),
       color: "gold",
     },
     {
-      name: "Sin aciertos",
+      name: t("resultNone"),
       users: Object.entries(data)
         .filter(([key, value]) => value === scoring.NONE && key)
         .map(([key]) => key),
@@ -54,35 +65,33 @@ export default function SingleMatchList({ data, userAvatars, scoring }) {
     },
   ];
   return (
-    <ListContainer>
+    <ListContainer isMobile={isMobile}>
       {groupedUsers.map((group) => {
-        return (
-          <CardWrapper isMobile key={group.name}>
-            <CardTitle>
-              <span style={{ color: group.color, textDecoration: "underline" }}>
-                {group.name}
-              </span>
-            </CardTitle>
-            {group.users.length > 0 ? (
+        if (group.users.length > 0)
+          return (
+            <CardWrapper isMobile key={group.name} border={isMobile && "none"}>
+              <CardTitle marginBottom={isMobile && "0"}>
+                <span
+                  style={{ color: group.color, textDecoration: "underline" }}
+                >
+                  {group.name}
+                </span>
+              </CardTitle>
               <UserListContainer>
                 {group.users.map((user) => {
                   return (
                     <ListElement
                       key={user}
                       avatar={<UserMiniAvatar avatar={userAvatars[user]} />}
+                      onClick={() => handleProfileNavigate(user)}
                     >
                       {user}
                     </ListElement>
                   );
                 })}
               </UserListContainer>
-            ) : (
-              <Text align="center" margin="auto" size="1.2rem">
-                Nadie
-              </Text>
-            )}
-          </CardWrapper>
-        );
+            </CardWrapper>
+          );
       })}
     </ListContainer>
   );
