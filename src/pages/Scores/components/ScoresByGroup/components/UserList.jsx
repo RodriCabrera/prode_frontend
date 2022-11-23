@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import styled from "@emotion/styled";
 import { MdOutlineChevronLeft } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../../../../../common/AuthProvider";
 import { ListElement } from "../../../../../common/Lists/ListElement";
 import { UserMiniAvatar } from "../../../../../common/UserMiniAvatar/UserMiniAvatar";
 
@@ -25,6 +27,13 @@ const CloseButton = styled.button`
 export default function UserList({ users, displayInfo, handleClose }) {
   const listRef = useRef();
   if (users.length === 0) handleClose();
+  const navigate = useNavigate();
+  const userContext = useContext(AuthContext);
+
+  const handleProfileNavigate = (username) => {
+    if (username === userContext.user.name) return navigate("/profile");
+    return navigate(`/profile/${username}`);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -52,6 +61,7 @@ export default function UserList({ users, displayInfo, handleClose }) {
             <ListElement
               key={user._id}
               avatar={<UserMiniAvatar avatar={user.avatar} name={user.name} />}
+              onClick={() => handleProfileNavigate(user.name)}
             >
               <Text>{user.name}</Text>
             </ListElement>
