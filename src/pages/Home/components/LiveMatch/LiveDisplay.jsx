@@ -84,10 +84,10 @@ export function LiveDisplay({ matchData }) {
         <Text>{live?.away?.score}</Text>
         <Text>{matchData.away.name}</Text>
         {getFlagUrl(matchData.away.flag, 1)}
-        <MoreInfoTrigger onClick={() => setShowMore((prev) => !prev)}>
-          {showMore ? <HiChevronUp size={24} /> : <HiChevronDown size={24} />}
-        </MoreInfoTrigger>
       </MatchInfoBanner>
+      <MoreInfoTrigger onClick={() => setShowMore((prev) => !prev)}>
+        {showMore ? <HiChevronUp size={24} /> : <HiChevronDown size={24} />}
+      </MoreInfoTrigger>
       {showMore &&
         formatEvents().map((event) => {
           return <MatchEvent key={event.id} event={event} />;
@@ -125,7 +125,7 @@ function MatchEvent({ event }) {
                   textAlign: event.side === "home" ? "right" : "left",
                 }}
               />
-              <Text color="red">
+              <Text color="salmon">
                 {event.playerOff.shirtNumber} {event.playerOff.name}
               </Text>
             </PlayerChangeGroup>

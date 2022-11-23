@@ -13,14 +13,9 @@ export const MatchInfoBanner = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  position: relative;
-  margin-bottom: 1rem;
 `;
 
 export const MoreInfoTrigger = styled.button`
-  position: absolute;
-  right: 0;
-  top: 0;
   background: none;
   border: none;
   cursor: pointer;
