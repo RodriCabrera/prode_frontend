@@ -109,7 +109,7 @@ export const enTranslation = {
     noPredictionsYet: "You haven't made predictions yet",
     noSharedGroups: "You don't share any group with this user",
     notComingMatches: "There are no matches soon",
-    onlyPlayedPredictions: "Only predictions for played matches will be shown",
+    onlyPlayedPredictions: "Only closed predictions will be shown",
     orChooseFromList: "choose from list",
     passRecovery: "Recover password",
     passRequirements: "Password must have at least 6 characters",

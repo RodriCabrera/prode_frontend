@@ -113,8 +113,7 @@ export const esTranslation = {
     noPredictionsYet: "Aún no hiciste predicciones",
     noSharedGroups: "No compartes ningún grupo con este usuario",
     notComingMatches: "No se aproximan partidos",
-    onlyPlayedPredictions:
-      "Solo podrás ver predicciones de partidos ya jugados",
+    onlyPlayedPredictions: "Solo podrás ver las predicciones ya cerradas",
     orChooseFromList: "o elegí de la lista",
     passRecovery: "Recuperar contraseña",
     passRequirements: "La contraseña tiene que tener al menos 6 caracteres",
