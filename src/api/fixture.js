@@ -23,3 +23,7 @@ export const getNextMatches = (quantity = "", signal) => {
     signal,
   });
 };
+
+export const getLiveMatch = (matchId = "", stageId = "", signal) => {
+  return api.get(`/fifa/live?id=${matchId}&stageId=${stageId}`, { signal });
+};
