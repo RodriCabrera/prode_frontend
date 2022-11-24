@@ -1,20 +1,20 @@
-export const getCountByResultType = (predictions, groupScoring) => {
+export const getCountByResultType = (predictions, groupScoring, t) => {
   if (predictions.length < 1) return [];
   const result = {
     perfect: {
-      name: "Resultado exacto",
+      name: t("resultExact"),
       ammount: 0,
       color: "green",
       type: "FULL",
     },
     winner: {
-      name: "Ganador acertado",
+      name: t("resultWinner"),
       ammount: 0,
       color: "gold",
       type: "WINNER",
     },
     lost: {
-      name: "Sin aciertos",
+      name: t("resultNone"),
       ammount: 0,
       color: "tomato",
       type: "NONE",
