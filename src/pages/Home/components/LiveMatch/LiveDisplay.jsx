@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi";
 import { MdSportsSoccer, MdExitToApp } from "react-icons/md";
-import { GiSoccerField } from "react-icons/gi";
 
 import useCleanupController from "../../../../hooks/useCleanupController";
 import { getLiveMatch } from "../../../../api/fixture";
@@ -14,7 +13,7 @@ import {
   EventContainer,
   PlayerChangeGroup,
 } from "./LiveMatch.styles";
-import { Text, TextGroup } from "../../../../common/common.styles";
+import { Text } from "../../../../common/common.styles";
 
 export function LiveDisplay({ matchData }) {
   const [live, setLive] = useState({});
@@ -50,17 +49,23 @@ export function LiveDisplay({ matchData }) {
     }));
   }
 
+  function sortMinutes(a, b) {
+    const splitedA = a.minute.replace("'", "").split("+");
+    const splitedB = b.minute.replace("'", "").split("+");
+    const difBase = parseInt(splitedA[0]) - parseInt(splitedB[0]);
+    if (difBase !== 0 || (!splitedA[1] && !splitedB[1])) return difBase;
+    if (!splitedA[1]) return -1;
+    if (!splitedB[1]) return 1;
+    return parseInt(splitedA[1]) - parseInt(splitedB[1]);
+  }
+
   const formatEvents = () => {
     const allEvents = [
       ...sideEvent(live?.home?.goals, "goal", "home"),
       ...sideEvent(live?.away?.goals, "goal", "away"),
       ...sideEvent(live?.home?.substitutions, "sub", "home"),
       ...sideEvent(live?.away?.substitutions, "sub", "away"),
-    ].sort(
-      (a, b) =>
-        parseInt(a.minute.replace("'", "")) -
-        parseInt(b.minute.replace("'", ""))
-    );
+    ].sort(sortMinutes);
     return allEvents;
   };
 
@@ -102,7 +107,10 @@ function MatchEvent({ event }) {
       {event.evType === "goal" ? (
         <>
           <MdSportsSoccer size={18} />
-          <Text color="gold">
+          <Text
+            color="gold"
+            style={{ textAlign: event.side === "home" ? "right" : "left" }}
+          >
             {event.player.shirtNumber} {event.player.name}
           </Text>
           <Text
@@ -125,13 +133,18 @@ function MatchEvent({ event }) {
                   textAlign: event.side === "home" ? "right" : "left",
                 }}
               />
-              <Text color="salmon">
+              <Text
+                color="salmon"
+                style={{ textAlign: event.side === "home" ? "right" : "left" }}
+              >
                 {event.playerOff.shirtNumber} {event.playerOff.name}
               </Text>
             </PlayerChangeGroup>
             <PlayerChangeGroup>
               <MdExitToApp size={18} />
-              <Text>
+              <Text
+                style={{ textAlign: event.side === "home" ? "right" : "left" }}
+              >
                 {event.playerOn.shirtNumber} {event.playerOn.name}
               </Text>
             </PlayerChangeGroup>
