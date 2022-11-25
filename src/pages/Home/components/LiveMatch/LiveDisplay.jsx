@@ -73,6 +73,8 @@ export function LiveDisplay({ matchData }) {
     if (!id) return null;
     return live[side].players.find((player) => player.id === id);
   }
+
+  const allEvents = formatEvents();
   return (
     <MatchContainer>
       <Text align="center" size="0.8rem">
@@ -90,11 +92,13 @@ export function LiveDisplay({ matchData }) {
         <Text>{matchData.away.name}</Text>
         {getFlagUrl(matchData.away.flag, 1)}
       </MatchInfoBanner>
-      <MoreInfoTrigger onClick={() => setShowMore((prev) => !prev)}>
-        {showMore ? <HiChevronUp size={24} /> : <HiChevronDown size={24} />}
-      </MoreInfoTrigger>
+      {allEvents.length > 0 && (
+        <MoreInfoTrigger onClick={() => setShowMore((prev) => !prev)}>
+          {showMore ? <HiChevronUp size={24} /> : <HiChevronDown size={24} />}
+        </MoreInfoTrigger>
+      )}
       {showMore &&
-        formatEvents().map((event) => {
+        allEvents.map((event) => {
           return <MatchEvent key={event.id} event={event} />;
         })}
     </MatchContainer>
