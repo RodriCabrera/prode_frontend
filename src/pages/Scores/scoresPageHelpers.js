@@ -1,20 +1,20 @@
-export const getCountByResultType = (predictions, groupScoring) => {
+export const getCountByResultType = (predictions, groupScoring, t) => {
   if (predictions.length < 1) return [];
   const result = {
     perfect: {
-      name: "Resultado exacto",
+      name: t("resultExact"),
       ammount: 0,
       color: "green",
       type: "FULL",
     },
     winner: {
-      name: "Ganador acertado",
+      name: t("resultWinner"),
       ammount: 0,
       color: "gold",
       type: "WINNER",
     },
     lost: {
-      name: "Sin aciertos",
+      name: t("resultNone"),
       ammount: 0,
       color: "tomato",
       type: "NONE",
@@ -103,7 +103,7 @@ export const calcScoreProgressByDate = (fixture, predictions, groupData) => {
     let newObj = { date: key };
     for (let member of memberAcc) {
       newObj[member.name] = value
-        .filter((prediction) => prediction.userId === member._id)
+        .filter((prediction) => prediction.userId === member.id)
         .reduce((acc, curr) => (acc += curr.score), member.score);
       member.score = newObj[member.name];
     }

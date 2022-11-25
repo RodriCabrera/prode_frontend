@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 import CustomPieChart from "../../../../../common/Charts/PieChart";
 import MultipleLines from "../../../../../common/Charts/MultipleLines";
@@ -14,23 +15,11 @@ import {
   calcScoreProgressByDate,
   pairUsernameWithAvatar,
 } from "../../../scoresPageHelpers";
+import { Text } from "../../../../../common/common.styles";
 
 const GRAPHS = {
   PIE_CHART: "pie",
   USER_PROGRESS: "users_p",
-};
-
-const switchModes = {
-  left: {
-    name: GRAPHS.PIE_CHART,
-    display: "ACIERTOS",
-    color: "gold",
-  },
-  right: {
-    name: GRAPHS.USER_PROGRESS,
-    display: "PROGRESO",
-    color: "darkorange",
-  },
 };
 
 const GraphContainer = styled.div`
@@ -41,17 +30,33 @@ const GraphContainer = styled.div`
   flex-wrap: nowrap;
   width: 100%;
   height: 100%;
+  margin: 0 0 4rem -1rem;
+  overflow: hidden;
 `;
 
 export default function Graphs({ predictions, groupData }) {
   const { data: fixture, current } = useNavContext();
   const [data, setData] = useState([]);
-  const [graph, setGraph] = useState(switchModes.left.name);
+  const [graph, setGraph] = useState(GRAPHS.PIE_CHART);
   const [usersInfo, setUsersInfo] = useState({
     show: false,
     users: null,
     info: null,
   });
+  const { t } = useTranslation();
+
+  const switchModes = {
+    left: {
+      name: GRAPHS.PIE_CHART,
+      display: t("results").toUpperCase(),
+      color: "gold",
+    },
+    right: {
+      name: GRAPHS.USER_PROGRESS,
+      display: t("progress"),
+      color: "darkorange",
+    },
+  };
 
   useEffect(() => {
     if (predictions?.length < 1 || fixture?.length < 1 || !graph || !fixture)
@@ -76,7 +81,12 @@ export default function Graphs({ predictions, groupData }) {
     });
   };
 
-  if (data.length < 1) return <div>No hay nada aquí</div>;
+  if (data.length < 1)
+    return (
+      <Text align="center" color="salmon" size="2rem">
+        {t("noData")}
+      </Text>
+    );
   if (usersInfo.show === true)
     return (
       <UserList
@@ -87,12 +97,13 @@ export default function Graphs({ predictions, groupData }) {
         }
       />
     );
+
   return (
     <GraphContainer>
       <ToggleSwitch mode={graph} setMode={setGraph} modes={switchModes} />
       {graph === GRAPHS.PIE_CHART && (
         <CustomPieChart
-          data={getCountByResultType(data, groupData?.rules.scoring)}
+          data={getCountByResultType(data, groupData?.rules.scoring, t)}
           clickHandler={handlePieClick}
         />
       )}
