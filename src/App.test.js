@@ -2,12 +2,7 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import {
-  fireEvent,
-  render,
-  screen,
-  user,
-} from "./vendors/react-testing-library";
+import { render } from "./vendors/react-testing-library";
 import { FlagsmithProvider } from "flagsmith/react";
 import config from "./Constants";
 import flagsmith from "flagsmith";
