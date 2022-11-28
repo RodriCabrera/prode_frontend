@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getOtherUserPredictionsByGroup } from "api/predictions";
+import useNavContext from "../../common/Navigator/useNavContext";
 import { Info } from "common/Info/Info";
 import { Spinner } from "common/Spinner/Spinner";
 import FixtureTable from "../FixturePage/components/FixtureTable";
 import useCleanupController from "hooks/useCleanupController";
+import MatchNavigator from "../Scores/components/MatchNavigator";
 
 import {
-  Button,
   CardContainer,
   CardTitle,
   CardWrapper,
   Text,
+  TextGroup,
 } from "common/common.styles";
 
 function ProfilePredictions({ props }) {
@@ -20,7 +22,6 @@ function ProfilePredictions({ props }) {
   const [isLoading, setIsLoading] = useState(true);
   const [otherUserPredictions, setOtherUserPredictions] = useState([]);
   const [signal, cleanup, handleCancel] = useCleanupController();
-  const [showShortList, setShowShortList] = useState(true);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -39,13 +40,6 @@ function ProfilePredictions({ props }) {
     return cleanup;
   }, [props]);
 
-  const predictionsToRender = () => {
-    const predictions = showShortList
-      ? otherUserPredictions.slice(0, 10)
-      : otherUserPredictions;
-    return predictions.sort((a, b) => new Date(a.date) - new Date(b.date));
-  };
-
   return (
     <>
       {isLoading && <Spinner />}
@@ -53,21 +47,9 @@ function ProfilePredictions({ props }) {
         <CardContainer>
           <CardWrapper border="none">
             <CardTitle>{`${t("predictionsFor")} ${group.name}`}</CardTitle>
-            <FixtureTable
-              data={predictionsToRender()}
-              isCompact
-              isMobile
-              fullWidth
-            />
-            {otherUserPredictions.length > 10 && (
-              <Button
-                padding="10px"
-                tertiary
-                onClick={() => setShowShortList(!showShortList)}
-              >
-                {showShortList ? "Mostrar más" : "Mostrar menos"}
-              </Button>
-            )}
+            <MatchNavigator>
+              <PredictionsDisplay predictions={otherUserPredictions} t={t} />
+            </MatchNavigator>
           </CardWrapper>
         </CardContainer>
       ) : (
@@ -79,6 +61,27 @@ function ProfilePredictions({ props }) {
         )
       )}
     </>
+  );
+}
+
+function PredictionsDisplay({ predictions, t }) {
+  const { data: fixture } = useNavContext();
+  const matchIds = fixture.map((match) => match.id);
+  const matchingPredictions = predictions.filter((prediction) =>
+    matchIds.includes(prediction.matchId)
+  );
+  if (!predictions) return null;
+  return matchingPredictions.length > 0 ||
+    fixture[0]?.groups ||
+    fixture[0]?.matches ? (
+    <FixtureTable data={matchingPredictions} isCompact isMobile fullWidth />
+  ) : (
+    <TextGroup style={{ flexDirection: "column" }}>
+      <Text align="center" margin={0}>
+        {t("noPredictionsToShow")}
+      </Text>
+      <Info>{t("onlyPlayedPredictions")}</Info>
+    </TextGroup>
   );
 }
 
