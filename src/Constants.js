@@ -2,7 +2,7 @@ const prod = {
   // fly
   // API_URL: "https://prode-backend.fly.dev",
   // heroku:
-  API_URL: "https://prode-mundial-backend.herokuapp.com",
+  API_URL: "https://prode-backend.fly.dev",
   FS_ENVIRONMENT_ID: "MSYvuxKL5fzL3ezdQUjic4",
   USE_DEBUG: false,
   // if prod testing env:

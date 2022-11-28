@@ -12,30 +12,23 @@ import {
 import styled from "@emotion/styled";
 
 const defaultColors = [
-  "gold",
-  "red",
-  "green",
-  "lightblue",
-  "orange",
-  "yellow",
-  "violet",
-  "pink",
-  "blue",
-  "darkorange",
-  "salmon",
-  "cyan",
-  "darkorchid",
-  "aquamarine",
-  "lightseagreen",
-  "tomato",
-  "thistle",
-  "turqoise",
-  "peru",
-  "moccasin",
-  "magenta",
-  "lavender",
-  "lightcyan",
-  "deeppink",
+  "#e6194B",
+  "#3cb44b",
+  "#ffe119",
+  "#4363d8",
+  "#f58231",
+  "#42d4f4",
+  "#f032e6",
+  "#fabed4",
+  "#469990",
+  "#dcbeff",
+  "#9A6324",
+  "#fffac8",
+  "#800000",
+  "#aaffc3",
+  "#000075",
+  "#a9a9a9",
+  "#ffffff",
 ];
 
 export default function MultipleLines({
@@ -155,8 +148,8 @@ export default function MultipleLines({
               type="monotone"
               dataKey={key}
               isAnimationActive={false}
-              strokeWidth={2}
-              stroke={colors[index]}
+              strokeWidth={3}
+              stroke={colors[index - 1]}
               activeDot={renderCustomDot}
             />
           );
