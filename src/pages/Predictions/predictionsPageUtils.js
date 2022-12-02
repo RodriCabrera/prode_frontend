@@ -154,9 +154,24 @@ export const calculateIfCanPredict = (
   const now = Date.now();
   const timeLimit = parseInt(selectedUserGroup.rules.timeLimit, 10) || 0;
 
-  if (selectedUserGroup.rules.limitByPhase && phase === "groups" && !isNew) {
-    const groupPhaseStart = new Date("2022-11-20T16:00:00.000Z").getTime();
-    return now + timeLimit < groupPhaseStart;
+  const uniqueMatchPhases = ["final", "3"];
+
+  if (
+    selectedUserGroup.rules.limitByPhase &&
+    !isNew &&
+    !uniqueMatchPhases.includes(phase)
+  ) {
+    let phaseStart;
+    if (phase === "groups") {
+      phaseStart = new Date("2022-11-20T16:00:00.000Z").getTime();
+    } else if (phase === "16") {
+      phaseStart = new Date("2022-12-03T15:00:00.000Z").getTime();
+    } else if (phase === "8") {
+      phaseStart = new Date("2022-12-09T15:00:00.000Z").getTime();
+    } else if (phase === "semis") {
+      phaseStart = new Date("2022-12-13T19:00:00.000Z").getTime();
+    }
+    return now + timeLimit < phaseStart;
   }
 
   const matchTime = new Date(matchDate).getTime();

@@ -23,7 +23,7 @@ export function Banner({ title, path, percentage, isLoading, disabled }) {
       return (
         editMode && (
           <Text weight="200">
-            {!isNil(percentage) ? `${percentage} % ${t('completed')}` : ""}
+            {!isNil(percentage) ? `${percentage} % ${t("completed")}` : ""}
           </Text>
         )
       );
