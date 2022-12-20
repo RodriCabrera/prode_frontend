@@ -6,13 +6,14 @@ import { GroupSelector } from "../../../Predictions/components/GroupSelector";
 import { useGetUserGroupsData } from "hooks/useGetUserGroupsData";
 import ScoreList from "../ScoresByGroup/components/ScoreList";
 import { BallLoader } from "common/Spinner/BallLoader";
-import { getPredictions } from "api/predictions";
+import { getPredictions, getExtraPredictions } from "api/predictions";
 import { Info } from "common/Info/Info";
 import { isEmpty } from "lodash";
 import { Spinner } from "common/Spinner/Spinner";
 import Graphs from "./components/Graphs";
 import MatchNavigator from "../MatchNavigator";
 import useCleanupController from "hooks/useCleanupController";
+import { calculateExtraPredictionsScores } from "../../scoresPageHelpers";
 
 import {
   CardContainer,
@@ -23,6 +24,7 @@ import { Link } from "react-router-dom";
 
 export default function ScoresByGroup() {
   const [scores, setScores] = useState({});
+  const [extraPredictions, setExtraPredictions] = useState({});
   const [predictions, setPredictions] = useState([]);
   const [checked, setChecked] = useState({
     scores: false,
@@ -52,15 +54,34 @@ export default function ScoresByGroup() {
         setChecked((prevState) => ({ ...prevState, predictions: true }));
       })
       .catch((err) => handleCancel(err));
+    getExtraPredictions(selectedUserGroup.id, false, signal)
+      .then(
+        (res) => res?.data && setExtraPredictions(res.data.extraPredictions)
+      )
+      .catch((err) => handleCancel(err));
   };
 
   useEffect(() => {
     if (!selectedUserGroup) return;
     setIsLoading(true);
+    setExtraPredictions({});
     setChecked({ scores: false, predictions: false, rules: false });
     getGroupData();
     return cleanup;
   }, [selectedUserGroup]);
+
+  useEffect(() => {
+    if (!checked.scores || !extraPredictions || isEmpty(extraPredictions))
+      return;
+    setScores((prevScores) => ({
+      ...prevScores,
+      scores: calculateExtraPredictionsScores(
+        selectedUserGroup,
+        extraPredictions,
+        prevScores
+      ),
+    }));
+  }, [extraPredictions, checked.scores]);
 
   useEffect(() => {
     if (!checked.predictions || !checked.scores) return;

@@ -117,3 +117,52 @@ export const pairUsernameWithAvatar = (members) => {
   members.forEach((member) => (result[member.name] = member.avatar));
   return result;
 };
+
+const ACCEPTED_VALUES = {
+  CAMPEON: ["ARGENTINA", "ARG", "ARGY", "ARGENTINE", "ARG."],
+  SUBCAMPEON: ["FRANCE", "FR", "FRANCIA", "FRAN", "FRAN."],
+  GOLEADOR: ["MBAPPE", "MBAPE", "MBAPPÉ", "MBAPPÈ", "MBAPÉ"],
+  BALONDEORO: ["MESSI", "MESI", "LM10", "LIONELMESSI"],
+};
+
+const returnScoresForUser = (groupData, predictions) => {
+  let extraScore = 0;
+  for (let [key, value] of Object.entries(predictions)) {
+    if (
+      ACCEPTED_VALUES[key.toUpperCase()].includes(
+        value.toUpperCase().replace(" ", "")
+      )
+    ) {
+      const ep = groupData.extraPredictions.find(
+        (p) => p.key.toUpperCase() === key.toUpperCase()
+      );
+      if (!ep) continue;
+      extraScore += parseInt(ep.score);
+    }
+  }
+  return extraScore;
+};
+
+export const calculateExtraPredictionsScores = (
+  groupData,
+  extraPredictions,
+  scores
+) => {
+  if (!groupData?.extraPredictions || groupData?.extraPredictions?.length <= 0)
+    return scores;
+  const newScores = scores?.scores
+    ?.map((score) => {
+      if (!extraPredictions[score.user]) return score;
+      return {
+        ...score,
+        score:
+          score.score +
+          returnScoresForUser(
+            groupData,
+            extraPredictions[score.user].predictions
+          ),
+      };
+    })
+    .sort((a, b) => b.score - a.score);
+  return newScores || scores;
+};
