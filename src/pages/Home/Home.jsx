@@ -10,6 +10,7 @@ import LeaderBoard from "./components//LeaderBoard/LeaderBoard";
 import NotificationBoard from "./components/NotificationBoard/NotificationBoard";
 import QuickPrediction from "./components/QuickPredictions/QuickPrediction";
 import ShortFixture from "./components/ShortFixture";
+import LiveMatch from "./components/LiveMatch/LiveMatch";
 
 import { Button } from "../../common/common.styles";
 
@@ -80,6 +81,7 @@ function Home() {
   return (
     <PageWrapper>
       <NotificationBoard id="notification-board" />
+      <LiveMatch />
       <Row>
         <Column>
           {isMobile && renderButton("fixture")}
